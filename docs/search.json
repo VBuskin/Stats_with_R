@@ -2,9 +2,9 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Stats_with_R",
+    "title": "Quantitative methods in corpus linguistics",
     "section": "",
-    "text": "Preface\nThis is a Quarto book. Text\nTo learn more about Quarto books visit https://quarto.org/docs/books.\n\n1 + 1\n\n[1] 2",
+    "text": "Preface\nThis collection of handouts provides a hands-on introduction to data analysis and statistical methods in quantitative corpus linguistics with R.\nIt is geared primarily towards students attending the classes Language Variation (BA) and Statistics for Linguistics (MA) as well as those currently working on their BA/MA/PhD theses in empirical linguistics.",
     "crumbs": [
       "Preface"
     ]
