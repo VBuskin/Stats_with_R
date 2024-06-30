@@ -1,6 +1,7 @@
 project:
-  type: book
-
+  type: website
+  output-dir: docs
+  
 book:
   title: "Stats_with_R"
   author: "Norah Jones"
