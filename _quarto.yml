@@ -8,6 +8,7 @@ book:
   date: "6/30/2024"
   chapters:
     - index.qmd
+    - Vectors & Factors.qmd
     - intro.qmd
     - summary.qmd
     - references.qmd
