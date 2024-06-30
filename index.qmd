@@ -1,6 +1,6 @@
 # Preface {.unnumbered}
 
-This is a Quarto book. Text
+This is a Quarto book. More text
 
 To learn more about Quarto books visit <https://quarto.org/docs/books>.
 
