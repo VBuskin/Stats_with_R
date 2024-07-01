@@ -1,5 +1,5 @@
 ---
-title: "Data Structures in R"
+title: "Data Structures in R: A cheatsheet"
 author: Vladimir Buskin
 format:
   html:
@@ -93,7 +93,7 @@ rm(a)
 :::
 :::
 
-# Variables {.smaller}
+## Variables {.smaller}
 
 ::: {.fragment fragment-index="1"}
 -   Variables are similar to **folders**: they can be filled with
@@ -124,10 +124,10 @@ x
     tab. You can also list them in the console with `ls()`.
 :::
 
-# Vectors {.smaller}
+## Vectors {.smaller}
 
 ::: panel-tabset
-## Generating vectors
+### Generating vectors
 
 ::: {.fragment fragment-index="1"}
 -   In R, vectors are **indexed lists of variables**. They can be
@@ -152,7 +152,7 @@ vehicles[1]
 ```
 :::
 
-## Editing vectors
+### Editing vectors
 
 ::: {.fragment fragment-index="4"}
 -   View content of one or several indexed positions
@@ -189,10 +189,10 @@ match(c("truck", "bus"), vehicles)
 :::
 :::
 
-# Factors {.smaller}
+## Factors {.smaller}
 
 ::: panel-tabset
-## Generating factors
+### Generating factors
 
 ::: {.fragment fragment-index="1"}
 -   First, generate a vector such as
@@ -226,7 +226,7 @@ levels(articles)
 ```
 :::
 
-## Editing factors
+### Editing factors
 
 ::: {.fragment fragment-index="5"}
 -   Change the reference level of a factor:
@@ -272,12 +272,12 @@ str(articles)
 :::
 :::
 
-# Data frames
+## Data frames
 
-## Data frames in Base R {.smaller}
+### Data frames in Base R {.smaller}
 
 ::: panel-tabset
-### Generating data frames {.smaller}
+#### Generating data frames {.smaller}
 
 ::: {.fragment fragment-index="1"}
 -   Data frames are comparable to spreadsheets. They can be built by
@@ -304,7 +304,7 @@ str(mydf)
 ```
 :::
 
-### Editing data frames {.smaller}
+#### Editing data frames {.smaller}
 
 ::: {.fragment fragment-index="3"}
 -   The individual columns of a data frame can be accessed using the `$`
@@ -349,7 +349,7 @@ mydf[mydf$participant == 'vincenzo',]$score
 :::
 :::
 
-## Data frames in the `tidyverse`
+### Data frames in the `tidyverse`
 
 -   Installing and loading the tidyverse
 
@@ -366,9 +366,9 @@ library(nycflights13)
 flights
 ```
 
-### Rows
+#### Rows
 
-#### `filter()`
+##### `filter()`
 
 -   Show flights where the departure was delayed by more than 120
     minutes
@@ -385,7 +385,7 @@ flights %>%
   filter(month == 1 & day == 1)
 ```
 
-#### `arrange()`
+##### `arrange()`
 
 -   Specify the order of the columns
 
@@ -401,9 +401,9 @@ flights %>%
   arrange(desc(dep_delay))
 ```
 
-### Columns
+#### Columns
 
-#### `mutate()`
+##### `mutate()`
 
 -   Add new columns to the data frame
 
@@ -416,13 +416,13 @@ flights %>%
   )
 ```
 
-#### `select()`
+##### `select()`
 
-#### `rename()`
+##### `rename()`
 
-#### `relocate()`
+##### `relocate()`
 
-### The pipe {.smaller}
+#### The pipeline {.smaller}
 
 -   Depending on your goal, it may be necessary to combine the various
     mode of data manipulation
@@ -435,9 +435,9 @@ flights %>% # data frame
   arrange(desc(speed)) # sort values in descending order
 ```
 
-### Groups
+#### Groups
 
-#### `group_by()` and `summarize()`
+##### `group_by()` and `summarize()`
 
 -   State that all further operations should be organised by "month"
 

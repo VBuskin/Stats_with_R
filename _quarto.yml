@@ -9,6 +9,8 @@ book:
   chapters:
     - index.qmd
     - Vectors & Factors.qmd
+    - Variables.qmd
+    - Summary_statistics.qmd
     - intro.qmd
     - summary.qmd
     - references.qmd

@@ -1,0 +1,265 @@
+---
+title: "Understanding and visualising variables"
+author: Vladimir Buskin
+institute: Catholic University of Eichstätt-Ingolstadt
+format:
+  html:
+    self-contained: true
+    theme: default
+    toc: true
+    number-sections: true
+    slide-number: true
+    incremental: false
+    slide-level: 3
+    scrollable: true
+editor: visual
+bibliography: R.bib
+---
+
+## Preparation
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+```
+
+Please download the file "Paquot_Larsson_2020_data.xlsx"
+    [@paquotDescriptiveStatisticsVisualization2020][^variables-1] and store it in your working directory.
+   
+[^variables-1]: The supplementary materials can be downloaded from the
+    publisher's
+    [website](https://link.springer.com/chapter/10.1007/978-3-030-46216-1_17)
+    \[Last accessed April 28, 2024\].
+
+```{r, echo = TRUE, output = TRUE}
+# Libraries
+library("nycflights13")
+library("readxl")
+library("tidyverse")
+library("ggthemes")
+
+# Load data
+cl.order <- read_xlsx("Paquot_Larsson_2020_data.xlsx")
+
+# Inspect data
+str(cl.order)
+head(cl.order)
+
+```
+
+## Types of variables
+
+The concept of the **variable** allows us to quantify various aspects of
+our observations.
+
+-   **nominal/categorical**: These variables have a limited number of
+    levels which cannot be ordered in a meaningful way. For instance, it
+    does not matter which value of `SUBORDTYPE` or `MORETHAN2CL` comes
+    first or last:
+
+    ```{r, echo = TRUE, output = TRUE}
+    unique(cl.order$SUBORDTYPE)
+    unique(cl.order$MORETHAN2CL)
+    ```
+
+-   **ordinal**: Such variables can be ordered, but the intervals
+    between their individuals values are not meaningful. Heumann
+    [-@heumann_introduction_2022: 6] provides a pertinent example:
+
+    "\[T\]he satisfaction with a product (unsatisfied–satisfied–very
+    satisfied) is an ordinal variable because the values this variable
+    can take can be ordered but the differences between
+    'unsatisfied–satisfied' and 'satisfied–very satisfied' cannot be
+    compared in a numerical way".
+
+-   In the case of **interval**-scaled variables, the differences
+    between the values can be interpreted, but their ratios must be
+    treated with caution. A temperature of 4°C is 6 degrees warmer than
+    -2°C; however, this does not imply that 4°C is three times warmer
+    than -2°C. This is because the temperature scale has no true zero
+    point; 0°C simply signifies another point on the scale and not the
+    absence of temperature altogether.
+
+-   **Ratio**-scaled variables allow both a meaningful interpretation of
+    the differences between their values and (!) of the ratios between
+    them. Within the context of clause length, `LENGTH_DIFF` values such
+    as 4 and 8 not only suggest that the latter is four units greater
+    than the former but also that their ratio $\frac{8}{4} = 2$ is a
+    valid way to describe the relationship between these values. Here a
+    `LENGTH_DIFF` of 0 can be clearly viewed as the absence of a length
+    difference.
+
+## Introduction to `ggplot2`
+
+### Building a ggplot
+
+-   A ggplot requires at minimum three elements: (1) **a data
+    frame**, (2) **axis labels**, and (3) **a plotting option** (also
+    known as "geom"). We combine them with the `+` sign.
+
+```{r, echo = TRUE, output = TRUE, warnings = FALSE, message = FALSE}
+
+# Supply data frame
+ggplot(data = cl.order,
+      # Supply axis labels
+        mapping = aes(x = LEN_MC, y = LEN_SC)) +
+      # Set plotting option (here: scatterplot)
+        geom_point()
+```
+
+### Adding layers
+
+-   Visualise a third variable using the `colors` argument as part of
+    the `aes()` function.
+
+```{r, echo = TRUE, output = TRUE}
+
+ggplot(data = cl.order,
+        mapping = aes(x = LEN_MC, 
+                      y = LEN_SC,
+                      color = ORDER)) +
+        geom_point()
+```
+
+-   Adjust further visual parameters as you see fit:
+
+```{r, echo = TRUE, output = TRUE}
+
+ggplot(data = cl.order,
+  mapping = aes(x = LEN_MC, y = LEN_SC)) +
+  geom_point(aes(color = ORDER, shape = SUBORDTYPE)) + # <1>
+  labs(
+    title = "Length of main and subordinate clauses", # <2>
+    subtitle = "Dimensions for different ordering types",
+    x = "Length of main clause",
+    y = "Length of subordinate clause",
+    color = "ORDER",
+    shape = "SUBORDTYPE"
+  ) +
+  theme_classic() # <3>
+
+```
+
+1.  Map variables to axes, colours and shapes.
+2.  Add a legend with a title, subtitle and axis labels.
+3.  Change the overall theme of the plot.
+
+## Visualising distributions
+
+### A categorical variable
+
+-   Barplot with `geom_bar()`
+
+```{r, echo = TRUE, output = TRUE}
+ggplot(cl.order, aes(x = ORDER)) +
+  geom_bar()
+```
+
+### A numerical variable
+
+-   Histogram with `geom_histogram()`
+-   Densitiy plot with ...
+
+```{r, echo = TRUE, output = TRUE}
+ggplot(cl.order, aes(x = LEN_MC)) +
+  geom_histogram(binwidth = 1)
+```
+
+-   Density plot with `geom_density()`
+
+```{r, echo = TRUE, output = TRUE}
+ggplot(cl.order, aes(x = LEN_MC)) +
+  geom_density(linewidth = 0.5)
+```
+
+### A numerical and categorical variable
+
+-   Boxplot with `geom_boxplot()`
+
+```{r, echo = TRUE, output = TRUE}
+ggplot(cl.order, aes(x = ORDER, y = LEN_MC)) +
+  geom_boxplot()
+```
+
+-   Densitiy plot using the optional arguments `color` and/or `fill`
+
+```{r, echo = TRUE, output = TRUE}
+ggplot(cl.order, aes(x = LEN_MC, fill = ORDER)) +
+  geom_density(alpha = 0.5)
+```
+
+-   A barplot with `geom_col()`
+
+```{r, echo = TRUE, output = TRUE}
+ggplot(cl.order, aes(x = ORDER, y = LEN_MC)) +
+  geom_col(aes(x = ORDER, y = LEN_MC))
+```
+
+### Two categorical variables
+
+-   Barplots with the `fill` argument
+
+```{r, echo = TRUE, output = TRUE}
+ggplot(cl.order, aes(x = ORDER, fill = SUBORDTYPE)) +
+  geom_bar(position = "dodge")
+```
+
+### Two numerical variables
+
+-   Scatterplot with `geom_point()` (cf. 1.1.1)
+
+```{r, echo = TRUE, output = TRUE}
+ggplot(cl.order, aes(x = LEN_MC, y = LEN_SC)) +
+  geom_point()
+```
+
+-   Line plot with `geom_line()`; the example is based on the `flights`
+    data set from the previous session)
+
+```{r, echo = TRUE, output = TRUE}
+nycflights13::flights %>%  
+  group_by(hour = sched_dep_time %/% 100) %>% 
+  summarize(prop_cancelled = mean(is.na(dep_time)), n = n()) %>%  
+  filter(hour > 1) -> flights2
+  
+  ggplot(flights2, aes(x = hour, y = prop_cancelled)) +
+  geom_line(color = "grey50") + 
+  geom_point()
+```
+
+### Multivariate plots
+
+-   Advanced scatterplot with four variables: `LEN_MC` (x), `LEN_SC`
+    (y), `ORDER` (colour) and `SUBORDTYPE` (shape)
+
+```{r, echo = TRUE, output = TRUE}
+# 4 variables
+ggplot(cl.order, aes(x = LEN_MC, y = LEN_SC)) +
+  geom_point(aes(color = ORDER, shape = SUBORDTYPE))
+```
+
+-   Facets
+
+```{r, echo = TRUE, output = TRUE}
+# 5 variables
+ggplot(cl.order, aes(x = LEN_MC, y = LEN_SC)) +
+  geom_point(aes(color = ORDER, shape = SUBORDTYPE)) +
+  facet_wrap(~MORETHAN2CL)
+```
+
+### Saving your plot
+
+-   Save last plot displayed in the viewer to your working directory:
+
+```{r, echo = TRUE, output = FALSE, eval = FALSE}
+
+ggplot(cl.order, aes(x = LEN_MC, y = LEN_SC)) +
+          geom_point()
+
+ggsave("figures/clause_length_plot.png")
+
+```
+
+## References
+
+::: {#refs}
+:::
