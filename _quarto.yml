@@ -5,23 +5,37 @@ project:
 book:
   title: "Quantitative methods in corpus linguistics"
   author: "Vladimir Buskin"
-  date: "6/30/2024"
+  date: "2024-06-30"
   chapters:
-    - index.qmd
-    - Vectors & Factors.qmd
-    - Variables.qmd
-    - Summary_statistics.qmd
-    - intro.qmd
-    - summary.qmd
-    - references.qmd
-
-bibliography: references.bib
+    - part: "Basics of R"
+      chapters:
+        - index.qmd
+        - Vectors & Factors.qmd
+    - part: "Descriptive statistics"
+      chapters:
+        - Variables.qmd
+        - Summary_statistics.qmd
+    - part: "Association tests"
+      chapters:
+        - Hypothesis_testing.qmd
+    - part: "Machine learning"
+      chapters:
+        - Linear_regression.qmd
+        - Logistic_regression.qmd
+        - Decision_trees_and_random_forests.qmd
+    - part: "References"
+      chapters:
+        - references.qmd
+        
+        
+bibliography: R.bib
 
 format:
   html:
     theme: yeti
   pdf:
     documentclass: scrreprt
+  
 
 editor: visual
 
