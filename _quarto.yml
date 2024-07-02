@@ -1,0 +1,43 @@
+project:
+  type: book
+  output-dir: docs
+  
+book:
+  title: "Quantitative methods in corpus linguistics: A reader"
+  author: "Vladimir Buskin"
+  date: "2024-06-30"
+  chapters:
+    - part: "Data structures in R"
+      chapters:
+        - index.qmd
+        - Vectors & Factors.qmd
+        - Data_frames.qmd
+    - part: "Descriptive and inferential statistics"
+      chapters:
+        - Variables.qmd
+        - Summary_statistics.qmd
+        - Hypothesis_testing.qmd
+    - part: "Machine learning"
+      chapters:
+        - Linear_regression.qmd
+        - Logistic_regression.qmd
+        - Decision_trees_and_random_forests.qmd
+    - part: "References"
+      chapters:
+        - references.qmd
+        
+        
+bibliography: R.bib
+
+format:
+  html:
+    theme: yeti
+  pdf:
+    documentclass: scrreprt
+  
+
+editor: visual
+
+execute:
+  freeze: auto
+

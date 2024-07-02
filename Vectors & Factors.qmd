@@ -1,0 +1,273 @@
+---
+title: "Vectors and factors"
+author: Vladimir Buskin
+format:
+  html:
+    self-contained: true
+    theme: default
+    toc: true
+    number-sections: true
+    slide-number: true
+    incremental: false
+    slide-level: 3
+    scrollable: true
+    
+editor: visual
+---
+
+## Suggested reading
+
+-   Gries (2013: Chapter 2)
+
+-   James et al. (2021: Chapter 2.3)
+
+-   Winter (2019: Chapter 1)
+
+## Functions and arguments {.smaller}
+
+::: panel-tabset
+### Description
+
+::: {.fragment fragment-index="1"}
+-   To call or invoke a built-in function in R you write the name of the
+    function and then enter its argument values enclosed in parentheses
+    and separated by commas.
+:::
+
+::: {.fragment fragment-index="2"}
+-   **Pattern**:
+    $\text{function}(\text{argument}_1, \text{argument}_2, ..., \text{argument}_n)$
+    which translates to 'apply the function to argument$_1$,
+    argument$_2$, ..., argument$_n$'.
+:::
+
+::: {.fragment fragment-index="3"}
+-   **Example**: The `seq()` function produces arithmetic sequences:
+
+```{r, echo = TRUE}
+seq(from = 1, to = 9, by = 2)
+```
+:::
+
+::: {.fragment fragment-index="4"}
+-   Every function has a default order for the arguments. If you provide
+    arguments in this order, then they do not need to be named.
+
+```{r, echo = TRUE}
+seq(1, 9, 2)
+```
+:::
+
+### Some useful functions
+
+::: {.fragment fragment-index="1"}
+-   `c()` to combine numbers or character strings into a vector
+
+```{r, echo = TRUE}
+# Concatenate the numbers 1, 2 and 3 into vector "a"
+a <- c(1, 2, 3)
+
+# Print "a"
+a
+```
+:::
+
+::: {.fragment fragment-index="2"}
+-   `class()` and `str()` to inspect the structure of objects
+
+```{r, echo = TRUE}
+class(a)
+```
+
+```{r, echo = TRUE}
+str(a)
+```
+:::
+
+::: {.fragment fragment-index="3"}
+-   `rm()` to remove objects from the working environment
+
+```{r, echo = TRUE}
+rm(a)
+```
+:::
+:::
+
+## Variables {.smaller}
+
+::: {.fragment fragment-index="1"}
+-   Variables are similar to **folders**: they can be filled with
+    information, inspected, and changed.
+:::
+
+::: {.fragment fragment-index="2"}
+-   To assign a value to a variable we use the **assignment command**
+    `<-`.
+
+```{r, echo = TRUE}
+
+# Assign the value 100 to the variable x
+x <- 100
+
+# Print the content of x
+print(x)
+```
+
+```{r, echo = TRUE}
+# or simply:
+x
+```
+:::
+
+::: {.fragment fragment-index="3"}
+-   The variables currently stored are displayed in the **Environment**
+    tab. You can also list them in the console with `ls()`.
+:::
+
+## Vectors {.smaller}
+
+::: panel-tabset
+### Generating vectors
+
+::: {.fragment fragment-index="1"}
+-   In R, vectors are **indexed lists of variables**. They can be
+    generated with the functions `c()`, `seq()` and `rep()`.
+
+```{r, echo = TRUE}
+# Define a character vector "vehicles"
+vehicles <- c("car", "truck", "bus")
+
+# Print the content of vehicles
+vehicles
+```
+:::
+
+::: {.fragment fragment-index="3"}
+-   We can access the `i`-th element of a vector `x` using the notation
+    `x[i]`.
+
+```{r, echo = TRUE}
+# Access the first element of vehicles
+vehicles[1]
+```
+:::
+
+### Editing vectors
+
+::: {.fragment fragment-index="4"}
+-   View content of one or several indexed positions
+
+```{r, echo = TRUE, output = TRUE}
+# View the first two elements
+vehicles[1:2]
+
+```
+:::
+
+::: {.fragment fragment-index="5"}
+-   Where in the vector does a specific property apply?
+
+```{r, echo = TRUE}
+vehicles == "bus"
+```
+:::
+
+::: {.fragment fragment-index="6"}
+-   Do multiple properties apply?
+
+```{r, echo = TRUE}
+c("truck", "bus") %in% vehicles
+```
+:::
+
+::: {.fragment fragment-index="7"}
+-   What positions do certain elements occupy in a vector?
+
+```{r, echo = TRUE}
+match(c("truck", "bus"), vehicles)
+```
+:::
+:::
+
+## Factors {.smaller}
+
+::: panel-tabset
+### Generating factors
+
+::: {.fragment fragment-index="1"}
+-   First, generate a vector such as
+
+```{r, echo = TRUE}
+articles <- c("a", "the", "a", "a", "a", "the", "the")
+```
+:::
+
+::: {.fragment fragment-index="2"}
+-   Convert the vector to a factor using the `factor()` function:
+
+```{r, echo = TRUE}
+articles <-  factor(articles)
+```
+:::
+
+::: {.fragment fragment-index="3"}
+-   Inspect the contents of the factor
+
+```{r, echo = TRUE}
+articles
+```
+:::
+
+::: {.fragment fragment-index="4"}
+-   Check the levels of "articles"
+
+```{r, echo = TRUE}
+levels(articles)
+```
+:::
+
+### Editing factors
+
+::: {.fragment fragment-index="5"}
+-   Change the reference level of a factor:
+
+```{r, echo = TRUE}
+
+# Prior to changing the reference level
+levels(articles)
+
+# Changing the reference level
+articles <- relevel(articles, ref = "the")
+
+levels(articles)
+```
+:::
+
+::: {.fragment fragment-index="6"}
+-   Change a factor level:
+
+```{r, echo = TRUE}
+# Change level "the" to "def_art" (definite article)
+levels(articles)[1] <- "def_art"
+
+# Change level "a" to "indef_art" (indefinite article)
+levels(articles)[2] <- "indef_art"
+```
+
+```{r, echo = TRUE}
+# Print "articles"
+print(articles) # the original levels "the" and "a" have been replaced
+```
+:::
+
+::: {.fragment fragment-index="7"}
+-   Change factor back to a character/numeric vector using
+    `as.character()`or `as.numeric()`:
+
+```{r, echo = TRUE}
+articles <- as.character(articles)
+
+str(articles)
+```
+:::
+:::
