@@ -1,0 +1,347 @@
+---
+title: "Decision trees and random forests"
+author: Vladimir Buskin
+format:
+  html:
+    self-contained: true
+    logo: logo.png
+    footer: "Regression"
+    theme: default
+    toc: true
+    number-sections: true
+    slide-number: true
+    incremental: false
+    slide-level: 4
+    scrollable: true
+editor: visual
+bibliography: R.bib
+---
+
+## Introduction {.smaller}
+
+Decision trees and random forests are very popular **non-parametric**
+methods. As such, "they do not make explicit assumptions about the
+functional form of $f$'' [@james_introduction_2021: 23].
+
+In this unit, we will cover the conceptual basics of these methods as
+well as their implementation in R using the `tv` data from
+@paquot_conditional_2020 in addition to the `ELP` data from the unit on
+Linear Regression. The libraries we will need are listed below:
+
+```{r, echo = TRUE, output = TRUE, warning = FALSE, message = FALSE, include = FALSE}
+
+library("randomForest")
+library("pdp")
+library("party")
+library("tidyverse")
+library("tree")
+library("treemisc")
+library("readxl")
+
+tv <- read.csv("/Users/vladimirbuskin/Library/Mobile Documents/com~apple~CloudDocs/Teaching/Statistics for Linguistics SS 2024/Handouts/Presentations/Levshina_2020_tv_data.csv", sep = ",", header = TRUE, stringsAsFactors = TRUE)
+
+ELP <- read_xlsx("/Users/vladimirbuskin/Library/Mobile Documents/com~apple~CloudDocs/Teaching/Statistics for Linguistics SS 2024/Handouts/Presentations/ELP.xlsx")
+
+ELP$POS <- as.factor(ELP$POS)
+```
+
+```{r, echo = TRUE, output = TRUE, warning = FALSE, message = FALSE, eval = FALSE}
+# Load libraries
+library("tidyverse")
+library("readxl")
+library("tree") # for CART
+library("randomForest") # for traditional random forests
+library("party") # for Conditional Inference Trees
+library("pdp") # for partial dependence plots
+
+## Reaction time data
+ELP <- read_xlsx("data/ELP.xlsx")
+
+ELP$POS <- as.factor(ELP$POS)
+
+## Levshina's (2020) data set on T/V forms in Russian
+tv <- read.csv("data/Levshina_2020_tv_data.csv", sep = ",", header = TRUE, stringsAsFactors = TRUE)
+
+```
+
+In the `tv` data frame, our target variable will be T/V `Form` with the
+two outcomes *ty* (Russian 2.p.sg., informal) and *vy* (Russian 2.p.pl.,
+polite).
+
+```{r, echo = TRUE, output = FALSE}
+
+str(tv)
+
+head(tv)
+```
+
+## Decision trees
+
+Core concepts:
+
+-   **Segmenting the feature space**: "\[T\]he feature space (i.e., the
+    space spanned by all predictor variables) is recursively partitioned
+    into a set of rectangular areas" [@strobl_introduction_2009: 325].
+
+-   **Impurity reduction**: These simplified prediction areas should
+    consist of mostly homogeneous (i.e., 'pure' rather than 'mixed')
+    observations.
+
+-   **Tree construction**: The 'decisions' made when partitioning the
+    training data can be visualised using tree structures. The nodes of
+    a tree represent variables, the branches represent decision rules,
+    and leaf nodes indicate the final outcome (e.g., a prediction).
+
+-   **CART**: The original computational implementation of decision
+    trees is known as the CART (Classification and Regression Trees)
+    algorithm developed by @breiman1984.
+
+### Classification trees
+
+If we are dealing with a **categorical response variable**, the `tree()`
+function can be used to fit a classification tree in accordance with
+Breiman's CART algorithm. For illustration, consider the `tv` data
+frame. We will model the choice of the pronoun `Form` based on the
+speaker's and hearer's social circle (`Rel_Circle`) and their difference
+in social class (`Rel_Class`).
+
+```{r, echo = TRUE, output = TRUE}
+
+# Set random number generator for reproducibility
+set.seed(123)
+
+# Supply model formula
+tree.tv <- tree(Form ~ Rel_Circle + Rel_Class, data = tv)
+
+# View tree statistics
+summary(tree.tv)
+
+# Visualisation
+plot(tree.tv)
+
+text(tree.tv, pretty = 3)
+
+
+```
+
+An important problem that arises during tree construction is that of
+**split selection**. When should the tree split a node into two further
+nodes and when not? Furthermore, when should the tree **stop** the
+splitting process entirely? In this respect, CART relies on the
+principle of **impurity reduction**: "The fundamental idea is to select
+each split of a subset so that the data in each of the descendent
+subsets are 'purer' than the data in the parent subset" [@breiman1984:
+23]. A measure for node purity is the **Gini index** $G$, which is
+defined as
+
+$$
+G = \sum_{k=1}^{K}{\hat{p}_{mk}(1-\hat{p}_{mk}),}
+$$
+
+where $\hat{p}_{mk}$ measures the proportion of observations of a
+response level $k$ in the $m$th prediction area of the training data
+set. Values close to 0 are indicative of high node purity, meaning that
+most observations belong to the same class (e.g., `Form = ty`). If
+splitting a node no longer leads to a substantial increase in purity, it
+becomes the **terminal node**, i.e., it is not split further. This
+terminal node returns the tree's class prediction.
+
+It is worth noting that modern CART implementations rely on different
+splitting criteria. For instance, **Conditional Inference Trees** use
+the $p$ values of internal association tests to identify which variables
+warrant further subdivision of the training data. The presence or
+absence of correlation thus also determines whether or not a given node
+will be terminal [for more details, see @greenwell2022: 122].
+
+```{r, echo = TRUE, output = TRUE, warning = FALSE, message = FALSE, include = TRUE}
+
+# Fitting a conditional inference tree
+ctree.tv <- ctree(Form ~ ., data = tv) # dot . means 'include all predictors'
+
+plot(ctree.tv)
+
+```
+
+### Regression trees
+
+Regression trees are used for **continuous response variables**. Instead
+of providing class predictions, they return the mean value of
+observations in a given prediction area. The algorithm now strives to
+**minimize the residual sum of squares** ($RSS$; cf. footnote 1 in 8.
+Linear Regression). Consider the regression tree for reaction times
+depending on word length, frequency and part of speech:
+
+```{r}
+
+# CART tree
+tree.rt <- tree(RT ~ Length + Freq + POS, data = ELP)
+
+summary(tree.rt)
+
+plot(tree.rt)
+
+text(tree.rt, pretty = 0)
+
+# Conditional inference tree
+ctree.rt <- ctree(RT ~ Length + Freq + POS, data = ELP) 
+
+plot(ctree.rt)
+
+```
+
+## Random forests
+
+Random forests [@breiman_random_2001] belong to the class of **ensemble
+methods** because they combine simpler models (e.g., individual decision
+trees) into a more complex and possibly more accurate model. As part of
+the RF algorithm, a great number of decision trees is trained on
+bootstrapped samples of the training data.
+
+So far, random forests are essentially identical with **Bagging** (=
+bootstrap aggregation); however, an important additional characteristic
+of the RF algorithm is that only **a random subset of the predictors**
+is taken into consideration at each split. According to
+[@strobl_introduction_2009: 332], the resulting variability in tree
+structure is advantageous: "By combining the prediction of such a
+diverse set of trees, ensemble methods utilize the fact that
+classification trees are unstable, but, on average, produce the right
+prediction".
+
+### Regression forest
+
+For **regression** tasks, random forests return the average prediction
+of all trees in the ensemble.
+
+```{r, echo = TRUE, output = TRUE}
+
+# For regression
+rt.rf.reg <- randomForest(RT ~ Length + Freq + POS, data = ELP,
+                                mtry = 1, # = sqrt(number of variables)
+                                ntree = 500) # number of trees
+
+rt.rf.reg
+
+# Conditional random forest
+rt.crf.reg <- cforest(RT ~ Length + Freq + POS, data = ELP, 
+                    controls = cforest_unbiased(ntree = 500, mtry = 1))
+
+
+
+```
+
+### Classification forest
+
+For **classification**, all trees cast a vote for one of the response
+classes. The OOB error estimate refers to the accuracy of **out-of-bag
+(OOB) predictions**. After the initial bootstrapping procedure, roughly
+a third of the training data remains unused. These observations, which
+were not used for fitting trees, can be used as a test data set.
+Predictions based on this internal test data set are called OOB
+predictions.
+
+```{r, echo = TRUE, output = TRUE}
+# For classification
+tv.rf.class <- randomForest(Form ~ ., data = tv,
+                            mtry = 4,
+                            ntree = 500)
+
+tv.rf.class
+
+# Conditional random forest
+tv.crf.class <- cforest(Form ~ ., data = tv,
+                    controls = cforest_unbiased(ntree = 500, mtry = 4))
+
+tv.crf.class
+
+```
+
+### Variable importance
+
+Random forests allow users to assess whether or not certain predictors
+are useful for the model. The **Gini** index can be re-used to identify
+those variables that have led to the greatest reduction in impurity.
+However, this measure is **biased** towards predictors with many values
+[cf. @strobl2007].
+
+```{r}
+# Gini importance (Reaction times)
+varImpPlot(rt.rf.reg)
+
+# Gini importance (Form of 2.p.)
+varImpPlot(tv.rf.class)
+
+```
+
+A more robust measures is (**Conditional) Permutation Accuracy
+Importance** which compares the predictive accuracy of the random forest
+model before and after randomly permuting the values of the predictors
+[cf. @strobl2008; @debeer2020].
+
+```{r, echo = TRUE, output = TRUE, eval = FALSE}
+
+# Conditional permutation accuracy importance
+library("permimp")
+
+# Refit RF model with additional parameters
+tv.rf.class <- randomForest(Form ~ .,
+                            data = tv,
+                            mtry = 4,
+                            ntree = 500,
+                            keep.inbag = TRUE,
+                            keep.forest = TRUE)
+
+# Compute CPI scores
+tv.rf.permimp <- permimp(tv.rf.class, conditional = TRUE, progressBar = FALSE, threshold = .95) # Choose "Yes" in the console
+
+# Plot CPI scores
+plot(tv.rf.permimp, horizontal = TRUE, type = "dot", sort = TRUE)
+
+```
+
+### Visualising random forest models
+
+-   Partial dependence plots (`pdp` package, cf. also Hastie et al.
+    [-@hastie2017]) provide averaged predictions ($\hat{y}$) for a given
+    constellation of predictors.
+
+```{r, echo = TRUE, output = TRUE}
+
+# Form ~ Rel_Circle
+Rel_Circle.partial <- pdp::partial(tv.rf.class, pred.var = "Rel_Circle", which.class = "ty")
+
+Rel_Circle.partial %>% 
+  ggplot(aes(x = Rel_Circle, y = yhat)) +
+  geom_point(col = "steelblue") +
+  theme_minimal() +
+  labs(
+    title = "Probability of 'ty' (2.p.sg.) depending on social circle",
+    y = "Log odds of 'ty'"
+  )
+
+# RT ~ POS
+pos.partial <- pdp::partial(rt.rf.reg, pred.var = "POS")
+
+pos.partial %>% 
+  ggplot(aes(x = POS, y = yhat)) +
+  geom_point(col = "steelblue") +
+  theme_minimal() +
+  labs(
+    title = "Predicted reaction times by POS",
+    y = "Predicted reaction time"
+  )
+
+
+# RT ~ Length
+length.partial <- pdp::partial(rt.rf.reg, pred.var = "Length")
+
+length.partial %>% 
+  ggplot(aes(x = Length, y = yhat)) +
+  geom_line(col = "steelblue") +
+  theme_minimal() +
+  labs(
+    title = "Predicted reaction times by word length",
+    y = "Predicted reaction time"
+  )
+
+```
+

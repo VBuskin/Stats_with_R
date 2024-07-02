@@ -406,6 +406,7 @@ ggplot(bernoulli_data, aes(x = factor(outcome), y = probability)) +
 ```
 
 ::: callout-note
+
 ### Extensions
 
 A Bernoulli experiment presupposes a single trial (e.g., tossing a coin
@@ -418,7 +419,3 @@ can be modelled using the **multinomial distribution**
 [@heumann_introduction_2022: 167-169].
 :::
 
-## References
-
-::: {#refs}
-:::
