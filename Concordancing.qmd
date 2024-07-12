@@ -1,0 +1,147 @@
+---
+title: "Concordancing with R"
+author: Vladimir Buskin
+format:
+  html:
+    self-contained: true
+    theme: default
+    toc: true
+    number-sections: true
+    slide-number: true
+    incremental: false
+    slide-level: 3
+    scrollable: true
+    
+editor: visual
+---
+
+## Introduction
+
+This section offers a short introduction to corpus queries in R. Our
+goal will be to obtain data on the genitive alternation in British
+English. To this end, we will rely on the British component of the
+International Corpus of English (ICE-GB).
+
+## Preparation
+
+### Directory structure
+
+In order for R to be able to recognise the data, it is crucial to set up
+the working directory accordingly.
+
+1.  Make sure your R-script **and** the corpus (e.g., 'ICE-GB') are
+    stored in the **same folder**.
+2.  In RStudio, now navigate to `Session` \> `Set working directory` \>
+    `To Source File Location`. This ensures that the folder where you
+    have placed your R-script will function as your working directory
+    until you close RStudio again. To see your working directory in your
+    files pane, click on `Files` \> `'Blue wheel symbol'` \>
+    `Go to working directory`.
+
+### Installing and loading packages
+
+Packages expand the basic functionality of R by providing numerous
+quality-of-life improvements that not only considerably simplify common
+data wrangling tasks but which also provide frameworks for
+state-of-the-art methods for statistical analysis and natural language
+processing (NLP).
+
+In order to install a package, you navigate to `Packages` \> `Install`
+and verify that the pop-up window says
+`Install from: Repository (CRAN)`. You can now type in the name of the
+package you would like to install under `Packages`.
+
+**Task**: Install the `tidyverse` and `quanteda` packages!
+
+Once the installation has been completed, you can proceed to load the
+libraries using the code below. You can ignore the warning messages.
+
+```{r, echo = TRUE}
+
+library(tidyverse)
+library(quanteda)
+```
+
+Remember that you will have to reload these libraries whenever you start
+a new R session (i.e., open RStudio).
+
+## Loading the corpus
+
+After specifying the working directory and loading the libraries we will
+need, we can read in the corpus files into a corpus object in R.
+
+First, simply copy-paste the following code chunk at the beginning of
+your R-script. Once you run it, it will load the function `read_GB()`
+into R's working memory (it should now appear in the `Environment`
+tab!). This function will automatically handle the entire reading-in
+process.
+
+```{r, echo = TRUE, output = FALSE}
+
+read_GB <- function() {
+
+  # define corpus files
+  path_GB <- list.files("ICE_GB", full.names = TRUE)
+  
+  # load corpus files
+  transcripts_GB <- sapply(path_GB, function(x){
+    x <- readLines(x)
+  })
+  
+  # Collapse every transcript into a single character vector
+  transcripts_collapsed_GB <<- sapply(path_GB, function(x){
+    # read-in text
+    x <- readLines(x)
+    # paste all lines together
+    x <- paste0(x, collapse = " ")
+    # remove superfluous white spaces
+    x <- str_squish(x)
+  })
+}
+```
+
+To now get all corpus files into R, all we have to do is call the
+function:
+
+```{r, echo = TRUE, eval = FALSE}
+
+read_GB()
+```
+
+If you encounter error messages, make sure you followed steps 1 and 2
+above.
+
+## Concordancing
+
+### Basic use
+
+### Add additional information
+
+We will define another function that provide us with more detailed
+information on the corpus hits. Copy-paste it at the beginning of your
+script and run it. If everything worked, you will see `kwic_ICE()` under
+'Functions' in your `Environment` tab.
+
+```{r, echo = TRUE, eval = FALSE}
+
+kwic_ICE <- function(corpus, query) { 
+  quanteda::kwic(
+  # tokenize transcripts
+  quanteda::tokens(corpus, what = "fasterword"), 
+  # define search
+  pattern = quanteda::phrase(query),
+  # regex
+  valuetype = "regex",
+  # extend context
+  window = 20) %>%
+  # make it a data frame
+  as.data.frame() %>%
+  # clean docnames
+  dplyr::mutate(docname = str_replace_all(docname, ".*/([A-Z][0-9][A-Z]-[0-9]{1,3}).txt", "\\1")) %>% 
+  as_tibble()
+}
+```
+
+### Example usage
+
+### Exporting the results
