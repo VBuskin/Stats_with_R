@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Quantitative methods in corpus linguistics: A reader",
     "section": "",
-    "text": "Preface\nThis collection of handouts provides a hands-on introduction to data analysis and statistical methods in quantitative corpus linguistics with R.\nIt is geared primarily towards students attending the classes Language Variation (BA) and Statistics for Linguistics (MA) as well as those currently working on their BA/MA/PhD theses in empirical linguistics.",
+    "text": "First steps\nThis collection of handouts provides a hands-on introduction to data analysis and statistical methods in quantitative corpus linguistics with R. It requires a working installation of both R and RStudio.\nIt is geared primarily towards students attending the classes Language Variation (BA) and Statistics for Linguistics (MA) as well as those currently working on their BA/MA/PhD theses in empirical linguistics.",
     "crumbs": [
       "Data structures in R",
       "Preface"
@@ -316,6 +316,50 @@
     "crumbs": [
       "References",
       "<span class='chapter-number'>9</span>  <span class='chapter-title'>References</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#setting-up-r-and-rstudio",
+    "href": "index.html#setting-up-r-and-rstudio",
+    "title": "Quantitative methods in corpus linguistics: A reader",
+    "section": "Setting up R and RStudio",
+    "text": "Setting up R and RStudio\n\nInstalling R\nFirst, we need to download R. The link will take you to the homepage of the Comprehensive R Archive Network (CRAN) where you can download the binary distribution. Choose the one that corresponds to your operating system (Windows/MAC/Linux).\nWindows users: Click “Download R for Windows” &gt; Select “base” &gt; Click on “Download R-4.4.1 for Windows” (or whatever most recent version is currently displayed).\nOpen the set-up file you’ve just downloaded and simply follow the instructions on screen. It’s fine to go with the default options.\nVisual tutorial\nMacOS users: Click “Download R for macOS” &gt; Select the latest release for your OS\nOpen the downloaded .pkg file and follow the instructions in the installation window.\n\n\nInstalling RStudio\nYou can now download RStudio. The installation is very straightforward.",
+    "crumbs": [
+      "Data structures in R",
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "index.html#installing-r",
+    "href": "index.html#installing-r",
+    "title": "Quantitative methods in corpus linguistics: A reader",
+    "section": "Installing R",
+    "text": "Installing R\nFirst, we need to download R. The link will take you to the homepage of the Comprehensive R Archive Network (CRAN) where you can download the binary distribution. Choose the one that corresponds to your operating system (Windows/MAC/Linux).\nWindows users: Click “Download R for Windows” \\(\\rightarrow\\) Select “base” \\(\\rightarrow\\) Click on “Download R-4.4.1 for Windows” (or whatever most recent version is currently displayed).\nOpen the set-up file you’ve just downloaded and simply follow the instructions on screen. It’s fine to go with the default options.\nVideo tutorial on YouTube\nMacOS users: Click “Download R for macOS” \\(\\rightarrow\\) Select the latest release for your OS\nOpen the downloaded .pkg file and follow the instructions in the installation window.\nVideo tutorial on YouTube",
+    "crumbs": [
+      "Data structures in R",
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "index.html#installing-rstudio",
+    "href": "index.html#installing-rstudio",
+    "title": "Quantitative methods in corpus linguistics: A reader",
+    "section": "Installing RStudio",
+    "text": "Installing RStudio\nYou can now download and install RStudio.",
+    "crumbs": [
+      "Data structures in R",
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "index.html#the-rstudio-interface",
+    "href": "index.html#the-rstudio-interface",
+    "title": "Quantitative methods in corpus linguistics: A reader",
+    "section": "The RStudio interface",
+    "text": "The RStudio interface\nOnce you’ve opened RStudio, you will see several empty panes similar to this:\n\n\n\n\n\n\nConsole\nLet’s focus on the console window on the left. This is where we can directly communicate with R by entering “code”. The way this code is written follows certain arbitrary conventions – just like natural languages such as English or German. Here is an example in the R programming language:\n\nprint(\"Hello world!\")\n\n[1] \"Hello world!\"\n\n\nEntering this command into your console and pressing ENTER will display the sentence “Hello world!” right below your input. For good measure, here is another example:\n\nprint(\"Alice was beginning to get very tired of sitting by her sister on the bank, and of having nothing to do\")\n\n[1] \"Alice was beginning to get very tired of sitting by her sister on the bank, and of having nothing to do\"\n\n\nAs we can see, anything that R should understand as a simple sequence of letters or words must be enclosed by quotation marks \"...\". Anything inside them will be interpreted as a so-called string. Their counterpart are numbers or integers, as illustrated here:\n\n2 + 2 - 1\n\n[1] 3\n\n\nNaturally, you can use R for more sophisticated computations:\n\n\\(2 + (3 \\times 3)\\)\n\n2 + (3 * 3)\n\n[1] 11\n\n\n\\(\\sqrt{9}\\)\n\nsqrt(9)\n\n[1] 3\n\n\n\\(\\frac{16}{2^3}\\)\n\n16 / 2 ^ 3\n\n[1] 2\n\n\n\n\n\nEnvironment/Workspace\nWhile it is certainly useful to print text or numbers to your console, it may sometimes make more sense to (at least temporally) store them somewhere, so you can re-use them later when you need them. In fact, R gives us a way of storing data in virtual, container-like objects: variables. We can assign strings or numbers to a variable by using the assignment operator &lt;-.\nWhen you run the commands below, you will (hopefully) notice two items popping up in your Environment tab in the top right corner.\n\ngreeting &lt;- \"Hello world!\"\n\nquick_math &lt;- 2 + 2 - 1\n\nIf we now want to display the content in the console, we can simply apply the print() function to the variable itself:\n\nprint(greeting)\n\n[1] \"Hello world!\"\n\nprint(quick_math)\n\n[1] 3\n\n\nWe can also embed variables in other statements. For example, let’s take the content of quick_math and multiply it with 2.\n\nhard_math &lt;- quick_math * 2\n\nprint(hard_math)\n\n[1] 6\n\n\n\n\nR Scripts\nWorking with the console has a very plain, yet important disadvantage: Once we close RStudio, the console is wiped clean, erasing everything we’ve typed into it during our precious R session.\nThe remedy for this nuisance are scripts. Essentially, a script is the programmer’s equivalent of a Word document: It allows you to save all the code you’ve written to a file, which you can seamlessly continue working on the next time you open it.\nTo create a new R script you can either go to:\n\n“File” \\(\\rightarrow\\) “New” \\(\\rightarrow\\) “R Script” or …\nclick on the icon with the + sign and select “R Script” …\nor simply press Ctrl+Shift+N (MacOS: Cmd+Shift+N)\n\nDon’t forget to save your script with Ctrl+S (Cmd+S)! It is good practice to save your files regularly.",
+    "crumbs": [
+      "Data structures in R",
+      "Preface"
     ]
   }
 ]

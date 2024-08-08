@@ -22,6 +22,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -69,6 +103,8 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -220,7 +256,17 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface">Preface</a></li>
+  <li><a href="#first-steps" id="toc-first-steps" class="nav-link active" data-scroll-target="#first-steps">First steps</a>
+  <ul class="collapse">
+  <li><a href="#installing-r" id="toc-installing-r" class="nav-link" data-scroll-target="#installing-r">Installing R</a></li>
+  <li><a href="#installing-rstudio" id="toc-installing-rstudio" class="nav-link" data-scroll-target="#installing-rstudio">Installing RStudio</a></li>
+  <li><a href="#the-rstudio-interface" id="toc-the-rstudio-interface" class="nav-link" data-scroll-target="#the-rstudio-interface">The RStudio interface</a>
+  <ul class="collapse">
+  <li><a href="#console" id="toc-console" class="nav-link" data-scroll-target="#console">Console</a></li>
+  <li><a href="#environmentworkspace" id="toc-environmentworkspace" class="nav-link" data-scroll-target="#environmentworkspace">Environment/Workspace</a></li>
+  <li><a href="#r-scripts" id="toc-r-scripts" class="nav-link" data-scroll-target="#r-scripts">R Scripts</a></li>
+  </ul></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -258,12 +304,125 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="preface" class="level1 unnumbered">
-<h1 class="unnumbered">Preface</h1>
-<p>This collection of handouts provides a hands-on introduction to data analysis and statistical methods in quantitative corpus linguistics with R.</p>
+<section id="first-steps" class="level1 unnumbered">
+<h1 class="unnumbered">First steps</h1>
+<p>This collection of handouts provides a hands-on introduction to data analysis and statistical methods in quantitative corpus linguistics with R. It requires a working installation of both <strong>R</strong> and <strong>RStudio</strong>.</p>
 <p>It is geared primarily towards students attending the classes <strong>Language Variation</strong> (BA) and <strong>Statistics for Linguistics</strong> (MA) as well as those currently working on their <strong>BA/MA/PhD theses</strong> in empirical linguistics.</p>
+<section id="installing-r" class="level2">
+<h2 class="anchored" data-anchor-id="installing-r">Installing R</h2>
+<p>First, we need to download <a href="https://ftp.fau.de/cran/">R</a>. The link will take you to the homepage of the Comprehensive R Archive Network (CRAN) where you can download the binary distribution. Choose the one that corresponds to your operating system (Windows/MAC/Linux).</p>
+<p><strong>Windows users</strong>: Click “Download R for Windows” <span class="math inline">\(\rightarrow\)</span> Select “base” <span class="math inline">\(\rightarrow\)</span> Click on “Download R-4.4.1 for Windows” (or whatever most recent version is currently displayed).</p>
+<p>Open the set-up file you’ve just downloaded and simply follow the instructions on screen. It’s fine to go with the default options.</p>
+<p><a href="https://www.youtube.com/watch?v=mfGFv-iB724">Video tutorial on YouTube</a></p>
+<p><strong>MacOS users</strong>: Click “Download R for macOS” <span class="math inline">\(\rightarrow\)</span> Select the latest release for your OS</p>
+<p>Open the downloaded .pkg file and follow the instructions in the installation window.</p>
+<p><a href="https://www.youtube.com/watch?v=Icawuhf0Yqo">Video tutorial on YouTube</a></p>
+</section>
+<section id="installing-rstudio" class="level2">
+<h2 class="anchored" data-anchor-id="installing-rstudio">Installing RStudio</h2>
+<p>You can now download and install <a href="https://posit.co/download/rstudio-desktop/">RStudio</a>.</p>
+</section>
+<section id="the-rstudio-interface" class="level2">
+<h2 class="anchored" data-anchor-id="the-rstudio-interface">The RStudio interface</h2>
+<p>Once you’ve opened RStudio, you will see several empty panes similar to this:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="RStudio.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<section id="console" class="level3">
+<h3 class="anchored" data-anchor-id="console">Console</h3>
+<p>Let’s focus on the <strong>console</strong> window on the left. This is where we can directly communicate with R by entering “code”. The way this code is written follows certain arbitrary conventions – just like natural languages such as English or German. Here is an example in the R programming language:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Hello world!"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Hello world!"</code></pre>
+</div>
+</div>
+<p>Entering this command into your console and pressing ENTER will display the sentence “Hello world!” right below your input. For good measure, here is another example:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Alice was beginning to get very tired of sitting by her sister on the bank, and of having nothing to do"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Alice was beginning to get very tired of sitting by her sister on the bank, and of having nothing to do"</code></pre>
+</div>
+</div>
+<p>As we can see, anything that R should understand as a simple sequence of letters or words must be enclosed by quotation marks <code>"..."</code>. Anything inside them will be interpreted as a so-called <strong>string</strong>. Their counterpart are <strong>numbers</strong> or <strong>integers</strong>, as illustrated here:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span> <span class="sc">-</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+</div>
+<p>Naturally, you can use R for more sophisticated computations:</p>
+<ul>
+<li><p><span class="math inline">\(2 + (3 \times 3)\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">+</span> (<span class="dv">3</span> <span class="sc">*</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 11</code></pre>
+</div>
+</div></li>
+<li><p><span class="math inline">\(\sqrt{9}\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="dv">9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+</div></li>
+<li><p><span class="math inline">\(\frac{16}{2^3}\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="dv">16</span> <span class="sc">/</span> <span class="dv">2</span> <span class="sc">^</span> <span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2</code></pre>
+</div>
+</div></li>
+</ul>
+</section>
+<section id="environmentworkspace" class="level3">
+<h3 class="anchored" data-anchor-id="environmentworkspace">Environment/Workspace</h3>
+<p>While it is certainly useful to print text or numbers to your console, it may sometimes make more sense to (at least temporally) store them somewhere, so you can re-use them later when you need them. In fact, R gives us a way of storing data in virtual, container-like objects: <strong>variables</strong>. We can assign strings or numbers to a variable by using the assignment operator <code>&lt;-</code>.</p>
+<p>When you run the commands below, you will (hopefully) notice two items popping up in your <strong>Environment</strong> tab in the top right corner.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>greeting <span class="ot">&lt;-</span> <span class="st">"Hello world!"</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>quick_math <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span> <span class="sc">-</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>If we now want to display the content in the console, we can simply apply the <code>print()</code> function to the variable itself:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(greeting)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Hello world!"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(quick_math)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+</div>
+<p>We can also embed variables in other statements. For example, let’s take the content of <code>quick_math</code> and multiply it with 2.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>hard_math <span class="ot">&lt;-</span> quick_math <span class="sc">*</span> <span class="dv">2</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(hard_math)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6</code></pre>
+</div>
+</div>
+</section>
+<section id="r-scripts" class="level3">
+<h3 class="anchored" data-anchor-id="r-scripts">R Scripts</h3>
+<p>Working with the console has a very plain, yet important disadvantage: Once we close RStudio, the console is wiped clean, erasing everything we’ve typed into it during our precious R session.</p>
+<p>The remedy for this nuisance are <strong>scripts</strong>. Essentially, a script is the programmer’s equivalent of a Word document: It allows you to save all the code you’ve written to a file, which you can seamlessly continue working on the next time you open it.</p>
+<p>To <strong>create a new R script</strong> you can either go to:</p>
+<ul>
+<li><p>“File” <span class="math inline">\(\rightarrow\)</span> “New” <span class="math inline">\(\rightarrow\)</span> “R Script” or …</p></li>
+<li><p>click on the icon with the + sign and select “R Script” …</p></li>
+<li><p>or simply press Ctrl+Shift+N (MacOS: Cmd+Shift+N)</p></li>
+</ul>
+<p>Don’t forget to save your script with Ctrl+S (Cmd+S)! It is good practice to save your files regularly.</p>
 
 
+</section>
+</section>
 </section>
 
 </main> <!-- /main -->

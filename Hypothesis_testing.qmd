@@ -84,7 +84,7 @@ possible constellations are summarised in the table below [cf.
 @heumann_introduction_2022: 223]:
 
 |                           | $H_0$ is true                                       | $H_0$ is not true                                   |
-|-----------------------------|---------------------|----------------------|
+|---------------------------|-----------------------------------------------------|-----------------------------------------------------|
 | $H_0$ **is not rejected** | $\color{green}{\text{Correct decision}}$            | $\color{red}{\text{Type II } (\beta)\text{-error}}$ |
 | $H_0$ **is rejected**     | $\color{red}{\text{Type I } (\alpha)\text{-error}}$ | $\color{green}{\text{Correct decision}}$            |
 
@@ -151,10 +151,9 @@ expected_table
 
 ::: {.callout-note collapse="true" title="Definition of the $\\chi^2$-test"}
 Given a sample with $n$ observations and $k$ degrees of freedom
-($df$)[^hypothesis_testing-1], the $\chi^2$-statistic measures how much
-the observed frequencies **deviate** from the expected frequencies **for
-each cell** in a contingency table [cf. @heumann_introduction_2022:
-249-251]:
+($df$)[^1], the $\chi^2$-statistic measures how much the observed
+frequencies **deviate** from the expected frequencies **for each cell**
+in a contingency table [cf. @heumann_introduction_2022: 249-251]:
 
 $$
 \chi^2 = \sum_{i=1}^{I}\sum_{i=j}^{J}{\frac{(n_{ij} - m_{ij})^2}{m_{ij}}}.
@@ -165,7 +164,7 @@ $$ The test stipulates that ...
 3.  all observed frequencies are $\geq$ 1.
 :::
 
-[^hypothesis_testing-1]: The degrees of freedom are calculated by
+[^1]: The degrees of freedom are calculated by
     $(\textrm{number of rows} -1) \times (\textrm{number of columns} - 1)$.
 
 ::: {.callout-tip collapse="true" title="Implementation in R: Manual vs. automatic"}
@@ -622,4 +621,3 @@ According to a two-sample $t$-test, there is a significant difference
 between the mean `F1 frequencies` of male and female speakers of Apache
 ($t = 2.44$, $df = 112.19$, $p < 0.05$). Therefore, $H_0$ will be
 rejected.
-

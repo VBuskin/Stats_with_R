@@ -1,10 +1,143 @@
-# Preface {.unnumbered}
+# First steps {.unnumbered}
 
 This collection of handouts provides a hands-on introduction to data
 analysis and statistical methods in quantitative corpus linguistics with
-R.
+R. It requires a working installation of both **R** and **RStudio**.
 
 It is geared primarily towards students attending the classes **Language
 Variation** (BA) and **Statistics for Linguistics** (MA) as well as
 those currently working on their **BA/MA/PhD theses** in empirical
 linguistics.
+
+## Installing R
+
+First, we need to download [R](https://ftp.fau.de/cran/). The link will
+take you to the homepage of the Comprehensive R Archive Network (CRAN)
+where you can download the binary distribution. Choose the one that
+corresponds to your operating system (Windows/MAC/Linux).
+
+**Windows users**: Click "Download R for Windows" $\rightarrow$ Select "base" $\rightarrow$
+Click on "Download R-4.4.1 for Windows" (or whatever most recent version
+is currently displayed).
+
+Open the set-up file you've just downloaded and simply follow the
+instructions on screen. It's fine to go with the default options.
+
+[Video tutorial on YouTube](https://www.youtube.com/watch?v=mfGFv-iB724)
+
+**MacOS users**: Click "Download R for macOS" $\rightarrow$ Select the latest
+release for your OS
+
+Open the downloaded .pkg file and follow the instructions in the
+installation window.
+
+[Video tutorial on YouTube](https://www.youtube.com/watch?v=Icawuhf0Yqo)
+
+## Installing RStudio
+
+You can now download and install
+[RStudio](https://posit.co/download/rstudio-desktop/).
+
+## The RStudio interface
+
+Once you've opened RStudio, you will see several empty panes similar to
+this:
+
+![](RStudio.png){fig-align="center"}
+
+### Console
+
+Let's focus on the **console** window on the left. This is where we can
+directly communicate with R by entering "code". The way this code is
+written follows certain arbitrary conventions -- just like natural
+languages such as English or German. Here is an example in the R
+programming language:
+
+```{r, echo = TRUE}
+print("Hello world!")
+```
+
+Entering this command into your console and pressing ENTER will display
+the sentence "Hello world!" right below your input. For good measure, here is another example:
+
+```{r}
+print("Alice was beginning to get very tired of sitting by her sister on the bank, and of having nothing to do")
+
+```
+
+As we can see, anything that R should understand as a simple
+sequence of letters or words must be enclosed by quotation marks `"..."`.
+Anything inside them will be interpreted as a so-called **string**.
+Their counterpart are **numbers** or **integers**, as illustrated here:
+
+```{r}
+2 + 2 - 1
+```
+
+Naturally, you can use R for more sophisticated computations:
+
+-   $2 + (3 \times 3)$
+
+    ```{r}
+    2 + (3 * 3)
+    ```
+
+-   $\sqrt{9}$
+
+    ```{r}
+    sqrt(9)
+    ```
+
+-   $\frac{16}{2^3}$
+
+    ```{r}
+    16 / 2 ^ 3
+    ```
+
+### Environment/Workspace
+
+While it is certainly useful to print text or numbers to your console, it may sometimes make more sense to (at least temporally) store them somewhere, so you can re-use them later when you need them. In fact, R gives us a way of storing data in virtual, container-like objects: **variables**. We can assign strings or numbers to a variable by using the assignment operator `<-`.
+
+When you run the commands below, you will (hopefully) notice two items  popping up in your **Environment** tab in the top right corner.
+
+```{r}
+greeting <- "Hello world!"
+
+quick_math <- 2 + 2 - 1
+
+```
+
+If we now want to display the content in the console, we can simply apply the ``print()`` function to the variable itself:
+
+```{r}
+print(greeting)
+
+print(quick_math)
+```
+
+We can also embed variables in other statements. For example, let's take the content of ``quick_math`` and multiply it with 2.
+
+```{r}
+hard_math <- quick_math * 2
+
+print(hard_math)
+```
+
+### R Scripts
+
+Working with the console has a very plain, yet important disadvantage: Once we close RStudio, the console is wiped clean, erasing everything we've typed into it during our precious R session.
+
+The remedy for this nuisance are **scripts**. Essentially, a script is the programmer's equivalent of a Word document: It allows you to save all the code you've written to a file, which you can seamlessly continue working on the next time you open it.
+
+To **create a new R script** you can either go to:
+
+-   "File" $\rightarrow$ "New" $\rightarrow$ "R Script" or ...
+
+-   click on the icon with the + sign and select "R Script" ...
+
+-   or simply press Ctrl+Shift+N (MacOS: Cmd+Shift+N)
+
+Don't forget to save your script with Ctrl+S (Cmd+S)! It is good practice to save your files regularly.
+
+
+
