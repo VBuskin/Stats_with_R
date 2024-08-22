@@ -15,286 +15,70 @@ format:
 editor: visual
 ---
 
-## Data frames in Base R {.smaller}
+## Word frequencies II
 
--   Today's script: 3_Data_frames.R
+Recall our corpus-linguistic data from the previous unit:
 
--   This session is primarily based on [Wickham et al. (2023: Chapter
-    3)](https://r4ds.hadley.nz/data-transform)
+| Lemma | Frequency |
+|-------|-----------|
+| start | 418       |
+| enjoy | 139       |
+| begin | 337       |
+| help  | 281       |
 
-```{r, include = FALSE}
-hooks = knitr::knit_hooks$get()
-hook_foldable = function(type) {
-  force(type)
-  function(x, options) {
-    res = hooks[[type]](x, options)
-    
-    if (isFALSE(options[[paste0("fold.", type)]])) return(res)
-    
-    paste0(
-      "<details><summary>", type, "</summary>\n\n",
-      res,
-      "\n\n</details>"
-    )
-  }
-}
-knitr::knit_hooks$set(
-  output = hook_foldable("output"),
-  plot = hook_foldable("plot")
-)
+We thought of the columns as one-dimensional, indexed lists of elements:
+
+```{r}
+lemma <- c("start", "enjoy", "begin", "help")
+
+frequency <- c(418, 139, 337, 281)
 ```
 
-::: panel-tabset
-#### Generating data frames {.smaller}
+Actually, R allows to combine these two vectors into something that
+resembles a real spreadsheet. To this end, we need to apply the
+`data.frame()` to two vectors of our choice.
 
-::: {.fragment fragment-index="1"}
--   Data frames are comparable to spreadsheets. They can be built by
-    combining multiple vectors and applying the `data.frame()` function
-    to them.
+```{r}
+data <- data.frame(lemma, frequency)
 
-```{r, echo = TRUE}
-# Define the columns
-participant <-  c("louis", "paula", "vincenzo")
-score <- c(67, 85, 32)
-
-# Combine the columns into a data frame
-mydf <- data.frame(participant, score)
-mydf
-
-```
-:::
-
-::: {.fragment fragment-index="2"}
--   You can check the structure of the data frame with `str().`
-
-```{r, echo = TRUE}
-str(mydf)
-```
-:::
-
-#### Editing data frames {.smaller}
-
-::: {.fragment fragment-index="3"}
--   The individual columns of a data frame can be accessed using the `$`
-    symbol. The output is a vector:
-
-```{r, echo = TRUE}
-mydf$participant
-
-```
-:::
-
-::: {.fragment fragment-index="4"}
--   Just like with vectors, it is possible to access specific elements
-    of a data frame:
-
-```{r, echo = TRUE, output = TRUE}
-# First row
-mydf[1,]
-
-# Second column
-mydf[,2]
-
-# First two rows
-mydf[1:2,]
-
-# First column, second entry
-mydf[,1][2]
-```
-:::
-
-::: {.fragment fragment-index="5"}
--   Extract only those cells where a certain property applies:
-
-```{r, echo = TRUE, output = TRUE}
-# Extract the row for the participant Vincenzo
-mydf[mydf$participant == 'vincenzo',]
-
-# Further subset this data frame to obtain Vincenzo's score only
-mydf[mydf$participant == 'vincenzo',]$score
-
-```
-:::
-:::
-
-## Basics of R III: Data frames in the `tidyverse` {.smaller}
-
--   Load the `tidyverse` library to gain access to a large set of data
-    manipulation and visualisation tools. If you have not installed it
-    yet, uncomment the first line of the following code and run it.
-
-```{r, echo = TRUE, warning = FALSE, message = FALSE}
-#install.packages("tidyverse")
-library("tidyverse")
+print(data)
 ```
 
--   Repeat the same procedure for the packages `readxl` and `writexl` to
-    be able to read from and write to Microsoft Excel (.xlsx) files.
+The variable `data` is no longer a vector, but a **data frame** (often
+abbreviated as 'df'). Once again, each element carries its own label and
+can, therefore, be accessed or manipulated.
 
-```{r, echo = TRUE}
-#install.packages("readxl")
-library("readxl")
-#install.packages("writexl")
-library("writexl")
+## Some technical details
+
+Since we now have two dimensions, the subsetting notation in square
+brackets `[ ]` has to reflect that. This is the general pattern:
+
+$$ df[row, column] $$ Following this logic, we can get the element in
+the first row of the first column like so:
+
+```{r}
+data[1,1]
 ```
 
--   Download the large spreadsheet file **NYC_flights_data.xlsx** from
-    ILIAS and place it in your `data` folder. Now import the dataset
-    (cf. instructions in the script file) and store it in a variable
-    `flights`.
+If we, however, need the entire first row, we simply omit the column
+part. Note that the comma `,` still needs to be present!
 
-```{r, echo = FALSE, output = FALSE}
-library("nycflights13")
+```{r}
+data[1,]
 ```
 
-### Rows
+Subsetting by columns is interesting. We can either use the explicit
+notation with square brackets or the **column operator** `$`:
 
-#### `filter()`
+```{r}
+data[,1]
 
--   Show flights where the departure was delayed by more than 120
-    minutes:
-
-```{r, echo = TRUE}
-flights %>% # pass the "flights" data frame on to the next function
-  filter(dep_delay > 120) # apply filter
+data$lemma
 ```
 
--   Show flights that departed on 01 January:
+## Practical
 
-```{r, echo = TRUE}
-flights %>% 
-  filter(month == 1 & day == 1) # "&" operator means 'and'
-```
+1.  Recreate the barplot from the previous unit by subsetting the `data`
+    variable accordingly.
 
-::: callout-tip
-## Coding style
-
-The above examples can also be rewritten in the form
-`function(data frame, argument)`. This is only a viable alternative as
-long as no further functions are added (compared to, e.g., the example
-in 2.3).
-
-```{r, echo = TRUE, output = FALSE}
-filter(flights, dep_delay > 120)
-
-filter(flights, month == 1 & day == 1)
-
-```
-:::
-
-#### `arrange()`
-
--   Rearrange rows based on column values:
-
-```{r, echo = TRUE}
-flights %>% 
-  arrange(dep_delay)
-```
-
--   Arrange the column values in descending order:
-
-```{r, echo = TRUE}
-flights %>%  
-  arrange(desc(dep_delay))
-```
-
-### Columns
-
-#### `mutate()`
-
--   Add new columns to the data frame based on existing ones:
-
-```{r, echo = TRUE}
-flights %>%  
-  mutate(
-    gain = dep_delay - arr_delay, # add gain column
-    speed = distance / air_time * 60, # add speed column
-    .before = 1 # add new columns to the left of the df
-  )
-```
-
-#### `select()`
-
--   Choose the variables to be used for further analysis and,
-    conversely, exclude all others:
-
-```{r, echo = TRUE}
-flights %>% 
-  select(origin, dest)
-
-```
-
-#### `rename()`
-
--   Change the name of an existing column with `rename()`. For example,
-    replace the old column names of *dep_time*, *sched_dep_time* and
-    *dep_delay* with *dep.time*, *sched.dep.time* and *dep.delay*,
-    respectively.
-
-```{r, echo = TRUE}
-flights %>%
-  rename(dep.time = dep_time,
-         sched.dep.time = sched_dep_time,
-         dep.delay = dep_delay
-         ) # new name = old name
-```
-
-#### `relocate()`
-
--   The column arguments of `relocate()` are moved to different
-    positions in the tibble. Without additional specification, the
-    function moves them to the beginning:
-
-```{r, echo = TRUE}
-flights %>% 
-  relocate(day, month, year)
-```
-
--   The optional arguments `.before()` and `.after()` provide explicit
-    instructions for column positioning. The default values are `NULL`.
-
-```{r, echo = TRUE}
-flights %>% 
-  relocate(year:dep_time, .after = sched_dep_time)
-
-flights %>% 
-  relocate(starts_with("arr"), .before = sched_dep_time)
-```
-
-### The pipe {.smaller}
-
--   Depending on the situation, it may be necessary to combine various
-    modes of data manipulation.
-
-```{r, echo = TRUE}
-flights %>% # data frame
-  filter(dest == "IAH") %>%   # only flights to IAH
-    mutate(speed = distance / air_time * 60) %>%   # create column with speed
-      select(year:day, dep_time, carrier, flight, speed) %>%   # choose variables
-        arrange(desc(speed)) # sort values in descending order
-```
-
-### Groups
-
-#### `group_by()` and `summarize()`
-
--   `group_by()` creates a grouped data frame that is organised by a
-    variable of your choice (e.g., "month").
-
-```{r, echo = TRUE}
-flights %>%  
-  group_by(month)
-```
-
--   Use `summarize()` to create a new data frame with rows for each
-    combination of grouping variables.
-
-```{r, echo = TRUE}
-flights %>%  
-  group_by(month) %>% 
-  summarize(
-    delay = mean(dep_delay, na.rm = TRUE), # second argument removes missing values
-    n = n() # shows number of rows in this group
-  )
-```
-
+2.  
