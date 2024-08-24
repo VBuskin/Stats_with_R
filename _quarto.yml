@@ -11,7 +11,7 @@ book:
       chapters:
         - index.qmd
         - Exploring_RStudio.qmd
-        - Vectors & Factors.qmd
+        - Vectors_Factors.qmd
         - Data_frames.qmd
     - part: "Corpus linguistics with R"
       chapters:
@@ -38,15 +38,31 @@ book:
         
 bibliography: R.bib
 
+code-block-font-size: 6pt
+
 format:
   html:
     theme: yeti
   pdf:
     documentclass: scrreprt
+    keep-tex: true  # Optionally keep the intermediate .tex file
+    geometry: "left=3cm,right=3cm,top=2cm,bottom=2cm,heightrounded"  # Set margins
+    fontsize: 11pt  # Set font size
+    fontfamily: libertine  # Set a custom font
+    header-includes:  # Add custom LaTeX preamble content
+      - \usepackage{fancyhdr}
+      - \pagestyle{fancy}
+      - \fancyhf{}
+      - \fancyhead[L]{\leftmark}
+      - \fancyhead[R]{\thepage}
+      - \fancyfoot[C]{Quantitative methods in corpus linguistics}
   
 
 editor: visual
 
 execute:
   freeze: auto
+  warning: false
+  message: false
+code-overflow: wrap
 
