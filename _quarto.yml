@@ -13,6 +13,10 @@ book:
         - Exploring_RStudio.qmd
         - Vectors & Factors.qmd
         - Data_frames.qmd
+    - part: "Corpus linguistics with R"
+      chapters:
+        - Libraries.qmd
+        - Concordancing.qmd
     - part: "Descriptive statistics"
       chapters:
         - Variables.qmd

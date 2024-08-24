@@ -1,0 +1,49 @@
+---
+title: "Libraries"
+author: Vladimir Buskin
+format:
+  html:
+    self-contained: true
+    theme: default
+    toc: true
+    number-sections: true
+    slide-number: true
+    incremental: false
+    slide-level: 3
+    scrollable: true
+    
+editor: visual
+---
+
+## Installing and loading packages
+
+Packages expand the basic functionality of R by providing numerous
+quality-of-life improvements that not only considerably simplify common
+data wrangling tasks but which also provide frameworks for
+state-of-the-art methods for statistical analysis and natural language
+processing (NLP).
+
+In order to install a package, you navigate to `Packages` \> `Install`
+and verify that the pop-up window says
+`Install from: Repository (CRAN)`. You can now type in the name of the
+package you would like to install under `Packages`.
+
+**Task**: Install the `tidyverse` and `quanteda` packages!
+
+Once the installation has been completed, you can proceed to load the
+libraries using the code below. You can ignore the warning messages.
+
+```{r, echo = TRUE}
+
+library(tidyverse)
+library(quanteda)
+```
+
+```{r, echo = FALSE}
+
+library(kableExtra)
+
+```
+
+Remember that you will have to reload these libraries whenever you start
+a new R session (i.e., open RStudio).

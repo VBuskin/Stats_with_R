@@ -73,12 +73,12 @@ objects. You will also notice that they are now showing in the
 
 The combination of categorical labels and numeric information renders
 our data ideally suited for a barplot. R's most basic barplot function
-(which is, unsurprisingly, called `barplot()`) needs at the very
-least ...
+(which is, unsurprisingly, called `barplot()`) needs at the very least
+...
 
 -   a `height` argument, i.e., our y-axis values and
 
--   a `names.arg` argument, i.e., our x-axis label.
+-   a `names.arg` argument, i.e., our x-axis labels.
 
 ```{r}
 barplot(frequency, names.arg = lemma, col = "skyblue")
@@ -94,7 +94,6 @@ barplot(frequency, names.arg = lemma,
         col = "steelblue") # color
 ```
 
-
 ::: {.callout-tip title="What does '#' mean? On comments in R" collapse="true"}
 In R, everything followed by the hashtag `#` will be interpreted as a
 comment and won't be evaluated by the R compiler. While comments don't
@@ -109,12 +108,19 @@ involved ...
 ![](comments_meme.png){fig-align="center" width="60%"}
 :::
 
-In RStudio, you now have the option to save the plot to your computer. Once the figure has appeared in your "Plots" panel, you can click on "Export" in the menu bar below and proceed to choose the desired output format file directory.
+In RStudio, you now have the option to save the plot to your computer.
+Once the figure has appeared in your "Plots" panel, you can click on
+"Export" in the menu bar below and proceed to choose the desired output
+format and file directory.
 
 ## Some technical details
 
-The example above demonstrates one of the most important data structures in R:
-**Vectors**. They form the cornerstone of various, more complex objects such as data frames, and are essential to handling large data sets (e.g., corpora). And yet, vectors are very simple in that they merely constitute one-dimensional sequences of characters or numbers -- no more, no less.
+The example above demonstrates one of the most important data structures
+in R: **Vectors**. They form the cornerstone of various more complex
+objects such as data frames, and are essential to handling large data
+sets (e.g., corpora). And yet, vectors are very simple in that they
+merely constitute one-dimensional sequences of characters or numbers --
+no more, no less.
 
 ```{r}
 print(lemma)
@@ -122,10 +128,11 @@ print(lemma)
 print(frequency)
 ```
 
-The individual elements in these two vectors are not randomly jumbling around in virtual space,
-but are in fact following a clear order. Each element has an "ID" (or
-**index**), by which we can access it. For example, if we want to print
-the first lemma in our `lemma` variable, we can use this notation:
+The individual elements in these two vectors are not randomly jumbling
+around in virtual space, but are in fact following a clear order. Each
+element has an "ID" (or **index**), by which we can access it. For
+example, if we want to print the first lemma in our `lemma` variable, we
+can use this notation:
 
 ```{r}
 lemma[1]

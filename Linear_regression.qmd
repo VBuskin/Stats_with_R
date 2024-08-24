@@ -283,7 +283,7 @@ The estimated parameter for `log(Freq)`, which is -0.049, thus has the
 
 [^linear_regression-3]: $$RSE = \sqrt{\frac{1}{n-2}\sum_{i=1}^n (y_i - \hat{y_i}})^2$$
 
-[^linear_regression-4]: $$R^2 = 1-\frac{\rm{TSS}}{RSS} = 1-\frac{\sum_{i=1}^n (y_i - \hat{y_i})^2}{\sum_{i=1}^n (y_i - \bar{y_i})^2}$$.
+[^linear_regression-4]: $$R^2 = 1-\frac{TSS}{RSS} = 1-\frac{\sum_{i=1}^n (y_i - \hat{y_i})^2}{\sum_{i=1}^n (y_i - \bar{y_i})^2}$$.
 
 ### Multiple linear regression
 
@@ -396,4 +396,3 @@ model with regard to
 -   **overfitting**, which results in poor model performance outside the
     training data.
 :::
-

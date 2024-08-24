@@ -1,0 +1,21 @@
+{
+  "hash": "685b20807e83c5b7a446e1ef3f66479b",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Data frames\"\nauthor: Vladimir Buskin\nformat:\n  html:\n    self-contained: true\n    theme: default\n    toc: true\n    number-sections: true\n    slide-number: true\n    incremental: false\n    slide-level: 3\n    scrollable: true\n    \neditor: visual\n---\n\n\n\n## Word frequencies II\n\nRecall our corpus-linguistic data from the previous unit:\n\n| Lemma | Frequency |\n|-------|-----------|\n| start | 418       |\n| enjoy | 139       |\n| begin | 337       |\n| help  | 281       |\n\nWe thought of the columns as one-dimensional, indexed lists of elements:\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlemma <- c(\"start\", \"enjoy\", \"begin\", \"help\")\n\nfrequency <- c(418, 139, 337, 281)\n```\n:::\n\n\n\nActually, R allows to combine these two vectors into something that\nresembles a real spreadsheet. To this end, we need to apply the\n`data.frame()` to two vectors of our choice.\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\ndata <- data.frame(lemma, frequency)\n\nprint(data)\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n  lemma frequency\n1 start       418\n2 enjoy       139\n3 begin       337\n4  help       281\n```\n\n\n:::\n:::\n\n\n\nThe variable `data` is no longer a vector, but a **data frame** (often\nabbreviated as 'df'). Once again, each element carries its own label and\ncan, therefore, be accessed or manipulated.\n\n## Some technical details\n\nSince we now have two dimensions, the subsetting notation in square\nbrackets `[ ]` has to reflect that. This is the general pattern:\n\n$$ df[row, column] $$ Following this logic, we can get the element in\nthe first row of the first column like so:\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\ndata[1,1]\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] \"start\"\n```\n\n\n:::\n:::\n\n\n\nIf we, however, need the entire first row, we simply omit the column\npart. Note that the comma `,` still needs to be present!\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\ndata[1,]\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n  lemma frequency\n1 start       418\n```\n\n\n:::\n:::\n\n\n\nSubsetting by columns is interesting. We can either use the explicit\nnotation with square brackets or the **column operator** `$`:\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\ndata[,1]\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] \"start\" \"enjoy\" \"begin\" \"help\" \n```\n\n\n:::\n\n```{.r .cell-code}\ndata$lemma\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] \"start\" \"enjoy\" \"begin\" \"help\" \n```\n\n\n:::\n:::\n\n\n\n## Practical\n\n1.  Recreate the barplot from the previous unit by subsetting the `data`\n    variable accordingly.\n\n2.  \n",
+    "supporting": [
+      "Data_frames_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {
+      "knitr": [
+        "{\"type\":\"list\",\"attributes\":{},\"value\":[]}"
+      ]
+    },
+    "preserve": null,
+    "postProcess": false
+  }
+}

@@ -103,15 +103,14 @@ cl.length.dens +
     (50% of the data are above the median; 50% of the data are below"
     [@winter_statistics_2020: 58]
 
-    $$
-    \begin{equation}
-    \tilde{x}_{0.5} = 
-    \begin{cases}
-    x_{((n+1)/2)} & \text{if } n \text{ is odd.} \\
-    \frac{1}{2}(x_{n/2}+x_{(n/2+1)}) & \text{if } n \text{ is even.}
-    \end{cases} 
-    \end{equation}
-    $$
+$$
+\tilde{x}_{0.5} = 
+\begin{cases}
+x_{((n+1)/2)} & \text{if } n \text{ is odd.} \\
+\frac{1}{2}(x_{n/2}+x_{(n/2+1)}) & \text{if } n \text{ is even.}
+\end{cases} 
+$$
+
 
 ```{r, echo = TRUE, output = TRUE}
 # Using median()
@@ -266,8 +265,6 @@ ggplot(cl_mean_sd, aes(x = ORDER, y = mean)) +
 
 ### Quartiles and boxplots
 
-![The structure of the boxplot [@wickham_r_2023: Chapter
-2.3.1]](images/Screenshot%202023-10-19%20at%2018.50.20.png)
 
 -   Consider the distribution of clause length by clause order:
 

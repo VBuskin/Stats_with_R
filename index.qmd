@@ -17,31 +17,31 @@ where you can download the binary distribution. Choose the one that
 corresponds to your operating system (Windows/MAC/Linux).
 
 ::: {.callout-note collapse="true" title="Installation instructions for Windows users"}
-
-Click "Download R for Windows" $\rightarrow$
-Select "base" $\rightarrow$ Click on "Download R-4.4.1 for Windows" (or
-whatever most recent version is currently displayed).
+Click "Download R for Windows" $\rightarrow$ Select "base" $\rightarrow$
+Click on "Download R-4.4.1 for Windows" (or whatever most recent version
+is currently displayed).
 
 Open the set-up file you've just downloaded and simply follow the
 instructions on screen. It's fine to go with the default options.
 
 [Video tutorial on YouTube](https://www.youtube.com/watch?v=mfGFv-iB724)
-
 :::
 
 ::: {.callout-note collapse="true" title="Installation instructions for MacOS users"}
-
-Click "Download R for macOS" $\rightarrow$ Select the
-latest release for your OS
+Click "Download R for macOS" $\rightarrow$ Select the latest release for
+your OS
 
 Open the downloaded .pkg file and follow the instructions in the
 installation window.
 
 [Video tutorial on YouTube](https://www.youtube.com/watch?v=Icawuhf0Yqo)
-
 :::
 
 ## Installing RStudio
 
 You can now download and install
-[RStudio](https://posit.co/download/rstudio-desktop/). RStudio is a so-called "Integrated Development Environment" (IDE), which will provide us with a variety of helpful tools to write and edit code comfortably. If R was a musical instrument, then RStudio would be the recording studio, so-to-speak.
+[RStudio](https://posit.co/download/rstudio-desktop/). RStudio is a
+so-called "Integrated Development Environment" (IDE), which will provide
+us with a variety of helpful tools to write and edit code comfortably.
+If R was a musical instrument, then RStudio would be the recording
+studio, so-to-speak.

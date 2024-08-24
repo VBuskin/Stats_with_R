@@ -1,5 +1,5 @@
 ---
-title: "Concordancing with R"
+title: "Querying a corpus"
 author: Vladimir Buskin
 format:
   html:
@@ -38,7 +38,7 @@ the working directory correctly.
     files pane, click on `Files` \> `'Blue wheel symbol'` \>
     `Go to working directory`.
 
-### Installing and loading packages
+### Installing and loading packages (move to earlier session)
 
 Packages expand the basic functionality of R by providing numerous
 quality-of-life improvements that not only considerably simplify common
@@ -68,7 +68,6 @@ library(kableExtra)
 
 ```
 
-
 Remember that you will have to reload these libraries whenever you start
 a new R session (i.e., open RStudio).
 
@@ -83,36 +82,14 @@ into R's working memory (it should now appear in the `Environment`
 tab!). This function will automatically handle the entire reading-in
 process.
 
-```{r, echo = TRUE, output = FALSE}
-
-read_GB <- function() {
-
-  # define corpus files
-  path_GB <- list.files("ICE_GB", full.names = TRUE)
-  
-  # load corpus files
-  transcripts_GB <- sapply(path_GB, function(x){
-    x <- readLines(x)
-  })
-  
-  # Collapse every transcript into a single character vector
-  ICE_GB_corpus <<- sapply(path_GB, function(x){
-    # read-in text
-    x <- readLines(x)
-    # paste all lines together
-    x <- paste0(x, collapse = " ")
-    # remove superfluous white spaces
-    x <- str_squish(x)
-  })
-}
-```
-
 To now get all corpus files into R, all we have to do is call the
 function:
 
 ```{r, echo = TRUE, eval = T}
 
-read_GB()
+
+ICE_GB <- readRDS("ICE_GB.RDS")
+
 ```
 
 If you encounter error messages, make sure you followed steps 1 and 2
@@ -120,13 +97,26 @@ above.
 
 ## Concordancing
 
+```{r}
+library(quanteda)
+library(tidyverse)
+
+# Load corpus
+ICE_GB <- readRDS("ICE_GB.RDS")
+```
+
 #### Basic use
+
+-   Concordances
 
 ```{r, echo = T, output = T}
 
 # Query the corpus
-kwic_provide1 <- kwic(tokens(ICE_GB_corpus),
-                     pattern = "provide")
+query1 <- kwic(ICE_GB, pattern = "provid(e|es|ing|ed)", valuetype = "regex")
+
+query1 %>%
+  as_tibble() %>% 
+  count(keyword)
 
 # Print first six lines to console
 #head(as_tibble(kwic_provide))
@@ -137,17 +127,16 @@ kwic_provide1 <- kwic(tokens(ICE_GB_corpus),
 
 ```{r, echo = F}
 
-kwic_provide1 %>% 
+query1 %>% 
   head() %>% 
   kbl() %>% 
   kable_classic(full_width = F, html_font = "Cambria")
 
 ```
 
-
 #### Increase search window
 
-```{r}
+```{r, eval = FALSE}
 
 # Query the corpus
 kwic_provide2 <- kwic(tokens(ICE_GB_corpus),
@@ -158,7 +147,7 @@ kwic_provide2 <- kwic(tokens(ICE_GB_corpus),
 #View(kwic_provide)
 ```
 
-```{r, echo = F}
+```{r, echo = F, eval = FALSE}
 
 kwic_provide2 %>% 
   head() %>% 
@@ -167,28 +156,28 @@ kwic_provide2 %>%
 
 ```
 
-
-
 #### Regular expressions
 
 **Regular expressions** (or 'regex') help us find more complex patterns
 in strings of text. Suppose we are interested in finding all
-inflectional forms of the lemma PROVIDE in a corpus, i.e., *provide, provides,
-providing* and *provided*. Insteading of searching for all forms individually, we can construct a regular expression of the form 
+inflectional forms of the lemma PROVIDE in a corpus, i.e., *provide,
+provides, providing* and *provided*. Insteading of searching for all
+forms individually, we can construct a regular expression of the form
 
 $$
 \text{provide(s | ing | ed)?}
-$$
-which can be read as 'Match the sequence of letters 
-\<provide\> as well as when it is optionally followed by the letters \<s\> or \<ing\> or \<ed\>'.
+$$ which can be read as 'Match the sequence of letters \<provide\> as
+well as when it is optionally followed by the letters \<s\> or \<ing\>
+or \<ed\>'. Notice how optionality is signified by the '?' operator and
+alternatives by '\|'.
 
-Notice how optionality is signified by the '?' operator and alternatives by '|'.
+To activate regular expression in a KWIC query, simply set the
+`valuetype` argument to `"regex"`:
 
-
-```{r}
+```{r, eval = FALSE}
 
 # Query the corpus
-kwic_provide3 <- kwic(quanteda::tokens(ICE_GB_corpus),
+kwic_provide3 <- kwic(ICE_GB,
                      pattern = "provide(s|ing|ed)?",
                      valuetype = "regex", # query format
                      window = 20)
@@ -199,7 +188,11 @@ kwic_provide3 <- kwic(quanteda::tokens(ICE_GB_corpus),
 #View(kwic_provide)
 ```
 
-```{r, echo = F}
+The number of hits has more than doubled. However, upon closer
+inspection, we'll notice a number of false positives (e.g.,
+*providential*).
+
+```{r, echo = F, eval = FALSE}
 
 kwic_provide3 %>% 
   head() %>% 
@@ -207,6 +200,8 @@ kwic_provide3 %>%
   kable_classic(full_width = T, html_font = "Cambria")
 
 ```
+
+### RegEx: A Cheatsheet
 
 ### Example usage
 
