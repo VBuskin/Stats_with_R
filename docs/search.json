@@ -416,5 +416,38 @@
       "References",
       "<span class='chapter-number'>14</span>  <span class='chapter-title'>References</span>"
     ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Quantitative methods in corpus linguistics: A reader",
+    "section": "",
+    "text": "First steps\nThis collection of handouts provides a hands-on introduction to data analysis and statistical methods in quantitative corpus linguistics with R. It requires a working installation of both R and RStudio.\nIt is geared primarily towards students attending the classes Language Variation (BA) and Statistics for Linguistics (MA) as well as those currently working on their BA/MA/PhD theses in empirical linguistics.",
+    "crumbs": [
+      "Data structures in R",
+      "First steps"
+    ]
+  },
+  {
+    "objectID": "index.html#installing-r",
+    "href": "index.html#installing-r",
+    "title": "Quantitative methods in corpus linguistics: A reader",
+    "section": "Installing R",
+    "text": "Installing R\nFirst, we need to download R. The link will take you to the homepage of the Comprehensive R Archive Network (CRAN) where you can download the binary distribution. Choose the one that corresponds to your operating system (Windows/MAC/Linux).\n\n\n\n\n\n\nInstallation instructions for Windows users\n\n\n\n\n\nClick “Download R for Windows” \\(\\rightarrow\\) Select “base” \\(\\rightarrow\\) Click on “Download R-4.4.1 for Windows” (or whatever most recent version is currently displayed).\nOpen the set-up file you’ve just downloaded and simply follow the instructions on screen. It’s fine to go with the default options.\nVideo tutorial on YouTube\n\n\n\n\n\n\n\n\n\nInstallation instructions for MacOS users\n\n\n\n\n\nClick “Download R for macOS” \\(\\rightarrow\\) Select the latest release for your OS\nOpen the downloaded .pkg file and follow the instructions in the installation window.\nVideo tutorial on YouTube",
+    "crumbs": [
+      "Data structures in R",
+      "First steps"
+    ]
+  },
+  {
+    "objectID": "index.html#installing-rstudio",
+    "href": "index.html#installing-rstudio",
+    "title": "Quantitative methods in corpus linguistics: A reader",
+    "section": "Installing RStudio",
+    "text": "Installing RStudio\nYou can now download and install RStudio. RStudio is a so-called “Integrated Development Environment” (IDE), which will provide us with a variety of helpful tools to write and edit code comfortably. If R was a musical instrument, then RStudio would be the recording studio, so-to-speak.",
+    "crumbs": [
+      "Data structures in R",
+      "First steps"
+    ]
   }
 ]

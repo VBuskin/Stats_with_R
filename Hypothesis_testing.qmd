@@ -3,7 +3,7 @@ title: "Hypothesis testing"
 author: Vladimir Buskin
 format:
   html:
-    self-contained: false
+    self-contained: true
     code-fold: false
     theme: default
     toc: true

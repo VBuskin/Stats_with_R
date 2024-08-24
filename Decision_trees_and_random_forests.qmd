@@ -3,7 +3,7 @@ title: "Decision trees and random forests"
 author: Vladimir Buskin
 format:
   html:
-    self-contained: false
+    self-contained: true
     logo: logo.png
     footer: "Regression"
     theme: default

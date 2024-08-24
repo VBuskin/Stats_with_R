@@ -3,7 +3,7 @@ title: "Querying a corpus"
 author: Vladimir Buskin
 format:
   html:
-    self-contained: false
+    self-contained: true
     theme: default
     toc: true
     number-sections: true
