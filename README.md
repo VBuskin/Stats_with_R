@@ -1,4 +1,4 @@
-This collection of handouts provides a hands-on introduction to data analysis and statistical methods in quantitative corpus linguistics with R. To be able to reproduce the examples, a working installation of both R and RStudio is required. The contents are geared towards in English Linguistics at the Catholic University of Eichstätt-Ingolstadt (Germany).
+This collection of handouts provides a hands-on introduction to data analysis and statistical methods in quantitative corpus linguistics with R. To be able to reproduce the examples, a working installation of both R and RStudio is required. The contents are geared towards students in English Linguistics at the Catholic University of Eichstätt-Ingolstadt (Germany).
 
 
 ## Information for students in "Empirical Approaches to Language Variation (BA)":
