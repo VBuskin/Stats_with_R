@@ -3,7 +3,7 @@ title: "Libraries"
 author: Vladimir Buskin
 format:
   html:
-    self-contained: true
+    self-contained: false
     theme: default
     toc: true
     number-sections: true

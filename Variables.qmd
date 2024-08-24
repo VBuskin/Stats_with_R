@@ -4,7 +4,7 @@ author: Vladimir Buskin
 institute: Catholic University of Eichstätt-Ingolstadt
 format:
   html:
-    self-contained: true
+    self-contained: false
     theme: default
     toc: true
     number-sections: true

@@ -3,7 +3,7 @@ title: "Linear and multiple regression"
 author: Vladimir Buskin
 format:
   html:
-    self-contained: true
+    self-contained: false
     logo: logo.png
     footer: "Regression"
     theme: default
