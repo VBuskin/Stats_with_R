@@ -1,0 +1,124 @@
+---
+title: "Importing and exporting data"
+author: Vladimir Buskin
+format:
+  html:
+    self-contained: true
+    theme: default
+    toc: true
+    number-sections: true
+    slide-number: true
+    incremental: false
+    slide-level: 3
+    scrollable: true
+    
+editor: visual
+---
+
+## Preparation
+
+The first section of an R-script always specifies the libraries that are
+needed for executing the code to follow. In this unit, we will need
+`readxl` and `writexl` to aid us with importing MS Excel files.
+
+```{r}
+library(readxl)
+library(writexl)
+```
+
+Simply copy the code lines above into your script and execute them.
+
+### Exporting data
+
+Assume we'd like to save our data frame with word frequencies to a local
+folder on our system. Let's briefly regenerate it:
+
+```{r}
+lemma <- c("start", "enjoy", "begin", "help")
+
+frequency <- c(418, 139, 337, 281)
+
+data <- data.frame(lemma, frequency)
+
+print(data)
+```
+
+There are two common formats in which tabular data can be stored on your
+computer:
+
+-    in .**csv**-files ('**c**omma-**s**eparated **v**alues'; native
+    format of LibreOffice)
+
+-    .**xls**/.**xlsx-files** (Microsoft Excel files)
+
+
+::: {.callout-note collapse="true" title="Export to CSV"}
+
+To save our `data` data frame in .csv-format, we can use the
+`write_table()` function:
+
+```{r}
+write.csv(data, "frequency_data.csv")
+```
+
+The file is now stored at the location of your current R-script. You can
+open this file ...
+
+-   in **LibreOffice**
+
+-   in **Microsoft Excel** via `File` \> `Import` \> `CSV file` \>
+    Select the file \> `Delimited` and then `Next` \> `Comma` and `Next`
+    \> `General` and `Finish`.
+    
+Clearly, opening CSV files in MS Excel is quite cumbersome, which is why it's better to export it as an Excel file directly.
+
+::: 
+
+::: {.callout-note collapse="true" title="Export to Excel"}
+
+We use `write_xlsx()` provided by the package `writexl` package:
+
+```{r}
+write_xlsx(data, "frequency_data.xlsx")
+```
+
+The file is now stored at the location of your current R-script. You should be able to open it in MS Excel without any issues.
+
+:::
+
+### Importing data
+
+Let's read the two files back into R.
+
+::: {.callout-note collapse="true" title="Import from CSV"}
+
+To import the CSV file, we can use the `read.csv()` function:
+
+```{r}
+imported_csv <- read.csv("frequency_data.csv")
+print(imported_csv)
+```
+
+To get rid of the column with the row names, we'll use some subsetting:
+
+```{r}
+imported_csv <- imported_csv[,-1] # delete first column
+```
+
+::: 
+
+::: {.callout-note collapse="true" title="Import from Excel"}
+For importing the Excel file, we'll use the `read_xlsx()` function from the readxl package:
+
+```{r}
+imported_excel <- read_xlsx("frequency_data.xlsx")
+print(imported_excel)
+```
+
+::: 
+
+That's it! Nevertheless, remember to always check your imported data to ensure it has been read correctly, especially when working with CSV files.
+
+### Exercises
+
+
