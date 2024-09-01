@@ -1,5 +1,5 @@
 ---
-title: "Summary statistics: Theory and practice"
+title: "Describing continuous data"
 author: Vladimir Buskin
 format:
   html:
@@ -110,7 +110,6 @@ x_{((n+1)/2)} & \text{if } n \text{ is odd.} \\
 \frac{1}{2}(x_{n/2}+x_{(n/2+1)}) & \text{if } n \text{ is even.}
 \end{cases} 
 $$
-
 
 ```{r, echo = TRUE, output = TRUE}
 # Using median()
@@ -265,7 +264,6 @@ ggplot(cl_mean_sd, aes(x = ORDER, y = mean)) +
 
 ### Quartiles and boxplots
 
-
 -   Consider the distribution of clause length by clause order:
 
 ::: panel-tabset
@@ -298,119 +296,50 @@ ggplot(cl.order, aes(x = LEN_MC, fill = ORDER)) +
 
 ```
 
-## Theoretical distributions
 
-### The normal distribution
+## Visualising mixed data
 
-A great number of numerical variables in the world follow the well-known
-**normal** (or Gaussian) **distribution**, which includes test scores,
-weight and height, among many others.
+### A numerical and categorical variable
 
-If a random variable $X$ is normally distributed, it is determined by
-the parameters $\mu$ (the mean) and $\sigma$ (the standard deviation).
-Formally, we can summarise this using the notation
+-   Boxplot with `geom_boxplot()`
 
-$$ X \sim N(\mu, \sigma^2).$$ The **probability density function (PDF)**
-of the normal distribution has a characteristic bell-shape. The density
-values on the $y$-axis indicate the likelihood of encountering a
-specific value of $X$ [cf. @winter_statistics_2020: 56;
-@heumann_introduction_2022: 173-177].
-
-```{r, echo = FALSE, output = TRUE, warning = FALSE, message = FALSE}
-
-# Step 1: Generate data from a normal distribution
-set.seed(123) # for reproducibility
-data <- rnorm(1000, mean = 0, sd = 1)
-
-# Step 2: Calculate mean and standard deviation
-mean_val <- mean(data)
-sd_val <- sd(data)
-
-# Step 3: Create a data frame for plotting
-x_values <- seq(mean_val - 3*sd_val, mean_val + 3*sd_val, length.out = 1000)
-y_values <- dnorm(x_values, mean = mean_val, sd = sd_val)
-plot_data <- data.frame(x = x_values, y = y_values)
-
-# Step 4: Plot the normal distribution curve
-#ggplot(plot_data, aes(x = x, y = y)) +
- # geom_line() +
-  #labs(title = "Normal Distribution",
-   #    x = "X",
-    #   y = "Density")
-
-# Step 5: Add markers at mean, mean +/- 1 SD, mean +/- 2 SD, and mean +/- 3 SD
-ggplot(plot_data, aes(x = x, y = y)) +
-  geom_line() +
-  geom_vline(xintercept = c(mean_val - 3*sd_val, mean_val - 2*sd_val, mean_val - sd_val, mean_val, mean_val + sd_val, mean_val + 2*sd_val, mean_val + 3*sd_val), color = "darkgreen", linetype = "dashed") +
-  geom_text(aes(x = mean_val - 3*sd_val, label = "-3 SD"), y = 0.1, vjust = -0.5) +
-  geom_text(aes(x = mean_val - 2*sd_val, label = "-2 SD"), y = 0.1, vjust = -0.5) +
-  geom_text(aes(x = mean_val - sd_val, label = "-1 SD"), y = 0.1, vjust = -0.5) +
-  geom_text(aes(x = mean_val, label = "Mean"), y = 0.1, vjust = -0.5) +
-  geom_text(aes(x = mean_val + sd_val, label = "+1 SD"), y = 0.1, vjust = -0.5) +
-  geom_text(aes(x = mean_val + 2*sd_val, label = "+2 SD"), y = 0.1, vjust = -0.5) +
-  geom_text(aes(x = mean_val + 3*sd_val, label = "+3 SD"), y = 0.1, vjust = -0.5) +
-  labs(title = "Normal Distribution",
-       x = "X",
-       y = "Density") +
-  theme_minimal()
-
+```{r, echo = TRUE, output = TRUE}
+ggplot(cl.order, aes(x = ORDER, y = LEN_MC)) +
+  geom_boxplot()
 ```
 
-### Bernoulli distribution
+-   Densitiy plot using the optional arguments `color` and/or `fill`
 
-The **Bernoulli distribution** is a discrete probability distribution
-for random variables which have only two possible outcomes: "positive"
-(often coded as 1) and "negative" (often coded as 0). Examples of such
-variables include coin tosses (heads/tails), binary response questions
-(yes/no), and defect status (defective/non-defective).
-
-If a random variable $X$ follows a Bernoulli distribution, it is
-determined by the parameter $p$, which is the probability of the
-positive case:
-
-$$ X \sim Bernoulli(p).$$ The **probability mass function (PMF)** of the
-Bernoulli distribution is given by: $$
-P(X = x) = 
-\begin{cases} 
-p & \text{if } x = 1 \\
-1 - p & \text{if } x = 0 
-\end{cases}
-$$
-
-where $0 \leq p \leq 1$. This function shows the probability of $X$
-taking on the value of 1 or 0 [cf. @heumann_introduction_2022: 162-163].
-
-```{r, echo = FALSE, output = TRUE}
-
-#Step 1: Define the probability of success
-p <- 0.3  # You can change this value to see different scenarios
-
-# Step 2: Create a data frame for the Bernoulli distribution
-bernoulli_data <- data.frame(
-  outcome = c(0, 1),
-  probability = c(1 - p, p)
-)
-
-# Step 3: Plot the Bernoulli distribution
-ggplot(bernoulli_data, aes(x = factor(outcome), y = probability)) +
-  geom_bar(stat = "identity", fill = "skyblue") +
-  geom_text(aes(label = round(probability, 2)), vjust = -0.5) +
-  labs(title = "Bernoulli Distribution",
-       x = "Outcome",
-       y = "Probability") +
-  theme_minimal()
-
+```{r, echo = TRUE, output = TRUE}
+ggplot(cl.order, aes(x = LEN_MC, fill = ORDER)) +
+  geom_density(alpha = 0.5)
 ```
 
-::: callout-note
-### Extensions
+-   A barplot with `geom_col()`
 
-A Bernoulli experiment presupposes a single trial (e.g., tossing a coin
-once). If we are interested in the distribution of a binary discrete
-variable over $n$ Bernoulli trials, we can describe it in terms of the
-**binomial distribution** [@heumann_introduction_2022: 163-166].
+```{r, echo = TRUE, output = TRUE}
+ggplot(cl.order, aes(x = ORDER, y = LEN_MC)) +
+  geom_col(aes(x = ORDER, y = LEN_MC))
+```
 
-Categorical variables with more than 2 outcomes and $n$ Bernoulli trials
-can be modelled using the **multinomial distribution**
-[@heumann_introduction_2022: 167-169].
-:::
+
+### Multivariate plots
+
+-   Advanced scatterplot with four variables: `LEN_MC` (x), `LEN_SC`
+    (y), `ORDER` (colour) and `SUBORDTYPE` (shape)
+
+```{r, echo = TRUE, output = TRUE}
+# 4 variables
+ggplot(cl.order, aes(x = LEN_MC, y = LEN_SC)) +
+  geom_point(aes(color = ORDER, shape = SUBORDTYPE))
+```
+
+-   Facets
+
+```{r, echo = TRUE, output = TRUE}
+# 5 variables
+ggplot(cl.order, aes(x = LEN_MC, y = LEN_SC)) +
+  geom_point(aes(color = ORDER, shape = SUBORDTYPE)) +
+  facet_wrap(~MORETHAN2CL)
+```
+

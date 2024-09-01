@@ -115,7 +115,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Libraries.html">Corpus linguistics with R</a></li><li class="breadcrumb-item"><a href="./Libraries.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Libraries</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Introduction to R</a></li><li class="breadcrumb-item"><a href="./Libraries.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Libraries</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -143,7 +143,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
- <span class="menu-text">Data structures in R</span></a>
+ <span class="menu-text">Introduction to R</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -173,6 +173,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data frames</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Libraries.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Libraries</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -184,12 +190,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           </a> 
       </div>
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Libraries.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Libraries</span></span></a>
-  </div>
-</li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Concordancing.html" class="sidebar-item-text sidebar-link">
@@ -306,14 +306,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#installing-and-loading-packages" id="toc-installing-and-loading-packages" class="nav-link active" data-scroll-target="#installing-and-loading-packages"><span class="header-section-number">4.1</span> Installing and loading packages</a></li>
+  <li><a href="#working-with-packages-in-r" id="toc-working-with-packages-in-r" class="nav-link active" data-scroll-target="#working-with-packages-in-r"><span class="header-section-number">4.1</span> Working with packages in R</a>
+  <ul class="collapse">
+  <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation"><span class="header-section-number">4.1.1</span> Installation</a></li>
+  <li><a href="#loading-packages" id="toc-loading-packages" class="nav-link" data-scroll-target="#loading-packages"><span class="header-section-number">4.1.2</span> Loading packages</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Libraries.html">Corpus linguistics with R</a></li><li class="breadcrumb-item"><a href="./Libraries.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Libraries</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Introduction to R</a></li><li class="breadcrumb-item"><a href="./Libraries.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Libraries</span></a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Libraries</span></h1>
 </div>
@@ -338,19 +342,70 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="installing-and-loading-packages" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="installing-and-loading-packages"><span class="header-section-number">4.1</span> Installing and loading packages</h2>
-<p>Packages expand the basic functionality of R by providing numerous quality-of-life improvements that not only considerably simplify common data wrangling tasks but which also provide frameworks for state-of-the-art methods for statistical analysis and natural language processing (NLP).</p>
-<p>In order to install a package, you navigate to <code>Packages</code> &gt; <code>Install</code> and verify that the pop-up window says <code>Install from: Repository (CRAN)</code>. You can now type in the name of the package you would like to install under <code>Packages</code>.</p>
-<p><strong>Task</strong>: Install the <code>tidyverse</code> and <code>quanteda</code> packages!</p>
+<section id="working-with-packages-in-r" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="working-with-packages-in-r"><span class="header-section-number">4.1</span> Working with packages in R</h2>
+<p>Packages expand the basic functionality of R by providing numerous quality-of-life improvements that not only considerably simplify common data wrangling tasks but which also provide frameworks for state-of-the-art methods for statistical analysis and natural language processing (NLP), among many other things.</p>
+<section id="installation" class="level3" data-number="4.1.1">
+<h3 data-number="4.1.1" class="anchored" data-anchor-id="installation"><span class="header-section-number">4.1.1</span> Installation</h3>
+<div class="callout callout-style-default callout-note callout-titled" title="How do I install a library?">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+How do I install a library?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>Nnavigate to <code>Packages</code> &gt; <code>Install</code> and verify that the pop-up window says <code>Install from: Repository (CRAN)</code>. You can now type in the name of the package you would like to install under <code>Packages</code>.</p>
+<p><a href="https://www.youtube.com/watch?v=u1r5XTqrCTQ">Video tutorial on YouTube</a></p>
+</div>
+</div>
+</div>
+<p>This reader will use functions from a variety of R packages. Please install the following ones:</p>
+<ul>
+<li><p><code>quanteda</code> (for the analysis of text data)</p></li>
+<li><p><code>tidyverse</code> (a framework for data manipulation and visualisation)</p></li>
+<li><p><code>readxl</code> (for importing Microsoft Excel files)</p></li>
+<li><p><code>writexl</code> (for exporting Microsoft Excel files)</p></li>
+<li><p><code>kableExtra</code> (for creating beautiful tables)</p></li>
+</ul>
+</section>
+<section id="loading-packages" class="level3" data-number="4.1.2">
+<h3 data-number="4.1.2" class="anchored" data-anchor-id="loading-packages"><span class="header-section-number">4.1.2</span> Loading packages</h3>
 <p>Once the installation has been completed, you can proceed to load the libraries using the code below. You can ignore the warning messages.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quanteda)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quanteda)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(writexl)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Remember that you will have to reload these libraries whenever you start a new R session (i.e., open RStudio).</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Activating libraries">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Activating libraries
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>Whenever you start a new R session (i.e., open RStudio), your libraries and their respective functions will be inactive. To re-activate a library, either use the <code>library()</code> function or simply select it in the <code>Packages</code> tab.</p>
+</div>
+</div>
+</div>
+<p>It is good practice to only activate those packages that are necessary for your analysis. While it won’t be a problem for the small set of packages as shown here, loading dozens of packages increases the risk of obtaining “homonymous” functions which have the same name but perform different operations. In this case, it might be helpful to “disambiguate” them by directly indicating which package a function is from:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

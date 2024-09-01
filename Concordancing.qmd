@@ -15,63 +15,32 @@ format:
 editor: visual
 ---
 
-## Introduction
+## Using the `QuantedaApp`
 
-This section offers a short introduction to corpus queries in R. Our
-goal will be to obtain data on the genitive alternation in British
-English. To this end, we will rely on the British component of the
-International Corpus of English (ICE-GB).
+### Installation
 
-## Preparation
+Installation and usage instructions are available in this [GitHub
+repository](https://github.com/VBuskin/quanteda_app).
 
-### Directory structure
+## Using the `quanteda` package in R
+
+### Preparation
 
 In order for R to be able to recognise the data, it is crucial to set up
 the working directory correctly.
 
 1.  Make sure your R-script **and** the corpus (e.g., 'ICE-GB') are
     stored in the **same folder**.
+
 2.  In RStudio, now navigate to `Session` \> `Set working directory` \>
     `To Source File Location`. This ensures that the folder where you
     have placed your R-script will function as your working directory
-    until you close RStudio again. To see your working directory in your
-    files pane, click on `Files` \> `'Blue wheel symbol'` \>
-    `Go to working directory`.
+    until you close RStudio again.
 
-### Installing and loading packages (move to earlier session)
+To see your working directory in your files pane, click on `Files` \>
+`'Blue wheel symbol'` \> `Go to working directory`.
 
-Packages expand the basic functionality of R by providing numerous
-quality-of-life improvements that not only considerably simplify common
-data wrangling tasks but which also provide frameworks for
-state-of-the-art methods for statistical analysis and natural language
-processing (NLP).
-
-In order to install a package, you navigate to `Packages` \> `Install`
-and verify that the pop-up window says
-`Install from: Repository (CRAN)`. You can now type in the name of the
-package you would like to install under `Packages`.
-
-**Task**: Install the `tidyverse` and `quanteda` packages!
-
-Once the installation has been completed, you can proceed to load the
-libraries using the code below. You can ignore the warning messages.
-
-```{r, echo = TRUE}
-
-library(tidyverse)
-library(quanteda)
-```
-
-```{r, echo = FALSE}
-
-library(kableExtra)
-
-```
-
-Remember that you will have to reload these libraries whenever you start
-a new R session (i.e., open RStudio).
-
-## Loading the corpus
+### Loading the corpus
 
 After specifying the working directory and loading the libraries we will
 need, we can read in the corpus files into a corpus object in R.
@@ -95,17 +64,16 @@ ICE_GB <- readRDS("ICE_GB.RDS")
 If you encounter error messages, make sure you followed steps 1 and 2
 above.
 
-## Concordancing
+### Concordancing
 
 ```{r}
 library(quanteda)
 library(tidyverse)
+library(kableExtra)
 
 # Load corpus
 ICE_GB <- readRDS("ICE_GB.RDS")
 ```
-
-#### Basic use
 
 -   Concordances
 
@@ -156,7 +124,7 @@ kwic_provide2 %>%
 
 ```
 
-#### Regular expressions
+## Regular expressions
 
 **Regular expressions** (or 'regex') help us find more complex patterns
 in strings of text. Suppose we are interested in finding all
@@ -200,8 +168,6 @@ kwic_provide3 %>%
   kable_classic(full_width = T, html_font = "Cambria")
 
 ```
-
-### RegEx: A Cheatsheet
 
 ### Example usage
 

@@ -48,7 +48,7 @@ The variable `data` is no longer a vector, but a **data frame** (often
 abbreviated as 'df'). Once again, each element carries its own label and
 can, therefore, be accessed or manipulated.
 
-## Some technical details
+## Some technical details {#sec-df}
 
 Since we now have two dimensions, the subsetting notation in square
 brackets `[ ]` has to reflect that. This is the general pattern:

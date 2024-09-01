@@ -8,7 +8,7 @@
 
 <meta name="author" content="Vladimir Buskin">
 
-<title>Quantitative methods in corpus linguistics: A reader - 7&nbsp; Summary statistics: Theory and practice</title>
+<title>Quantitative methods in corpus linguistics: A reader - 9&nbsp; Describing continuous data</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -85,8 +85,8 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./Hypothesis_testing.html" rel="next">
-<link href="./Variables.html" rel="prev">
+<link href="./Distributions.html" rel="next">
+<link href="./Categorical_data.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -137,7 +137,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Variables.html">Descriptive statistics</a></li><li class="breadcrumb-item"><a href="./Summary_statistics.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Summary statistics: Theory and practice</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Variables.html">Descriptive statistics</a></li><li class="breadcrumb-item"><a href="./Summary_statistics.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Describing continuous data</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -165,7 +165,7 @@ div.csl-indent {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
- <span class="menu-text">Data structures in R</span></a>
+ <span class="menu-text">Introduction to R</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -195,6 +195,18 @@ div.csl-indent {
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data frames</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Libraries.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Libraries</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Importing_exporting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Importing and exporting data</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -208,14 +220,8 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Libraries.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Libraries</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./Concordancing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Querying a corpus</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Querying a corpus</span></span></a>
   </div>
 </li>
       </ul>
@@ -232,13 +238,25 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Variables.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Understanding and visualising variables</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Understanding and visualising variables</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Categorical_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Describing categorical data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Summary_statistics.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Summary statistics: Theory and practice</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Describing continuous data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Distributions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Theoretical distributions</span></span></a>
   </div>
 </li>
       </ul>
@@ -255,19 +273,19 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Hypothesis_testing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Hypothesis testing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Hypothesis testing</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Chi_square_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Chi square test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Chi square test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./t_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">t-test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">t-test</span></span></a>
   </div>
 </li>
       </ul>
@@ -284,19 +302,19 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Linear_regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Linear and multiple regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Linear and multiple regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Logistic_regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Logistic Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Logistic Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Decision_trees_and_random_forests.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Decision trees and random forests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Decision trees and random forests</span></span></a>
   </div>
 </li>
       </ul>
@@ -313,7 +331,7 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">References</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">References</span></span></a>
   </div>
 </li>
       </ul>
@@ -328,18 +346,18 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#measures-of-central-tendency" id="toc-measures-of-central-tendency" class="nav-link active" data-scroll-target="#measures-of-central-tendency"><span class="header-section-number">7.1</span> Measures of central tendency</a>
+  <li><a href="#measures-of-central-tendency" id="toc-measures-of-central-tendency" class="nav-link active" data-scroll-target="#measures-of-central-tendency"><span class="header-section-number">9.1</span> Measures of central tendency</a>
   <ul class="collapse">
-  <li><a href="#the-mean" id="toc-the-mean" class="nav-link" data-scroll-target="#the-mean"><span class="header-section-number">7.1.1</span> The mean</a></li>
-  <li><a href="#the-median" id="toc-the-median" class="nav-link" data-scroll-target="#the-median"><span class="header-section-number">7.1.2</span> The median</a></li>
-  <li><a href="#sample-variance-and-standard-deviation" id="toc-sample-variance-and-standard-deviation" class="nav-link" data-scroll-target="#sample-variance-and-standard-deviation"><span class="header-section-number">7.1.3</span> Sample variance and standard deviation</a></li>
-  <li><a href="#quantiles" id="toc-quantiles" class="nav-link" data-scroll-target="#quantiles"><span class="header-section-number">7.1.4</span> Quantiles</a></li>
-  <li><a href="#quartiles-and-boxplots" id="toc-quartiles-and-boxplots" class="nav-link" data-scroll-target="#quartiles-and-boxplots"><span class="header-section-number">7.1.5</span> Quartiles and boxplots</a></li>
+  <li><a href="#the-mean" id="toc-the-mean" class="nav-link" data-scroll-target="#the-mean"><span class="header-section-number">9.1.1</span> The mean</a></li>
+  <li><a href="#the-median" id="toc-the-median" class="nav-link" data-scroll-target="#the-median"><span class="header-section-number">9.1.2</span> The median</a></li>
+  <li><a href="#sample-variance-and-standard-deviation" id="toc-sample-variance-and-standard-deviation" class="nav-link" data-scroll-target="#sample-variance-and-standard-deviation"><span class="header-section-number">9.1.3</span> Sample variance and standard deviation</a></li>
+  <li><a href="#quantiles" id="toc-quantiles" class="nav-link" data-scroll-target="#quantiles"><span class="header-section-number">9.1.4</span> Quantiles</a></li>
+  <li><a href="#quartiles-and-boxplots" id="toc-quartiles-and-boxplots" class="nav-link" data-scroll-target="#quartiles-and-boxplots"><span class="header-section-number">9.1.5</span> Quartiles and boxplots</a></li>
   </ul></li>
-  <li><a href="#theoretical-distributions" id="toc-theoretical-distributions" class="nav-link" data-scroll-target="#theoretical-distributions"><span class="header-section-number">7.2</span> Theoretical distributions</a>
+  <li><a href="#visualising-mixed-data" id="toc-visualising-mixed-data" class="nav-link" data-scroll-target="#visualising-mixed-data"><span class="header-section-number">9.2</span> Visualising mixed data</a>
   <ul class="collapse">
-  <li><a href="#the-normal-distribution" id="toc-the-normal-distribution" class="nav-link" data-scroll-target="#the-normal-distribution"><span class="header-section-number">7.2.1</span> The normal distribution</a></li>
-  <li><a href="#bernoulli-distribution" id="toc-bernoulli-distribution" class="nav-link" data-scroll-target="#bernoulli-distribution"><span class="header-section-number">7.2.2</span> Bernoulli distribution</a></li>
+  <li><a href="#a-numerical-and-categorical-variable" id="toc-a-numerical-and-categorical-variable" class="nav-link" data-scroll-target="#a-numerical-and-categorical-variable"><span class="header-section-number">9.2.1</span> A numerical and categorical variable</a></li>
+  <li><a href="#multivariate-plots" id="toc-multivariate-plots" class="nav-link" data-scroll-target="#multivariate-plots"><span class="header-section-number">9.2.2</span> Multivariate plots</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -347,9 +365,9 @@ div.csl-indent {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Variables.html">Descriptive statistics</a></li><li class="breadcrumb-item"><a href="./Summary_statistics.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Summary statistics: Theory and practice</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Variables.html">Descriptive statistics</a></li><li class="breadcrumb-item"><a href="./Summary_statistics.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Describing continuous data</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Summary statistics: Theory and practice</span></h1>
+<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Describing continuous data</span></h1>
 </div>
 
 
@@ -372,10 +390,10 @@ div.csl-indent {
 </header>
 
 
-<section id="measures-of-central-tendency" class="level2 scrollable" data-number="7.1">
-<h2 class="scrollable anchored" data-number="7.1" data-anchor-id="measures-of-central-tendency"><span class="header-section-number">7.1</span> Measures of central tendency</h2>
-<section id="the-mean" class="level3 smaller scrollable" data-number="7.1.1">
-<h3 class="smaller scrollable anchored" data-number="7.1.1" data-anchor-id="the-mean"><span class="header-section-number">7.1.1</span> The mean</h3>
+<section id="measures-of-central-tendency" class="level2 scrollable" data-number="9.1">
+<h2 class="scrollable anchored" data-number="9.1" data-anchor-id="measures-of-central-tendency"><span class="header-section-number">9.1</span> Measures of central tendency</h2>
+<section id="the-mean" class="level3 smaller scrollable" data-number="9.1.1">
+<h3 class="smaller scrollable anchored" data-number="9.1.1" data-anchor-id="the-mean"><span class="header-section-number">9.1.1</span> The mean</h3>
 <ul>
 <li><p>A useful summary statistic is the arithmetic mean <span class="math inline">\(\bar{x}\)</span> <span class="citation" data-cites="heumann_introduction_2022">(cf. <a href="references.html#ref-heumann_introduction_2022" role="doc-biblioref">Heumann, Schomaker, and Shalabh 2022</a>: 38)</span>. Consider a variable <span class="math inline">\(X\)</span> with observations <span class="math inline">\(x_1, x_2, ..., x_n\)</span> from a sample of size <span class="math inline">\(n\)</span>. The sample mean then corresponds to</p>
 <p><span class="math display">\[
@@ -441,8 +459,8 @@ div.csl-indent {
 </div>
 </div>
 </section>
-<section id="the-median" class="level3 smaller" data-number="7.1.2">
-<h3 class="smaller anchored" data-number="7.1.2" data-anchor-id="the-median"><span class="header-section-number">7.1.2</span> The median</h3>
+<section id="the-median" class="level3 smaller" data-number="9.1.2">
+<h3 class="smaller anchored" data-number="9.1.2" data-anchor-id="the-median"><span class="header-section-number">9.1.2</span> The median</h3>
 <ul>
 <li>The <code>median()</code> function computes the “the halfway point of the data (50% of the data are above the median; 50% of the data are below” <span class="citation" data-cites="winter_statistics_2020">(<a href="references.html#ref-winter_statistics_2020" role="doc-biblioref">Winter 2020</a>: 58)</span></li>
 </ul>
@@ -507,8 +525,8 @@ x_{((n+1)/2)} &amp; \text{if } n \text{ is odd.} \\
 </div>
 </div>
 </section>
-<section id="sample-variance-and-standard-deviation" class="level3 smaller" data-number="7.1.3">
-<h3 class="smaller anchored" data-number="7.1.3" data-anchor-id="sample-variance-and-standard-deviation"><span class="header-section-number">7.1.3</span> Sample variance and standard deviation</h3>
+<section id="sample-variance-and-standard-deviation" class="level3 smaller" data-number="9.1.3">
+<h3 class="smaller anchored" data-number="9.1.3" data-anchor-id="sample-variance-and-standard-deviation"><span class="header-section-number">9.1.3</span> Sample variance and standard deviation</h3>
 <ul>
 <li><p>In order to assess how well the mean represents the data, it is instructive to compute the <strong>variance</strong> <code>var()</code> and the <strong>standard deviation</strong> <code>sd()</code> for a sample.</p></li>
 <li><p>The sample variance is defined as</p></li>
@@ -615,8 +633,8 @@ x_{((n+1)/2)} &amp; \text{if } n \text{ is odd.} \\
 </div>
 </div>
 </section>
-<section id="quantiles" class="level3" data-number="7.1.4">
-<h3 data-number="7.1.4" class="anchored" data-anchor-id="quantiles"><span class="header-section-number">7.1.4</span> Quantiles</h3>
+<section id="quantiles" class="level3" data-number="9.1.4">
+<h3 data-number="9.1.4" class="anchored" data-anchor-id="quantiles"><span class="header-section-number">9.1.4</span> Quantiles</h3>
 <ul>
 <li><p>While <code>median()</code> divides the data into two equal sets (i.e., two 50% quantiles), the <code>quantile()</code> function makes it possible to partition the data further.</p>
 <div class="cell">
@@ -641,8 +659,8 @@ x_{((n+1)/2)} &amp; \text{if } n \text{ is odd.} \\
 </div></li>
 </ul>
 </section>
-<section id="quartiles-and-boxplots" class="level3" data-number="7.1.5">
-<h3 data-number="7.1.5" class="anchored" data-anchor-id="quartiles-and-boxplots"><span class="header-section-number">7.1.5</span> Quartiles and boxplots</h3>
+<section id="quartiles-and-boxplots" class="level3" data-number="9.1.5">
+<h3 data-number="9.1.5" class="anchored" data-anchor-id="quartiles-and-boxplots"><span class="header-section-number">9.1.5</span> Quartiles and boxplots</h3>
 <ul>
 <li>Consider the distribution of clause length by clause order:</li>
 </ul>
@@ -698,14 +716,16 @@ x_{((n+1)/2)} &amp; \text{if } n \text{ is odd.} \\
 </div>
 </section>
 </section>
-<section id="theoretical-distributions" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="theoretical-distributions"><span class="header-section-number">7.2</span> Theoretical distributions</h2>
-<section id="the-normal-distribution" class="level3" data-number="7.2.1">
-<h3 data-number="7.2.1" class="anchored" data-anchor-id="the-normal-distribution"><span class="header-section-number">7.2.1</span> The normal distribution</h3>
-<p>A great number of numerical variables in the world follow the well-known <strong>normal</strong> (or Gaussian) <strong>distribution</strong>, which includes test scores, weight and height, among many others.</p>
-<p>If a random variable <span class="math inline">\(X\)</span> is normally distributed, it is determined by the parameters <span class="math inline">\(\mu\)</span> (the mean) and <span class="math inline">\(\sigma\)</span> (the standard deviation). Formally, we can summarise this using the notation</p>
-<p><span class="math display">\[ X \sim N(\mu, \sigma^2).\]</span> The <strong>probability density function (PDF)</strong> of the normal distribution has a characteristic bell-shape. The density values on the <span class="math inline">\(y\)</span>-axis indicate the likelihood of encountering a specific value of <span class="math inline">\(X\)</span> <span class="citation" data-cites="winter_statistics_2020 heumann_introduction_2022">(cf. <a href="references.html#ref-winter_statistics_2020" role="doc-biblioref">Winter 2020</a>: 56; <a href="references.html#ref-heumann_introduction_2022" role="doc-biblioref">Heumann, Schomaker, and Shalabh 2022</a>: 173-177)</span>.</p>
+<section id="visualising-mixed-data" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="visualising-mixed-data"><span class="header-section-number">9.2</span> Visualising mixed data</h2>
+<section id="a-numerical-and-categorical-variable" class="level3" data-number="9.2.1">
+<h3 data-number="9.2.1" class="anchored" data-anchor-id="a-numerical-and-categorical-variable"><span class="header-section-number">9.2.1</span> A numerical and categorical variable</h3>
+<ul>
+<li>Boxplot with <code>geom_boxplot()</code></li>
+</ul>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(cl.order, <span class="fu">aes</span>(<span class="at">x =</span> ORDER, <span class="at">y =</span> LEN_MC)) <span class="sc">+</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -714,20 +734,12 @@ x_{((n+1)/2)} &amp; \text{if } n \text{ is odd.} \\
 </div>
 </div>
 </div>
-</section>
-<section id="bernoulli-distribution" class="level3" data-number="7.2.2">
-<h3 data-number="7.2.2" class="anchored" data-anchor-id="bernoulli-distribution"><span class="header-section-number">7.2.2</span> Bernoulli distribution</h3>
-<p>The <strong>Bernoulli distribution</strong> is a discrete probability distribution for random variables which have only two possible outcomes: “positive” (often coded as 1) and “negative” (often coded as 0). Examples of such variables include coin tosses (heads/tails), binary response questions (yes/no), and defect status (defective/non-defective).</p>
-<p>If a random variable <span class="math inline">\(X\)</span> follows a Bernoulli distribution, it is determined by the parameter <span class="math inline">\(p\)</span>, which is the probability of the positive case:</p>
-<p><span class="math display">\[ X \sim Bernoulli(p).\]</span> The <strong>probability mass function (PMF)</strong> of the Bernoulli distribution is given by: <span class="math display">\[
-P(X = x) =
-\begin{cases}
-p &amp; \text{if } x = 1 \\
-1 - p &amp; \text{if } x = 0
-\end{cases}
-\]</span></p>
-<p>where <span class="math inline">\(0 \leq p \leq 1\)</span>. This function shows the probability of <span class="math inline">\(X\)</span> taking on the value of 1 or 0 <span class="citation" data-cites="heumann_introduction_2022">(cf. <a href="references.html#ref-heumann_introduction_2022" role="doc-biblioref">Heumann, Schomaker, and Shalabh 2022</a>: 162-163)</span>.</p>
+<ul>
+<li>Densitiy plot using the optional arguments <code>color</code> and/or <code>fill</code></li>
+</ul>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(cl.order, <span class="fu">aes</span>(<span class="at">x =</span> LEN_MC, <span class="at">fill =</span> ORDER)) <span class="sc">+</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -736,18 +748,52 @@ p &amp; \text{if } x = 1 \\
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<ul>
+<li>A barplot with <code>geom_col()</code></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(cl.order, <span class="fu">aes</span>(<span class="at">x =</span> ORDER, <span class="at">y =</span> LEN_MC)) <span class="sc">+</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">x =</span> ORDER, <span class="at">y =</span> LEN_MC))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Summary_statistics_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
-<div class="callout-title-container flex-fill">
-Extensions
 </div>
 </div>
-<div class="callout-body-container callout-body">
-<p>A Bernoulli experiment presupposes a single trial (e.g., tossing a coin once). If we are interested in the distribution of a binary discrete variable over <span class="math inline">\(n\)</span> Bernoulli trials, we can describe it in terms of the <strong>binomial distribution</strong> <span class="citation" data-cites="heumann_introduction_2022">(<a href="references.html#ref-heumann_introduction_2022" role="doc-biblioref">Heumann, Schomaker, and Shalabh 2022</a>: 163-166)</span>.</p>
-<p>Categorical variables with more than 2 outcomes and <span class="math inline">\(n\)</span> Bernoulli trials can be modelled using the <strong>multinomial distribution</strong> <span class="citation" data-cites="heumann_introduction_2022">(<a href="references.html#ref-heumann_introduction_2022" role="doc-biblioref">Heumann, Schomaker, and Shalabh 2022</a>: 167-169)</span>.</p>
+</section>
+<section id="multivariate-plots" class="level3" data-number="9.2.2">
+<h3 data-number="9.2.2" class="anchored" data-anchor-id="multivariate-plots"><span class="header-section-number">9.2.2</span> Multivariate plots</h3>
+<ul>
+<li>Advanced scatterplot with four variables: <code>LEN_MC</code> (x), <code>LEN_SC</code> (y), <code>ORDER</code> (colour) and <code>SUBORDTYPE</code> (shape)</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 4 variables</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(cl.order, <span class="fu">aes</span>(<span class="at">x =</span> LEN_MC, <span class="at">y =</span> LEN_SC)) <span class="sc">+</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> ORDER, <span class="at">shape =</span> SUBORDTYPE))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Summary_statistics_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>Facets</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 5 variables</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(cl.order, <span class="fu">aes</span>(<span class="at">x =</span> LEN_MC, <span class="at">y =</span> LEN_SC)) <span class="sc">+</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> ORDER, <span class="at">shape =</span> SUBORDTYPE)) <span class="sc">+</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>MORETHAN2CL)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Summary_statistics_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 
@@ -1163,13 +1209,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./Variables.html" class="pagination-link  aria-label=" &lt;span="" and="" visualising="" variables&lt;="" span&gt;"="">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Understanding and visualising variables</span></span>
+      <a href="./Categorical_data.html" class="pagination-link  aria-label=" &lt;span="" categorical="" data&lt;="" span&gt;"="">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Describing categorical data</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./Hypothesis_testing.html" class="pagination-link" aria-label="<span class='chapter-number'>8</span>&nbsp; <span class='chapter-title'>Hypothesis testing</span>">
-        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Hypothesis testing</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./Distributions.html" class="pagination-link" aria-label="<span class='chapter-number'>10</span>&nbsp; <span class='chapter-title'>Theoretical distributions</span>">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Theoretical distributions</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -7,20 +7,23 @@ book:
   author: "Vladimir Buskin"
   date: "2024-06-30"
   chapters:
-    - part: "Data structures in R"
+    - part: "Introduction to R"
       chapters:
         - index.qmd
         - Exploring_RStudio.qmd
         - Vectors_Factors.qmd
         - Data_frames.qmd
+        - Libraries.qmd
+        - Importing_exporting.qmd
     - part: "Corpus linguistics with R"
       chapters:
-        - Libraries.qmd
         - Concordancing.qmd
     - part: "Descriptive statistics"
       chapters:
         - Variables.qmd
+        - Categorical_data.qmd
         - Summary_statistics.qmd
+        - Distributions.qmd
     - part: "Inferential statistics"
       chapters:
         - Hypothesis_testing.qmd
