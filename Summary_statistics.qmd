@@ -22,47 +22,79 @@ knitr::opts_chunk$set(
 )
 ```
 
-## Measures of central tendency {.scrollable}
+## Preparation
 
-```{r, echo = FALSE, output = FALSE}
+We will use the dataset from the previous unit:
+
+```{r, echo = TRUE, output = FALSE}
 
 # Libraries
 library("readxl")
 library("tidyverse")
-library("ggthemes")
 
 # Load data from working directory
 cl.order <- read_xlsx("Paquot_Larsson_2020_data.xlsx")
 
 ```
 
+## Measures of central tendency {.scrollable}
+
 ### The mean {.smaller .scrollable}
 
--   A useful summary statistic is the arithmetic mean $\bar{x}$ [cf.
-    @heumann_introduction_2022: 38]. Consider a variable $X$ with
-    observations $x_1, x_2, ..., x_n$ from a sample of size $n$. The
-    sample mean then corresponds to
+A useful summary statistic is the arithmetic mean $\bar{x}$ [cf.
+@heumann_introduction_2022: 38]. Consider a continuous variable $X$ with
+observations $x_1, x_2, ..., x_n$ from a sample of size $n$. The sample
+mean $\bar{x}$ then corresponds to
 
-    $$
-    \bar{x}= \frac{x_1 + x_2 + ... + x_n}{n} \\ = \frac{1}{n}\sum_{i=1}^n{x_i}.
-    $$
+$$
+\bar{x} = \frac{x_1 + x_2 + ... + x_n}{n} \\ = \frac{1}{n}\sum_{i=1}^n{x_i}.
+$$
+
+::: callout-note
+## Hold on, what does this large Σ symbol mean?
+
+The summation symbol $\sum$ is a concise way to express the sum of a
+sequence of numbers. It works like this:
+
+-   The expression below the $\sum$ (e.g., $i = 1$) indicates the
+    starting value of the index $i$.
+
+-   The number above the $\sum$ (e.g., $n$) is the ending value of the
+    index $i$.
+
+-   The expression to the right of the $\sum$ (e.g., $x_i$) is the term
+    to be summed.
+
+For instance, the expression $\sum_{i=1}^n{x_i}$ means "sum the values
+of $x_i$ starting from $i = 1$ up to $i = n$." In other words, it adds
+up the values $x_1 + x_2 + \dots + x_n$.
+:::
 
 In R, we can obtain the average value of a numeric vector with the
-`mean()` function.
+`mean()` function. Let's do that for the length of main clauses found in
+the `cl.order` data:
 
 ```{r, echo = TRUE, output = TRUE}
 # Using mean()
 mean(cl.order$LEN_MC)
-
-# or by hand:
-mean <- 1/length(cl.order$LEN_MC) * sum(cl.order$LEN_MC)
-
 ```
 
-**Visualisation**:
+::: {.callout-tip collapse="true" title="Compute the sample mean by hand"}
+```{r, echo = TRUE, output = TRUE}
+mean <- 1/length(cl.order$LEN_MC) * sum(cl.order$LEN_MC)
+```
+:::
+
+The output returned by this function provides a one-value summary of all
+observations contained in `LEN_MC`. How could we visualise it?
+
+First, let's create a histogram of `LEN_MC`. Histograms summarise how
+often certain values occur in a continuous variable. The blue line
+indicates the sample mean. Alternatively, you can use a density plot to
+represent the probability of encountering a specific value in the data.
 
 ::: panel-tabset
-#### Histogram
+### Histogram (ggplot2)
 
 ```{r, echo = TRUE, warnings = FALSE, message = FALSE}
 
@@ -79,7 +111,7 @@ cl.length.hist +
   
 ```
 
-#### Density plot
+### Density plot (ggplot2)
 
 ```{r, echo = TRUE, warnings = FALSE, message = FALSE}
 
@@ -95,13 +127,27 @@ cl.length.dens +
   theme_classic()
   
 ```
+
+### Histogram (Base R)
+
+```{r}
+hist(cl.order$LEN_MC)
+  abline(v=mean(cl.order$LEN_MC),lwd=3, col = "steelblue")
+```
+
+### Density plot (Base R)
+
+```{r}
+plot(density(cl.order$LEN_MC))
+  abline(v=mean(cl.order$LEN_MC),lwd=3, col = "steelblue")
+```
 :::
 
 ### The median {.smaller}
 
--   The `median()` function computes the "the halfway point of the data
-    (50% of the data are above the median; 50% of the data are below"
-    [@winter_statistics_2020: 58]
+The `median()` function computes the "the halfway point of the data (50%
+of the data are above the median; 50% of the data are below"
+[@winter_statistics_2020: 58].
 
 $$
 \tilde{x}_{0.5} = 
@@ -114,8 +160,10 @@ $$
 ```{r, echo = TRUE, output = TRUE}
 # Using median()
 median(cl.order$LEN_MC)
+```
 
-# or by hand:
+::: {.callout-tip collapse="true" title="Compute the median by hand"}
+```{r, echo = TRUE, output = TRUE}
 sample_sorted <- sort(cl.order$LEN_MC) # sort values in ascending order
 
 n <- length(cl.order$LEN_MC) # sample size is 403 (odd number!)
@@ -123,11 +171,12 @@ n <- length(cl.order$LEN_MC) # sample size is 403 (odd number!)
 median <- sample_sorted[(n + 1) %/% 2] # compute median
 
 ```
+:::
 
-**Visualisation**:
+The median of `LEN_MC` is represented by the red vertical line.
 
 ::: panel-tabset
-#### Histogram
+### Histogram (ggplot2)
 
 ```{r, echo = TRUE, output = TRUE}
 cl.length.hist +
@@ -138,7 +187,7 @@ cl.length.hist +
   theme_classic()
 ```
 
-#### Density plot
+### Density plot (ggplot2)
 
 ```{r, echo = TRUE, output = TRUE}
 cl.length.dens +
@@ -148,39 +197,58 @@ cl.length.dens +
   geom_vline(aes(xintercept = median(LEN_MC)), color = "red", linewidth = 1) +
   theme_classic()
 ```
+
+### Histogram (Base R)
+
+```{r}
+hist(cl.order$LEN_MC)
+  abline(v=mean(cl.order$LEN_MC),lwd=3, col = "steelblue")
+  abline(v=median(cl.order$LEN_MC),lwd=3, col = "red")
+```
+
+### Density plot (Base R)
+
+```{r}
+plot(density(cl.order$LEN_MC))
+  abline(v=mean(cl.order$LEN_MC),lwd=3, col = "steelblue")
+  abline(v=mean(cl.order$LEN_MC),lwd=3, col = "red")
+```
 :::
 
 ### Sample variance and standard deviation {.smaller}
 
--   In order to assess how well the mean represents the data, it is
-    instructive to compute the **variance** `var()` and the **standard
-    deviation** `sd()` for a sample.
+In order to assess how well the mean represents the data, it is
+instructive to compute the **variance** `var()` and the **standard
+deviation** `sd()` for a sample.
 
--   The sample variance is defined as
+The sample variance $s^2$ is defined as
 
 $$s^2 = \frac{1}{n}\sum_{i=1}^n{(x_i - \bar{x})^2}. $$
 
-```{r, echo = TRUE, output = TRUE}
+In other words, it stands for the average squared deviation of all
+observations from the sample mean.
 
+```{r, echo = TRUE, output = TRUE}
 # Using var()
 var(cl.order$LEN_MC)
+```
 
-# or by hand:
-
+::: {.callout-tip collapse="true" title="Compute the sample variance by hand"}
+```{r, echo = TRUE, output = TRUE}
+# Define sample
 sample_data <- cl.order$LEN_MC
 
 # Calculate the sample standard deviation
-
 var <- 1 / length(sample_data) * sum((sample_data - mean(sample_data))^2) # formula above
 
 # Note that R's var() function applies an additional bias correction measure:
-
 var_corrected <- 1 / (length(sample_data) - 1) * sum((sample_data - mean(sample_data))^2) # equivalent to var()
 
 ```
+:::
 
--   Correspondingly, the standard deviation of the mean is the square
-    root of the variance [cf. @heumann_introduction_2022: 51-2]:
+Correspondingly, the standard deviation of the mean is the square root
+of the variance [cf. @heumann_introduction_2022: 51-2].
 
 $$ s = \sqrt{\frac{1}{n}\sum_{i=1}^n{(x_i - \bar{x})^2}} $$
 
@@ -191,14 +259,15 @@ sd(cl.order$LEN_MC)
 # or by hand:
 
 sample_data <- cl.order$LEN_MC
-
-# Calculate the sample standard deviation
-
-sd <- sqrt(1 / (length(sample_data) - 1)* sum((sample_data - mean(sample_data))^2))
-
 ```
 
-**Application and visualisation**:
+::: {.callout-tip collapse="true" title="Compute the sample standard deviation by hand"}
+```{r, echo = TRUE, output = TRUE}
+sd <- sqrt(1 / (length(sample_data) - 1)* sum((sample_data - mean(sample_data))^2))
+```
+:::
+
+**Visualisation**:
 
 ::: panel-tabset
 #### Example 1
@@ -246,28 +315,35 @@ ggplot(cl_mean_sd, aes(x = ORDER, y = mean)) +
 
 ### Quantiles
 
--   While `median()` divides the data into two equal sets (i.e., two 50%
-    quantiles), the `quantile()` function makes it possible to partition
-    the data further.
+While `median()` divides the data into two equal sets (i.e., two 50%
+quantiles), the `quantile()` function makes it possible to partition the
+data further.
 
-    ```{r, echo = TRUE}
-    quantile(cl.order$LEN_MC)
-    ```
+```{r, echo = TRUE}
+quantile(cl.order$LEN_MC)
+```
 
--   `quantile(x, 0)` and `quantile(x, 1)` thus show the minimum and
-    maximum values, respectively.
+`quantile(x, 0)` and `quantile(x, 1)` thus show the minimum and maximum
+values, respectively.
 
-    ```{r, echo = TRUE}
-    quantile(cl.order$LEN_MC, 0)
-    quantile(cl.order$LEN_MC, 1)
-    ```
+```{r, echo = TRUE}
+quantile(cl.order$LEN_MC, 0)
+quantile(cl.order$LEN_MC, 1)
+```
 
 ### Quartiles and boxplots
 
--   Consider the distribution of clause length by clause order:
+Consider the distribution of clause length by clause order:
 
 ::: panel-tabset
-#### Version 1
+#### Boxplot (Base R)
+
+```{r}
+boxplot(LEN_MC ~ ORDER, cl.order)
+```
+
+
+#### Boxplot (ggplot2)
 
 ```{r, echo = TRUE, output = TRUE}
 ggplot(cl.order, aes(x = ORDER, y = LEN_MC)) +
@@ -275,17 +351,9 @@ ggplot(cl.order, aes(x = ORDER, y = LEN_MC)) +
   theme_classic()
 ```
 
-#### Version 2
-
-```{r, echo = TRUE, output = TRUE}
-ggplot(cl.order, aes(x = ORDER, y = LEN_MC)) +
-  geom_boxplot() +
-  geom_jitter() + # add data points 
-  theme_classic()
-```
 :::
 
--   Compare it to the corresponding rotated density plot:
+Compare it to the corresponding rotated density plot:
 
 ```{r, echo = TRUE, output = TRUE}
 
@@ -295,7 +363,6 @@ ggplot(cl.order, aes(x = LEN_MC, fill = ORDER)) +
   theme_classic()
 
 ```
-
 
 ## Visualising mixed data
 
@@ -322,7 +389,6 @@ ggplot(cl.order, aes(x = ORDER, y = LEN_MC)) +
   geom_col(aes(x = ORDER, y = LEN_MC))
 ```
 
-
 ### Multivariate plots
 
 -   Advanced scatterplot with four variables: `LEN_MC` (x), `LEN_SC`
@@ -342,4 +408,3 @@ ggplot(cl.order, aes(x = LEN_MC, y = LEN_SC)) +
   geom_point(aes(color = ORDER, shape = SUBORDTYPE)) +
   facet_wrap(~MORETHAN2CL)
 ```
-

@@ -35,20 +35,40 @@ library("tidyverse")
 
 ```{r, echo = TRUE, output = TRUE, warning = FALSE, message = FALSE}
 
-data <- read_xlsx("Paquot_Larsson_2020_data.xlsx")
+cl.order <- read_xlsx("Paquot_Larsson_2020_data.xlsx")
 
 ```
 
-### The $\chi^2$-test
+## The $\chi^2$-test
 
-The next step is to compute a test statistic that indicates how strongly
-our data conforms to $H_0$. For instance, the Pearson $\chi^2$ statistic
-is commonly used for categorical variables. It requires two types of
-values: the **observed frequencies** $n_{ij}$ in our data set and the
-**expected frequencies** $m_{ij}$, which we would expect to see if $H_0$
-was true.
 
-This table represents a generic contingency table where $X$ and $Y$ are
+::: {.callout-note collapse="false" title="This unit in a nutshell"}
+
+The chi-square test helps determine if there is a statistically significant association between two categorical variables. It compares observed frequencies (actual data) with expected frequencies (if the null hypothesis were true). The greater the difference, the higher the $\chi^2$ score, providing evidence against $H_0$
+
+-   $p$-value: Indicates significance level.
+-   $\chi^2$ score: Shows the deviation between observed and expected frequencies.
+-   Degrees of freedom: Affects the shape of the chi-square distribution.
+
+If the $p$-value is below 0.05, we reject $H_0$, indicating a significant association between the variables.
+
+Example:
+
+```{r}
+# Hypotheses:
+# H0: ORDER and SUBORDTYPE are independent.
+# H1: ORDER and SUBORDTYPE are not independent.
+
+chisq.test(cl.order$ORDER, cl.order$SUBORDTYPE)
+
+# We can reject H0 and accept H1.
+```
+
+:::
+
+We calculate the Pearson $\chi^2$ statistic, requiring the observed frequencies ($n_{ij}$) from the data set and the expected frequencies ($m_{ij}$), assuming $H_0$ is true.
+
+The table below represents a generic contingency table where $X$ and $Y$ are
 categorical variables. Each $x_i$ represents a category of $X$ and each
 $y_j$ represents a category of $Y$. In the table, each cell indicates
 the count of observation $n_{ij}$ corresponding to the $i$-th row and
@@ -62,20 +82,27 @@ $j$-th column.
 | $X$ | ...   | ...      | ...      | ... | ...      |     |
 |     | $x_I$ | $n_{I1}$ | $n_{I2}$ | ... | $n_{3J}$ |     |
 
-```{r}
+This is really just an abstraction of the cross-tables we've computed so many times before. These are our observed frequencies:
+
+```{r, echo = FALSE}
 # Cross-tabulate the frequencies for the variables of interest
 
-freqs <- table(data$ORDER, data$SUBORDTYPE); freqs
+freqs <- table(cl.order$ORDER, cl.order$SUBORDTYPE)
+
+print(freqs)
 
 ```
 
-We calculate the expected frequencies by using the formula
+The expected frequencies are calculated as:
 
 $$
 m_{ij} = \frac{i\textrm{th row sum} \times j \textrm{th column sum}}{\textrm{number of observations}}.
 $$
+The expected frequencies for our combination of variables is shown below. In which cells can you see the greatest deviations between observed and expected frequencies?
 
-```{r}
+```{r, echo = FALSE}
+#| code-fold: true
+#| code-summary: "Show the code"
 
 # Compute expected frequencies
 
@@ -92,65 +119,38 @@ total_obs <- sum(freqs)
 expected_table <- outer(row_totals, col_totals) / total_obs
 
 expected_table
-
 ```
 
-::: {.callout-note collapse="true" title="Definition of the $\\chi^2$-test"}
-Given a sample with $n$ observations and $k$ degrees of freedom
-($df$)[^hypothesis_testing-1], the $\chi^2$-statistic measures how much
-the observed frequencies **deviate** from the expected frequencies **for
-each cell** in a contingency table [cf. @heumann_introduction_2022:
-249-251]:
+The $\chi^2$-test now offers a convenient way of quantifying the differences between the two tables above. Given $n$ observations and $k$ degrees of freedom ($df$)[^chi_square_test-1], the $\chi^2$-statistic measures how much the observed frequencies **deviate** from the expected frequencies **for each cell** in a contingency table [cf. @heumann_introduction_2022:
+249-251]. The joint deviations make up the final $\chi^2$-score, which is defined as
+
+[^chi_square_test-1]: The degrees of freedom are calculated by
+    $(\textrm{number of rows} -1) \times (\textrm{number of columns} - 1)$.
 
 $$
 \chi^2 = \sum_{i=1}^{I}\sum_{i=j}^{J}{\frac{(n_{ij} - m_{ij})^2}{m_{ij}}}.
-$$ The test stipulates that ...
+$$
 
-1.  all observations are independent of each other,
-2.  80% of the expected frequencies are $\geq$ 5, and
-3.  all observed frequencies are $\geq$ 1.
-:::
+Note, however, that this test comes with certain assumptions:
 
-[^hypothesis_testing-1]: The degrees of freedom are calculated by
-    $(\textrm{number of rows} -1) \times (\textrm{number of columns} - 1)$.
+1.  All observations are independent of each other.
+2.  80% of the expected frequencies are $\geq$ 5.
+3.  All observed frequencies are $\geq$ 1.
 
-::: {.callout-tip collapse="true" title="Implementation in R: Manual vs. automatic"}
-```{r}
-# Compute chi-squared scores for all cells
-## Create empty chi_squared_table for later storage
-chi_squared_table <- matrix(NA, nrow = 2, ncol = 2,
-                            dimnames = list(c("mc-sc", "sc-mc"), c("caus", "temp")))
-
-# Loop: Repeat the following commands ...
-for (i in 1:2) { # for each of the 2 rows and
-  for (j in 1:2) { # for each of the 2 columns:
-    observed_freq <- freqs[i, j] # 1. Get the observed frequencies
-    expected_freq <- expected_table[i, j] # 2. Get the expected frequencies
-    chi_squared_score <- ((observed_freq - expected_freq)^2) / expected_freq # 3. Compute chi-squared scores
-    chi_squared_table[i, j] <- chi_squared_score # 4. Store output in the chi_squared_table
-  }
-}
-
-chi_squared_table
-
-```
-
-Or, more elegantly:
+In R, conducting this test is a simple one-liner:
 
 ```{r}
 freqs_test <- chisq.test(freqs)
 
+print(freqs_test)
+```
+
+The test object `freqs_test` also stores the expected frequencies, which we can also access. They appear to be all right:
+
+```{r}
 # Expected frequencies
 freqs_test$expected
-
-# Chi-squared scores
-(freqs_test$residuals)^2
-
-# Test statistics
-freqs_test
-
 ```
-:::
 
 ::: callout-important
 If the data does not meet the (expected) frequency requirements for the
@@ -169,53 +169,13 @@ $\chi^2$-test, the Fisher's Exact Test is a viable alternative (see
 -   $H_1:$ The variables `ORDER` and `SUBORDTYPE` are **not**
     independent.
 
-#### Descriptive overview
-
-We plot the distribution of clause `ORDER` depending on `SUBORDTYPE`.
-This requires (a) selecting the desired variables, (b) computing the
-token frequencies and (c) computing the percentages.
-
-```{r, echo = TRUE, output = TRUE}
-#| code-fold: true
-
-# Filter data so as to show only those observations that are relevant
-
-data %>% 
-  # Filter columns
-  select(ORDER, SUBORDTYPE) %>%
-    # Count observations 
-    count(ORDER, SUBORDTYPE) %>%  
-    # Compute percentages
-    mutate(pct = n/sum(n) * 100) -> data_order_subord
-
-knitr::kable(data_order_subord)
-
-```
-
-Next, we visualise the `ORDER` distribution using a barplot with a
-custom y-axis, requiring `geom_col()`.
-
-```{r}
-#| code-fold: true
-# Plot distribution
-
-data_order_subord %>%
-  # Map variables onto axes
-  ggplot(aes(x = ORDER, y = pct, fill = SUBORDTYPE)) +
-    # Define plot type
-    geom_col(pos = "dodge") +
-    # Define theme
-    theme_classic()
-
-```
-
 #### Running the test
 
 ```{r}
 
 # Cross-tabulate the frequencies for the variables of interest
 
-freqs <- table(data$ORDER, data$SUBORDTYPE)
+freqs <- table(cl.order$ORDER, cl.order$SUBORDTYPE)
 
 freqs ## Assumption met: all observed freqs => 1
 
