@@ -39,18 +39,23 @@ cl.order <- read_xlsx("Paquot_Larsson_2020_data.xlsx")
 
 ```
 
-## The $\chi^2$-test
-
+## Overview
 
 ::: {.callout-note collapse="false" title="This unit in a nutshell"}
-
-The chi-square test helps determine if there is a statistically significant association between two categorical variables. It compares observed frequencies (actual data) with expected frequencies (if the null hypothesis were true). The greater the difference, the higher the $\chi^2$ score, providing evidence against $H_0$
+The chi-square test helps determine if there is a statistically
+significant association between two categorical variables. It compares
+observed frequencies (actual data) with expected frequencies (if the
+null hypothesis were true). The greater the difference, the higher the
+$\chi^2$ score, providing evidence against $H_0$
 
 -   $p$-value: Indicates significance level.
--   $\chi^2$ score: Shows the deviation between observed and expected frequencies.
--   Degrees of freedom: Affects the shape of the chi-square distribution.
+-   $\chi^2$ score: Shows the deviation between observed and expected
+    frequencies.
+-   Degrees of freedom: Affects the shape of the chi-square
+    distribution.
 
-If the $p$-value is below 0.05, we reject $H_0$, indicating a significant association between the variables.
+If the $p$-value is below 0.05, we reject $H_0$, indicating a
+significant association between the variables.
 
 Example:
 
@@ -63,16 +68,25 @@ chisq.test(cl.order$ORDER, cl.order$SUBORDTYPE)
 
 # We can reject H0 and accept H1.
 ```
-
 :::
 
-We calculate the Pearson $\chi^2$ statistic, requiring the observed frequencies ($n_{ij}$) from the data set and the expected frequencies ($m_{ij}$), assuming $H_0$ is true.
+## The $\chi^2$-test
 
-The table below represents a generic contingency table where $X$ and $Y$ are
-categorical variables. Each $x_i$ represents a category of $X$ and each
-$y_j$ represents a category of $Y$. In the table, each cell indicates
-the count of observation $n_{ij}$ corresponding to the $i$-th row and
-$j$-th column.
+Having clearly stated our hypotheses in the previous unit, the next step is to compute a test statistic that indicates how strongly
+our data conforms to $H_0$. For instance, the Pearson $\chi^2$ statistic
+is commonly used for categorical variables.
+
+It requires two types of
+values: the **observed frequencies** $n_{ij}$ in our data set and the
+**expected frequencies** $m_{ij}$, which we would expect to see if $H_0$ were true. The indices $i$ and $j$ uniquely identify the frequencies found in all column-row combinations of a cross-table.
+
+::: {.callout-note collapse="false" title="Mathematical details: The structure of a contingency table"}
+
+The table below represents a generic contingency table where $X$ and $Y$
+are categorical variables. Each $x_i$ represents a category of $X$ and
+each $y_j$ represents a category of $Y$. In the table, each cell
+indicates the count of observation $n_{ij}$ corresponding to the $i$-th
+row and $j$-th column.
 
 |     |       |          | $Y$      |     |          |     |
 |-----|-------|----------|----------|-----|----------|-----|
@@ -82,7 +96,12 @@ $j$-th column.
 | $X$ | ...   | ...      | ...      | ... | ...      |     |
 |     | $x_I$ | $n_{I1}$ | $n_{I2}$ | ... | $n_{3J}$ |     |
 
-This is really just an abstraction of the cross-tables we've computed so many times before. These are our observed frequencies:
+This is really just an abstraction of the cross-tables we've computed so
+many times before.
+
+:::
+
+These are our observed frequencies $n_{ij}$:
 
 ```{r, echo = FALSE}
 # Cross-tabulate the frequencies for the variables of interest
@@ -93,12 +112,15 @@ print(freqs)
 
 ```
 
-The expected frequencies are calculated as:
+The expected frequencies $m_{ij}$ are calculated by
 
 $$
 m_{ij} = \frac{i\textrm{th row sum} \times j \textrm{th column sum}}{\textrm{number of observations}}.
-$$
-The expected frequencies for our combination of variables is shown below. In which cells can you see the greatest deviations between observed and expected frequencies?
+$$ T
+
+he expected frequencies for our combination of variables is shown
+below. In which cells can you see the greatest deviations between
+observed and expected frequencies?
 
 ```{r, echo = FALSE}
 #| code-fold: true
@@ -121,8 +143,17 @@ expected_table <- outer(row_totals, col_totals) / total_obs
 expected_table
 ```
 
-The $\chi^2$-test now offers a convenient way of quantifying the differences between the two tables above. Given $n$ observations and $k$ degrees of freedom ($df$)[^chi_square_test-1], the $\chi^2$-statistic measures how much the observed frequencies **deviate** from the expected frequencies **for each cell** in a contingency table [cf. @heumann_introduction_2022:
-249-251]. The joint deviations make up the final $\chi^2$-score, which is defined as
+The $\chi^2$-test now offers a convenient way of quantifying the
+differences between the two tables above. Given $n$ observations and $k$
+degrees of freedom ($df$)[^chi_square_test-1], the $\chi^2$-statistic
+measures how much the observed frequencies **deviate** from the expected
+frequencies **for each cell** in a contingency table [cf.
+@heumann_introduction_2022: 249-251]. 
+
+::: {.callout-note collapse="false" title="Mathematical details: Formal definition of the chi-square test"}
+
+The joint deviations make up the
+final $\chi^2$-score, which is defined as
 
 [^chi_square_test-1]: The degrees of freedom are calculated by
     $(\textrm{number of rows} -1) \times (\textrm{number of columns} - 1)$.
@@ -130,8 +161,9 @@ The $\chi^2$-test now offers a convenient way of quantifying the differences bet
 $$
 \chi^2 = \sum_{i=1}^{I}\sum_{i=j}^{J}{\frac{(n_{ij} - m_{ij})^2}{m_{ij}}}.
 $$
+:::
 
-Note, however, that this test comes with certain assumptions:
+Note, however, that this test comes with certain statistical assumptions. Violations of these assumptions decrease the validity of the result and could, therefore, lead to wrong conclusions about relationships in the data.
 
 1.  All observations are independent of each other.
 2.  80% of the expected frequencies are $\geq$ 5.
@@ -145,7 +177,8 @@ freqs_test <- chisq.test(freqs)
 print(freqs_test)
 ```
 
-The test object `freqs_test` also stores the expected frequencies, which we can also access. They appear to be all right:
+The test object `freqs_test` also stores the expected frequencies, which
+we can also access. They appear to be all right:
 
 ```{r}
 # Expected frequencies
@@ -189,7 +222,7 @@ test$expected # Assumption met: all expected frequences => 5
 
 ```
 
-#### Optional: Effect size
+::: {.callout-tip collapse="true" title="Advanced: Effect size"}
 
 The sample-size independent effect size measure **Cramer's *V***
 ($\phi$) is defined as
@@ -217,6 +250,8 @@ library("confintr") # Load library
 
 cramersv(test)
 ```
+
+:::
 
 #### Reporting the results
 

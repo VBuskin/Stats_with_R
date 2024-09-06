@@ -1,5 +1,5 @@
 ---
-title: "Importing and exporting data"
+title: "Import/export data"
 author: Vladimir Buskin
 format:
   html:

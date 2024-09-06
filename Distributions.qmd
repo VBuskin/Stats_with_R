@@ -1,5 +1,5 @@
 ---
-title: "Theoretical distributions"
+title: "Distributions"
 author: Vladimir Buskin
 format:
   html:
@@ -15,7 +15,6 @@ editor: visual
 bibliography: R.bib
 ---
 
-
 ```{r, echo = FALSE, output = FALSE}
 
 # Libraries
@@ -27,8 +26,6 @@ library("ggthemes")
 #cl.order <- read_xlsx("Paquot_Larsson_2020_data.xlsx")
 
 ```
-
-
 
 ## The normal distribution
 

@@ -1,5 +1,5 @@
 ---
-title: "Variables in statistics"
+title: "Statistical variables"
 author: Vladimir Buskin
 institute: Catholic University of Eichstätt-Ingolstadt
 format:
@@ -88,4 +88,3 @@ our observations.
     valid way to describe the relationship between these values. Here a
     `LENGTH_DIFF` of 0 can be clearly viewed as the absence of a length
     difference.
-

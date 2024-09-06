@@ -1,0 +1,105 @@
+---
+title: "Regular expressions"
+author: Vladimir Buskin, Thomas Brunner
+format:
+  html:
+    self-contained: true
+    theme: default
+    toc: true
+    number-sections: true
+    slide-number: true
+    incremental: false
+    slide-level: 3
+    scrollable: true
+    
+editor: visual
+---
+
+## Regular expressions
+
+**Regular expressions** (or 'regex') help us find more complex patterns
+in strings of text. Suppose we are interested in finding all
+inflectional forms of the lemma PROVIDE in a corpus, i.e., *provide,
+provides, providing* and *provided*. Insteading of searching for all
+forms individually, we can construct a regular expression of the form
+
+$$
+\text{provide(s | ing | ed)?}
+$$ which can be read as 'Match the sequence of letters \<provide\> as
+well as when it is optionally followed by the letters \<s\> or \<ing\>
+or \<ed\>'. Notice how optionality is signified by the '?' operator and
+alternatives by '\|'.
+
+To activate regular expression in a KWIC query, simply set the
+`valuetype` argument to `"regex"`:
+
+```{r, eval = FALSE}
+
+# Query the corpus
+kwic_provide3 <- kwic(ICE_GB,
+                     pattern = "provide(s|ing|ed)?",
+                     valuetype = "regex", # query format
+                     window = 20)
+
+                     
+
+# View output in separate window
+#View(kwic_provide)
+```
+
+The number of hits has more than doubled. However, upon closer
+inspection, we'll notice a number of false positives (e.g.,
+*providential*).
+
+```{r, echo = F, eval = FALSE}
+
+kwic_provide3 %>% 
+  head() %>% 
+  kbl() %>% 
+  kable_classic(full_width = T, html_font = "Cambria")
+
+```
+
+## A RegEx Cheatsheet
+
+### Basic functions
+
+| **Command** | **Definition** | **Example** | **Finds** |
+|-------------|----------------|-------------|-----------|
+|             |                | `python`    | *python*  |
+| `.`         | Any character  | `.ython`    | *aython, bython...* |
+
+### Character classes and alternatives
+
+| **Command**          | **Definition**                                     | **Example**   | **Finds**                 |
+|----------------------|---------------------------------------------------|---------------|---------------------------|
+| `[abc]`              | Class of characters                               | `[jp]ython`   | *jython, python*          |
+| `[ ^pP]`             | Excluded class of characters                      | `[^pP]ython`  | everything but *python, Python* |
+| `(...|...)`          | Alternatives linked by logical operator `or`      | `P(ython|eter)` | *Python, Peter*           |
+
+### Pre-defined character classes
+
+| **Command**  | **Definition**                   | **Example** | **Finds**               |
+|--------------|----------------------------------|-------------|-------------------------|
+| `\w`         | All alphanumeric characters      |             | A-Z, a-z, 0-9           |
+| `\W`         | All non-alphanumeric characters  |             | everything but A-Z, a-z, 0-9 |
+| `\d`         | All decimal numbers              |             | 0-9                     |
+| `\D`         | Everything which is not a decimal number |       | everything but 0-9      |
+| `\s`         | Empty space                      |             |                         |
+
+### Quantifiers
+
+| **Command**  | **Definition**                                             | **Example**    | **Finds**                              |
+|--------------|------------------------------------------------------------|----------------|----------------------------------------|
+| `?`          | One or zero instances of the preceding symbol              | `Py?thon`      | *Python, Pthon*                        |
+| `*`          | No matter how many times — also zero                       | `Py*thon`      | *Python, Pthon, Pyyyython...*          |
+|              |                                                            | `P[Yy]*thon`   | *Python, Pthon, PyYYython...*          |
+| `+`          | No matter how many times but at least once                 | `Py+thon`      | *Python, Pyyython, Pyyyython*          |
+| `{1,3}`      | `{min, max}`                                               | `Py{1,3}thon`  | *Python, Pyython, Pyyython*            |
+
+## Tasks
+
+1. Find all labels of months!
+2. Write an elegant regular expression which finds *sing*, *sang* and *sung*.
+3. Find all four-digit numbers in the corpus!
+4. Write an elegant regular expression which finds all inflectional forms of *swim*!

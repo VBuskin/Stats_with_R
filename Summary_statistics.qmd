@@ -1,5 +1,5 @@
 ---
-title: "Describing continuous data"
+title: "Continuous data"
 author: Vladimir Buskin
 format:
   html:
@@ -342,7 +342,6 @@ Consider the distribution of clause length by clause order:
 boxplot(LEN_MC ~ ORDER, cl.order)
 ```
 
-
 #### Boxplot (ggplot2)
 
 ```{r, echo = TRUE, output = TRUE}
@@ -350,7 +349,6 @@ ggplot(cl.order, aes(x = ORDER, y = LEN_MC)) +
   geom_boxplot() +
   theme_classic()
 ```
-
 :::
 
 Compare it to the corresponding rotated density plot:

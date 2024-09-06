@@ -6,6 +6,11 @@ book:
   title: "Quantitative methods in corpus linguistics: A reader"
   author: "Vladimir Buskin"
   date: "2024-06-30"
+  reader-mode: true
+  repo-url: https://github.com/VBuskin/Stats_with_R
+  repo-actions: [source]
+  downloads: [pdf]
+  repo-branch: main
   chapters:
     - part: "Introduction to R"
       chapters:
@@ -18,6 +23,7 @@ book:
     - part: "Corpus linguistics with R"
       chapters:
         - Concordancing.qmd
+        - Regular_expressions.qmd
     - part: "Descriptive statistics"
       chapters:
         - Variables.qmd
@@ -34,7 +40,13 @@ book:
         - Linear_regression.qmd
         - Logistic_regression.qmd
         - Decision_trees_and_random_forests.qmd
-    - part: "References"
+    - part: Conducting a corpus-linguistic study
+      chapters:
+        - Basics.qmd
+        - Research_questions.qmd
+        - Linguistic_variables.qmd
+        - Dos_donts.qmd
+    - part: References
       chapters:
         - references.qmd
         
@@ -45,7 +57,10 @@ code-block-font-size: 6pt
 
 format:
   html:
-    theme: yeti
+    theme: 
+      - yeti
+      - design.scss
+    code-copy: true
   pdf:
     documentclass: scrreprt
     keep-tex: true  # Optionally keep the intermediate .tex file
