@@ -1,81 +1,33 @@
-# First steps {.unnumbered}
+## Preface {.unnumbered}
 
 This collection of handouts provides a hands-on introduction to data
 analysis and statistical methods in quantitative corpus linguistics with
-R. It requires a working installation of both **R** and **RStudio**.
+R. It is designed with accessibility in mind, assuming no prior
+knowledge of programming or statistics. All you need to get started is a
+laptop; everything else will be explained within these pages.
 
-It is geared primarily towards students attending the classes **Language
-Variation** (BA) and **Statistics for Linguistics** (MA) as well as
-those currently working on their **BA/MA/PhD theses** in empirical
-linguistics.
+Primarily, this reader is geared towards students attending the classes
+**Language Variation** (BA) and **Statistics for Linguistics** (MA) at
+the Catholic University of Eichstätt-Ingolstadt (Germany). However, it
+is also meant to equip students currently working on their **BA/MA/PhD
+theses** with the tools they need to conduct empirical studies on a wide
+array of linguistic phenomena. The methods presented here reflect the
+state-of-the-art in corpus-linguistic research, providing readers with
+current and relevant analytical techniques.
 
-### Why learn R to begin with?
+## Overview {.unnumbered}
 
-When it comes to data analysis, learning R offers an overwhelming number
-of short- and long-term advantages over conventional spreadsheet
-software such as Microsoft Excel or LibreOffice Calc:
+We begin by establishing the general structure of corpus-linguistic
+studies, accompanied by key theoretical and practical considerations.
+The second section introduces R as an analytical tool, covering its core
+functionality. With these fundamentals in place, we proceed to query
+corpora directly within R. Chapters four and five focus on describing
+discrete and continuous outputs, as well as identifying meaningful
+associations and differences in the data (**BA**). Finally, to gain more
+nuanced insights into potential patterns, we apply common machine
+learning algorithms to fit, evaluate, and interpret statistical models
+(**MA**).
 
--   First of all, it's completely **free**. There's no need to obtain
-    any expensive licenses, as it is the case for commercial software
-    such as SPSS or MS Excel.
-
--   R makes it very easy to document and share every step of the
-    analysis, thereby facilitating **reproducible workflows**.
-
--   Large (and by that I mean extremely large!) datasets pose no
-    problems whatsoever. Loading tabular data with hundreds of thousands
-    (or even millions) of rows only takes a few seconds, whereas most
-    other software would crash.
-
--   There are numerous extensions that provide tailored **functions for
-    corpus linguistics** that aren't available in general-purpose
-    spreadsheet software. This allows us to work with corpora, use
-    complex search expression, perform part-of-speech annotation,
-    dependency parsing, and much more – all from within R.
-
--   R's `ggplot2` offers an incredibly powerful framework for data
-    visualisation. Don't believe it? Check out the [ggplot2
-    gallery](https://r-graph-gallery.com/ggplot2-package.html).
-
--   The CRAN repository features **more than 20,000 packages** that can
-    be installed to expand the functionality of R almost indefinitely.
-    Should none of them meet your needs, R gives you the tools to
-    comfortably **write and share your own functions and packages**.
-
-## Installing R
-
-The first step involves downloading the [R](https://ftp.fau.de/cran/)
-programming language itself. The link will take you to the homepage of
-the Comprehensive R Archive Network (CRAN) where you can download the
-binary distribution. Choose the one that corresponds to your operating
-system (Windows/MAC/Linux).
-
-::: {.callout-note collapse="true" title="Installation instructions for Windows users"}
-Click "Download R for Windows" $\rightarrow$ Select "base" $\rightarrow$
-Click on "Download R-4.4.1 for Windows" (or whatever most recent version
-is currently displayed).
-
-Open the set-up file you've just downloaded and simply follow the
-instructions on screen. It's fine to go with the default options.
-
-[Video tutorial on YouTube](https://www.youtube.com/watch?v=mfGFv-iB724)
-:::
-
-::: {.callout-note collapse="true" title="Installation instructions for MacOS users"}
-Click "Download R for macOS" $\rightarrow$ Select the latest release for
-your OS
-
-Open the downloaded .pkg file and follow the instructions in the
-installation window.
-
-[Video tutorial on YouTube](https://www.youtube.com/watch?v=Icawuhf0Yqo)
-:::
-
-## Installing RStudio
-
-You can now download and install
-[RStudio](https://posit.co/download/rstudio-desktop/). RStudio is a
-so-called "Integrated Development Environment" (IDE), which will provide
-us with a variety of helpful tools to write and edit code comfortably.
-If R was a musical instrument, then RStudio would be the recording
-studio, so-to-speak.
+Throughout this journey, readers will develop the skills to conduct
+robust corpus-linguistic analyses, from basic querying to advanced
+statistical modeling.

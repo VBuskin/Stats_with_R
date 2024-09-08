@@ -15,6 +15,10 @@ format:
 editor: visual
 ---
 
+## Recommended reading
+
+> @winter_statistics_2020: Chapter 1.10-1.16
+
 ## Word frequencies II
 
 Recall our corpus-linguistic data from the previous unit:
@@ -76,7 +80,7 @@ data[,1]
 data$lemma
 ```
 
-## Practical
+## Exercises
 
 1.  Recreate the barplot from the previous unit by subsetting the `data`
     variable accordingly.

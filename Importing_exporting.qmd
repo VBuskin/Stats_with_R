@@ -15,6 +15,10 @@ format:
 editor: visual
 ---
 
+## Recommended reading
+
+> @winter_statistics_2020: Chapter 1.11
+
 ## Preparation
 
 The first section of an R-script always specifies the libraries that are

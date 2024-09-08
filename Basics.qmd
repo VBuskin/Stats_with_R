@@ -15,7 +15,7 @@ format:
 editor: visual
 ---
 
-## Barbieri (2008): Older Men and Younger Women
+## @barbieriOlderMenYounger2007: Older Men and Younger Women
 
 ### Defining the Variable
 
@@ -27,6 +27,13 @@ New quotatives in American English: *be like*, *go*, *be all*:
 (3) "My sister’s *all* 'excuse me would you mind if I gave you, if I
     want your autograph.'"
 
+::: callout-caution
+## Task
+
+As you read through the following sections, think about **what might go
+wrong** at each stage of the study!
+:::
+
 ### Reviewing Previous Research
 
 -   Previous results with regard to **age**: *Be like* is known to be
@@ -35,10 +42,10 @@ New quotatives in American English: *be like*, *go*, *be all*:
 
 ### Research Question
 
-> "The study aims to contribute to the investigation of the controversial
-question of the effect of **speaker’s age** and **sex** on quotative use
-in American English, focusing on the newer quotatives *be like*, *go*,
-*be all*."
+> "The study aims to contribute to the investigation of the
+> controversial question of the effect of **speaker’s age** and **sex**
+> on quotative use in American English, focusing on the newer quotatives
+> *be like*, *go*, *be all*" [@barbieriOlderMenYounger2007: 26].
 
 ### Data
 
@@ -53,39 +60,60 @@ in American English, focusing on the newer quotatives *be like*, *go*,
 
 ### Presentation of Results
 
-```{r, echo = FALSE}
-#| fig-cap: "Distribution of Quotatives Across Sex and Age Groups (Normed Frequency per 100,000 Words)"
-#| 
-# Load necessary library
-library(ggplot2)
+| Quotative   | Age group | Male use (per 100,000 words) | Female use (per 100,000 words) |
+|--------------|--------------|---------------------|-----------------------|
+| **say**     | 16–26     | 115                          | 149                            |
+|             | 27–40     | 101                          | 117                            |
+|             | 41–54     | 55                           | 214                            |
+|             | 55+       | 67                           | 433                            |
+| **be like** | 16–26     | 32                           | 329                            |
+|             | 27–40     | 66                           | 25                             |
+|             | 41–54     | \-                           | 1                              |
+|             | 55+       | \-                           | 19                             |
+| **go**      | 16–26     | 25                           | 113                            |
+|             | 27–40     | 61                           | 18                             |
+|             | 41–54     | \-                           | 15                             |
+|             | 55+       | \-                           | 7                              |
+| **be all**  | 16–26     | 14                           | 33                             |
 
-# Data from the table
+```{r, echo = FALSE}
+#| fig-cap: "Reproduction of Barbieri's Figure 5 'Proportional quotative use by men and women aged 16–26 and 27–40'"
+
+# Load necessary libraries
+library(ggplot2)
+library(dplyr)
+
+# Create the data frame
 data <- data.frame(
-  Group = c("Men 16-26", "Women 16-26", "Men 27-40", "Women 27-40"),
-  Frequency = c(500, 1200, 450, 300)
+  Quotative = c('say', 'say', 'say', 'say', 'be like', 'be like', 'be like', 'be like', 'go', 'go', 'go', 'go', 'be all', 'be all'),
+  Age_group = c('M16-26', 'M27-40', 'F16-26', 'F27-40', 'M16-26', 'M27-40', 'F16-26', 'F27-40', 'M16-26', 'M27-40', 'F16-26', 'F27-40', 'M16-26', 'F16-26'),
+  Frequency = c(60, 55, 35, 40, 20, 30, 50, 20, 15, 25, 30, 15, 5, 5)
 )
 
-# Creating the barplot
-ggplot(data, aes(x = Group, y = Frequency, fill = Group)) +
-  geom_bar(stat = "identity") +
-  theme_minimal() +
-  labs(title = "Distribution of Quotatives by Age and Sex Groups",
-       x = "Group",
-       y = "Normed Frequency (per 100,000 words)") +
-  scale_fill_brewer(palette = "Set3")
+# Plot the barplot
+ggplot(data, aes(x = Age_group, y = Frequency, fill = Quotative)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  scale_fill_brewer(palette = "Set1") +
+  labs(title = "Quotative Use by Age Group and Gender", x = "Age and Gender Groups", y = "Percentage (%)") +
+  theme_minimal()
+
 ```
 
 ### Formulation of Results
 
 > "In sum, the patterns of proportional use and the results of the
-statistical analyses show that there are striking differences in the way
-that men and women under the age of forty use quotative verbs. In
-contrast, in conforming to the traditional quotative *say*, men and
-women over forty displayed similar behavior" (38-39)
+> statistical analyses show that there are striking differences in the
+> way that men and women under the age of forty use quotative verbs. In
+> contrast, in conforming to the traditional quotative *say*, men and
+> women over forty displayed similar behavior"
+> [@barbieriOlderMenYounger2007: 38–39].
 
 ### Some of her conclusions
 
-> "In favoring *be like* over other quotatives, men in their late 20s and in their 30s display an 'affinity' with slightly younger women, women in their early 20s, rather than with women of their same age" (41).
+> "In favoring *be like* over other quotatives, men in their late 20s
+> and in their 30s display an 'affinity' with slightly younger women,
+> women in their early 20s, rather than with women of their same age"
+> [@barbieriOlderMenYounger2007: 41].
 
 ## Principles of Empirical Linguistics
 

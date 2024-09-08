@@ -9,7 +9,7 @@
 <meta name="author" content="Vladimir Buskin">
 <meta name="dcterms.date" content="2024-06-30">
 
-<title>Quantitative methods in corpus linguistics: A reader</title>
+<title>Statistics and Data Analysis for Corpus Linguists: From Theory to Practice with R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -32,7 +32,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./Exploring_RStudio.html" rel="next">
+<link href="./Basics.html" rel="next">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -69,8 +69,6 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -83,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Introduction to R</a></li><li class="breadcrumb-item"><a href="./index.html">First steps</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Conducting a corpus-linguistic study</a></li><li class="breadcrumb-item"><a href="./index.html">Preface</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -98,10 +96,10 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Quantitative methods in corpus linguistics: A reader</a> 
+      <a href="./">Statistics and Data Analysis for Corpus Linguists: From Theory to Practice with R</a> 
         <div class="sidebar-tools-main tools-wide">
     <a href="https://github.com/VBuskin/Stats_with_R" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
-    <a href="./Quantitative-methods-in-corpus-linguistics--A-reader.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+    <a href="./Statistics-and-Data-Analysis-for-Corpus-Linguists--From-Theory-to-Practice-with-R.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
   <i class="bi"></i>
@@ -120,7 +118,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
- <span class="menu-text">Introduction to R</span></a>
+ <span class="menu-text">Conducting a corpus-linguistic study</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -129,37 +127,31 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">First steps</span></a>
+ <span class="menu-text">Preface</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Exploring_RStudio.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Exploring RStudio</span></span></a>
+  <a href="./Basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">An example from sociolinguistics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Vectors_Factors.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Vectors</span></span></a>
+  <a href="./Research_questions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Research questions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Data_frames.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data frames</span></span></a>
+  <a href="./Linguistic_variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Linguistic variables</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Libraries.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Libraries</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Importing_exporting.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Import/export data</span></span></a>
+  <a href="./Dos_donts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Some general guidelines</span></span></a>
   </div>
 </li>
       </ul>
@@ -167,7 +159,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
- <span class="menu-text">Corpus linguistics with R</span></a>
+ <span class="menu-text">Introduction to R</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -175,14 +167,38 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Concordancing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Querying a corpus</span></span></a>
+  <a href="./First_steps.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">First steps</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Regular_expressions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Regular expressions</span></span></a>
+  <a href="./Exploring_RStudio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Exploring RStudio</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Vectors_Factors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Vectors</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Data_frames.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Data frames</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Libraries.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Libraries</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Importing_exporting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Import/export data</span></span></a>
   </div>
 </li>
       </ul>
@@ -190,7 +206,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
- <span class="menu-text">Descriptive statistics</span></a>
+ <span class="menu-text">Corpus linguistics with R</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -198,26 +214,14 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Variables.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Statistical variables</span></span></a>
+  <a href="./Concordancing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Concordancing</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Categorical_data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Categorical data</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Summary_statistics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Continuous data</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Distributions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Distributions</span></span></a>
+  <a href="./Regular_expressions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Regular expressions</span></span></a>
   </div>
 </li>
       </ul>
@@ -225,7 +229,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
- <span class="menu-text">Inferential statistics</span></a>
+ <span class="menu-text">Descriptive statistics</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -233,20 +237,26 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Hypothesis_testing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Hypothesis testing</span></span></a>
+  <a href="./Variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Statistical variables</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Chi_square_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Chi square test</span></span></a>
+  <a href="./Categorical_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Categorical data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./t_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">t-test</span></span></a>
+  <a href="./Summary_statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Continuous data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Distributions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Distributions</span></span></a>
   </div>
 </li>
       </ul>
@@ -254,7 +264,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
- <span class="menu-text">Machine learning</span></a>
+ <span class="menu-text">Inferential statistics</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -262,20 +272,20 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Linear_regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Linear and multiple regression</span></span></a>
+  <a href="./Hypothesis_testing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Hypothesis testing</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Logistic_regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Logistic Regression</span></span></a>
+  <a href="./Chi_square_test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Chi square test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Decision_trees_and_random_forests.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Decision trees and random forests</span></span></a>
+  <a href="./t_test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">t-test</span></span></a>
   </div>
 </li>
       </ul>
@@ -283,7 +293,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
- <span class="menu-text">Conducting a corpus-linguistic study</span></a>
+ <span class="menu-text">Machine learning</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -291,26 +301,20 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Basics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">An Sociolinguistic Case Study</span></span></a>
+  <a href="./Linear_regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Linear regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Research_questions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Research questions</span></span></a>
+  <a href="./Logistic_regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Logistic Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Linguistic_variables.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Linguistic variables</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Dos_donts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Some general guidelines</span></span></a>
+  <a href="./Decision_trees_and_random_forests.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Decision trees and random forests</span></span></a>
   </div>
 </li>
       </ul>
@@ -327,7 +331,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">References</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">References</span></span></a>
   </div>
 </li>
       </ul>
@@ -342,21 +346,17 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#first-steps" id="toc-first-steps" class="nav-link active" data-scroll-target="#first-steps">First steps</a>
-  <ul class="collapse">
-  <li><a href="#why-learn-r-to-begin-with" id="toc-why-learn-r-to-begin-with" class="nav-link" data-scroll-target="#why-learn-r-to-begin-with">Why learn R to begin with?</a></li>
-  <li><a href="#installing-r" id="toc-installing-r" class="nav-link" data-scroll-target="#installing-r">Installing R</a></li>
-  <li><a href="#installing-rstudio" id="toc-installing-rstudio" class="nav-link" data-scroll-target="#installing-rstudio">Installing RStudio</a></li>
-  </ul></li>
+  <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface">Preface</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/VBuskin/Stats_with_R/blob/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Introduction to R</a></li><li class="breadcrumb-item"><a href="./index.html">First steps</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Conducting a corpus-linguistic study</a></li><li class="breadcrumb-item"><a href="./index.html">Preface</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Quantitative methods in corpus linguistics: A reader</h1>
+<h1 class="title">Statistics and Data Analysis for Corpus Linguists: From Theory to Practice with R</h1>
 </div>
 
 
@@ -385,68 +385,17 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="first-steps" class="level1 unnumbered">
-<h1 class="unnumbered">First steps</h1>
-<p>This collection of handouts provides a hands-on introduction to data analysis and statistical methods in quantitative corpus linguistics with R. It requires a working installation of both <strong>R</strong> and <strong>RStudio</strong>.</p>
-<p>It is geared primarily towards students attending the classes <strong>Language Variation</strong> (BA) and <strong>Statistics for Linguistics</strong> (MA) as well as those currently working on their <strong>BA/MA/PhD theses</strong> in empirical linguistics.</p>
-<section id="why-learn-r-to-begin-with" class="level3">
-<h3 class="anchored" data-anchor-id="why-learn-r-to-begin-with">Why learn R to begin with?</h3>
-<p>When it comes to data analysis, learning R offers an overwhelming number of short- and long-term advantages over conventional spreadsheet software such as Microsoft Excel or LibreOffice Calc:</p>
-<ul>
-<li><p>First of all, it’s completely <strong>free</strong>. There’s no need to obtain any expensive licenses, as it is the case for commercial software such as SPSS or MS Excel.</p></li>
-<li><p>R makes it very easy to document and share every step of the analysis, thereby facilitating <strong>reproducible workflows</strong>.</p></li>
-<li><p>Large (and by that I mean extremely large!) datasets pose no problems whatsoever. Loading tabular data with hundreds of thousands (or even millions) of rows only takes a few seconds, whereas most other software would crash.</p></li>
-<li><p>There are numerous extensions that provide tailored <strong>functions for corpus linguistics</strong> that aren’t available in general-purpose spreadsheet software. This allows us to work with corpora, use complex search expression, perform part-of-speech annotation, dependency parsing, and much more – all from within R.</p></li>
-<li><p>R’s <code>ggplot2</code> offers an incredibly powerful framework for data visualisation. Don’t believe it? Check out the <a href="https://r-graph-gallery.com/ggplot2-package.html">ggplot2 gallery</a>.</p></li>
-<li><p>The CRAN repository features <strong>more than 20,000 packages</strong> that can be installed to expand the functionality of R almost indefinitely. Should none of them meet your needs, R gives you the tools to comfortably <strong>write and share your own functions and packages</strong>.</p></li>
-</ul>
+<section id="preface" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="preface">Preface</h2>
+<p>This collection of handouts provides a hands-on introduction to data analysis and statistical methods in quantitative corpus linguistics with R. It is designed with accessibility in mind, assuming no prior knowledge of programming or statistics. All you need to get started is a laptop; everything else will be explained within these pages.</p>
+<p>Primarily, this reader is geared towards students attending the classes <strong>Language Variation</strong> (BA) and <strong>Statistics for Linguistics</strong> (MA) at the Catholic University of Eichstätt-Ingolstadt (Germany). However, it is also meant to equip students currently working on their <strong>BA/MA/PhD theses</strong> with the tools they need to conduct empirical studies on a wide array of linguistic phenomena. The methods presented here reflect the state-of-the-art in corpus-linguistic research, providing readers with current and relevant analytical techniques.</p>
 </section>
-<section id="installing-r" class="level2">
-<h2 class="anchored" data-anchor-id="installing-r">Installing R</h2>
-<p>The first step involves downloading the <a href="https://ftp.fau.de/cran/">R</a> programming language itself. The link will take you to the homepage of the Comprehensive R Archive Network (CRAN) where you can download the binary distribution. Choose the one that corresponds to your operating system (Windows/MAC/Linux).</p>
-<div class="callout callout-style-default callout-note callout-titled" title="Installation instructions for Windows users">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Installation instructions for Windows users
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Click “Download R for Windows” <span class="math inline">\(\rightarrow\)</span> Select “base” <span class="math inline">\(\rightarrow\)</span> Click on “Download R-4.4.1 for Windows” (or whatever most recent version is currently displayed).</p>
-<p>Open the set-up file you’ve just downloaded and simply follow the instructions on screen. It’s fine to go with the default options.</p>
-<p><a href="https://www.youtube.com/watch?v=mfGFv-iB724">Video tutorial on YouTube</a></p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled" title="Installation instructions for MacOS users">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Installation instructions for MacOS users
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Click “Download R for macOS” <span class="math inline">\(\rightarrow\)</span> Select the latest release for your OS</p>
-<p>Open the downloaded .pkg file and follow the instructions in the installation window.</p>
-<p><a href="https://www.youtube.com/watch?v=Icawuhf0Yqo">Video tutorial on YouTube</a></p>
-</div>
-</div>
-</div>
-</section>
-<section id="installing-rstudio" class="level2">
-<h2 class="anchored" data-anchor-id="installing-rstudio">Installing RStudio</h2>
-<p>You can now download and install <a href="https://posit.co/download/rstudio-desktop/">RStudio</a>. RStudio is a so-called “Integrated Development Environment” (IDE), which will provide us with a variety of helpful tools to write and edit code comfortably. If R was a musical instrument, then RStudio would be the recording studio, so-to-speak.</p>
+<section id="overview" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="overview">Overview</h2>
+<p>We begin by establishing the general structure of corpus-linguistic studies, accompanied by key theoretical and practical considerations. The second section introduces R as an analytical tool, covering its core functionality. With these fundamentals in place, we proceed to query corpora directly within R. Chapters four and five focus on describing discrete and continuous outputs, as well as identifying meaningful associations and differences in the data (<strong>BA</strong>). Finally, to gain more nuanced insights into potential patterns, we apply common machine learning algorithms to fit, evaluate, and interpret statistical models (<strong>MA</strong>).</p>
+<p>Throughout this journey, readers will develop the skills to conduct robust corpus-linguistic analyses, from basic querying to advanced statistical modeling.</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -851,8 +800,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   <div class="nav-page nav-page-previous">
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./Exploring_RStudio.html" class="pagination-link" aria-label="<span class='chapter-number'>1</span>&nbsp; <span class='chapter-title'>Exploring RStudio</span>">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Exploring RStudio</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./Basics.html" class="pagination-link" aria-label="<span class='chapter-number'>1</span>&nbsp; <span class='chapter-title'>An example from sociolinguistics</span>">
+        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">An example from sociolinguistics</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

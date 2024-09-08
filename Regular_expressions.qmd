@@ -24,8 +24,8 @@ provides, providing* and *provided*. Insteading of searching for all
 forms individually, we can construct a regular expression of the form
 
 $$
-\text{provide(s | ing | ed)?}
-$$ which can be read as 'Match the sequence of letters \<provide\> as
+\text{provid(es | ing | ed)?}
+$$which can be read as 'Match the sequence of letters \<provide\> as
 well as when it is optionally followed by the letters \<s\> or \<ing\>
 or \<ed\>'. Notice how optionality is signified by the '?' operator and
 alternatives by '\|'.
@@ -33,73 +33,103 @@ alternatives by '\|'.
 To activate regular expression in a KWIC query, simply set the
 `valuetype` argument to `"regex"`:
 
-```{r, eval = FALSE}
+```{r, eval = TRUE}
 
-# Query the corpus
-kwic_provide3 <- kwic(ICE_GB,
-                     pattern = "provide(s|ing|ed)?",
-                     valuetype = "regex", # query format
+# Load library and corpus
+library(quanteda)
+ICE_GB <- readRDS("ICE_GB.RDS")
+
+# Perform query
+kwic_provide <- kwic(ICE_GB,
+                     phrase("provid(es|ing|ed)?"),
+                     valuetype = "regex",
                      window = 20)
-
-                     
-
-# View output in separate window
-#View(kwic_provide)
 ```
 
 The number of hits has more than doubled. However, upon closer
-inspection, we'll notice a number of false positives (e.g.,
-*providential*).
+inspection, we'll notice a few false positives, namely *providential,
+provider* and *providers*:
 
-```{r, echo = F, eval = FALSE}
+```{r}
+table(kwic_provide$keyword)
+```
 
-kwic_provide3 %>% 
-  head() %>% 
-  kbl() %>% 
-  kable_classic(full_width = T, html_font = "Cambria")
+There are two ways to handle this:
+
+1.  Refine the search expression further to only match those cases of
+    interest.
+2.  Manually sort out irrelevant cases during annotation in your
+    spreadsheet software.
+
+As a rule of thumb, you should consider improving your search expression
+if you receive hundreds or even thousands of false hits. If there are
+only a couple of false positives, it's usually easier to simply mark
+them as "irrelevant" in your spreadsheet.
+
+::: callout-caution
+## Task
+
+How could you refine the search expression for PROVIDE to get rid of the
+irrelevant cases? Consult the RegEX Cheatsheet below!
+
+```{r, output = FALSE}
+#| code-fold: true
+#| code-summary: "Solution:"
+
+# Add word boundary with \\b
+kwic_provide2 <- kwic(ICE_GB,
+                     phrase("\\bprovid(e|es|ing|ed)\\b"),
+                     valuetype = "regex",
+                     window = 20)
+
+table(kwic_provide2$keyword)
 
 ```
+:::
 
 ## A RegEx Cheatsheet
 
 ### Basic functions
 
-| **Command** | **Definition** | **Example** | **Finds** |
-|-------------|----------------|-------------|-----------|
-|             |                | `python`    | *python*  |
+| **Command** | **Definition** | **Example** | **Finds**           |
+|-------------|----------------|-------------|---------------------|
+|             |                | `python`    | *python*            |
 | `.`         | Any character  | `.ython`    | *aython, bython...* |
 
 ### Character classes and alternatives
 
-| **Command**          | **Definition**                                     | **Example**   | **Finds**                 |
-|----------------------|---------------------------------------------------|---------------|---------------------------|
-| `[abc]`              | Class of characters                               | `[jp]ython`   | *jython, python*          |
-| `[ ^pP]`             | Excluded class of characters                      | `[^pP]ython`  | everything but *python, Python* |
-| `(...|...)`          | Alternatives linked by logical operator `or`      | `P(ython|eter)` | *Python, Peter*           |
+| **Command** | **Definition**                               | **Example**     | **Finds**                       |
+|-----------------|-----------------------|-----------------|-----------------|
+| `[abc]`     | Class of characters                          | `[jp]ython`     | *jython, python*                |
+| `[ ^pP]`    | Excluded class of characters                 | `[^pP]ython`    | everything but *python, Python* |
+| `(...|...)` | Alternatives linked by logical operator `or` | `P(ython|eter)` | *Python, Peter*                 |
 
 ### Pre-defined character classes
 
-| **Command**  | **Definition**                   | **Example** | **Finds**               |
-|--------------|----------------------------------|-------------|-------------------------|
-| `\w`         | All alphanumeric characters      |             | A-Z, a-z, 0-9           |
-| `\W`         | All non-alphanumeric characters  |             | everything but A-Z, a-z, 0-9 |
-| `\d`         | All decimal numbers              |             | 0-9                     |
-| `\D`         | Everything which is not a decimal number |       | everything but 0-9      |
-| `\s`         | Empty space                      |             |                         |
+| **Command** | **Definition**                           | **Example**    | **Finds**                        |
+|-----------------|---------------------|-----------------|-----------------|
+| `\\w`       | All alphanumeric characters              |                | A-Z, a-z, 0-9                    |
+| `\\W`       | All non-alphanumeric characters          |                | everything but A-Z, a-z, 0-9     |
+| `\\d`       | All decimal numbers                      |                | 0-9                              |
+| `\\D`       | Everything which is not a decimal number |                | everything but 0-9               |
+| `\\s`       | Empty space                              |                |                                  |
+| `\\b`       | Word boundary                            | `\\bpython\\b` | Matches *python* as a whole word |
 
 ### Quantifiers
 
-| **Command**  | **Definition**                                             | **Example**    | **Finds**                              |
-|--------------|------------------------------------------------------------|----------------|----------------------------------------|
-| `?`          | One or zero instances of the preceding symbol              | `Py?thon`      | *Python, Pthon*                        |
-| `*`          | No matter how many times — also zero                       | `Py*thon`      | *Python, Pthon, Pyyyython...*          |
-|              |                                                            | `P[Yy]*thon`   | *Python, Pthon, PyYYython...*          |
-| `+`          | No matter how many times but at least once                 | `Py+thon`      | *Python, Pyyython, Pyyyython*          |
-| `{1,3}`      | `{min, max}`                                               | `Py{1,3}thon`  | *Python, Pyython, Pyyython*            |
+| **Command** | **Definition**                                | **Example**   | **Finds**                     |
+|-----------------|-----------------------|-----------------|-----------------|
+| `?`         | One or zero instances of the preceding symbol | `Py?thon`     | *Python, Pthon*               |
+| `*`         | No matter how many times — also zero          | `Py*thon`     | *Python, Pthon, Pyyyython...* |
+|             |                                               | `P[Yy]*thon`  | *Python, Pthon, PyYYython...* |
+| `+`         | No matter how many times but at least once    | `Py+thon`     | *Python, Pyyython, Pyyyython* |
+| `{1,3}`     | `{min, max}`                                  | `Py{1,3}thon` | *Python, Pyython, Pyyython*   |
 
-## Tasks
+## Exercises
 
-1. Find all labels of months!
-2. Write an elegant regular expression which finds *sing*, *sang* and *sung*.
-3. Find all four-digit numbers in the corpus!
-4. Write an elegant regular expression which finds all inflectional forms of *swim*!
+1.  Find all labels of months!
+2.  Write an elegant regular expression which finds *sing*, *sang* and
+    *sung*.
+3.  Find all four-digit numbers in the corpus!
+4.  Write an elegant regular expression which finds all inflectional
+    forms of *swim*!

@@ -1,5 +1,5 @@
 ---
-title: "Linear and multiple regression"
+title: "Linear regression"
 author: Vladimir Buskin
 format:
   html:
@@ -17,7 +17,9 @@ editor: visual
 bibliography: R.bib
 ---
 
-The following introduction is based on Heumann et al.
+## Recommended reading
+
+> The following introduction is based on Heumann et al.
 [-@heumann_introduction_2022: Chapter 11], James et al.
 [-@james_introduction_2021: Chapter 3], Levshina [-@levshina_how_2015:
 Chapter 7] and Winter [-@winter_statistics_2020: Chapter 4].
@@ -114,33 +116,30 @@ ggplot(ELP, aes(x = log(RT), y = log(Freq))) +
 
 ### Building a statistical model
 
--   Here `RT` is a *response* or *target* that we wish to explain. We
-    generically refer to the response as $Y$.
+Here `RT` is a *response* or *target* that we wish to explain. We
+generically refer to the response as $Y$.
 
--   `Freq` is a *feature*, *input*, or *predictor*, which we name $X$.
+`Freq` is a *feature*, *input*, or *predictor*, which we name $X$.
 
 We can thus summarise our preliminary and fairly general statistical
 model as
 
-$$ Y = f(X) + \epsilon. $$ While the term $f(X)$ denotes the
-contribution of $X$ to the explanation of $Y$, $\epsilon$ describes the
-errors of the model.
+$$ Y = f(X) + \epsilon. $$While the term $f(X)$ denotes the contribution
+of $X$ to the explanation of $Y$, $\epsilon$ describes the errors of the
+model.
 
 ## Linear Regression
 
--   Linear regression is a simple approach to supervised machine
-    learning where the response variable is known. It assumes that the
-    dependence of $Y$ on $X$ is **linear**.
-
--   This approach is suited for **numerical response variables**. The
-    predictors can be either numerical or discrete/categorical.
-
--   Although it may seem overly simplistic, linear regression is
-    **extremely useful** both conceptually and practically.
+Linear regression is a simple approach to supervised machine learning
+where the response variable is known. It assumes that the dependence of
+$Y$ on $X$ is **linear**. This approach is suitable for **numerical
+response variables**. The predictors, however, can be either numerical
+or discrete/categorical. Although it may seem overly simplistic, linear
+regression is **extremely useful** both conceptually and practically.
 
 ### Model with a single predictor $X$ {.smaller}
 
--   A linear model of our data would have the form
+A linear model of our data would have the form
 
 $$ Y = \beta_0 + \beta_1X + \epsilon $$
 
@@ -149,40 +148,45 @@ or, in more concrete terms,
 $$ \text{Reaction time} = \beta_0 + \beta_1\text{Frequency} + \text{Model Error,} $$
 
 where $\beta_0$ and $\beta_1$ are two unknown constants that represent
-the **intercept** and **slope**, respectively. Together they are
-referred to as the model **coefficients** (or parameters), and
-$\epsilon$ is the error term. The fact that assumptions are made about
-the form of the model renders it a **parametric model**.
+the **intercept** and **slope** of the regression line, respectively.
+Together they are referred to as the model **coefficients** (or
+parameters), and $\epsilon$ is the error term. The fact that assumptions
+are made about the form of the model renders it a **parametric model**.
 
--   Given the existing data on $X$ and $Y$, which is also known as the
-    training data, we **estimate** the model coefficients $\beta_0$ and
-    $\beta_1$. While we use the training data to estimate these
-    coefficients, we cannot know the true values of the coefficients,
-    i.e., the exact true relationship between the variables.
+Given the existing data on $X$ and $Y$, which is also known as the
+training data, we **estimate** the model coefficients $\beta_0$ and
+$\beta_1$. While we use the training data to estimate these
+coefficients, we cannot know the true values of the coefficients, i.e.,
+the exact true relationship between the variables. Their tentative nature is indicated by the **hat**
+symbol \^ above them: $\hat{\beta_0}$ and $\hat{\beta_1}$.
 
--   The most common way of estimating parameters for linear models is
-    the **least squares** approach. In essence, the parameters are
-    chosen such that the residual sum of squares[^linear_regression-1],
-    i.e., the sum of the differences between observed and predicted
-    values, is as low as possible.
+::: {.callout-tip title="How are the coefficients estimated?" collapse="true"}
 
--   We can then predict future sales using the formula
+The most common way of estimating parameters for linear models is the
+**Least Squares** approach. In essence, the parameters are chosen such
+that the residual sum of squares, i.e., the sum of the differences
+between observed and predicted values, is as low as possible. More
+formally, the estimated slope then corresponds to
 
-[^linear_regression-1]: $$ \hat{\beta}_1 = \frac{\sum_{i=1}^n(x_i - \bar{x})(y_i- \bar{y})}{\sum_{i=1}(x_i- \bar{x})^2}
-    $$
+$$ \hat{\beta}_1 = \frac{\sum_{i=1}^n(x_i - \bar{x})(y_i- \bar{y})}{\sum_{i=1}(x_i- \bar{x})^2}.$$
 
-    $$
-    \hat{\beta_0}= \bar{y}- \hat{\beta}_1\bar{x}
-    $$
+Now we can obtain the intercept:
+
+$$
+\hat{\beta_0}= \bar{y}- \hat{\beta}_1\bar{x}
+$$
+:::
+
+We can then predict future sales using the formula
 
 $$
 \hat{y} = \hat{\beta}_0 + \hat{\beta}_1x,
 $$
 
 where $\hat{y}$ indicates a prediction of $Y$ on the basis of the
-predictor values $X = x$. The **hat** symbol \^ marks estimated values.
+predictor values $X = x$.
 
--   In R, we can fit a linear model with the `lm()` function.
+In R, we can fit a linear model with the `lm()` function.
 
 ```{r, echo = TRUE, output = TRUE}
 
@@ -198,9 +202,12 @@ summary(rt.lm1)
 
 The model statistics comprise the following elements:
 
-1.  **Call**, i.e., the model formula.
+::: {.callout-tip title="Call" collapse="true"}
+i.e., the model formula.
+:::
 
-2.  **Residuals**: These indicate the difference between the observed
+::: {.callout-tip title="Residuals" collapse="true"}
+These indicate the difference between the observed
     values in the data set and the values predicted by the model (= the
     fitted values). These correspond to the error term $\epsilon$. The
     lower the residuals, the better the model describes the data.
@@ -216,8 +223,11 @@ head(rt.lm1$fitted.values)
 head(rt.lm1$residuals)
 
 ```
+:::
 
-3.  **Coefficients**: The regression coefficients correspond to
+::: {.callout-tip title="Coefficients" collapse="true"}
+
+The regression coefficients correspond to
     $\hat{\beta}_0$ ("Intercept") and $\hat{\beta}_1$ ("log(Freq)"),
     respectively. The model shows that for a one-unit increase in
     log-frequency the log-reaction time decreases by approx. -0.05.
@@ -234,7 +244,11 @@ tidy_model
 
 ```
 
-4.  $p$**-values and** $t$**-statistic**: Given the null hypothesis
+:::
+
+::: {.callout-tip title="$p$-values and $t$-statistic" collapse="true"}
+
+$p$**-values and** $t$**-statistic**: Given the null hypothesis
     $H_0$ that there is no correlation between `log(RT)` and `log(Freq)`
     (i.e., $H_0: \beta_1 = 0$), a $p$-value lower than 0.05 indicates
     that $\beta_1$ considerably deviates from 0, thus providing evidence
@@ -242,7 +256,7 @@ tidy_model
     $p < 0.001$, we can reject $H_0$.
 
     The $p$-value itself crucially depends on the
-    $t$-statistic[^linear_regression-2], which measures "the number of
+    $t$-statistic[^linear_regression-1], which measures "the number of
     standard deviations that $\hat{\beta_1}$ is away from 0"
     [@james_introduction_2021: 67] . The standard error (SE) reflects
     how much an estimated coefficient differs on average from the true
@@ -252,7 +266,7 @@ tidy_model
     the true estimate of the parameter $\beta_1$ lies within the
     specified range 95% of the time.
 
-[^linear_regression-2]: $$t = \frac{\hat{\beta_1} - 0}{SE(\hat{\beta_0})}$$
+[^linear_regression-1]: $$t = \frac{\hat{\beta_1} - 0}{SE(\hat{\beta_0})}$$
 
 ```{r, echo = TRUE, output = TRUE}
 
@@ -267,23 +281,35 @@ tidy_model_ci
 The estimated parameter for `log(Freq)`, which is -0.049, thus has the
 95% confidence interval \[-0.053, -0.044\].
 
-5.  The **residual standard error** (RSE)[^linear_regression-3] is an
-    estimation of the average deviation from the observed values.
+:::
 
-6.  $R^2$[^linear_regression-4] is important for assessing model fit
+::: {.callout-tip title="**Residual standard error** (RSE)" collapse="true"}
+This is an estimation of the average deviation of the predictions from the observed values.
+
+$$RSE = \sqrt{\frac{1}{n-2}\sum_{i=1}^n (y_i - \hat{y_i}})^2$$
+
+:::
+
+::: {.callout-tip title="$R^2$" collapse="true"}
+
+The $R^2$ score is important for assessing model fit
     because it "measures the proportion of variability in $Y$ that can
     be explained using $X$" [@james_introduction_2021: 70; emphasis
     removed], varying between 0 and 1.
+    
+$$R^2 = 1-\frac{TSS}{RSS} = 1-\frac{\sum_{i=1}^n (y_i - \hat{y_i})^2}{\sum_{i=1}^n (y_i - \bar{y_i})^2}$$
 
-7.  The $F$-statistic is used to measure the association between the
+:::
+
+::: {.callout-tip title="$F$-statistic" collapse="true"}
+
+It is used to measure the association between the
     dependent variable and the independent variable(s). Generally
-    speaking, values greater than 1 indicate a possible correlation. A
-    very low $p$-value suggests that the null hypothesis
+    speaking, values greater than 1 indicate a possible correlation. A sufficiently very low $p$-value suggests that the null hypothesis
     $H_0: \beta_1 = 0$ can be rejected.
+    
+:::
 
-[^linear_regression-3]: $$RSE = \sqrt{\frac{1}{n-2}\sum_{i=1}^n (y_i - \hat{y_i}})^2$$
-
-[^linear_regression-4]: $$R^2 = 1-\frac{TSS}{RSS} = 1-\frac{\sum_{i=1}^n (y_i - \hat{y_i})^2}{\sum_{i=1}^n (y_i - \bar{y_i})^2}$$.
 
 ### Multiple linear regression
 

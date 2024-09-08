@@ -3,7 +3,7 @@ project:
   output-dir: docs
   
 book:
-  title: "Quantitative methods in corpus linguistics: A reader"
+  title: "Statistics and Data Analysis for Corpus Linguists: From Theory to Practice with R"
   author: "Vladimir Buskin"
   date: "2024-06-30"
   reader-mode: true
@@ -12,9 +12,16 @@ book:
   downloads: [pdf]
   repo-branch: main
   chapters:
-    - part: "Introduction to R"
+    - part: Conducting a corpus-linguistic study
       chapters:
         - index.qmd
+        - Basics.qmd
+        - Research_questions.qmd
+        - Linguistic_variables.qmd
+        - Dos_donts.qmd
+    - part: "Introduction to R"
+      chapters:
+        - First_steps.qmd
         - Exploring_RStudio.qmd
         - Vectors_Factors.qmd
         - Data_frames.qmd
@@ -40,12 +47,6 @@ book:
         - Linear_regression.qmd
         - Logistic_regression.qmd
         - Decision_trees_and_random_forests.qmd
-    - part: Conducting a corpus-linguistic study
-      chapters:
-        - Basics.qmd
-        - Research_questions.qmd
-        - Linguistic_variables.qmd
-        - Dos_donts.qmd
     - part: References
       chapters:
         - references.qmd

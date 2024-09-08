@@ -22,21 +22,20 @@ bibliography: R.bib
 knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 ```
 
-Please download the file "Paquot_Larsson_2020_data.xlsx"
+Please download the file `Paquot_Larsson_2020_data.xlsx`
 [@paquotDescriptiveStatisticsVisualization2020][^variables-1] and store
 it in your working directory.
 
 [^variables-1]: The supplementary materials can be downloaded from the
     publisher's
     [website](https://link.springer.com/chapter/10.1007/978-3-030-46216-1_17)
-    \[Last accessed April 28, 2024\].
+    \[Last accessed April 28, 2024\]. Note that the dataset has been
+    originally compiled by @gries_statistics_2013.
 
 ```{r, echo = TRUE, output = TRUE}
 # Libraries
-library("nycflights13")
 library("readxl")
 library("tidyverse")
-library("ggthemes")
 
 # Load data
 cl.order <- read_xlsx("Paquot_Larsson_2020_data.xlsx")

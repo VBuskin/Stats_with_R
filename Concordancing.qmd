@@ -1,5 +1,5 @@
 ---
-title: "Querying a corpus"
+title: "Concordancing"
 author: Vladimir Buskin
 format:
   html:
@@ -17,14 +17,15 @@ editor: visual
 
 ## Using the `QuantedaApp`
 
-### Installation
-
 Installation and usage instructions are available in this [GitHub
 repository](https://github.com/VBuskin/quanteda_app).
 
 ## Using the `quanteda` package in R
 
 ### Preparation
+
+::: callout-warning
+### Working directory
 
 In order for R to be able to recognise the data, it is crucial to set up
 the working directory correctly.
@@ -39,20 +40,14 @@ the working directory correctly.
 
 To see your working directory in your files pane, click on `Files` \>
 `'Blue wheel symbol'` \> `Go to working directory`.
+:::
 
 ### Loading the corpus
 
-After specifying the working directory and loading the libraries we will
-need, we can read in the corpus files into a corpus object in R.
-
-First, simply copy-paste the following code chunk at the beginning of
-your R-script. Once you run it, it will load the function `read_GB()`
-into R's working memory (it should now appear in the `Environment`
-tab!). This function will automatically handle the entire reading-in
-process.
-
-To now get all corpus files into R, all we have to do is call the
-function:
+To load a corpus object into R, place it in your working directory and
+perform read it into your working environment with `readRDS()`. The
+ICE-GB.RDS file you've been provided with has been pre-processed and
+saved in this specific format for practical reasons.
 
 ```{r, echo = TRUE, eval = T}
 
@@ -61,39 +56,36 @@ ICE_GB <- readRDS("ICE_GB.RDS")
 
 ```
 
-If you encounter error messages, make sure you followed steps 1 and 2
-above.
+If you encounter any error messages, make sure you followed steps 1 and
+2 in the box above.
 
 ### Concordancing
 
+In order to perform concordances in R, we need to load the packages
+below.
+
 ```{r}
+# Load libraries
 library(quanteda)
 library(tidyverse)
-library(kableExtra)
-
-# Load corpus
-ICE_GB <- readRDS("ICE_GB.RDS")
 ```
 
--   Concordances
+Next, we use the `kwic()` function, which requires a corpus object and a
+search expression. Let's supply both:
 
 ```{r, echo = T, output = T}
-
 # Query the corpus
-query1 <- kwic(ICE_GB, pattern = "provid(e|es|ing|ed)", valuetype = "regex")
+query1 <- kwic(ICE_GB, phrase("eat"))
+```
 
-query1 %>%
-  as_tibble() %>% 
-  count(keyword)
+Print the first few lines of our results with `head()`:
 
-# Print first six lines to console
-#head(as_tibble(kwic_provide))
-
-# View output in separate window
-#View(kwic_provide)
+```{r, echo = T, output = T}
+head(query1)
 ```
 
 ```{r, echo = F}
+library(kableExtra)
 
 query1 %>% 
   head() %>% 
@@ -102,25 +94,77 @@ query1 %>%
 
 ```
 
-#### Increase search window
+For a full screen display of the data frame, try `View()`:
 
 ```{r, eval = FALSE}
-
-# Query the corpus
-kwic_provide2 <- kwic(tokens(ICE_GB_corpus),
-                     pattern = "provide",
-                     window = 20) # choose window size
-
-# View output in separate window
-#View(kwic_provide)
+View(query1)
 ```
 
-```{r, echo = F, eval = FALSE}
+### Some basic statistics
 
-kwic_provide2 %>% 
+How many tokens (= individual hits) does our query return?
+
+```{r}
+nrow(query1) # Token number corresponds to the number of rows in the data frame
+```
+
+How many types (= distinct hits) does our query return?
+
+```{r}
+table(query1$keyword)
+```
+
+How is the keyword distributed across corpus files?
+
+```{r}
+query_distrib <- table(query1$docname, query1$keyword)
+
+head(query_distrib, n = 10)
+```
+
+### Window size
+
+Some studies require careful examination of the preceding or following
+context of the keyword. We can easily adjust the `window` size to suit
+our needs:
+
+```{r, eval = TRUE}
+query2 <- kwic(ICE_GB, phrase("eat"), window = 20) 
+
+```
+
+```{r, echo = FALSE, eval = TRUE}
+
+query2 %>% 
   head() %>% 
   kbl() %>% 
   kable_classic(full_width = F, html_font = "Cambria")
 
 ```
 
+### Saving your output
+
+You can store your results in a spreadsheet file just as described in
+`Introduction to R > Import/export data`.
+
+-   **Microsoft Excel (.xlsx)**
+
+```{r, output = F, eval = F}
+library(writexl)
+
+write_xlsx(query2, "myresults1.xlsx")
+
+
+```
+
+-   **LibreOffice** (.csv)
+
+```{r, output = F, eval = F}
+
+write.csv(query2, "myresults1.csv")
+
+```
+
+As soon as you have annotated your data, you can load .xlsx files back
+into R with `read_xlsx()` from the `readxl` package and .csv files using
+the Base R function `read.csv()`.

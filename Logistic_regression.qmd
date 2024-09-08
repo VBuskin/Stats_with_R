@@ -17,9 +17,9 @@ editor: visual
 bibliography: R.bib
 ---
 
-This unit is based on James et al. [-@james_introduction_2021: Chapter
-4] and Levshina [-@levshina_how_2015: Chapter 12]. For an in-depth
-introduction, see Hosmer & Lemeshow [-@hosmer_applied_2008].
+## Recommended reading
+
+> This unit is based on James et al. [-@james_introduction_2021: Chapter 4] and Levshina [-@levshina_how_2015: Chapter 12]. For an in-depth introduction, see Hosmer & Lemeshow [-@hosmer_applied_2008].
 
 ## Preparation {.smaller}
 
@@ -234,7 +234,6 @@ $$
 & = \beta_0 + \sum_{i=1}^{p} \beta_i X_i
 \end{aligned}
 $$ respectively.
-
 
 ### Odds ratios
 

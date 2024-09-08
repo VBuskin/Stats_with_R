@@ -8,7 +8,7 @@
 
 <meta name="author" content="Vladimir Buskin">
 
-<title>Quantitative methods in corpus linguistics: A reader - 2&nbsp; Vectors</title>
+<title>Statistics and Data Analysis for Corpus Linguists: From Theory to Practice with R - 7&nbsp; Vectors</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -55,7 +55,27 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -115,7 +135,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Introduction to R</a></li><li class="breadcrumb-item"><a href="./Vectors_Factors.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Vectors</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./First_steps.html">Introduction to R</a></li><li class="breadcrumb-item"><a href="./Vectors_Factors.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Vectors</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -130,10 +150,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Quantitative methods in corpus linguistics: A reader</a> 
+      <a href="./">Statistics and Data Analysis for Corpus Linguists: From Theory to Practice with R</a> 
         <div class="sidebar-tools-main tools-wide">
     <a href="https://github.com/VBuskin/Stats_with_R" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
-    <a href="./Quantitative-methods-in-corpus-linguistics--A-reader.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+    <a href="./Statistics-and-Data-Analysis-for-Corpus-Linguists--From-Theory-to-Practice-with-R.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
   <i class="bi"></i>
@@ -152,7 +172,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
- <span class="menu-text">Introduction to R</span></a>
+ <span class="menu-text">Conducting a corpus-linguistic study</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -161,37 +181,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">First steps</span></a>
+ <span class="menu-text">Preface</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Exploring_RStudio.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Exploring RStudio</span></span></a>
+  <a href="./Basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">An example from sociolinguistics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Vectors_Factors.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Vectors</span></span></a>
+  <a href="./Research_questions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Research questions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Data_frames.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data frames</span></span></a>
+  <a href="./Linguistic_variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Linguistic variables</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Libraries.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Libraries</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Importing_exporting.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Importing and exporting data</span></span></a>
+  <a href="./Dos_donts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Some general guidelines</span></span></a>
   </div>
 </li>
       </ul>
@@ -199,7 +213,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
- <span class="menu-text">Corpus linguistics with R</span></a>
+ <span class="menu-text">Introduction to R</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -207,14 +221,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Concordancing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Querying a corpus</span></span></a>
+  <a href="./First_steps.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">First steps</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Regular_expressions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Regular expressions</span></span></a>
+  <a href="./Exploring_RStudio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Exploring RStudio</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Vectors_Factors.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Vectors</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Data_frames.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Data frames</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Libraries.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Libraries</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Importing_exporting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Import/export data</span></span></a>
   </div>
 </li>
       </ul>
@@ -222,7 +260,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
- <span class="menu-text">Descriptive statistics</span></a>
+ <span class="menu-text">Corpus linguistics with R</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -230,26 +268,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Variables.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Variables in statistics</span></span></a>
+  <a href="./Concordancing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Concordancing</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Categorical_data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Describing categorical data</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Summary_statistics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Describing continuous data</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Distributions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Theoretical distributions</span></span></a>
+  <a href="./Regular_expressions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Regular expressions</span></span></a>
   </div>
 </li>
       </ul>
@@ -257,7 +283,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
- <span class="menu-text">Inferential statistics</span></a>
+ <span class="menu-text">Descriptive statistics</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -265,20 +291,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Hypothesis_testing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Hypothesis testing</span></span></a>
+  <a href="./Variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Statistical variables</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Chi_square_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Chi square test</span></span></a>
+  <a href="./Categorical_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Categorical data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./t_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">t-test</span></span></a>
+  <a href="./Summary_statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Continuous data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Distributions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Distributions</span></span></a>
   </div>
 </li>
       </ul>
@@ -286,7 +318,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
- <span class="menu-text">Machine learning</span></a>
+ <span class="menu-text">Inferential statistics</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -294,20 +326,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Linear_regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Linear and multiple regression</span></span></a>
+  <a href="./Hypothesis_testing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Hypothesis testing</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Logistic_regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Logistic Regression</span></span></a>
+  <a href="./Chi_square_test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Chi square test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Decision_trees_and_random_forests.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Decision trees and random forests</span></span></a>
+  <a href="./t_test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">t-test</span></span></a>
   </div>
 </li>
       </ul>
@@ -315,7 +347,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
- <span class="menu-text">Conducting a corpus-linguistic study</span></a>
+ <span class="menu-text">Machine learning</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -323,26 +355,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Basics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">An Sociolinguistic Case Study</span></span></a>
+  <a href="./Linear_regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Linear regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Research_questions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Research questions</span></span></a>
+  <a href="./Logistic_regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Logistic Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Linguistic_variables.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Linguistic variables</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Dos_donts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Some general guidelines</span></span></a>
+  <a href="./Decision_trees_and_random_forests.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Decision trees and random forests</span></span></a>
   </div>
 </li>
       </ul>
@@ -359,7 +385,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">References</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">References</span></span></a>
   </div>
 </li>
       </ul>
@@ -374,19 +400,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#suggested-reading" id="toc-suggested-reading" class="nav-link active" data-scroll-target="#suggested-reading"><span class="header-section-number">2.1</span> Suggested reading</a></li>
-  <li><a href="#word-frequencies-i" id="toc-word-frequencies-i" class="nav-link" data-scroll-target="#word-frequencies-i"><span class="header-section-number">2.2</span> Word frequencies I</a></li>
-  <li><a href="#some-technical-details" id="toc-some-technical-details" class="nav-link" data-scroll-target="#some-technical-details"><span class="header-section-number">2.3</span> Some technical details</a></li>
-  <li><a href="#practical" id="toc-practical" class="nav-link" data-scroll-target="#practical"><span class="header-section-number">2.4</span> Practical</a></li>
+  <li><a href="#recommended-reading" id="toc-recommended-reading" class="nav-link active" data-scroll-target="#recommended-reading"><span class="header-section-number">7.1</span> Recommended reading</a></li>
+  <li><a href="#word-frequencies-i" id="toc-word-frequencies-i" class="nav-link" data-scroll-target="#word-frequencies-i"><span class="header-section-number">7.2</span> Word frequencies I</a></li>
+  <li><a href="#some-technical-details" id="toc-some-technical-details" class="nav-link" data-scroll-target="#some-technical-details"><span class="header-section-number">7.3</span> Some technical details</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">7.4</span> Exercises</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/VBuskin/Stats_with_R/blob/main/Vectors_Factors.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Introduction to R</a></li><li class="breadcrumb-item"><a href="./Vectors_Factors.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Vectors</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./First_steps.html">Introduction to R</a></li><li class="breadcrumb-item"><a href="./Vectors_Factors.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Vectors</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Vectors</span></h1>
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Vectors</span></h1>
 </div>
 
 
@@ -409,16 +435,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="suggested-reading" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="suggested-reading"><span class="header-section-number">2.1</span> Suggested reading</h2>
-<ul>
-<li><p>Gries (2013: Chapter 2)</p></li>
-<li><p>James et al.&nbsp;(2021: Chapter 2.3)</p></li>
-<li><p>Winter (2019: Chapter 1)</p></li>
-</ul>
+<section id="recommended-reading" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="recommended-reading"><span class="header-section-number">7.1</span> Recommended reading</h2>
+<blockquote class="blockquote">
+<p><span class="citation" data-cites="winter_statistics_2020">Winter (<a href="references.html#ref-winter_statistics_2020" role="doc-biblioref">2020</a>)</span>: Chapter 1.1–1.9</p>
+</blockquote>
 </section>
-<section id="word-frequencies-i" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="word-frequencies-i"><span class="header-section-number">2.2</span> Word frequencies I</h2>
+<section id="word-frequencies-i" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="word-frequencies-i"><span class="header-section-number">7.2</span> Word frequencies I</h2>
 <p>You are given the following token counts of English verb lemmas in the International Corpus of English:</p>
 <table class="table">
 <thead>
@@ -527,8 +551,8 @@ What does ‘#’ mean? On comments in R
 </div>
 <p>In RStudio, you now have the option to save the plot to your computer. Once the figure has appeared in your “Plots” panel, you can click on “Export” in the menu bar below and proceed to choose the desired output format and file directory.</p>
 </section>
-<section id="some-technical-details" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="some-technical-details"><span class="header-section-number">2.3</span> Some technical details</h2>
+<section id="some-technical-details" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="some-technical-details"><span class="header-section-number">7.3</span> Some technical details</h2>
 <p>The example above demonstrates one of the most important data structures in R: <strong>Vectors</strong>. They form the cornerstone of various more complex objects such as data frames, and are essential to handling large data sets (e.g., corpora). And yet, vectors are very simple in that they merely constitute one-dimensional sequences of characters or numbers – no more, no less.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(lemma)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -562,8 +586,8 @@ What does ‘#’ mean? On comments in R
 </div>
 </div>
 </section>
-<section id="practical" class="level2" data-number="2.4">
-<h2 data-number="2.4" class="anchored" data-anchor-id="practical"><span class="header-section-number">2.4</span> Practical</h2>
+<section id="exercises" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="exercises"><span class="header-section-number">7.4</span> Exercises</h2>
 <ol type="1">
 <li>Create a vector that lists the third person personal pronouns of English (subject and object forms). Store them in a variable <code>pp3</code>.</li>
 </ol>
@@ -653,7 +677,7 @@ What does ‘#’ mean? On comments in R
 </div></li>
 </ul>
 <ol start="4" type="1">
-<li>Once we are sure that an element is in the vector of interest, another common problem that arises is finding its location. Luckily, R has got us covered! The <code>which()</code> function returns the index of an element. You can read this notation as “Which element in <code>pp3</code> is <em>they</em>?”. The output suggests that is in position <code>6</code>. Note that the number obtained depends on the order of elements you’ve chosen when creating <code>pp3</code>.</li>
+<li>Once we are sure that an element is in the vector of interest, another common problem that arises is finding its location. Luckily, R has got us covered! The <code>which()</code> function returns the index of an element.</li>
 </ol>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(pp3 <span class="sc">==</span> <span class="st">"they"</span>) <span class="co"># Note the two equal signs == !</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -661,7 +685,8 @@ What does ‘#’ mean? On comments in R
 <pre><code>[1] 6</code></pre>
 </div>
 </div>
-<p>Find the locations of <em>it</em> and <em>them</em> in <code>pp3</code>.</p>
+<p>You can read this notation as “Which element in <code>pp3</code> is <em>they</em>?”. The output suggests that is in position <code>6</code>. Note that the number obtained depends on the order of elements you’ve chosen when creating <code>pp3</code>.</p>
+<p>Now, it’s your turn: Find the locations of <em>it</em> and <em>them</em> in <code>pp3</code>!</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Solution:</summary>
@@ -674,6 +699,11 @@ What does ‘#’ mean? On comments in R
 </div>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-winter_statistics_2020" class="csl-entry" role="listitem">
+Winter, Bodo. 2020. <em>Statistics for Linguists: An Introduction Using r</em>. New York; London: Routledge.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
@@ -1077,12 +1107,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./Exploring_RStudio.html" class="pagination-link  aria-label=" &lt;span="" rstudio&lt;="" span&gt;"="">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Exploring RStudio</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Exploring RStudio</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./Data_frames.html" class="pagination-link" aria-label="<span class='chapter-number'>3</span>&nbsp; <span class='chapter-title'>Data frames</span>">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data frames</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./Data_frames.html" class="pagination-link" aria-label="<span class='chapter-number'>8</span>&nbsp; <span class='chapter-title'>Data frames</span>">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Data frames</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
