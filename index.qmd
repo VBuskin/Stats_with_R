@@ -31,3 +31,14 @@ learning algorithms to fit, evaluate, and interpret statistical models
 Throughout this journey, readers will develop the skills to conduct
 robust corpus-linguistic analyses, from basic querying to advanced
 statistical modeling.
+
+## Collaborators
+
+Vladimir Buskin, PhD student at the Department of English Language and
+Linguistics, *Catholic University of Eichstätt-Ingolstadt*
+
+Thomas Brunner, Assistant Professor at the Department of English
+Language and Linguistics, *Catholic University of Eichstätt-Ingolstadt*
+
+Philippa Adolf, PhD student at the Department of Romance Studies,
+*University of Vienna*

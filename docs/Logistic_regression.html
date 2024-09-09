@@ -8,7 +8,7 @@
 
 <meta name="author" content="Vladimir Buskin">
 
-<title>Statistics and Data Analysis for Corpus Linguists: From Theory to Practice with R - 21&nbsp; Logistic Regression</title>
+<title>Statistics and Data Analysis for Corpus Linguists: From Theory to Practice with R - 22&nbsp; Logistic Regression</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -85,7 +85,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./Decision_trees_and_random_forests.html" rel="next">
+<link href="./Mixed_effects_regression.html" rel="next">
 <link href="./Linear_regression.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -137,7 +137,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Linear_regression.html">Machine learning</a></li><li class="breadcrumb-item"><a href="./Logistic_regression.html"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Logistic Regression</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Linear_regression.html">Machine learning</a></li><li class="breadcrumb-item"><a href="./Logistic_regression.html"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Logistic Regression</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -280,6 +280,12 @@ div.csl-indent {
  <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Regular expressions</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Annotation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Data annotation</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -294,25 +300,25 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Variables.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Statistical variables</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Statistical variables</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Categorical_data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Categorical data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Categorical data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Summary_statistics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Continuous data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Continuous data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Distributions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Distributions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Distributions</span></span></a>
   </div>
 </li>
       </ul>
@@ -329,19 +335,19 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Hypothesis_testing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Hypothesis testing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Hypothesis testing</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Chi_square_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Chi square test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Chi square test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./t_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">t-test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">t-test</span></span></a>
   </div>
 </li>
       </ul>
@@ -358,19 +364,25 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Linear_regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Linear regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Linear regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Logistic_regression.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Logistic Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Logistic Regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Mixed_effects_regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Mixed-effects regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Decision_trees_and_random_forests.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Decision trees and random forests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Decision trees and random forests</span></span></a>
   </div>
 </li>
       </ul>
@@ -387,7 +399,7 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">References</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">References</span></span></a>
   </div>
 </li>
       </ul>
@@ -402,26 +414,26 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#recommended-reading" id="toc-recommended-reading" class="nav-link active" data-scroll-target="#recommended-reading"><span class="header-section-number">21.1</span> Recommended reading</a></li>
-  <li><a href="#preparation" id="toc-preparation" class="nav-link" data-scroll-target="#preparation"><span class="header-section-number">21.2</span> Preparation</a>
+  <li><a href="#recommended-reading" id="toc-recommended-reading" class="nav-link active" data-scroll-target="#recommended-reading"><span class="header-section-number">22.1</span> Recommended reading</a></li>
+  <li><a href="#preparation" id="toc-preparation" class="nav-link" data-scroll-target="#preparation"><span class="header-section-number">22.2</span> Preparation</a>
   <ul class="collapse">
-  <li><a href="#descriptive-overview" id="toc-descriptive-overview" class="nav-link" data-scroll-target="#descriptive-overview"><span class="header-section-number">21.2.1</span> Descriptive overview</a></li>
+  <li><a href="#descriptive-overview" id="toc-descriptive-overview" class="nav-link" data-scroll-target="#descriptive-overview"><span class="header-section-number">22.2.1</span> Descriptive overview</a></li>
   </ul></li>
-  <li><a href="#logistic-regression" id="toc-logistic-regression" class="nav-link" data-scroll-target="#logistic-regression"><span class="header-section-number">21.3</span> Logistic regression</a>
+  <li><a href="#logistic-regression" id="toc-logistic-regression" class="nav-link" data-scroll-target="#logistic-regression"><span class="header-section-number">22.3</span> Logistic regression</a>
   <ul class="collapse">
-  <li><a href="#the-logistic-model" id="toc-the-logistic-model" class="nav-link" data-scroll-target="#the-logistic-model"><span class="header-section-number">21.3.1</span> The logistic model</a></li>
-  <li><a href="#multiple-logistic-regression" id="toc-multiple-logistic-regression" class="nav-link" data-scroll-target="#multiple-logistic-regression"><span class="header-section-number">21.3.2</span> Multiple logistic regression</a></li>
-  <li><a href="#odds-ratios" id="toc-odds-ratios" class="nav-link" data-scroll-target="#odds-ratios"><span class="header-section-number">21.3.3</span> Odds ratios</a></li>
+  <li><a href="#the-logistic-model" id="toc-the-logistic-model" class="nav-link" data-scroll-target="#the-logistic-model"><span class="header-section-number">22.3.1</span> The logistic model</a></li>
+  <li><a href="#multiple-logistic-regression" id="toc-multiple-logistic-regression" class="nav-link" data-scroll-target="#multiple-logistic-regression"><span class="header-section-number">22.3.2</span> Multiple logistic regression</a></li>
+  <li><a href="#odds-ratios" id="toc-odds-ratios" class="nav-link" data-scroll-target="#odds-ratios"><span class="header-section-number">22.3.3</span> Odds ratios</a></li>
   </ul></li>
-  <li><a href="#workflow-in-r" id="toc-workflow-in-r" class="nav-link" data-scroll-target="#workflow-in-r"><span class="header-section-number">21.4</span> Workflow in R</a>
+  <li><a href="#workflow-in-r" id="toc-workflow-in-r" class="nav-link" data-scroll-target="#workflow-in-r"><span class="header-section-number">22.4</span> Workflow in R</a>
   <ul class="collapse">
-  <li><a href="#step-1-research-question-and-hypotheses" id="toc-step-1-research-question-and-hypotheses" class="nav-link" data-scroll-target="#step-1-research-question-and-hypotheses"><span class="header-section-number">21.4.1</span> Step 1: Research question and hypotheses</a></li>
-  <li><a href="#step-2-convert-to-factors-and-specify-reference-levels" id="toc-step-2-convert-to-factors-and-specify-reference-levels" class="nav-link" data-scroll-target="#step-2-convert-to-factors-and-specify-reference-levels"><span class="header-section-number">21.4.2</span> Step 2: Convert to factors and specify reference levels</a></li>
-  <li><a href="#step-3-fit-the-model" id="toc-step-3-fit-the-model" class="nav-link" data-scroll-target="#step-3-fit-the-model"><span class="header-section-number">21.4.3</span> Step 3: Fit the model</a></li>
-  <li><a href="#step-4-confidence-intervals-and-odds-ratios" id="toc-step-4-confidence-intervals-and-odds-ratios" class="nav-link" data-scroll-target="#step-4-confidence-intervals-and-odds-ratios"><span class="header-section-number">21.4.4</span> Step 4: Confidence intervals and odds ratios</a></li>
-  <li><a href="#step-5-visualise-the-model" id="toc-step-5-visualise-the-model" class="nav-link" data-scroll-target="#step-5-visualise-the-model"><span class="header-section-number">21.4.5</span> Step 5: Visualise the model</a></li>
-  <li><a href="#step-6-interpret-the-model" id="toc-step-6-interpret-the-model" class="nav-link" data-scroll-target="#step-6-interpret-the-model"><span class="header-section-number">21.4.6</span> Step 6: Interpret the model</a></li>
-  <li><a href="#step-7-further-model-diagnostics" id="toc-step-7-further-model-diagnostics" class="nav-link" data-scroll-target="#step-7-further-model-diagnostics"><span class="header-section-number">21.4.7</span> Step 7: Further model diagnostics</a></li>
+  <li><a href="#step-1-research-question-and-hypotheses" id="toc-step-1-research-question-and-hypotheses" class="nav-link" data-scroll-target="#step-1-research-question-and-hypotheses"><span class="header-section-number">22.4.1</span> Step 1: Research question and hypotheses</a></li>
+  <li><a href="#step-2-convert-to-factors-and-specify-reference-levels" id="toc-step-2-convert-to-factors-and-specify-reference-levels" class="nav-link" data-scroll-target="#step-2-convert-to-factors-and-specify-reference-levels"><span class="header-section-number">22.4.2</span> Step 2: Convert to factors and specify reference levels</a></li>
+  <li><a href="#step-3-fit-the-model" id="toc-step-3-fit-the-model" class="nav-link" data-scroll-target="#step-3-fit-the-model"><span class="header-section-number">22.4.3</span> Step 3: Fit the model</a></li>
+  <li><a href="#step-4-confidence-intervals-and-odds-ratios" id="toc-step-4-confidence-intervals-and-odds-ratios" class="nav-link" data-scroll-target="#step-4-confidence-intervals-and-odds-ratios"><span class="header-section-number">22.4.4</span> Step 4: Confidence intervals and odds ratios</a></li>
+  <li><a href="#step-5-visualise-the-model" id="toc-step-5-visualise-the-model" class="nav-link" data-scroll-target="#step-5-visualise-the-model"><span class="header-section-number">22.4.5</span> Step 5: Visualise the model</a></li>
+  <li><a href="#step-6-interpret-the-model" id="toc-step-6-interpret-the-model" class="nav-link" data-scroll-target="#step-6-interpret-the-model"><span class="header-section-number">22.4.6</span> Step 6: Interpret the model</a></li>
+  <li><a href="#step-7-further-model-diagnostics" id="toc-step-7-further-model-diagnostics" class="nav-link" data-scroll-target="#step-7-further-model-diagnostics"><span class="header-section-number">22.4.7</span> Step 7: Further model diagnostics</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/VBuskin/Stats_with_R/blob/main/Logistic_regression.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
@@ -429,9 +441,9 @@ div.csl-indent {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Linear_regression.html">Machine learning</a></li><li class="breadcrumb-item"><a href="./Logistic_regression.html"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Logistic Regression</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Linear_regression.html">Machine learning</a></li><li class="breadcrumb-item"><a href="./Logistic_regression.html"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Logistic Regression</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Logistic Regression</span></h1>
+<h1 class="title"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Logistic Regression</span></h1>
 </div>
 
 
@@ -454,14 +466,14 @@ div.csl-indent {
 </header>
 
 
-<section id="recommended-reading" class="level2" data-number="21.1">
-<h2 data-number="21.1" class="anchored" data-anchor-id="recommended-reading"><span class="header-section-number">21.1</span> Recommended reading</h2>
+<section id="recommended-reading" class="level2" data-number="22.1">
+<h2 data-number="22.1" class="anchored" data-anchor-id="recommended-reading"><span class="header-section-number">22.1</span> Recommended reading</h2>
 <blockquote class="blockquote">
 <p>This unit is based on James et al. <span class="citation" data-cites="james_introduction_2021">(<a href="references.html#ref-james_introduction_2021" role="doc-biblioref">2021</a>: Chapter 4)</span> and Levshina <span class="citation" data-cites="levshina_how_2015">(<a href="references.html#ref-levshina_how_2015" role="doc-biblioref">2015</a>: Chapter 12)</span>. For an in-depth introduction, see Hosmer &amp; Lemeshow <span class="citation" data-cites="hosmer_applied_2008">(<a href="references.html#ref-hosmer_applied_2008" role="doc-biblioref">2008</a>)</span>.</p>
 </blockquote>
 </section>
-<section id="preparation" class="level2 smaller" data-number="21.2">
-<h2 class="smaller anchored" data-number="21.2" data-anchor-id="preparation"><span class="header-section-number">21.2</span> Preparation</h2>
+<section id="preparation" class="level2 smaller" data-number="22.2">
+<h2 class="smaller anchored" data-number="22.2" data-anchor-id="preparation"><span class="header-section-number">22.2</span> Preparation</h2>
 <p>Consider the data from Buskin’s <span class="citation" data-cites="buskinDefiniteNullInstantiationfc">(<a href="references.html#ref-buskinDefiniteNullInstantiationfc" role="doc-biblioref">n.d.</a>)</span> corpus-study on subject pronoun realisation:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load libraries</span></span>
@@ -502,8 +514,8 @@ div.csl-indent {
   174  4664 </code></pre>
 </div>
 </div>
-<section id="descriptive-overview" class="level3" data-number="21.2.1">
-<h3 data-number="21.2.1" class="anchored" data-anchor-id="descriptive-overview"><span class="header-section-number">21.2.1</span> Descriptive overview</h3>
+<section id="descriptive-overview" class="level3" data-number="22.2.1">
+<h3 data-number="22.2.1" class="anchored" data-anchor-id="descriptive-overview"><span class="header-section-number">22.2.1</span> Descriptive overview</h3>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -586,8 +598,8 @@ div.csl-indent {
 </div>
 </section>
 </section>
-<section id="logistic-regression" class="level2" data-number="21.3">
-<h2 data-number="21.3" class="anchored" data-anchor-id="logistic-regression"><span class="header-section-number">21.3</span> Logistic regression</h2>
+<section id="logistic-regression" class="level2" data-number="22.3">
+<h2 data-number="22.3" class="anchored" data-anchor-id="logistic-regression"><span class="header-section-number">22.3</span> Logistic regression</h2>
 <ul>
 <li><p>In contrast to linear regression, logistic regression models a <strong>qualitative response variable</strong> <span class="math inline">\(Y\)</span> (here: <code>Reference</code>) with two outcomes as a function of the independent variables <span class="math inline">\(X_p\)</span> (<code>Register</code>, Variety etc.). The goal is to predict a value for <span class="math inline">\(Y\)</span>.</p></li>
 <li><p>For a given observation, the model should predict either a specific category of <span class="math inline">\(Y\)</span> (e.g., <code>Reference = overt</code> or <code>Reference = null</code>) or provide a probability estimation of a particular outcome (e.g., the probability of <code>Reference = null</code>).</p></li>
@@ -603,8 +615,8 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<section id="the-logistic-model" class="level3" data-number="21.3.1">
-<h3 data-number="21.3.1" class="anchored" data-anchor-id="the-logistic-model"><span class="header-section-number">21.3.1</span> The logistic model</h3>
+<section id="the-logistic-model" class="level3" data-number="22.3.1">
+<h3 data-number="22.3.1" class="anchored" data-anchor-id="the-logistic-model"><span class="header-section-number">22.3.1</span> The logistic model</h3>
 <p>Assuming a binary response variable <span class="math inline">\(Y\)</span> with the values 1 and 0 and a single predictor <span class="math inline">\(X\)</span>, we can model the probability <span class="math inline">\(P(Y = 1\vert X) = p(X)\)</span> as</p>
 <p><span class="math display">\[
 p(X) = \frac{e^{\beta_0 + \beta_1X}}{1 + e^{\beta_0 + \beta_1X}}.
@@ -623,8 +635,8 @@ p(X) = \frac{e^{\beta_0 + \beta_1X}}{1 + e^{\beta_0 + \beta_1X}}.
 \log\left(\frac{P(\text{Reference} = \text{null} \mid \text{Register})}{1- P(\text{Reference} = \text{null} \mid \text{Register})}\right) = \beta_0 + \beta_1\text{Register}
 \]</span></p>
 </section>
-<section id="multiple-logistic-regression" class="level3" data-number="21.3.2">
-<h3 data-number="21.3.2" class="anchored" data-anchor-id="multiple-logistic-regression"><span class="header-section-number">21.3.2</span> Multiple logistic regression</h3>
+<section id="multiple-logistic-regression" class="level3" data-number="22.3.2">
+<h3 data-number="22.3.2" class="anchored" data-anchor-id="multiple-logistic-regression"><span class="header-section-number">22.3.2</span> Multiple logistic regression</h3>
 <p>If more than one predictor is included, the above equations can be expanded so as to take into account <span class="math inline">\(p\)</span> slopes <span class="math inline">\(\beta_p\)</span> for <span class="math inline">\(p\)</span> independent variables <span class="math inline">\(X_p\)</span>.</p>
 <p><span class="math display">\[
 p(X) = \frac{e^{\beta_0 + \beta_1X_1 + ... +  \beta_pX_p}}{1 + e^{\beta_0 + \beta_1X_1 + ... + \beta_pX_p}}.
@@ -636,8 +648,8 @@ p(X) = \frac{e^{\beta_0 + \beta_1X_1 + ... +  \beta_pX_p}}{1 + e^{\beta_0 + \bet
 \end{aligned}
 \]</span> respectively.</p>
 </section>
-<section id="odds-ratios" class="level3" data-number="21.3.3">
-<h3 data-number="21.3.3" class="anchored" data-anchor-id="odds-ratios"><span class="header-section-number">21.3.3</span> Odds ratios</h3>
+<section id="odds-ratios" class="level3" data-number="22.3.3">
+<h3 data-number="22.3.3" class="anchored" data-anchor-id="odds-ratios"><span class="header-section-number">22.3.3</span> Odds ratios</h3>
 <p>To assess the strength of an effect, it is instructive to examine the <strong>odds ratios</strong> that correspond to the model coefficients. Odds ratios (OR) are defined as</p>
 <p><span class="math display">\[
 OR(X_1) = e^{\beta_1}.
@@ -648,10 +660,10 @@ OR(X_1) = e^{\beta_1}.
 \]</span> Read as: ‘<strong>The ratio between</strong> the probability of a null vs.&nbsp;overt object in S1A <strong>and</strong> the probability of a null vs.&nbsp;overt object in S1B’.</p>
 </section>
 </section>
-<section id="workflow-in-r" class="level2" data-number="21.4">
-<h2 data-number="21.4" class="anchored" data-anchor-id="workflow-in-r"><span class="header-section-number">21.4</span> Workflow in R</h2>
-<section id="step-1-research-question-and-hypotheses" class="level3" data-number="21.4.1">
-<h3 data-number="21.4.1" class="anchored" data-anchor-id="step-1-research-question-and-hypotheses"><span class="header-section-number">21.4.1</span> Step 1: Research question and hypotheses</h3>
+<section id="workflow-in-r" class="level2" data-number="22.4">
+<h2 data-number="22.4" class="anchored" data-anchor-id="workflow-in-r"><span class="header-section-number">22.4</span> Workflow in R</h2>
+<section id="step-1-research-question-and-hypotheses" class="level3" data-number="22.4.1">
+<h3 data-number="22.4.1" class="anchored" data-anchor-id="step-1-research-question-and-hypotheses"><span class="header-section-number">22.4.1</span> Step 1: Research question and hypotheses</h3>
 <p>How do the intra- and extra-linguistic variables suggested in the literature affect subject pronoun realisation (Definite Null Instantiation) in British English, Singapore English and Hong Kong English?</p>
 <p>Given a significance level <span class="math inline">\(\alpha = 0.05\)</span>, the hypotheses are: <span class="math display">\[
 \begin{aligned}
@@ -666,8 +678,8 @@ H_0: &amp; \quad \beta_1 = \beta_2 = \cdots = \beta_p = 0 \\
 H_1: &amp; \quad \text{At least one } \beta_i \neq 0 \text{ for } i \in \{1, 2, \ldots, p\}
 \end{aligned} \]</span></p>
 </section>
-<section id="step-2-convert-to-factors-and-specify-reference-levels" class="level3" data-number="21.4.2">
-<h3 data-number="21.4.2" class="anchored" data-anchor-id="step-2-convert-to-factors-and-specify-reference-levels"><span class="header-section-number">21.4.2</span> Step 2: Convert to factors and specify reference levels</h3>
+<section id="step-2-convert-to-factors-and-specify-reference-levels" class="level3" data-number="22.4.2">
+<h3 data-number="22.4.2" class="anchored" data-anchor-id="step-2-convert-to-factors-and-specify-reference-levels"><span class="header-section-number">22.4.2</span> Step 2: Convert to factors and specify reference levels</h3>
 <p>The next step involves specifying <strong>reference levels</strong> for all categorical variables. This step is very important because it will directly impact the parameter estimation and, consequently, influence our interpretation of the model output.</p>
 <ul>
 <li><p>The reference level of the response is usually chosen such that it corresponds to the <strong>unmarked or most frequent case</strong>. Since overt pronouns are much more common in the data, the reference level of the <code>Reference</code> variable will be set to <code>Reference = overt</code>. This way, the model coefficients will directly represent the probability of the <strong>null</strong> <strong>subject</strong> variant (i.e., the special case) given certain predictor configurations.</p></li>
@@ -753,8 +765,8 @@ H_1: &amp; \quad \text{At least one } \beta_i \neq 0 \text{ for } i \in \{1, 2, 
 </details>
 </div>
 </section>
-<section id="step-3-fit-the-model" class="level3" data-number="21.4.3">
-<h3 data-number="21.4.3" class="anchored" data-anchor-id="step-3-fit-the-model"><span class="header-section-number">21.4.3</span> Step 3: Fit the model</h3>
+<section id="step-3-fit-the-model" class="level3" data-number="22.4.3">
+<h3 data-number="22.4.3" class="anchored" data-anchor-id="step-3-fit-the-model"><span class="header-section-number">22.4.3</span> Step 3: Fit the model</h3>
 <p>There are two functions that can fit logistic models in R: <code>lrm()</code> and <code>glm()</code>.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -828,8 +840,8 @@ Stepwise variable selection
 </div>
 </div>
 </section>
-<section id="step-4-confidence-intervals-and-odds-ratios" class="level3" data-number="21.4.4">
-<h3 data-number="21.4.4" class="anchored" data-anchor-id="step-4-confidence-intervals-and-odds-ratios"><span class="header-section-number">21.4.4</span> Step 4: Confidence intervals and odds ratios</h3>
+<section id="step-4-confidence-intervals-and-odds-ratios" class="level3" data-number="22.4.4">
+<h3 data-number="22.4.4" class="anchored" data-anchor-id="step-4-confidence-intervals-and-odds-ratios"><span class="header-section-number">22.4.4</span> Step 4: Confidence intervals and odds ratios</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tidy the model output</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>tidy_model <span class="ot">&lt;-</span> <span class="fu">tidy</span>(Reference.glm, <span class="at">conf.int =</span> <span class="cn">TRUE</span>)</span>
@@ -844,8 +856,8 @@ Stepwise variable selection
 <span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="step-5-visualise-the-model" class="level3" data-number="21.4.5">
-<h3 data-number="21.4.5" class="anchored" data-anchor-id="step-5-visualise-the-model"><span class="header-section-number">21.4.5</span> Step 5: Visualise the model</h3>
+<section id="step-5-visualise-the-model" class="level3" data-number="22.4.5">
+<h3 data-number="22.4.5" class="anchored" data-anchor-id="step-5-visualise-the-model"><span class="header-section-number">22.4.5</span> Step 5: Visualise the model</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the coefficient plot</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(tidy_model, <span class="fu">aes</span>(<span class="at">x =</span> estimate, <span class="at">y =</span> term)) <span class="sc">+</span></span>
@@ -921,14 +933,14 @@ Stepwise variable selection
 </div>
 </div>
 </section>
-<section id="step-6-interpret-the-model" class="level3" data-number="21.4.6">
-<h3 data-number="21.4.6" class="anchored" data-anchor-id="step-6-interpret-the-model"><span class="header-section-number">21.4.6</span> Step 6: Interpret the model</h3>
+<section id="step-6-interpret-the-model" class="level3" data-number="22.4.6">
+<h3 data-number="22.4.6" class="anchored" data-anchor-id="step-6-interpret-the-model"><span class="header-section-number">22.4.6</span> Step 6: Interpret the model</h3>
 <p>The logistic regression model is statistically significant at <span class="math inline">\(p &lt; 0.001\)</span> (<span class="math inline">\(\chi^2 = 120.43\)</span>, <span class="math inline">\(df = 9\)</span>) and has acceptable fit (Nagelkerke’s-<span class="math inline">\(R^2\)</span> = <span class="math inline">\(0.09\)</span>, <span class="math inline">\(C = 0.73\)</span>).</p>
 <p>The model coefficients indicate that null subjects are significantly more likely in Singapore English compared to British English (Estimate = 1.12, 95% CI [0.56, 1.73], <span class="math inline">\(p &lt; 0.001\)</span>). This effect is moderate with an <span class="math inline">\(OR\)</span> of 3.06 (95% CI [1.75, 5.64]), suggesting that the probability of subject omission is elevated by a factor of approximately 3 in the Singaporean variety.</p>
 <p>…</p>
 </section>
-<section id="step-7-further-model-diagnostics" class="level3" data-number="21.4.7">
-<h3 data-number="21.4.7" class="anchored" data-anchor-id="step-7-further-model-diagnostics"><span class="header-section-number">21.4.7</span> Step 7: Further model diagnostics</h3>
+<section id="step-7-further-model-diagnostics" class="level3" data-number="22.4.7">
+<h3 data-number="22.4.7" class="anchored" data-anchor-id="step-7-further-model-diagnostics"><span class="header-section-number">22.4.7</span> Step 7: Further model diagnostics</h3>
 <ul>
 <li><strong>Cross-validation</strong></li>
 </ul>
@@ -1393,12 +1405,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./Linear_regression.html" class="pagination-link  aria-label=" &lt;span="" regression&lt;="" span&gt;"="">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Linear regression</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Linear regression</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./Decision_trees_and_random_forests.html" class="pagination-link" aria-label="<span class='chapter-number'>22</span>&nbsp; <span class='chapter-title'>Decision trees and random forests</span>">
-        <span class="nav-page-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Decision trees and random forests</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./Mixed_effects_regression.html" class="pagination-link" aria-label="<span class='chapter-number'>23</span>&nbsp; <span class='chapter-title'>Mixed-effects regression</span>">
+        <span class="nav-page-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Mixed-effects regression</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -1,0 +1,24 @@
+---
+title: "Mixed-effects regression"
+author: Vladimir Buskin
+format:
+  html:
+    self-contained: false
+    logo: logo.png
+    footer: "Regression"
+    theme: Reference
+    toc: true
+    number-sections: true
+    slide-number: true
+    incremental: false
+    slide-level: 4
+    scrollable: true
+editor: visual
+bibliography: R.bib
+---
+
+::: callout-caution
+## This page is under construction.
+
+Content will be added soon!
+:::

@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Vladimir Buskin, Thomas Brunner, Philippa Adolf">
+<meta name="author" content="Vladimir Buskin">
 
-<title>Statistics and Data Analysis for Corpus Linguists: From Theory to Practice with R</title>
+<title>Statistics and Data Analysis for Corpus Linguists: From Theory to Practice with R - 23&nbsp; Mixed-effects regression</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,7 +31,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./Basics.html" rel="next">
+<link href="./Decision_trees_and_random_forests.html" rel="next">
+<link href="./Logistic_regression.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -80,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Conducting a corpus-linguistic study</a></li><li class="breadcrumb-item"><a href="./index.html">Preface</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Linear_regression.html">Machine learning</a></li><li class="breadcrumb-item"><a href="./Mixed_effects_regression.html"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Mixed-effects regression</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -125,7 +126,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
   </div>
 </li>
@@ -318,7 +319,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Mixed_effects_regression.html" class="sidebar-item-text sidebar-link">
+  <a href="./Mixed_effects_regression.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Mixed-effects regression</span></span></a>
   </div>
 </li>
@@ -353,22 +354,14 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface">Preface</a></li>
-  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
-  <li><a href="#collaborators" id="toc-collaborators" class="nav-link" data-scroll-target="#collaborators">Collaborators</a></li>
-  </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/VBuskin/Stats_with_R/blob/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Conducting a corpus-linguistic study</a></li><li class="breadcrumb-item"><a href="./index.html">Preface</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Linear_regression.html">Machine learning</a></li><li class="breadcrumb-item"><a href="./Mixed_effects_regression.html"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Mixed-effects regression</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Statistics and Data Analysis for Corpus Linguists: From Theory to Practice with R</h1>
+<h1 class="title"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Mixed-effects regression</span></h1>
 </div>
 
 
@@ -378,7 +371,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Vladimir Buskin, Thomas Brunner, Philippa Adolf </p>
+             <p>Vladimir Buskin </p>
           </div>
   </div>
     
@@ -391,24 +384,21 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="preface" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="preface">Preface</h2>
-<p>This collection of handouts provides a hands-on introduction to data analysis and statistical methods in quantitative corpus linguistics with R. It is designed with accessibility in mind, assuming no prior knowledge of programming or statistics. All you need to get started is a laptop; everything else will be explained within these pages.</p>
-<p>Primarily, this reader is geared towards students attending the classes <strong>Language Variation</strong> (BA) and <strong>Statistics for Linguistics</strong> (MA) at the Catholic University of Eichstätt-Ingolstadt (Germany). However, it is also meant to equip students currently working on their <strong>BA/MA/PhD theses</strong> with the tools they need to conduct empirical studies on a wide array of linguistic phenomena. The methods presented here reflect the state-of-the-art in corpus-linguistic research, providing readers with current and relevant analytical techniques.</p>
-</section>
-<section id="overview" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="overview">Overview</h2>
-<p>We begin by establishing the general structure of corpus-linguistic studies, accompanied by key theoretical and practical considerations. The second section introduces R as an analytical tool, covering its core functionality. With these fundamentals in place, we proceed to query corpora directly within R. Chapters four and five focus on describing discrete and continuous outputs, as well as identifying meaningful associations and differences in the data (<strong>BA</strong>). Finally, to gain more nuanced insights into potential patterns, we apply common machine learning algorithms to fit, evaluate, and interpret statistical models (<strong>MA</strong>).</p>
-<p>Throughout this journey, readers will develop the skills to conduct robust corpus-linguistic analyses, from basic querying to advanced statistical modeling.</p>
-</section>
-<section id="collaborators" class="level2">
-<h2 class="anchored" data-anchor-id="collaborators">Collaborators</h2>
-<p>Vladimir Buskin, PhD student at the Department of English Language and Linguistics, <em>Catholic University of Eichstätt-Ingolstadt</em></p>
-<p>Thomas Brunner, Assistant Professor at the Department of English Language and Linguistics, <em>Catholic University of Eichstätt-Ingolstadt</em></p>
-<p>Philippa Adolf, PhD student at the Department of Romance Studies, <em>University of Vienna</em></p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+This page is under construction.
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Content will be added soon!</p>
+</div>
+</div>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -810,10 +800,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./Logistic_regression.html" class="pagination-link  aria-label=" &lt;span="" regression&lt;="" span&gt;"="">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Logistic Regression</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./Basics.html" class="pagination-link" aria-label="<span class='chapter-number'>1</span>&nbsp; <span class='chapter-title'>An example from sociolinguistics</span>">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">An example from sociolinguistics</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./Decision_trees_and_random_forests.html" class="pagination-link" aria-label="<span class='chapter-number'>24</span>&nbsp; <span class='chapter-title'>Decision trees and random forests</span>">
+        <span class="nav-page-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Decision trees and random forests</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -822,4 +815,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-</body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/VBuskin/Stats_with_R/blob/main/Mixed_effects_regression.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></div></div></footer></body></html>

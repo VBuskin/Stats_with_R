@@ -4,8 +4,7 @@ project:
   
 book:
   title: "Statistics and Data Analysis for Corpus Linguists: From Theory to Practice with R"
-  author: "Vladimir Buskin"
-  date: "2024-06-30"
+  author: "Vladimir Buskin, Thomas Brunner, Philippa Adolf"
   reader-mode: true
   repo-url: https://github.com/VBuskin/Stats_with_R
   repo-actions: [source]
@@ -31,6 +30,7 @@ book:
       chapters:
         - Concordancing.qmd
         - Regular_expressions.qmd
+        - Annotation.qmd
     - part: "Descriptive statistics"
       chapters:
         - Variables.qmd
@@ -46,6 +46,7 @@ book:
       chapters:
         - Linear_regression.qmd
         - Logistic_regression.qmd
+        - Mixed_effects_regression.qmd
         - Decision_trees_and_random_forests.qmd
     - part: References
       chapters:

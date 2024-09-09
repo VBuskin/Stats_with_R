@@ -99,7 +99,7 @@ table(kwic_provide2$keyword)
 ### Character classes and alternatives
 
 | **Command** | **Definition**                               | **Example**     | **Finds**                       |
-|-----------------|-----------------------|-----------------|-----------------|
+|-----------------|---------------------|-----------------|-----------------|
 | `[abc]`     | Class of characters                          | `[jp]ython`     | *jython, python*                |
 | `[ ^pP]`    | Excluded class of characters                 | `[^pP]ython`    | everything but *python, Python* |
 | `(...|...)` | Alternatives linked by logical operator `or` | `P(ython|eter)` | *Python, Peter*                 |
@@ -107,7 +107,7 @@ table(kwic_provide2$keyword)
 ### Pre-defined character classes
 
 | **Command** | **Definition**                           | **Example**    | **Finds**                        |
-|-----------------|---------------------|-----------------|-----------------|
+|-----------------|--------------------|-----------------|-----------------|
 | `\\w`       | All alphanumeric characters              |                | A-Z, a-z, 0-9                    |
 | `\\W`       | All non-alphanumeric characters          |                | everything but A-Z, a-z, 0-9     |
 | `\\d`       | All decimal numbers                      |                | 0-9                              |
@@ -118,7 +118,7 @@ table(kwic_provide2$keyword)
 ### Quantifiers
 
 | **Command** | **Definition**                                | **Example**   | **Finds**                     |
-|-----------------|-----------------------|-----------------|-----------------|
+|-----------------|---------------------|-----------------|-----------------|
 | `?`         | One or zero instances of the preceding symbol | `Py?thon`     | *Python, Pthon*               |
 | `*`         | No matter how many times — also zero          | `Py*thon`     | *Python, Pthon, Pyyyython...* |
 |             |                                               | `P[Yy]*thon`  | *Python, Pthon, PyYYython...* |
