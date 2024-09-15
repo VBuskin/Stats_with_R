@@ -4907,8 +4907,14 @@ vertical-align: -.125em;
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./Mixed_effects_regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Mixed-effects regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./Decision_trees_and_random_forests.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Decision trees and random forests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Decision trees and random forests</span></span></a>
   </div>
 </li>
       </ul>
@@ -4925,7 +4931,7 @@ vertical-align: -.125em;
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">References</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">References</span></span></a>
   </div>
 </li>
       </ul>
@@ -5029,14 +5035,14 @@ vertical-align: -.125em;
 </section>
 <section id="working-environment" class="level3" data-number="6.1.2">
 <h3 data-number="6.1.2" class="anchored" data-anchor-id="working-environment"><span class="header-section-number">6.1.2</span> Working environment</h3>
-<p>While it is certainly useful to print text or numbers to your console, it may sometimes make more sense to (at least temporally) store them somewhere, so you can re-use them later when you need them. In fact, R gives us a way of storing data in virtual, container-like objects: <strong>variables</strong>. We can assign strings or numbers to a variable by using the assignment operator <code>&lt;-</code>.</p>
+<p>While it is certainly useful to print text or numbers to your console, it may sometimes make more sense to (at least temporally) store them somewhere, so you can re-use them later. In fact, R gives us a way of storing data in virtual, container-like objects: <strong>variables</strong>. We can assign strings or numbers to a variable by using the assignment operator <code>&lt;-</code>.</p>
 <p>When you run the commands below, you will (hopefully) notice two items popping up in your <strong>Environment/Workspace</strong> tab in the top right corner.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>greeting <span class="ot">&lt;-</span> <span class="st">"Hello world!"</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>quick_math <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span> <span class="sc">-</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>If we now want to display the content in the console, we can simply apply the <code>print()</code> function to the variable itself:</p>
+<p>If we now want to display the content in the console, we can simply apply the <code>print()</code> function to the variable:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(greeting)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">

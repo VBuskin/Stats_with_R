@@ -8,7 +8,7 @@
 
 <meta name="author" content="Vladimir Buskin">
 
-<title>Statistics and Data Analysis for Corpus Linguists: From Theory to Practice with R - 14&nbsp; Statistical variables</title>
+<title>Statistics and Data Analysis for Corpus Linguists: From Theory to Practice with R - 24&nbsp; Ordinal regression</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,61 +21,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -85,8 +31,8 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./Categorical_data.html" rel="next">
-<link href="./Annotation.html" rel="prev">
+<link href="./Decision_trees_and_random_forests.html" rel="next">
+<link href="./Mixed_effects_regression.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -123,8 +69,6 @@ div.csl-indent {
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -137,7 +81,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Variables.html">Descriptive statistics</a></li><li class="breadcrumb-item"><a href="./Variables.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Statistical variables</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Linear_regression.html">Machine learning</a></li><li class="breadcrumb-item"><a href="./Ordinal_regression.html"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Ordinal regression</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -299,7 +243,7 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Variables.html" class="sidebar-item-text sidebar-link active">
+  <a href="./Variables.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Statistical variables</span></span></a>
   </div>
 </li>
@@ -381,8 +325,14 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./Ordinal_regression.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Ordinal regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./Decision_trees_and_random_forests.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Decision trees and random forests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Decision trees and random forests</span></span></a>
   </div>
 </li>
       </ul>
@@ -399,7 +349,7 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">References</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">References</span></span></a>
   </div>
 </li>
       </ul>
@@ -410,41 +360,27 @@ div.csl-indent {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#preparation" id="toc-preparation" class="nav-link active" data-scroll-target="#preparation"><span class="header-section-number">14.1</span> Preparation</a></li>
-  <li><a href="#types-of-variables" id="toc-types-of-variables" class="nav-link" data-scroll-target="#types-of-variables"><span class="header-section-number">14.2</span> Types of variables</a></li>
-  </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/VBuskin/Stats_with_R/blob/main/Variables.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Variables.html">Descriptive statistics</a></li><li class="breadcrumb-item"><a href="./Variables.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Statistical variables</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Linear_regression.html">Machine learning</a></li><li class="breadcrumb-item"><a href="./Ordinal_regression.html"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Ordinal regression</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Statistical variables</span></h1>
+<h1 class="title"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Ordinal regression</span></h1>
 </div>
 
 
-<div class="quarto-title-meta-author">
-  <div class="quarto-title-meta-heading">Author</div>
-  <div class="quarto-title-meta-heading">Affiliation</div>
-  
-    <div class="quarto-title-meta-contents">
-    <p class="author">Vladimir Buskin </p>
-  </div>
-  <div class="quarto-title-meta-contents">
-        <p class="affiliation">
-            Catholic University of Eichstätt-Ingolstadt
-          </p>
-      </div>
-  </div>
 
 <div class="quarto-title-meta">
 
-      
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Vladimir Buskin </p>
+          </div>
+  </div>
+    
   
     
   </div>
@@ -454,84 +390,21 @@ div.csl-indent {
 </header>
 
 
-<section id="preparation" class="level2" data-number="14.1">
-<h2 data-number="14.1" class="anchored" data-anchor-id="preparation"><span class="header-section-number">14.1</span> Preparation</h2>
-<p>Please download the file <code>Paquot_Larsson_2020_data.xlsx</code> <span class="citation" data-cites="paquotDescriptiveStatisticsVisualization2020">(<a href="references.html#ref-paquotDescriptiveStatisticsVisualization2020" role="doc-biblioref">Paquot and Larsson 2020</a>)</span><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> and store it in your working directory.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Libraries</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"readxl"</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tidyverse"</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>cl.order <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"Paquot_Larsson_2020_data.xlsx"</span>)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspect data</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(cl.order)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>tibble [403 × 8] (S3: tbl_df/tbl/data.frame)
- $ CASE       : num [1:403] 4777 1698 953 1681 4055 ...
- $ ORDER      : chr [1:403] "sc-mc" "mc-sc" "sc-mc" "mc-sc" ...
- $ SUBORDTYPE : chr [1:403] "temp" "temp" "temp" "temp" ...
- $ LEN_MC     : num [1:403] 4 7 12 6 9 9 9 4 6 4 ...
- $ LEN_SC     : num [1:403] 10 6 7 15 5 5 12 2 24 11 ...
- $ LENGTH_DIFF: num [1:403] -6 1 5 -9 4 4 -3 2 -18 -7 ...
- $ CONJ       : chr [1:403] "als/when" "als/when" "als/when" "als/when" ...
- $ MORETHAN2CL: chr [1:403] "no" "no" "yes" "no" ...</code></pre>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(cl.order)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 8
-   CASE ORDER SUBORDTYPE LEN_MC LEN_SC LENGTH_DIFF CONJ     MORETHAN2CL
-  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;      
-1  4777 sc-mc temp            4     10          -6 als/when no         
-2  1698 mc-sc temp            7      6           1 als/when no         
-3   953 sc-mc temp           12      7           5 als/when yes        
-4  1681 mc-sc temp            6     15          -9 als/when no         
-5  4055 sc-mc temp            9      5           4 als/when yes        
-6   967 sc-mc temp            9      5           4 als/when yes        </code></pre>
+<div class="callout-title-container flex-fill">
+This page is under construction.
 </div>
 </div>
-</section>
-<section id="types-of-variables" class="level2" data-number="14.2">
-<h2 data-number="14.2" class="anchored" data-anchor-id="types-of-variables"><span class="header-section-number">14.2</span> Types of variables</h2>
-<p>The concept of the <strong>variable</strong> allows us to quantify various aspects of our observations.</p>
-<ul>
-<li><p><strong>nominal/categorical</strong>: These variables have a limited number of levels which cannot be ordered in a meaningful way. For instance, it does not matter which value of <code>SUBORDTYPE</code> or <code>MORETHAN2CL</code> comes first or last:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(cl.order<span class="sc">$</span>SUBORDTYPE)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "temp" "caus"</code></pre>
+<div class="callout-body-container callout-body">
+<p>Content will be added soon!</p>
 </div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(cl.order<span class="sc">$</span>MORETHAN2CL)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "no"  "yes"</code></pre>
 </div>
-</div></li>
-<li><p><strong>ordinal</strong>: Such variables can be ordered, but the intervals between their individuals values are not meaningful. Heumann <span class="citation" data-cites="heumann_introduction_2022">(<a href="references.html#ref-heumann_introduction_2022" role="doc-biblioref">2022</a>: 6)</span> provides a pertinent example:</p>
-<p>“[T]he satisfaction with a product (unsatisfied–satisfied–very satisfied) is an ordinal variable because the values this variable can take can be ordered but the differences between ‘unsatisfied–satisfied’ and ‘satisfied–very satisfied’ cannot be compared in a numerical way”.</p></li>
-<li><p>In the case of <strong>interval</strong>-scaled variables, the differences between the values can be interpreted, but their ratios must be treated with caution. A temperature of 4°C is 6 degrees warmer than -2°C; however, this does not imply that 4°C is three times warmer than -2°C. This is because the temperature scale has no true zero point; 0°C simply signifies another point on the scale and not the absence of temperature altogether.</p></li>
-<li><p><strong>Ratio</strong>-scaled variables allow both a meaningful interpretation of the differences between their values and (!) of the ratios between them. Within the context of clause length, <code>LENGTH_DIFF</code> values such as 4 and 8 not only suggest that the latter is four units greater than the former but also that their ratio <span class="math inline">\(\frac{8}{4} = 2\)</span> is a valid way to describe the relationship between these values. Here a <code>LENGTH_DIFF</code> of 0 can be clearly viewed as the absence of a length difference.</p></li>
-</ul>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
-<div id="ref-gries_statistics_2013" class="csl-entry" role="listitem">
-Gries, Stefan Thomas. 2013. <em>Statistics for Linguistics with r: A Practical Introduction</em>. 2nd rev. ed. Berlin; Boston: De Gruyter Mouton.
-</div>
-<div id="ref-heumann_introduction_2022" class="csl-entry" role="listitem">
-Heumann, Christian, Michael Schomaker, and Shalabh. 2022. <em>Introduction to Statistics and Data Analysis: With Exercises, Solutions and Applications in r</em>. 2nd ed. Cham: Springer. <a href="https://doi.org/10.1007/978-3-031-11833-3">https://doi.org/10.1007/978-3-031-11833-3</a>.
-</div>
-<div id="ref-paquotDescriptiveStatisticsVisualization2020" class="csl-entry" role="listitem">
-Paquot, Magali, and Tove Larsson. 2020. <span>“Descriptive Statistics and Visualization with r.”</span> In <em>A Practical Handbook of Corpus Linguistics</em>, edited by Magali Paquot and Stefan Thomas Gries, 375–99. Cham: Springer.
-</div>
-</div>
-</section>
-<aside id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn1"><p>The supplementary materials can be downloaded from the publisher’s <a href="https://link.springer.com/chapter/10.1007/978-3-030-46216-1_17">website</a> [Last accessed April 28, 2024]. Note that the dataset has been originally compiled by <span class="citation" data-cites="gries_statistics_2013">Gries (<a href="references.html#ref-gries_statistics_2013" role="doc-biblioref">2013</a>)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</aside>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -933,13 +806,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./Annotation.html" class="pagination-link  aria-label=" &lt;span="" annotation&lt;="" span&gt;"="">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Data annotation</span></span>
+      <a href="./Mixed_effects_regression.html" class="pagination-link  aria-label=" &lt;span="" regression&lt;="" span&gt;"="">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Mixed-effects regression</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./Categorical_data.html" class="pagination-link" aria-label="<span class='chapter-number'>15</span>&nbsp; <span class='chapter-title'>Categorical data</span>">
-        <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Categorical data</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./Decision_trees_and_random_forests.html" class="pagination-link" aria-label="<span class='chapter-number'>25</span>&nbsp; <span class='chapter-title'>Decision trees and random forests</span>">
+        <span class="nav-page-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Decision trees and random forests</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -948,4 +821,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-</body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/VBuskin/Stats_with_R/blob/main/Ordinal_regression.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></div></div></footer></body></html>

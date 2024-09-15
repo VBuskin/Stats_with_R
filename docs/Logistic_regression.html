@@ -381,8 +381,14 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./Ordinal_regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Ordinal regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./Decision_trees_and_random_forests.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Decision trees and random forests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Decision trees and random forests</span></span></a>
   </div>
 </li>
       </ul>
@@ -399,7 +405,7 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">References</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">References</span></span></a>
   </div>
 </li>
       </ul>
@@ -952,17 +958,17 @@ Stepwise variable selection
 <span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>model.validated <span class="ot">&lt;-</span> <span class="fu">validate</span>(Reference.val, <span class="at">B =</span> <span class="dv">200</span>); model.validated </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          index.orig training    test optimism index.corrected   n
-Dxy           0.4592   0.4691  0.4455   0.0236          0.4356 200
-R2            0.0923   0.0996  0.0842   0.0154          0.0769 200
-Intercept     0.0000   0.0000 -0.2573   0.2573         -0.2573 200
-Slope         1.0000   1.0000  0.9122   0.0878          0.9122 200
-Emax          0.0000   0.0000  0.0741   0.0741          0.0741 200
-D             0.0247   0.0267  0.0225   0.0042          0.0205 200
+Dxy           0.4592   0.4660  0.4455   0.0205          0.4387 200
+R2            0.0923   0.0971  0.0843   0.0128          0.0795 200
+Intercept     0.0000   0.0000 -0.2067   0.2067         -0.2067 200
+Slope         1.0000   1.0000  0.9264   0.0736          0.9264 200
+Emax          0.0000   0.0000  0.0595   0.0595          0.0595 200
+D             0.0247   0.0259  0.0225   0.0034          0.0213 200
 U            -0.0004  -0.0004  0.0002  -0.0006          0.0002 200
-Q             0.0251   0.0271  0.0223   0.0048          0.0203 200
-B             0.0336   0.0335  0.0337  -0.0002          0.0338 200
-g             1.0081   1.2458  1.1196   0.1262          0.8819 200
-gp            0.0319   0.0328  0.0303   0.0024          0.0295 200</code></pre>
+Q             0.0251   0.0263  0.0223   0.0040          0.0211 200
+B             0.0336   0.0333  0.0337  -0.0004          0.0340 200
+g             1.0081   1.2032  1.0971   0.1061          0.9020 200
+gp            0.0319   0.0321  0.0303   0.0018          0.0301 200</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Slope optimism should be as low possible!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>

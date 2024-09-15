@@ -19,6 +19,14 @@ editor: visual
 
 > @winter_statistics_2020: Chapter 1.10-1.16
 
+Suggested video tutorial:
+
+> [Using the Data Frame in
+> R](https://www.youtube.com/watch?v=9f2g7RN5N0I) (DataCamp, 5min)
+>
+> [Learn How to Subset, Extend & Sort Data Frames in
+> R](https://www.youtube.com/watch?v=Nh6tSD4i4qs) (DataCamp, 7min)
+
 ## Word frequencies II
 
 Recall our corpus-linguistic data from the previous unit:

@@ -19,7 +19,8 @@ bibliography: R.bib
 
 Please download the file "Paquot_Larsson_2020_data.xlsx"
 [@paquotDescriptiveStatisticsVisualization2020][^categorical_data-1] and
-store it in the same folder as your currently active R-script.
+store it in the same folder as your currently active R-script. Then run
+the code lines below:
 
 [^categorical_data-1]: The original supplementary materials can be
     downloaded from the publisher's
@@ -28,39 +29,15 @@ store it in the same folder as your currently active R-script.
 
 ```{r, echo = TRUE, output = TRUE}
 # Libraries
-library("readxl")
-library("tidyverse")
+library("readxl") # for loading Excel data
+library("tidyverse") # data manipulation and visualisation
 
 # Load data from working directory
 cl.order <- read_xlsx("Paquot_Larsson_2020_data.xlsx")
 
 ```
 
-It contains the **dependent variable**
-
--   `ORDER`: Does the subordinate clause come before or after the main
-    clause? ('sc-mc' vs. 'mc-sc')
-
-... and the **independent variables**:
-
--   `SUBORDTYPE`: Is the subordinate clause temporal or causal? ('temp'
-    vs. 'caus')
-
--   `MORETHAN2CL`: Are there most clauses in the sentence than just one
-    subordinate clause and one main clause? ('yes' vs. 'no')
-
--   `LEN_MC`: How many words does the main clause contain? (ratio-scaled
-    continuous variable)
-
--   `LEN_SC`: How many words does the subordinate clause contain?
-    (ratio-scaled continuous variable)
-
--   `LENGTH_DIFF`: What is the length difference in words between the
-    main clause and subordinate clause? (ratio-scaled continuous
-    variables)
-
-## Descriptive measures
-
+::: {.callout-note collapse="true" title="What's in the file? The `str()` function"}
 The easiest way to get a general overview of the full data set is to
 apply the `str()` function to the respective data frame.
 
@@ -83,14 +60,39 @@ simply show the first few rows:
 ```{r}
 head(cl.order)
 ```
+:::
 
-### Frequency tables
+::: {.callout-note collapse="true" title="Further details on the variables"}
+The data frame contains the **dependent variable**
 
-#### One variable
+-   `ORDER`: Does the subordinate clause come before or after the main
+    clause? ('sc-mc' vs. 'mc-sc')
 
-Each categorical variable is made up of two or more categories. A simple
-descriptive measure is the frequency of each category. The table below
-indicates how often each clause order occurs in the data.
+... and the **independent variables**:
+
+-   `SUBORDTYPE`: Is the subordinate clause temporal or causal? ('temp'
+    vs. 'caus')
+
+-   `MORETHAN2CL`: Are there most clauses in the sentence than just one
+    subordinate clause and one main clause? ('yes' vs. 'no')
+
+-   `LEN_MC`: How many words does the main clause contain? (ratio-scaled
+    continuous variable)
+
+-   `LEN_SC`: How many words does the subordinate clause contain?
+    (ratio-scaled continuous variable)
+
+-   `LENGTH_DIFF`: What is the length difference in words between the
+    main clause and subordinate clause? (ratio-scaled continuous
+    variables)
+:::
+
+## Frequency tables
+
+Each categorical variable in the data frame is made up of two or more
+categories. A simple descriptive measure is the frequency of each
+category. The table below indicates how often each clause order occurs
+in the `ORDER` column.
 
 ```{r}
 order_freq1 <- table(cl.order$ORDER) 
@@ -110,12 +112,11 @@ order_freq2 <- xtabs(~ ORDER, cl.order)
 print(order_freq2)
 ```
 
-#### Two variables
-
-If we are interested in the relationship between multiple categorical
-variables, we can cross-tabulate the frequencies of their categories.
+If we are interested in the relationship between **multiple categorical
+variables**, we can cross-tabulate the frequencies of their categories.
 For example, what is the distribution of clause order depending on the
-type of subordinate clause?
+type of subordinate clause? The output is also referred to as a
+**contingency table**.
 
 ```{r}
 order_counts1 <- table(cl.order$ORDER, cl.order$SUBORDTYPE)
@@ -131,29 +132,28 @@ order_counts2 <- xtabs(~ ORDER + SUBORDTYPE, cl.order)
 print(order_counts2)
 ```
 
-::: {.callout-note collapse="false" title="How do I obtain percentages?"}
+::: {.callout-note collapse="true" title="How do I obtain percentage tables?"}
 There are two ways to convert the raw frequency counts to percentage
 tables:
 
 1.  Manually divide all cells by the total number of observations (which
     correspond to the sum of all cells) and multiply the result by 100.
 
-```{r}
+```{r, output = FALSE}
 pct1 <- order_counts1/sum(order_counts1) * 100
 ```
 
 2.  Use the `prop.table()` function and multiply the result by 100.
 
-```{r}
+```{r, output = FALSE}
 pct2 <- prop.table(order_counts1) * 100
 ```
 :::
 
-## Visualising categorical variables
+## Visualising discrete distributions
 
 This section demonstrates both the in-built plotting functions of R
-('Base R') as well as the more modern versions provided by the
-`tidyverse` package.
+('Base R') as well as the more modern versions provided by the `tidyverse` package.
 
 ### One variable
 
@@ -233,18 +233,22 @@ ggplot(cl.order, aes(x = ORDER, fill = SUBORDTYPE)) +
 ```
 :::
 
-::: {.callout-note collapse="false" title="How do I plot percentages?"}
-In Base R, very much the same way as with the raw counts:
+## Plotting percentages
+
+::: {.callout-note collapse="true" title="How do I plot percentages in Base R?"}
+In very much the same way as with the raw counts:
 
 ```{r}
 barplot(pct1, 
         beside = TRUE,  # Make bars side-by-side
         legend = TRUE)  # Add a legend
 ```
+:::
 
-In ggplot2, a few tweaks are necessary. In general, ggplot2 only works
-with data frames and not with table objects, so we'd have to convert it
-to one first:
+::: {.callout-note collapse="true" title="How do I plot percentages with `ggplot2`?"}
+
+Here, a few tweaks are necessary. In general, the `ggplot()` function only works
+with data frames and not with table objects, so we'll have to convert it to one first:
 
 ```{r}
 pct1_df <- as.data.frame(pct1)
@@ -267,36 +271,39 @@ ggplot(pct1_df, aes(x = Var1, y = Freq, fill = Var2)) +
 
 ## Exporting tables to MS Word
 
-Publication-ready tables can be generated with the help of the
-`flextable` package. The full guide can be found
+The `flextable` package greatly facilitates generating publication-ready tables in R. It provides the best output if used on a table created by `xtabs()`. The full guide to this package can be found
 [here](https://ardata-fr.github.io/flextable-book/crosstabs.html#using-tables).
 
+
 ```{r, output = FALSE}
+# Load library after installation
 library(flextable)
-output_1 <- as_flextable(pct1)
+
+# Create a table
+tab1 <- xtabs(~ ORDER + SUBORDTYPE, cl.order)
+
+# Convert a table to a flextable with as_flextable()
+output_1 <- as_flextable(tab1)
+
+# Print output
 print(output_1)
 ```
 
 ![](crosstable_plot1.png)
 
-The `rempsyc` also provides a simple way of creating beautiful,
-export-ready tables. You can find the documentation
-[here](https://rempsyc.remi-theriault.com/articles/table).
+Unfortunately, the output cannot really be customised. However, if you'd like to add some further options, the `crosstable` package provides a remedy. In fact, it is even easier to use as it doesn't require you to compute any tables beforehand.
 
-```{r, output = FALSE}
+```{r}
+# Required libraries
+library(crosstable)
+library(flextable)
 
-library(rempsyc)
+# Create the cross table
+output2 <- crosstable(cl.order, ORDER, by = SUBORDTYPE, 
+                 total = "both",
+                 percent_digits = 2)
 
-# Format table
-output2 <- nice_table(pct1_df)
-
-print(output2)
-```
-
-![](crosstable_plot2.png)
-
-```{r, eval = FALSE}
-# Export to Microsoft Word
-print(output2, preview = "docx")
+as_flextable(output2)
 
 ```
+

@@ -70,10 +70,10 @@ Naturally, you can use R for more sophisticated computations:
 
 While it is certainly useful to print text or numbers to your console,
 it may sometimes make more sense to (at least temporally) store them
-somewhere, so you can re-use them later when you need them. In fact, R
-gives us a way of storing data in virtual, container-like objects:
-**variables**. We can assign strings or numbers to a variable by using
-the assignment operator `<-`.
+somewhere, so you can re-use them later. In fact, R gives us a way of
+storing data in virtual, container-like objects: **variables**. We can
+assign strings or numbers to a variable by using the assignment operator
+`<-`.
 
 When you run the commands below, you will (hopefully) notice two items
 popping up in your **Environment/Workspace** tab in the top right
@@ -86,7 +86,7 @@ quick_math <- 2 + 2 - 1
 ```
 
 If we now want to display the content in the console, we can simply
-apply the `print()` function to the variable itself:
+apply the `print()` function to the variable:
 
 ```{r}
 print(greeting)

@@ -61,7 +61,7 @@ wrong** at each stage of the study!
 ### Presentation of Results
 
 | Quotative   | Age group | Male use (per 100,000 words) | Female use (per 100,000 words) |
-|----------------|----------------|-------------------|---------------------|
+|--------------|--------------|---------------------|-----------------------|
 | **say**     | 16–26     | 115                          | 149                            |
 |             | 27–40     | 101                          | 117                            |
 |             | 41–54     | 55                           | 214                            |
@@ -90,8 +90,33 @@ data <- data.frame(
   Frequency = c(60, 55, 35, 40, 20, 30, 50, 20, 15, 25, 30, 15, 5, 5)
 )
 
+
+
+# Get grouped percentages (very unelegant)
+say_pct <- data[data$Quotative == "say",]$Frequency / sum(data[data$Quotative == "say",]$Frequency) * 100
+be_like_pct <- data[data$Quotative == "be like",]$Frequency / sum(data[data$Quotative == "be like",]$Frequency) * 100
+go_pct <- data[data$Quotative == "go",]$Frequency / sum(data[data$Quotative == "go",]$Frequency) * 100
+be_all_pct <- data[data$Quotative == "be all",]$Frequency / sum(data[data$Quotative == "be all",]$Frequency) * 100
+  
+pct <- c(say_pct, be_like_pct, go_pct, be_all_pct)
+
+data_pct <- cbind(data, pct)
+
+## Turns out Barbieri didn't group them ...
+
+# Get ungrouped percentages (even worse)
+
+say_pct2 <- data[data$Quotative == "say",]$Frequency / sum(data$Frequency) * 100
+be_like_pct2 <- data[data$Quotative == "be like",]$Frequency / sum(data$Frequency) * 100
+go_pct2 <- data[data$Quotative == "go",]$Frequency / sum(data$Frequency) * 100
+be_all_pct2 <- data[data$Quotative == "be all",]$Frequency / sum(data$Frequency) * 100
+
+pct2 <- c(say_pct2, be_like_pct2, go_pct2, be_all_pct2)
+
+data_pct2 <- cbind(data, pct2)
+
 # Plot the barplot
-ggplot(data, aes(x = Age_group, y = Frequency, fill = Quotative)) +
+ggplot(data_pct2, aes(x = Age_group, y = pct2, fill = Quotative)) +
   geom_bar(stat = "identity", position = "dodge") +
   scale_fill_brewer(palette = "Set1") +
   labs(title = "Quotative Use by Age Group and Gender", x = "Age and Gender Groups", y = "Percentage (%)") +

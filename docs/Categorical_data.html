@@ -122,6 +122,8 @@ div.csl-indent {
     "search-label": "Search"
   }
 }</script>
+<link href="site_libs/tabwid-1.1.3/tabwid.css" rel="stylesheet">
+<script src="site_libs/tabwid-1.1.3/tabwid.js"></script>
 
 
 </head>
@@ -373,8 +375,14 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./Mixed_effects_regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Mixed-effects regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./Decision_trees_and_random_forests.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Decision trees and random forests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Decision trees and random forests</span></span></a>
   </div>
 </li>
       </ul>
@@ -391,7 +399,7 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">References</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">References</span></span></a>
   </div>
 </li>
       </ul>
@@ -407,16 +415,14 @@ div.csl-indent {
    
   <ul>
   <li><a href="#preparation" id="toc-preparation" class="nav-link active" data-scroll-target="#preparation"><span class="header-section-number">15.1</span> Preparation</a></li>
-  <li><a href="#descriptive-measures" id="toc-descriptive-measures" class="nav-link" data-scroll-target="#descriptive-measures"><span class="header-section-number">15.2</span> Descriptive measures</a>
+  <li><a href="#frequency-tables" id="toc-frequency-tables" class="nav-link" data-scroll-target="#frequency-tables"><span class="header-section-number">15.2</span> Frequency tables</a></li>
+  <li><a href="#visualising-discrete-distributions" id="toc-visualising-discrete-distributions" class="nav-link" data-scroll-target="#visualising-discrete-distributions"><span class="header-section-number">15.3</span> Visualising discrete distributions</a>
   <ul class="collapse">
-  <li><a href="#frequency-tables" id="toc-frequency-tables" class="nav-link" data-scroll-target="#frequency-tables"><span class="header-section-number">15.2.1</span> Frequency tables</a></li>
+  <li><a href="#one-variable" id="toc-one-variable" class="nav-link" data-scroll-target="#one-variable"><span class="header-section-number">15.3.1</span> One variable</a></li>
+  <li><a href="#two-variables" id="toc-two-variables" class="nav-link" data-scroll-target="#two-variables"><span class="header-section-number">15.3.2</span> Two variables</a></li>
   </ul></li>
-  <li><a href="#visualising-categorical-variables" id="toc-visualising-categorical-variables" class="nav-link" data-scroll-target="#visualising-categorical-variables"><span class="header-section-number">15.3</span> Visualising categorical variables</a>
-  <ul class="collapse">
-  <li><a href="#one-variable-1" id="toc-one-variable-1" class="nav-link" data-scroll-target="#one-variable-1"><span class="header-section-number">15.3.1</span> One variable</a></li>
-  <li><a href="#two-variables-1" id="toc-two-variables-1" class="nav-link" data-scroll-target="#two-variables-1"><span class="header-section-number">15.3.2</span> Two variables</a></li>
-  </ul></li>
-  <li><a href="#exporting-tables-to-ms-word" id="toc-exporting-tables-to-ms-word" class="nav-link" data-scroll-target="#exporting-tables-to-ms-word"><span class="header-section-number">15.4</span> Exporting tables to MS Word</a></li>
+  <li><a href="#plotting-percentages" id="toc-plotting-percentages" class="nav-link" data-scroll-target="#plotting-percentages"><span class="header-section-number">15.4</span> Plotting percentages</a></li>
+  <li><a href="#exporting-tables-to-ms-word" id="toc-exporting-tables-to-ms-word" class="nav-link" data-scroll-target="#exporting-tables-to-ms-word"><span class="header-section-number">15.5</span> Exporting tables to MS Word</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/VBuskin/Stats_with_R/blob/main/Categorical_data.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
     </div>
@@ -450,30 +456,27 @@ div.csl-indent {
 
 <section id="preparation" class="level2" data-number="15.1">
 <h2 data-number="15.1" class="anchored" data-anchor-id="preparation"><span class="header-section-number">15.1</span> Preparation</h2>
-<p>Please download the file “Paquot_Larsson_2020_data.xlsx” <span class="citation" data-cites="paquotDescriptiveStatisticsVisualization2020">(<a href="references.html#ref-paquotDescriptiveStatisticsVisualization2020" role="doc-biblioref">Paquot and Larsson 2020</a>)</span><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> and store it in the same folder as your currently active R-script.</p>
+<p>Please download the file “Paquot_Larsson_2020_data.xlsx” <span class="citation" data-cites="paquotDescriptiveStatisticsVisualization2020">(<a href="references.html#ref-paquotDescriptiveStatisticsVisualization2020" role="doc-biblioref">Paquot and Larsson 2020</a>)</span><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> and store it in the same folder as your currently active R-script. Then run the code lines below:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Libraries</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"readxl"</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"readxl"</span>) <span class="co"># for loading Excel data</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tidyverse"</span>) <span class="co"># data manipulation and visualisation</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data from working directory</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>cl.order <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"Paquot_Larsson_2020_data.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>It contains the <strong>dependent variable</strong></p>
-<ul>
-<li><code>ORDER</code>: Does the subordinate clause come before or after the main clause? (‘sc-mc’ vs.&nbsp;‘mc-sc’)</li>
-</ul>
-<p>… and the <strong>independent variables</strong>:</p>
-<ul>
-<li><p><code>SUBORDTYPE</code>: Is the subordinate clause temporal or causal? (‘temp’ vs.&nbsp;‘caus’)</p></li>
-<li><p><code>MORETHAN2CL</code>: Are there most clauses in the sentence than just one subordinate clause and one main clause? (‘yes’ vs.&nbsp;‘no’)</p></li>
-<li><p><code>LEN_MC</code>: How many words does the main clause contain? (ratio-scaled continuous variable)</p></li>
-<li><p><code>LEN_SC</code>: How many words does the subordinate clause contain? (ratio-scaled continuous variable)</p></li>
-<li><p><code>LENGTH_DIFF</code>: What is the length difference in words between the main clause and subordinate clause? (ratio-scaled continuous variables)</p></li>
-</ul>
-</section>
-<section id="descriptive-measures" class="level2" data-number="15.2">
-<h2 data-number="15.2" class="anchored" data-anchor-id="descriptive-measures"><span class="header-section-number">15.2</span> Descriptive measures</h2>
+<div class="callout callout-style-default callout-note callout-titled" title="What's in the file? The `str()` function">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+What’s in the file? The <code>str()</code> function
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <p>The easiest way to get a general overview of the full data set is to apply the <code>str()</code> function to the respective data frame.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(cl.order)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -510,11 +513,40 @@ div.csl-indent {
 6   967 sc-mc temp            9      5           4 als/when yes        </code></pre>
 </div>
 </div>
-<section id="frequency-tables" class="level3" data-number="15.2.1">
-<h3 data-number="15.2.1" class="anchored" data-anchor-id="frequency-tables"><span class="header-section-number">15.2.1</span> Frequency tables</h3>
-<section id="one-variable" class="level4" data-number="15.2.1.1">
-<h4 data-number="15.2.1.1" class="anchored" data-anchor-id="one-variable"><span class="header-section-number">15.2.1.1</span> One variable</h4>
-<p>Each categorical variable is made up of two or more categories. A simple descriptive measure is the frequency of each category. The table below indicates how often each clause order occurs in the data.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Further details on the variables">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Further details on the variables
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The data frame contains the <strong>dependent variable</strong></p>
+<ul>
+<li><code>ORDER</code>: Does the subordinate clause come before or after the main clause? (‘sc-mc’ vs.&nbsp;‘mc-sc’)</li>
+</ul>
+<p>… and the <strong>independent variables</strong>:</p>
+<ul>
+<li><p><code>SUBORDTYPE</code>: Is the subordinate clause temporal or causal? (‘temp’ vs.&nbsp;‘caus’)</p></li>
+<li><p><code>MORETHAN2CL</code>: Are there most clauses in the sentence than just one subordinate clause and one main clause? (‘yes’ vs.&nbsp;‘no’)</p></li>
+<li><p><code>LEN_MC</code>: How many words does the main clause contain? (ratio-scaled continuous variable)</p></li>
+<li><p><code>LEN_SC</code>: How many words does the subordinate clause contain? (ratio-scaled continuous variable)</p></li>
+<li><p><code>LENGTH_DIFF</code>: What is the length difference in words between the main clause and subordinate clause? (ratio-scaled continuous variables)</p></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="frequency-tables" class="level2" data-number="15.2">
+<h2 data-number="15.2" class="anchored" data-anchor-id="frequency-tables"><span class="header-section-number">15.2</span> Frequency tables</h2>
+<p>Each categorical variable in the data frame is made up of two or more categories. A simple descriptive measure is the frequency of each category. The table below indicates how often each clause order occurs in the <code>ORDER</code> column.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>order_freq1 <span class="ot">&lt;-</span> <span class="fu">table</span>(cl.order<span class="sc">$</span>ORDER) </span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -537,10 +569,7 @@ mc-sc sc-mc
   275   128 </code></pre>
 </div>
 </div>
-</section>
-<section id="two-variables" class="level4" data-number="15.2.1.2">
-<h4 data-number="15.2.1.2" class="anchored" data-anchor-id="two-variables"><span class="header-section-number">15.2.1.2</span> Two variables</h4>
-<p>If we are interested in the relationship between multiple categorical variables, we can cross-tabulate the frequencies of their categories. For example, what is the distribution of clause order depending on the type of subordinate clause?</p>
+<p>If we are interested in the relationship between <strong>multiple categorical variables</strong>, we can cross-tabulate the frequencies of their categories. For example, what is the distribution of clause order depending on the type of subordinate clause? The output is also referred to as a <strong>contingency table</strong>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>order_counts1 <span class="ot">&lt;-</span> <span class="fu">table</span>(cl.order<span class="sc">$</span>ORDER, cl.order<span class="sc">$</span>SUBORDTYPE)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -564,17 +593,17 @@ ORDER   caus temp
   sc-mc   15  113</code></pre>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled" title="How do I obtain percentages?">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout callout-style-default callout-note callout-titled" title="How do I obtain percentage tables?">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-How do I obtain percentages?
+How do I obtain percentage tables?
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>There are two ways to convert the raw frequency counts to percentage tables:</p>
 <ol type="1">
@@ -593,13 +622,11 @@ How do I obtain percentages?
 </div>
 </div>
 </section>
-</section>
-</section>
-<section id="visualising-categorical-variables" class="level2" data-number="15.3">
-<h2 data-number="15.3" class="anchored" data-anchor-id="visualising-categorical-variables"><span class="header-section-number">15.3</span> Visualising categorical variables</h2>
+<section id="visualising-discrete-distributions" class="level2" data-number="15.3">
+<h2 data-number="15.3" class="anchored" data-anchor-id="visualising-discrete-distributions"><span class="header-section-number">15.3</span> Visualising discrete distributions</h2>
 <p>This section demonstrates both the in-built plotting functions of R (‘Base R’) as well as the more modern versions provided by the <code>tidyverse</code> package.</p>
-<section id="one-variable-1" class="level3" data-number="15.3.1">
-<h3 data-number="15.3.1" class="anchored" data-anchor-id="one-variable-1"><span class="header-section-number">15.3.1</span> One variable</h3>
+<section id="one-variable" class="level3" data-number="15.3.1">
+<h3 data-number="15.3.1" class="anchored" data-anchor-id="one-variable"><span class="header-section-number">15.3.1</span> One variable</h3>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" aria-current="page">Base R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">ggplot2</a></li></ul>
 <div class="tab-content">
@@ -639,8 +666,8 @@ How do I obtain percentages?
 </div>
 </div>
 </section>
-<section id="two-variables-1" class="level3" data-number="15.3.2">
-<h3 data-number="15.3.2" class="anchored" data-anchor-id="two-variables-1"><span class="header-section-number">15.3.2</span> Two variables</h3>
+<section id="two-variables" class="level3" data-number="15.3.2">
+<h3 data-number="15.3.2" class="anchored" data-anchor-id="two-variables"><span class="header-section-number">15.3.2</span> Two variables</h3>
 <ul>
 <li>Barplots with the <code>fill</code> argument</li>
 </ul>
@@ -719,19 +746,23 @@ How do I obtain percentages?
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled" title="How do I plot percentages?">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="true" aria-label="Toggle callout">
+</section>
+</section>
+<section id="plotting-percentages" class="level2" data-number="15.4">
+<h2 data-number="15.4" class="anchored" data-anchor-id="plotting-percentages"><span class="header-section-number">15.4</span> Plotting percentages</h2>
+<div class="callout callout-style-default callout-note callout-titled" title="How do I plot percentages in Base R?">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-How do I plot percentages?
+How do I plot percentages in Base R?
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse show">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>In Base R, very much the same way as with the raw counts:</p>
+<p>In very much the same way as with the raw counts:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(pct1, </span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">beside =</span> <span class="cn">TRUE</span>,  <span class="co"># Make bars side-by-side</span></span>
@@ -744,7 +775,22 @@ How do I plot percentages?
 </div>
 </div>
 </div>
-<p>In ggplot2, a few tweaks are necessary. In general, ggplot2 only works with data frames and not with table objects, so we’d have to convert it to one first:</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="How do I plot percentages with `ggplot2`?">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+How do I plot percentages with <code>ggplot2</code>?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Here, a few tweaks are necessary. In general, the <code>ggplot()</code> function only works with data frames and not with table objects, so we’ll have to convert it to one first:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>pct1_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(pct1)</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -775,29 +821,38 @@ How do I plot percentages?
 </div>
 </div>
 </section>
-</section>
-<section id="exporting-tables-to-ms-word" class="level2" data-number="15.4">
-<h2 data-number="15.4" class="anchored" data-anchor-id="exporting-tables-to-ms-word"><span class="header-section-number">15.4</span> Exporting tables to MS Word</h2>
-<p>Publication-ready tables can be generated with the help of the <code>flextable</code> package. The full guide can be found <a href="https://ardata-fr.github.io/flextable-book/crosstabs.html#using-tables">here</a>.</p>
+<section id="exporting-tables-to-ms-word" class="level2" data-number="15.5">
+<h2 data-number="15.5" class="anchored" data-anchor-id="exporting-tables-to-ms-word"><span class="header-section-number">15.5</span> Exporting tables to MS Word</h2>
+<p>The <code>flextable</code> package greatly facilitates generating publication-ready tables in R. It provides the best output if used on a table created by <code>xtabs()</code>. The full guide to this package can be found <a href="https://ardata-fr.github.io/flextable-book/crosstabs.html#using-tables">here</a>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(flextable)</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>output_1 <span class="ot">&lt;-</span> <span class="fu">as_flextable</span>(pct1)</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(output_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load library after installation</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(flextable)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a table</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>tab1 <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(<span class="sc">~</span> ORDER <span class="sc">+</span> SUBORDTYPE, cl.order)</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert a table to a flextable with as_flextable()</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>output_1 <span class="ot">&lt;-</span> <span class="fu">as_flextable</span>(tab1)</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Print output</span></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(output_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><img src="crosstable_plot1.png" class="img-fluid"></p>
-<p>The <code>rempsyc</code> also provides a simple way of creating beautiful, export-ready tables. You can find the documentation <a href="https://rempsyc.remi-theriault.com/articles/table">here</a>.</p>
+<p>Unfortunately, the output cannot really be customised. However, if you’d like to add some further options, the <code>crosstable</code> package provides a remedy. In fact, it is even easier to use as it doesn’t require you to compute any tables beforehand.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rempsyc)</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Format table</span></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>output2 <span class="ot">&lt;-</span> <span class="fu">nice_table</span>(pct1_df)</span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(output2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Required libraries</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(crosstable)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(flextable)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the cross table</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>output2 <span class="ot">&lt;-</span> <span class="fu">crosstable</span>(cl.order, ORDER, <span class="at">by =</span> SUBORDTYPE, </span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">total =</span> <span class="st">"both"</span>,</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">percent_digits =</span> <span class="dv">2</span>)</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="fu">as_flextable</span>(output2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="tabwid"><style>.cl-8a797ad0{}.cl-8a714220{font-family:'Helvetica';font-size:11pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-8a714234{font-family:'Helvetica';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-8a74a596{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-8a74a5a0{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-8a74bd92{width:0.837in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(0, 0, 0, 1.00);border-top: 1.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-8a74bd9c{width:0.863in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(0, 0, 0, 1.00);border-top: 1.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-8a74bda6{width:1.202in;background-color:transparent;vertical-align: middle;border-bottom: 1pt solid rgba(0, 0, 0, 1.00);border-top: 1.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-8a74bda7{width:1.287in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(0, 0, 0, 1.00);border-top: 1.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-8a74bdb0{width:0.837in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(0, 0, 0, 1.00);border-top: 1pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-8a74bdb1{width:0.863in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(0, 0, 0, 1.00);border-top: 1pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-8a74bdb2{width:1.202in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(0, 0, 0, 1.00);border-top: 1pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-8a74bdba{width:1.287in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(0, 0, 0, 1.00);border-top: 1pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-8a74bdbb{width:0.837in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-8a74bdbc{width:0.863in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-8a74bdc4{width:1.202in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-8a74bdc5{width:1.287in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-8a74bdc6{width:0.837in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-8a74bdc7{width:0.863in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-8a74bdce{width:1.202in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-8a74bdcf{width:1.287in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-8a797ad0"><thead><tr style="overflow-wrap:break-word;"><th rowspan="2" class="cl-8a74bd92"><p class="cl-8a74a596"><span class="cl-8a714220">label</span></p></th><th rowspan="2" class="cl-8a74bd9c"><p class="cl-8a74a596"><span class="cl-8a714220">variable</span></p></th><th colspan="2" class="cl-8a74bda6"><p class="cl-8a74a596"><span class="cl-8a714220">SUBORDTYPE</span></p></th><th rowspan="2" class="cl-8a74bda7"><p class="cl-8a74a596"><span class="cl-8a714220">Total</span></p></th></tr><tr style="overflow-wrap:break-word;"><th class="cl-8a74bdb2"><p class="cl-8a74a596"><span class="cl-8a714220">caus</span></p></th><th class="cl-8a74bdb2"><p class="cl-8a74a596"><span class="cl-8a714220">temp</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td rowspan="3" class="cl-8a74bdbb"><p class="cl-8a74a5a0"><span class="cl-8a714234">ORDER</span></p></td><td class="cl-8a74bdbc"><p class="cl-8a74a5a0"><span class="cl-8a714234">mc-sc</span></p></td><td class="cl-8a74bdc4"><p class="cl-8a74a5a0"><span class="cl-8a714234">184 (66.91%)</span></p></td><td class="cl-8a74bdc4"><p class="cl-8a74a5a0"><span class="cl-8a714234">91 (33.09%)</span></p></td><td class="cl-8a74bdc5"><p class="cl-8a74a5a0"><span class="cl-8a714234">275 (68.24%)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-8a74bdbc"><p class="cl-8a74a5a0"><span class="cl-8a714234">sc-mc</span></p></td><td class="cl-8a74bdc4"><p class="cl-8a74a5a0"><span class="cl-8a714234">15 (11.72%)</span></p></td><td class="cl-8a74bdc4"><p class="cl-8a74a5a0"><span class="cl-8a714234">113 (88.28%)</span></p></td><td class="cl-8a74bdc5"><p class="cl-8a74a5a0"><span class="cl-8a714234">128 (31.76%)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-8a74bdc7"><p class="cl-8a74a5a0"><span class="cl-8a714234">Total</span></p></td><td class="cl-8a74bdce"><p class="cl-8a74a5a0"><span class="cl-8a714234">199 (49.38%)</span></p></td><td class="cl-8a74bdce"><p class="cl-8a74a5a0"><span class="cl-8a714234">204 (50.62%)</span></p></td><td class="cl-8a74bdcf"><p class="cl-8a74a5a0"><span class="cl-8a714234">403 (100.00%)</span></p></td></tr></tbody></table></div>
 </div>
-<p><img src="crosstable_plot2.png" class="img-fluid"></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Export to Microsoft Word</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(output2, <span class="at">preview =</span> <span class="st">"docx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 

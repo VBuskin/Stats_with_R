@@ -47,6 +47,7 @@ book:
         - Linear_regression.qmd
         - Logistic_regression.qmd
         - Mixed_effects_regression.qmd
+        - Ordinal_regression.qmd
         - Decision_trees_and_random_forests.qmd
     - part: References
       chapters:
