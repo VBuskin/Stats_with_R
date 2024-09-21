@@ -1,5 +1,5 @@
 ---
-title: "Chi square test"
+title: "Chi-squared test"
 author: Vladimir Buskin
 format:
   html:
@@ -41,7 +41,7 @@ cl.order <- read_xlsx("Paquot_Larsson_2020_data.xlsx")
 
 ## Overview
 
-::: {.callout-note collapse="false" title="This unit in a nutshell"}
+::: {.callout-note collapse="true" title="This unit in a nutshell"}
 The chi-square test helps determine if there is a statistically
 significant association between two categorical variables. It compares
 observed frequencies (actual data) with expected frequencies (if the
@@ -72,16 +72,18 @@ chisq.test(cl.order$ORDER, cl.order$SUBORDTYPE)
 
 ## The $\chi^2$-test
 
-Having clearly stated our hypotheses in the previous unit, the next step is to compute a test statistic that indicates how strongly
-our data conforms to $H_0$. For instance, the Pearson $\chi^2$ statistic
-is commonly used for categorical variables.
+Having clearly stated our hypotheses in the previous unit, the next step
+is to compute a test statistic that indicates how strongly our data
+conforms to $H_0$. For instance, the Pearson $\chi^2$ statistic is
+commonly used for categorical variables.
 
-It requires two types of
-values: the **observed frequencies** $n_{ij}$ in our data set and the
-**expected frequencies** $m_{ij}$, which we would expect to see if $H_0$ were true. The indices $i$ and $j$ uniquely identify the frequencies found in all column-row combinations of a cross-table.
+It requires two types of values: the **observed frequencies** $n_{ij}$
+in our data set and the **expected frequencies** $m_{ij}$, which we
+would expect to see if $H_0$ were true. The indices $i$ and $j$ uniquely
+identify the frequencies found in all column-row combinations of a
+cross-table.
 
-::: {.callout-note collapse="false" title="Mathematical details: The structure of a contingency table"}
-
+::: {.callout-note collapse="true" title="Mathematical details: The structure of a contingency table"}
 The table below represents a generic contingency table where $X$ and $Y$
 are categorical variables. Each $x_i$ represents a category of $X$ and
 each $y_j$ represents a category of $Y$. In the table, each cell
@@ -98,7 +100,6 @@ row and $j$-th column.
 
 This is really just an abstraction of the cross-tables we've computed so
 many times before.
-
 :::
 
 These are our observed frequencies $n_{ij}$:
@@ -116,9 +117,9 @@ The expected frequencies $m_{ij}$ are calculated by
 
 $$
 m_{ij} = \frac{i\textrm{th row sum} \times j \textrm{th column sum}}{\textrm{number of observations}}.
-$$ T
+$$
 
-he expected frequencies for our combination of variables is shown
+The expected frequencies for our combination of variables is shown
 below. In which cells can you see the greatest deviations between
 observed and expected frequencies?
 
@@ -148,22 +149,24 @@ differences between the two tables above. Given $n$ observations and $k$
 degrees of freedom ($df$)[^chi_square_test-1], the $\chi^2$-statistic
 measures how much the observed frequencies **deviate** from the expected
 frequencies **for each cell** in a contingency table [cf.
-@heumann_introduction_2022: 249-251]. 
-
-::: {.callout-note collapse="false" title="Mathematical details: Formal definition of the chi-square test"}
-
-The joint deviations make up the
-final $\chi^2$-score, which is defined as
+@heumann_introduction_2022: 249-251].
 
 [^chi_square_test-1]: The degrees of freedom are calculated by
     $(\textrm{number of rows} -1) \times (\textrm{number of columns} - 1)$.
+
+::: {.callout-note collapse="true" title="Mathematical details: Formal definition of the chi-square test"}
+The joint deviations make up the final $\chi^2$-score, which is defined
+as
 
 $$
 \chi^2 = \sum_{i=1}^{I}\sum_{i=j}^{J}{\frac{(n_{ij} - m_{ij})^2}{m_{ij}}}.
 $$
 :::
 
-Note, however, that this test comes with certain statistical assumptions. Violations of these assumptions decrease the validity of the result and could, therefore, lead to wrong conclusions about relationships in the data.
+Note, however, that this test comes with certain statistical
+assumptions. Violations of these assumptions decrease the validity of
+the result and could, therefore, lead to wrong conclusions about
+relationships in the data.
 
 1.  All observations are independent of each other.
 2.  80% of the expected frequencies are $\geq$ 5.
@@ -193,25 +196,26 @@ $\chi^2$-test, the Fisher's Exact Test is a viable alternative (see
 
 ## Workflow in R
 
-### $\chi^2$-test
-
-#### Define hypotheses
+### Define hypotheses
 
 -   $H_0:$ The variables `ORDER` and `SUBORDTYPE` are independent.
 
 -   $H_1:$ The variables `ORDER` and `SUBORDTYPE` are **not**
     independent.
 
-#### Running the test
+### Cross-tabulate the categories of interest
 
 ```{r}
-
 # Cross-tabulate the frequencies for the variables of interest
 
 freqs <- table(cl.order$ORDER, cl.order$SUBORDTYPE)
 
 freqs ## Assumption met: all observed freqs => 1
+```
 
+### Run the test
+
+```{r}
 # Run a chis-quared test on the absolute frequencies and print the results
 
 test <- chisq.test(freqs, correct = FALSE)
@@ -223,7 +227,6 @@ test$expected # Assumption met: all expected frequences => 5
 ```
 
 ::: {.callout-tip collapse="true" title="Advanced: Effect size"}
-
 The sample-size independent effect size measure **Cramer's *V***
 ($\phi$) is defined as
 
@@ -250,11 +253,10 @@ library("confintr") # Load library
 
 cramersv(test)
 ```
-
 :::
 
 #### Reporting the results
 
-According to a $\chi^2$-test, there is a significant association between
+According to a $\chi^2$-test, there is a highly significant association between
 clause `ORDER`and `SUBORDTYPE` at $p < 0.001$
 ($\chi^2 = 106.44, df = 1$), thus justifying the rejection of $H_0$.

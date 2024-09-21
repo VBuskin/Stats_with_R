@@ -20,9 +20,9 @@ bibliography: R.bib
 ## Recommended reading
 
 > The following introduction is based on Heumann et al.
-[-@heumann_introduction_2022: Chapter 11], James et al.
-[-@james_introduction_2021: Chapter 3], Levshina [-@levshina_how_2015:
-Chapter 7] and Winter [-@winter_statistics_2020: Chapter 4].
+> [-@heumann_introduction_2022: Chapter 11], James et al.
+> [-@james_introduction_2021: Chapter 3], Levshina [-@levshina_how_2015:
+> Chapter 7] and Winter [-@winter_statistics_2020: Chapter 4].
 
 ## Preparation {.smaller}
 
@@ -157,11 +157,11 @@ Given the existing data on $X$ and $Y$, which is also known as the
 training data, we **estimate** the model coefficients $\beta_0$ and
 $\beta_1$. While we use the training data to estimate these
 coefficients, we cannot know the true values of the coefficients, i.e.,
-the exact true relationship between the variables. Their tentative nature is indicated by the **hat**
-symbol \^ above them: $\hat{\beta_0}$ and $\hat{\beta_1}$.
+the exact true relationship between the variables. Their tentative
+nature is indicated by the **hat** symbol \^ above them: $\hat{\beta_0}$
+and $\hat{\beta_1}$.
 
 ::: {.callout-tip title="How are the coefficients estimated?" collapse="true"}
-
 The most common way of estimating parameters for linear models is the
 **Least Squares** approach. In essence, the parameters are chosen such
 that the residual sum of squares, i.e., the sum of the differences
@@ -207,10 +207,10 @@ i.e., the model formula.
 :::
 
 ::: {.callout-tip title="Residuals" collapse="true"}
-These indicate the difference between the observed
-    values in the data set and the values predicted by the model (= the
-    fitted values). These correspond to the error term $\epsilon$. The
-    lower the residuals, the better the model describes the data.
+These indicate the difference between the observed values in the data
+set and the values predicted by the model (= the fitted values). These
+correspond to the error term $\epsilon$. The lower the residuals, the
+better the model describes the data.
 
 ```{r, echo = TRUE, output = TRUE}
 
@@ -226,11 +226,10 @@ head(rt.lm1$residuals)
 :::
 
 ::: {.callout-tip title="Coefficients" collapse="true"}
-
-The regression coefficients correspond to
-    $\hat{\beta}_0$ ("Intercept") and $\hat{\beta}_1$ ("log(Freq)"),
-    respectively. The model shows that for a one-unit increase in
-    log-frequency the log-reaction time decreases by approx. -0.05.
+The regression coefficients correspond to $\hat{\beta}_0$ ("Intercept")
+and $\hat{\beta}_1$ ("log(Freq)"), respectively. The model shows that
+for a one-unit increase in log-frequency the log-reaction time decreases
+by approx. -0.05.
 
 ```{r, echo = TRUE, output = TRUE, message = FALSE, warning = FALSE}
 
@@ -243,30 +242,28 @@ tidy_model <- tidy(rt.lm1)
 tidy_model
 
 ```
-
 :::
 
 ::: {.callout-tip title="$p$-values and $t$-statistic" collapse="true"}
+$p$**-values and** $t$**-statistic**: Given the null hypothesis $H_0$
+that there is no correlation between `log(RT)` and `log(Freq)` (i.e.,
+$H_0: \beta_1 = 0$), a $p$-value lower than 0.05 indicates that
+$\beta_1$ considerably deviates from 0, thus providing evidence for the
+alternative hypothesis $H_1: \beta_1 \ne 0$. Since $p < 0.001$, we can
+reject $H_0$.
 
-$p$**-values and** $t$**-statistic**: Given the null hypothesis
-    $H_0$ that there is no correlation between `log(RT)` and `log(Freq)`
-    (i.e., $H_0: \beta_1 = 0$), a $p$-value lower than 0.05 indicates
-    that $\beta_1$ considerably deviates from 0, thus providing evidence
-    for the alternative hypothesis $H_1: \beta_1 \ne 0$. Since
-    $p < 0.001$, we can reject $H_0$.
-
-    The $p$-value itself crucially depends on the
-    $t$-statistic[^linear_regression-1], which measures "the number of
-    standard deviations that $\hat{\beta_1}$ is away from 0"
-    [@james_introduction_2021: 67] . The standard error (SE) reflects
-    how much an estimated coefficient differs on average from the true
-    values of $\beta_0$ and $\beta_1$. They can be used to compute the
-    95% confidence interval
-    $[\hat{\beta}_1 - 2 \cdot SE(\hat{β}_1), \hat{\beta}_1 + 2 \cdot SE(\hat{β}_1)]$;
-    the true estimate of the parameter $\beta_1$ lies within the
-    specified range 95% of the time.
-
-[^linear_regression-1]: $$t = \frac{\hat{\beta_1} - 0}{SE(\hat{\beta_0})}$$
+```         
+The $p$-value itself crucially depends on the
+$t$-statistic[^linear_regression-1], which measures "the number of
+standard deviations that $\hat{\beta_1}$ is away from 0"
+[@james_introduction_2021: 67] . The standard error (SE) reflects
+how much an estimated coefficient differs on average from the true
+values of $\beta_0$ and $\beta_1$. They can be used to compute the
+95% confidence interval
+$[\hat{\beta}_1 - 2 \cdot SE(\hat{β}_1), \hat{\beta}_1 + 2 \cdot SE(\hat{β}_1)]$;
+the true estimate of the parameter $\beta_1$ lies within the
+specified range 95% of the time.
+```
 
 ```{r, echo = TRUE, output = TRUE}
 
@@ -280,36 +277,30 @@ tidy_model_ci
 
 The estimated parameter for `log(Freq)`, which is -0.049, thus has the
 95% confidence interval \[-0.053, -0.044\].
-
 :::
 
 ::: {.callout-tip title="**Residual standard error** (RSE)" collapse="true"}
-This is an estimation of the average deviation of the predictions from the observed values.
+This is an estimation of the average deviation of the predictions from
+the observed values.
 
 $$RSE = \sqrt{\frac{1}{n-2}\sum_{i=1}^n (y_i - \hat{y_i}})^2$$
-
 :::
 
 ::: {.callout-tip title="$R^2$" collapse="true"}
+The $R^2$ score is important for assessing model fit because it
+"measures the proportion of variability in $Y$ that can be explained
+using $X$" [@james_introduction_2021: 70; emphasis removed], varying
+between 0 and 1.
 
-The $R^2$ score is important for assessing model fit
-    because it "measures the proportion of variability in $Y$ that can
-    be explained using $X$" [@james_introduction_2021: 70; emphasis
-    removed], varying between 0 and 1.
-    
 $$R^2 = 1-\frac{TSS}{RSS} = 1-\frac{\sum_{i=1}^n (y_i - \hat{y_i})^2}{\sum_{i=1}^n (y_i - \bar{y_i})^2}$$
-
 :::
 
 ::: {.callout-tip title="$F$-statistic" collapse="true"}
-
-It is used to measure the association between the
-    dependent variable and the independent variable(s). Generally
-    speaking, values greater than 1 indicate a possible correlation. A sufficiently very low $p$-value suggests that the null hypothesis
-    $H_0: \beta_1 = 0$ can be rejected.
-    
+It is used to measure the association between the dependent variable and
+the independent variable(s). Generally speaking, values greater than 1
+indicate a possible correlation. A sufficiently very low $p$-value
+suggests that the null hypothesis $H_0: \beta_1 = 0$ can be rejected.
 :::
-
 
 ### Multiple linear regression
 
