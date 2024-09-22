@@ -60,6 +60,11 @@ code-block-font-size: 6pt
 
 format:
   html:
+    grid:
+      sidebar-width: 300px
+      body-width: 850px
+      margin-width: 225px
+      gutter-width: 1.5rem
     theme: 
       - yeti
       - design.scss
@@ -86,4 +91,6 @@ execute:
   warning: false
   message: false
 code-overflow: wrap
+
+reference-location: margin
 

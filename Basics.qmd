@@ -11,7 +11,7 @@ format:
     incremental: false
     slide-level: 3
     scrollable: true
-    
+  pdf: default
 editor: visual
 ---
 
@@ -61,7 +61,7 @@ wrong** at each stage of the study!
 ### Presentation of Results
 
 | Quotative   | Age group | Male use (per 100,000 words) | Female use (per 100,000 words) |
-|--------------|--------------|---------------------|-----------------------|
+|----------------|----------------|-------------------|---------------------|
 | **say**     | 16–26     | 115                          | 149                            |
 |             | 27–40     | 101                          | 117                            |
 |             | 41–54     | 55                           | 214                            |
@@ -78,6 +78,7 @@ wrong** at each stage of the study!
 
 ```{r, echo = FALSE}
 #| fig-cap: "Reproduction of Barbieri's Figure 5 'Proportional quotative use by men and women aged 16–26 and 27–40'"
+#| cap-location: margin
 
 # Load necessary libraries
 library(ggplot2)
@@ -115,6 +116,7 @@ pct2 <- c(say_pct2, be_like_pct2, go_pct2, be_all_pct2)
 
 data_pct2 <- cbind(data, pct2)
 
+
 # Plot the barplot
 ggplot(data_pct2, aes(x = Age_group, y = pct2, fill = Quotative)) +
   geom_bar(stat = "identity", position = "dodge") +
@@ -123,6 +125,7 @@ ggplot(data_pct2, aes(x = Age_group, y = pct2, fill = Quotative)) +
   theme_minimal()
 
 ```
+
 
 ### Formulation of Results
 

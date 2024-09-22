@@ -139,6 +139,33 @@ h5 { margin-top: 1.5em; font-size: 1rem; }
   font-weight: normal;
 }
 
+/* Adjust header colors - Darker and more opaque version */
+h1, h2, h3, h4, h5, h6 {
+  color: #2A5982;  /* Darker version of your primary color */
+}
+
+/* Gradient of darker shades for different header levels */
+h1 { color: #2A5982; }  /* Darkest shade for h1 */
+h2 { color: #336699; }  /* Slightly lighter for h2 */
+h3 { color: #3C73B0; }  /* Even lighter for h3 */
+h4, h5, h6 { color: #4580C7; }  /* Lightest shade for h4-h6, but still darker than before */
+
+/* Adjust the color of the section identifiers if needed */
+.quarto-section-identifier {
+  color: #555555;  /* Darker grey for better contrast */
+}
+
+/* Main title color */
+#title-block-header.quarto-title-block.default .quarto-title h1.title {
+  color: #2A5982;  /* Matching the darkest header color */
+}
+
+/* Optional: If you want to ensure full opacity */
+h1, h2, h3, h4, h5, h6, .quarto-section-identifier, 
+#title-block-header.quarto-title-block.default .quarto-title h1.title {
+  opacity: 1;
+}
+
 /* Code ------------------------------------------------ */
 
 code {

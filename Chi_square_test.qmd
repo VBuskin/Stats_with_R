@@ -15,6 +15,9 @@ format:
     scrollable: true
 editor: visual
 bibliography: R.bib
+metadata-files:
+  - _quarto.yml
+google-scholar: false
 ---
 
 ## Preparation
@@ -257,6 +260,6 @@ cramersv(test)
 
 #### Reporting the results
 
-According to a $\chi^2$-test, there is a highly significant association between
-clause `ORDER`and `SUBORDTYPE` at $p < 0.001$
+According to a $\chi^2$-test, there is a highly significant association
+between clause `ORDER`and `SUBORDTYPE` at $p < 0.001$
 ($\chi^2 = 106.44, df = 1$), thus justifying the rejection of $H_0$.
