@@ -21,7 +21,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -69,10 +123,12 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -285,7 +341,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Chi_square_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Chi square test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Chi-squared test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -360,10 +416,29 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#suggested-reading" id="toc-suggested-reading" class="nav-link active" data-scroll-target="#suggested-reading"><span class="header-section-number">24.1</span> Suggested reading</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction"><span class="header-section-number">24.2</span> Introduction</a>
+  <ul class="collapse">
+  <li><a href="#research-question-and-hypotheses" id="toc-research-question-and-hypotheses" class="nav-link" data-scroll-target="#research-question-and-hypotheses"><span class="header-section-number">24.2.1</span> Research question and hypotheses</a></li>
+  <li><a href="#preparation" id="toc-preparation" class="nav-link" data-scroll-target="#preparation"><span class="header-section-number">24.2.2</span> Preparation</a></li>
+  </ul></li>
+  <li><a href="#modelling-ordinal-data" id="toc-modelling-ordinal-data" class="nav-link" data-scroll-target="#modelling-ordinal-data"><span class="header-section-number">24.3</span> Modelling ordinal data</a>
+  <ul class="collapse">
+  <li><a href="#ordered-logistic-regression" id="toc-ordered-logistic-regression" class="nav-link" data-scroll-target="#ordered-logistic-regression"><span class="header-section-number">24.3.1</span> Ordered logistic regression</a></li>
+  <li><a href="#application-in-r" id="toc-application-in-r" class="nav-link" data-scroll-target="#application-in-r"><span class="header-section-number">24.3.2</span> Application in R</a></li>
+  <li><a href="#using-polr-from-the-mass-library" id="toc-using-polr-from-the-mass-library" class="nav-link" data-scroll-target="#using-polr-from-the-mass-library"><span class="header-section-number">24.3.3</span> Using <code>polr()</code> from the <code>MASS</code> library</a></li>
+  <li><a href="#using-clm-from-the-ordinal-library" id="toc-using-clm-from-the-ordinal-library" class="nav-link" data-scroll-target="#using-clm-from-the-ordinal-library"><span class="header-section-number">24.3.4</span> Using <code>clm()</code> from the <code>ordinal</code> library</a></li>
+  <li><a href="#mixed-effects" id="toc-mixed-effects" class="nav-link" data-scroll-target="#mixed-effects"><span class="header-section-number">24.3.5</span> Mixed-effects</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/VBuskin/Stats_with_R/blob/main/Ordinal_regression.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Linear_regression.html">Machine learning</a></li><li class="breadcrumb-item"><a href="./Ordinal_regression.html"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Ordinal regression</span></a></li></ol></nav>
 <div class="quarto-title">
@@ -390,20 +465,410 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center">
+<section id="suggested-reading" class="level2" data-number="24.1">
+<h2 data-number="24.1" class="anchored" data-anchor-id="suggested-reading"><span class="header-section-number">24.1</span> Suggested reading</h2>
+<blockquote class="blockquote">
+<p><span class="citation" data-cites="powersStatisticalMethodsCategorical2008">Powers and Xie (<a href="references.html#ref-powersStatisticalMethodsCategorical2008" role="doc-biblioref">2008</a>)</span>: Chapter 7 <span class="citation" data-cites="baguleySeriousStatsGuide2012">Baguley (<a href="references.html#ref-baguleySeriousStatsGuide2012" role="doc-biblioref">2012</a>)</span>: Chapter 17.4.5</p>
+</blockquote>
+</section>
+<section id="introduction" class="level2 page-columns page-full" data-number="24.2">
+<h2 data-number="24.2" class="anchored" data-anchor-id="introduction"><span class="header-section-number">24.2</span> Introduction</h2>
+<p>In her recent contribution, <span class="citation" data-cites="glassEnglishVerbsCan2021">Glass (<a href="references.html#ref-glassEnglishVerbsCan2021" role="doc-biblioref">2021</a>)</span> examines possible reasons why certain transitive verbs have a stronger affinity towards object omission compared to others, placing special emphasis on the routinisation of the actions denoted by transitive verbs.</p>
+<section id="research-question-and-hypotheses" class="level3" data-number="24.2.1">
+<h3 data-number="24.2.1" class="anchored" data-anchor-id="research-question-and-hypotheses"><span class="header-section-number">24.2.1</span> Research question and hypotheses</h3>
+<p>How do high/low-routine contexts affect the acceptability of object omission for transitive verbs of varying frequency of occurrence?</p>
+<p><strong>Low-frequency verbs</strong>:</p>
+<ul>
+<li><p><span class="math inline">\(H_0:\)</span> Mean Likert rating in low-routine contexts (low freq) <span class="math inline">\(=\)</span> Mean Likert rating in high-routine contexts (low freq)</p></li>
+<li><p><span class="math inline">\(H_1:\)</span> Mean Likert rating in low-routine contexts (low freq) <span class="math inline">\(\neq\)</span> Mean Likert rating in high-routine contexts (low freq)</p></li>
+</ul>
+<p><strong>High-frequency verbs</strong>:</p>
+<ul>
+<li><p><span class="math inline">\(H_0:\)</span> Mean Likert rating in low-routine contexts (high freq) = Mean Likert rating in high-routine contexts (high freq)</p></li>
+<li><p><span class="math inline">\(H_1:\)</span> Mean Likert rating in low-routine contexts (high freq) <span class="math inline">\(\neq\)</span> Mean Likert rating in high-routine contexts (high freq)</p></li>
+</ul>
+</section>
+<section id="preparation" class="level3 page-columns page-full" data-number="24.2.2">
+<h3 data-number="24.2.2" class="anchored" data-anchor-id="preparation"><span class="header-section-number">24.2.2</span> Preparation</h3>
+<p>Load the data <code>Glass_2021_survey_processed.csv</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>:</p>
+<div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;The original dataset can be retrieved from Lelia Glass’s OSF repository: <a href="https://osf.io/t6zw5" class="uri">https://osf.io/t6zw5</a> [Last accessed: 27th September, 2024].</p></li></div><div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ordinal)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>survey <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"Glass_2021_survey_processed.csv"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(survey)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   784 obs. of  5 variables:
+ $ rating       : int  3 4 3 3 2 4 3 2 3 2 ...
+ $ freq         : chr  "hi" "lo" "lo" "hi" ...
+ $ verb         : chr  "pick" "catch" "throw" "break" ...
+ $ ParticipantID: chr  "Participant1" "Participant1" "Participant1" "Participant1" ...
+ $ routine      : chr  "hi" "lo" "lo" "lo" ...</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(survey)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  rating freq   verb ParticipantID routine
+1      3   hi   pick  Participant1      hi
+2      4   lo  catch  Participant1      lo
+3      3   lo  throw  Participant1      lo
+4      3   hi  break  Participant1      lo
+5      2   hi  taste  Participant1      hi
+6      4   hi bottle  Participant1      hi</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Short breakdown of the variables">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-This page is under construction.
+Short breakdown of the variables
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Content will be added soon!</p>
+<ul>
+<li><code>routine</code>: In Glass’s study, transitive verbs were randomly assigned to one of the following conditions:</li>
+</ul>
+<blockquote class="blockquote">
+<ul>
+<li><p>(High routine condition:) I worked at my poultry farm. Just like I always do, I butchered some chickens. Then I gathered some eggs.</p></li>
+<li><p>(Low-routine condition:) I visited a friend’s job. Just because people wanted me to try it, I butchered some chickens. Then I went for a walk.</p></li>
+</ul>
+<p>Cf. Glass <span class="citation" data-cites="glassEnglishVerbsCan2021">(<a href="references.html#ref-glassEnglishVerbsCan2021" role="doc-biblioref">2021</a>: 66)</span></p>
+</blockquote>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(survey<span class="sc">$</span>routine)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "hi" "lo"</code></pre>
+</div>
+</div>
+<ul>
+<li><code>rating</code> records the responses of participants to a follow-up question regarding the acceptability of object omission. The answers are recorded on a 1-5 Likert scale.</li>
+</ul>
+<blockquote class="blockquote">
+<p><em>The next time Caroline talks about butchering chickens the day before, how likely do you think she is to say the following?</em></p>
+<p>‘I butchered yesterday’</p>
+<p>Cf. Glass <span class="citation" data-cites="glassEnglishVerbsCan2021">(<a href="references.html#ref-glassEnglishVerbsCan2021" role="doc-biblioref">2021</a>: 66)</span></p>
+</blockquote>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(survey<span class="sc">$</span>rating)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3 4 2 5 1</code></pre>
+</div>
+</div>
+<ul>
+<li><code>verb</code> contains the items to be rated for the conditions in <code>routine</code></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(survey<span class="sc">$</span>verb)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "pick"   "catch"  "throw"  "break"  "taste"  "bottle" "sell"   "chop"  </code></pre>
+</div>
+</div>
+<ul>
+<li><code>frequency</code> relates to the frequency bins of the verbs:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(survey<span class="sc">$</span>freq)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "hi" "lo"</code></pre>
+</div>
+</div>
+<ul>
+<li><code>ParticipantID</code> identifies each of the 98 subjects who provided ratings</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="modelling-ordinal-data" class="level2" data-number="24.3">
+<h2 data-number="24.3" class="anchored" data-anchor-id="modelling-ordinal-data"><span class="header-section-number">24.3</span> Modelling ordinal data</h2>
+<p>In order to answer our research question, we need to assess how the features <code>freq</code> and <code>routine</code> affect the variability in the acceptability ratings. Furthermore, we’ll need to control for <code>verb</code> and <code>ParticipantID</code>, which impose a hierarchical structure on our dataset.</p>
+<p>We will denote these predictor variables <span class="math inline">\(X_p\)</span> where <span class="math inline">\(p\)</span> represents the number of predictors. The target variable <code>rating</code> is our <span class="math inline">\(Y\)</span>, i.e., our response variable with the ordered, discrete outcomes <span class="math inline">\(y \in \{1, 2, 3, 4, 5\}\)</span>. Our goal is to find a model <span class="math inline">\(f\)</span> that describes the relationship between <span class="math inline">\(Y\)</span> and <span class="math inline">\(X_p\)</span> as accurately as possible and minimises the erorr term <span class="math inline">\(\epsilon\)</span>:</p>
+<p><span class="math display">\[
+Y = f(X_1, X_2, ..., X_p) + \epsilon
+\]</span></p>
+<section id="ordered-logistic-regression" class="level3" data-number="24.3.1">
+<h3 data-number="24.3.1" class="anchored" data-anchor-id="ordered-logistic-regression"><span class="header-section-number">24.3.1</span> Ordered logistic regression</h3>
+<p>One family of models that respects the ordered, yet categorical nature of <span class="math inline">\(Y\)</span> is ordered (or ordinal) logistic regression. Other terms include <strong>proportional odds models</strong>, <strong>cumulative logit/link models</strong> etc.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Recap: Logistic regression">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Recap: Logistic regression
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Logistic regression is used to model categorical response variables with two or more levels. For instance, let’s assume our <span class="math inline">\(Y\)</span> is dichotomous with the following two outcomes:</p>
+<p><span class="math display">\[
+Y =
+\begin{cases}
+\text{yes} \\
+\text{no}
+\end{cases}
+\]</span></p>
+<p>Using the logistic function, we can estimate the probability of one outcome versus the other <strong>given</strong> the predictors <span class="math inline">\(X_p\)</span>. Their log-transformed odds ratio (<strong>log odds</strong>) is equivalent of the all-too-familiar linear model:</p>
+<p><span class="math display">\[
+\log\left(\frac{P(Y = yes \mid X_p)}{1 - P(Y = yes \mid X_p)}\right) = \beta_0 + \beta_1X_1 + ... + \beta_pX_p.
+\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Recap: Mixed-effects models">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Recap: Mixed-effects models
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Certain datasets display a nested (or hierarchical) structure; this becomes particularly apparent in the case of multiple observations.</p>
+<p>(Add violation of independence)</p>
+</div>
+</div>
+</div>
+<p>Core to this approach is the notion of <strong>cumulative probabilities</strong>. Let <span class="math inline">\(J\)</span> denote the number of ordered categories in <span class="math inline">\(Y\)</span>. In Glass’s case study (<span class="math inline">\(J = 5\)</span>), the estimated cumulative probabilities for each ordered outcome would have the following form:</p>
+<p><span class="math display">\[
+\begin{array}{rcl}
+P(Y \leq 1) &amp; = &amp; P(Y = 1) \\
+P(Y \leq 2) &amp; = &amp; P(Y = 1) + P(Y = 2) \\
+P(Y \leq 3) &amp; = &amp; P(Y = 1) + P(Y = 2) + P(Y = 3) \\
+P(Y \leq 4) &amp; = &amp; P(Y = 1) + P(Y = 2) + P(Y = 3) + P(Y = 4) \\
+P(Y \leq 5) &amp; = &amp; P(Y = 1) + P(Y = 2) + P(Y = 3) + P(Y = 4) + P(Y = 5)
+\end{array}
+\]</span> We can generalise this pattern to</p>
+<p><span class="math display">\[
+P(Y \leq j) = \hat{P_1} + ... + \hat{P_j}
+\]</span></p>
+<p>We can now update our logistic regression equation to take into account cumulative probabilities:</p>
+<p><span class="math display">\[
+\log\left(\frac{P(Y \leq j \mid X_p)}{1 - P(Y \leq j \mid X_p)}\right) = \beta_0 + \beta_1X_1 + ... + \beta_pX_p \qquad j = 1, ..., J-1
+\]</span></p>
+</section>
+<section id="application-in-r" class="level3" data-number="24.3.2">
+<h3 data-number="24.3.2" class="anchored" data-anchor-id="application-in-r"><span class="header-section-number">24.3.2</span> Application in R</h3>
+</section>
+<section id="using-polr-from-the-mass-library" class="level3" data-number="24.3.3">
+<h3 data-number="24.3.3" class="anchored" data-anchor-id="using-polr-from-the-mass-library"><span class="header-section-number">24.3.3</span> Using <code>polr()</code> from the <code>MASS</code> library</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>survey<span class="sc">$</span>rating <span class="ot">&lt;-</span> <span class="fu">factor</span>(survey<span class="sc">$</span>rating, <span class="at">ordered =</span> <span class="cn">TRUE</span>, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>, <span class="st">"4"</span>, <span class="st">"5"</span>))</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>survey.polr <span class="ot">&lt;-</span> <span class="fu">polr</span>(rating <span class="sc">~</span> </span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>                      freq <span class="sc">+</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>                      routine,</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>                      <span class="at">data =</span> survey)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(survey.polr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+polr(formula = rating ~ freq + routine, data = survey)
+
+Coefficients:
+             Value Std. Error  t value
+freqlo    -0.01095     0.1291 -0.08483
+routinelo -0.55521     0.1302 -4.26449
+
+Intercepts:
+    Value   Std. Error t value
+1|2 -0.8704  0.1228    -7.0859
+2|3  0.1342  0.1188     1.1290
+3|4  1.2528  0.1293     9.6856
+4|5  2.8915  0.2003    14.4345
+
+Residual Deviance: 2246.662 
+AIC: 2258.662 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Get diagnostics</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DescTools)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">PseudoR2</span>(survey.polr, <span class="fu">c</span>(<span class="st">"Nagelkerke"</span>, <span class="st">"AIC"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Nagelkerke          AIC 
+   0.0244793 2258.6617419 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Goodness-of-fit tests</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(generalhoslem)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">lipsitz.test</span>(survey.polr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Lipsitz goodness of fit test for ordinal response models
+
+data:  formula:  rating ~ freq + routine
+LR statistic = 20.261, df = 9, p-value = 0.01637</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pulkrob.chisq</span>(survey.polr, <span class="at">catvars =</span> <span class="fu">c</span>(<span class="st">"freq"</span>, <span class="st">"routine"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pulkstenis-Robinson chi-squared test
+
+data:  formula:  rating ~ freq + routine
+X-squared = 21.476, df = 9, p-value = 0.0107</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Test proportional odds assumption</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(brant)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">brant</span>(survey.polr) <span class="co"># p &lt; 0.05 is a violation of the assumption</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>-------------------------------------------- 
+Test for    X2  df  probability 
+-------------------------------------------- 
+Omnibus     14.45   6   0.02
+freqlo      6.5 3   0.09
+routinelo   8.14    3   0.04
+-------------------------------------------- 
+
+H0: Parallel Regression Assumption holds</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Plot (best so far)</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(effects)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggeffects)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Frequency effect plot</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">Effect</span>(<span class="at">focal.predictors =</span> <span class="fu">c</span>(<span class="st">"freq"</span>), <span class="at">mod =</span> survey.polr), <span class="at">rug =</span> <span class="cn">FALSE</span>, <span class="at">style =</span> <span class="st">"stacked"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Ordinal_regression_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Routine effect plot</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">Effect</span>(<span class="at">focal.predictors =</span> <span class="fu">c</span>(<span class="st">"routine"</span>), <span class="at">mod =</span> survey.polr), <span class="at">rug =</span> <span class="cn">FALSE</span>, <span class="at">style=</span><span class="st">"stacked"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Ordinal_regression_files/figure-html/unnamed-chunk-6-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Interaction</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">Effect</span>(<span class="at">focal.predictors =</span> <span class="fu">c</span>(<span class="st">"routine"</span>, <span class="st">"freq"</span>), <span class="at">mod =</span> survey.polr), <span class="at">rug =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">style=</span><span class="st">"stacked"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Ordinal_regression_files/figure-html/unnamed-chunk-6-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggarrange</span>(p1, p2, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">common.legend =</span> <span class="cn">TRUE</span>, <span class="at">legend =</span> <span class="st">"right"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Ordinal_regression_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Ordinal_regression_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="using-clm-from-the-ordinal-library" class="level3" data-number="24.3.4">
+<h3 data-number="24.3.4" class="anchored" data-anchor-id="using-clm-from-the-ordinal-library"><span class="header-section-number">24.3.4</span> Using <code>clm()</code> from the <code>ordinal</code> library</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to factors</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>survey<span class="sc">$</span>rating <span class="ot">&lt;-</span> <span class="fu">factor</span>(survey<span class="sc">$</span>rating, <span class="at">ordered =</span> <span class="cn">TRUE</span>, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>, <span class="st">"4"</span>, <span class="st">"5"</span>))</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>clm<span class="fl">.1</span> <span class="ot">&lt;-</span> ordinal<span class="sc">::</span><span class="fu">clm</span>(rating <span class="sc">~</span> </span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>                    freq <span class="sc">+</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>                    routine,</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>                    <span class="at">data =</span> survey, <span class="at">Hess=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="mixed-effects" class="level3" data-number="24.3.5">
+<h3 data-number="24.3.5" class="anchored" data-anchor-id="mixed-effects"><span class="header-section-number">24.3.5</span> Mixed-effects</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>survey<span class="sc">$</span>rating <span class="ot">&lt;-</span> <span class="fu">factor</span>(survey<span class="sc">$</span>rating, <span class="at">ordered =</span> <span class="cn">TRUE</span>, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>, <span class="st">"4"</span>, <span class="st">"5"</span>))</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co">#survey$verb &lt;- factor(survey$verb)</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co">#survey$ParticipantID &lt;- factor(survey$ParticipantID)</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co">#survey$routine &lt;- factor(survey$routine)</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="co">#survey$freq &lt;- factor(survey$freq)</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>clm<span class="fl">.2</span> <span class="ot">&lt;-</span> ordinal<span class="sc">::</span><span class="fu">clmm</span>(rating <span class="sc">~</span> </span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>                    freq <span class="sc">*</span> routine <span class="sc">+</span></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>                    (<span class="dv">1</span> <span class="sc">|</span> verb) <span class="sc">+</span></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>                    (<span class="dv">1</span> <span class="sc">|</span> ParticipantID),</span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>                    <span class="at">data =</span> survey, <span class="at">Hess=</span><span class="cn">TRUE</span>)</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(clm<span class="fl">.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Cumulative Link Mixed Model fitted with the Laplace approximation
+
+formula: rating ~ freq * routine + (1 | verb) + (1 | ParticipantID)
+data:    survey
+
+ link  threshold nobs logLik  AIC     niter     max.grad cond.H 
+ logit flexible  784  -991.65 2001.30 598(2386) 3.81e-04 1.5e+02
+
+Random effects:
+ Groups        Name        Variance Std.Dev.
+ ParticipantID (Intercept) 2.0628   1.4363  
+ verb          (Intercept) 0.9059   0.9518  
+Number of groups:  ParticipantID 98,  verb 8 
+
+Coefficients:
+                 Estimate Std. Error z value Pr(&gt;|z|)    
+freqlo            -0.1567     0.2138  -0.733 0.463437    
+routinelo         -0.7473     0.2103  -3.553 0.000381 ***
+freqlo:routinelo  -0.1406     0.2981  -0.472 0.637046    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Threshold coefficients:
+    Estimate Std. Error z value
+1|2  -1.3562     0.4020  -3.374
+2|3   0.2062     0.3988   0.517
+3|4   1.8329     0.4053   4.523
+4|5   3.8639     0.4401   8.780</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggarrange</span>(p_caterpillar, p_caterpillar2, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">common.legend =</span> <span class="cn">TRUE</span>, <span class="at">legend =</span> <span class="st">"right"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Ordinal_regression_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-baguleySeriousStatsGuide2012" class="csl-entry" role="listitem">
+Baguley, Thomas. 2012. <em>Serious <span>Stats</span>: <span>A</span> <span>Guide</span> to <span>Advanced</span> <span>Statistics</span> for the <span>Behavioral</span> <span>Sciences</span></em>. Houndmills, Basingstoke: Palgrave Macmillan.
+</div>
+<div id="ref-glassEnglishVerbsCan2021" class="csl-entry" role="listitem">
+Glass, Lelia. 2021. <span>“English Verbs Can Omit Their Objects When They Describe Routines.”</span> <em>English Language and Linguistics</em> 26 (1): 49–73. <a href="https://doi.org/10.1017/S1360674321000022">https://doi.org/10.1017/S1360674321000022</a>.
+</div>
+<div id="ref-powersStatisticalMethodsCategorical2008" class="csl-entry" role="listitem">
+Powers, Daniel A., and Yu Xie. 2008. <em>Statistical <span>Methods</span> for <span>Categorical</span> <span>Data</span> <span>Analysis</span></em>. 2. ed. Bingley: Emerald.
+</div>
+</div>
+</section>
+</section>
 
 
 </main> <!-- /main -->
@@ -821,4 +1286,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/VBuskin/Stats_with_R/blob/main/Ordinal_regression.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></div></div></footer></body></html>
+</body></html>

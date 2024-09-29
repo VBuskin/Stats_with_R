@@ -420,7 +420,7 @@ div.csl-indent {
   <ul>
   <li><a href="#recommended-reading" id="toc-recommended-reading" class="nav-link active" data-scroll-target="#recommended-reading"><span class="header-section-number">7.1</span> Recommended reading</a></li>
   <li><a href="#word-frequencies-i" id="toc-word-frequencies-i" class="nav-link" data-scroll-target="#word-frequencies-i"><span class="header-section-number">7.2</span> Word frequencies I</a></li>
-  <li><a href="#some-technical-details" id="toc-some-technical-details" class="nav-link" data-scroll-target="#some-technical-details"><span class="header-section-number">7.3</span> Some technical details</a></li>
+  <li><a href="#essential-r-concepts" id="toc-essential-r-concepts" class="nav-link" data-scroll-target="#essential-r-concepts"><span class="header-section-number">7.3</span> Essential R concepts</a></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">7.4</span> Exercises</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/VBuskin/Stats_with_R/blob/main/Vectors_Factors.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
@@ -573,9 +573,9 @@ What does ‘#’ mean? On comments in R
 </div>
 <p>In RStudio, you now have the option to save the plot to your computer. Once the figure has appeared in your “Plots” panel, you can click on “Export” in the menu bar below and proceed to choose the desired output format and file directory.</p>
 </section>
-<section id="some-technical-details" class="level2" data-number="7.3">
-<h2 data-number="7.3" class="anchored" data-anchor-id="some-technical-details"><span class="header-section-number">7.3</span> Some technical details</h2>
-<p>The example above demonstrates one of the most important data structures in R: <strong>Vectors</strong>. They form the cornerstone of various more complex objects such as data frames, and are essential to handling large data sets (e.g., corpora). And yet, vectors are very simple in that they are merely one-dimensional sequences of characters or numbers – no more, no less.</p>
+<section id="essential-r-concepts" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="essential-r-concepts"><span class="header-section-number">7.3</span> Essential R concepts</h2>
+<p>The example above demonstrates one of the most important data structures in R: <strong>Vectors</strong>. They form the cornerstone of various more complex objects such as data frames, and are essential to handling large data sets (e.g., corpora). And yet, vectors are very simple in that they are merely one-dimensional sequences of characters or numbers — no more, no less.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(lemma)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -586,7 +586,7 @@ What does ‘#’ mean? On comments in R
 <pre><code>[1] 418 139 337 281</code></pre>
 </div>
 </div>
-<p>The individual elements in these two vectors are not randomly jumbling around in virtual space, but are in fact following a clear order. Each element comes with an “ID” (or <strong>index</strong>), by which it can be accessed. For example, if we want to print the first lemma in our <code>lemma</code> variable, we append square brackets <code>[]</code> to it. This will allow us to <strong>subset</strong> it.</p>
+<p>The individual elements in these two vectors are not randomly jumbling around in virtual space, but are in fact following a clear order. Each element comes with an “ID” (or <strong>index</strong>), by which it can be accessed. For example, if we want to print the first lemma in our <code>lemma</code> variable, we append square brackets <code>[ ]</code> to it. This will allow us to <strong>subset</strong> it.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>lemma[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -611,113 +611,57 @@ What does ‘#’ mean? On comments in R
 <section id="exercises" class="level2" data-number="7.4">
 <h2 data-number="7.4" class="anchored" data-anchor-id="exercises"><span class="header-section-number">7.4</span> Exercises</h2>
 <ol type="1">
-<li>Create a vector that lists the third person personal pronouns of English (subject and object forms). Store them in a variable <code>pp3</code>.</li>
-</ol>
-<div class="cell">
-<details class="code-fold">
-<summary>Solution:</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>pp3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"he"</span>, <span class="st">"she"</span>, <span class="st">"it"</span>, <span class="st">"him"</span>, <span class="st">"her"</span>, <span class="st">"they"</span>, <span class="st">"them"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<ol start="2" type="1">
+<li><p>Create a vector that lists the third person personal pronouns of English (subject and object forms). Store them in a variable <code>pp3</code>.</p></li>
 <li><p>Now print …</p>
 <ul>
-<li>… the fourth element in <code>pp3</code>.</li>
-</ul>
-<div class="cell">
-<details class="code-fold">
-<summary>Solution:</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(pp3[<span class="dv">4</span>]) <span class="co"># or simply</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>pp3[<span class="dv">4</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<ul>
-<li>… elements 3 through 5.</li>
-</ul>
-<div class="cell">
-<details class="code-fold">
-<summary>Solution:</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>pp3[<span class="dv">3</span><span class="sc">:</span><span class="dv">5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<ul>
-<li>… all elements.</li>
-</ul>
-<div class="cell">
-<details class="code-fold">
-<summary>Solution:</summary>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>pp3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<ul>
-<li>… elements 1, 3 <strong>and</strong> 5.</li>
-</ul>
-<div class="cell">
-<details class="code-fold">
-<summary>Solution:</summary>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>pp3[<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div></li>
+<li><p>… the fourth element in <code>pp3</code>.</p></li>
+<li><p>… elements 3 through 5.</p></li>
+<li><p>… all elements.</p></li>
+<li><p>… elements 1, 3 <strong>and</strong> 5.</p></li>
+</ul></li>
 <li><p>When working with large datasets, we often don’t know whether an element is in the vector to begin with, let alone its position. For instance, if we wanted to check whether <em>they</em> is in <code>pp3</code> or not, we could use the handy notation below, returning a <code>TRUE</code> or <code>FALSE</code> value:</p></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="st">"they"</span> <span class="sc">%in%</span> pp3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] TRUE</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="st">"they"</span> <span class="sc">%in%</span> pp3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Ascertain whether the following items are in <code>pp3</code>:</p>
 <ul>
-<li><p><em>him</em></p>
-<div class="cell">
-<details class="code-fold">
-<summary>Solution:</summary>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="st">"him"</span> <span class="sc">%in%</span> pp3 <span class="co"># TRUE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div></li>
-<li><p><em>you</em></p>
-<div class="cell">
-<details class="code-fold">
-<summary>Solution:</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="st">"you"</span> <span class="sc">%in%</span> pp3 <span class="co"># FALSE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div></li>
-<li><p><em>it</em> and <em>them</em></p>
-<div class="cell">
-<details class="code-fold">
-<summary>Solution:</summary>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="st">"it"</span>, <span class="st">"them"</span>) <span class="sc">%in%</span> pp3 <span class="co"># TRUE TRUE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div></li>
-<li><p><em>we</em>, <em>us</em> and <em>me</em></p>
-<div class="cell">
-<details class="code-fold">
-<summary>Solution:</summary>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="st">"we"</span>, <span class="st">"us"</span>, <span class="st">"them"</span>) <span class="sc">%in%</span> pp3 <span class="co"># FALSE FALSE TRUE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div></li>
+<li><p><em>him</em></p></li>
+<li><p><em>you</em></p></li>
+<li><p><em>it</em> and <em>them</em></p></li>
+<li><p><em>we</em>, <em>us</em> and <em>me</em></p></li>
 </ul>
 <ol start="4" type="1">
-<li>Once we are sure that an element is in the vector of interest, another common problem that arises is finding its location. Luckily, R has got us covered! The <code>which()</code> function returns the index of an element.</li>
+<li>Once we are sure that an element is in the vector of interest, another common problem that arises is finding its location. In this case, we can use <code>which()</code> to return the index of an element.</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(pp3 <span class="sc">==</span> <span class="st">"they"</span>) <span class="co"># Note the two equal signs == !</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 6</code></pre>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(pp3 <span class="sc">==</span> <span class="st">"they"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<p>You can read this notation as “Which element in <code>pp3</code> is <em>they</em>?”. The output suggests that is in position <code>6</code>. Note that the number obtained depends on the order of elements you’ve chosen when creating <code>pp3</code>.</p>
-<p>Now, it’s your turn: Find the locations of <em>it</em> and <em>them</em> in <code>pp3</code>!</p>
+<p>You can read the code above as “Which element in <code>pp3</code> is <em>they</em>?”. Note that the index number depends on the order of elements you’ve chosen when creating <code>pp3</code>.</p>
+<p>Find the locations of <em>it</em> and <em>them</em> in <code>pp3</code>!</p>
+<ol start="5" type="1">
+<li>Consider the vector <code>numbers</code>.</li>
+</ol>
 <div class="cell">
-<details class="code-fold">
-<summary>Solution:</summary>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># "him"</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(pp3 <span class="sc">==</span> <span class="st">"it"</span>)</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co"># "you"</span></span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(pp3 <span class="sc">==</span> <span class="st">"them"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>numbers <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">500</span><span class="sc">:</span><span class="dv">1000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>What does the following code do? How does the output change when you subset <code>numbers</code> according to this expression?</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(numbers <span class="sc">&gt;</span> <span class="dv">600</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Describe the output of these code chunks:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>numbers[numbers <span class="sc">!=</span> <span class="dv">500</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>numbers[numbers <span class="sc">&gt;</span> <span class="dv">500</span> <span class="sc">&amp;</span> numbers <span class="sc">&lt;</span> <span class="dv">550</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>numbers[numbers <span class="sc">&lt;</span> <span class="dv">510</span> <span class="sc">|</span> numbers <span class="sc">&gt;</span> <span class="dv">990</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 

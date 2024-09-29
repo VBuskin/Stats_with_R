@@ -56,24 +56,24 @@ data <- data.frame(lemma, frequency)
 print(data)
 ```
 
+## Essential R concepts {#sec-df}
+
 The variable `data` is no longer a vector, but a **data frame** (often
 abbreviated as 'df'). Once again, each element carries its own label and
 can, therefore, be accessed or manipulated.
 
-## Some technical details {#sec-df}
-
-Since we now have two dimensions, the subsetting notation in square
+Since we now have two dimensions, the **subsetting** notation in square
 brackets `[ ]` has to reflect that. This is the general pattern:
 
-$$ df[row, column] $$ Following this logic, we can get the element in
-the first row of the first column like so:
+$$ df[row, column] $$Following this logic, we can get the element in the
+first row of the first column like so:
 
 ```{r}
 data[1,1]
 ```
 
 If we, however, need the entire first row, we simply omit the column
-part. Note that the comma `,` still needs to be present!
+part. The comma `,` needs to stay there:
 
 ```{r}
 data[1,]
@@ -87,6 +87,47 @@ data[,1]
 
 data$lemma
 ```
+
+## Handling data frames `tidyverse`-style
+
+The `tidyverse`-ecosystem is a collection of packages specifically
+designed for handling typical data science tasks as comfortably and
+elegantly as possible, supplying countless helper functions for data
+manipulation, transformation and visualisation.
+
+It offers some appealing alternatives to the Base R subsetting
+functions. Let's generate a tidyverse-style data frame, the **tibble**:
+
+```{r}
+library(tidyverse)
+
+data2 <- tibble(
+  lemma = c("start", "enjoy", "begin", "help"),
+  frequency = c(418, 139, 337, 281)
+)
+
+print(data2)
+```
+
+We can single out certain columns by using `select()`:
+
+```{r}
+select(data2, lemma)
+
+```
+
+It is very easy to filter the data frame according to certain criteria:
+
+```{r}
+filter(data2, lemma == "start")
+
+filter(data2, frequency > 150)
+
+```
+
+A extensive guide to the main tidyverse functions is provided in Chapter
+3 of the free eBook [R For Data Science (2nd
+edition)](https://r4ds.hadley.nz).
 
 ## Exercises
 

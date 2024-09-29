@@ -52,7 +52,6 @@ head(cl.order)
 
 ```
 
-
 ::: {.callout-note collapse="true" title="What's in the file? The `str()` function"}
 The easiest way to get a general overview of the full data set is to
 apply the `str()` function to the respective data frame.
@@ -79,7 +78,6 @@ head(cl.order)
 :::
 
 ::: {.callout-note collapse="true" title="Further details on the variables"}
-
 -   `ORDER`: Does the subordinate clause come before or after the main
     clause? ('sc-mc' vs. 'mc-sc')
 
@@ -99,7 +97,6 @@ head(cl.order)
     main clause and subordinate clause? (ratio-scaled continuous
     variables)
 :::
-
 
 ## Variables
 
@@ -126,7 +123,7 @@ value of `SUBORDTYPE` or `MORETHAN2CL` comes first or last:
 :::
 
 ::: {.callout-note title="Ordinal/categorical" collapse="true"}
-Ordinal variables are ordered. However, the intervals between their
+Ordinal variables are **ordered**. However, the intervals between their
 individual values are not interpretable. Heumann
 [-@heumann_introduction_2022: 6] provides a pertinent example:
 
@@ -137,7 +134,7 @@ individual values are not interpretable. Heumann
 > compared in a numerical way.
 :::
 
-::: {.callout-note title="Interval-scaled/continous" collapse="true"}
+::: {.callout-note title="Interval-scaled/continuous" collapse="true"}
 -   In the case of **interval**-scaled variables, the differences
     between the values can be interpreted, but their ratios must be
     treated with caution. A temperature of 4°C is 6 degrees warmer than
@@ -147,7 +144,7 @@ individual values are not interpretable. Heumann
     absence of temperature altogether.
 :::
 
-::: {.callout-note title="Ratio-scaled/continous" collapse="true"}
+::: {.callout-note title="Ratio-scaled/continuous" collapse="true"}
 -   **Ratio**-scaled variables allow both a meaningful interpretation of
     the differences between their values and (!) of the ratios between
     them. Within the context of clause length, `LENGTH_DIFF` values such
@@ -166,7 +163,9 @@ to changes in the values of another variable. When exploring such
 direction of the influence.
 
 In a linguistic context, we denote the variable whose usage patterns
-we'd like to explain as the **dependent** or **response** variable. A list of possible dependent variables is provided in the section on [Linguistic variables](Linguistic_variables.qmd)).
+we'd like to explain as the **dependent** or **response** variable. A
+list of possible dependent variables is provided in the section on
+[Linguistic variables](Linguistic_variables.qmd)).
 
 Its outcomes are said to depend on one or more **independent
 variables**. These are also often referred to as **explanatory**
@@ -175,10 +174,11 @@ variable. These can be age, sex or the variety of English at hand.
 
 ### Exercises
 
-1. Classify the remaining variables in the `cl.order` dataset.
+1.  Classify the remaining variables in the `cl.order` dataset.
 
-2. Consider the following statement:
+2.  Consider the following statement:
 
-> This paper examines the influence of clause length on the ordering of main and subordinate clauses. 
+> This paper examines the influence of clause length on the ordering of
+> main and subordinate clauses.
 
 What is the dependent variable? What is/are the independent variable(s)?

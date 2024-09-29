@@ -4974,8 +4974,9 @@ vertical-align: -.125em;
   <ul>
   <li><a href="#recommended-reading" id="toc-recommended-reading" class="nav-link active" data-scroll-target="#recommended-reading"><span class="header-section-number">8.1</span> Recommended reading</a></li>
   <li><a href="#word-frequencies-ii" id="toc-word-frequencies-ii" class="nav-link" data-scroll-target="#word-frequencies-ii"><span class="header-section-number">8.2</span> Word frequencies II</a></li>
-  <li><a href="#sec-df" id="toc-sec-df" class="nav-link" data-scroll-target="#sec-df"><span class="header-section-number">8.3</span> Some technical details</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">8.4</span> Exercises</a></li>
+  <li><a href="#sec-df" id="toc-sec-df" class="nav-link" data-scroll-target="#sec-df"><span class="header-section-number">8.3</span> Essential R concepts</a></li>
+  <li><a href="#handling-data-frames-tidyverse-style" id="toc-handling-data-frames-tidyverse-style" class="nav-link" data-scroll-target="#handling-data-frames-tidyverse-style"><span class="header-section-number">8.4</span> Handling data frames <code>tidyverse</code>-style</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">8.5</span> Exercises</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/VBuskin/Stats_with_R/blob/main/Data_frames.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
     </div>
@@ -5066,19 +5067,19 @@ vertical-align: -.125em;
 4  help       281</code></pre>
 </div>
 </div>
-<p>The variable <code>data</code> is no longer a vector, but a <strong>data frame</strong> (often abbreviated as ‘df’). Once again, each element carries its own label and can, therefore, be accessed or manipulated.</p>
 </section>
 <section id="sec-df" class="level2" data-number="8.3">
-<h2 data-number="8.3" class="anchored" data-anchor-id="sec-df"><span class="header-section-number">8.3</span> Some technical details</h2>
-<p>Since we now have two dimensions, the subsetting notation in square brackets <code>[ ]</code> has to reflect that. This is the general pattern:</p>
-<p><span class="math display">\[ df[row, column] \]</span> Following this logic, we can get the element in the first row of the first column like so:</p>
+<h2 data-number="8.3" class="anchored" data-anchor-id="sec-df"><span class="header-section-number">8.3</span> Essential R concepts</h2>
+<p>The variable <code>data</code> is no longer a vector, but a <strong>data frame</strong> (often abbreviated as ‘df’). Once again, each element carries its own label and can, therefore, be accessed or manipulated.</p>
+<p>Since we now have two dimensions, the <strong>subsetting</strong> notation in square brackets <code>[ ]</code> has to reflect that. This is the general pattern:</p>
+<p><span class="math display">\[ df[row, column] \]</span>Following this logic, we can get the element in the first row of the first column like so:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>data[<span class="dv">1</span>,<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "start"</code></pre>
 </div>
 </div>
-<p>If we, however, need the entire first row, we simply omit the column part. Note that the comma <code>,</code> still needs to be present!</p>
+<p>If we, however, need the entire first row, we simply omit the column part. The comma <code>,</code> needs to stay there:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>data[<span class="dv">1</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -5098,8 +5099,65 @@ vertical-align: -.125em;
 </div>
 </div>
 </section>
-<section id="exercises" class="level2" data-number="8.4">
-<h2 data-number="8.4" class="anchored" data-anchor-id="exercises"><span class="header-section-number">8.4</span> Exercises</h2>
+<section id="handling-data-frames-tidyverse-style" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="handling-data-frames-tidyverse-style"><span class="header-section-number">8.4</span> Handling data frames <code>tidyverse</code>-style</h2>
+<p>The <code>tidyverse</code>-ecosystem is a collection of packages specifically designed for handling typical data science tasks as comfortably and elegantly as possible, supplying countless helper functions for data manipulation, transformation and visualisation.</p>
+<p>It offers some appealing alternatives to the Base R subsetting functions. Let’s generate a tidyverse-style data frame, the <strong>tibble</strong>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>data2 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">lemma =</span> <span class="fu">c</span>(<span class="st">"start"</span>, <span class="st">"enjoy"</span>, <span class="st">"begin"</span>, <span class="st">"help"</span>),</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">frequency =</span> <span class="fu">c</span>(<span class="dv">418</span>, <span class="dv">139</span>, <span class="dv">337</span>, <span class="dv">281</span>)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(data2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 2
+  lemma frequency
+  &lt;chr&gt;     &lt;dbl&gt;
+1 start       418
+2 enjoy       139
+3 begin       337
+4 help        281</code></pre>
+</div>
+</div>
+<p>We can single out certain columns by using <code>select()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(data2, lemma)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 1
+  lemma
+  &lt;chr&gt;
+1 start
+2 enjoy
+3 begin
+4 help </code></pre>
+</div>
+</div>
+<p>It is very easy to filter the data frame according to certain criteria:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(data2, lemma <span class="sc">==</span> <span class="st">"start"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+  lemma frequency
+  &lt;chr&gt;     &lt;dbl&gt;
+1 start       418</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(data2, frequency <span class="sc">&gt;</span> <span class="dv">150</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  lemma frequency
+  &lt;chr&gt;     &lt;dbl&gt;
+1 start       418
+2 begin       337
+3 help        281</code></pre>
+</div>
+</div>
+<p>A extensive guide to the main tidyverse functions is provided in Chapter 3 of the free eBook <a href="https://r4ds.hadley.nz">R For Data Science (2nd edition)</a>.</p>
+</section>
+<section id="exercises" class="level2" data-number="8.5">
+<h2 data-number="8.5" class="anchored" data-anchor-id="exercises"><span class="header-section-number">8.5</span> Exercises</h2>
 <ol type="1">
 <li><p>Recreate the barplot from the previous unit by subsetting the <code>data</code> variable accordingly.</p></li>
 <li></li>
