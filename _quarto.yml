@@ -49,6 +49,10 @@ book:
         - Mixed_effects_regression.qmd
         - Ordinal_regression.qmd
         - Decision_trees_and_random_forests.qmd
+    - part: "Multivariate data analysis"
+      chapters:
+        - PCA.qmd
+        - EFA.qmd
     - part: References
       chapters:
         - references.qmd

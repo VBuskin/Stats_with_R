@@ -128,7 +128,7 @@ div.csl-indent {
 
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -396,7 +396,7 @@ div.csl-indent {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
- <span class="menu-text">References</span></a>
+ <span class="menu-text">Multivariate data analysis</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -404,8 +404,31 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./PCA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Principal Components Analysis</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./EFA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Exploratory Factor Analysis</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+ <span class="menu-text">References</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">References</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">References</span></span></a>
   </div>
 </li>
       </ul>
@@ -427,7 +450,7 @@ div.csl-indent {
   </ul></li>
   <li><a href="#logistic-regression" id="toc-logistic-regression" class="nav-link" data-scroll-target="#logistic-regression"><span class="header-section-number">22.3</span> Logistic regression</a>
   <ul class="collapse">
-  <li><a href="#the-logistic-model" id="toc-the-logistic-model" class="nav-link" data-scroll-target="#the-logistic-model"><span class="header-section-number">22.3.1</span> The logistic model</a></li>
+  <li><a href="#the-simple-logistic-model" id="toc-the-simple-logistic-model" class="nav-link" data-scroll-target="#the-simple-logistic-model"><span class="header-section-number">22.3.1</span> The simple logistic model</a></li>
   <li><a href="#multiple-logistic-regression" id="toc-multiple-logistic-regression" class="nav-link" data-scroll-target="#multiple-logistic-regression"><span class="header-section-number">22.3.2</span> Multiple logistic regression</a></li>
   <li><a href="#odds-ratios" id="toc-odds-ratios" class="nav-link" data-scroll-target="#odds-ratios"><span class="header-section-number">22.3.3</span> Odds ratios</a></li>
   </ul></li>
@@ -445,7 +468,7 @@ div.csl-indent {
 <div class="toc-actions"><ul><li><a href="https://github.com/VBuskin/Stats_with_R/blob/main/Logistic_regression.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Linear_regression.html">Machine learning</a></li><li class="breadcrumb-item"><a href="./Logistic_regression.html"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Logistic Regression</span></a></li></ol></nav>
 <div class="quarto-title">
@@ -474,20 +497,29 @@ div.csl-indent {
 
 <section id="recommended-reading" class="level2" data-number="22.1">
 <h2 data-number="22.1" class="anchored" data-anchor-id="recommended-reading"><span class="header-section-number">22.1</span> Recommended reading</h2>
+<p>Specifically for linguists:</p>
 <blockquote class="blockquote">
-<p>This unit is based on James et al. <span class="citation" data-cites="james_introduction_2021">(<a href="references.html#ref-james_introduction_2021" role="doc-biblioref">2021</a>: Chapter 4)</span> and Levshina <span class="citation" data-cites="levshina_how_2015">(<a href="references.html#ref-levshina_how_2015" role="doc-biblioref">2015</a>: Chapter 12)</span>. For an in-depth introduction, see Hosmer &amp; Lemeshow <span class="citation" data-cites="hosmer_applied_2008">(<a href="references.html#ref-hosmer_applied_2008" role="doc-biblioref">2008</a>)</span>.</p>
+<p>Levshina <span class="citation" data-cites="levshina_how_2015">(<a href="references.html#ref-levshina_how_2015" role="doc-biblioref">2015</a>: Chapter 12)</span></p>
+<p>Winter <span class="citation" data-cites="winter_statistics_2020">(<a href="references.html#ref-winter_statistics_2020" role="doc-biblioref">2020</a>: Chapter 12)</span></p>
+</blockquote>
+<p>Full theoretical treatment:</p>
+<blockquote class="blockquote">
+<p>James et al. <span class="citation" data-cites="james_introduction_2021">(<a href="references.html#ref-james_introduction_2021" role="doc-biblioref">2021</a>: Chapter 4)</span></p>
+<p>Hosmer &amp; Lemeshow <span class="citation" data-cites="hosmer_applied_2008">(<a href="references.html#ref-hosmer_applied_2008" role="doc-biblioref">2008</a>)</span>.</p>
 </blockquote>
 </section>
-<section id="preparation" class="level2 smaller" data-number="22.2">
+<section id="preparation" class="level2 smaller page-columns page-full" data-number="22.2">
 <h2 class="smaller anchored" data-number="22.2" data-anchor-id="preparation"><span class="header-section-number">22.2</span> Preparation</h2>
-<p>Consider the data from Buskin’s <span class="citation" data-cites="buskinDefiniteNullInstantiationfc">(<a href="references.html#ref-buskinDefiniteNullInstantiationfc" role="doc-biblioref">n.d.</a>)</span> corpus-study on subject pronoun realisation:</p>
-<div class="cell">
+<p>Consider the data from Buskin’s <span class="citation" data-cites="buskinDefiniteNullInstantiationfc">(<a href="references.html#ref-buskinDefiniteNullInstantiationfc" role="doc-biblioref">n.d.</a>)</span><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> corpus-study on subject pronoun realisation:</p>
+<div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;The input data is can be accessed via this OSF repository: <a href="https://osf.io/qgnms" class="uri">https://osf.io/qgnms</a>.</p></li></div><div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load libraries</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tidyverse"</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"rms"</span>) <span class="co"># For regression modelling</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>data_pro <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/Buskin_pronoun_data.csv"</span>, <span class="at">sep =</span> <span class="st">","</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rms)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggeffects)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>data_pro <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"INPUT_pronouns.csv"</span>, <span class="at">sep =</span> <span class="st">","</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li><p><strong>Target variable</strong>:</p>
@@ -523,37 +555,27 @@ div.csl-indent {
 <section id="descriptive-overview" class="level3" data-number="22.2.1">
 <h3 data-number="22.2.1" class="anchored" data-anchor-id="descriptive-overview"><span class="header-section-number">22.2.1</span> Descriptive overview</h3>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Raw data for Ref x Reg x Var</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>data_pro <span class="sc">%&gt;%</span> </span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Reference, Register, Variety) <span class="sc">%&gt;%</span> </span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Reference <span class="sc">==</span> <span class="st">"null"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pct =</span> n<span class="sc">/</span><span class="fu">sum</span>(n) <span class="sc">*</span> <span class="dv">100</span>) <span class="ot">-&gt;</span> pro_stats1</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Raw data for Ref x Per x Var</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>data_pro <span class="sc">%&gt;%</span> </span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Reference, Person, Variety) <span class="sc">%&gt;%</span> </span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Reference <span class="sc">==</span> <span class="st">"null"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pct =</span> n<span class="sc">/</span><span class="fu">sum</span>(n) <span class="sc">*</span> <span class="dv">100</span>) <span class="ot">-&gt;</span> pro_stats2</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Raw data for Ref x Referent. x Var</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>data_pro <span class="sc">%&gt;%</span> </span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Reference, Referentiality, Variety) <span class="sc">%&gt;%</span> </span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Reference <span class="sc">==</span> <span class="st">"null"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pct =</span> n<span class="sc">/</span><span class="fu">sum</span>(n) <span class="sc">*</span> <span class="dv">100</span>) <span class="ot">-&gt;</span> pro_stats3</span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot 1</span></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>pro_stats1 <span class="sc">%&gt;%</span></span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Variety, <span class="at">y =</span> pct, <span class="at">color =</span> Register)) <span class="sc">+</span></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Null subjects by Variety and Register"</span>,</span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Proportion of null subjects"</span></span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Logistic_regression_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="logistic-regression" class="level2 page-columns page-full" data-number="22.3">
+<h2 data-number="22.3" class="anchored" data-anchor-id="logistic-regression"><span class="header-section-number">22.3</span> Logistic regression</h2>
+<p>In contrast to linear regression, logistic regression models a <strong>qualitative response variable</strong> <span class="math inline">\(Y\)</span> with two outcomes<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. In the present study, <span class="math inline">\(Y\)</span> is pronominal <code>Reference</code> and has the outcomes <code>Reference = null</code> and <code>Reference = overt</code>, which represent null and overt subjects, respectively. Dichotomous variables of this kind are also often coded as <code>yes</code>/<code>no</code> or <code>1</code>/<code>0</code>.</p>
+<div class="no-row-height column-margin column-container"><li id="fn2"><p><sup>2</sup>&nbsp;Logistic regression can also be used for <span class="math inline">\(\geq 3\)</span> classes by breaking down the response variable into a series of dichotomous variables. This is also known as <strong>multinomial logistic regression</strong> or <strong>softmax regression.</strong></p></li></div><p>Another difference from linear regression is the <strong>output</strong> of the model. In linear regression, we obtain a predicted value for the continuous response variable we’re interested in. For instance, if we’re modelling reaction times, the model will return an estimated reaction time (given the predictors).</p>
+<p>In logistic regression, however, we either get a <strong>class label</strong> or a <strong>probability</strong>. When modelling pronominal reference, the model will thus either tell us</p>
+<ol type="1">
+<li><p>whether a speaker would use an overt or a null subject in a given observation (class prediction).</p></li>
+<li><p>what the probability of using one variant vs.&nbsp;the other would be (probability prediction).</p></li>
+</ol>
+<p>A core component of logistic regression is the <strong>logistic function</strong>. The rationale for using it is that the output of the function will always lie between <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span>, and it will always denote a <strong>probability</strong>.</p>
+<div class="cell">
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -561,95 +583,51 @@ div.csl-indent {
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot 2</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>pro_stats2 <span class="sc">%&gt;%</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Variety, <span class="at">y =</span> pct, <span class="at">color =</span> Person)) <span class="sc">+</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Null subjects by Variety and Person"</span>,</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Proportion of null subjects"</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="Logistic_regression_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid figure-img" width="672"></p>
-</figure>
 </div>
-</div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot 3</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>pro_stats3 <span class="sc">%&gt;%</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Variety, <span class="at">y =</span> pct, <span class="at">color =</span> Referentiality)) <span class="sc">+</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Null subjects by Variety and Referentiality"</span>,</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Proportion of null subjects"</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="Logistic_regression_files/figure-html/unnamed-chunk-4-3.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="logistic-regression" class="level2" data-number="22.3">
-<h2 data-number="22.3" class="anchored" data-anchor-id="logistic-regression"><span class="header-section-number">22.3</span> Logistic regression</h2>
-<ul>
-<li><p>In contrast to linear regression, logistic regression models a <strong>qualitative response variable</strong> <span class="math inline">\(Y\)</span> (here: <code>Reference</code>) with two outcomes as a function of the independent variables <span class="math inline">\(X_p\)</span> (<code>Register</code>, Variety etc.). The goal is to predict a value for <span class="math inline">\(Y\)</span>.</p></li>
-<li><p>For a given observation, the model should predict either a specific category of <span class="math inline">\(Y\)</span> (e.g., <code>Reference = overt</code> or <code>Reference = null</code>) or provide a probability estimation of a particular outcome (e.g., the probability of <code>Reference = null</code>).</p></li>
-<li><p>The probability that <code>Reference = null</code> given a predictor (e.g., <code>Register</code>) can be written as <span class="math inline">\(P(\text{Reference} = \text{null} \mid \text{Register})\)</span> or more simply as <span class="math inline">\(p(\text{Register})\)</span>.</p></li>
-<li><p>A core component of logistic regression is the <strong>logistic function</strong>. The rationale for using it is that the output of the function will always lie between <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span>, and it will always denote a <strong>probability</strong>.</p></li>
-</ul>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="Logistic_regression_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<section id="the-logistic-model" class="level3" data-number="22.3.1">
-<h3 data-number="22.3.1" class="anchored" data-anchor-id="the-logistic-model"><span class="header-section-number">22.3.1</span> The logistic model</h3>
-<p>Assuming a binary response variable <span class="math inline">\(Y\)</span> with the values 1 and 0 and a single predictor <span class="math inline">\(X\)</span>, we can model the probability <span class="math inline">\(P(Y = 1\vert X) = p(X)\)</span> as</p>
+<section id="the-simple-logistic-model" class="level3 page-columns page-full" data-number="22.3.1">
+<h3 data-number="22.3.1" class="anchored" data-anchor-id="the-simple-logistic-model"><span class="header-section-number">22.3.1</span> The simple logistic model</h3>
+<p>Assuming a binary response variable <span class="math inline">\(Y\)</span> with the values 1 and 0 and a single predictor <span class="math inline">\(X\)</span>, we can model the probability <span class="math inline">\(P(Y = 1 \mid X)\)</span> as</p>
 <p><span class="math display">\[
-p(X) = \frac{e^{\beta_0 + \beta_1X}}{1 + e^{\beta_0 + \beta_1X}}.
+P(Y = 1 \mid  X) = \frac{e^{\beta_0 + \beta_1X}}{1 + e^{\beta_0 + \beta_1X}}.
 \]</span></p>
-<p>Note that <span class="math inline">\(e \approx 2.71828\)</span>. This expression is equivalent to</p>
+<p>The above expression is equivalent to</p>
 <p><span class="math display">\[
-\log\left(\frac{p(X)}{1-p(X)}\right) = \beta_0 + \beta_1X.
+\log\left(\frac{P(Y = 1 \mid  X)}{1 - P(Y = 1 \mid  X)}\right) = \beta_0 + \beta_1X.
 \]</span></p>
-<p>The fraction <span class="math inline">\(\frac{p(X)}{1-p(X)}\)</span> represents the <strong>odds</strong>, which stand for to the probability of one outcome (e.g., <code>Reference = null</code>) compared to the other (e.g., <code>Reference = overt</code>). Their logarithmic transformation are the <strong>log odds</strong> (or <strong>logits</strong>) of a model. When interpreting the output of a logistic model, note that</p>
+<p>The fraction <span class="math inline">\(\frac{P(Y = 1 \mid X)}{1-P(Y = 1 \mid X)}\)</span> represents the <strong>odds</strong>, which stand for to the probability of one outcome (e.g., <code>Reference = null</code>) compared to the other (e.g., <code>Reference = overt</code>).</p>
+<p>Their logarithmic transformation are the <strong>log odds</strong> (or <strong>logits</strong>) of one outcome versus the other.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Understanding log odds">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Understanding log odds
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>When interpreting the output of a logistic model, note that</p>
 <ul>
-<li><p>positive log odds indicate an <strong>increase</strong> in <span class="math inline">\(p(X)\)</span>, whereas</p></li>
-<li><p>negative log odds indicate a <strong>decrease</strong> in <span class="math inline">\(p(X)\)</span>.</p></li>
+<li><p>positive log odds indicate an <strong>increase</strong> in <span class="math inline">\(\frac{P(Y = 1 \mid X)}{1-P(Y = 1 \mid X)}\)</span>, whereas</p></li>
+<li><p>negative log odds indicate a <strong>decrease</strong> in <span class="math inline">\(\frac{P(Y = 1 \mid X)}{1-P(Y = 1 \mid X)}\)</span>.</p></li>
 </ul>
-<p>If <span class="math inline">\(X = \text{Register}\)</span>, then our model has the form:</p>
+</div>
+</div>
+<p>In more concrete terms: If <span class="math inline">\(X = \text{Register}\)</span>, then our model would have the form:</p>
 <p><span class="math display">\[
 \log\left(\frac{P(\text{Reference} = \text{null} \mid \text{Register})}{1- P(\text{Reference} = \text{null} \mid \text{Register})}\right) = \beta_0 + \beta_1\text{Register}
 \]</span></p>
-</section>
+<p>Given <code>Register</code>, the log odds of a null subject versus an overt one is essentially equivalent to the linear model equation. The model parameters <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> are typically estimated using <strong>Maximum Likelihood Estimation</strong><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> (MLE).</p>
+<div class="no-row-height column-margin column-container"><li id="fn3"><p><sup>3</sup>&nbsp;The goal of the fitting procedure is to maximise the likelihood function of the parameter matrix <span class="math inline">\(\ell(\mathbf{\beta})\)</span>. Via partial differentiation, an intermediary result can be attained which can only be solved using an iterative algorithm (e.g. Newton-Ralphson). For further technical details, see Wood <span class="citation" data-cites="woodGeneralizedAdditiveModels2006">(<a href="references.html#ref-woodGeneralizedAdditiveModels2006" role="doc-biblioref">2006</a>: 63-66)</span> or Agresti &amp; Kateri <span class="citation" data-cites="agrestiFoundationsStatisticsData2022">(<a href="references.html#ref-agrestiFoundationsStatisticsData2022" role="doc-biblioref">2022</a>: 291-294)</span>.</p></li></div></section>
 <section id="multiple-logistic-regression" class="level3" data-number="22.3.2">
 <h3 data-number="22.3.2" class="anchored" data-anchor-id="multiple-logistic-regression"><span class="header-section-number">22.3.2</span> Multiple logistic regression</h3>
 <p>If more than one predictor is included, the above equations can be expanded so as to take into account <span class="math inline">\(p\)</span> slopes <span class="math inline">\(\beta_p\)</span> for <span class="math inline">\(p\)</span> independent variables <span class="math inline">\(X_p\)</span>.</p>
 <p><span class="math display">\[
-p(X) = \frac{e^{\beta_0 + \beta_1X_1 + ... +  \beta_pX_p}}{1 + e^{\beta_0 + \beta_1X_1 + ... + \beta_pX_p}}.
+\log\left(\frac{P(Y = 1 \mid X_1 + ... + X_p)}{1 - P(Y = 1 \mid X_1 + ... + X_p)}\right) = \frac{e^{\beta_0 + \beta_1X_1 + ... +  \beta_pX_p}}{1 + e^{\beta_0 + \beta_1X_1 + ... + \beta_pX_p}}.
 \]</span> Thus, the log odds correspond to the sum of <span class="math inline">\(\beta_pX_p\)</span>,</p>
 <p><span class="math display">\[
 \begin{aligned}
-\log\left(\frac{p(X)}{1-p(X)}\right) &amp;= \beta_0 + \beta_1X_1 + ... +  \beta_pX_p \\
+\log\left(\frac{P(Y = 1 \mid X_p)}{1 - P(Y = 1 \mid X_p)}\right) &amp; = \beta_0 + \beta_1X_1 + ... +  \beta_pX_p \\
 &amp; = \beta_0 + \sum_{i=1}^{p} \beta_i X_i
 \end{aligned}
 \]</span> respectively.</p>
@@ -660,10 +638,26 @@ p(X) = \frac{e^{\beta_0 + \beta_1X_1 + ... +  \beta_pX_p}}{1 + e^{\beta_0 + \bet
 <p><span class="math display">\[
 OR(X_1) = e^{\beta_1}.
 \]</span></p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Understanding odds ratios">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Understanding odds ratios
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <p>Essentially, the OR describes the ratio between two odds with respect to another independent variable. This is illustrated for <code>Reference</code> given <code>Register</code> below:</p>
 <p><span class="math display">\[
 \text{OR}(\text{Reference} \mid \text{Register}) = \frac{\frac{P(\text{Reference} = \text{null} \mid \text{Register} = \text{S1A})}{P(\text{Reference} = \text{overt} \mid \text{Register} = \text{S1A})}}{\frac{P(\text{Reference} = \text{null} \mid \text{Register} = \text{S1B})}{P(\text{Reference} = \text{overt} \mid \text{Register} = \text{S1B})}}
-\]</span> Read as: ‘<strong>The ratio between</strong> the probability of a null vs.&nbsp;overt object in S1A <strong>and</strong> the probability of a null vs.&nbsp;overt object in S1B’.</p>
+\]</span></p>
+<p>Read as: ‘<strong>The ratio between</strong> the probability of a null vs.&nbsp;overt object in S1A <strong>and</strong> the probability of a null vs.&nbsp;overt object in S1B’.</p>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="workflow-in-r" class="level2" data-number="22.4">
@@ -729,14 +723,14 @@ H_1: &amp; \quad \text{At least one } \beta_i \neq 0 \text{ for } i \in \{1, 2, 
 </tbody>
 </table>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Store "Reference" as factor</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>data_pro<span class="sc">$</span>Reference <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(data_pro<span class="sc">$</span>Reference)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Specify reference level (the 'unmarked' case)</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>data_pro<span class="sc">$</span>Reference <span class="ot">&lt;-</span> <span class="fu">relevel</span>(data_pro<span class="sc">$</span>Reference, <span class="st">"overt"</span>)</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Print levels</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(data_pro<span class="sc">$</span>Reference)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Store "Reference" as factor</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>data_pro<span class="sc">$</span>Reference <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(data_pro<span class="sc">$</span>Reference)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Specify reference level (the 'unmarked' case)</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>data_pro<span class="sc">$</span>Reference <span class="ot">&lt;-</span> <span class="fu">relevel</span>(data_pro<span class="sc">$</span>Reference, <span class="st">"overt"</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Print levels</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(data_pro<span class="sc">$</span>Reference)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "overt" "null" </code></pre>
 </div>
@@ -745,29 +739,29 @@ H_1: &amp; \quad \text{At least one } \beta_i \neq 0 \text{ for } i \in \{1, 2, 
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Store "Register" as factor</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>data_pro<span class="sc">$</span>Register <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(data_pro<span class="sc">$</span>Register)</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Specify reference level</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>data_pro<span class="sc">$</span>Register <span class="ot">&lt;-</span> <span class="fu">relevel</span>(data_pro<span class="sc">$</span>Register, <span class="st">"S1A"</span>)</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Store "Variety" as factor</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>data_pro<span class="sc">$</span>Variety <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(data_pro<span class="sc">$</span>Variety)</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="do">## Specify reference level</span></span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>data_pro<span class="sc">$</span>Variety <span class="ot">&lt;-</span> <span class="fu">relevel</span>(data_pro<span class="sc">$</span>Variety, <span class="st">"GB"</span>)</span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Store "Person" as factor</span></span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>data_pro<span class="sc">$</span>Person <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(data_pro<span class="sc">$</span>Person)</span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Specify reference level</span></span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>data_pro<span class="sc">$</span>Person <span class="ot">&lt;-</span> <span class="fu">relevel</span>(data_pro<span class="sc">$</span>Person, <span class="st">"3"</span>)</span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Store "Referentiality" as factor</span></span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>data_pro<span class="sc">$</span>Referentiality <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(data_pro<span class="sc">$</span>Referentiality)</span>
-<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a><span class="do">## Specify reference level</span></span>
-<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>data_pro<span class="sc">$</span>Referentiality <span class="ot">&lt;-</span> <span class="fu">relevel</span>(data_pro<span class="sc">$</span>Referentiality, <span class="st">"referential"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Store "Register" as factor</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>data_pro<span class="sc">$</span>Register <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(data_pro<span class="sc">$</span>Register)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Specify reference level</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>data_pro<span class="sc">$</span>Register <span class="ot">&lt;-</span> <span class="fu">relevel</span>(data_pro<span class="sc">$</span>Register, <span class="st">"S1A"</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Store "Variety" as factor</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>data_pro<span class="sc">$</span>Variety <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(data_pro<span class="sc">$</span>Variety)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="do">## Specify reference level</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>data_pro<span class="sc">$</span>Variety <span class="ot">&lt;-</span> <span class="fu">relevel</span>(data_pro<span class="sc">$</span>Variety, <span class="st">"GB"</span>)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Store "Person" as factor</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>data_pro<span class="sc">$</span>Person <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(data_pro<span class="sc">$</span>Person)</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Specify reference level</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>data_pro<span class="sc">$</span>Person <span class="ot">&lt;-</span> <span class="fu">relevel</span>(data_pro<span class="sc">$</span>Person, <span class="st">"3"</span>)</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Store "Referentiality" as factor</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>data_pro<span class="sc">$</span>Referentiality <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(data_pro<span class="sc">$</span>Referentiality)</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="do">## Specify reference level</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>data_pro<span class="sc">$</span>Referentiality <span class="ot">&lt;-</span> <span class="fu">relevel</span>(data_pro<span class="sc">$</span>Referentiality, <span class="st">"referential"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
@@ -788,13 +782,13 @@ Note
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># With lrm(); requires library("rms")</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit interaction model</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>Reference.lrm <span class="ot">&lt;-</span> <span class="fu">lrm</span>(Reference <span class="sc">~</span> Register <span class="sc">+</span> Variety <span class="sc">+</span> Register<span class="sc">:</span>Variety <span class="sc">+</span> Person, <span class="at">data =</span> data_pro)</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co"># View model statistics</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>Reference.lrm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># With lrm(); requires library("rms")</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit interaction model</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>Reference.lrm <span class="ot">&lt;-</span> <span class="fu">lrm</span>(Reference <span class="sc">~</span> Register <span class="sc">+</span> Variety <span class="sc">+</span> Register<span class="sc">:</span>Variety <span class="sc">+</span> Person, <span class="at">data =</span> data_pro)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># View model statistics</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>Reference.lrm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Logistic Regression Model
 
@@ -822,12 +816,12 @@ Register=S1B * Variety=SING -0.4753 0.4688  -1.01 0.3107  </code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># With (glm); available in base R</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Note the additional "family" argument!</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>Reference.glm <span class="ot">&lt;-</span> <span class="fu">glm</span>(Reference <span class="sc">~</span> Register <span class="sc">+</span> Variety <span class="sc">+</span> Register<span class="sc">:</span>Variety <span class="sc">+</span> Person, <span class="at">data =</span> data_pro, <span class="at">family =</span> <span class="st">"binomial"</span>)</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># View model statistics</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Reference.glm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># With (glm); available in base R</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Note the additional "family" argument!</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>Reference.glm <span class="ot">&lt;-</span> <span class="fu">glm</span>(Reference <span class="sc">~</span> Register <span class="sc">+</span> Variety <span class="sc">+</span> Register<span class="sc">:</span>Variety <span class="sc">+</span> Person, <span class="at">data =</span> data_pro, <span class="at">family =</span> <span class="st">"binomial"</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># View model statistics</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Reference.glm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -841,7 +835,7 @@ Stepwise variable selection
 <div class="callout-body-container callout-body">
 <p>With the function <code>drop1()</code>, it is possible to successively remove variables from the complex model to ascertain which ones improve the model significantly (i.e., decrease the deviance and AIC scores).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">drop1</span>(Reference.glm, <span class="at">test =</span> <span class="st">"Chisq"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">drop1</span>(Reference.glm, <span class="at">test =</span> <span class="st">"Chisq"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -849,91 +843,101 @@ Stepwise variable selection
 <section id="step-4-confidence-intervals-and-odds-ratios" class="level3" data-number="22.4.4">
 <h3 data-number="22.4.4" class="anchored" data-anchor-id="step-4-confidence-intervals-and-odds-ratios"><span class="header-section-number">22.4.4</span> Step 4: Confidence intervals and odds ratios</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tidy the model output</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>tidy_model <span class="ot">&lt;-</span> <span class="fu">tidy</span>(Reference.glm, <span class="at">conf.int =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove intercept, compute odds ratios and their CIs</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>tidy_model <span class="ot">&lt;-</span> tidy_model <span class="sc">%&gt;%</span> </span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(term <span class="sc">!=</span> <span class="st">"(Intercept)"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">odds_ratio =</span> <span class="fu">exp</span>(estimate),</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">odds.conf.low =</span> <span class="fu">exp</span>(conf.low),</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">odds.conf.high =</span> <span class="fu">exp</span>(conf.high)</span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tidy the model output</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>tidy_model <span class="ot">&lt;-</span> <span class="fu">tidy</span>(Reference.glm, <span class="at">conf.int =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove intercept, compute odds ratios and their CIs</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>tidy_model <span class="ot">&lt;-</span> tidy_model <span class="sc">%&gt;%</span> </span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(term <span class="sc">!=</span> <span class="st">"(Intercept)"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">odds_ratio =</span> <span class="fu">exp</span>(estimate),</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">odds.conf.low =</span> <span class="fu">exp</span>(conf.low),</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">odds.conf.high =</span> <span class="fu">exp</span>(conf.high)</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="step-5-visualise-the-model" class="level3" data-number="22.4.5">
 <h3 data-number="22.4.5" class="anchored" data-anchor-id="step-5-visualise-the-model"><span class="header-section-number">22.4.5</span> Step 5: Visualise the model</h3>
+<p>Plot model coefficients:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the coefficient plot</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(tidy_model, <span class="fu">aes</span>(<span class="at">x =</span> estimate, <span class="at">y =</span> term)) <span class="sc">+</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbarh</span>(<span class="fu">aes</span>(<span class="at">xmin =</span> conf.low, <span class="at">xmax =</span> conf.high), <span class="at">height =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Coefficient Estimate (log-odds)"</span>,</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Predictor"</span>,</span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Coefficient Estimates with Confidence Intervals"</span>,</span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"*Note that the CIs of singificant predictors do not include 0."</span></span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the coefficient plot</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(tidy_model, <span class="fu">aes</span>(<span class="at">x =</span> estimate, <span class="at">y =</span> term)) <span class="sc">+</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbarh</span>(<span class="fu">aes</span>(<span class="at">xmin =</span> conf.low, <span class="at">xmax =</span> conf.high), <span class="at">height =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Coefficient Estimate (log-odds)"</span>,</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Predictor"</span>,</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Coefficient Estimates with Confidence Intervals"</span>,</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"*Note that the CIs of singificant predictors do not include 0."</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Logistic_regression_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Logistic_regression_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot odds ratios</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(tidy_model, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">exp</span>(estimate), <span class="at">y =</span> term)) <span class="sc">+</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbarh</span>(<span class="fu">aes</span>(<span class="at">xmin =</span> odds.conf.low, <span class="at">xmax =</span> odds.conf.high), <span class="at">height =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">1</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Coefficient Estimate (odds ratios)"</span>,</span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Predictor"</span>,</span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Odds ratios with Confidence Intervals"</span>,</span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"*Note that the CIs of singificant predictors do not include 1."</span></span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot odds ratios</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(tidy_model, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">exp</span>(estimate), <span class="at">y =</span> term)) <span class="sc">+</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbarh</span>(<span class="fu">aes</span>(<span class="at">xmin =</span> odds.conf.low, <span class="at">xmax =</span> odds.conf.high), <span class="at">height =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">1</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Coefficient Estimate (odds ratios)"</span>,</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Predictor"</span>,</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Odds ratios with Confidence Intervals"</span>,</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"*Note that the CIs of singificant predictors do not include 1."</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Logistic_regression_files/figure-html/unnamed-chunk-12-2.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Logistic_regression_files/figure-html/unnamed-chunk-11-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot marginal effects; y-axis = log odds of a null vs. overt subject</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">Effect</span>(<span class="st">"Register"</span>, <span class="at">mod =</span> Reference.glm)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Plot predicted probabilities:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use ggeffect() from the ggeffects package</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">ggeffect</span>(Reference.glm, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"Register"</span>))) <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="at">col =</span> <span class="st">"steelblue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Logistic_regression_files/figure-html/unnamed-chunk-12-3.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Logistic_regression_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">Effect</span>(<span class="st">"Variety"</span>, <span class="at">mod =</span> Reference.glm))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">ggeffect</span>(Reference.glm, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"Variety"</span>))) <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="at">col =</span> <span class="st">"steelblue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Logistic_regression_files/figure-html/unnamed-chunk-12-4.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Logistic_regression_files/figure-html/unnamed-chunk-13-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">Effect</span>(<span class="st">"Person"</span>, <span class="at">mod =</span> Reference.glm))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">ggeffect</span>(Reference.glm, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"Person"</span>))) <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="at">col =</span> <span class="st">"steelblue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Logistic_regression_files/figure-html/unnamed-chunk-12-5.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot interactions</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">Effect</span>(<span class="at">focal.predictors =</span> <span class="fu">c</span>(<span class="st">"Register"</span>, <span class="st">"Variety"</span>), <span class="at">mod =</span> Reference.glm))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="Logistic_regression_files/figure-html/unnamed-chunk-12-6.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Logistic_regression_files/figure-html/unnamed-chunk-13-3.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -951,33 +955,42 @@ Stepwise variable selection
 <li><strong>Cross-validation</strong></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Refit the model with additional settings</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>Reference.val <span class="ot">&lt;-</span> <span class="fu">lrm</span>(Reference <span class="sc">~</span> Register <span class="sc">+</span> Variety <span class="sc">+</span> Register<span class="sc">:</span>Variety <span class="sc">+</span> Person, <span class="at">data =</span> data_pro, <span class="at">x =</span> T, <span class="at">y =</span> T)</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform 200-fold cross-validation</span></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>model.validated <span class="ot">&lt;-</span> <span class="fu">validate</span>(Reference.val, <span class="at">B =</span> <span class="dv">200</span>); model.validated </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Refit the model with additional settings</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>Reference.val <span class="ot">&lt;-</span> <span class="fu">lrm</span>(Reference <span class="sc">~</span> Register <span class="sc">+</span> Variety <span class="sc">+</span> Register<span class="sc">:</span>Variety <span class="sc">+</span> Person, <span class="at">data =</span> data_pro, <span class="at">x =</span> T, <span class="at">y =</span> T)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform 200-fold cross-validation</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>model.validated <span class="ot">&lt;-</span> <span class="fu">validate</span>(Reference.val, <span class="at">B =</span> <span class="dv">200</span>); model.validated </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>          index.orig training    test optimism index.corrected   n
-Dxy           0.4592   0.4732  0.4458   0.0273          0.4319 200
-R2            0.0923   0.1004  0.0843   0.0161          0.0761 200
-Intercept     0.0000   0.0000 -0.2703   0.2703         -0.2703 200
-Slope         1.0000   1.0000  0.9111   0.0889          0.9111 200
-Emax          0.0000   0.0000  0.0774   0.0774          0.0774 200
-D             0.0247   0.0270  0.0225   0.0045          0.0202 200
-U            -0.0004  -0.0004  0.0002  -0.0007          0.0002 200
-Q             0.0251   0.0274  0.0223   0.0052          0.0199 200
-B             0.0336   0.0338  0.0337   0.0000          0.0336 200
-g             1.0081   1.2418  1.1142   0.1277          0.8804 200
-gp            0.0319   0.0330  0.0303   0.0027          0.0292 200</code></pre>
+Dxy           0.4592   0.4748  0.4472   0.0276          0.4316 200
+R2            0.0923   0.1015  0.0847   0.0168          0.0755 200
+Intercept     0.0000   0.0000 -0.2669   0.2669         -0.2669 200
+Slope         1.0000   1.0000  0.9068   0.0932          0.9068 200
+Emax          0.0000   0.0000  0.0773   0.0773          0.0773 200
+D             0.0247   0.0271  0.0226   0.0045          0.0202 200
+U            -0.0004  -0.0004  0.0003  -0.0007          0.0003 200
+Q             0.0251   0.0275  0.0223   0.0052          0.0199 200
+B             0.0336   0.0333  0.0337  -0.0004          0.0340 200
+g             1.0081   1.2472  1.1132   0.1339          0.8742 200
+gp            0.0319   0.0329  0.0304   0.0025          0.0294 200</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Slope optimism should be as low possible!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Slope optimism should be as low possible!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <ul>
 <li><strong>Multicollinearity</strong></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Variable inflation factors further reveal severe multicollinearity</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(Reference.lrm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Variable inflation factors further reveal severe multicollinearity</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(Reference.lrm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>               Register=S1B                  Variety=HK 
                    5.818111                    4.006084 
@@ -994,6 +1007,9 @@ Register=S1B * Variety=SING
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-agrestiFoundationsStatisticsData2022" class="csl-entry" role="listitem">
+Agresti, Alan, and Maria Kateri. 2022. <em>Foundations of Statistics for Data Scientists: With r and Python</em>. Boca Raton: <span>CRC</span> Press.
+</div>
 <div id="ref-buskinDefiniteNullInstantiationfc" class="csl-entry" role="listitem">
 Buskin, Vladimir. n.d. <span>“Definite <span>Null Instantiation</span> in <span>English</span>(es): <span class="nocase">A Usage-based Construction Grammar Approach</span>.”</span> <em>Constructions and Frames</em>.
 </div>
@@ -1006,9 +1022,16 @@ James, Gareth, Daniela Witten, Trevor Hastie, and Robert Tibshirani. 2021. <em>A
 <div id="ref-levshina_how_2015" class="csl-entry" role="listitem">
 Levshina, Natalia. 2015. <em>How to Do Linguistics with r: Data Exploration and Statistical Analysis</em>. Amsterdam; Philadelphia: John Benjamins Publishing Company.
 </div>
+<div id="ref-winter_statistics_2020" class="csl-entry" role="listitem">
+Winter, Bodo. 2020. <em>Statistics for Linguists: An Introduction Using r</em>. New York; London: Routledge.
+</div>
+<div id="ref-woodGeneralizedAdditiveModels2006" class="csl-entry" role="listitem">
+Wood, Simon N. 2006. <em>Generalized <span>Additive</span> <span>Models</span>: <span>An</span> <span>Introduction</span> with <span>R</span></em>. Boca Raton: Chapman &amp; Hall/CRC.
+</div>
 </div>
 </section>
 </section>
+
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

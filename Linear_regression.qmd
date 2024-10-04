@@ -19,10 +19,17 @@ bibliography: R.bib
 
 ## Recommended reading
 
-> The following introduction is based on Heumann et al.
-> [-@heumann_introduction_2022: Chapter 11], James et al.
-> [-@james_introduction_2021: Chapter 3], Levshina [-@levshina_how_2015:
-> Chapter 7] and Winter [-@winter_statistics_2020: Chapter 4].
+Specifically for linguists:
+
+> Levshina [-@levshina_how_2015: Chapter 7]
+>
+> Winter [-@winter_statistics_2020: Chapter 4]
+
+General:
+
+> Heumann et al. [-@heumann_introduction_2022: Chapter 11]
+>
+> James et al. [-@james_introduction_2021: Chapter 3]
 
 ## Preparation {.smaller}
 
@@ -33,63 +40,68 @@ library("tidyverse")
 ```
 
 ```{r, echo = TRUE, output = FALSE}
-
 # Load libraries
+library(readxl)
+library(writexl)
+library(tidyverse)
+library(ggpubr)
+library(ggeffects)
 
-library("readxl")
-library("writexl")
-library("tidyverse")
-
-# Load file
+# Load data
 ELP <- read_xlsx("ELP.xlsx")
 
-# Inspect file structure
+# Inspect data structure
 str(ELP)
-
 ```
 
 ## Introduction
 
 Consider the distribution of the continuous variable `RT` (reaction
-times) from the `ELP` (English Lexicon Project) dataset. We will
-$log$-transform the reaction times to even out the differences between
-extremely high and extremely low frequency counts [cf.
-@winter_statistics_2020: 90-94].
+times) from the `ELP` (English Lexicon Project) dataset. We will apply a
+$\log$-transformation to the the reaction times in order to even out the
+differences between extremely high and extremely low frequency counts
+[cf. @winter_statistics_2020: 90-94].
 
 ::: panel-tabset
 ### Log-transformed
 
 ```{r, echo = FALSE, output = TRUE}
 # Log-transformed
-
 ggplot(ELP, aes(x = log(RT))) +
   geom_histogram() +
   geom_vline(xintercept = log(mean(ELP$RT)), color = "steelblue") +
   theme_minimal() +
   labs(
     x = "Reaction time (log)"
-  )
+  ) +
+   annotate("text", x = log(mean(ELP$RT)) + 0.01, y = 0, 
+           label = expression(paste(bar(x))), 
+           vjust = 1.5, hjust = -0.2, color = "steelblue", parse = TRUE)
 
 
 ```
 
-### Default
+### Untransformed
 
 ```{r, echo = FALSE, output = TRUE}
 # Skewed
-
 ggplot(ELP, aes(x = RT)) +
   geom_histogram() +
   geom_vline(xintercept = mean(ELP$RT), color = "steelblue") +
   theme_minimal() +
   labs(
     x = "Reaction time"
-  )
+  ) +
+annotate("text", x = mean(ELP$RT) + 10, y = 0, 
+           label = expression(paste(bar(x))), 
+           vjust = 1.5, hjust = -0.2, color = "steelblue", parse = TRUE)
+
 ```
 :::
 
-We are investigating the relationship between reaction times `RT` and
-the frequency `Freq` of a lexical stimulus.
+We are particularly interested in the relationship between reaction
+times `RT` and the (log-)frequency `Freq` of a lexical stimulus. What
+kind of pattern does the scatter plot below suggest?
 
 ```{r, echo = FALSE, output = TRUE}
 ggplot(ELP, aes(x = log(RT), y = log(Freq))) +
@@ -99,85 +111,162 @@ ggplot(ELP, aes(x = log(RT), y = log(Freq))) +
     x = "Log-transformed reaction time",
     y = "Log-transformed word frequency"
   )
-
-
-
 ```
 
-**Some open questions**:
+::: {.callout-caution title="Some open questions" collapse="false"}
+-   Can word frequency help us **explain variation** in reaction times?
 
--   Can word frequency help us explain variation in reaction times?
-
--   If it can, then how could we characterise the effect of word
+-   If it can, then how could we characterise the **effect** of word
     frequency? In other words, does it increase or decrease reaction
     times?
 
--   What reaction times should we expect for new observations?
+-   What reaction times should we expect for **new observations**?
+:::
 
-### Building a statistical model
+### A simple statistical model
 
-Here `RT` is a *response* or *target* that we wish to explain. We
+`RT` is the *response* or *target* that we wish to explain. We
 generically refer to the response as $Y$.
 
-`Freq` is a *feature*, *input*, or *predictor*, which we name $X$.
+`Freq` is the *feature*, *input*, or *predictor*, which we will call
+$X$.
 
 We can thus summarise our preliminary and fairly general statistical
 model as
 
-$$ Y = f(X) + \epsilon. $$While the term $f(X)$ denotes the contribution
-of $X$ to the explanation of $Y$, $\epsilon$ describes the errors of the
-model.
+$$Y = f(X) + \epsilon.$$
 
-## Linear Regression
+The term $f(X)$ describes the contribution of $X$ to the explanation of
+$Y$. Since no model can explain everything perfectly, we expect there to
+be some degree of error $\epsilon$.
 
-Linear regression is a simple approach to supervised machine learning
-where the response variable is known. It assumes that the dependence of
-$Y$ on $X$ is **linear**. This approach is suitable for **numerical
-response variables**. The predictors, however, can be either numerical
-or discrete/categorical. Although it may seem overly simplistic, linear
-regression is **extremely useful** both conceptually and practically.
+## Linear regression
+
+-   Linear regression is a simple approach to supervised machine
+    learning where the response variable is known.[^linear_regression-1]
+
+-   It assumes that the dependence of $Y$ on $X$ is **linear**, i.e.,
+    their relationship is a straight line.
+
+-   This approach is suitable for **numerical response variables**. The
+    predictors, however, can be either continuous or discrete.
+
+[^linear_regression-1]: If the response variable is unknown or
+    irrelevant, we speak of **unsupervised machine learning**.
+    Unsupervised models are mostly concerned with finding patterns in
+    high-dimensional datasets with dozens or even hundreds of variables.
+
+Although it may seem overly simplistic, linear regression is **extremely
+useful** both conceptually and practically.
 
 ### Model with a single predictor $X$ {.smaller}
 
-A linear model of our data would have the form
+The simple linear model has the general form
 
-$$ Y = \beta_0 + \beta_1X + \epsilon $$
+$$ Y = \beta_0 + \beta_1X + \epsilon. $$ The model parameters (or
+coefficients) $\beta_0$ and $\beta_1$ specify the functional
+relationship $f$ between $Y$ and $X$. The first parameter $\beta_0$
+determines the **intercept** of the regression line, and $\beta_1$
+indicates the **slope**. Once again, $\epsilon$ captures the model
+error.
 
-or, in more concrete terms,
+```{r, echo = F}
+# Create sample data
+set.seed(123)
+n <- 50
+x <- runif(n, -5, 10)
+y <- 2 + 0.5 * x + rnorm(n, sd = 1)
+data <- data.frame(x = x, y = y)
 
-$$ \text{Reaction time} = \beta_0 + \beta_1\text{Frequency} + \text{Model Error,} $$
+# Fit linear regression
+model <- lm(y ~ x, data = data)
+intercept <- coef(model)[1]
+slope <- coef(model)[2]
 
-where $\beta_0$ and $\beta_1$ are two unknown constants that represent
-the **intercept** and **slope** of the regression line, respectively.
-Together they are referred to as the model **coefficients** (or
-parameters), and $\epsilon$ is the error term. The fact that assumptions
-are made about the form of the model renders it a **parametric model**.
+# Find a point with a large residual
+large_residual <- data %>%
+  mutate(residual = abs(y - predict(model))) %>%
+  arrange(desc(residual)) %>%
+  slice(1)
 
-Given the existing data on $X$ and $Y$, which is also known as the
-training data, we **estimate** the model coefficients $\beta_0$ and
-$\beta_1$. While we use the training data to estimate these
-coefficients, we cannot know the true values of the coefficients, i.e.,
-the exact true relationship between the variables. Their tentative
-nature is indicated by the **hat** symbol \^ above them: $\hat{\beta_0}$
-and $\hat{\beta_1}$.
 
-::: {.callout-tip title="How are the coefficients estimated?" collapse="true"}
+# Assuming the data and model are already created as in the previous example
+
+# Choose points for the slope triangle
+x1 <- 2
+x2 <- 6
+y1 <- intercept + slope * x1
+y2 <- intercept + slope * x2
+
+ggplot(data, aes(x = x, y = y)) +
+  geom_point(color = "steelblue", alpha = 0.6) +
+  geom_smooth(method = "lm", se = FALSE, color = "grey20") +
+  geom_segment(aes(xend = x, yend = predict(model)), color = "grey10", alpha = 0.5) +
+  geom_vline(xintercept = 0, col = "grey10", linetype = "dashed") +
+  
+  # Intercept annotation
+  annotate("text", x = 0.7, y = intercept + 1.75, label = expression(beta[0]), 
+           hjust = 0, vjust = 2, color = "purple") +
+  annotate("curve", x = 0.5, y = intercept + 1, xend = 0, yend = intercept,
+           arrow = arrow(length = unit(0.3, "cm")), curvature = 0.3, color = "purple") +
+  
+  # Slope annotation with triangle
+  geom_segment(x = x1, xend = x2, y = y1, yend = y1, color = "darkred", linetype = "dashed") +
+  geom_segment(x = x2, xend = x2, y = y1, yend = y2, color = "darkred", linetype = "dashed") +
+  annotate("text", x = (x1 + x2)/2, y = y1 - 0.5, label = expression(Delta * x), color = "darkred") +
+  annotate("text", x = x2 + 0.3, y = (y1 + y2)/2, label = expression(Delta * y), color = "darkred", angle = 90) +
+  annotate("text", x = x2 + 1, y = y2 - 1.5, label = expression(beta[1] == frac(Delta * y, Delta * x)), 
+           color = "darkred", hjust = 0) +
+  
+  # Improved Residuals annotation
+  annotate("text", x = large_residual$x, y = large_residual$y, 
+           label = expression(epsilon), 
+           hjust = -1, vjust = -5, color = "red") +
+  geom_segment(aes(x = large_residual$x, xend = large_residual$x, 
+                   y = large_residual$y, yend = predict(model, newdata = large_residual)),
+               color = "red", linetype = "dashed") +
+  
+  theme_minimal() +
+  labs(title = "Elements of the Linear Regression Model",
+       x = "X", y = "Y")
+
+
+```
+
+Applying the model formula to our dataset, we get the following updated
+regression equation:
+
+$$ \text{Reaction time} = \beta_0 + \beta_1\text{Frequency} + \text{Model Error}. $$But
+how do we find the right values for the intercept and the slope? In
+short: We can't. We are dealing with population parameters and can,
+therefore, only provide an approximation of the true relationship
+between `RT` and `Frequency`, but will never capture the true one. To
+reflect the tentative nature of the model coefficients, we use the
+**hat** symbol \^ (e.g., $\hat{\beta_0}$) to indicate **estimations**
+rather than true values. The estimation procedure requires **training
+data**, based on which the algorithm "learns" the relationship between
+$Y$ and $X$ (hence "Machine Learning").
+
+::: {.callout-tip title="How exactly do you estimate the model parameters?" collapse="true"}
 The most common way of estimating parameters for linear models is the
 **Least Squares** approach. In essence, the parameters are chosen such
 that the residual sum of squares, i.e., the sum of the differences
-between observed and predicted values, is as low as possible. More
-formally, the estimated slope then corresponds to
+between observed and predicted values, is as low as possible. In other
+words, the distances between the data points and the regression line
+should be minimised. More formally, the estimated slope then corresponds
+to
 
-$$ \hat{\beta}_1 = \frac{\sum_{i=1}^n(x_i - \bar{x})(y_i- \bar{y})}{\sum_{i=1}(x_i- \bar{x})^2}.$$
+$$ \hat{\beta}_1 = \frac{\sum_{i=1}^n(x_i - \bar{x})(y_i- \bar{y})}{\sum_{i=1}^n(x_i- \bar{x})^2}.$$
 
-Now we can obtain the intercept:
+We can then obtain the intercept:
 
 $$
 \hat{\beta_0}= \bar{y}- \hat{\beta}_1\bar{x}
 $$
 :::
 
-We can then predict future sales using the formula
+Once we've fitted the model, we can then predict reaction times if we
+know the frequency of a lexical stimulus:
 
 $$
 \hat{y} = \hat{\beta}_0 + \hat{\beta}_1x,
@@ -186,16 +275,15 @@ $$
 where $\hat{y}$ indicates a prediction of $Y$ on the basis of the
 predictor values $X = x$.
 
+### Application in R
+
 In R, we can fit a linear model with the `lm()` function.
 
 ```{r, echo = TRUE, output = TRUE}
-
 # Fit linear model
-
 rt.lm1 = lm(log(RT) ~ log(Freq), data = ELP)
 
 # View model data
-
 summary(rt.lm1)
 
 ```
@@ -215,11 +303,9 @@ better the model describes the data.
 ```{r, echo = TRUE, output = TRUE}
 
 # Show fitted values (= predictions) for the first six observations
-
 head(rt.lm1$fitted.values)
 
 # Show deviation of the fitted values from the observed values
-
 head(rt.lm1$residuals)
 
 ```
@@ -234,7 +320,6 @@ by approx. -0.05.
 ```{r, echo = TRUE, output = TRUE, message = FALSE, warning = FALSE}
 
 # Convert coefficients to a tibble 
-
 library("broom")
 
 tidy_model <- tidy(rt.lm1)
@@ -268,7 +353,6 @@ specified range 95% of the time.
 ```{r, echo = TRUE, output = TRUE}
 
 # Compute confidence intervals for intercept and log(Freq)
-
 tidy_model_ci <- tidy(rt.lm1, conf.int = TRUE)
 
 tidy_model_ci
@@ -298,8 +382,15 @@ $$R^2 = 1-\frac{TSS}{RSS} = 1-\frac{\sum_{i=1}^n (y_i - \hat{y_i})^2}{\sum_{i=1}
 ::: {.callout-tip title="$F$-statistic" collapse="true"}
 It is used to measure the association between the dependent variable and
 the independent variable(s). Generally speaking, values greater than 1
-indicate a possible correlation. A sufficiently very low $p$-value
-suggests that the null hypothesis $H_0: \beta_1 = 0$ can be rejected.
+indicate a possible correlation. A sufficiently low $p$-value suggests
+that the null hypothesis $H_0: \beta_1 = 0$ can be rejected. The $F$
+statistic is computed as shown below [cf.
+@agrestiFoundationsStatisticsData2022: 232] and follows an
+$F$-distribution with two different $df$ values.
+
+$$
+F = \frac{(TSS - SSE) / p}{SSE / [n - (p + 1)]}
+$$
 :::
 
 ### Multiple linear regression
@@ -313,19 +404,18 @@ $$ Y = \beta_0 + \beta_1X_1 + \beta_2X_2 + ... + \beta_pX_p + \epsilon.$$
 
 Predictions are then obtained via the formula
 
-$$\hat{y} = \hat{\beta}_0 + \hat{\beta}_1x_1 + \hat{\beta}_2x_2 + ... + \hat{\beta}_px_p.
-$$
+$$\hat{y} = \hat{\beta}_0 + \hat{\beta}_1x_1 + \hat{\beta}_2x_2 + ... + \hat{\beta}_px_p.$$
+
+### Application in R
 
 In R, a multiple regression model is fitted as in the code example
 below:
 
 ```{r, echo = TRUE, output = TRUE, warning = FALSE, message = FALSE}
 # Fit multiple regression model
-
 rt.lm2 <- lm(log(RT) ~ log(Freq) + POS + Length, data = ELP)
 
 # View model statistics
-
 summary(rt.lm2)
 
 ```
@@ -335,6 +425,9 @@ summary(rt.lm2)
 Plot coefficient estimates:
 
 ```{r, echo = TRUE, output = TRUE}
+#| code-fold: true
+#| code-summary: "Code"
+
 
 # Tidy the model output
 tidy_model <- tidy(rt.lm2, conf.int = TRUE)
@@ -356,16 +449,33 @@ ggplot(tidy_model, aes(x = estimate, y = term)) +
 
 ```
 
+### Plotting effects
+
 Plot contributions of individual variable values:
 
-```{r, echo = TRUE, output = TRUE, warning = FALSE, message = FALSE}
-# Plot marginal effects
-
+```{r, echo = TRUE, output = TRUE, warning = FALSE, message = FALSE, include = FALSE}
+#| code-fold: true
+#| code-summary: "Code"
+# Load library
 library("effects")
 
+# Plot effects
 plot(Effect("Freq", mod = rt.lm2))
 plot(Effect("POS", mod = rt.lm2))
 plot(Effect("Length", mod = rt.lm2))
+```
+
+### Plotting predictions
+
+```{r, echo = TRUE, output = TRUE, warning = FALSE, message = FALSE}
+#| code-fold: true
+#| code-summary: "Code"
+
+plot(ggeffect(rt.lm2, "Freq"), residuals = TRUE) + geom_line(col = "steelblue")
+plot(ggeffect(rt.lm2, "POS"), residuals = TRUE) + geom_line(col = "steelblue")
+plot(ggeffect(rt.lm2, "Length"), residuals = TRUE) + geom_line(col = "steelblue")
+
+#ggarrange(eff1, eff2, eff3)
 
 ```
 
@@ -382,11 +492,36 @@ assumptions include:
     (e.g., `crPlot()` from the `car` library) for the visual
     identification of potentially non-linear trends.
 
+```{r}
+#| code-fold: true
+#| code-summary: "Code"
+
+library(car)
+
+# pink line = main tendency vs. blue line = slope coefficients;
+# some minor non-linearity can be observed
+
+crPlot(rt.lm2, var = "log(Freq)") 
+crPlot(rt.lm2, var = "POS")
+crPlot(rt.lm2, var = "Length") # potentially problematic
+
+```
+
 -   **No heteroscedasticity** (i.e, non-constant variance of error
     terms): Visually, a violation of this assumption becomes apparent if
     the residuals form a funnel-like shape. It is also possible to
     conduct a non-constant variance test `ncvTest()`: If it returns
-    $p$-values \< 0.05, this suggests non-constant variance.
+    $p$-values \< 0.05, it suggests non-constant variance.
+
+```{r}
+#| code-fold: true
+#| code-summary: "Code"
+
+plot(rt.lm2, which = 1)
+
+ncvTest(rt.lm2) # significant, meaning that errors do not vary constantly
+
+```
 
 -   **No multicollinearity**: Predictors should not be correlated with
     each other. In the model data, correlated variables have unusually
@@ -396,11 +531,29 @@ assumptions include:
     VIF scores \> 5 are potentially collinear. They can be computed
     using the `vif()` function.
 
+```{r}
+#| code-fold: true
+#| code-summary: "Code"
+
+vif(rt.lm2) # vif < 5 indicates that predictors are not correlated
+```
+
 -   **Normally distributed residuals**: The residuals should follow the
     normal distribution. Usually, a visual inspection using `qqnorm()`
     is sufficient, but the Shapiro-Wilke test `shapiro.test()` can also
     be run on the model residuals. Note that a $p$-value below 0.05
     provides evidence for non-normality.
+
+```{r}
+#| code-fold: true
+#| code-summary: "Code"
+
+qqnorm(rt.lm2$residuals) # or
+
+plot(rt.lm2, which = 2)
+
+shapiro.test(residuals(rt.lm2)) # residuals are not normally distributed because p < 0.05
+```
 
 ::: callout-important
 Beside the points mentioned above, it is always recommend to examine the
@@ -408,8 +561,46 @@ model with regard to
 
 -   **outliers** that might skew the regression estimates,
 
+```{r}
+#| code-fold: true
+#| code-summary: "Code"
+
+influencePlot(rt.lm2, id.method = "identify")
+```
+
 -   **interactions**, i.e., combined effects of predictors, and
+
+```{r}
+#| code-fold: true
+#| code-summary: "Code"
+
+rt.lm.int <- lm(log(RT) ~ log(Freq) + POS + Length + log(Freq):Length, data = ELP)
+
+summary(rt.lm.int)
+
+# ANOVA (analysis of variance)
+
+## Compare interaction model with main effects model
+
+anova(rt.lm.int, rt.lm2) # interaction term improves the model
+```
 
 -   **overfitting**, which results in poor model performance outside the
     training data.
+
+```{r}
+#| code-fold: true
+#| code-summary: "Code"
+
+library("rms")
+
+# Refit the model with ols(), which is equivalent to lm()
+ols.rt <- ols(log(RT) ~ log(Freq) + POS + Length, data = ELP, x = TRUE, y = TRUE)
+
+# Cross-validate
+ols.val <- validate(ols.rt, bw = TRUE, B = 200) # Perform 200 random resampling iterations (= bootstrapping); compare model performance on training vs. test (= new) data. The slope optimism should be below 0.05 to rule out overfitting.
+
+
+ols.val[,1:5] # The model does not overfit.
+```
 :::

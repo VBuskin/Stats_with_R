@@ -112,16 +112,18 @@ This section demonstrates both the in-built plotting functions of R
 
 ### Moscaiplot
 
-A straightforward way to visualise a contingency table is the mosaicplot:
+A straightforward way to visualise a contingency table is the
+mosaicplot:
 
 ```{r}
 mosaicplot(order_counts2, color = TRUE)
 ```
 
-
 ### Barplots
 
-The workhorse of categorical data analysis is the barplot. Base R functions usually require a `table` object as input, whereas `ggplot2` can operate on the raw dataset.
+The workhorse of categorical data analysis is the barplot. Base R
+functions usually require a `table` object as input, whereas `ggplot2`
+can operate on the raw dataset.
 
 ### One variable
 
@@ -220,8 +222,9 @@ barplot(pct1,
 :::
 
 ::: {.callout-note collapse="true" title="How do I plot percentages with `ggplot2`?"}
-Here, a few tweaks are necessary. In general, the `ggplot()` function prefers to works with data frames rather than cross-tables, so we'll have to
-coerce it into one first:
+Here, a few tweaks are necessary. In general, the `ggplot()` function
+prefers to works with data frames rather than cross-tables, so we'll
+have to coerce it into one first:
 
 ```{r}
 pct1_df <- as.data.frame(pct1)

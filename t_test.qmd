@@ -35,7 +35,6 @@ data_vowels <- read.csv("Vowels_Apache.csv", sep = "\t")
 
 ```
 
-
 ## The $t$-test
 
 Since the $\chi^2$ measure exclusively works with categorical variables,
@@ -137,7 +136,6 @@ that is greater than a value $y$ from sample $Y$. For details, see
 :::
 
 ## Workflow in R
-
 
 ### Define hypotheses
 

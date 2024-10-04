@@ -19,35 +19,36 @@ bibliography: R.bib
 
 ## Recommended reading
 
-> This unit is based on James et al. [-@james_introduction_2021: Chapter
-> 4] and Levshina [-@levshina_how_2015: Chapter 12]. For an in-depth
-> introduction, see Hosmer & Lemeshow [-@hosmer_applied_2008].
+Specifically for linguists:
+
+> Levshina [-@levshina_how_2015: Chapter 12]
+>
+> Winter [-@winter_statistics_2020: Chapter 12]
+
+Full theoretical treatment:
+
+> James et al. [-@james_introduction_2021: Chapter 4]
+>
+> Hosmer & Lemeshow [-@hosmer_applied_2008].
 
 ## Preparation {.smaller}
 
-```{r, echo = FALSE, output = FALSE}
-
-# Load libraries
-library("tidyverse")
-library("rms")
-library("broom")
-library("effects")
-
-# Load data
-data_pro <- read.csv("/Users/vladimirbuskin/Library/Mobile Documents/com~apple~CloudDocs/Teaching/Statistics for Linguistics SS 2024/SfL_2024_working_directory/data/Buskin_pronoun_data.csv", sep = ",", header = TRUE)
-
-```
-
-Consider the data from Buskin's [-@buskinDefiniteNullInstantiationfc]
+Consider the data from Buskin's
+[-@buskinDefiniteNullInstantiationfc][^logistic_regression-1]
 corpus-study on subject pronoun realisation:
 
-```{r, echo = TRUE, output = TRUE, eval = FALSE}
+[^logistic_regression-1]: The input data is can be accessed via this OSF
+    repository: <https://osf.io/qgnms>.
+
+```{r, echo = TRUE, output = TRUE, eval = TRUE}
 # Load libraries
-library("tidyverse")
-library("rms") # For regression modelling
+library(tidyverse)
+library(rms)
+library(broom)
+library(ggeffects)
 
 # Load data
-data_pro <- read_csv("data/Buskin_pronoun_data.csv", sep = ",", header = TRUE)
+data_pro <- read.csv("INPUT_pronouns.csv", sep = ",", header = TRUE)
 ```
 
 -   **Target variable**:
@@ -77,9 +78,11 @@ table(data_pro$Reference)
 
 ### Descriptive overview
 
-```{r, echo = TRUE, output = TRUE}
+```{r, echo = FALSE, output = TRUE}
 #| code-fold: true
 #| code-summary: "Code"
+
+library(ggpubr)
 
 # Raw data for Ref x Reg x Var
 data_pro %>% 
@@ -93,17 +96,16 @@ data_pro %>%
   filter(Reference == "null") %>% 
   mutate(pct = n/sum(n) * 100) -> pro_stats2
 
-# Raw data for Ref x Referent. x Var
+# Raw data for Ref x Referent x Var
 data_pro %>% 
   count(Reference, Referentiality, Variety) %>% 
   filter(Reference == "null") %>% 
   mutate(pct = n/sum(n) * 100) -> pro_stats3
 
 # Plot 1
-
-pro_stats1 %>%
+pro1 <- pro_stats1 %>%
   ggplot(aes(x = Variety, y = pct, color = Register)) +
-  geom_point(size = 3) +
+  geom_point(size = 2) +
   theme_minimal() +
   labs(
     title = "Null subjects by Variety and Register",
@@ -111,10 +113,9 @@ pro_stats1 %>%
   )
   
 # Plot 2
-
-pro_stats2 %>%
+pro2 <- pro_stats2 %>%
   ggplot(aes(x = Variety, y = pct, color = Person)) +
-  geom_point(size = 3) +
+  geom_point(size = 2) +
   theme_minimal() +
   labs(
     title = "Null subjects by Variety and Person",
@@ -123,38 +124,53 @@ pro_stats2 %>%
 
 
 # Plot 3
-
-pro_stats3 %>%
+pro3 <- pro_stats3 %>%
   ggplot(aes(x = Variety, y = pct, color = Referentiality)) +
-  geom_point(size = 3) +
+  geom_point(size = 2) +
   theme_minimal() +
   labs(
     title = "Null subjects by Variety and Referentiality",
     y = "Proportion of null subjects"
   )
+
+ggarrange(pro1, pro2, pro3)
 ```
 
 ## Logistic regression
 
--   In contrast to linear regression, logistic regression models a
-    **qualitative response variable** $Y$ (here: `Reference`) with two
-    outcomes as a function of the independent variables $X_p$
-    (`Register`, Variety etc.). The goal is to predict a value for $Y$.
+In contrast to linear regression, logistic regression models a
+**qualitative response variable** $Y$ with two
+outcomes[^logistic_regression-2]. In the present study, $Y$ is
+pronominal `Reference` and has the outcomes `Reference = null` and
+`Reference = overt`, which represent null and overt subjects,
+respectively. Dichotomous variables of this kind are also often coded as
+`yes`/`no` or `1`/`0`.
 
--   For a given observation, the model should predict either a specific
-    category of $Y$ (e.g., `Reference = overt` or `Reference = null`) or
-    provide a probability estimation of a particular outcome (e.g., the
-    probability of `Reference = null`).
+[^logistic_regression-2]: Logistic regression can also be used for
+    $\geq 3$ classes by breaking down the response variable into a
+    series of dichotomous variables. This is also known as **multinomial
+    logistic regression** or **softmax regression.**
 
--   The probability that `Reference = null` given a predictor (e.g.,
-    `Register`) can be written as
-    $P(\text{Reference} = \text{null} \mid \text{Register})$ or more
-    simply as $p(\text{Register})$.
+Another difference from linear regression is the **output** of the
+model. In linear regression, we obtain a predicted value for the
+continuous response variable we're interested in. For instance, if we're
+modelling reaction times, the model will return an estimated reaction
+time (given the predictors).
 
--   A core component of logistic regression is the **logistic
-    function**. The rationale for using it is that the output of the
-    function will always lie between $0$ and $1$, and it will always
-    denote a **probability**.
+In logistic regression, however, we either get a **class label** or a
+**probability**. When modelling pronominal reference, the model will
+thus either tell us
+
+1.  whether a speaker would use an overt or a null subject in a given
+    observation (class prediction).
+
+2.  what the probability of using one variant vs. the other would be
+    (probability prediction).
+
+A core component of logistic regression is the **logistic function**.
+The rationale for using it is that the output of the function will
+always lie between $0$ and $1$, and it will always denote a
+**probability**.
 
 ```{r, echo = FALSE, output = TRUE}
 #| code-fold: true
@@ -183,42 +199,61 @@ ggplot(df, aes(x = X, y = p)) +
   geom_line(color = "black") +
   labs(title = "Logistic Function",
        x = "X",
-       y = "p(X)") +
+       y = "P(Y = 1 | X)") +
   theme_minimal()
 
 ```
 
-### The logistic model
+### The simple logistic model
 
 Assuming a binary response variable $Y$ with the values 1 and 0 and a
-single predictor $X$, we can model the probability
-$P(Y = 1\vert X) = p(X)$ as
+single predictor $X$, we can model the probability $P(Y = 1 \mid X)$ as
 
 $$
-p(X) = \frac{e^{\beta_0 + \beta_1X}}{1 + e^{\beta_0 + \beta_1X}}.
+P(Y = 1 \mid  X) = \frac{e^{\beta_0 + \beta_1X}}{1 + e^{\beta_0 + \beta_1X}}.
 $$
 
-Note that $e \approx 2.71828$. This expression is equivalent to
+The above expression is equivalent to
 
 $$
-\log\left(\frac{p(X)}{1-p(X)}\right) = \beta_0 + \beta_1X.
+\log\left(\frac{P(Y = 1 \mid  X)}{1 - P(Y = 1 \mid  X)}\right) = \beta_0 + \beta_1X.
 $$
 
-The fraction $\frac{p(X)}{1-p(X)}$ represents the **odds**, which stand
-for to the probability of one outcome (e.g., `Reference = null`)
-compared to the other (e.g., `Reference = overt`). Their logarithmic
-transformation are the **log odds** (or **logits**) of a model. When
-interpreting the output of a logistic model, note that
+The fraction $\frac{P(Y = 1 \mid X)}{1-P(Y = 1 \mid X)}$ represents the
+**odds**, which stand for to the probability of one outcome (e.g.,
+`Reference = null`) compared to the other (e.g., `Reference = overt`).
 
--   positive log odds indicate an **increase** in $p(X)$, whereas
+Their logarithmic transformation are the **log odds** (or **logits**) of
+one outcome versus the other.
 
--   negative log odds indicate a **decrease** in $p(X)$.
+::: {.callout-tip title="Understanding log odds"}
+When interpreting the output of a logistic model, note that
 
-If $X = \text{Register}$, then our model has the form:
+-   positive log odds indicate an **increase** in
+    $\frac{P(Y = 1 \mid X)}{1-P(Y = 1 \mid X)}$, whereas
+
+-   negative log odds indicate a **decrease** in
+    $\frac{P(Y = 1 \mid X)}{1-P(Y = 1 \mid X)}$.
+:::
+
+In more concrete terms: If $X = \text{Register}$, then our model would
+have the form:
 
 $$
 \log\left(\frac{P(\text{Reference} = \text{null} \mid \text{Register})}{1- P(\text{Reference} = \text{null} \mid \text{Register})}\right) = \beta_0 + \beta_1\text{Register}
 $$
+
+Given `Register`, the log odds of a null subject versus an overt one is
+essentially equivalent to the linear model equation. The model
+parameters $\beta_0$ and $\beta_1$ are typically estimated using
+**Maximum Likelihood Estimation**[^logistic_regression-3] (MLE).
+
+[^logistic_regression-3]: The goal of the fitting procedure is to
+    maximise the likelihood function of the parameter matrix $\ell(\mathbf{\beta})$. Via
+    partial differentiation, an intermediary result can be attained
+    which can only be solved using an iterative algorithm (e.g.
+    Newton-Ralphson). For further technical details, see Wood [-@woodGeneralizedAdditiveModels2006: 63-66] or
+    Agresti & Kateri [-@agrestiFoundationsStatisticsData2022: 291-294].
 
 ### Multiple logistic regression
 
@@ -227,12 +262,12 @@ expanded so as to take into account $p$ slopes $\beta_p$ for $p$
 independent variables $X_p$.
 
 $$
-p(X) = \frac{e^{\beta_0 + \beta_1X_1 + ... +  \beta_pX_p}}{1 + e^{\beta_0 + \beta_1X_1 + ... + \beta_pX_p}}.
+\log\left(\frac{P(Y = 1 \mid X_1 + ... + X_p)}{1 - P(Y = 1 \mid X_1 + ... + X_p)}\right) = \frac{e^{\beta_0 + \beta_1X_1 + ... +  \beta_pX_p}}{1 + e^{\beta_0 + \beta_1X_1 + ... + \beta_pX_p}}.
 $$ Thus, the log odds correspond to the sum of $\beta_pX_p$,
 
 $$
 \begin{aligned}
-\log\left(\frac{p(X)}{1-p(X)}\right) &= \beta_0 + \beta_1X_1 + ... +  \beta_pX_p \\
+\log\left(\frac{P(Y = 1 \mid X_p)}{1 - P(Y = 1 \mid X_p)}\right) & = \beta_0 + \beta_1X_1 + ... +  \beta_pX_p \\
 & = \beta_0 + \sum_{i=1}^{p} \beta_i X_i
 \end{aligned}
 $$ respectively.
@@ -247,15 +282,19 @@ $$
 OR(X_1) = e^{\beta_1}.
 $$
 
+::: {.callout-tip collapse="true" title="Understanding odds ratios"}
 Essentially, the OR describes the ratio between two odds with respect to
 another independent variable. This is illustrated for `Reference` given
 `Register` below:
 
 $$
 \text{OR}(\text{Reference} \mid \text{Register}) = \frac{\frac{P(\text{Reference} = \text{null} \mid \text{Register} = \text{S1A})}{P(\text{Reference} = \text{overt} \mid \text{Register} = \text{S1A})}}{\frac{P(\text{Reference} = \text{null} \mid \text{Register} = \text{S1B})}{P(\text{Reference} = \text{overt} \mid \text{Register} = \text{S1B})}}
-$$ Read as: '**The ratio between** the probability of a null vs. overt
+$$
+
+Read as: '**The ratio between** the probability of a null vs. overt
 object in S1A **and** the probability of a null vs. overt object in
 S1B'.
+:::
 
 ## Workflow in R
 
@@ -422,7 +461,11 @@ tidy_model <- tidy_model %>%
 
 ### Step 5: Visualise the model
 
+Plot model coefficients:
+
 ```{r, echo = TRUE, output = TRUE}
+#| code-fold: true
+#| code-summary: "Code"
 
 # Create the coefficient plot
 ggplot(tidy_model, aes(x = estimate, y = term)) +
@@ -450,6 +493,10 @@ ggplot(tidy_model, aes(x = exp(estimate), y = term)) +
     title = "Odds ratios with Confidence Intervals",
     caption = "*Note that the CIs of singificant predictors do not include 1."
   )
+```
+
+
+```{r, echo = TRUE, output = TRUE, eval = FALSE, include = FALSE}
 
 # Plot marginal effects; y-axis = log odds of a null vs. overt subject
 plot(Effect("Register", mod = Reference.glm)) 
@@ -458,9 +505,23 @@ plot(Effect("Person", mod = Reference.glm))
 
 # Plot interactions
 plot(Effect(focal.predictors = c("Register", "Variety"), mod = Reference.glm))
+```
 
+Plot predicted probabilities:
+
+```{r}
+#| code-fold: true
+#| code-summary: "Code"
+
+# Use ggeffect() from the ggeffects package
+plot(ggeffect(Reference.glm, terms = c("Register"))) + geom_line(col = "steelblue")
+
+plot(ggeffect(Reference.glm, terms = c("Variety"))) + geom_line(col = "steelblue")
+
+plot(ggeffect(Reference.glm, terms = c("Person"))) + geom_line(col = "steelblue")
 
 ```
+
 
 ### Step 6: Interpret the model
 
@@ -482,6 +543,9 @@ Singaporean variety.
 -   **Cross-validation**
 
 ```{r, echo = TRUE, output = TRUE}
+#| code-fold: true
+#| code-summary: "Code"
+
 # Refit the model with additional settings
 Reference.val <- lrm(Reference ~ Register + Variety + Register:Variety + Person, data = data_pro, x = T, y = T)
 
@@ -494,7 +558,9 @@ model.validated <- validate(Reference.val, B = 200); model.validated
 -   **Multicollinearity**
 
 ```{r, echo = TRUE, output = TRUE}
+#| code-fold: true
+#| code-summary: "Code"
+
 # Variable inflation factors further reveal severe multicollinearity
 vif(Reference.lrm)
-
 ```
