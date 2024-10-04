@@ -1,0 +1,27 @@
+---
+title: "Exploratory Factor Analysis"
+author: Vladimir Buskin
+format:
+  html:
+    self-contained: true
+    code-fold: false
+    theme: default
+    toc: true
+    toc-depth: 4
+    number-sections: true
+    slide-number: true
+    incremental: false
+    slide-level: 3
+    scrollable: true
+editor: visual
+bibliography: R.bib
+metadata-files:
+  - _quarto.yml
+google-scholar: false
+---
+
+::: callout-caution
+## This page is under construction.
+
+Content will be added soon!
+:::
