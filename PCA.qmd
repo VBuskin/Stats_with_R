@@ -20,8 +20,300 @@ metadata-files:
 google-scholar: false
 ---
 
-::: callout-caution
-## This page is under construction.
+## Recommended reading
 
-Content will be added soon!
+> Mair [-@mairModernPsychometrics2018: Chapter 6]
+
+## Preparation
+
+This unit relies on psycholinguistic data from the [South Carolina
+Psycholinguistic
+Metabase](https://sc.edu/study/colleges_schools/artsandsciences/psychology/research_clinical_facilities/scope/)
+[@gaoSCOPESouthCarolina2022].[^pca-1] Detailed descriptions of the
+variables can be found
+[here](https://sc.edu/study/colleges_schools/artsandsciences/psychology/research_clinical_facilities/scope/search.php).
+
+[^pca-1]: One exception is the variable
+    `Resnik_strength [`@resnikSelectionalConstraintsInformationtheoretic1996\],
+    which was computed manually and appended to the data frame.
+
+The data frame `scope_sem_df` contains semantic ratings for a sample of
+1,702 transitive verbs. Note that all columns have been standardised
+(cf. `?scale()` for details).
+
+```{r}
+# Load libraries
+library(tidyverse)
+library(purrr)
+library(lattice)
+library(corrplot)
+library(psych)
+library(GPArotation)
+library(Gifi)
+
+
+# Load data
+scope_sem_df <- readRDS("scope_sem_df.RDS")
+
+# Overview
+glimpse(scope_sem_df)
+```
+
+## Examine correlations
+
+```{r}
+# Remove the verb labels from the first column
+scope_sem_df_cleaned <- scope_sem_df[,-1]
+
+# Generate correlation matrix
+cor_mat1 <- cor(scope_sem_df_cleaned)
+
+# Plot correlation matrix
+corrplot(cor_mat1, col = topo.colors(200), tl.col = "darkgrey", number.cex = 0.5, tl.cex = 0.5)
+```
+
+```{r}
+# Levelplot
+seq1 <- seq(-1, 1, by = 0.01)
+
+levelplot(cor_mat1, aspect = "fill", col.regions = topo.colors(length(seq1)),
+          at = seq1, scales = list(x = list(rot = 45)),
+          xlab = "", ylab = "")
+
+```
+
+Needless to say, the above correlation matrices are hard to interpret –
+even more so if the number of variables were to increase further.
+
+**Principal Components Analysis** offers a technique to break down a
+high-dimensional dataset, into a much smaller set of "meta-variables", i.e., **principle components** (PCs) which capture the bulk of the variance in the data. This allows researchers to see overarching patterns in the data and re-use the output for further analysis
+(e.g., clustering or predictive modelling).
+
+## How does PCA work?
+
+PCA "repackages" large sets of variables by forming uncorrelated linear combinations of them, yielding $k$ principal components $Z_k$ of the dataset (for $k \in \{1, ..., K\}$).
+
+Each PC comprises a set of **loadings** (or **weights**) $w_{nm}$, which are comparable to the coefficients of regression equations. For instance, the first PC has the general form shown in the equation below, where $x_m$ stand for continuous input variables in the $n \times m$ data matrix.
+
+\begin{equation} \label{pca-1}
+Z_1 = w_{11}\mathbf{x}_{1} + w_{21}\mathbf{x}_{2} + \dots + w_{m1}\mathbf{x}_{m}
+\end{equation}
+
+If a feature positively loads on a principal component (i.e., $w > 0$), it means that as the value of this feature increases, the score for this principal component also increases. The magnitude of $w$ indicates the strength of this relationship. Conversely, negative loadings ($w < 0$) indicate that as the feature value increases, the PC score decreases as well.
+
+The figure below offers a visual summary of PCA:
+
+
+```{r, echo = FALSE, output = FALSE}
+library(ggplot2)
+library(dplyr)
+library(gridExtra)
+
+# Generate sample data
+set.seed(42)
+n <- 100
+x <- rnorm(n)
+y <- 0.5 * x + rnorm(n, sd = 0.5)
+df <- data.frame(x = x, y = y)
+
+# Function to calculate principal components
+calculate_pca <- function(df) {
+  pca <- prcomp(df, center = TRUE, scale. = TRUE)
+  pc1 <- pca$rotation[, 1]
+  pc2 <- pca$rotation[, 2]
+  list(pc1 = pc1, pc2 = pc2, center = pca$center)
+}
+
+# Calculate PCA
+pca_result <- calculate_pca(df)
+
+# Function to create plot
+create_pca_plot <- function(df, pc1, pc2, center, title, show_pc1 = FALSE, show_pc2 = FALSE) {
+  p <- ggplot(df, aes(x, y)) +
+    geom_point(alpha = 0.6) +
+    labs(title = title) +
+    theme_minimal() +
+    coord_fixed(ratio = 1)
+  
+  if (show_pc1) {
+    p <- p + geom_segment(aes(x = center[1], y = center[2], 
+                     xend = center[1] + pc1[1], 
+                     yend = center[2] + pc1[2]),
+                 arrow = arrow(length = unit(0.2, "cm")), 
+                 color = "red", size = 1)
+  }
+  
+  if (show_pc2) {
+    p <- p + geom_segment(aes(x = center[1], y = center[2], 
+                              xend = center[1] + pc2[1], 
+                              yend = center[2] + pc2[2]),
+                          arrow = arrow(length = unit(0.2, "cm")), 
+                          color = "blue", size = 1)
+  }
+  
+  p
+}
+
+# Create plots
+p1 <- create_pca_plot(df, pca_result$pc1, pca_result$pc2, pca_result$center, 
+                      "Original Data")
+
+p2 <- create_pca_plot(df, pca_result$pc1, pca_result$pc2, pca_result$center, 
+                      "First Principal Component (PC1)", show_pc1 = TRUE)
+
+p3 <- create_pca_plot(df, pca_result$pc1, pca_result$pc2, pca_result$center, 
+                      "PC1 and PC2", show_pc1 = TRUE, show_pc2 = TRUE)
+
+# Function to project data onto PC1
+project_data <- function(df, pc, center) {
+  df_centered <- df - center
+  projected <- as.matrix(df_centered) %*% pc
+  data.frame(PC = projected, original_x = df$x, original_y = df$y)
+}
+
+# Project data onto PC1
+df_projected <- project_data(df, pca_result$pc1, pca_result$center)
+
+# Create plot with data colored by PC1 score
+p4 <- ggplot(df_projected, aes(x = original_x, y = original_y, color = PC)) +
+  geom_point() +
+  scale_color_gradient2(low = "blue", mid = "white", high = "red", midpoint = 0) +
+  labs(title = "Direction of variance captured by PC1",
+       x = "x", y = "y", color = "PC1 Score") +
+  theme_minimal()
+
+# Display plots
+grid.arrange(p1, p2, p3, p4, ncol = 2)
+```
+
+
+```{r, echo = FALSE}
+# Generate sample data
+set.seed(42)
+n <- 100
+x <- rnorm(n)
+y <- 0.5 * x + rnorm(n, sd = 0.5)
+df <- data.frame(x = x, y = y)
+
+# Function to calculate principal components
+calculate_pca <- function(df) {
+  pca <- prcomp(df, center = TRUE, scale. = TRUE)
+  pc1 <- pca$rotation[, 1]
+  pc2 <- pca$rotation[, 2]
+  list(pc1 = pc1, pc2 = pc2, center = pca$center, pca = pca)
+}
+
+# Calculate PCA
+pca_result <- calculate_pca(df)
+
+# Function to create plot
+create_pca_plot <- function(df, pc1, pc2, center, title, show_pc1 = FALSE, show_pc2 = FALSE) {
+  p <- ggplot(df, aes(x, y)) +
+    geom_point(alpha = 0.6) +
+    labs(title = title) +
+    theme_minimal() +
+    coord_fixed(ratio = 1)
+  
+  if (show_pc1) {
+    p <- p + geom_segment(aes(x = center[1], y = center[2], 
+                     xend = center[1] + pc1[1], 
+                     yend = center[2] + pc1[2]),
+                 arrow = arrow(length = unit(0.2, "cm")), 
+                 color = "red", size = 1)
+  }
+  
+  if (show_pc2) {
+    p <- p + geom_segment(aes(x = center[1], y = center[2], 
+                              xend = center[1] + pc2[1], 
+                              yend = center[2] + pc2[2]),
+                          arrow = arrow(length = unit(0.2, "cm")), 
+                          color = "blue", size = 1)
+  }
+  
+  p
+}
+
+# Create plots
+p1 <- create_pca_plot(df, pca_result$pc1, pca_result$pc2, pca_result$center, 
+                      "Original Data")
+
+p2 <- create_pca_plot(df, pca_result$pc1, pca_result$pc2, pca_result$center, 
+                      "PC1", show_pc1 = TRUE)
+
+p3 <- create_pca_plot(df, pca_result$pc1, pca_result$pc2, pca_result$center, 
+                      "PC2", show_pc1 = TRUE, show_pc2 = TRUE)
+
+# Function to project data onto PCs
+project_data <- function(df, pca) {
+  as.data.frame(predict(pca, df))
+}
+
+# Project data onto PCs
+df_projected <- project_data(df, pca_result$pca)
+df_projected$original_x <- df$x
+df_projected$original_y <- df$y
+
+# Create plot with data colored by PC1 score
+p4 <- ggplot(df_projected, aes(x = original_x, y = original_y, color = PC1)) +
+  geom_point() +
+  scale_color_gradient2(low = "blue", mid = "white", high = "red", midpoint = 0) +
+  labs(title = "Direction of variance captured by PC1",
+       x = "x", y = "y", color = "PC1 Score") +
+  theme_minimal()
+
+# Create plot with data colored by PC2 score
+p5 <- ggplot(df_projected, aes(x = original_x, y = original_y, color = PC2)) +
+  geom_point() +
+  scale_color_gradient2(low = "blue", mid = "white", high = "red", midpoint = 0) +
+  labs(title = "Direction of variance captured by PC2",
+       x = "x", y = "y", color = "PC2 Score") +
+  theme_minimal()
+
+# Display plots
+grid.arrange(p2, p3, p4, p5, ncol = 2)
+```
+
+
+
+::: {.callout-tip title="How do you identify the principle components of a dataset?" collapse="true"}
+
+The computation of PC loadings/weights relies on several techniques from matrix algebra, namely **singular value decomposition** (SVD) and **eigenvalue decomposition**, depending on the format of the input matrix.
+
+Let $\mathbf{X}$ denote the $n \times m$ matrix of input variables. Using SVD, it can be analysed into three elements:
+
+$$
+\mathbf{X} = \mathbf{UDV}^T
+$$
+
+
+```{r, eval = F, include = F}
+library("mvtnorm")
+sigma <- matrix(c(2, 0.8, 0, 0.8, 0.5, 0, 0, 0, 0.1), ncol = 3)
+set.seed(123)
+baguette <- rmvnorm(1000, mean = c(0,0,0), sigma = sigma)
+
+svdb <- svd(baguette)
+
+svdb$u
+D <- diag(svdb$d)   ## singular values
+round(D, 3)
+V <- svdb$v   
+
+
+v1 <- V[,1]
+v2 <- V[,2]
+round(v1 %*% v2, 7)  
+
+
+library("rgl")
+plot3d(baguette, col = "gray", xlim = c(-4, 4), ylim = c(-4,4),
+         zlim = c(-4,4), aspect = 1, size = 2)
+  arrow3d(c(0,0,0), V[,1], col = "red")
+  arrow3d(c(0,0,0), V[,2], col = "red")
+  arrow3d(c(0,0,0), V[,3], col = "red")
+```
+
+
 :::
+
+
