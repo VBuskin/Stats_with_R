@@ -513,13 +513,14 @@ div.csl-indent {
 <p>Consider the data from Buskin’s <span class="citation" data-cites="buskinDefiniteNullInstantiationfc">(<a href="references.html#ref-buskinDefiniteNullInstantiationfc" role="doc-biblioref">n.d.</a>)</span><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> corpus-study on subject pronoun realisation:</p>
 <div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;The input data is can be accessed via this OSF repository: <a href="https://osf.io/qgnms" class="uri">https://osf.io/qgnms</a>.</p></li></div><div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load libraries</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rms)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggeffects)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>data_pro <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"INPUT_pronouns.csv"</span>, <span class="at">sep =</span> <span class="st">","</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sjPlot)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rms)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggeffects)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>data_pro <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"INPUT_pronouns.csv"</span>, <span class="at">sep =</span> <span class="st">","</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li><p><strong>Target variable</strong>:</p>
@@ -618,7 +619,7 @@ Understanding log odds
 \log\left(\frac{P(\text{Reference} = \text{null} \mid \text{Register})}{1- P(\text{Reference} = \text{null} \mid \text{Register})}\right) = \beta_0 + \beta_1\text{Register}
 \]</span></p>
 <p>Given <code>Register</code>, the log odds of a null subject versus an overt one is essentially equivalent to the linear model equation. The model parameters <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> are typically estimated using <strong>Maximum Likelihood Estimation</strong><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> (MLE).</p>
-<div class="no-row-height column-margin column-container"><li id="fn3"><p><sup>3</sup>&nbsp;The goal of the fitting procedure is to maximise the likelihood function of the parameter matrix <span class="math inline">\(\ell(\mathbf{\beta})\)</span>. Via partial differentiation, an intermediary result can be attained which can only be solved using an iterative algorithm (e.g. Newton-Ralphson). For further technical details, see Wood <span class="citation" data-cites="woodGeneralizedAdditiveModels2006">(<a href="references.html#ref-woodGeneralizedAdditiveModels2006" role="doc-biblioref">2006</a>: 63-66)</span> or Agresti &amp; Kateri <span class="citation" data-cites="agrestiFoundationsStatisticsData2022">(<a href="references.html#ref-agrestiFoundationsStatisticsData2022" role="doc-biblioref">2022</a>: 291-294)</span>.</p></li></div></section>
+<div class="no-row-height column-margin column-container"><li id="fn3"><p><sup>3</sup>&nbsp;The goal of the fitting procedure is to maximise the likelihood function of the parameter matrix <span class="math inline">\(\ell(\mathbf{\beta})\)</span>. Via partial differentiation, an intermediary result can be attained which can only be solved using an iterative algorithm (e.g.&nbsp;Newton-Ralphson). For further technical details, see Wood <span class="citation" data-cites="woodGeneralizedAdditiveModels2006">(<a href="references.html#ref-woodGeneralizedAdditiveModels2006" role="doc-biblioref">2006</a>: 63-66)</span> or Agresti &amp; Kateri <span class="citation" data-cites="agrestiFoundationsStatisticsData2022">(<a href="references.html#ref-agrestiFoundationsStatisticsData2022" role="doc-biblioref">2022</a>: 291-294)</span>.</p></li></div></section>
 <section id="multiple-logistic-regression" class="level3" data-number="22.3.2">
 <h3 data-number="22.3.2" class="anchored" data-anchor-id="multiple-logistic-regression"><span class="header-section-number">22.3.2</span> Multiple logistic regression</h3>
 <p>If more than one predictor is included, the above equations can be expanded so as to take into account <span class="math inline">\(p\)</span> slopes <span class="math inline">\(\beta_p\)</span> for <span class="math inline">\(p\)</span> independent variables <span class="math inline">\(X_p\)</span>.</p>
@@ -823,6 +824,123 @@ Register=S1B * Variety=SING -0.4753 0.4688  -1.01 0.3107  </code></pre>
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># View model statistics</span></span>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Reference.glm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tab_model</span>(Reference.glm, <span class="at">show.se =</span> <span class="cn">TRUE</span>, <span class="at">show.aic =</span> <span class="cn">TRUE</span>, <span class="at">show.dev =</span> <span class="cn">TRUE</span>, <span class="at">show.fstat =</span> <span class="cn">TRUE</span>, <span class="at">transform =</span> <span class="cn">NULL</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table data-quarto-postprocess="true" class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">&nbsp;</td>
+<td colspan="4" data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">Reference</td>
+</tr>
+<tr class="even">
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">Predictors</td>
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">Log-Odds</td>
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">std. Error</td>
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">CI</td>
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">p</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">(Intercept)</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-3.41</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.27</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-3.99&nbsp;–&nbsp;-2.91</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;"><strong>&lt;0.001</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">Register [S1B]</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.03</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.38</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-0.74&nbsp;–&nbsp;0.77</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.944</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">Variety [HK]</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.67</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.32</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.06&nbsp;–&nbsp;1.32</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;"><strong>0.034</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">Variety [SING]</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">1.12</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.30</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.56&nbsp;–&nbsp;1.73</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;"><strong>&lt;0.001</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">Person [1]</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-0.88</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.18</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-1.24&nbsp;–&nbsp;-0.53</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;"><strong>&lt;0.001</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">Person [2]</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-1.64</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.27</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-2.21&nbsp;–&nbsp;-1.14</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;"><strong>&lt;0.001</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">Person [it]</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.79</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.30</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.18&nbsp;–&nbsp;1.35</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;"><strong>0.008</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">Person [there]</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-2.56</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">1.01</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-5.44&nbsp;–&nbsp;-1.05</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;"><strong>0.011</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">Register [S1B] × Variety<br>
+[HK]</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.60</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.45</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-0.28&nbsp;–&nbsp;1.50</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.182</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">Register [S1B] × Variety<br>
+[SING]</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-0.48</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.47</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-1.40&nbsp;–&nbsp;0.45</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.311</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">Observations</td>
+<td colspan="4" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">4838</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">R<sup>2</sup> Tjur</td>
+<td colspan="4" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">0.030</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">Deviance</td>
+<td colspan="4" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">1378.406</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">AIC</td>
+<td colspan="4" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">1398.406</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -835,7 +953,19 @@ Stepwise variable selection
 <div class="callout-body-container callout-body">
 <p>With the function <code>drop1()</code>, it is possible to successively remove variables from the complex model to ascertain which ones improve the model significantly (i.e., decrease the deviance and AIC scores).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">drop1</span>(Reference.glm, <span class="at">test =</span> <span class="st">"Chisq"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">drop1</span>(Reference.glm, <span class="at">test =</span> <span class="st">"Chisq"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Single term deletions
+
+Model:
+Reference ~ Register + Variety + Register:Variety + Person
+                 Df Deviance    AIC    LRT Pr(&gt;Chi)    
+&lt;none&gt;                1378.4 1398.4                    
+Person            4   1460.2 1472.2 81.828  &lt; 2e-16 ***
+Register:Variety  2   1387.5 1403.5  9.100  0.01057 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -843,17 +973,17 @@ Stepwise variable selection
 <section id="step-4-confidence-intervals-and-odds-ratios" class="level3" data-number="22.4.4">
 <h3 data-number="22.4.4" class="anchored" data-anchor-id="step-4-confidence-intervals-and-odds-ratios"><span class="header-section-number">22.4.4</span> Step 4: Confidence intervals and odds ratios</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tidy the model output</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>tidy_model <span class="ot">&lt;-</span> <span class="fu">tidy</span>(Reference.glm, <span class="at">conf.int =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove intercept, compute odds ratios and their CIs</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>tidy_model <span class="ot">&lt;-</span> tidy_model <span class="sc">%&gt;%</span> </span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(term <span class="sc">!=</span> <span class="st">"(Intercept)"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">odds_ratio =</span> <span class="fu">exp</span>(estimate),</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">odds.conf.low =</span> <span class="fu">exp</span>(conf.low),</span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">odds.conf.high =</span> <span class="fu">exp</span>(conf.high)</span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tidy the model output</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>tidy_model <span class="ot">&lt;-</span> <span class="fu">tidy</span>(Reference.glm, <span class="at">conf.int =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove intercept, compute odds ratios and their CIs</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>tidy_model <span class="ot">&lt;-</span> tidy_model <span class="sc">%&gt;%</span> </span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(term <span class="sc">!=</span> <span class="st">"(Intercept)"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">odds_ratio =</span> <span class="fu">exp</span>(estimate),</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">odds.conf.low =</span> <span class="fu">exp</span>(conf.low),</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">odds.conf.high =</span> <span class="fu">exp</span>(conf.high)</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="step-5-visualise-the-model" class="level3" data-number="22.4.5">
@@ -862,45 +992,45 @@ Stepwise variable selection
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the coefficient plot</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(tidy_model, <span class="fu">aes</span>(<span class="at">x =</span> estimate, <span class="at">y =</span> term)) <span class="sc">+</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbarh</span>(<span class="fu">aes</span>(<span class="at">xmin =</span> conf.low, <span class="at">xmax =</span> conf.high), <span class="at">height =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Coefficient Estimate (log-odds)"</span>,</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Predictor"</span>,</span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Coefficient Estimates with Confidence Intervals"</span>,</span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"*Note that the CIs of singificant predictors do not include 0."</span></span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the coefficient plot</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(tidy_model, <span class="fu">aes</span>(<span class="at">x =</span> estimate, <span class="at">y =</span> term)) <span class="sc">+</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbarh</span>(<span class="fu">aes</span>(<span class="at">xmin =</span> conf.low, <span class="at">xmax =</span> conf.high), <span class="at">height =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Coefficient Estimate (log-odds)"</span>,</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Predictor"</span>,</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Coefficient Estimates with Confidence Intervals"</span>,</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"*Note that the CIs of singificant predictors do not include 0."</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Logistic_regression_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Logistic_regression_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot odds ratios</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(tidy_model, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">exp</span>(estimate), <span class="at">y =</span> term)) <span class="sc">+</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbarh</span>(<span class="fu">aes</span>(<span class="at">xmin =</span> odds.conf.low, <span class="at">xmax =</span> odds.conf.high), <span class="at">height =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">1</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Coefficient Estimate (odds ratios)"</span>,</span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Predictor"</span>,</span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Odds ratios with Confidence Intervals"</span>,</span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"*Note that the CIs of singificant predictors do not include 1."</span></span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot odds ratios</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(tidy_model, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">exp</span>(estimate), <span class="at">y =</span> term)) <span class="sc">+</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbarh</span>(<span class="fu">aes</span>(<span class="at">xmin =</span> odds.conf.low, <span class="at">xmax =</span> odds.conf.high), <span class="at">height =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">1</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Coefficient Estimate (odds ratios)"</span>,</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Predictor"</span>,</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Odds ratios with Confidence Intervals"</span>,</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"*Note that the CIs of singificant predictors do not include 1."</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Logistic_regression_files/figure-html/unnamed-chunk-11-2.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Logistic_regression_files/figure-html/unnamed-chunk-12-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -909,35 +1039,35 @@ Stepwise variable selection
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use ggeffect() from the ggeffects package</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">ggeffect</span>(Reference.glm, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"Register"</span>))) <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="at">col =</span> <span class="st">"steelblue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use ggeffect() from the ggeffects package</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">ggeffect</span>(Reference.glm, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"Register"</span>))) <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="at">col =</span> <span class="st">"steelblue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Logistic_regression_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Logistic_regression_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">ggeffect</span>(Reference.glm, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"Variety"</span>))) <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="at">col =</span> <span class="st">"steelblue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">ggeffect</span>(Reference.glm, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"Variety"</span>))) <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="at">col =</span> <span class="st">"steelblue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Logistic_regression_files/figure-html/unnamed-chunk-13-2.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Logistic_regression_files/figure-html/unnamed-chunk-14-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">ggeffect</span>(Reference.glm, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"Person"</span>))) <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="at">col =</span> <span class="st">"steelblue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">ggeffect</span>(Reference.glm, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"Person"</span>))) <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="at">col =</span> <span class="st">"steelblue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Logistic_regression_files/figure-html/unnamed-chunk-13-3.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Logistic_regression_files/figure-html/unnamed-chunk-14-3.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -957,29 +1087,29 @@ Stepwise variable selection
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Refit the model with additional settings</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>Reference.val <span class="ot">&lt;-</span> <span class="fu">lrm</span>(Reference <span class="sc">~</span> Register <span class="sc">+</span> Variety <span class="sc">+</span> Register<span class="sc">:</span>Variety <span class="sc">+</span> Person, <span class="at">data =</span> data_pro, <span class="at">x =</span> T, <span class="at">y =</span> T)</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform 200-fold cross-validation</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>model.validated <span class="ot">&lt;-</span> <span class="fu">validate</span>(Reference.val, <span class="at">B =</span> <span class="dv">200</span>); model.validated </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Refit the model with additional settings</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>Reference.val <span class="ot">&lt;-</span> <span class="fu">lrm</span>(Reference <span class="sc">~</span> Register <span class="sc">+</span> Variety <span class="sc">+</span> Register<span class="sc">:</span>Variety <span class="sc">+</span> Person, <span class="at">data =</span> data_pro, <span class="at">x =</span> T, <span class="at">y =</span> T)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform 200-fold cross-validation</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>model.validated <span class="ot">&lt;-</span> <span class="fu">validate</span>(Reference.val, <span class="at">B =</span> <span class="dv">200</span>); model.validated </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>          index.orig training    test optimism index.corrected   n
-Dxy           0.4592   0.4726  0.4468   0.0259          0.4334 200
-R2            0.0923   0.1004  0.0843   0.0161          0.0762 200
-Intercept     0.0000   0.0000 -0.2598   0.2598         -0.2598 200
-Slope         1.0000   1.0000  0.9107   0.0893          0.9107 200
-Emax          0.0000   0.0000  0.0749   0.0749          0.0749 200
-D             0.0247   0.0269  0.0225   0.0044          0.0203 200
-U            -0.0004  -0.0004  0.0003  -0.0007          0.0003 200
-Q             0.0251   0.0273  0.0222   0.0051          0.0200 200
-B             0.0336   0.0335  0.0337  -0.0002          0.0339 200
-g             1.0081   1.2676  1.1324   0.1352          0.8729 200
-gp            0.0319   0.0328  0.0303   0.0025          0.0294 200</code></pre>
+Dxy           0.4592   0.4686  0.4444   0.0242          0.4350 200
+R2            0.0923   0.0987  0.0841   0.0146          0.0777 200
+Intercept     0.0000   0.0000 -0.2414   0.2414         -0.2414 200
+Slope         1.0000   1.0000  0.9189   0.0811          0.9189 200
+Emax          0.0000   0.0000  0.0691   0.0691          0.0691 200
+D             0.0247   0.0265  0.0225   0.0041          0.0206 200
+U            -0.0004  -0.0004  0.0002  -0.0006          0.0002 200
+Q             0.0251   0.0269  0.0222   0.0047          0.0204 200
+B             0.0336   0.0336  0.0337  -0.0001          0.0337 200
+g             1.0081   1.2336  1.1113   0.1223          0.8858 200
+gp            0.0319   0.0327  0.0303   0.0024          0.0295 200</code></pre>
 </div>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Slope optimism should be as low possible!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Slope optimism should be as low possible!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <ul>
@@ -988,8 +1118,8 @@ gp            0.0319   0.0328  0.0303   0.0025          0.0294 200</code></pre>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Variable inflation factors further reveal severe multicollinearity</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(Reference.lrm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Variable inflation factors further reveal severe multicollinearity</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(Reference.lrm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>               Register=S1B                  Variety=HK 

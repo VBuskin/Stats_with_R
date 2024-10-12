@@ -3,7 +3,7 @@ title: "Ordinal regression"
 author: Vladimir Buskin
 format:
   html:
-    self-contained: false
+    self-contained: true
     logo: logo.png
     footer: "Regression"
     theme: Reference
@@ -19,7 +19,7 @@ bibliography: R.bib
 
 ## Suggested reading
 
-> @powersStatisticalMethodsCategorical2008: Chapter 7
+> @powersStatisticalMethodsCategorical2008: Chapter 7;
 > @baguleySeriousStatsGuide2012: Chapter 17.4.5
 
 ## Introduction
@@ -27,46 +27,27 @@ bibliography: R.bib
 In her recent contribution, @glassEnglishVerbsCan2021 examines possible
 reasons why certain transitive verbs have a stronger affinity towards
 object omission compared to others, placing special emphasis on the
-routinisation of the actions denoted by transitive verbs.
+routinisation of the actions denoted by the verbs. Specifically, she
+analyses **how high/low-routine contexts affect the acceptability of
+object omission** for transitive verbs from different frequency bins.
 
-### Research question and hypotheses
-
-How do high/low-routine contexts affect the acceptability of object
-omission for transitive verbs of varying frequency of occurrence?
-
-**Low-frequency verbs**:
-
--   $H_0:$ Mean Likert rating in low-routine contexts (low freq) $=$
-    Mean Likert rating in high-routine contexts (low freq)
-
--   $H_1:$ Mean Likert rating in low-routine contexts (low freq) $\neq$
-    Mean Likert rating in high-routine contexts (low freq)
-
-**High-frequency verbs**:
-
--   $H_0:$ Mean Likert rating in low-routine contexts (high freq) = Mean
-    Likert rating in high-routine contexts (high freq)
-
--   $H_1:$ Mean Likert rating in low-routine contexts (high freq) $\neq$
-    Mean Likert rating in high-routine contexts (high freq)
-
-### Preparation
-
-Load the data `Glass_2021_survey_processed.csv`[^ordinal_regression-1]:
+We will replicate her findings using her survey data
+`Glass_2021_survey_processed.csv`[^ordinal_regression-1]:
 
 [^ordinal_regression-1]: The original dataset can be retrieved from
     Lelia Glass's OSF repository: <https://osf.io/t6zw5> \[Last
     accessed: 27th September, 2024\].
 
 ```{r}
+# Load libraries
 library(tidyverse)
 library(ordinal)
 
-
+# Load data
 survey <- read.csv("Glass_2021_survey_processed.csv")
 
+# Inspect dataset
 str(survey)
-
 head(survey)
 ```
 
@@ -121,17 +102,20 @@ unique(survey$freq)
 
 ## Modelling ordinal data
 
-In order to answer our research question, we need to assess how the
-features `freq` and `routine` affect the variability in the
-acceptability ratings. Furthermore, we'll need to control for `verb` and
-`ParticipantID`, which impose a hierarchical structure on our dataset.
+Answering the research question means assessing how the features
+`routine` and `freq` affect the variability in the acceptability
+ratings. Furthermore, it is important to control for repeated
+measurements for `verb` and `ParticipantID`, which impose a hierarchical
+structure on the dataset.
 
-We will denote these predictor variables $X_p$ where $p$ represents the
-number of predictors. The target variable `rating` is our $Y$, i.e., our
-response variable with the ordered, discrete outcomes
-$y \in \{1, 2, 3, 4, 5\}$. Our goal is to find a model $f$ that
-describes the relationship between $Y$ and $X_p$ as accurately as
-possible and minimises the erorr term $\epsilon$:
+Formally speaking, we have $p$ explanatory variables
+$X_1, X_2, ..., X_p$ for $p \in \{1, ..., P\}$. The target variable
+`rating` is our target variable $Y$ with the ordered, discrete outcomes
+$y \in \{1, 2, 3, 4, 5\}$.
+
+Our goal is to find a model $f$ that describes the relationship between
+$Y$ and $X_p$ as accurately as possible and minimises the error term
+$\epsilon$:
 
 $$
 Y = f(X_1, X_2, ..., X_p) + \epsilon
@@ -166,13 +150,6 @@ $$
 $$
 :::
 
-::: {.callout-note collapse="true" title="Recap: Mixed-effects models"}
-Certain datasets display a nested (or hierarchical) structure; this
-becomes particularly apparent in the case of multiple observations.
-
-(Add violation of independence)
-:::
-
 Core to this approach is the notion of **cumulative probabilities**. Let
 $J$ denote the number of ordered categories in $Y$. In Glass's case
 study ($J = 5$), the estimated cumulative probabilities for each ordered
@@ -203,16 +180,24 @@ $$
 
 ### Using `polr()` from the `MASS` library
 
-```{r}
+```{r, echo = TRUE, output = FALSE}
 library(MASS)
+# Convert to factor and determine ordering
 survey$rating <- factor(survey$rating, ordered = TRUE, levels = c("1", "2", "3", "4", "5"))
 
+# Fit polr model
 survey.polr <- polr(rating ~ 
                       freq +
                       routine,
                       data = survey)
 
+# Model summary
 summary(survey.polr)
+```
+
+```{r}
+library(sjPlot)
+tab_model(survey.polr, show.se = TRUE, show.aic = TRUE, show.dev = TRUE, transform = NULL)
 
 ## Get diagnostics
 library(DescTools)
@@ -232,17 +217,16 @@ library(effects)
 library(ggeffects)
 
 ## Frequency effect plot
-plot(Effect(focal.predictors = c("freq"), mod = survey.polr), rug = FALSE, style = "stacked")
+#plot(Effect(focal.predictors = c("freq"), mod = survey.polr), rug = FALSE, style = "stacked")
 
 ## Routine effect plot
 plot(Effect(focal.predictors = c("routine"), mod = survey.polr), rug = FALSE, style="stacked")
 
 ## Interaction
-plot(Effect(focal.predictors = c("routine", "freq"), mod = survey.polr), rug = FALSE,
-     style="stacked")
+#plot(Effect(focal.predictors = c("routine", "freq"), mod = survey.polr), rug = FALSE,
+ #    style="stacked")
 
 ```
-
 
 ```{r, echo = FALSE, output = FALSE}
 # Get the ggeffects data
@@ -352,7 +336,7 @@ p_interaction <- ggplot(plot_data_interaction, aes(x = group, y = predicted, col
     y = "Predicted Probability",
     color = "Rating"
   ) +
-  facet_wrap(~ x, labeller = labeller(x = c("hi" = "High Frequency", "lo" = "Low Frequency"))) +  # Facet by 'freq'
+  facet_wrap(~ x, labeller = labeller(x = c("hi" = "High Frequency", "lo" = "Low Frequency"))) +  # Facet by "freq"
   theme_minimal() +
   theme(
     legend.position = "right",
@@ -370,43 +354,56 @@ p_interaction
 
 ```
 
-
-
 ### Using `clm()` from the `ordinal` library
 
-```{r}
-# Convert to factors
+```{r, echo = T, output = F}
+# Convert to factor and determine ordering
 survey$rating <- factor(survey$rating, ordered = TRUE, levels = c("1", "2", "3", "4", "5"))
 
+# Fit cumulative link model
 clm.1 <- ordinal::clm(rating ~ 
                     freq +
                     routine,
                     data = survey, Hess=TRUE)
 
+# Model summary
+summary(clm.1)
 ```
 
+```{r}
+tab_model(clm.1, show.se = TRUE, show.aic = TRUE, show.dev = TRUE, transform = NULL)
+```
 
 ### Mixed-effects
 
+::: {.callout-note collapse="true" title="Recap: Mixed-effects models"}
+If the data is nested according to some grouping factor with $1, ..., K$
+groups, we can let the intercept and/or slopes vary by group. For
+instance, recall the varying-intercept model:
 
-```{r}
+$$
+Y = \alpha_{k} + \beta_1X_{1} + \beta_2X_{2} + ... + \epsilon \qquad \alpha_{j} \sim N(\mu_{\alpha}, \sigma_{\alpha}^2).
+$$ In this case we also speak of **random effects**.
+:::
 
+```{r, echo T, output = F}
+# Convert to factor and determine ordering
 survey$rating <- factor(survey$rating, ordered = TRUE, levels = c("1", "2", "3", "4", "5"))
-#survey$verb <- factor(survey$verb)
-#survey$ParticipantID <- factor(survey$ParticipantID)
-#survey$routine <- factor(survey$routine)
-#survey$freq <- factor(survey$freq)
 
+
+# Fit mixed model with random intercepts for "verb" and "ParticipantID"
 clm.2 <- ordinal::clmm(rating ~ 
                     freq * routine +
                     (1 | verb) +
                     (1 | ParticipantID),
                     data = survey, Hess=TRUE)
 
+# Model summary
 summary(clm.2)
+```
 
-
-
+```{r}
+tab_model(clm.2, show.se = TRUE, show.aic = TRUE, show.dev = TRUE, transform = NULL)
 ```
 
 ```{r, echo = F, output = F}
@@ -477,12 +474,73 @@ p_caterpillar2 <- ggplot(df_verb, aes(x = re, y = reorder(verb, re))) +
   theme_minimal() +
   theme(panel.grid.major.y = element_blank())  # Removes the gridlines for y-axis
 
-
 ```
 
-
-```{r}
+```{r, echo = FALSE, output = TRUE}
 ggarrange(p_caterpillar, p_caterpillar2, ncol = 2, common.legend = TRUE, legend = "right")
 
 ```
 
+## Generalised additive models (GAMs)
+
+```{r}
+library(mgcv)
+library(itsadug)
+library(gratia)
+
+survey$ParticipantID <- as.factor(survey$ParticipantID)
+survey$verb <- as.factor(survey$verb)
+
+gam1 <- bam(as.numeric(rating) ~ 
+              freq +
+              routine +
+              s(ParticipantID, bs = "re") +
+              s(verb, bs = "re"),
+              data = survey, 
+              family = ocat(R=5)
+            )
+
+summary(gam1)
+
+# Extract the thresholds on the linear predictor from the model
+thresh <- gratia::theta(gam1) |>
+  tibble::as_tibble() |>
+  setNames(c("threshold"))
+
+routine_pred <- ggpredict(gam1, terms = "routine")
+
+routine_pred |>
+  ggplot(aes(x = x, y = predicted)) +
+  geom_point(col = "steelblue") +
+  geom_errorbar(aes(ymin = conf.low, ymax = conf.high, width = 0), col = "steelblue") +
+  #geom_line() +
+  geom_hline(data = thresh, aes(yintercept = threshold), linetype = "dashed") +
+  theme_minimal()
+
+
+verb_pred <- ggpredict(gam1, terms = "verb")
+
+verb_pred |>
+  ggplot(aes(x = x, y = predicted)) +
+  geom_point(col = "steelblue") +
+  geom_errorbar(aes(ymin = conf.low, ymax = conf.high, width = 0), col = "steelblue") +
+  #geom_line() +
+  geom_hline(data = thresh, aes(yintercept = threshold), linetype = "dashed") +
+  theme_minimal()
+
+
+
+subj_pred <- ggpredict(gam1, terms = "ParticipantID")
+
+subj_pred |>
+  ggplot(aes(x = x, y = predicted)) +
+  geom_point(col = "steelblue") +
+  geom_errorbar(aes(ymin = conf.low, ymax = conf.high, width = 0), col = "steelblue") +
+  #geom_line() +
+  geom_hline(data = thresh, aes(yintercept = threshold), linetype = "dashed") +
+  theme_minimal()
+
+
+
+
+```

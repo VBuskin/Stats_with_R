@@ -11,7 +11,7 @@ book:
   downloads: [pdf]
   repo-branch: main
   chapters:
-    - part: Conducting a corpus-linguistic study
+    - part: "Fundamentals of Corpus-based Research"
       chapters:
         - index.qmd
         - Basics.qmd
@@ -26,30 +26,30 @@ book:
         - Data_frames.qmd
         - Libraries.qmd
         - Importing_exporting.qmd
-    - part: "Corpus linguistics with R"
+    - part: "Corpus Linguistics with R"
       chapters:
         - Concordancing.qmd
         - Regular_expressions.qmd
         - Annotation.qmd
-    - part: "Descriptive statistics"
+    - part: "Descriptive Statistics"
       chapters:
         - Variables.qmd
         - Categorical_data.qmd
         - Summary_statistics.qmd
         - Distributions.qmd
-    - part: "Inferential statistics"
+    - part: "Inferential Statistics"
       chapters:
         - Hypothesis_testing.qmd
         - Chi_square_test.qmd
         - t_test.qmd
-    - part: "Machine learning"
+    - part: "Statistical Modelling and Machine Learning"
       chapters:
         - Linear_regression.qmd
         - Logistic_regression.qmd
         - Mixed_effects_regression.qmd
         - Ordinal_regression.qmd
         - Decision_trees_and_random_forests.qmd
-    - part: "Multivariate data analysis"
+    - part: "Multivariate Data Analysis"
       chapters:
         - PCA.qmd
         - EFA.qmd

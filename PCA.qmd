@@ -22,9 +22,15 @@ google-scholar: false
 
 ## Recommended reading
 
+For linguists:
+
+> Levshina [-@levshina_how_2015: Chapter 18]
+
+General:
+
 > Mair [-@mairModernPsychometrics2018: Chapter 6]
 
-## Preparation
+## Preparation {#sec-pca-prep}
 
 This unit relies on psycholinguistic data from the [South Carolina
 Psycholinguistic
@@ -50,27 +56,61 @@ library(corrplot)
 library(psych)
 library(GPArotation)
 library(Gifi)
+library(gridExtra)
 
 
 # Load data
-scope_sem_df <- readRDS("scope_sem_df.RDS")
+scope_sem_df <- readRDS("scope_sem.RDS")
+
+# Select subset
+scope_sem_sub <- scope_sem_df[,1:11]
 
 # Overview
-glimpse(scope_sem_df)
+glimpse(scope_sem_sub)
 ```
 
-## Examine correlations
+## Descriptive overview
+
+A popular descriptive measure for associations between continuous
+variables $x$ and $y$ is the **Pearson product-moment correlation
+coefficient** (or simply Pearson's $r$; cf. @eq-pearson). It varies on a scale from $-1$
+to $1$ and indicates the extent to which two variables form a
+straight-line relationship [@heumann_introduction_2022: 153-154]. One of
+its core components is the **covariance** between $x$ and $y$ which
+"measures the average tendency of two variables to covary (change
+together)" [@baguleySeriousStatsGuide2012: 206].
+
+$$
+r_{xy} = \frac{Cov(x, y)}{\sqrt{Var(x)}\sqrt{Var(y)}}= \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum_{i=1}^n (x_i - \bar{x})^2}\sqrt{\sum_{i=1}^n (y_i - \bar{y})^2}}.
+$$ {#eq-pearson}
+
+In R, we can compure Pearson's $r$ by using the `cor()` function.
 
 ```{r}
-# Remove the verb labels from the first column
-scope_sem_df_cleaned <- scope_sem_df[,-1]
+# Check correlation between number of senses and concreteness
+cor(scope_sem_sub[,-1]$Nsenses_WordNet, scope_sem_sub[,-1]$Conc_Brys) # low
 
+# Check correlation between haptic experience and concreteness
+cor(scope_sem_sub[,-1]$Haptic_Lanc, scope_sem_sub[,-1]$Conc_Brys) # high
+```
+
+If the data frame consists of numeric columns only (i.e., if it is a
+**matrix**), we can apply `cor()` to the full dataset and obtain the
+**correlation matrix** (also known as covariance matrix).
+
+```{r}
 # Generate correlation matrix
-cor_mat1 <- cor(scope_sem_df_cleaned)
+cor_mat1 <- cor(scope_sem_sub[,-1])
+
+head(cor_mat1)
 
 # Plot correlation matrix
 corrplot(cor_mat1, col = topo.colors(200), tl.col = "darkgrey", number.cex = 0.5, tl.cex = 0.5)
 ```
+
+Since the upper triangle mirrors the lower one, it is enough to only
+examine one of them. The diagonal values are not particularly insightful
+and can be ignored.
 
 ```{r}
 # Levelplot
@@ -86,106 +126,42 @@ Needless to say, the above correlation matrices are hard to interpret –
 even more so if the number of variables were to increase further.
 
 **Principal Components Analysis** offers a technique to break down a
-high-dimensional dataset, into a much smaller set of "meta-variables", i.e., **principle components** (PCs) which capture the bulk of the variance in the data. This allows researchers to see overarching patterns in the data and re-use the output for further analysis
-(e.g., clustering or predictive modelling).
+high-dimensional dataset, into a much smaller set of "meta-variables",
+i.e., **principle components** (PCs) which capture the bulk of the
+variance in the data. This allows researchers to see overarching
+patterns in the data and re-use the output for further analysis (e.g.,
+clustering or predictive modelling).
 
-## How does PCA work?
+## Basics of PCA
 
-PCA "repackages" large sets of variables by forming uncorrelated linear combinations of them, yielding $k$ principal components $Z_k$ of the dataset (for $k \in \{1, ..., K\}$).
+PCA "repackages" large sets of variables by forming uncorrelated linear
+combinations of them, yielding $k$ principal components $Z_k$ of the
+dataset (for $k \in \{1, ..., K\}$).
 
-Each PC comprises a set of **loadings** (or **weights**) $w_{nm}$, which are comparable to the coefficients of regression equations. For instance, the first PC has the general form shown in the equation below, where $x_m$ stand for continuous input variables in the $n \times m$ data matrix.
+Each PC comprises a set of **loadings** (or **weights**) $w_{nm}$, which
+are comparable to the coefficients of regression equations. For
+instance, the first PC has the general form shown in @eq-pca,
+where $x_m$ stand for continuous input variables in the $n \times m$
+data matrix.
 
-\begin{equation} \label{pca-1}
-Z_1 = w_{11}\mathbf{x}_{1} + w_{21}\mathbf{x}_{2} + \dots + w_{m1}\mathbf{x}_{m}
-\end{equation}
+$$
+Z_1 = w_{11}x_{1} + w_{21}x_{2} + \dots + w_{m1}x_{m}
+$$ {#eq-pca}
 
-If a feature positively loads on a principal component (i.e., $w > 0$), it means that as the value of this feature increases, the score for this principal component also increases. The magnitude of $w$ indicates the strength of this relationship. Conversely, negative loadings ($w < 0$) indicate that as the feature value increases, the PC score decreases as well.
+If a feature positively loads on a principal component (i.e., $w > 0$),
+it means that as the value of this feature increases, the score for this
+principal component also increases. The magnitude of $w$ indicates the
+strength of this relationship. Conversely, negative loadings ($w < 0$)
+indicate that as the feature value increases, the PC score decreases as
+well.
+
+PCs are identified using common techniques from matrix algebra, namely
+**singular value decomposition** and **eigenvalue decomposition**. By
+breaking down the input data into products of several further matrices,
+it becomes possible to characterise the exact 'shape' of its variance
+[@mairModernPsychometrics2018: 181].
 
 The figure below offers a visual summary of PCA:
-
-
-```{r, echo = FALSE, output = FALSE}
-library(ggplot2)
-library(dplyr)
-library(gridExtra)
-
-# Generate sample data
-set.seed(42)
-n <- 100
-x <- rnorm(n)
-y <- 0.5 * x + rnorm(n, sd = 0.5)
-df <- data.frame(x = x, y = y)
-
-# Function to calculate principal components
-calculate_pca <- function(df) {
-  pca <- prcomp(df, center = TRUE, scale. = TRUE)
-  pc1 <- pca$rotation[, 1]
-  pc2 <- pca$rotation[, 2]
-  list(pc1 = pc1, pc2 = pc2, center = pca$center)
-}
-
-# Calculate PCA
-pca_result <- calculate_pca(df)
-
-# Function to create plot
-create_pca_plot <- function(df, pc1, pc2, center, title, show_pc1 = FALSE, show_pc2 = FALSE) {
-  p <- ggplot(df, aes(x, y)) +
-    geom_point(alpha = 0.6) +
-    labs(title = title) +
-    theme_minimal() +
-    coord_fixed(ratio = 1)
-  
-  if (show_pc1) {
-    p <- p + geom_segment(aes(x = center[1], y = center[2], 
-                     xend = center[1] + pc1[1], 
-                     yend = center[2] + pc1[2]),
-                 arrow = arrow(length = unit(0.2, "cm")), 
-                 color = "red", size = 1)
-  }
-  
-  if (show_pc2) {
-    p <- p + geom_segment(aes(x = center[1], y = center[2], 
-                              xend = center[1] + pc2[1], 
-                              yend = center[2] + pc2[2]),
-                          arrow = arrow(length = unit(0.2, "cm")), 
-                          color = "blue", size = 1)
-  }
-  
-  p
-}
-
-# Create plots
-p1 <- create_pca_plot(df, pca_result$pc1, pca_result$pc2, pca_result$center, 
-                      "Original Data")
-
-p2 <- create_pca_plot(df, pca_result$pc1, pca_result$pc2, pca_result$center, 
-                      "First Principal Component (PC1)", show_pc1 = TRUE)
-
-p3 <- create_pca_plot(df, pca_result$pc1, pca_result$pc2, pca_result$center, 
-                      "PC1 and PC2", show_pc1 = TRUE, show_pc2 = TRUE)
-
-# Function to project data onto PC1
-project_data <- function(df, pc, center) {
-  df_centered <- df - center
-  projected <- as.matrix(df_centered) %*% pc
-  data.frame(PC = projected, original_x = df$x, original_y = df$y)
-}
-
-# Project data onto PC1
-df_projected <- project_data(df, pca_result$pc1, pca_result$center)
-
-# Create plot with data colored by PC1 score
-p4 <- ggplot(df_projected, aes(x = original_x, y = original_y, color = PC)) +
-  geom_point() +
-  scale_color_gradient2(low = "blue", mid = "white", high = "red", midpoint = 0) +
-  labs(title = "Direction of variance captured by PC1",
-       x = "x", y = "y", color = "PC1 Score") +
-  theme_minimal()
-
-# Display plots
-grid.arrange(p1, p2, p3, p4, ncol = 2)
-```
-
 
 ```{r, echo = FALSE}
 # Generate sample data
@@ -273,47 +249,120 @@ p5 <- ggplot(df_projected, aes(x = original_x, y = original_y, color = PC2)) +
 grid.arrange(p2, p3, p4, p5, ncol = 2)
 ```
 
+## Application in R
 
+### Fitting the model and identifying number of PCs
 
-::: {.callout-tip title="How do you identify the principle components of a dataset?" collapse="true"}
+First, we fit a PCA object with the number of PCs equivalent to the
+number of columns in `scope_sem_sub`.
 
-The computation of PC loadings/weights relies on several techniques from matrix algebra, namely **singular value decomposition** (SVD) and **eigenvalue decomposition**, depending on the format of the input matrix.
+```{r}
+# Fit initial PCA
+pca1 <- principal(scope_sem_sub[,-1],
+                  nfactors = ncol(scope_sem_sub[,-1]),
+                  rotate = "none")
 
-Let $\mathbf{X}$ denote the $n \times m$ matrix of input variables. Using SVD, it can be analysed into three elements:
-
-$$
-\mathbf{X} = \mathbf{UDV}^T
-$$
-
-
-```{r, eval = F, include = F}
-library("mvtnorm")
-sigma <- matrix(c(2, 0.8, 0, 0.8, 0.5, 0, 0, 0, 0.1), ncol = 3)
-set.seed(123)
-baguette <- rmvnorm(1000, mean = c(0,0,0), sigma = sigma)
-
-svdb <- svd(baguette)
-
-svdb$u
-D <- diag(svdb$d)   ## singular values
-round(D, 3)
-V <- svdb$v   
-
-
-v1 <- V[,1]
-v2 <- V[,2]
-round(v1 %*% v2, 7)  
-
-
-library("rgl")
-plot3d(baguette, col = "gray", xlim = c(-4, 4), ylim = c(-4,4),
-         zlim = c(-4,4), aspect = 1, size = 2)
-  arrow3d(c(0,0,0), V[,1], col = "red")
-  arrow3d(c(0,0,0), V[,2], col = "red")
-  arrow3d(c(0,0,0), V[,3], col = "red")
+loadings(pca1)
 ```
 
+It is common practice to retain only those PCs with eigenvalues
+(variances) $> 1$ (cf. scree plot).
 
+```{r}
+barplot(pca1$values, main = "Scree plot", ylab = "Variances", xlab = "PC", # first three PCs
+        names.arg = 1:length(pca1$values))
+  abline(h = 1, col = "blue", lty = "dotted")
+```
+
+Alternatively, one can perform parallel analysis to identify
+statistically significant PCs whose variances are "larger than the 95%
+quantile \[...\] of those obtained from random or resampled data"
+[@mairModernPsychometrics2018: 31]. The corresponding function is
+`fa.parallel()` from the `psych` package.
+
+```{r}
+pca.pa <- fa.parallel(scope_sem_sub[,-1], # raw data
+                     fa = "pc", # Use PCA instead of factor analysis
+                     cor = "cor",  # Use Pearson correlations (default for PCA)
+                     n.iter = 200, # Number of iterations (increase for more stable results)
+                     quant = 0.95, # Use 95th percentile (common choice)
+                     fm = "minres") # Factor method
+```
+
+### Accessing and visualising the loadings
+
+Since three PCs appear to be enough to explain the majority of variance
+in the data, we will refit the model with `nfactors = 3`.
+
+```{r}
+pca2 <- principal(scope_sem_sub[,-1],
+                  nfactors = 3,
+                  rotate = "none")
+```
+
+A convenient function for printing the PCA loadings is `loadings()`.
+Weights close to $0$ are not displayed.
+
+```{r}
+loadings(pca2)
+```
+
+In order to see what features load particularly strongly on the PCs, we
+can draw a path diagram with `diagram()`. Note that the red arrows
+indicate negative weights (i.e., negative "regression coefficients").
+
+```{r}
+diagram(pca2, main = NA)
+```
+
+The generic `plot` method returns a scatterplot of the loadings:
+
+```{r}
+plot(pca2, labels = colnames(scope_sem_sub[,-1]), main = NA)
+```
+
+Finally, you can obtain the PC scores for each observation in the input
+data by accessing the `$scores` element:
+
+```{r}
+head(pca2$scores, n = 15)
+```
+
+Biplots offer juxtaposed visualisations of PC scores (points) and
+loadings (arrows).
+
+```{r}
+
+# PC1 and PC2
+biplot(pca2, choose = c(1, 2), 
+       main = NA, pch = 20, col = c("darkgrey", "blue"))
+
+
+# PC2 and PC3
+biplot(pca2, choose = c(2, 3), 
+       main = NA, pch = 20, col = c("darkgrey", "blue"))
+```
+
+::: callout-note
+## Interpreting the PCA output
+
+After inspecting the loadings and biplots, we can see the following
+patterns:
+
+-   **External sensation**: Higher ratings in concreteness (i.e., direct
+    perception with one's senses) as well as the visual and haptic
+    dimensions of verbs are associated with an increase in PC1.
+
+-   **Senses and selection**: PC2 displays notable negative loadings in
+    features relating to the number of meanings a verb has and how much
+    information it carries about the meaning of its objects. PC2 scores
+    decrease if a verb has fewer meanings, but they increase if it
+    displays higher selectional preference strength.
+
+-   **Internal sensation**: PC3 captures variance in olfactory,
+    gustatory and interoceptive[^pca-2] ratings.
 :::
 
-
+[^pca-2]: Here *interoceptive* means "\[t\]o what extent one experiences
+    the referent by sensations inside one's body"
+    [@gaoSCOPESouthCarolina2022: 2859].

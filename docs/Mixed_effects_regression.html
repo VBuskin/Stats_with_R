@@ -131,7 +131,7 @@ div.csl-indent {
 
 </head>
 
-<body class="nav-sidebar floating slimcontent">
+<body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -451,16 +451,15 @@ div.csl-indent {
   <li><a href="#multilevel-models" id="toc-multilevel-models" class="nav-link" data-scroll-target="#multilevel-models"><span class="header-section-number">23.3</span> Multilevel models</a>
   <ul class="collapse">
   <li><a href="#types-of-mixed-effects-models" id="toc-types-of-mixed-effects-models" class="nav-link" data-scroll-target="#types-of-mixed-effects-models"><span class="header-section-number">23.3.1</span> Types of mixed-effects models</a></li>
-  <li><a href="#crossed-and-nested-effects" id="toc-crossed-and-nested-effects" class="nav-link" data-scroll-target="#crossed-and-nested-effects"><span class="header-section-number">23.3.2</span> Crossed and nested effects</a></li>
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example"><span class="header-section-number">23.3.2</span> Example</a></li>
   <li><a href="#linear-mixed-effects-models" id="toc-linear-mixed-effects-models" class="nav-link" data-scroll-target="#linear-mixed-effects-models"><span class="header-section-number">23.3.3</span> Linear mixed-effects models</a></li>
   <li><a href="#application-in-r" id="toc-application-in-r" class="nav-link" data-scroll-target="#application-in-r"><span class="header-section-number">23.3.4</span> Application in R</a></li>
   </ul></li>
-  <li><a href="#visualising-mixed-effects-models" id="toc-visualising-mixed-effects-models" class="nav-link" data-scroll-target="#visualising-mixed-effects-models"><span class="header-section-number">23.4</span> Visualising mixed-effects models</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/VBuskin/Stats_with_R/blob/main/Mixed_effects_regression.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Linear_regression.html">Machine learning</a></li><li class="breadcrumb-item"><a href="./Mixed_effects_regression.html"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Mixed-effects regression</span></a></li></ol></nav>
 <div class="quarto-title">
@@ -506,44 +505,80 @@ div.csl-indent {
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggeffects)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>varmorph <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"varmorph_data.csv"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sjPlot)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom.mixed)</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Reduce data</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>varmorph2 <span class="ot">&lt;-</span> varmorph <span class="sc">%&gt;%</span> <span class="fu">select</span>(rt, target, prime_type, subj_id)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>varmorph <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"varmorph_data.csv"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Reduce data</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>varmorph2 <span class="ot">&lt;-</span> varmorph <span class="sc">%&gt;%</span> <span class="fu">select</span>(rt, target, prime_type, subj_id) <span class="sc">%&gt;%</span> <span class="fu">drop_na</span>()</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Overview</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(varmorph2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 37,260
+Columns: 4
+$ rt         &lt;dbl&gt; 599.63, 885.39, 1124.94, 568.68, 726.24, 1095.37, 492.96, 6…
+$ target     &lt;chr&gt; "print", "defend", "tempt", "hunt", "staple", "pose", "kick…
+$ prime_type &lt;chr&gt; "derived", "derived", "derived", "derived", "derived", "der…
+$ subj_id    &lt;chr&gt; "3202", "3202", "3202", "3202", "3202", "3202", "3202", "32…</code></pre>
+</div>
 </div>
 </section>
-<section id="multilevel-models" class="level2 page-columns page-full" data-number="23.3">
+<section id="multilevel-models" class="level2" data-number="23.3">
 <h2 data-number="23.3" class="anchored" data-anchor-id="multilevel-models"><span class="header-section-number">23.3</span> Multilevel models</h2>
 <p>At their core, mixed-effects models “are extensions of regression in which data are structured in groups and coefficients can vary by group” <span class="citation" data-cites="gelmanDataAnalysisUsing2007">(<a href="references.html#ref-gelmanDataAnalysisUsing2007" role="doc-biblioref">Gelman and Hill 2007</a>: 237)</span>. Typical grouping structures found in linguistic data include speakers, regions, or lexical stimuli for which <strong>multiple observations</strong> are attested. Normally, such structures would violate the assumption of independence, but can be controlled for by capturing group-wise tendencies.</p>
-<p>Here is a schematic representation of a hierarchically structured dataset:</p>
-<div class="cell" data-fig-width="8" data-fig-height="8">
+<p>For illustration, a simple example of a hierarchical dataset is presented in <a href="#fig-multi-simple" class="quarto-xref">Figure&nbsp;<span>23.1</span></a>. If one were to, for instance, measure test scores for every student, it may be of interest how their performance varies not only from student to student but also from school to school. After all, the students are <strong>nested</strong> within their schools.</p>
+<div id="fig-multi-simple" class="quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-multi-simple-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell" data-fig-width="4" data-fig-height="4">
 <div class="cell-output-display">
 <div>
 <div>
 <pre class="mermaid mermaid-js">graph LR
-    A1[Participant 1] --&gt; B11(Item 1) --&gt; C11(Reaction time 1)
-    A1[Participant 1] --&gt; B12(Item 2) --&gt; C12(Reaction time 2)
-    A1[Participant 1] --&gt; B13(Item ...) --&gt; C13(Reaction time ...)
-
-    A2[Participant 2] --&gt; B21(Item 1) --&gt; C21(Reaction time 1)
-    A2[Participant 2] --&gt; B22(Item 2) --&gt; C22(Reaction time 2)
-    A2[Participant 2] --&gt; B23(Item ...) --&gt; C23(Reaction time ...)
-  
-    A3[Participant ...] --&gt; B31(Item 1) --&gt; C31(Reaction time 1)
-    A3[Participant ...] --&gt; B32(Item 2) --&gt; C32(Reaction time 2)
-    A3[Participant ...] --&gt; B33(Item ...) --&gt; C33(Reaction time ...)
-  
+    A1[School 1] --&gt; B11(Student 1)
+    A1[School 1] --&gt; B12(Student 2)
+    A1[School 1] --&gt; B13(Student 3)
+    
+    A2[School 2] --&gt; B21(Student 4)
+    A2[School 2] --&gt; B22(Student 5)
+    A2[School 2] --&gt; B23(Student 6)
+    
 </pre>
 </div>
 </div>
 </div>
 </div>
-<section id="types-of-mixed-effects-models" class="level3 page-columns page-full" data-number="23.3.1">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-multi-simple-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;23.1
+</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Task
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Read the following (partial) description of the experiments conducted by Ciaccio &amp; Veríssimo on the morphological processing of complex lexical items <span class="citation" data-cites="ciaccioInvestigatingVariabilityMorphological2022">(<a href="references.html#ref-ciaccioInvestigatingVariabilityMorphological2022" role="doc-biblioref">2022</a>)</span>:</p>
+<blockquote class="blockquote">
+<p>The experiment included 102 English monomorphemic verbs used as targets (e.g., <em>print</em>). These were preceded by their -<em>ed</em> past-tense form (e.g., <em>printed</em>) as the inflected prime, their -<em>er</em> nominalization (e.g., <em>printer</em>) as the derived prime, or by an unrelated prime. Unrelated primes were dis- similar in form and meaning from their corresponding targets; half of them were -<em>ed</em> inflected forms and half of them were -<em>er</em> derived words. The distributions of word-form frequency, lemma frequency, and length (in letters) of the three prime types were kept as similar as possible. <span class="citation" data-cites="ciaccioInvestigatingVariabilityMorphological2022">(<a href="references.html#ref-ciaccioInvestigatingVariabilityMorphological2022" role="doc-biblioref">Ciaccio and Veríssimo 2022</a>: 2267)</span></p>
+</blockquote>
+<p>Inspect <code>varmorph2</code> and characterise its multilevel structure.</p>
+</div>
+</div>
+<section id="types-of-mixed-effects-models" class="level3" data-number="23.3.1">
 <h3 data-number="23.3.1" class="anchored" data-anchor-id="types-of-mixed-effects-models"><span class="header-section-number">23.3.1</span> Types of mixed-effects models</h3>
-<p>Variance across groups can be captured by <strong>varying-intercept</strong> and/or <strong>varying-slope</strong> models. These varying coefficients also known as <strong>random effects</strong> (cf. <span class="citation" data-cites="gelmanDataAnalysisUsing2007">Gelman and Hill (<a href="references.html#ref-gelmanDataAnalysisUsing2007" role="doc-biblioref">2007</a>)</span>: 245).<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> In the model equation, the intercept and/or the slope is additionally indexed for the grouping factor. Let <span class="math inline">\(J\)</span> denote the number of groups for <span class="math inline">\(j = 1, ..., J\)</span>.</p>
-<div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;Random effects are assumed to behave like random variables and follow a normal distribution</p></li></div><div class="callout callout-style-default callout-note callout-titled">
+<p>Variance across groups can be captured by <strong>varying-intercept</strong> and/or <strong>varying-slope</strong> models. These varying coefficients also known as <strong>random effects</strong> (cf. <span class="citation" data-cites="gelmanDataAnalysisUsing2007">Gelman and Hill (<a href="references.html#ref-gelmanDataAnalysisUsing2007" role="doc-biblioref">2007</a>)</span>: 245). In the model equation, the intercept <span class="math inline">\(\alpha\)</span> and/or the slope <span class="math inline">\(\beta\)</span> is additionally indexed for the grouping factor. Let <span class="math inline">\(J\)</span> denote the number of groups for <span class="math inline">\(j = 1, ..., J\)</span>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -553,10 +588,10 @@ Varying-intercept model
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>We allow group-wise variation in the intercept by replacing <span class="math inline">\(\beta_0\)</span> with <span class="math inline">\(\beta_{0j}\)</span> to indicate the intercept for the <span class="math inline">\(j\)</span>-th group.</p>
-<p><span class="math display">\[
-Y = \beta_{0j} + \beta_1X_{1} + \beta_2X_{2} + ... + \epsilon
-\]</span></p>
+<p>We allow group-wise variation in the intercept by replacing <span class="math inline">\(\alpha\)</span> with <span class="math inline">\(\alpha_{j}\)</span> to indicate the intercept for the <span class="math inline">\(j\)</span>-th group. It is defined as a random variable and follows the normal distribution. For instance, each participant in the aforementioned psycholinguistic would receive its own intercept rather than a global one for all participants.</p>
+<p><span id="eq-rnd-intercept"><span class="math display">\[
+Y = \alpha_{j} + \beta_1X_{1} + \beta_2X_{2} + ... + \epsilon \qquad \alpha_{j} \sim N(\mu_{\alpha}, \sigma_{\alpha}^2)
+\tag{23.1}\]</span></span></p>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -569,130 +604,453 @@ Varying-slope model
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>We will allow group-wise variation in the slope coefficients by replacing them with <span class="math inline">\(\beta_{ij}\)</span> to indicate the slope for the <span class="math inline">\(j\)</span>-th group.<br>
-<span class="math display">\[Y = \beta_{0} + \beta_{1j}X_{1} + \beta_{2j}X_{2} + ... + \epsilon \]</span></p>
+<p>We will allow group-wise variation in the slope coefficients by replacing them with <span class="math inline">\(\beta_{ij}\)</span> to indicate the slope for the <span class="math inline">\(j\)</span>-th group. The slope now functions as a random variable and is normally distributed. In the psycholinguistic study, each participant would be assigned its own slope coefficient.</p>
+<p><span id="eq-rnd-slope"><span class="math display">\[
+Y = \alpha + \beta_{1j}X_{1} + \beta_{2j}X_{2} + ... + \epsilon \qquad \beta_{j} \sim N(\mu_{\beta}, \sigma_{\beta}^2)
+\tag{23.2}\]</span></span></p>
 </div>
 </div>
 </section>
-<section id="crossed-and-nested-effects" class="level3" data-number="23.3.2">
-<h3 data-number="23.3.2" class="anchored" data-anchor-id="crossed-and-nested-effects"><span class="header-section-number">23.3.2</span> Crossed and nested effects</h3>
-<p>Another distinction often made in multilevel data with more than one random effect is between <strong>nested</strong> and <strong>crossed</strong> effects. This is dictated by the design of the study. In the priming data.</p>
+<section id="example" class="level3" data-number="23.3.2">
+<h3 data-number="23.3.2" class="anchored" data-anchor-id="example"><span class="header-section-number">23.3.2</span> Example</h3>
+<p>Assume we are predicting test performance by <code>School</code>. Using simulated data, the following series of plots plots illustrate …</p>
+<ol type="1">
+<li><p>… <code>School</code> as a fixed effect,</p></li>
+<li><p>… random intercepts for each <code>School</code>,</p></li>
+<li><p>… random slopes for each <code>School</code>, and</p></li>
+<li><p>… random intercepts and slopes for each <code>School</code>.</p></li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled" title="Plot: (1) Fixed-effects model">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Plot: (1) Fixed-effects model
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Mixed_effects_regression_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Plot: (2) Varying-intercept model">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Plot: (2) Varying-intercept model
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Mixed_effects_regression_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Plot: (3) Varying-slope model">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Plot: (3) Varying-slope model
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Mixed_effects_regression_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Plot: (4) Varying-intercept and varying-slope model">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Plot: (4) Varying-intercept and varying-slope model
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Mixed_effects_regression_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="linear-mixed-effects-models" class="level3" data-number="23.3.3">
 <h3 data-number="23.3.3" class="anchored" data-anchor-id="linear-mixed-effects-models"><span class="header-section-number">23.3.3</span> Linear mixed-effects models</h3>
 </section>
 <section id="application-in-r" class="level3" data-number="23.3.4">
 <h3 data-number="23.3.4" class="anchored" data-anchor-id="application-in-r"><span class="header-section-number">23.3.4</span> Application in R</h3>
+<section id="varying-intercept-model-1" class="level4" data-number="23.3.4.1">
+<h4 data-number="23.3.4.1" class="anchored" data-anchor-id="varying-intercept-model-1"><span class="header-section-number">23.3.4.1</span> Varying-intercept model</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Varying intercept model</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Define reference level for "prime_type"</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>varmorph2<span class="sc">$</span>prime_type <span class="ot">&lt;-</span> <span class="fu">factor</span>(varmorph2<span class="sc">$</span>prime_type, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"unrelated"</span>, <span class="st">"derived"</span>, <span class="st">"inflected"</span>, <span class="st">"fillter"</span>))</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit mixed-effects models</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>varmorph.me <span class="ot">&lt;-</span> <span class="fu">lmer</span>(rt <span class="sc">~</span> prime_type <span class="sc">+</span> <span class="co"># fixed effect</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>                      (<span class="dv">1</span> <span class="sc">|</span> subj_id) <span class="sc">+</span> <span class="co"># let intercept vary by subject</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                      (<span class="dv">1</span> <span class="sc">|</span> target), <span class="co"># # let intercept vary by target word</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>                    <span class="at">data =</span> varmorph2)</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Summarise results</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(varmorph.me)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Linear mixed model fit by REML ['lmerMod']
-Formula: rt ~ prime_type + (1 | subj_id) + (1 | target)
-   Data: varmorph2
-
-REML criterion at convergence: 92843.6
-
-Scaled residuals: 
-    Min      1Q  Median      3Q     Max 
--2.2516 -0.5714 -0.1819  0.3212  7.5829 
-
-Random effects:
- Groups   Name        Variance Std.Dev.
- target   (Intercept)  3691     60.75  
- subj_id  (Intercept)  7694     87.71  
- Residual             29484    171.71  
-Number of obs: 7038, groups:  target, 102; subj_id, 69
-
-Fixed effects:
-                    Estimate Std. Error t value
-(Intercept)          715.703     12.659  56.537
-prime_typederived    -31.312      5.014  -6.246
-prime_typeinflected  -33.956      5.014  -6.773
-
-Correlation of Fixed Effects:
-            (Intr) prm_typd
-prm_typdrvd -0.198         
-prm_typnflc -0.198  0.500  </code></pre>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Varying intercept model</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Define reference level for "prime_type"</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>varmorph2<span class="sc">$</span>prime_type <span class="ot">&lt;-</span> <span class="fu">factor</span>(varmorph2<span class="sc">$</span>prime_type, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"unrelated"</span>, <span class="st">"derived"</span>, <span class="st">"inflected"</span>, <span class="st">"fillter"</span>))</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit mixed-effects models</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>varmorph.me <span class="ot">&lt;-</span> <span class="fu">lmer</span>(rt <span class="sc">~</span> prime_type <span class="sc">+</span> <span class="co"># fixed effect</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>                      (<span class="dv">1</span> <span class="sc">|</span> subj_id) <span class="sc">+</span> <span class="co"># let intercept vary by subject</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>                      (<span class="dv">1</span> <span class="sc">|</span> target), <span class="co"># # let intercept vary by target word</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>                      <span class="at">data =</span> varmorph2)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Summarise results</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(varmorph.me)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Varying-slope model</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>varmorph.me2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(rt <span class="sc">~</span> prime_type <span class="sc">+</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                      (<span class="dv">1</span> <span class="sc">+</span> prime_type <span class="sc">|</span> subj_id),</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">data =</span> varmorph2)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(varmorph.me2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Linear mixed model fit by REML ['lmerMod']
-Formula: rt ~ prime_type + (1 + prime_type | subj_id)
-   Data: varmorph2
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tab_model</span>(varmorph.me, <span class="at">show.se =</span> <span class="cn">TRUE</span>, <span class="at">show.aic =</span> <span class="cn">TRUE</span>, <span class="at">show.dev =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table style="border-collapse:collapse; border:none;">
+<tbody><tr>
+<th style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm;  text-align:left; ">&nbsp;</th>
+<th colspan="4" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">rt</th>
+</tr>
+<tr>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  text-align:left; ">Predictors</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">Estimates</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">std. Error</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">CI</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">p</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">(Intercept)</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">715.70</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">12.66</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">690.89&nbsp;–&nbsp;740.52</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">prime type [derived]</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-31.31</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">5.01</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-41.14&nbsp;–&nbsp;-21.48</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">prime type [inflected]</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-33.96</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">5.01</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-43.78&nbsp;–&nbsp;-24.13</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
+</tr>
+<tr>
+<td colspan="5" style="font-weight:bold; text-align:left; padding-top:.8em;">Random Effects</td>
+</tr>
 
-REML criterion at convergence: 93435.4
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">σ<sup>2</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="4">29483.89</td>
+</tr>
 
-Scaled residuals: 
-    Min      1Q  Median      3Q     Max 
--2.2721 -0.5930 -0.2214  0.3089  7.1532 
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">τ<sub>00</sub> <sub>target</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="4">3690.56</td>
 
-Random effects:
- Groups   Name                Variance  Std.Dev. Corr       
- subj_id  (Intercept)          7543.550  86.854             
-          prime_typederived     192.590  13.878   0.19      
-          prime_typeinflected     4.028   2.007  -0.47 -0.96
- Residual                     33126.047 182.006             
-Number of obs: 7038, groups:  subj_id, 69
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">τ<sub>00</sub> <sub>subj_id</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="4">7693.61</td>
 
-Fixed effects:
-                    Estimate Std. Error t value
-(Intercept)          715.703     11.111  64.416
-prime_typederived    -31.312      5.571  -5.621
-prime_typeinflected  -33.956      5.320  -6.383
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">ICC</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="4">0.28</td>
 
-Correlation of Fixed Effects:
-            (Intr) prm_typd
-prm_typdrvd -0.175         
-prm_typnflc -0.259  0.463  
-optimizer (nloptwrap) convergence code: 0 (OK)
-boundary (singular) fit: see help('isSingular')</code></pre>
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">N <sub>subj_id</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="4">69</td>
+
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">N <sub>target</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="4">102</td>
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm; border-top:1px solid;">Observations</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="4">7038</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">Marginal R<sup>2</sup> / Conditional R<sup>2</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="4">0.006 / 0.283</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">Deviance</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="4">92860.321</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">AIC</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="4">92855.624</td>
+</tr>
+
+</tbody></table>
+
 </div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(<span class="fu">ranef</span>(varmorph.me))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>List of 2
- $ target :'data.frame':    102 obs. of  1 variable:
-  ..$ (Intercept): num [1:102] 1.68 -16.58 82.31 -43.64 -61.85 ...
-  ..- attr(*, "postVar")= num [1, 1, 1:102] 407 407 407 407 407 ...
- $ subj_id:'data.frame':    69 obs. of  1 variable:
-  ..$ (Intercept): num [1:69] 36.6 14.9 165.7 -14.4 -80.9 ...
-  ..- attr(*, "postVar")= num [1, 1, 1:69] 304 304 304 304 304 ...
- - attr(*, "class")= chr "ranef.mer"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(<span class="fu">ranef</span>(varmorph.me2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>List of 1
- $ subj_id:'data.frame':    69 obs. of  3 variables:
-  ..$ (Intercept)        : num [1:69] 36.9 13.6 162.5 -14.5 -79.4 ...
-  ..$ prime_typederived  : num [1:69] -2.288 5.425 10.421 0.991 -5.046 ...
-  ..$ prime_typeinflected: num [1:69] 0.0428 -0.7996 -2.4774 -0.0286 1.2046 ...
-  ..- attr(*, "postVar")= num [1:3, 1:3, 1:69] 320.57 -36.45 2.53 -36.45 159.69 ...
- - attr(*, "class")= chr "ranef.mer"</code></pre>
+<div class="callout callout-style-default callout-tip callout-titled" title="ICC">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+ICC
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The intraclass correlation coefficient (ICC) “ranges from <span class="math inline">\(0\)</span> if the grouping conveys no information to <span class="math inline">\(1\)</span> if all members of a group are identical” <span class="citation" data-cites="gelmanDataAnalysisUsing2007">(<a href="references.html#ref-gelmanDataAnalysisUsing2007" role="doc-biblioref">Gelman and Hill 2007</a>: 258)</span>. In other words, it indicates how much of the variance in the outcome can be explained by the grouping factor (e.g.&nbsp;school or participant).</p>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract random effects and their standard errors</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>ranef_obj <span class="ot">&lt;-</span> <span class="fu">ranef</span>(varmorph.me)  <span class="co"># Extract random effects with conditional variance</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>se_ranef <span class="ot">&lt;-</span> arm<span class="sc">::</span><span class="fu">se.ranef</span>(varmorph.me)           <span class="co"># Extract standard errors for random effects</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare a data frame for 'subj_id' random intercepts with confidence intervals</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>subj_ranef <span class="ot">&lt;-</span> ranef_obj<span class="sc">$</span>subj_id  <span class="co"># Random effects for subjects</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>subj_se <span class="ot">&lt;-</span> se_ranef<span class="sc">$</span>subj_id      <span class="co"># Standard errors for subjects</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine random effects and standard errors into a data frame</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>subj_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">subj_id =</span> <span class="fu">rownames</span>(subj_ranef),</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">intercept =</span> subj_ranef[, <span class="st">"(Intercept)"</span>],</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">se =</span> subj_se[, <span class="st">"(Intercept)"</span>],</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">conf.low =</span> subj_ranef[, <span class="st">"(Intercept)"</span>] <span class="sc">-</span> <span class="fl">1.96</span> <span class="sc">*</span> subj_se[, <span class="st">"(Intercept)"</span>],</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">conf.high =</span> subj_ranef[, <span class="st">"(Intercept)"</span>] <span class="sc">+</span> <span class="fl">1.96</span> <span class="sc">*</span> subj_se[, <span class="st">"(Intercept)"</span>]</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the waterfall plot</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(subj_df, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(subj_id, intercept), <span class="at">y =</span> intercept)) <span class="sc">+</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">col =</span> <span class="st">"grey10"</span>) <span class="sc">+</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_pointrange</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> conf.low, <span class="at">ymax =</span> conf.high)) <span class="sc">+</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">col =</span> <span class="st">"grey10"</span>) <span class="sc">+</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Random Intercepts by Subject"</span>,</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Subject ID"</span>,</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Random Intercept"</span>) <span class="sc">+</span></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Mixed_effects_regression_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
-</section>
-<section id="visualising-mixed-effects-models" class="level2" data-number="23.4">
-<h2 data-number="23.4" class="anchored" data-anchor-id="visualising-mixed-effects-models"><span class="header-section-number">23.4</span> Visualising mixed-effects models</h2>
+<section id="varying-slope-model-1" class="level4" data-number="23.3.4.2">
+<h4 data-number="23.3.4.2" class="anchored" data-anchor-id="varying-slope-model-1"><span class="header-section-number">23.3.4.2</span> Varying-slope model</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Varying-slope model; replace 0 with 1 if you want the intercept to vary too</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>varmorph.me2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(rt <span class="sc">~</span> prime_type <span class="sc">+</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                      (<span class="dv">0</span> <span class="sc">+</span> prime_type <span class="sc">|</span> subj_id),</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">data =</span> varmorph2)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(varmorph.me2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tab_model</span>(varmorph.me2, <span class="at">show.se =</span> <span class="cn">TRUE</span>, <span class="at">show.aic =</span> <span class="cn">TRUE</span>, <span class="at">show.dev =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table style="border-collapse:collapse; border:none;">
+<tbody><tr>
+<th style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm;  text-align:left; ">&nbsp;</th>
+<th colspan="4" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">rt</th>
+</tr>
+<tr>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  text-align:left; ">Predictors</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">Estimates</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">std. Error</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">CI</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">p</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">(Intercept)</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">715.70</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">11.11</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">693.92&nbsp;–&nbsp;737.49</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">prime type [derived]</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-31.31</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">5.57</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-42.23&nbsp;–&nbsp;-20.39</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">prime type [inflected]</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-33.96</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">5.32</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-44.38&nbsp;–&nbsp;-23.53</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
+</tr>
+<tr>
+<td colspan="5" style="font-weight:bold; text-align:left; padding-top:.8em;">Random Effects</td>
+</tr>
+
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">σ<sup>2</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="4">33126.00</td>
+</tr>
+
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">τ<sub>00</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="4">&nbsp;</td>
+
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">τ<sub>00</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="4">&nbsp;</td>
+
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">τ<sub>11</sub> <sub>subj_id.prime_typeunrelated</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="4">7545.01</td>
+
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">τ<sub>11</sub> <sub>subj_id.prime_typederived</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="4">8193.86</td>
+
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">τ<sub>11</sub> <sub>subj_id.prime_typeinflected</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="4">7385.08</td>
+
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">ρ<sub>01</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="4">&nbsp;</td>
+
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">ρ<sub>01</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="4">&nbsp;</td>
+
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">ICC</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="4">0.14</td>
+
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">N <sub>subj_id</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="4">69</td>
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm; border-top:1px solid;">Observations</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="4">7038</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">Marginal R<sup>2</sup> / Conditional R<sup>2</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="4">0.006 / 0.141</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">Deviance</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="4">93452.160</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">AIC</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="4">93455.369</td>
+</tr>
+
+</tbody></table>
+
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract random slopes</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>ranef_data1 <span class="ot">&lt;-</span> <span class="fu">ranef</span>(varmorph.me2)<span class="sc">$</span>subj_id</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract standard errors</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>ranef_data1_se <span class="ot">&lt;-</span> arm<span class="sc">::</span><span class="fu">se.ranef</span>(varmorph.me2)<span class="sc">$</span>subj_id</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert data into long format</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>random_effects_df <span class="ot">&lt;-</span> ranef_data1 <span class="sc">%&gt;%</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames_to_column</span>(<span class="at">var =</span> <span class="st">"subj_id"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>subj_id, </span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"prime_type"</span>, </span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"random_effect"</span>)</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a data frame for standard errors</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>se_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(ranef_data1_se) <span class="sc">%&gt;%</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames_to_column</span>(<span class="at">var =</span> <span class="st">"subj_id"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>subj_id, </span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"prime_type"</span>, </span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"se"</span>)</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine random effects with standard errors</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>combined_df <span class="ot">&lt;-</span> random_effects_df <span class="sc">%&gt;%</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(se_df, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"subj_id"</span>, <span class="st">"prime_type"</span>))</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate confidence intervals</span></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>combined_df <span class="ot">&lt;-</span> combined_df <span class="sc">%&gt;%</span></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">lower_ci =</span> random_effect <span class="sc">-</span> <span class="fl">1.96</span> <span class="sc">*</span> se,</span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>         <span class="at">upper_ci =</span> random_effect <span class="sc">+</span> <span class="fl">1.96</span> <span class="sc">*</span> se)</span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Dotplots with confidence intervals</span></span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(combined_df, <span class="fu">aes</span>(<span class="at">x =</span> subj_id, <span class="at">y =</span> random_effect, <span class="at">col =</span> prime_type)) <span class="sc">+</span></span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">col =</span> <span class="st">"grey10"</span>) <span class="sc">+</span></span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> prime_type) <span class="sc">+</span></span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> lower_ci, <span class="at">ymax =</span> upper_ci), <span class="at">width =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Random Effect of Prime Type by Subject ID"</span>,</span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Random Slope"</span>,</span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Subject ID"</span>) <span class="sc">+</span></span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust=</span><span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Mixed_effects_regression_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-ciaccioInvestigatingVariabilityMorphological2022" class="csl-entry" role="listitem">
+Ciaccio, Laura Anna, and João Veríssimo. 2022. <span>“Investigating Variability in Morphological Processing with <span>Bayesian</span> Distributional Models.”</span> <em>Psychonomic Bulletin &amp; Review</em> 29 (6): 2264–74. <a href="https://doi.org/10.3758/s13423-022-02109-w">https://doi.org/10.3758/s13423-022-02109-w</a>.
+</div>
 <div id="ref-gelmanDataAnalysisUsing2007" class="csl-entry" role="listitem">
 Gelman, Andrew, and Jennifer Hill. 2007. <em>Data <span>Analysis</span> <span>Using</span> <span>Regression</span> and <span>Multilevel</span>/<span>Hierarchical</span> Models</em>. Analytical Methods for Social Research. Cambridge: Cambridge University Press.
 </div>
@@ -701,7 +1059,8 @@ Schäfer, Roland. 2020. <span>“Mixed-Effects Regression Modeling.”</span> In
 </div>
 </div>
 </section>
-
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

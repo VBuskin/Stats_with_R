@@ -3,7 +3,7 @@ title: "Logistic Regression"
 author: Vladimir Buskin
 format:
   html:
-    self-contained: false
+    self-contained: true
     logo: logo.png
     footer: "Regression"
     theme: Reference
@@ -42,6 +42,7 @@ corpus-study on subject pronoun realisation:
 
 ```{r, echo = TRUE, output = TRUE, eval = TRUE}
 # Load libraries
+library(sjPlot)
 library(tidyverse)
 library(rms)
 library(broom)
@@ -249,11 +250,12 @@ parameters $\beta_0$ and $\beta_1$ are typically estimated using
 **Maximum Likelihood Estimation**[^logistic_regression-3] (MLE).
 
 [^logistic_regression-3]: The goal of the fitting procedure is to
-    maximise the likelihood function of the parameter matrix $\ell(\mathbf{\beta})$. Via
-    partial differentiation, an intermediary result can be attained
-    which can only be solved using an iterative algorithm (e.g.
-    Newton-Ralphson). For further technical details, see Wood [-@woodGeneralizedAdditiveModels2006: 63-66] or
-    Agresti & Kateri [-@agrestiFoundationsStatisticsData2022: 291-294].
+    maximise the likelihood function of the parameter matrix
+    $\ell(\mathbf{\beta})$. Via partial differentiation, an intermediary
+    result can be attained which can only be solved using an iterative
+    algorithm (e.g. Newton-Ralphson). For further technical details, see
+    Wood [-@woodGeneralizedAdditiveModels2006: 63-66] or Agresti &
+    Kateri [-@agrestiFoundationsStatisticsData2022: 291-294].
 
 ### Multiple logistic regression
 
@@ -415,6 +417,7 @@ Reference.lrm <- lrm(Reference ~ Register + Variety + Register:Variety + Person,
 
 # View model statistics
 Reference.lrm
+
 ```
 
 ```{r, echo = TRUE, output = FALSE}
@@ -424,7 +427,10 @@ Reference.glm <- glm(Reference ~ Register + Variety + Register:Variety + Person,
 
 # View model statistics
 summary(Reference.glm)
+```
 
+```{r, echo = TRUE, output = TRUE}
+tab_model(Reference.glm, show.se = TRUE, show.aic = TRUE, show.dev = TRUE, show.fstat = TRUE, transform = NULL)
 ```
 
 ::: callout-tip
@@ -434,7 +440,7 @@ With the function `drop1()`, it is possible to successively remove
 variables from the complex model to ascertain which ones improve the
 model significantly (i.e., decrease the deviance and AIC scores).
 
-```{r, echo = TRUE, output = FALSE}
+```{r, echo = TRUE, output = TRUE}
 
 drop1(Reference.glm, test = "Chisq")
 
@@ -495,7 +501,6 @@ ggplot(tidy_model, aes(x = exp(estimate), y = term)) +
   )
 ```
 
-
 ```{r, echo = TRUE, output = TRUE, eval = FALSE, include = FALSE}
 
 # Plot marginal effects; y-axis = log odds of a null vs. overt subject
@@ -521,7 +526,6 @@ plot(ggeffect(Reference.glm, terms = c("Variety"))) + geom_line(col = "steelblue
 plot(ggeffect(Reference.glm, terms = c("Person"))) + geom_line(col = "steelblue")
 
 ```
-
 
 ### Step 6: Interpret the model
 

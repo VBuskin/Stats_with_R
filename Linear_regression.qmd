@@ -3,7 +3,7 @@ title: "Linear regression"
 author: Vladimir Buskin
 format:
   html:
-    self-contained: false
+    self-contained: true
     logo: logo.png
     footer: "Regression"
     theme: default
@@ -41,11 +41,10 @@ library("tidyverse")
 
 ```{r, echo = TRUE, output = FALSE}
 # Load libraries
-library(readxl)
-library(writexl)
-library(tidyverse)
-library(ggpubr)
-library(ggeffects)
+library(readxl) # for reading in Excel data
+library(tidyverse) # data manipulation and visualisation framework
+library(sjPlot) # exporting regression tables
+library(ggeffects) # generating predictions
 
 # Load data
 ELP <- read_xlsx("ELP.xlsx")
@@ -56,16 +55,21 @@ str(ELP)
 
 ## Introduction
 
-Consider the distribution of the continuous variable `RT` (reaction
-times) from the `ELP` (English Lexicon Project) dataset. We will apply a
-$\log$-transformation to the the reaction times in order to even out the
-differences between extremely high and extremely low frequency counts
-[cf. @winter_statistics_2020: 90-94].
+Consider the distribution of the variables `RT` (reaction times) and
+`Freq` from the `ELP` (English Lexicon Project) dataset
+[@balotaEnglishLexiconProject2007].
+
+We will apply a $\log$-transformation to both variables in order to even
+out the differences between extremely high and extremely low frequency
+counts [@winter_statistics_2020: 90-94].
 
 ::: panel-tabset
 ### Log-transformed
 
-```{r, echo = FALSE, output = TRUE}
+```{r, echo = TRUE, output = TRUE}
+#| code-fold: true
+#| code-summary: "Code"
+
 # Log-transformed
 ggplot(ELP, aes(x = log(RT))) +
   geom_histogram() +
@@ -78,12 +82,14 @@ ggplot(ELP, aes(x = log(RT))) +
            label = expression(paste(bar(x))), 
            vjust = 1.5, hjust = -0.2, color = "steelblue", parse = TRUE)
 
-
 ```
 
 ### Untransformed
 
-```{r, echo = FALSE, output = TRUE}
+```{r, echo = TRUE, output = TRUE}
+#| code-fold: true
+#| code-summary: "Code"
+
 # Skewed
 ggplot(ELP, aes(x = RT)) +
   geom_histogram() +
@@ -134,7 +140,8 @@ $X$.
 We can thus summarise our preliminary and fairly general statistical
 model as
 
-$$Y = f(X) + \epsilon.$$
+$$Y = f(X) + \epsilon.
+$$ {#eq-model}
 
 The term $f(X)$ describes the contribution of $X$ to the explanation of
 $Y$. Since no model can explain everything perfectly, we expect there to
@@ -163,12 +170,18 @@ useful** both conceptually and practically.
 
 The simple linear model has the general form
 
-$$ Y = \beta_0 + \beta_1X + \epsilon. $$ The model parameters (or
-coefficients) $\beta_0$ and $\beta_1$ specify the functional
-relationship $f$ between $Y$ and $X$. The first parameter $\beta_0$
-determines the **intercept** of the regression line, and $\beta_1$
-indicates the **slope**. Once again, $\epsilon$ captures the model
-error.
+$$ Y = \beta_0 + \beta_1X + \epsilon. 
+$$ {#eq-linear}
+
+-   The model parameters (or coefficients) $\beta_0$ and $\beta_1$
+    specify the functional relationship $f$ between $Y$ and $X$.
+
+-   The first parameter $\beta_0$ determines the **intercept** of the
+    regression line, and $\beta_1$ indicates the **slope**.
+
+-   Once again, $\epsilon$ captures the model error, which is equivalent
+    to the sum of all distances of the data points from the regression
+    line.
 
 ```{r, echo = F}
 # Create sample data
@@ -236,33 +249,37 @@ ggplot(data, aes(x = x, y = y)) +
 Applying the model formula to our dataset, we get the following updated
 regression equation:
 
-$$ \text{Reaction time} = \beta_0 + \beta_1\text{Frequency} + \text{Model Error}. $$But
-how do we find the right values for the intercept and the slope? In
-short: We can't. We are dealing with population parameters and can,
+$$ \text{Reaction time} = \beta_0 + \beta_1\text{Frequency} + \text{Model Error}. $$
+
+But how do we find the exact values of the intercept and the slope? In
+short: We can't! We are dealing with population parameters and can,
 therefore, only provide an approximation of the true relationship
-between `RT` and `Frequency`, but will never capture the true one. To
-reflect the tentative nature of the model coefficients, we use the
+between `RT` and `Freq`.
+
+To reflect the tentative nature of the model coefficients, we use the
 **hat** symbol \^ (e.g., $\hat{\beta_0}$) to indicate **estimations**
 rather than true values. The estimation procedure requires **training
 data**, based on which the algorithm "learns" the relationship between
-$Y$ and $X$ (hence "Machine Learning").
+$Y$ and $X$ (hence the term "Machine Learning").
 
 ::: {.callout-tip title="How exactly do you estimate the model parameters?" collapse="true"}
 The most common way of estimating parameters for linear models is the
 **Least Squares** approach. In essence, the parameters are chosen such
 that the residual sum of squares, i.e., the sum of the differences
 between observed and predicted values, is as low as possible. In other
-words, the distances between the data points and the regression line
-should be minimised. More formally, the estimated slope then corresponds
-to
+words, we are trying to minimise the distances between the data points
+and the regression line.
 
-$$ \hat{\beta}_1 = \frac{\sum_{i=1}^n(x_i - \bar{x})(y_i- \bar{y})}{\sum_{i=1}^n(x_i- \bar{x})^2}.$$
+It can be computed using the equvilance in @eq-lse-slope.
 
-We can then obtain the intercept:
+$$ \hat{\beta}_1 = \frac{\sum_{i=1}^n(x_i - \bar{x})(y_i- \bar{y})}{\sum_{i=1}^n(x_i- \bar{x})^2}.
+$$ {#eq-lse-slope}
+
+We can then obtain the intercept via @eq-lse-intercept.
 
 $$
 \hat{\beta_0}= \bar{y}- \hat{\beta}_1\bar{x}
-$$
+$$ {#eq-lse-intercept}
 :::
 
 Once we've fitted the model, we can then predict reaction times if we
@@ -270,7 +287,7 @@ know the frequency of a lexical stimulus:
 
 $$
 \hat{y} = \hat{\beta}_0 + \hat{\beta}_1x,
-$$
+$$ {#eq-preds}
 
 where $\hat{y}$ indicates a prediction of $Y$ on the basis of the
 predictor values $X = x$.
@@ -279,12 +296,16 @@ predictor values $X = x$.
 
 In R, we can fit a linear model with the `lm()` function.
 
-```{r, echo = TRUE, output = TRUE}
+```{r, echo = TRUE, output = FALSE}
 # Fit linear model
 rt.lm1 = lm(log(RT) ~ log(Freq), data = ELP)
 
 # View model data
 summary(rt.lm1)
+```
+
+```{r, echo = TRUE, output = TRUE}
+tab_model(rt.lm1, show.se = TRUE, show.aic = TRUE, show.dev = TRUE, show.fstat = TRUE, digits = 3)
 
 ```
 
@@ -337,18 +358,18 @@ $\beta_1$ considerably deviates from 0, thus providing evidence for the
 alternative hypothesis $H_1: \beta_1 \ne 0$. Since $p < 0.001$, we can
 reject $H_0$.
 
-```         
 The $p$-value itself crucially depends on the
-$t$-statistic[^linear_regression-1], which measures "the number of
+$t$-statistic[^linear_regression-2], which measures "the number of
 standard deviations that $\hat{\beta_1}$ is away from 0"
-[@james_introduction_2021: 67] . The standard error (SE) reflects
-how much an estimated coefficient differs on average from the true
-values of $\beta_0$ and $\beta_1$. They can be used to compute the
-95% confidence interval
-$[\hat{\beta}_1 - 2 \cdot SE(\hat{β}_1), \hat{\beta}_1 + 2 \cdot SE(\hat{β}_1)]$;
-the true estimate of the parameter $\beta_1$ lies within the
-specified range 95% of the time.
-```
+[@james_introduction_2021: 67]. The standard error (SE) reflects how
+much an estimated coefficient differs on average from the true values of
+$\beta_0$ and $\beta_1$. They can be used to compute the 95% confidence
+interval
+$$[\hat{\beta}_1 - 2 \cdot SE(\hat{β}_1), \hat{\beta}_1 + 2 \cdot SE(\hat{\beta}_1)].
+$$ {#eq-ci}
+
+The true value of the parameter $\beta_1$ lies within the specified
+range 95% of the time.
 
 ```{r, echo = TRUE, output = TRUE}
 
@@ -363,11 +384,17 @@ The estimated parameter for `log(Freq)`, which is -0.049, thus has the
 95% confidence interval \[-0.053, -0.044\].
 :::
 
+[^linear_regression-2]: If the response variable is unknown or
+    irrelevant, we speak of **unsupervised machine learning**.
+    Unsupervised models are mostly concerned with finding patterns in
+    high-dimensional datasets with dozens or even hundreds of variables.
+
 ::: {.callout-tip title="**Residual standard error** (RSE)" collapse="true"}
 This is an estimation of the average deviation of the predictions from
 the observed values.
 
-$$RSE = \sqrt{\frac{1}{n-2}\sum_{i=1}^n (y_i - \hat{y_i}})^2$$
+$$RSE = \sqrt{\frac{1}{n-2}\sum_{i=1}^n (y_i - \hat{y_i}})^2
+$$ {#eq-rse}
 :::
 
 ::: {.callout-tip title="$R^2$" collapse="true"}
@@ -376,7 +403,8 @@ The $R^2$ score is important for assessing model fit because it
 using $X$" [@james_introduction_2021: 70; emphasis removed], varying
 between 0 and 1.
 
-$$R^2 = 1-\frac{TSS}{RSS} = 1-\frac{\sum_{i=1}^n (y_i - \hat{y_i})^2}{\sum_{i=1}^n (y_i - \bar{y_i})^2}$$
+$$R^2 = 1-\frac{TSS}{RSS} = 1-\frac{\sum_{i=1}^n (y_i - \hat{y_i})^2}{\sum_{i=1}^n (y_i - \bar{y_i})^2}
+$$ {#eq-r2}
 :::
 
 ::: {.callout-tip title="$F$-statistic" collapse="true"}
@@ -390,7 +418,7 @@ $F$-distribution with two different $df$ values.
 
 $$
 F = \frac{(TSS - SSE) / p}{SSE / [n - (p + 1)]}
-$$
+$$ {#eq-f}
 :::
 
 ### Multiple linear regression
@@ -400,24 +428,29 @@ into account. For instance, modelling `log(RT)` as a function of
 `log(Freq)`, `POS` and `Length` requires a more complex model of the
 form
 
-$$ Y = \beta_0 + \beta_1X_1 + \beta_2X_2 + ... + \beta_pX_p + \epsilon.$$
+$$ Y = \beta_0 + \beta_1X_1 + \beta_2X_2 + ... + \beta_pX_p + \epsilon.
+$$ {#eq-multreg}
 
 Predictions are then obtained via the formula
 
-$$\hat{y} = \hat{\beta}_0 + \hat{\beta}_1x_1 + \hat{\beta}_2x_2 + ... + \hat{\beta}_px_p.$$
+$$\hat{y} = \hat{\beta}_0 + \hat{\beta}_1x_1 + \hat{\beta}_2x_2 + ... + \hat{\beta}_px_p.
+$$ {#eq-multreg-preds}
 
 ### Application in R
 
 In R, a multiple regression model is fitted as in the code example
 below:
 
-```{r, echo = TRUE, output = TRUE, warning = FALSE, message = FALSE}
+```{r, echo = TRUE, output = FALSE, warning = FALSE, message = FALSE}
 # Fit multiple regression model
 rt.lm2 <- lm(log(RT) ~ log(Freq) + POS + Length, data = ELP)
 
 # View model statistics
 summary(rt.lm2)
+```
 
+```{r, echo = TRUE, output = TRUE, warning = FALSE, message = FALSE}
+tab_model(rt.lm2, show.se = TRUE, show.aic = TRUE, show.dev = TRUE, show.fstat = TRUE, digits = 3)
 ```
 
 ## Visualising regression models
@@ -539,16 +572,20 @@ vif(rt.lm2) # vif < 5 indicates that predictors are not correlated
 ```
 
 -   **Normally distributed residuals**: The residuals should follow the
-    normal distribution. Usually, a visual inspection using `qqnorm()`
-    is sufficient, but the Shapiro-Wilke test `shapiro.test()` can also
-    be run on the model residuals. Note that a $p$-value below 0.05
-    provides evidence for non-normality.
+    normal distribution and be centered around 0:
+
+$$
+\epsilon \sim N(0, \sigma^2)
+$$ {#eq-erorr-distrib}
+
+Usually, a visual inspection using `qqnorm()` is sufficient, but the
+Shapiro-Wilke test `shapiro.test()` can also be run on the model
+residuals. Note that a $p$-value below 0.05 provides evidence for
+non-normality.
 
 ```{r}
 #| code-fold: true
 #| code-summary: "Code"
-
-qqnorm(rt.lm2$residuals) # or
 
 plot(rt.lm2, which = 2)
 

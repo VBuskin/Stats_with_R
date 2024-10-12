@@ -3,7 +3,7 @@ title: "Mixed-effects regression"
 author: Vladimir Buskin
 format:
   html:
-    self-contained: false
+    self-contained: true
     logo: logo.png
     footer: "Regression"
     theme: Reference
@@ -35,12 +35,18 @@ library(lme4)
 library(tidyverse)
 library(broom)
 library(ggeffects)
+library(sjPlot)
+library(tidyr)
+library(broom.mixed)
 
 # Load data
 varmorph <- read.csv("varmorph_data.csv", header = TRUE)
 
 # Reduce data
-varmorph2 <- varmorph %>% select(rt, target, prime_type, subj_id)
+varmorph2 <- varmorph %>% select(rt, target, prime_type, subj_id) %>% drop_na()
+
+# Overview
+glimpse(varmorph2)
 ```
 
 ## Multilevel models
@@ -53,48 +59,70 @@ which **multiple observations** are attested. Normally, such structures
 would violate the assumption of independence, but can be controlled for
 by capturing group-wise tendencies.
 
-Here is a schematic representation of a hierarchically structured
-dataset:
+For illustration, a simple example of a hierarchical dataset is
+presented in @fig-multi-simple. If one were to, for instance, measure
+test scores for every student, it may be of interest how their
+performance varies not only from student to student but also from school
+to school. After all, the students are **nested** within their schools.
 
+::: {#fig-multi-simple}
 ```{mermaid}
-%%| fig-width: 8
-%%| fig-height: 8
+%%| fig-width: 4
+%%| fig-height: 4
 graph LR
-    A1[Participant 1] --> B11(Item 1) --> C11(Reaction time 1)
-    A1[Participant 1] --> B12(Item 2) --> C12(Reaction time 2)
-    A1[Participant 1] --> B13(Item ...) --> C13(Reaction time ...)
-
-    A2[Participant 2] --> B21(Item 1) --> C21(Reaction time 1)
-    A2[Participant 2] --> B22(Item 2) --> C22(Reaction time 2)
-    A2[Participant 2] --> B23(Item ...) --> C23(Reaction time ...)
-  
-    A3[Participant ...] --> B31(Item 1) --> C31(Reaction time 1)
-    A3[Participant ...] --> B32(Item 2) --> C32(Reaction time 2)
-    A3[Participant ...] --> B33(Item ...) --> C33(Reaction time ...)
-  
+    A1[School 1] --> B11(Student 1)
+    A1[School 1] --> B12(Student 2)
+    A1[School 1] --> B13(Student 3)
+    
+    A2[School 2] --> B21(Student 4)
+    A2[School 2] --> B22(Student 5)
+    A2[School 2] --> B23(Student 6)
+    
 ```
+:::
+
+::: callout-caution
+## Task
+
+Read the following (partial) description of the experiments conducted by
+Ciaccio & Veríssimo on the morphological processing of complex lexical
+items [-@ciaccioInvestigatingVariabilityMorphological2022]:
+
+> The experiment included 102 English monomorphemic verbs used as
+> targets (e.g., *print*). These were preceded by their -*ed* past-tense
+> form (e.g., *printed*) as the inflected prime, their -*er*
+> nominalization (e.g., *printer*) as the derived prime, or by an
+> unrelated prime. Unrelated primes were dis- similar in form and
+> meaning from their corresponding targets; half of them were -*ed*
+> inflected forms and half of them were -*er* derived words. The
+> distributions of word-form frequency, lemma frequency, and length (in
+> letters) of the three prime types were kept as similar as possible.
+> [@ciaccioInvestigatingVariabilityMorphological2022: 2267]
+
+Inspect `varmorph2` and characterise its multilevel structure.
+:::
 
 ### Types of mixed-effects models
 
 Variance across groups can be captured by **varying-intercept** and/or
 **varying-slope** models. These varying coefficients also known as
-**random effects** (cf. @gelmanDataAnalysisUsing2007:
-245).[^mixed_effects_regression-1] In the model equation, the intercept
-and/or the slope is additionally indexed for the grouping factor. Let
-$J$ denote the number of groups for $j = 1, ..., J$.
-
-[^mixed_effects_regression-1]: Random effects are assumed to behave like
-    random variables and follow a normal distribution
+**random effects** (cf. @gelmanDataAnalysisUsing2007: 245). In the model
+equation, the intercept $\alpha$ and/or the slope $\beta$ is
+additionally indexed for the grouping factor. Let $J$ denote the number
+of groups for $j = 1, ..., J$.
 
 ::: callout-note
 ## Varying-intercept model
 
-We allow group-wise variation in the intercept by replacing $\beta_0$
-with $\beta_{0j}$ to indicate the intercept for the $j$-th group.
+We allow group-wise variation in the intercept by replacing $\alpha$
+with $\alpha_{j}$ to indicate the intercept for the $j$-th group. It is
+defined as a random variable and follows the normal distribution. For
+instance, each participant in the aforementioned psycholinguistic would
+receive its own intercept rather than a global one for all participants.
 
 $$
-Y = \beta_{0j} + \beta_1X_{1} + \beta_2X_{2} + ... + \epsilon
-$$
+Y = \alpha_{j} + \beta_1X_{1} + \beta_2X_{2} + ... + \epsilon \qquad \alpha_{j} \sim N(\mu_{\alpha}, \sigma_{\alpha}^2) 
+$$ {#eq-rnd-intercept}
 :::
 
 ::: callout-note
@@ -102,22 +130,138 @@ $$
 
 We will allow group-wise variation in the slope coefficients by
 replacing them with $\beta_{ij}$ to indicate the slope for the $j$-th
-group.\
-$$Y = \beta_{0} + \beta_{1j}X_{1} + \beta_{2j}X_{2} + ... + \epsilon $$
+group. The slope now functions as a random variable and is normally
+distributed. In the psycholinguistic study, each participant would be
+assigned its own slope coefficient.
+
+$$
+Y = \alpha + \beta_{1j}X_{1} + \beta_{2j}X_{2} + ... + \epsilon \qquad \beta_{j} \sim N(\mu_{\beta}, \sigma_{\beta}^2) 
+$$ {#eq-rnd-slope}
 :::
 
-### Crossed and nested effects
+### Example
 
-Another distinction often made in multilevel data with more than one
-random effect is between **nested** and **crossed** effects. This is
-dictated by the design of the study. In the priming data.
+Assume we are predicting test performance by `School`. Using simulated
+data, the following series of plots plots illustrate ...
+
+(1) ... `School` as a fixed effect,
+
+(2) ... random intercepts for each `School`,
+
+(3) ... random slopes for each `School`, and
+
+(4) ... random intercepts and slopes for each `School`.
+
+```{r, echo = F}
+library(ggpubr)
+# Set seed for reproducibility
+set.seed(123)
+
+# Generate sample data
+generate_data <- function(n_schools = 5, n_students = 20) {
+  schools <- data.frame(
+    school = paste0("School ", LETTERS[1:n_schools]),
+    intercept = rnorm(n_schools, mean = 60, sd = 5),
+    slope = rnorm(n_schools, mean = 3, sd = 0.5)
+  )
+  
+  data <- expand.grid(
+    school = schools$school,
+    student = 1:n_students
+  ) %>%
+    mutate(
+      study_time = runif(n(), 0, 10),
+      school_effect = schools$intercept[match(school, schools$school)] +
+        schools$slope[match(school, schools$school)] * study_time,
+      test_score = school_effect + rnorm(n(), mean = 0, sd = 5)
+    )
+  
+  return(list(data = data, schools = schools))
+}
+
+# Generate data
+data_list <- generate_data()
+data <- data_list$data
+schools <- data_list$schools
+
+# Fit mixed-effects model
+model <- lmer(test_score ~ study_time + (1 + study_time | school), data = data)
+
+# Extract fixed effects
+fixed_effects <- fixef(model)
+
+# Function to plot
+plot_mixed_effects <- function(data, model, show_random_intercepts = TRUE, show_random_slopes = TRUE) {
+  # Extract random effects
+  ranef_df <- as.data.frame(ranef(model)$school)
+  ranef_df$school <- rownames(ranef_df)
+  
+  # Prepare data for school-specific lines
+  school_lines <- schools %>%
+    left_join(ranef_df, by = "school") %>%
+    mutate(
+      intercept = if (show_random_intercepts) intercept + `(Intercept)` else fixed_effects[1],
+      slope = if (show_random_slopes) slope + study_time else fixed_effects[2]
+    )
+  
+  # Create plot
+  p <- ggplot(data, aes(x = study_time, y = test_score, color = school)) +
+    geom_point(alpha = 0.5) +
+    geom_vline(xintercept = 0, linetype = "dashed", col = "grey10") +
+    geom_abline(data = school_lines, 
+                aes(intercept = intercept, slope = slope, color = school),
+                linewidth = 1) +
+    geom_abline(intercept = fixed_effects[1], slope = fixed_effects[2], 
+                color = "black", linewidth = 1.5) +
+    scale_color_brewer(palette = "Set1") +
+    labs(x = "Study Time (hours)", y = "Test Score",
+         title = "Mixed Effects Regression Visualisation",
+         subtitle = paste("Random Intercepts:", show_random_intercepts, 
+                          "| Random Slopes:", show_random_slopes)) +
+    theme_minimal() +
+    theme(legend.position = "bottom")
+  
+  return(p)
+}
+
+# Generate plots
+p1 <- plot_mixed_effects(data, model, TRUE, TRUE)
+p2 <- plot_mixed_effects(data, model, TRUE, FALSE)
+p3 <- plot_mixed_effects(data, model, FALSE, TRUE)
+p4 <- plot_mixed_effects(data, model, FALSE, FALSE)
+```
+
+::: {.callout-note title="Plot: (1) Fixed-effects model" collapse="true"}
+```{r, echo = F}
+print(p4)
+```
+:::
+
+::: {.callout-note title="Plot: (2) Varying-intercept model" collapse="true"}
+```{r, echo = F}
+print(p2)
+```
+:::
+
+::: {.callout-note title="Plot: (3) Varying-slope model" collapse="true"}
+```{r, echo = F}
+print(p3)
+```
+:::
+
+::: {.callout-note title="Plot: (4) Varying-intercept and varying-slope model" collapse="true"}
+```{r, echo = F}
+print(p1)
+```
+:::
 
 ### Linear mixed-effects models
 
 ### Application in R
 
-```{r}
+#### Varying-intercept model
 
+```{r, output = F}
 # Varying intercept model
 
 # Define reference level for "prime_type"
@@ -127,100 +271,33 @@ varmorph2$prime_type <- factor(varmorph2$prime_type, levels = c("unrelated", "de
 varmorph.me <- lmer(rt ~ prime_type + # fixed effect
                       (1 | subj_id) + # let intercept vary by subject
                       (1 | target), # # let intercept vary by target word
-                    data = varmorph2)
+                      data = varmorph2)
 
 # Summarise results
 summary(varmorph.me)
-
-
-# Varying-slope model
-varmorph.me2 <- lmer(rt ~ prime_type +
-                      (1 + prime_type | subj_id),
-                     data = varmorph2)
-
-summary(varmorph.me2)
-
-
-str(ranef(varmorph.me))
-
-str(ranef(varmorph.me2))
-
 ```
 
-## Visualising mixed-effects models
+```{r}
+tab_model(varmorph.me, show.se = TRUE, show.aic = TRUE, show.dev = TRUE)
+```
 
-```{r, eval = F, include = F}
-# For random effects of subject
-plot(ggpredict(varmorph.me, terms = c("subj_id"), type = "re")) 
-plot(ggpredict(varmorph.me, terms = c("target"), type = "re")) + geom_smooth()
+::: {.callout-tip title="ICC"}
+The intraclass correlation coefficient (ICC) "ranges from $0$ if the
+grouping conveys no information to $1$ if all members of a group are
+identical" [@gelmanDataAnalysisUsing2007: 258]. In other words, it
+indicates how much of the variance in the outcome can be explained by
+the grouping factor (e.g. school or participant).
+:::
 
-# Or more simply
-sjPlot::plot_model(varmorph.me, type="pred", terms=c("subj_id"), pred.type="re", ci.lvl=NA)
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
 
-
-## Varying intercept
-
-### Using ggeffects
-
-# Step 1: Generate predictions for the random effects of 'subj_id'
-pred_subj <- ggpredict(varmorph.me, terms = "subj_id", type = "re", interval = "confidence", ci.level = 0.95)
-
-# Step 2: Plot the caterpillar plot
-ggplot(pred_subj, aes(x = x, y = predicted)) +
-  geom_pointrange(aes(ymin = conf.low, ymax = conf.high)) +
-  coord_flip() +  # Flip coordinates to get the classic caterpillar shape
-  labs(title = "Caterpillar Plot: Random Intercepts by Subject",
-       x = "Subject ID",
-       y = "Predicted Random Intercept") +
-  theme_minimal()
-
-### Using base R
-
-## Version 1
-
-# Step 1: Extract random effects for both 'subj_id' and 'target'
-ranef_data <- ranef(varmorph.me)
-
-# Step 2: Prepare data frames for both 'subj_id' and 'target' intercepts
-subj_intercepts <- data.frame(
-  subj_id = rownames(ranef_data$subj_id),
-  intercept = ranef_data$subj_id[,"(Intercept)"]
-)
-
-target_intercepts <- data.frame(
-  target = rownames(ranef_data$target),
-  intercept = ranef_data$target[,"(Intercept)"]
-)
-
-# Step 3: Plot the varying intercepts for 'subj_id'
-p1 <- ggplot(subj_intercepts, aes(x = reorder(subj_id, intercept), y = intercept)) +
-  geom_point() +
-  coord_flip() +  # Flip coordinates for better readability
-  labs(title = "Varying Intercepts by Subject",
-       x = "Subject ID",
-       y = "Intercept") +
-  theme_minimal()
-
-# Step 4: Plot the varying intercepts for 'target'
-p2 <- ggplot(target_intercepts, aes(x = reorder(target, intercept), y = intercept)) +
-  geom_point() +
-  coord_flip() +
-  labs(title = "Varying Intercepts by Target Word",
-       x = "Target Word",
-       y = "Intercept") +
-  theme_minimal()
-
-# Step 5: Display both plots
-p1
-p2
-
-## Version 2
-
-# Step 1: Extract random effects and their standard errors
-ranef_obj <- ranef(varmorph.me, condVar = TRUE)  # Extract random effects with conditional variance
+# Extract random effects and their standard errors
+ranef_obj <- ranef(varmorph.me)  # Extract random effects with conditional variance
 se_ranef <- arm::se.ranef(varmorph.me)           # Extract standard errors for random effects
 
-# Step 2: Prepare a data frame for 'subj_id' random intercepts with confidence intervals
+# Prepare a data frame for 'subj_id' random intercepts with confidence intervals
 subj_ranef <- ranef_obj$subj_id  # Random effects for subjects
 subj_se <- se_ranef$subj_id      # Standard errors for subjects
 
@@ -233,64 +310,83 @@ subj_df <- data.frame(
   conf.high = subj_ranef[, "(Intercept)"] + 1.96 * subj_se[, "(Intercept)"]
 )
 
-# Step 3: Create the caterpillar plot
+# Create the waterfall plot
 ggplot(subj_df, aes(x = reorder(subj_id, intercept), y = intercept)) +
+  geom_hline(yintercept = 0, linetype = "dashed", col = "grey10") +
   geom_pointrange(aes(ymin = conf.low, ymax = conf.high)) +
-  coord_flip() +  # Flip coordinates to get the classic caterpillar shape
-  labs(title = "Caterpillar Plot: Random Intercepts by Subject",
+  coord_flip() +
+  geom_vline(xintercept = 0, linetype = "dashed", col = "grey10") +
+  labs(title = "Random Intercepts by Subject",
        x = "Subject ID",
        y = "Random Intercept") +
   theme_minimal()
 
-## Varying slope
+```
 
-# Step 1: Generate predictions for each subject and prime_type
-pred <- ggpredict(varmorph.me2, terms = c("prime_type", "subj_id"), type = "re")
+#### Varying-slope model
 
-# Step 2: Plot regression lines for each subject
-ggplot(pred, aes(x = x, y = predicted)) +
-  geom_line(aes(group = group), size = 1) +  # 'group' here refers to 'subj_id'
-  facet_wrap(~ group) +     # This will give you one plot per subject
-  labs(title = "Random Slopes for Prime Type by Subject",
-       x = "Prime Type",
-       y = "Predicted Reaction Time (rt)",
-       color = "Subject ID") +
-  theme_minimal()
+```{r, output = F}
+# Varying-slope model; replace 0 with 1 if you want the intercept to vary too
+varmorph.me2 <- lmer(rt ~ prime_type +
+                      (0 + prime_type | subj_id),
+                      data = varmorph2)
+
+summary(varmorph.me2)
+```
+
+```{r}
+tab_model(varmorph.me2, show.se = TRUE, show.aic = TRUE, show.dev = TRUE)
+```
+
+```{r, eval = T, include = T}
+#| code-fold: true
+#| code-summary: "Show the code"
+
+# Extract random slopes
+ranef_data1 <- ranef(varmorph.me2)$subj_id
+
+# Extract standard errors
+ranef_data1_se <- arm::se.ranef(varmorph.me2)$subj_id
+
+# Convert data into long format
+random_effects_df <- ranef_data1 %>%
+  as.data.frame() %>% 
+  rownames_to_column(var = "subj_id") %>%
+  pivot_longer(cols = -subj_id, 
+               names_to = "prime_type", 
+               values_to = "random_effect")
 
 
-## Using ranef()
+# Create a data frame for standard errors
+se_df <- as.data.frame(ranef_data1_se) %>%
+  rownames_to_column(var = "subj_id") %>%
+  pivot_longer(cols = -subj_id, 
+               names_to = "prime_type", 
+               values_to = "se")
 
-# Step 1: Extract random effects
-ranef_data <- ranef(varmorph.me2)$subj_id
 
-# Step 2: Extract fixed effects
-fixed_effects <- fixef(varmorph.me2)
+# Combine random effects with standard errors
+combined_df <- random_effects_df %>%
+  left_join(se_df, by = c("subj_id", "prime_type"))
 
-# Step 3: Create a data frame of the prime types
-prime_types <- c("filler", "inflected", "unrelated")
+# Calculate confidence intervals
+combined_df <- combined_df %>%
+  mutate(lower_ci = random_effect - 1.96 * se,
+         upper_ci = random_effect + 1.96 * se)
 
-# Step 4: Prepare a data frame for plotting
-# Add random effects to fixed effects to calculate the predicted values
-ranef_df <- data.frame(
-  subj_id = rownames(ranef_data),
-  intercept = ranef_data[,"(Intercept)"],
-  filler = fixed_effects["prime_typefiller"] + ranef_data[,"prime_typefiller"],
-  inflected = fixed_effects["prime_typeinflected"] + ranef_data[,"prime_typeinflected"],
-  unrelated = fixed_effects["prime_typeunrelated"] + ranef_data[,"prime_typeunrelated"]
-)
 
-# Reshape the data to long format for plotting with ggplot
-ranef_long <- ranef_df %>%
-  pivot_longer(cols = filler:unrelated, names_to = "prime_type", values_to = "slope")
-
-# Step 5: Plot the regression lines
-ggplot(ranef_long, aes(x = prime_type, y = slope, group = subj_id, color = subj_id)) +
-  geom_line(size = 1) +  # Line for each subject
-  labs(title = "Random Slopes for Prime Type by Subject",
-       x = "Prime Type",
-       y = "Predicted Effect",
-       color = "Subject ID") +
+# Dotplots with confidence intervals
+ggplot(combined_df, aes(x = subj_id, y = random_effect, col = prime_type)) +
+  coord_flip() +
+  geom_point() +
+  geom_hline(yintercept = 0, linetype = "dashed", col = "grey10") +
+  facet_wrap(~ prime_type) +
+  geom_errorbar(aes(ymin = lower_ci, ymax = upper_ci), width = 0.2) +
+  labs(title = "Random Effect of Prime Type by Subject ID",
+       x = "Random Slope",
+       y = "Subject ID") +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 0, hjust = 1))
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
 
 ```
