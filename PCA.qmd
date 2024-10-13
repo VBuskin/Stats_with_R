@@ -73,18 +73,18 @@ glimpse(scope_sem_sub)
 
 A popular descriptive measure for associations between continuous
 variables $x$ and $y$ is the **Pearson product-moment correlation
-coefficient** (or simply Pearson's $r$; cf. @eq-pearson). It varies on a scale from $-1$
-to $1$ and indicates the extent to which two variables form a
-straight-line relationship [@heumann_introduction_2022: 153-154]. One of
-its core components is the **covariance** between $x$ and $y$ which
-"measures the average tendency of two variables to covary (change
+coefficient** (or simply Pearson's $r$; cf. @eq-pearson). It varies on a
+scale from $-1$ to $1$ and indicates the extent to which two variables
+form a straight-line relationship [@heumann_introduction_2022: 153-154].
+One of its core components is the **covariance** between $x$ and $y$
+which "measures the average tendency of two variables to covary (change
 together)" [@baguleySeriousStatsGuide2012: 206].
 
 $$
 r_{xy} = \frac{Cov(x, y)}{\sqrt{Var(x)}\sqrt{Var(y)}}= \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum_{i=1}^n (x_i - \bar{x})^2}\sqrt{\sum_{i=1}^n (y_i - \bar{y})^2}}.
 $$ {#eq-pearson}
 
-In R, we can compure Pearson's $r$ by using the `cor()` function.
+In R, we can compute Pearson's $r$ by using the `cor()` function.
 
 ```{r}
 # Check correlation between number of senses and concreteness
@@ -126,7 +126,7 @@ Needless to say, the above correlation matrices are hard to interpret –
 even more so if the number of variables were to increase further.
 
 **Principal Components Analysis** offers a technique to break down a
-high-dimensional dataset, into a much smaller set of "meta-variables",
+high-dimensional dataset into a much smaller set of "meta-variables",
 i.e., **principle components** (PCs) which capture the bulk of the
 variance in the data. This allows researchers to see overarching
 patterns in the data and re-use the output for further analysis (e.g.,
@@ -140,9 +140,9 @@ dataset (for $k \in \{1, ..., K\}$).
 
 Each PC comprises a set of **loadings** (or **weights**) $w_{nm}$, which
 are comparable to the coefficients of regression equations. For
-instance, the first PC has the general form shown in @eq-pca,
-where $x_m$ stand for continuous input variables in the $n \times m$
-data matrix.
+instance, the first PC has the general form shown in @eq-pca, where
+$x_m$ stand for continuous input variables in the $n \times m$ data
+matrix.
 
 $$
 Z_1 = w_{11}x_{1} + w_{21}x_{2} + \dots + w_{m1}x_{m}

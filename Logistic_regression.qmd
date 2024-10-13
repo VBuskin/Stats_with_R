@@ -19,7 +19,7 @@ bibliography: R.bib
 
 ## Recommended reading
 
-Specifically for linguists:
+For linguists:
 
 > Levshina [-@levshina_how_2015: Chapter 12]
 >
@@ -42,10 +42,10 @@ corpus-study on subject pronoun realisation:
 
 ```{r, echo = TRUE, output = TRUE, eval = TRUE}
 # Load libraries
-library(sjPlot)
 library(tidyverse)
 library(rms)
 library(broom)
+library(sjPlot)
 library(ggeffects)
 
 # Load data

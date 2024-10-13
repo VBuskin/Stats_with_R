@@ -19,7 +19,7 @@ bibliography: R.bib
 
 ## Recommended reading
 
-Specifically for linguists:
+For linguists:
 
 > Levshina [-@levshina_how_2015: Chapter 7]
 >
@@ -200,7 +200,7 @@ slope <- coef(model)[2]
 large_residual <- data %>%
   mutate(residual = abs(y - predict(model))) %>%
   arrange(desc(residual)) %>%
-  slice(1)
+  dplyr::slice(1)
 
 
 # Assuming the data and model are already created as in the previous example
@@ -328,7 +328,6 @@ head(rt.lm1$fitted.values)
 
 # Show deviation of the fitted values from the observed values
 head(rt.lm1$residuals)
-
 ```
 :::
 
@@ -400,8 +399,7 @@ $$ {#eq-rse}
 ::: {.callout-tip title="$R^2$" collapse="true"}
 The $R^2$ score is important for assessing model fit because it
 "measures the proportion of variability in $Y$ that can be explained
-using $X$" [@james_introduction_2021: 70; emphasis removed], varying
-between 0 and 1.
+using $X$" [@james_introduction_2021: 70], varying between 0 and 1.
 
 $$R^2 = 1-\frac{TSS}{RSS} = 1-\frac{\sum_{i=1}^n (y_i - \hat{y_i})^2}{\sum_{i=1}^n (y_i - \bar{y_i})^2}
 $$ {#eq-r2}
@@ -460,7 +458,6 @@ Plot coefficient estimates:
 ```{r, echo = TRUE, output = TRUE}
 #| code-fold: true
 #| code-summary: "Code"
-
 
 # Tidy the model output
 tidy_model <- tidy(rt.lm2, conf.int = TRUE)

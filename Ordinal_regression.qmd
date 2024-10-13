@@ -19,8 +19,11 @@ bibliography: R.bib
 
 ## Suggested reading
 
-> @powersStatisticalMethodsCategorical2008: Chapter 7;
+General:
+
 > @baguleySeriousStatsGuide2012: Chapter 17.4.5
+>
+> @powersStatisticalMethodsCategorical2008: Chapter 7
 
 ## Introduction
 
@@ -28,7 +31,7 @@ In her recent contribution, @glassEnglishVerbsCan2021 examines possible
 reasons why certain transitive verbs have a stronger affinity towards
 object omission compared to others, placing special emphasis on the
 routinisation of the actions denoted by the verbs. Specifically, she
-analyses **how high/low-routine contexts affect the acceptability of
+assesses **how high/low-routine contexts affect the acceptability of
 object omission** for transitive verbs from different frequency bins.
 
 We will replicate her findings using her survey data
@@ -42,6 +45,17 @@ We will replicate her findings using her survey data
 # Load libraries
 library(tidyverse)
 library(ordinal)
+library(MASS)
+library(sjPlot)
+library(effects)
+library(ggeffects)
+library(ggpubr)
+
+
+# For additional tests
+library(DescTools)
+library(generalhoslem)
+library(brant)
 
 # Load data
 survey <- read.csv("Glass_2021_survey_processed.csv")
@@ -102,30 +116,30 @@ unique(survey$freq)
 
 ## Modelling ordinal data
 
-Answering the research question means assessing how the features
-`routine` and `freq` affect the variability in the acceptability
-ratings. Furthermore, it is important to control for repeated
-measurements for `verb` and `ParticipantID`, which impose a hierarchical
-structure on the dataset.
+Our task is clear: We need to measure how `routine` and `freq` affect
+the variability in the acceptability ratings, while controlling for
+repeated measurements for `verb` and `ParticipantID`, which impose a
+hierarchical structure on the dataset.
 
 Formally speaking, we have $p$ explanatory variables
-$X_1, X_2, ..., X_p$ for $p \in \{1, ..., P\}$. The target variable
-`rating` is our target variable $Y$ with the ordered, discrete outcomes
+$X_1, X_2, ..., X_p$ for $1, ..., p$. The target variable, i.e. our $Y$,
+is `rating` with the ordered, discrete outcomes
 $y \in \{1, 2, 3, 4, 5\}$.
 
-Our goal is to find a model $f$ that describes the relationship between
+The goal is to find a model $f$ that describes the relationship between
 $Y$ and $X_p$ as accurately as possible and minimises the error term
 $\epsilon$:
 
 $$
 Y = f(X_1, X_2, ..., X_p) + \epsilon
-$$
+$$ {#eq-mod}
 
 ### Ordered logistic regression
 
 One family of models that respects the ordered, yet categorical nature
-of $Y$ is ordered (or ordinal) logistic regression. Other terms include
-**proportional odds models**, **cumulative logit/link models** etc.
+of $Y$ is **ordered** (or ordinal) **logistic regression**. Other terms
+include **proportional odds models** and **cumulative logit/link
+models**.
 
 ::: {.callout-note collapse="true" title="Recap: Logistic regression"}
 Logistic regression is used to model categorical response variables with
@@ -138,7 +152,7 @@ Y =
 \text{yes} \\
 \text{no}
 \end{cases}
-$$
+$$ {#eq-logreg-outcomes}
 
 Using the logistic function, we can estimate the probability of one
 outcome versus the other **given** the predictors $X_p$. Their
@@ -146,42 +160,78 @@ log-transformed odds ratio (**log odds**) is equivalent of the
 all-too-familiar linear model:
 
 $$
-\log\left(\frac{P(Y = yes \mid X_p)}{1 - P(Y = yes \mid X_p)}\right) = \beta_0 + \beta_1X_1 + ... + \beta_pX_p.
-$$
+\log\left(\frac{P(Y = yes \mid X_1, X_2, ..., X_p)}{1 - P(Y = yes \mid X_1, X_2, ..., X_p)}\right) = \beta_0 + \beta_1X_1 + ... + \beta_pX_p.
+$$ {#eq-logreg}
 :::
 
 Core to this approach is the notion of **cumulative probabilities**. Let
 $J$ denote the number of ordered categories in $Y$. In Glass's case
-study ($J = 5$), the estimated cumulative probabilities for each ordered
-outcome would have the following form:
+study, the estimated cumulative probabilities for each ordered outcome
+(= acceptability rating) would have the forms in @eq-cumprobs.
 
 $$
 \begin{array}{rcl}
 P(Y \leq 1) & = & P(Y = 1) \\
 P(Y \leq 2) & = & P(Y = 1) + P(Y = 2) \\
 P(Y \leq 3) & = & P(Y = 1) + P(Y = 2) + P(Y = 3) \\
-P(Y \leq 4) & = & P(Y = 1) + P(Y = 2) + P(Y = 3) + P(Y = 4) \\
-P(Y \leq 5) & = & P(Y = 1) + P(Y = 2) + P(Y = 3) + P(Y = 4) + P(Y = 5)
+& \vdots & \\
+P(Y \leq j) & = & P_1 + ... + P_j
 \end{array}
-$$ We can generalise this pattern to
+$$ {#eq-cumprobs}
+
+We can now update our logistic regression model to take into account
+cumulative probabilities for $j = 1, ..., J-1$.
 
 $$
-P(Y \leq j) = \hat{P_1} + ... + \hat{P_j}
-$$
+\log\left(\frac{P(Y \leq j \mid X_1, X_2, ..., X_p)}{1 - P(Y \leq j \mid X_1, X_2, ..., X_p)}\right) = \beta_{0_j} + \beta_1X_1 + ... + \beta_pX_p
+$$ {#eq-cumlog}
 
-We can now update our logistic regression equation to take into account
-cumulative probabilities:
+The intercepts $\beta_{0_j}$ serve as **cutpoints** between the adjacent
+ordinal categories. For $J = 5$ categories, there are $J - 1 = 4$
+cutpoints, i.e.,
+
+-   1\|2 ($P(Y \leq 1)$),
+
+-   2\|3 ($P(Y \leq 2)$),
+
+-   3\|4 ($P(Y \leq 3)$), and
+
+-   4\|5 ($P(Y \leq 4)$).
+
+Given a change in predictor values, the slope coefficients $\beta_pX_p$
+indicate how the probability of being in a higher rating category
+changes [@baguleySeriousStatsGuide2012: 691--2].
+
+We can obtain "regular" probabilities form the cumulative ones by
+drawing on the equivalence in \@#eq-cumprobs-transform.
 
 $$
-\log\left(\frac{P(Y \leq j \mid X_p)}{1 - P(Y \leq j \mid X_p)}\right) = \beta_0 + \beta_1X_1 + ... + \beta_pX_p \qquad j = 1, ..., J-1
-$$
+P(Y = j) = P(Y \leq j) - P(Y \leq j - 1)
+$$ {#eq-cumprobs-transform}
 
-### Application in R
+For instance, the probability $P(Y = 3)$ is equivalent to
+
+$$
+P(Y = 3) = P(Y \leq 3) - P(Y \leq 2).
+$$ {#eq-example}
+
+::: {.callout-important title="Assumptions of proportional odds models" collapse="false"}
+**The proportional odds assumption** stipulates a stable effect of the
+predictors on the (log) odds of the ordinal outcomes across all possible
+cutpoints [@oconnellLogisticRegressionModels2006: 29]. In case of
+violation, it is better to rely on partial proportional odds models or
+multinomial logistic regression instead.
+:::
+
+## Application in R
+
+There are several R packages that support ordinal logistic regression
+models. This section provides an overview of some of the more common (as
+well as well-documented) implementations.
 
 ### Using `polr()` from the `MASS` library
 
-```{r, echo = TRUE, output = FALSE}
-library(MASS)
+```{r, echo = TRUE, output = TRUE}
 # Convert to factor and determine ordering
 survey$rating <- factor(survey$rating, ordered = TRUE, levels = c("1", "2", "3", "4", "5"))
 
@@ -193,42 +243,74 @@ survey.polr <- polr(rating ~
 
 # Model summary
 summary(survey.polr)
+
+# R-squared and AIC
+PseudoR2(survey.polr, c("Nagelkerke", "AIC"))
+
 ```
 
 ```{r}
-library(sjPlot)
 tab_model(survey.polr, show.se = TRUE, show.aic = TRUE, show.dev = TRUE, transform = NULL)
+```
 
-## Get diagnostics
-library(DescTools)
-PseudoR2(survey.polr, c("Nagelkerke", "AIC"))
+::: {.callout-tip title="Interpreting the model parameters" collapse="true"}
+-   **Coefficients**: The conditions `freqlo` (low frequency) and
+    `routinelo` (low-routine context) both have negative values, which
+    means that both of them decrease the probability of obtaining a
+    higher acceptability rating (compared to `freqhi` and `routinehi`).
 
-## Goodness-of-fit tests
-library(generalhoslem)
-lipsitz.test(survey.polr)
-pulkrob.chisq(survey.polr, catvars = c("freq", "routine"))
+-   **Intercepts**: These represent the cutpoints between the ordinal
+    categories, which are necessary for calculating the probabilities of
+    each ordinal category.
+:::
 
-## Test proportional odds assumption
-library(brant)
+### Testing assumptions and goodness of fit
+
+-   Test proportional odds assumption:
+
+```{r}
 brant(survey.polr) # p < 0.05 is a violation of the assumption
+```
 
-## Plot (best so far)
-library(effects)
-library(ggeffects)
+-   Hosmer-Lemeshow test, which is essentially a $\chi^2$-test:
 
-## Frequency effect plot
-#plot(Effect(focal.predictors = c("freq"), mod = survey.polr), rug = FALSE, style = "stacked")
+```{r}
+logitgof(survey$rating, # observed
+         fitted(survey.polr), # expected
+         ord = TRUE) # respect ordering
+```
 
+-   The Lipsitz test is an extension of the Hosmer-lemeshow test. Note
+    that it requires the response to be a factor.
+
+```{r}
+lipsitz.test(survey.polr)
+```
+
+-   Part of the same family of tests is the Pulkstenis-Robinson test,
+    which also relies on the $\chi^2$-distribution:
+
+```{r}
+pulkrob.chisq(survey.polr, catvars = c("freq", "routine"))
+```
+
+### Visualisation
+
+#### With `effects`
+
+```{r}
 ## Routine effect plot
 plot(Effect(focal.predictors = c("routine"), mod = survey.polr), rug = FALSE, style="stacked")
 
-## Interaction
-#plot(Effect(focal.predictors = c("routine", "freq"), mod = survey.polr), rug = FALSE,
- #    style="stacked")
-
 ```
 
-```{r, echo = FALSE, output = FALSE}
+#### With `ggeffects` and `ggplot2`
+
+```{r, echo = TRUE, output = TRUE}
+#| code-fold: true
+#| code-summary: "Show the code"
+
+
 # Get the ggeffects data
 eff <- ggeffects::ggeffect(survey.polr, "freq")
 
@@ -267,7 +349,10 @@ p1
 
 ```
 
-```{r, echo = FALSE, output = FALSE}
+```{r, echo = TRUE, output = TRUE}
+#| code-fold: true
+#| code-summary: "Show the code"
+
 # Get the ggeffects data for "routine"
 eff_routine <- ggeffects::ggeffect(survey.polr, "routine")
 
@@ -304,14 +389,10 @@ p2 <- ggplot(plot_data_routine, aes(x = x, y = predicted, color = response.level
 p2
 ```
 
-```{r}
-library(ggpubr)
-ggarrange(p1, p2, ncol = 2, common.legend = TRUE, legend = "right")
-```
+```{r, echo = TRUE, output = TRUE}
+#| code-fold: true
+#| code-summary: "Show the code"
 
-```{r, echo = FALSE}
-
-## Interaction plot
 # Generate the interaction effects for "freq" and "routine"
 eff_interaction <- ggeffect(survey.polr, terms = c("freq", "routine"))
 
@@ -351,7 +432,6 @@ p_interaction <- ggplot(plot_data_interaction, aes(x = group, y = predicted, col
 p_interaction
 
 
-
 ```
 
 ### Using `clm()` from the `ordinal` library
@@ -374,22 +454,21 @@ summary(clm.1)
 tab_model(clm.1, show.se = TRUE, show.aic = TRUE, show.dev = TRUE, transform = NULL)
 ```
 
-### Mixed-effects
+### Mixed-effects ordinal regression
 
 ::: {.callout-note collapse="true" title="Recap: Mixed-effects models"}
-If the data is nested according to some grouping factor with $1, ..., K$
+If the data is nested according to some grouping factor with $1, ..., k$
 groups, we can let the intercept and/or slopes vary by group. For
 instance, recall the varying-intercept model:
 
 $$
-Y = \alpha_{k} + \beta_1X_{1} + \beta_2X_{2} + ... + \epsilon \qquad \alpha_{j} \sim N(\mu_{\alpha}, \sigma_{\alpha}^2).
+Y = \alpha_{k} + \beta_1X_{1} + \beta_2X_{2} + ... + \epsilon \qquad \alpha_{k} \sim N(\mu_{\alpha}, \sigma_{\alpha}^2).
 $$ In this case we also speak of **random effects**.
 :::
 
-```{r, echo T, output = F}
+```{r, echo = T, output = T}
 # Convert to factor and determine ordering
 survey$rating <- factor(survey$rating, ordered = TRUE, levels = c("1", "2", "3", "4", "5"))
-
 
 # Fit mixed model with random intercepts for "verb" and "ParticipantID"
 clm.2 <- ordinal::clmm(rating ~ 
@@ -409,25 +488,25 @@ tab_model(clm.2, show.se = TRUE, show.aic = TRUE, show.dev = TRUE, transform = N
 ```{r, echo = F, output = F}
 ## Plot random effects
 
-# 1. Extract random effects
+# Extract random effects
 re_verb <- ranef(clm.2)$verb
 re_participant <- ranef(clm.2)$ParticipantID
 
-# 2. Create dataframes for random effects
+# Create dataframes for random effects
 df_verb <- data.frame(verb = rownames(re_verb), re = re_verb[,1])
 df_participant <- data.frame(ParticipantID = rownames(re_participant), re = re_participant[,1])
 
-# 3. Get predictions for an average case
+# Get predictions for an average case
 pred_avg <- ggpredict(clm.2, terms = c("freq", "routine"))
 
-# 4. Add random effects to predictions
+# Add random effects to predictions
 pred_verb <- crossing(pred_avg, df_verb) %>%
   mutate(predicted = predicted + re)
 
 pred_participant <- crossing(pred_avg, df_participant) %>%
   mutate(predicted = predicted + re)
 
-# 5. Plot random effects for verbs
+# Plot random effects for verbs
 p_verb <- ggplot(pred_verb, aes(x = x, y = predicted, color = group, group = interaction(group, verb))) +
   geom_line(alpha = 1) +
   facet_wrap(~ response.level) +
@@ -439,7 +518,7 @@ p_verb <- ggplot(pred_verb, aes(x = x, y = predicted, color = group, group = int
 
 print(p_verb)
 
-# 6. Plot random effects for participants
+# Plot random effects for participants
 p_participant <- ggplot(pred_participant, aes(x = x, y = predicted, color = group, group = interaction(group, ParticipantID))) +
   geom_line(alpha = 1) +
   facet_wrap(~ response.level) +
@@ -453,8 +532,10 @@ print(p_participant)
 
 ```
 
-```{r, echo = F, output = F}
-# Second attempt
+```{r, echo = T, output = T}
+#| code-fold: true
+#| code-summary: "Show the code"
+
 # Create a horizontal dot plot for random effects of participants
 p_caterpillar <- ggplot(df_participant, aes(x = re, y = reorder(ParticipantID, re))) +
   geom_point(size = 3, color = "steelblue3") +  # Dots representing the random effects
@@ -476,30 +557,59 @@ p_caterpillar2 <- ggplot(df_verb, aes(x = re, y = reorder(verb, re))) +
 
 ```
 
-```{r, echo = FALSE, output = TRUE}
+```{r, echo = FALSE, output = FALSE}
 ggarrange(p_caterpillar, p_caterpillar2, ncol = 2, common.legend = TRUE, legend = "right")
 
 ```
 
-## Generalised additive models (GAMs)
+## Generalised Additive Mixed-effects Models (GAMMs)
+
+### Suggested reading
+
+For linguists:
+
+> Baayen & Linke [-@baayenGeneralizedAdditiveMixed2020]
+
+General:
+
+> Hastie & Tibshirani [-@hastieGeneralizedAdditiveModels1991]
+>
+> Wood [-@woodGeneralizedAdditiveModels2006]
+
+### Rationale
+
+A core assumption of Generalised Linear Models (GLMs) is a linear
+relationship between predictor(s) and response. If, however, one is
+interested in exploring potential non-linear trends without the risk of
+extreme overfitting, GAMs offer an elegant solution: Instead of relying on the linear sum of model coefficients, GAMs estimate more flexible **smooth terms** $f_q$. For illustration, @eq-gam shows a GAM for a binomial target variable with a logistic link function.
+
+$$
+\log \left( \frac{P(Y = 1 \mid X_1, X_2, ..., X_p)}{1 - P(Y = 1 \mid X_1, X_2, ..., X_p)} \right) = \alpha + \sum\limits_{q = 1}^p f_j(X_j)
+$$ {#eq-gam}
+
+### Application in R
 
 ```{r}
+# Load libraries
 library(mgcv)
 library(itsadug)
 library(gratia)
 
+# Convert predictors to factors
 survey$ParticipantID <- as.factor(survey$ParticipantID)
 survey$verb <- as.factor(survey$verb)
 
-gam1 <- bam(as.numeric(rating) ~ 
-              freq +
-              routine +
-              s(ParticipantID, bs = "re") +
-              s(verb, bs = "re"),
+# Fit GAMM
+gam1 <- bam(as.numeric(rating) ~ # treated as numeric term
+              freq + # linear term
+              routine + # linear term
+              s(ParticipantID, bs = "re") + # smooth term
+              s(verb, bs = "re"), # smooth term
               data = survey, 
               family = ocat(R=5)
             )
 
+# Model summary
 summary(gam1)
 
 # Extract the thresholds on the linear predictor from the model
@@ -507,8 +617,10 @@ thresh <- gratia::theta(gam1) |>
   tibble::as_tibble() |>
   setNames(c("threshold"))
 
+# Extract predictions for "routine"
 routine_pred <- ggpredict(gam1, terms = "routine")
 
+# Plot predictions
 routine_pred |>
   ggplot(aes(x = x, y = predicted)) +
   geom_point(col = "steelblue") +
@@ -518,8 +630,10 @@ routine_pred |>
   theme_minimal()
 
 
+# Extract random effects for "verb"
 verb_pred <- ggpredict(gam1, terms = "verb")
 
+# Plot random effect
 verb_pred |>
   ggplot(aes(x = x, y = predicted)) +
   geom_point(col = "steelblue") +
@@ -529,9 +643,11 @@ verb_pred |>
   theme_minimal()
 
 
-
+# Extract random effects for "ParticipantID"
 subj_pred <- ggpredict(gam1, terms = "ParticipantID")
 
+
+# Plot random effect
 subj_pred |>
   ggplot(aes(x = x, y = predicted)) +
   geom_point(col = "steelblue") +
@@ -539,8 +655,6 @@ subj_pred |>
   #geom_line() +
   geom_hline(data = thresh, aes(yintercept = threshold), linetype = "dashed") +
   theme_minimal()
-
-
 
 
 ```
