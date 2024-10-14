@@ -37,8 +37,8 @@ Consider the data from Buskin's
 [-@buskinDefiniteNullInstantiationfc][^logistic_regression-1]
 corpus-study on subject pronoun realisation:
 
-[^logistic_regression-1]: The input data is can be accessed via this OSF
-    repository: <https://osf.io/qgnms>.
+[^logistic_regression-1]: The input data is can be downloaded from this
+    OSF repository: <https://osf.io/qgnms>.
 
 ```{r, echo = TRUE, output = TRUE, eval = TRUE}
 # Load libraries
@@ -47,9 +47,14 @@ library(rms)
 library(broom)
 library(sjPlot)
 library(ggeffects)
+library(ggpubr)
 
 # Load data
 data_pro <- read.csv("INPUT_pronouns.csv", sep = ",", header = TRUE)
+
+# Inspect data
+str(data_pro)
+head(data_pro)
 ```
 
 -   **Target variable**:
@@ -82,8 +87,6 @@ table(data_pro$Reference)
 ```{r, echo = FALSE, output = TRUE}
 #| code-fold: true
 #| code-summary: "Code"
-
-library(ggpubr)
 
 # Raw data for Ref x Reg x Var
 data_pro %>% 
@@ -345,7 +348,7 @@ our interpretation of the model output.
 We will use the following specifications:
 
 | **Variable**   | **Factor Levels**            | **Preferred Reference level** |
-|-------------------|--------------------------|---------------------------|
+|-----------------|---------------------------|----------------------------|
 | Register       | S1A, S1B                     | S1A                           |
 | Variety        | GB, SING, HK                 | GB                            |
 | Person         | 1, 2, 3, *it*, *there*       | 3                             |
@@ -393,7 +396,6 @@ data_pro$Referentiality <- as.factor(data_pro$Referentiality)
 ## Specify reference level
 data_pro$Referentiality <- relevel(data_pro$Referentiality, "referential")
 
-
 ```
 
 ### Step 3: Fit the model
@@ -417,7 +419,6 @@ Reference.lrm <- lrm(Reference ~ Register + Variety + Register:Variety + Person,
 
 # View model statistics
 Reference.lrm
-
 ```
 
 ```{r, echo = TRUE, output = FALSE}
@@ -441,9 +442,7 @@ variables from the complex model to ascertain which ones improve the
 model significantly (i.e., decrease the deviance and AIC scores).
 
 ```{r, echo = TRUE, output = TRUE}
-
 drop1(Reference.glm, test = "Chisq")
-
 ```
 :::
 
@@ -486,7 +485,6 @@ ggplot(tidy_model, aes(x = estimate, y = term)) +
     caption = "*Note that the CIs of singificant predictors do not include 0."
   )
 
-
 # Plot odds ratios
 ggplot(tidy_model, aes(x = exp(estimate), y = term)) +
   geom_point() +
@@ -502,7 +500,6 @@ ggplot(tidy_model, aes(x = exp(estimate), y = term)) +
 ```
 
 ```{r, echo = TRUE, output = TRUE, eval = FALSE, include = FALSE}
-
 # Plot marginal effects; y-axis = log odds of a null vs. overt subject
 plot(Effect("Register", mod = Reference.glm)) 
 plot(Effect("Variety", mod = Reference.glm))
@@ -550,13 +547,17 @@ Singaporean variety.
 #| code-fold: true
 #| code-summary: "Code"
 
+# Set seed for reproducibility
+set.seed(123)
+
 # Refit the model with additional settings
 Reference.val <- lrm(Reference ~ Register + Variety + Register:Variety + Person, data = data_pro, x = T, y = T)
 
 # Perform 200-fold cross-validation
-model.validated <- validate(Reference.val, B = 200); model.validated 
+model.validated <- validate(Reference.val, B = 200)
 
 # Slope optimism should be as low possible!
+model.validated
 ```
 
 -   **Multicollinearity**

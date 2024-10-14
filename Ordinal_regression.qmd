@@ -298,7 +298,7 @@ pulkrob.chisq(survey.polr, catvars = c("freq", "routine"))
 
 #### With `effects`
 
-```{r}
+```{r, output = F}
 ## Routine effect plot
 plot(Effect(focal.predictors = c("routine"), mod = survey.polr), rug = FALSE, style="stacked")
 
@@ -485,8 +485,9 @@ summary(clm.2)
 tab_model(clm.2, show.se = TRUE, show.aic = TRUE, show.dev = TRUE, transform = NULL)
 ```
 
-```{r, echo = F, output = F}
-## Plot random effects
+```{r, echo = T, output = T}
+#| code-fold: true
+#| code-summary: "Show the code"
 
 # Extract random effects
 re_verb <- ranef(clm.2)$verb
@@ -505,36 +506,6 @@ pred_verb <- crossing(pred_avg, df_verb) %>%
 
 pred_participant <- crossing(pred_avg, df_participant) %>%
   mutate(predicted = predicted + re)
-
-# Plot random effects for verbs
-p_verb <- ggplot(pred_verb, aes(x = x, y = predicted, color = group, group = interaction(group, verb))) +
-  geom_line(alpha = 1) +
-  facet_wrap(~ response.level) +
-  labs(title = "Random Effects for Verbs",
-       x = "Frequency",
-       y = "Predicted Probability",
-       color = "Routine") +
-  theme_minimal()
-
-print(p_verb)
-
-# Plot random effects for participants
-p_participant <- ggplot(pred_participant, aes(x = x, y = predicted, color = group, group = interaction(group, ParticipantID))) +
-  geom_line(alpha = 1) +
-  facet_wrap(~ response.level) +
-  labs(title = "Random Effects for Participants",
-       x = "Frequency",
-       y = "Predicted Probability",
-       color = "Routine") +
-  theme_minimal()
-
-print(p_participant)
-
-```
-
-```{r, echo = T, output = T}
-#| code-fold: true
-#| code-summary: "Show the code"
 
 # Create a horizontal dot plot for random effects of participants
 p_caterpillar <- ggplot(df_participant, aes(x = re, y = reorder(ParticipantID, re))) +
@@ -555,9 +526,6 @@ p_caterpillar2 <- ggplot(df_verb, aes(x = re, y = reorder(verb, re))) +
   theme_minimal() +
   theme(panel.grid.major.y = element_blank())  # Removes the gridlines for y-axis
 
-```
-
-```{r, echo = FALSE, output = FALSE}
 ggarrange(p_caterpillar, p_caterpillar2, ncol = 2, common.legend = TRUE, legend = "right")
 
 ```
@@ -606,26 +574,25 @@ gam1 <- bam(as.numeric(rating) ~ # treated as numeric term
               s(ParticipantID, bs = "re") + # smooth term
               s(verb, bs = "re"), # smooth term
               data = survey, 
-              family = ocat(R=5)
+              family = ocat(R = 5) # number of ordinal categories
             )
 
 # Model summary
 summary(gam1)
 
-# Extract the thresholds on the linear predictor from the model
-thresh <- gratia::theta(gam1) |>
-  tibble::as_tibble() |>
+# Extract the intercepts for plotting
+thresh <- gratia::theta(gam1) %>% 
+  tibble::as_tibble() %>% 
   setNames(c("threshold"))
 
 # Extract predictions for "routine"
 routine_pred <- ggpredict(gam1, terms = "routine")
 
 # Plot predictions
-routine_pred |>
+routine_pred %>% 
   ggplot(aes(x = x, y = predicted)) +
   geom_point(col = "steelblue") +
   geom_errorbar(aes(ymin = conf.low, ymax = conf.high, width = 0), col = "steelblue") +
-  #geom_line() +
   geom_hline(data = thresh, aes(yintercept = threshold), linetype = "dashed") +
   theme_minimal()
 
@@ -634,18 +601,16 @@ routine_pred |>
 verb_pred <- ggpredict(gam1, terms = "verb")
 
 # Plot random effect
-verb_pred |>
+verb_pred %>% 
   ggplot(aes(x = x, y = predicted)) +
   geom_point(col = "steelblue") +
   geom_errorbar(aes(ymin = conf.low, ymax = conf.high, width = 0), col = "steelblue") +
-  #geom_line() +
   geom_hline(data = thresh, aes(yintercept = threshold), linetype = "dashed") +
   theme_minimal()
 
 
 # Extract random effects for "ParticipantID"
 subj_pred <- ggpredict(gam1, terms = "ParticipantID")
-
 
 # Plot random effect
 subj_pred |>
@@ -655,6 +620,5 @@ subj_pred |>
   #geom_line() +
   geom_hline(data = thresh, aes(yintercept = threshold), linetype = "dashed") +
   theme_minimal()
-
 
 ```

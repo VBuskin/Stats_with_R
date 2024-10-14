@@ -55,9 +55,7 @@ library(lattice)
 library(corrplot)
 library(psych)
 library(GPArotation)
-library(Gifi)
 library(gridExtra)
-
 
 # Load data
 scope_sem_df <- readRDS("scope_sem.RDS")
@@ -262,6 +260,7 @@ pca1 <- principal(scope_sem_sub[,-1],
                   nfactors = ncol(scope_sem_sub[,-1]),
                   rotate = "none")
 
+# Print loadings
 loadings(pca1)
 ```
 
@@ -269,6 +268,7 @@ It is common practice to retain only those PCs with eigenvalues
 (variances) $> 1$ (cf. scree plot).
 
 ```{r}
+# Scree plot
 barplot(pca1$values, main = "Scree plot", ylab = "Variances", xlab = "PC", # first three PCs
         names.arg = 1:length(pca1$values))
   abline(h = 1, col = "blue", lty = "dotted")
@@ -312,13 +312,17 @@ can draw a path diagram with `diagram()`. Note that the red arrows
 indicate negative weights (i.e., negative "regression coefficients").
 
 ```{r}
+
 diagram(pca2, main = NA)
+
 ```
 
 The generic `plot` method returns a scatterplot of the loadings:
 
 ```{r}
+
 plot(pca2, labels = colnames(scope_sem_sub[,-1]), main = NA)
+
 ```
 
 Finally, you can obtain the PC scores for each observation in the input

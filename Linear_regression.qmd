@@ -33,18 +33,15 @@ General:
 
 ## Preparation {.smaller}
 
-```{r, echo = FALSE, output = FALSE}
-library("readxl")
-library("writexl")
-library("tidyverse")
-```
-
 ```{r, echo = TRUE, output = FALSE}
 # Load libraries
 library(readxl) # for reading in Excel data
 library(tidyverse) # data manipulation and visualisation framework
+library(broom) # converting models to data frames
 library(sjPlot) # exporting regression tables
+library(effects) # plot marginal effects
 library(ggeffects) # generating predictions
+library(car) # model diagnostics
 
 # Load data
 ELP <- read_xlsx("ELP.xlsx")
@@ -339,9 +336,7 @@ by approx. -0.05.
 
 ```{r, echo = TRUE, output = TRUE, message = FALSE, warning = FALSE}
 
-# Convert coefficients to a tibble 
-library("broom")
-
+# Convert coefficients to a tibble (= tidyverse-style data frame)
 tidy_model <- tidy(rt.lm1)
 
 tidy_model
@@ -486,8 +481,6 @@ Plot contributions of individual variable values:
 ```{r, echo = TRUE, output = TRUE, warning = FALSE, message = FALSE, include = FALSE}
 #| code-fold: true
 #| code-summary: "Code"
-# Load library
-library("effects")
 
 # Plot effects
 plot(Effect("Freq", mod = rt.lm2))
@@ -504,8 +497,6 @@ plot(Effect("Length", mod = rt.lm2))
 plot(ggeffect(rt.lm2, "Freq"), residuals = TRUE) + geom_line(col = "steelblue")
 plot(ggeffect(rt.lm2, "POS"), residuals = TRUE) + geom_line(col = "steelblue")
 plot(ggeffect(rt.lm2, "Length"), residuals = TRUE) + geom_line(col = "steelblue")
-
-#ggarrange(eff1, eff2, eff3)
 
 ```
 
@@ -525,8 +516,6 @@ assumptions include:
 ```{r}
 #| code-fold: true
 #| code-summary: "Code"
-
-library(car)
 
 # pink line = main tendency vs. blue line = slope coefficients;
 # some minor non-linearity can be observed

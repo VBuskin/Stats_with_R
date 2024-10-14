@@ -38,6 +38,7 @@ library(tidyr)
 library(lme4) # for linear mixed-effects models
 library(sjPlot)
 library(ggeffects)
+library(ggpubr)
 
 # Load data
 varmorph <- read.csv("varmorph_data.csv", header = TRUE)
@@ -153,7 +154,6 @@ data, the following series of plots plots illustrate ...
 (4) ... random intercepts and slopes for each `School`.
 
 ```{r, echo = F}
-library(ggpubr)
 # Set seed for reproducibility
 set.seed(123)
 
