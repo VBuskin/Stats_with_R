@@ -29,7 +29,7 @@ Full theoretical treatment:
 
 > James et al. [-@james_introduction_2021: Chapter 4]
 >
-> Hosmer & Lemeshow [-@hosmer_applied_2008].
+> Hosmer & Lemeshow [-@hosmer_applied_2008]
 
 ## Preparation {.smaller}
 
@@ -348,7 +348,7 @@ our interpretation of the model output.
 We will use the following specifications:
 
 | **Variable**   | **Factor Levels**            | **Preferred Reference level** |
-|-----------------|---------------------------|----------------------------|
+|------------------|---------------------------|----------------------------|
 | Register       | S1A, S1B                     | S1A                           |
 | Variety        | GB, SING, HK                 | GB                            |
 | Person         | 1, 2, 3, *it*, *there*       | 3                             |

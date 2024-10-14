@@ -280,7 +280,7 @@ logitgof(survey$rating, # observed
          ord = TRUE) # respect ordering
 ```
 
--   The Lipsitz test is an extension of the Hosmer-lemeshow test. Note
+-   The Lipsitz test is an extension of the Hosmer-Lemeshow test. Note
     that it requires the response to be a factor.
 
 ```{r}
@@ -299,7 +299,7 @@ pulkrob.chisq(survey.polr, catvars = c("freq", "routine"))
 #### With `effects`
 
 ```{r, output = F}
-## Routine effect plot
+# Routine effect plot
 plot(Effect(focal.predictors = c("routine"), mod = survey.polr), rug = FALSE, style="stacked")
 
 ```
@@ -309,7 +309,6 @@ plot(Effect(focal.predictors = c("routine"), mod = survey.polr), rug = FALSE, st
 ```{r, echo = TRUE, output = TRUE}
 #| code-fold: true
 #| code-summary: "Show the code"
-
 
 # Get the ggeffects data
 eff <- ggeffects::ggeffect(survey.polr, "freq")
@@ -549,7 +548,10 @@ General:
 A core assumption of Generalised Linear Models (GLMs) is a linear
 relationship between predictor(s) and response. If, however, one is
 interested in exploring potential non-linear trends without the risk of
-extreme overfitting, GAMs offer an elegant solution: Instead of relying on the linear sum of model coefficients, GAMs estimate more flexible **smooth terms** $f_q$. For illustration, @eq-gam shows a GAM for a binomial target variable with a logistic link function.
+extreme overfitting, GAMs offer an elegant solution: Instead of relying
+on the linear sum of model coefficients, GAMs estimate more flexible
+**smooth terms** $f_q$. For illustration, @eq-gam shows a GAM for a
+binomial target variable with a logistic link function.
 
 $$
 \log \left( \frac{P(Y = 1 \mid X_1, X_2, ..., X_p)}{1 - P(Y = 1 \mid X_1, X_2, ..., X_p)} \right) = \alpha + \sum\limits_{q = 1}^p f_j(X_j)

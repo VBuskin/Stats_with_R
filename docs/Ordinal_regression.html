@@ -5429,7 +5429,7 @@ X-squared = 51.173, df = 35, p-value = 0.03808</code></pre>
 </div>
 </div>
 <ul>
-<li>The Lipsitz test is an extension of the Hosmer-lemeshow test. Note that it requires the response to be a factor.</li>
+<li>The Lipsitz test is an extension of the Hosmer-Lemeshow test. Note that it requires the response to be a factor.</li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lipsitz.test</span>(survey.polr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -5460,7 +5460,7 @@ X-squared = 21.476, df = 9, p-value = 0.0107</code></pre>
 <section id="with-effects" class="level4" data-number="24.4.3.1">
 <h4 data-number="24.4.3.1" class="anchored" data-anchor-id="with-effects"><span class="header-section-number">24.4.3.1</span> With <code>effects</code></h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Routine effect plot</span></span>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Routine effect plot</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">Effect</span>(<span class="at">focal.predictors =</span> <span class="fu">c</span>(<span class="st">"routine"</span>), <span class="at">mod =</span> survey.polr), <span class="at">rug =</span> <span class="cn">FALSE</span>, <span class="at">style=</span><span class="st">"stacked"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
