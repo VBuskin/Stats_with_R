@@ -348,7 +348,7 @@ our interpretation of the model output.
 We will use the following specifications:
 
 | **Variable**   | **Factor Levels**            | **Preferred Reference level** |
-|------------------|---------------------------|----------------------------|
+|------------------|--------------------------|---------------------------|
 | Register       | S1A, S1B                     | S1A                           |
 | Variety        | GB, SING, HK                 | GB                            |
 | Person         | 1, 2, 3, *it*, *there*       | 3                             |
@@ -466,7 +466,7 @@ tidy_model <- tidy_model %>%
 
 ### Step 5: Visualise the model
 
-Plot model coefficients:
+-   Plot model coefficients:
 
 ```{r, echo = TRUE, output = TRUE}
 #| code-fold: true
@@ -509,7 +509,7 @@ plot(Effect("Person", mod = Reference.glm))
 plot(Effect(focal.predictors = c("Register", "Variety"), mod = Reference.glm))
 ```
 
-Plot predicted probabilities:
+-   Plot predicted probabilities:
 
 ```{r}
 #| code-fold: true

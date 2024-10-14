@@ -14,7 +14,6 @@ format:
     
 editor: visual
 ---
-                                                                                                   |
 
 ## Do's
 

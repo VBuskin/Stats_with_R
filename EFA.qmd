@@ -56,7 +56,7 @@ scope_sem_sub <- scope_sem_df[,1:11]
 glimpse(scope_sem_sub)
 ```
 
-## Exploratory Factor Analysis vs PCA
+## Exploratory Factor Analysis vs. PCA
 
 Exploratory Factor Analysis (EFA) is quite similar to PCA in that it
 compresses the high-dimensional feature space, yet the core idea is not
