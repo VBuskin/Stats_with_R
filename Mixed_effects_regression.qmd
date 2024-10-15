@@ -44,7 +44,10 @@ library(ggpubr)
 varmorph <- read.csv("varmorph_data.csv", header = TRUE)
 
 # Reduce data
-varmorph2 <- varmorph %>% select(rt, target, prime_type, subj_id) %>% drop_na()
+varmorph %>%
+  select(rt, target, prime_type, subj_id) %>%
+  filter(prime_type != "filler") %>% 
+  drop_na() -> varmorph2
 
 # Overview
 glimpse(varmorph2)
@@ -89,15 +92,16 @@ Read the following (partial) description of the experiments conducted by
 Ciaccio & Veríssimo on the morphological processing of complex lexical
 items [-@ciaccioInvestigatingVariabilityMorphological2022]:
 
-> The experiment included 102 English monomorphemic verbs used as
-> targets (e.g., *print*). These were preceded by their -*ed* past-tense
-> form (e.g., *printed*) as the inflected prime, their -*er*
-> nominalization (e.g., *printer*) as the derived prime, or by an
-> unrelated prime. Unrelated primes were dissimilar in form and meaning
-> from their corresponding targets; half of them were -*ed* inflected
-> forms and half of them were -*er* derived words. The distributions of
-> word-form frequency, lemma frequency, and length (in letters) of the
-> three prime types were kept as similar as possible.
+> Sixty-nine intermediate to advanced non-native speakers of
+> English (54 women; 15 men) took part in the experiment
+> in exchange for payment or course credits. \[...\] The experiment
+> included 102 English monomorphemic verbs used as targets (e.g.,
+> *print*). These were preceded by their -*ed* past-tense form (e.g.,
+> *printed*) as the inflected prime, their -*er* nominalization (e.g.,
+> *printer*) as the derived prime, or by an unrelated prime. Unrelated
+> primes were dissimilar in form and meaning from their corresponding
+> targets; half of them were -*ed* inflected forms and half of them were
+> -*er* derived words.
 > [@ciaccioInvestigatingVariabilityMorphological2022: 2267]
 
 Inspect `varmorph2` and characterise its multilevel structure.
@@ -265,7 +269,7 @@ print(p1)
 # Varying intercept model
 
 # Define reference level for "prime_type"
-varmorph2$prime_type <- factor(varmorph2$prime_type, levels = c("unrelated", "derived", "inflected", "fillter"))
+varmorph2$prime_type <- factor(varmorph2$prime_type, levels = c("unrelated", "derived", "inflected"))
 
 # Fit mixed-effects models
 varmorph.me <- lmer(rt ~ prime_type + # fixed effect
@@ -387,6 +391,5 @@ ggplot(combined_df, aes(x = subj_id, y = random_effect, col = prime_type)) +
        y = "Subject ID") +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
-
 
 ```
