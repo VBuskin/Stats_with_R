@@ -33,7 +33,7 @@ General:
 
 ## Preparation {.smaller}
 
-```{r, echo = TRUE, output = FALSE}
+```{r, echo = TRUE, output = TRUE}
 # Load libraries
 library(readxl) # for reading in Excel data
 library(tidyverse) # data manipulation and visualisation framework
@@ -70,14 +70,19 @@ counts [@winter_statistics_2020: 90-94].
 # Log-transformed
 ggplot(ELP, aes(x = log(RT))) +
   geom_histogram() +
-  geom_vline(xintercept = log(mean(ELP$RT)), color = "steelblue") +
+  geom_vline(xintercept = mean(log(ELP$RT)), color = "steelblue") +
+  geom_vline(xintercept = mean(log(ELP$RT)), color = "red") +
   theme_minimal() +
   labs(
     x = "Reaction time (log)"
   ) +
-   annotate("text", x = log(mean(ELP$RT)) + 0.01, y = 0, 
-           label = expression(paste(bar(x))), 
-           vjust = 1.5, hjust = -0.2, color = "steelblue", parse = TRUE)
+   annotate("text", x = log(mean(ELP$RT)), y = 0, 
+           label = "mean", 
+           vjust = 1.5, hjust = -0.2, color = "steelblue", parse = TRUE) +
+  annotate("text", x = log(mean(ELP$RT)) + -0.2, y = .7, 
+           label = "median", 
+           vjust = 1.5, hjust = -0.2, color = "red", parse = TRUE)
+
 
 ```
 
@@ -91,13 +96,17 @@ ggplot(ELP, aes(x = log(RT))) +
 ggplot(ELP, aes(x = RT)) +
   geom_histogram() +
   geom_vline(xintercept = mean(ELP$RT), color = "steelblue") +
+  geom_vline(xintercept = median(ELP$RT), color = "red") +
   theme_minimal() +
   labs(
     x = "Reaction time"
   ) +
 annotate("text", x = mean(ELP$RT) + 10, y = 0, 
-           label = expression(paste(bar(x))), 
-           vjust = 1.5, hjust = -0.2, color = "steelblue", parse = TRUE)
+           label = "mean", 
+           vjust = 1.5, hjust = -0.2, color = "steelblue", parse = TRUE) +
+  annotate("text", x = median(ELP$RT) -175, y = .7, 
+           label = "median", 
+           vjust = 1.5, hjust = -0.2, color = "red", parse = TRUE)
 
 ```
 :::
@@ -107,12 +116,12 @@ times `RT` and the (log-)frequency `Freq` of a lexical stimulus. What
 kind of pattern does the scatter plot below suggest?
 
 ```{r, echo = FALSE, output = TRUE}
-ggplot(ELP, aes(x = log(RT), y = log(Freq))) +
+ggplot(ELP, aes(x = log(Freq), y = log(RT))) +
   geom_point() +
   theme_minimal() +
   labs(
-    x = "Log-transformed reaction time",
-    y = "Log-transformed word frequency"
+    x = "Log-transformed word frequency",
+    y = "Log-transformed reaction time"
   )
 ```
 
@@ -479,9 +488,13 @@ ggplot(tidy_model, aes(x = estimate, y = term)) +
 #| code-fold: true
 #| code-summary: "Code"
 
-plot(ggeffect(rt.lm2, "Freq"), residuals = TRUE) + geom_line(col = "steelblue")
-plot(ggeffect(rt.lm2, "POS"), residuals = TRUE) + geom_line(col = "steelblue")
-plot(ggeffect(rt.lm2, "Length"), residuals = TRUE) + geom_line(col = "steelblue")
+plot(ggeffect(rt.lm2, "Freq"), residuals = TRUE) + geom_line(col = "steelblue") + labs(subtitle = "Untransformed frequencies", y = "log(RT)")
+
+plot(ggeffect(rt.lm2, "Freq [log]"), residuals = TRUE) + geom_line(col = "steelblue") + labs(subtitle = "Log-transformed frequencies", y = "log(RT)")
+
+plot(ggeffect(rt.lm2, "POS"), residuals = TRUE) + geom_line(col = "steelblue") + labs(y = "log(RT)")
+
+plot(ggeffect(rt.lm2, "Length"), residuals = TRUE) + geom_line(col = "steelblue") + labs(y = "log(RT)")
 ```
 
 ## Model assumptions and diagnostics
