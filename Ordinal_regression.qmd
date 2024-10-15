@@ -24,6 +24,9 @@ General:
 > @baguleySeriousStatsGuide2012: Chapter 17.4.5
 >
 > @powersStatisticalMethodsCategorical2008: Chapter 7
+>
+> [Documentation of Cumulative Link
+> Models](https://cran.r-project.org/web/packages/ordinal/vignettes/clm_article.pdf)
 
 ## Introduction
 
@@ -203,7 +206,7 @@ indicate how the probability of being in a higher rating category
 changes [@baguleySeriousStatsGuide2012: 691--2].
 
 We can obtain "regular" probabilities form the cumulative ones by
-drawing on the equivalence in \@#eq-cumprobs-transform.
+drawing on the equivalence in @eq-cumprobs-transform.
 
 $$
 P(Y = j) = P(Y \leq j) - P(Y \leq j - 1)
