@@ -263,19 +263,21 @@ parameters $\beta_0$ and $\beta_1$ are typically estimated using
 ### Multiple logistic regression
 
 If more than one predictor is included, the above equations can be
-expanded so as to take into account $p$ slopes $\beta_p$ for $p$
+expanded so as to take into account $1, ..., p$ slopes and $1, ..., p$
 independent variables $X_p$.
 
-$$
-\log\left(\frac{P(Y = 1 \mid X_1 + ... + X_p)}{1 - P(Y = 1 \mid X_1 + ... + X_p)}\right) = \frac{e^{\beta_0 + \beta_1X_1 + ... +  \beta_pX_p}}{1 + e^{\beta_0 + \beta_1X_1 + ... + \beta_pX_p}}.
-$$ Thus, the log odds correspond to the sum of $\beta_pX_p$,
+$$ P(Y = 1 \mid X_1, ..., X_p) = \frac{e^{\beta_0 + \beta_1X_1 + ... + \beta_pX_p}}{1 + e^{\beta_0 + \beta_1X_1 + ... + \beta_pX_p}}.
+$$ 
+
+Thus, the log odds correspond to the sum of $\beta_pX_p$,
 
 $$
 \begin{aligned}
-\log\left(\frac{P(Y = 1 \mid X_p)}{1 - P(Y = 1 \mid X_p)}\right) & = \beta_0 + \beta_1X_1 + ... +  \beta_pX_p \\
+\log\left(\frac{P(Y = 1 \mid X_1, ..., X_p)}{1 - P(Y = 1 \mid X_1, ...,  X_p)}\right) & = \beta_0 + \beta_1X_1 + ... +  \beta_pX_p \\
 & = \beta_0 + \sum_{i=1}^{p} \beta_i X_i
 \end{aligned}
-$$ respectively.
+$$
+respectively.
 
 ### Odds ratios
 
@@ -348,7 +350,7 @@ our interpretation of the model output.
 We will use the following specifications:
 
 | **Variable**   | **Factor Levels**            | **Preferred Reference level** |
-|------------------|--------------------------|---------------------------|
+|-------------------|--------------------------|---------------------------|
 | Register       | S1A, S1B                     | S1A                           |
 | Variety        | GB, SING, HK                 | GB                            |
 | Person         | 1, 2, 3, *it*, *there*       | 3                             |

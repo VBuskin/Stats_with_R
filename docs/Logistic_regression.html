@@ -5196,13 +5196,13 @@ Understanding log odds
 <div class="no-row-height column-margin column-container"><li id="fn3"><p><sup>3</sup>&nbsp;The goal of the fitting procedure is to maximise the likelihood function of the parameter matrix <span class="math inline">\(\ell(\mathbf{\beta})\)</span>. Via partial differentiation, an intermediary result can be attained which can only be solved using an iterative algorithm (e.g.&nbsp;Newton-Ralphson). For further technical details, see Wood <span class="citation" data-cites="woodGeneralizedAdditiveModels2006">(<a href="references.html#ref-woodGeneralizedAdditiveModels2006" role="doc-biblioref">2006</a>: 63-66)</span> or Agresti &amp; Kateri <span class="citation" data-cites="agrestiFoundationsStatisticsData2022">(<a href="references.html#ref-agrestiFoundationsStatisticsData2022" role="doc-biblioref">2022</a>: 291-294)</span>.</p></li></div></section>
 <section id="multiple-logistic-regression" class="level3" data-number="22.3.2">
 <h3 data-number="22.3.2" class="anchored" data-anchor-id="multiple-logistic-regression"><span class="header-section-number">22.3.2</span> Multiple logistic regression</h3>
-<p>If more than one predictor is included, the above equations can be expanded so as to take into account <span class="math inline">\(p\)</span> slopes <span class="math inline">\(\beta_p\)</span> for <span class="math inline">\(p\)</span> independent variables <span class="math inline">\(X_p\)</span>.</p>
-<p><span class="math display">\[
-\log\left(\frac{P(Y = 1 \mid X_1 + ... + X_p)}{1 - P(Y = 1 \mid X_1 + ... + X_p)}\right) = \frac{e^{\beta_0 + \beta_1X_1 + ... +  \beta_pX_p}}{1 + e^{\beta_0 + \beta_1X_1 + ... + \beta_pX_p}}.
-\]</span> Thus, the log odds correspond to the sum of <span class="math inline">\(\beta_pX_p\)</span>,</p>
+<p>If more than one predictor is included, the above equations can be expanded so as to take into account <span class="math inline">\(1, ..., p\)</span> slopes and <span class="math inline">\(1, ..., p\)</span> independent variables <span class="math inline">\(X_p\)</span>.</p>
+<p><span class="math display">\[ P(Y = 1 \mid X_1, ..., X_p) = \frac{e^{\beta_0 + \beta_1X_1 + ... + \beta_pX_p}}{1 + e^{\beta_0 + \beta_1X_1 + ... + \beta_pX_p}}.
+\]</span></p>
+<p>Thus, the log odds correspond to the sum of <span class="math inline">\(\beta_pX_p\)</span>,</p>
 <p><span class="math display">\[
 \begin{aligned}
-\log\left(\frac{P(Y = 1 \mid X_p)}{1 - P(Y = 1 \mid X_p)}\right) &amp; = \beta_0 + \beta_1X_1 + ... +  \beta_pX_p \\
+\log\left(\frac{P(Y = 1 \mid X_1, ..., X_p)}{1 - P(Y = 1 \mid X_1, ...,  X_p)}\right) &amp; = \beta_0 + \beta_1X_1 + ... +  \beta_pX_p \\
 &amp; = \beta_0 + \sum_{i=1}^{p} \beta_i X_i
 \end{aligned}
 \]</span> respectively.</p>
@@ -5263,9 +5263,9 @@ H_1: &amp; \quad \text{At least one } \beta_i \neq 0 \text{ for } i \in \{1, 2, 
 <p>We will use the following specifications:</p>
 <table class="table">
 <colgroup>
-<col style="width: 25%">
+<col style="width: 26%">
 <col style="width: 36%">
-<col style="width: 38%">
+<col style="width: 37%">
 </colgroup>
 <thead>
 <tr class="header">
