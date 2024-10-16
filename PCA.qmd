@@ -126,15 +126,15 @@ even more so if the number of variables were to increase further.
 **Principal Components Analysis** offers a technique to break down a
 high-dimensional dataset into a much smaller set of "meta-variables",
 i.e., **principle components** (PCs) which capture the bulk of the
-variance in the data. This allows researchers to see overarching
+variance in the data. This is also known as **dimension reduction**, which allows researchers to see overarching
 patterns in the data and re-use the output for further analysis (e.g.,
 clustering or predictive modelling).
 
 ## Basics of PCA
 
 PCA "repackages" large sets of variables by forming uncorrelated linear
-combinations of them, yielding $k$ principal components $Z_k$ of the
-dataset (for $k \in \{1, ..., K\}$).
+combinations of them, yielding $k$ principal components $Z_k$ (PCs hf.) of the
+dataset (for $k \in \{1, ..., K\}$). PCs are ordered such that the first PC explains the most variance in the data, with each subsequent PC explaining the maximum remaining variance while being uncorrelated with previous PCs. 
 
 Each PC comprises a set of **loadings** (or **weights**) $w_{nm}$, which
 are comparable to the coefficients of regression equations. For
@@ -153,11 +153,14 @@ strength of this relationship. Conversely, negative loadings ($w < 0$)
 indicate that as the feature value increases, the PC score decreases as
 well.
 
+
+::: {.callout-note collapse="true" title="How do we find PCs?"}
 PCs are identified using common techniques from matrix algebra, namely
 **singular value decomposition** and **eigenvalue decomposition**. By
 breaking down the input data into products of several further matrices,
 it becomes possible to characterise the exact 'shape' of its variance
 [@mairModernPsychometrics2018: 181].
+:::
 
 The figure below offers a visual summary of PCA:
 

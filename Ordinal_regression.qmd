@@ -54,7 +54,6 @@ library(effects)
 library(ggeffects)
 library(ggpubr)
 
-
 # For additional tests
 library(DescTools)
 library(generalhoslem)
@@ -117,6 +116,48 @@ unique(survey$freq)
     ratings
 :::
 
+## Descriptive overview
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+
+ggplot(survey, aes(x = rating, fill = freq)) +
+  geom_density(alpha = 0.7) +
+  facet_wrap(~freq) +
+  theme_minimal() +
+  labs(title = "Density of Ratings by Verb and Frequency",
+       x = "Rating", y = "Density", fill = "Frequency")
+```
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+
+ggplot(survey, aes(x = rating, fill = routine)) +
+  geom_density(alpha = 0.7) +
+  facet_wrap(~routine) +
+  theme_minimal() +
+  labs(title = "Density of Ratings by Verb and Routine",
+       x = "Rating", y = "Density", fill = "Routine")
+```
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+
+library(ggridges)
+ggplot(survey, aes(x = rating, y = verb, fill = verb)) +
+  geom_density_ridges(scale = 5, rel_min_height = 0.01, alpha = 0.6) +
+  theme_ridges() +
+  #theme(legend.position = "none") +
+  labs(title = "Distribution of Ratings by Verb",
+       x = "Rating", y = "Verb")
+
+```
+
+
+
 ## Modelling ordinal data
 
 Our task is clear: We need to measure how `routine` and `freq` affect
@@ -163,7 +204,7 @@ log-transformed odds ratio (**log odds**) is equivalent of the
 all-too-familiar linear model:
 
 $$
-\log\left(\frac{P(Y = yes \mid X_1, X_2, ..., X_p)}{1 - P(Y = yes \mid X_1, X_2, ..., X_p)}\right) = \beta_0 + \beta_1X_1 + ... + \beta_pX_p.
+\log\left(\frac{P(Y = yes \mid X_1, X_2, ..., X_p)}{1 - P(Y = yes \mid X_1, X_2, ..., X_p)}\right) = \beta_0 + \sum_{i=1}^p \beta_iX_i
 $$ {#eq-logreg}
 :::
 
@@ -186,26 +227,26 @@ We can now update our logistic regression model to take into account
 cumulative probabilities for $j = 1, ..., J-1$.
 
 $$
-\log\left(\frac{P(Y \leq j \mid X_1, X_2, ..., X_p)}{1 - P(Y \leq j \mid X_1, X_2, ..., X_p)}\right) = \beta_{0_j} + \beta_1X_1 + ... + \beta_pX_p
+\log\left(\frac{P(Y \leq j \mid X_1, X_2, ..., X_p)}{1 - P(Y \leq j \mid X_1, X_2, ..., X_p)}\right) = \beta_0 + \sum_{i=1}^p \beta_iX_i
 $$ {#eq-cumlog}
 
 The intercepts $\beta_{0_j}$ serve as **cutpoints** between the adjacent
 ordinal categories. For $J = 5$ categories, there are $J - 1 = 4$
 cutpoints, i.e.,
 
--   1\|2 ($P(Y \leq 1)$),
+-   1\|2 for $P(Y \leq 1)$
 
--   2\|3 ($P(Y \leq 2)$),
+-   2\|3 for $P(Y \leq 2)$
 
--   3\|4 ($P(Y \leq 3)$), and
+-   3\|4 for $P(Y \leq 3)$
 
--   4\|5 ($P(Y \leq 4)$).
+-   4\|5 for $P(Y \leq 4)$.
 
 Given a change in predictor values, the slope coefficients $\beta_pX_p$
 indicate how the probability of being in a higher rating category
 changes [@baguleySeriousStatsGuide2012: 691--2].
 
-We can obtain "regular" probabilities form the cumulative ones by
+We can obtain "regular" probabilities from the cumulative ones by
 drawing on the equivalence in @eq-cumprobs-transform.
 
 $$
@@ -553,11 +594,11 @@ relationship between predictor(s) and response. If, however, one is
 interested in exploring potential non-linear trends without the risk of
 extreme overfitting, GAMs offer an elegant solution: Instead of relying
 on the linear sum of model coefficients, GAMs estimate more flexible
-**smooth terms** $f_q$. For illustration, @eq-gam shows a GAM for a
-binomial target variable with a logistic link function.
+**smooth terms** $f_k$ for $k = 1, ..., p$. For illustration, @eq-gam shows a linear additive model for a
+continuous target variable with $p$ predictors.
 
 $$
-\log \left( \frac{P(Y = 1 \mid X_1, X_2, ..., X_p)}{1 - P(Y = 1 \mid X_1, X_2, ..., X_p)} \right) = \alpha + \sum\limits_{q = 1}^p f_j(X_j)
+Y = \beta_0 + \sum\limits_{k = 1}^p f_k(X_k)
 $$ {#eq-gam}
 
 ### Application in R
