@@ -61,7 +61,7 @@
     "section": "3.1 What is a linguistic variable?",
     "text": "3.1 What is a linguistic variable?\n\nThe classical view: Labov (1972) defines a linguistic variable as “two ways of saying the same thing.”\nA restriction: Meyerhoff (2009, p. 11) summarized, “In sum, a sociolinguistic variable can be defined as a linguistic variable that is constrained by social or non-linguistic factors…”\nA more open view: Kiesling (2011) argued, “Given the variability of what counts as a variable, we must define what counts as a variable more broadly than ‘two or more ways of saying the same thing’. We will simply say that a linguistic variable is a choice or option about speaking in a speech community… Note that this definition does not in any way require us to state that the meaning be the same, although there should be some kind of equivalence noted.”\n\n\n\n\n\n\n\nDiscussion\n\n\n\nWhich of the following variables are good sociolinguistic variables, and which of them are poor?\n\n/fɔːθ flɔː/ vs. /fɔːrθ flɔːr/\nThis enables him to preside over the process which I have described vs. This enables him to preside over the process that I have described vs. This enables him to preside over the process ∅ I have described.\nThe pair found the briefcase on a bus station bench at Bath central bus station. vs. The briefcase was found on a bus station bench at Bath central bus station by the pair.\nArt is after all the subject of attention for both critic and historian, even though the functions and methods of the two sorts of writer have drawn apart. vs. Art histories often make an attempt to keep to chronology, although the difficulties include the crucial fact that in art there is no clear sequence of events. vs. Many of his readers approved his sensitive and appreciative understanding of paintings, though without sharing his political views.\n/pleɪŋ/ vs. /pleɪn/\n[tʰ] in /tɔp/ vs. [t] in stop.",
     "crumbs": [
-      "Conducting a corpus-linguistic study",
+      "Fundamentals of Corpus-based Research",
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Linguistic variables</span>"
     ]
   },
@@ -72,7 +72,7 @@
     "section": "3.2 The principle of accountability",
     "text": "3.2 The principle of accountability\n\n\n\n\n\n\nTask\n\n\n\nTwo linguists aim to study the preference for passives among men and women. They extract all the passives from 500,000 words of male speech and all passives from 500,000 words of female speech and report the results. What’s wrong?",
     "crumbs": [
-      "Conducting a corpus-linguistic study",
+      "Fundamentals of Corpus-based Research",
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Linguistic variables</span>"
     ]
   },
@@ -83,7 +83,7 @@
     "section": "3.3 Subtypes of variables",
     "text": "3.3 Subtypes of variables\n\n3.3.1 Linguistic perspective\n\nphonetic/phonological\nmorphological\nsyntactic\npragmatic\n\n\n\n3.3.2 Sociolinguistic perspective\nSociolinguistic variables also differ with regard to their salience in society.\n\nStereotypes are strongly socially marked and part of popular discourse about language.\n\nh-dropping in Cockney\nCanadian eh at the end of sentences\nAustralian dinkum: I was fair dinkum about my interest in their culture ‘authentic, genuine’\n\nMarkers show both social and style stratification; all members of a society react similarly in taking care to avoid the pattern in formal registers.\n\n\n\n\n(th)\n\nIndicators differentiate social groups. However, people are not aware of them and therefore do not avoid them in formal registers.\n\nSame vowel in God and Guard in New York City\n\n\n\nTaken from Mesthrie, Rajend, et al. Introducing Sociolinguistics. Edinburgh University Press, 2009.",
     "crumbs": [
-      "Conducting a corpus-linguistic study",
+      "Fundamentals of Corpus-based Research",
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Linguistic variables</span>"
     ]
   },
@@ -94,7 +94,7 @@
     "section": "3.4 Statistical perspective",
     "text": "3.4 Statistical perspective\n\n3.4.1 Dependent and independent variables\nTask: Decide which of the variables are independent, and which are dependent variables!\n\n\n\n\nKenyan speakers\nSingaporean speakers\n\n\n\n\nAverage sentence length\n10.5\n9.8\n\n\n\n\n\n\n\nmale\nfemale\n\n\n\n\nactually\n65\n98\n\n\npossibly\n55\n77\n\n\nreally\n54\n55\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nQuestion: English is the most important language today.\nstrongly agree\nagree\nneutral\ndisagree\nstrongly disagree\n\n\n\n\nN\n12\n33\n58\n12\n8\n\n\n\n\n\n3.4.2 Interval, ordinal, and nominal\n\nCOMPLEXITY (ordinal)\n\nthe book (low)\nthe brown book (middle)\nthe book I had bought in Europe (high)\n\nLENGTH (interval)\n\nbook (1)\nthe book (2)\nthe book I had bought in Europe (7)\n\nANIMACY (nominal)\n\nHe picked up the book.\nHe picked his dad up.\n\n\n\nCf. Gries, Stefan Th. Statistics for Linguistics with R. De Gruyter Mouton, 2013, p. 9.\n\nTask: Now, go back to Tables 1–3 and decide which of the variables are interval variables, ordinal or nominal variables!",
     "crumbs": [
-      "Conducting a corpus-linguistic study",
+      "Fundamentals of Corpus-based Research",
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Linguistic variables</span>"
     ]
   },
@@ -105,7 +105,7 @@
     "section": "3.5 Many morphosyntactic variables in English",
     "text": "3.5 Many morphosyntactic variables in English\n\n\n\n\n\n\n\nVariable\nExample\n\n\n\n\nIndefinite Pronouns\neverybody vs. everyone\n\n\nCase and order of coordinated pronouns\nmy husband and I vs. my husband and me vs. me and my husband\n\n\nthat vs. zero complementation\nI don’t think that/Ø it’s a problem.\n\n\nthat vs. gerundial complementation\nremember that vs. remember V-ing; try to vs. try and vs. try V-ing\n\n\nParticle placement\nset the computer up vs. set up the computer\n\n\nThe dative alternation\ngive the book to John vs. give John the book\n\n\nThe genitive alternation\nJohn’s house vs. the house of John\n\n\nRelativization strategies\nwh-word vs. that vs. Ø\n\n\nAnalytic vs. synthetic comparatives\nwarmer vs. more scary\n\n\nPlural existentials\nthere are some places vs. there’s some places\n\n\nFuture temporal reference\nwill vs. going to vs. progressive etc.\n\n\nDeontic modality\nmust vs. have to vs. need to vs. got to etc.\n\n\nStative possession\nhave vs. have got vs. got\n\n\nQuotatives\nsay vs. be like vs. go etc.\n\n\nnot vs. no\nnot anybody vs. nobody; not anyone vs. no one; not anything vs. nothing\n\n\nNOT vs. AUX contraction\nthat’s not vs. that isn’t etc.\n\n\n\n\nTaken from Szmrecsanyi, Benedikt. Grammatical Variation in British English Dialects: A Study in Corpus-Based Dialectometry. Cambridge University Press, 2021 (including most examples).",
     "crumbs": [
-      "Conducting a corpus-linguistic study",
+      "Fundamentals of Corpus-based Research",
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Linguistic variables</span>"
     ]
   },
@@ -895,7 +895,7 @@
     "href": "Ordinal_regression.html#suggested-reading",
     "title": "24  Ordinal regression",
     "section": "24.1 Suggested reading",
-    "text": "24.1 Suggested reading\nGeneral:\n\nBaguley (2012): Chapter 17.4.5\nPowers and Xie (2008): Chapter 7\nDocumentation of Cumulative Link Models",
+    "text": "24.1 Suggested reading\nGeneral:\n\nBaguley (2012): Chapter 17.4.5\nO’Connell (2006)\nPowers and Xie (2008): Chapter 7\nDocumentation of Cumulative Link Models",
     "crumbs": [
       "Statistical Modelling and Machine Learning",
       "<span class='chapter-number'>24</span>  <span class='chapter-title'>Ordinal regression</span>"
@@ -1203,7 +1203,7 @@
     "href": "Ordinal_regression.html#descriptive-overview",
     "title": "24  Ordinal regression",
     "section": "24.3 Descriptive overview",
-    "text": "24.3 Descriptive overview\n\n\nShow the code\nggplot(survey, aes(x = rating, fill = freq)) +\n  geom_density(alpha = 0.7) +\n  facet_wrap(~freq) +\n  theme_minimal() +\n  labs(title = \"Density of Ratings by Verb and Frequency\",\n       x = \"Rating\", y = \"Density\", fill = \"Frequency\")\n\n\n\n\n\n\n\n\n\n\n\nShow the code\nggplot(survey, aes(x = rating, fill = routine)) +\n  geom_density(alpha = 0.7) +\n  facet_wrap(~routine) +\n  theme_minimal() +\n  labs(title = \"Density of Ratings by Verb and Routine\",\n       x = \"Rating\", y = \"Density\", fill = \"Routine\")\n\n\n\n\n\n\n\n\n\n\n\nShow the code\nlibrary(ggridges)\nggplot(survey, aes(x = rating, y = verb, fill = verb)) +\n  geom_density_ridges(scale = 5, rel_min_height = 0.01, alpha = 0.6) +\n  theme_ridges() +\n  #theme(legend.position = \"none\") +\n  labs(title = \"Distribution of Ratings by Verb\",\n       x = \"Rating\", y = \"Verb\")",
+    "text": "24.3 Descriptive overview\n\n\nShow the code\nggplot(survey, aes(x = rating, fill = freq)) +\n  geom_density(alpha = 0.7) +\n  facet_wrap(~freq) +\n  theme_minimal() +\n  labs(title = \"Density of Ratings by Frequency\",\n       x = \"Rating\", y = \"Density\", fill = \"Frequency\")\n\n\n\n\n\n\n\n\n\n\n\nShow the code\nggplot(survey, aes(x = rating, fill = routine)) +\n  geom_density(alpha = 0.7) +\n  facet_wrap(~routine) +\n  theme_minimal() +\n  labs(title = \"Density of Ratings by Routine\",\n       x = \"Rating\", y = \"Density\", fill = \"Routine\")\n\n\n\n\n\n\n\n\n\n\n\nShow the code\nlibrary(ggridges)\nggplot(survey, aes(x = rating, y = verb, fill = verb)) +\n  geom_density_ridges(scale = 5, rel_min_height = 0.01, alpha = 0.6) +\n  theme_ridges() +\n  #theme(legend.position = \"none\") +\n  labs(title = \"Distribution of Ratings by Verb\",\n       x = \"Rating\", y = \"Verb\")",
     "crumbs": [
       "Statistical Modelling and Machine Learning",
       "<span class='chapter-number'>24</span>  <span class='chapter-title'>Ordinal regression</span>"

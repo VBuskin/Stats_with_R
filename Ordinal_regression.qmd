@@ -23,6 +23,8 @@ General:
 
 > @baguleySeriousStatsGuide2012: Chapter 17.4.5
 >
+> @oconnellLogisticRegressionModels2006
+>
 > @powersStatisticalMethodsCategorical2008: Chapter 7
 >
 > [Documentation of Cumulative Link
@@ -72,11 +74,12 @@ head(survey)
     to one of the following conditions:
 
 > -   (High routine condition:) I worked at my poultry farm. Just like I
->     always do, I butchered some chickens. Then I gathered some eggs.
+>     always do, I **butchered** some chickens. Then I gathered some
+>     eggs.
 >
 > -   (Low-routine condition:) I visited a friend's job. Just because
->     people wanted me to try it, I butchered some chickens. Then I went
->     for a walk.
+>     people wanted me to try it, I **butchered** some chickens. Then I
+>     went for a walk.
 >
 > Cf. Glass [-@glassEnglishVerbsCan2021: 66]
 
@@ -91,7 +94,7 @@ unique(survey$routine)
 > *The next time Caroline talks about butchering chickens the day
 > before, how likely do you think she is to say the following?*
 >
-> 'I butchered yesterday'
+> 'I **butchered** yesterday'
 >
 > Cf. Glass [-@glassEnglishVerbsCan2021: 66]
 
@@ -126,7 +129,7 @@ ggplot(survey, aes(x = rating, fill = freq)) +
   geom_density(alpha = 0.7) +
   facet_wrap(~freq) +
   theme_minimal() +
-  labs(title = "Density of Ratings by Verb and Frequency",
+  labs(title = "Density of Ratings by Frequency",
        x = "Rating", y = "Density", fill = "Frequency")
 ```
 
@@ -138,7 +141,7 @@ ggplot(survey, aes(x = rating, fill = routine)) +
   geom_density(alpha = 0.7) +
   facet_wrap(~routine) +
   theme_minimal() +
-  labs(title = "Density of Ratings by Verb and Routine",
+  labs(title = "Density of Ratings by Routine",
        x = "Rating", y = "Density", fill = "Routine")
 ```
 
@@ -155,8 +158,6 @@ ggplot(survey, aes(x = rating, y = verb, fill = verb)) +
        x = "Rating", y = "Verb")
 
 ```
-
-
 
 ## Modelling ordinal data
 
@@ -594,8 +595,9 @@ relationship between predictor(s) and response. If, however, one is
 interested in exploring potential non-linear trends without the risk of
 extreme overfitting, GAMs offer an elegant solution: Instead of relying
 on the linear sum of model coefficients, GAMs estimate more flexible
-**smooth terms** $f_k$ for $k = 1, ..., p$. For illustration, @eq-gam shows a linear additive model for a
-continuous target variable with $p$ predictors.
+**smooth terms** $f_k$ for $k = 1, ..., p$. For illustration, @eq-gam
+shows a linear additive model for a continuous target variable with $p$
+predictors.
 
 $$
 Y = \beta_0 + \sum\limits_{k = 1}^p f_k(X_k)

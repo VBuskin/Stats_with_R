@@ -1,7 +1,5 @@
 
-
 # Ordinal regression ------------------------------------------------------
-
 
 ## Introduction ------------------------------------------------------------
 
@@ -61,7 +59,6 @@ tab_model(survey.polr, show.se = TRUE, show.aic = TRUE, show.dev = TRUE, transfo
 brant(survey.polr) # p < 0.05 is a violation of the assumption
 
 # Hosmer-Lemeshow test
-
 logitgof(survey$rating, # observed
          fitted(survey.polr), # expected
          ord = TRUE) # respect ordering
@@ -332,7 +329,6 @@ verb_pred %>%
   geom_errorbar(aes(ymin = conf.low, ymax = conf.high, width = 0), col = "steelblue") +
   geom_hline(data = thresh, aes(yintercept = threshold), linetype = "dashed") +
   theme_minimal()
-
 
 # Extract random effects for "ParticipantID"
 subj_pred <- ggpredict(gam1, terms = "ParticipantID")
