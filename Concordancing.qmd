@@ -147,7 +147,7 @@ query2 %>%
 You can store your results in a spreadsheet file just as described in
 `Introduction to R > Import/export data`.
 
--   **Microsoft Excel (.xlsx)**
+-   **Microsoft Excel (**.xlsx**)**
 
 ```{r, output = F, eval = F}
 library(writexl)
