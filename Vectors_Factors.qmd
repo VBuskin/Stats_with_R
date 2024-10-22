@@ -156,6 +156,13 @@ frequency[2:4]
 
 ## Exercises
 
+::: callout-tip
+## Solutions
+
+You can find the solutions to the exercises
+[here](https://osf.io/967hj).
+:::
+
 1.  Create a vector that lists the third person personal pronouns of
     English (subject and object forms). Store them in a variable `pp3`.
 
