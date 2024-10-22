@@ -88,12 +88,12 @@ data[,1]
 data$lemma
 ```
 
-## Handling data frames `tidyverse`-style
+::: {.callout-tip title="Handling data frames `tidyverse`-style" collapse="false"}
 
 The `tidyverse`-ecosystem is a collection of packages specifically
 designed for handling typical data science tasks as comfortably and
 elegantly as possible, supplying countless helper functions for data
-manipulation, transformation and visualisation.
+manipulation, transformation and visualisation. Installation instructions are provided in @sec-libraries.
 
 It offers some appealing alternatives to the Base R subsetting
 functions. Let's generate a tidyverse-style data frame, the **tibble**:
@@ -129,9 +129,9 @@ A extensive guide to the main tidyverse functions is provided in Chapter
 3 of the free eBook [R For Data Science (2nd
 edition)](https://r4ds.hadley.nz).
 
+:::
+
 ## Exercises
 
 1.  Recreate the barplot from the previous unit by subsetting the `data`
     variable accordingly.
-
-2.  

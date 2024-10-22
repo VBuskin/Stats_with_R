@@ -27,7 +27,7 @@ data wrangling tasks but which also provide frameworks for
 state-of-the-art methods for statistical analysis and natural language
 processing (NLP), among many other things.
 
-### Installation
+### Installation {#sec-libraries}
 
 ::: {.callout-note collapse="false" title="How do I install a library?"}
 Navigate to `Packages` \> `Install` and verify that the pop-up window

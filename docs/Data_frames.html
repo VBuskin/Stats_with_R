@@ -4998,8 +4998,7 @@ vertical-align: -.125em;
   <li><a href="#recommended-reading" id="toc-recommended-reading" class="nav-link active" data-scroll-target="#recommended-reading"><span class="header-section-number">8.1</span> Recommended reading</a></li>
   <li><a href="#word-frequencies-ii" id="toc-word-frequencies-ii" class="nav-link" data-scroll-target="#word-frequencies-ii"><span class="header-section-number">8.2</span> Word frequencies II</a></li>
   <li><a href="#sec-df" id="toc-sec-df" class="nav-link" data-scroll-target="#sec-df"><span class="header-section-number">8.3</span> Essential R concepts</a></li>
-  <li><a href="#handling-data-frames-tidyverse-style" id="toc-handling-data-frames-tidyverse-style" class="nav-link" data-scroll-target="#handling-data-frames-tidyverse-style"><span class="header-section-number">8.4</span> Handling data frames <code>tidyverse</code>-style</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">8.5</span> Exercises</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">8.4</span> Exercises</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/VBuskin/Stats_with_R/blob/main/Data_frames.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
     </div>
@@ -5121,10 +5120,19 @@ vertical-align: -.125em;
 <pre><code>[1] "start" "enjoy" "begin" "help" </code></pre>
 </div>
 </div>
-</section>
-<section id="handling-data-frames-tidyverse-style" class="level2" data-number="8.4">
-<h2 data-number="8.4" class="anchored" data-anchor-id="handling-data-frames-tidyverse-style"><span class="header-section-number">8.4</span> Handling data frames <code>tidyverse</code>-style</h2>
-<p>The <code>tidyverse</code>-ecosystem is a collection of packages specifically designed for handling typical data science tasks as comfortably and elegantly as possible, supplying countless helper functions for data manipulation, transformation and visualisation.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Handling data frames `tidyverse`-style">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Handling data frames <code>tidyverse</code>-style
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>The <code>tidyverse</code>-ecosystem is a collection of packages specifically designed for handling typical data science tasks as comfortably and elegantly as possible, supplying countless helper functions for data manipulation, transformation and visualisation. Installation instructions are provided in <a href="Libraries.html#sec-libraries" class="quarto-xref"><span>Section&nbsp;9.2.1</span></a>.</p>
 <p>It offers some appealing alternatives to the Base R subsetting functions. Let’s generate a tidyverse-style data frame, the <strong>tibble</strong>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
@@ -5178,12 +5186,14 @@ vertical-align: -.125em;
 </div>
 </div>
 <p>A extensive guide to the main tidyverse functions is provided in Chapter 3 of the free eBook <a href="https://r4ds.hadley.nz">R For Data Science (2nd edition)</a>.</p>
+</div>
+</div>
+</div>
 </section>
-<section id="exercises" class="level2" data-number="8.5">
-<h2 data-number="8.5" class="anchored" data-anchor-id="exercises"><span class="header-section-number">8.5</span> Exercises</h2>
+<section id="exercises" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="exercises"><span class="header-section-number">8.4</span> Exercises</h2>
 <ol type="1">
-<li><p>Recreate the barplot from the previous unit by subsetting the <code>data</code> variable accordingly.</p></li>
-<li></li>
+<li>Recreate the barplot from the previous unit by subsetting the <code>data</code> variable accordingly.</li>
 </ol>
 
 
