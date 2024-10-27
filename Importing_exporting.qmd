@@ -87,7 +87,7 @@ The file is now stored at the location of your current R-script. You
 should be able to open it in MS Excel without any issues.
 :::
 
-### Importing data
+### Importing data {#sec-import}
 
 Let's read the two files back into R.
 
