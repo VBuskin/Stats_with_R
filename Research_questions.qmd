@@ -34,9 +34,53 @@ how social factors influence our linguistic behavior.
 
 > Cf. @boothCraftResearch2008: 45–48
 
-::: callout-caution
-## Task
+### Hints for good research questions
 
+::: callout-tip
+1.  A research question must be **simple, specific, and doable**. It is
+    better to make a small contribution to a particular problem than to
+    aim at covering a whole subfield of sociolinguistics.
+
+2.  Keep a research question **stable** in your paper, even if you come
+    across interesting new ideas as you work on it.
+
+3.  The research question must be an **explicit part of your paper**.
+    Mention it in the introduction and keep referring back to it from
+    time to time.
+
+4.  Keep in mind that the research question will determine both
+    **methodology** and **data**.
+
+> Cf. @hazenIntroductionLanguage2015: 9–10
+:::
+
+### Hypotheses
+
+Research questions must be complemented by a set of falsifiable
+hypotheses. These will be covered in-depth in @sec-hyp. In short,
+
+-   **Hypothesis** $H_1$ predicts a specific relationship between a
+    dependent variable and an independent variable.
+
+-   its **opposite**, **Hypothesis** $H_0$, describes the state of
+    affairs where the predicted relationship between the variables does
+    not hold.
+
+The predictions made by the hypotheses are based on previous research.
+Here is an example:
+
+**Research question**: I am studying the pronunciation of \[r\] in New
+York because I want to find out whether different social groups differ
+with respect to their pronunciation, in order to help my readers
+understand how social factors influence our linguistic behavior.
+
+-   **Hypothesis** $H_1$: There is a difference in the use of postvocalic /r/ between upper-class and lower-class speakers.
+
+-   **Hypothesis** $H_0$:  There is **no** difference in the use of postvocalic /r/ between upper-class and lower-class speakers.
+
+### Exercises
+
+::: {#exr-rqs-1}
 Assess the following research questions!
 
 (a) I will try to find the specific linguistic features which a
@@ -61,56 +105,12 @@ Assess the following research questions!
     the use of verb forms.
 :::
 
-### Hints for good research questions
-
-::: callout-tip
-1.  A research question must be **simple, specific, and doable**. It is
-    better to make a small contribution to a particular problem than to
-    aim at covering a whole subfield of sociolinguistics.
-
-2.  Keep a research question **stable** in your paper, even if you come
-    across interesting new ideas as you work on it.
-
-3.  The research question must be an **explicit part of your paper**.
-    Mention it in the introduction and keep referring back to it from
-    time to time.
-
-4.  Keep in mind that the research question will determine both
-    **methodology** and **data**.
-
-> Cf. @hazenIntroductionLanguage2015: 9–10
-:::
-
-### Hypotheses
-
-Research questions must be complemented by a set of falsifiable hypotheses. These are covered in-depth under `Inferential statistics > Hypothesis testing`. In short, 
-
--   **Hypothesis H**<sub>1</sub>  predicts a specific relationship
-    between a dependent variable and an independent variable.
-
--   its **opposite**, **Hypothesis H**<sub>0</sub>, describes the
-    state of affairs where the predicted relationship between the
-    variables does not hold.
-
-The predictions made by the hypotheses are based on previous research. Here is an example:
-
-**Research question**: I am studying the pronunciation of \[r\] in New
-York because I want to find out whether different social groups differ
-with respect to their pronunciation, in order to help my readers
-understand how social factors influence our linguistic behavior.
-
--   **Hypothesis H**<sub>1</sub>: Upper-class speakers will use
-    postvocalic /r/ more frequently than lower-class speakers.
-
--   **Hypothesis H**<sub>0</sub>: Upper-class speakers will **not** use
-    postvocalic /r/ more frequently than lower-class speakers.
-
-### Practice
-
-**Task**: Develop valid research questions on the basis
-of the following linguistic variables:
+::: {#exr-rqs-2}
+Develop valid research questions on the basis of the following
+linguistic variables:
 
 1.  Speakers in bilingual conversations are especially likely to
     code-switch when there is a significant change of topic.
 
 2.  Women use more tentative language in conversations than men.
+:::

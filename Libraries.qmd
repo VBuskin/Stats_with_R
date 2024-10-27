@@ -3,7 +3,7 @@ title: "Libraries"
 author: Vladimir Buskin
 format:
   html:
-    self-contained: false
+    self-contained: true
     theme: default
     toc: true
     number-sections: true
@@ -48,7 +48,9 @@ install the following ones:
 
 -   `writexl` (for exporting Microsoft Excel files)
 
--   `kableExtra` (for creating beautiful tables)
+-   `crosstable` (for creating contingency tables)
+
+-   `flextable` (for exporting contingency tables)
 
 ### Loading packages
 
@@ -61,14 +63,10 @@ library(quanteda)
 library(tidyverse)
 library(readxl)
 library(writexl)
-library(kableExtra)
+library(crosstable)
+library(flextable)
 ```
 
-```{r, echo = FALSE}
-
-library(kableExtra)
-
-```
 
 ::: {.callout-note collapse="false" title="Activating libraries"}
 Whenever you start a new R session (i.e., open RStudio), your libraries
@@ -88,3 +86,36 @@ from:
 ```{r, echo = TRUE, output = FALSE, eval = FALSE}
 readxl::read_xlsx(...)
 ```
+
+### Citing packages
+
+Whenever we draw on ideas other than our own, we give credit to the respective source by citing it appropriately. The same applies to R, RStudio as well as all the packages we rely on throughout our analyses.
+
+For R, an up-to-date citation can be generated as follows:
+
+```{r}
+citation()
+```
+
+To cite a specific package, simply supply the package name as an argument.
+
+```{r}
+citation("quanteda")
+```
+
+Since it would be quite tedious to do this for every single package we've currently loaded, there are a few more elegant solutions in place.
+
+```{r}
+sessionInfo()
+```
+
+An excellent package that specialises in reporting the output of statistical analyses, including the packages used, is `report`.
+
+
+```{r}
+library(report)
+
+cite_packages()
+```
+
+

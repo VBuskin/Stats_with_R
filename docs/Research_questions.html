@@ -4632,6 +4632,17 @@ vertical-align: -.125em;
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
 
 </head>
 
@@ -4644,7 +4655,7 @@ vertical-align: -.125em;
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Conducting a corpus-linguistic study</a></li><li class="breadcrumb-item"><a href="./Research_questions.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Research questions</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Fundamentals of Corpus-based Research</a></li><li class="breadcrumb-item"><a href="./Research_questions.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Research questions</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -4681,7 +4692,7 @@ vertical-align: -.125em;
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
- <span class="menu-text">Conducting a corpus-linguistic study</span></a>
+ <span class="menu-text">Fundamentals of Corpus-based Research</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -4769,7 +4780,7 @@ vertical-align: -.125em;
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
- <span class="menu-text">Corpus linguistics with R</span></a>
+ <span class="menu-text">Corpus Linguistics with R</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -4798,7 +4809,7 @@ vertical-align: -.125em;
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
- <span class="menu-text">Descriptive statistics</span></a>
+ <span class="menu-text">Descriptive Statistics</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -4833,7 +4844,7 @@ vertical-align: -.125em;
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
- <span class="menu-text">Inferential statistics</span></a>
+ <span class="menu-text">Inferential Statistics</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -4862,7 +4873,7 @@ vertical-align: -.125em;
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
- <span class="menu-text">Machine learning</span></a>
+ <span class="menu-text">Statistical Modelling and Machine Learning</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -4903,7 +4914,7 @@ vertical-align: -.125em;
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
- <span class="menu-text">References</span></a>
+ <span class="menu-text">Multivariate Data Analysis</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -4911,8 +4922,31 @@ vertical-align: -.125em;
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./PCA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Principal Components Analysis</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./EFA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Exploratory Factor Analysis</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+ <span class="menu-text">References</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">References</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">References</span></span></a>
   </div>
 </li>
       </ul>
@@ -4932,7 +4966,7 @@ vertical-align: -.125em;
   <li><a href="#the-structure-of-research-questions" id="toc-the-structure-of-research-questions" class="nav-link" data-scroll-target="#the-structure-of-research-questions"><span class="header-section-number">2.1.1</span> The structure of research questions</a></li>
   <li><a href="#hints-for-good-research-questions" id="toc-hints-for-good-research-questions" class="nav-link" data-scroll-target="#hints-for-good-research-questions"><span class="header-section-number">2.1.2</span> Hints for good research questions</a></li>
   <li><a href="#hypotheses" id="toc-hypotheses" class="nav-link" data-scroll-target="#hypotheses"><span class="header-section-number">2.1.3</span> Hypotheses</a></li>
-  <li><a href="#practice" id="toc-practice" class="nav-link" data-scroll-target="#practice"><span class="header-section-number">2.1.4</span> Practice</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">2.1.4</span> Exercises</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/VBuskin/Stats_with_R/blob/main/Research_questions.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
@@ -4940,7 +4974,7 @@ vertical-align: -.125em;
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Conducting a corpus-linguistic study</a></li><li class="breadcrumb-item"><a href="./Research_questions.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Research questions</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Fundamentals of Corpus-based Research</a></li><li class="breadcrumb-item"><a href="./Research_questions.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Research questions</span></a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Research questions</span></h1>
 </div>
@@ -4978,26 +5012,6 @@ vertical-align: -.125em;
 <blockquote class="blockquote">
 <p>Cf. <span class="citation" data-cites="boothCraftResearch2008">Booth, Colomb, and Williams (<a href="references.html#ref-boothCraftResearch2008" role="doc-biblioref">2008</a>)</span>: 45–48</p>
 </blockquote>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Task
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Assess the following research questions!</p>
-<ol type="a">
-<li><p>I will try to find the specific linguistic features which a Shetlander uses when speaking Scottish standard English, i.e., Shetland accent in Scottish Standard English.</p></li>
-<li><p>In this paper, I am going to analyze the use of American and Indian dialect features among Indian immigrants to the US because I want to find out whether they correlate with their willingness to integrate into American society; this will show the degree to which linguistic adaptation depends on cultural orientation.</p></li>
-<li><p>In this paper, I am going to address the question of how gender influences language.</p></li>
-<li><p>The study aims to contribute to the investigation of the controversial question of the effect of speaker’s age and sex on quotative use in American English, focusing on the newer quotatives <em>be like</em>, <em>go</em>, <em>be all</em>.</p></li>
-<li><p>In this paper, adverts by Coca-Cola and Pepsi will be analyzed for the use of verb forms.</p></li>
-</ol>
-</div>
-</div>
 </section>
 <section id="hints-for-good-research-questions" class="level3" data-number="2.1.2">
 <h3 data-number="2.1.2" class="anchored" data-anchor-id="hints-for-good-research-questions"><span class="header-section-number">2.1.2</span> Hints for good research questions</h3>
@@ -5025,25 +5039,37 @@ Tip
 </section>
 <section id="hypotheses" class="level3" data-number="2.1.3">
 <h3 data-number="2.1.3" class="anchored" data-anchor-id="hypotheses"><span class="header-section-number">2.1.3</span> Hypotheses</h3>
-<p>Research questions must be complemented by a set of falsifiable hypotheses. These are covered in-depth under <code>Inferential statistics &gt; Hypothesis testing</code>. In short,</p>
+<p>Research questions must be complemented by a set of falsifiable hypotheses. These will be covered in-depth in <a href="Hypothesis_testing.html#sec-hyp" class="quarto-xref"><span>Section&nbsp;18.2</span></a>. In short,</p>
 <ul>
-<li><p><strong>Hypothesis H</strong><sub>1</sub> predicts a specific relationship between a dependent variable and an independent variable.</p></li>
-<li><p>its <strong>opposite</strong>, <strong>Hypothesis H</strong><sub>0</sub>, describes the state of affairs where the predicted relationship between the variables does not hold.</p></li>
+<li><p><strong>Hypothesis</strong> <span class="math inline">\(H_1\)</span> predicts a specific relationship between a dependent variable and an independent variable.</p></li>
+<li><p>its <strong>opposite</strong>, <strong>Hypothesis</strong> <span class="math inline">\(H_0\)</span>, describes the state of affairs where the predicted relationship between the variables does not hold.</p></li>
 </ul>
 <p>The predictions made by the hypotheses are based on previous research. Here is an example:</p>
 <p><strong>Research question</strong>: I am studying the pronunciation of [r] in New York because I want to find out whether different social groups differ with respect to their pronunciation, in order to help my readers understand how social factors influence our linguistic behavior.</p>
 <ul>
-<li><p><strong>Hypothesis H</strong><sub>1</sub>: Upper-class speakers will use postvocalic /r/ more frequently than lower-class speakers.</p></li>
-<li><p><strong>Hypothesis H</strong><sub>0</sub>: Upper-class speakers will <strong>not</strong> use postvocalic /r/ more frequently than lower-class speakers.</p></li>
+<li><p><strong>Hypothesis</strong> <span class="math inline">\(H_1\)</span>: There is a difference in the use of postvocalic /r/ between upper-class and lower-class speakers.</p></li>
+<li><p><strong>Hypothesis</strong> <span class="math inline">\(H_0\)</span>: There is <strong>no</strong> difference in the use of postvocalic /r/ between upper-class and lower-class speakers.</p></li>
 </ul>
 </section>
-<section id="practice" class="level3" data-number="2.1.4">
-<h3 data-number="2.1.4" class="anchored" data-anchor-id="practice"><span class="header-section-number">2.1.4</span> Practice</h3>
-<p><strong>Task</strong>: Develop valid research questions on the basis of the following linguistic variables:</p>
+<section id="exercises" class="level3" data-number="2.1.4">
+<h3 data-number="2.1.4" class="anchored" data-anchor-id="exercises"><span class="header-section-number">2.1.4</span> Exercises</h3>
+<div id="exr-rqs-1" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 2.1 </strong></span>Assess the following research questions!</p>
+<ol type="a">
+<li><p>I will try to find the specific linguistic features which a Shetlander uses when speaking Scottish standard English, i.e., Shetland accent in Scottish Standard English.</p></li>
+<li><p>In this paper, I am going to analyze the use of American and Indian dialect features among Indian immigrants to the US because I want to find out whether they correlate with their willingness to integrate into American society; this will show the degree to which linguistic adaptation depends on cultural orientation.</p></li>
+<li><p>In this paper, I am going to address the question of how gender influences language.</p></li>
+<li><p>The study aims to contribute to the investigation of the controversial question of the effect of speaker’s age and sex on quotative use in American English, focusing on the newer quotatives <em>be like</em>, <em>go</em>, <em>be all</em>.</p></li>
+<li><p>In this paper, adverts by Coca-Cola and Pepsi will be analyzed for the use of verb forms.</p></li>
+</ol>
+</div>
+<div id="exr-rqs-2" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 2.2 </strong></span>Develop valid research questions on the basis of the following linguistic variables:</p>
 <ol type="1">
 <li><p>Speakers in bilingual conversations are especially likely to code-switch when there is a significant change of topic.</p></li>
 <li><p>Women use more tentative language in conversations than men.</p></li>
 </ol>
+</div>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">

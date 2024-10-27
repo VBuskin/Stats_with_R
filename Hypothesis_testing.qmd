@@ -41,7 +41,7 @@ data_vowels <- read.csv("Vowels_Apache.csv", sep = "\t")
 
 ```
 
-## Hypothesis testing
+## Hypothesis testing {#sec-hyp}
 
 The first step is to define the **null hypothesis** $H_0$ and the
 **alternative hypothesis** $H_1$ (or $H_a$).
@@ -84,7 +84,7 @@ possible constellations are summarised in the table below [cf.
 @heumann_introduction_2022: 223]:
 
 |                           | $H_0$ is true                                       | $H_0$ is not true                                   |
-|---------------------------|-----------------------------------------------------|-----------------------------------------------------|
+|-----------------|---------------------------|---------------------------|
 | $H_0$ **is not rejected** | $\color{green}{\text{Correct decision}}$            | $\color{red}{\text{Type II } (\beta)\text{-error}}$ |
 | $H_0$ **is rejected**     | $\color{red}{\text{Type I } (\alpha)\text{-error}}$ | $\color{green}{\text{Correct decision}}$            |
 

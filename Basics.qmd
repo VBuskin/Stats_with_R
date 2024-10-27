@@ -17,7 +17,7 @@ editor: visual
 
 ## @barbieriOlderMenYounger2007: Older Men and Younger Women
 
-### Defining the Variable
+### Defining the variable
 
 New quotatives in American English: *be like*, *go*, *be all*:
 
@@ -27,20 +27,13 @@ New quotatives in American English: *be like*, *go*, *be all*:
 (3) "My sister’s *all* 'excuse me would you mind if I gave you, if I
     want your autograph.'"
 
-::: callout-caution
-## Task
-
-As you read through the following sections, think about **what might go
-wrong** at each stage of the study!
-:::
-
-### Reviewing Previous Research
+### Reviewing previous research
 
 -   Previous results with regard to **age**: *Be like* is known to be
     preferred by **younger speakers**.
 -   Previous results with regard to **sex** are **inconclusive**.
 
-### Research Question
+### Research question
 
 > "The study aims to contribute to the investigation of the
 > controversial question of the effect of **speaker’s age** and **sex**
@@ -61,7 +54,7 @@ wrong** at each stage of the study!
 ### Presentation of Results
 
 | Quotative   | Age group | Male use (per 100,000 words) | Female use (per 100,000 words) |
-|----------------|----------------|-------------------|---------------------|
+|------------------|------------------|------------------|-------------------|
 | **say**     | 16–26     | 115                          | 149                            |
 |             | 27–40     | 101                          | 117                            |
 |             | 41–54     | 55                           | 214                            |
@@ -126,8 +119,7 @@ ggplot(data_pct2, aes(x = Age_group, y = pct2, fill = Quotative)) +
 
 ```
 
-
-### Formulation of Results
+### Formulation of results
 
 > "In sum, the patterns of proportional use and the results of the
 > statistical analyses show that there are striking differences in the
@@ -152,3 +144,15 @@ ggplot(data_pct2, aes(x = Age_group, y = pct2, fill = Quotative)) +
 
 -   **Validity** — A study must actually address the problem formulated
     in the research question.
+
+## Exercises
+
+::: {#exr-basics-1}
+As you read through the sections above, think about **what might go
+wrong** at each stage of the study!
+:::
+
+::: {#exr-basics-2}
+Read another sociolinguistic study
+[e.g., @unuabonahCommentaryPragmaticMarkers2018]. As you read, identify similar key sections or "building blocks" used in this study (e.g., introduction, research question etc.). What purpose does each section serve in the study’s overall structure?
+:::
