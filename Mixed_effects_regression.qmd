@@ -53,7 +53,7 @@ varmorph %>%
 glimpse(varmorph2)
 ```
 
-## Multilevel models
+## Multilevel models {#sec-mer}
 
 At their core, mixed-effects models "are extensions of regression in
 which data are structured in groups and coefficients can vary by group"
@@ -92,17 +92,16 @@ Read the following (partial) description of the experiments conducted by
 Ciaccio & Veríssimo on the morphological processing of complex lexical
 items [-@ciaccioInvestigatingVariabilityMorphological2022]:
 
-> Sixty-nine intermediate to advanced non-native speakers of
-> English (54 women; 15 men) took part in the experiment
-> in exchange for payment or course credits. \[...\] The experiment
-> included 102 English monomorphemic verbs used as targets (e.g.,
-> *print*). These were preceded by their -*ed* past-tense form (e.g.,
-> *printed*) as the inflected prime, their -*er* nominalization (e.g.,
-> *printer*) as the derived prime, or by an unrelated prime. Unrelated
-> primes were dissimilar in form and meaning from their corresponding
-> targets; half of them were -*ed* inflected forms and half of them were
-> -*er* derived words.
-> [@ciaccioInvestigatingVariabilityMorphological2022: 2267]
+> Sixty-nine intermediate to advanced non-native speakers of English (54
+> women; 15 men) took part in the experiment in exchange for payment or
+> course credits. \[...\] The experiment included 102 English
+> monomorphemic verbs used as targets (e.g., *print*). These were
+> preceded by their -*ed* past-tense form (e.g., *printed*) as the
+> inflected prime, their -*er* nominalization (e.g., *printer*) as the
+> derived prime, or by an unrelated prime. Unrelated primes were
+> dissimilar in form and meaning from their corresponding targets; half
+> of them were -*ed* inflected forms and half of them were -*er* derived
+> words. [@ciaccioInvestigatingVariabilityMorphological2022: 2267]
 
 Inspect `varmorph2` and characterise its multilevel structure.
 :::

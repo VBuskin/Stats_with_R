@@ -47,9 +47,18 @@ cl.order <- read_xlsx("Paquot_Larsson_2020_data.xlsx")
 ::: {.callout-note collapse="true" title="This unit in a nutshell"}
 The chi-square test helps determine if there is a statistically
 significant association between two categorical variables. It compares
-observed frequencies (actual data) with expected frequencies (if the
-null hypothesis were true). The greater the difference, the higher the
-$\chi^2$ score, providing evidence against $H_0$
+observed frequencies (actual data) with expected frequencies (assuming
+the null hypothesis were true). The $\chi^2$ (chi-squared) score
+quantifies the difference between them for every cell in the table
+according to this simplified formula:
+
+$$
+\text{chi-squared =}\frac{(observed - expected)^2}{expected}
+$$ {#eq-chisq-simple}
+
+The greater the difference between observed and expected, the higher the
+$\chi^2$ score, the more evidence we obtain against $H_0$. We should
+always report the following three elements:
 
 -   $p$-value: Indicates significance level.
 -   $\chi^2$ score: Shows the deviation between observed and expected
@@ -78,13 +87,13 @@ chisq.test(cl.order$ORDER, cl.order$SUBORDTYPE)
 Having clearly stated our hypotheses in the previous unit, the next step
 is to compute a test statistic that indicates how strongly our data
 conforms to $H_0$. For instance, the Pearson $\chi^2$ statistic is
-commonly used for categorical variables.
+commonly used for categorical data.
 
 It requires two types of values: the **observed frequencies** $n_{ij}$
-in our data set and the **expected frequencies** $m_{ij}$, which we
-would expect to see if $H_0$ were true. The indices $i$ and $j$ uniquely
-identify the frequencies found in all column-row combinations of a
-cross-table.
+(for $1, ..., n$) in our data set and the **expected frequencies**
+$m_{ij}$ (for $1, ..., m$), which we would expect to see if $H_0$ were
+true. The indices $i$ and $j$ uniquely identify the frequencies found in
+all column-row combinations of a cross-table.
 
 ::: {.callout-note collapse="true" title="Mathematical details: The structure of a contingency table"}
 The table below represents a generic contingency table where $X$ and $Y$
@@ -100,12 +109,11 @@ row and $j$-th column.
 |     | $x_2$ | $n_{21}$ | $n_{22}$ | ... | $n_{2J}$ |     |
 | $X$ | ...   | ...      | ...      | ... | ...      |     |
 |     | $x_I$ | $n_{I1}$ | $n_{I2}$ | ... | $n_{3J}$ |     |
-
-This is really just an abstraction of the cross-tables we've computed so
-many times before.
 :::
 
-These are our observed frequencies $n_{ij}$:
+Drawing on the `cl.order` data, we can cross-tabulate the frequencies of
+`ORDER` by `SUBORDTYPE`. These correspond to our observed frequencies
+$n_{ij}$.
 
 ```{r, echo = FALSE}
 # Cross-tabulate the frequencies for the variables of interest
@@ -120,7 +128,7 @@ The expected frequencies $m_{ij}$ are calculated by
 
 $$
 m_{ij} = \frac{i\textrm{th row sum} \times j \textrm{th column sum}}{\textrm{number of observations}}.
-$$
+$$ {#eq-exp-freq}
 
 The expected frequencies for our combination of variables is shown
 below. In which cells can you see the greatest deviations between
@@ -163,17 +171,34 @@ as
 
 $$
 \chi^2 = \sum_{i=1}^{I}\sum_{i=j}^{J}{\frac{(n_{ij} - m_{ij})^2}{m_{ij}}}.
-$$
+$$ {#eq-chisq}
 :::
 
-Note, however, that this test comes with certain statistical
-assumptions. Violations of these assumptions decrease the validity of
+### Assumptions
+
+Note, however, that this test comes with certain **statistical
+assumptions**. Violations of these assumptions decrease the validity of
 the result and could, therefore, lead to wrong conclusions about
-relationships in the data.
+relationships in the data. In this case, other tests should be
+consulted.
+
+::: callout-important
+### Assumptions of the chi-squared test
 
 1.  All observations are independent of each other.
 2.  80% of the expected frequencies are $\geq$ 5.
 3.  All observed frequencies are $\geq$ 1.
+
+If assumptions 2 and 3 are violated, it is recommended to use a more
+robust test such as the Fisher's Exact Test (see `?fisher.test()` for
+details) or the log-likelihood test ($G$-test).
+
+In case of dependent observations (e.g., multiple measurements per
+participant), the default approach is to fit a multilevel model that can
+control for grouping factors (see mixed-effects regression in @sec-mer.)
+:::
+
+### Implementation in R
 
 In R, conducting this test is a simple one-liner:
 
@@ -191,13 +216,7 @@ we can also access. They appear to be all right:
 freqs_test$expected
 ```
 
-::: callout-important
-If the data does not meet the (expected) frequency requirements for the
-$\chi^2$-test, the Fisher's Exact Test is a viable alternative (see
-`?fisher.test()` for details).
-:::
-
-## Workflow in R
+## Typical workflow
 
 ### Define hypotheses
 
@@ -210,7 +229,6 @@ $\chi^2$-test, the Fisher's Exact Test is a viable alternative (see
 
 ```{r}
 # Cross-tabulate the frequencies for the variables of interest
-
 freqs <- table(cl.order$ORDER, cl.order$SUBORDTYPE)
 
 freqs ## Assumption met: all observed freqs => 1
@@ -220,11 +238,9 @@ freqs ## Assumption met: all observed freqs => 1
 
 ```{r}
 # Run a chis-quared test on the absolute frequencies and print the results
-
 test <- chisq.test(freqs, correct = FALSE)
 
 # Inspect expected frequencies
-
 test$expected # Assumption met: all expected frequences => 5
 
 ```
@@ -233,25 +249,15 @@ test$expected # Assumption met: all expected frequences => 5
 The sample-size independent effect size measure **Cramer's *V***
 ($\phi$) is defined as
 
-$$V = \sqrt{\frac{\chi^2}{N \times df}}.$$ The outcome varies between
-$0$ (= no correlation) and $1$ (= perfect correlation); cf. also Gries
-[-@gries_statistics_2013: 186].
+$$V = \sqrt{\frac{\chi^2}{N \times df}}.
+$$ {#eq-cramer-v}
+
+The outcome varies between $0$ (= no correlation) and $1$ (= perfect
+correlation); cf. also Gries [-@gries_statistics_2013: 186].
 
 ```{r, echo = TRUE, output = TRUE}
 #| code-fold: true
 # Compute Cramer's V
-
-## By hand:
-
-# Given chi-squared statistic
-chi_squared <- unname(test$statistic)
-
-# Total number of observations
-total_obs <- sum(freqs)
-
-sqrt(chi_squared / total_obs * (min(dim(freqs)) - 1))
-
-## Automatically:
 library("confintr") # Load library
 
 cramersv(test)

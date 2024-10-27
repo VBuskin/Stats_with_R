@@ -1,9 +1,9 @@
 ---
-title: "Distributions"
+title: "Probability distributions"
 author: Vladimir Buskin
 format:
   html:
-    self-contained: false
+    self-contained: true
     theme: default
     toc: true
     number-sections: true
@@ -27,7 +27,9 @@ library("ggthemes")
 
 ```
 
-## The normal distribution
+## Continuous distributions
+
+### The normal distribution
 
 A great number of numerical variables in the world follow the well-known
 **normal** (or Gaussian) **distribution**, which includes test scores,
@@ -82,6 +84,8 @@ ggplot(plot_data, aes(x = x, y = y)) +
   theme_minimal()
 
 ```
+
+## Discrete distributions
 
 ### Bernoulli distribution
 

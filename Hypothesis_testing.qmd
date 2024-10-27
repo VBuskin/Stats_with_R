@@ -20,23 +20,25 @@ bibliography: R.bib
 ## Preparation
 
 ```{r, echo = FALSE, include = FALSE}
-library("readxl")
-library("tidyverse")
+library(readxl)
+library(tidyverse)
 ```
 
 -   Load packages:
 
 ```{r, echo = TRUE, eval = FALSE}
-library("readxl")
-library("tidyverse")
+library(readxl)
+library(tidyverse)
 ```
 
 -   Load the data sets:
 
 ```{r, echo = TRUE, output = TRUE, warning = FALSE, message = FALSE}
 
+# Clause order data
 data <- read_xlsx("Paquot_Larsson_2020_data.xlsx")
 
+# Data on vowel frequencies
 data_vowels <- read.csv("Vowels_Apache.csv", sep = "\t")
 
 ```
@@ -53,7 +55,7 @@ describes the "default state of the world" [@james_introduction_2021:
 alternative hypothesis $H_1$ states that $X$ and $Y$ are **not**
 independent, i.e., that $H_0$ does not hold.
 
-In this unit, we will consider two scenarios:
+In the subsequent sections, we will consider two scenarios:
 
 1.  We are interested in finding out whether English clause `ORDER`
     ('sc-mc' or 'mc-sc') depends on the type of the subordinate clause
@@ -84,7 +86,7 @@ possible constellations are summarised in the table below [cf.
 @heumann_introduction_2022: 223]:
 
 |                           | $H_0$ is true                                       | $H_0$ is not true                                   |
-|-----------------|---------------------------|---------------------------|
+|------------------|---------------------------|---------------------------|
 | $H_0$ **is not rejected** | $\color{green}{\text{Correct decision}}$            | $\color{red}{\text{Type II } (\beta)\text{-error}}$ |
 | $H_0$ **is rejected**     | $\color{red}{\text{Type I } (\alpha)\text{-error}}$ | $\color{green}{\text{Correct decision}}$            |
 
