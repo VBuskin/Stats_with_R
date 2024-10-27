@@ -257,7 +257,7 @@
     "href": "Data_frames.html#exercises",
     "title": "8  Data frames",
     "section": "8.4 Exercises",
-    "text": "8.4 Exercises\n\n\n\n\n\n\nSolutions\n\n\n\nYou can find the solutions to the exercises here.\n\n\n\nExercise 8.1 Recreate the barplot from the previous unit by subsetting the data variable accordingly.\n\n\nExercise 8.2 Print the following elements by subsetting the data frame data accordingly.\n\n337\nbegin\nenjoy\nenjoy 139\nthe entire frequency column\n\n\n\nExercise 8.3 Extension of Exercise 7.3. Verify that the following verbs are represented in the lemma column: enjoy, hit, find, begin. If they are in the data frame, print their frequency information.\n\n\n\n\n\nWinter, Bodo. 2020. Statistics for Linguists: An Introduction Using r. New York; London: Routledge.",
+    "text": "8.4 Exercises\n\n\n\n\n\n\nSolutions\n\n\n\nYou can find the solutions to the exercises here.\n\n\n\nExercise 8.1 Recreate the barplot from the previous unit by subsetting the data variable accordingly.\n\n\nExercise 8.2 Print the following elements by subsetting the data frame data accordingly.\n\n337\nbegin\nenjoy\nenjoy 139\nthe entire frequency column\n\n\n\nExercise 8.3 Extension of Exercise 7.3. Verify that the following verbs are represented in the lemma column: enjoy, hit, find, begin. If they are in the data frame, print their frequency information.\n\n\nExercise 8.4 Extension of Exercise 7.4. Use which() to find the rows where the frequency is greater than 200, and then print the lemma and frequency of only those rows.\n\n\n\n\n\nWinter, Bodo. 2020. Statistics for Linguists: An Introduction Using r. New York; London: Routledge.",
     "crumbs": [
       "Introduction to R",
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>Data frames</span>"
@@ -1247,7 +1247,7 @@
     "href": "Data_frames.html#preparation",
     "title": "8  Data frames",
     "section": "8.1 Preparation",
-    "text": "8.1 Preparation\n\n\n\n\n\n\nScript\n\n\n\nYou can find the full R script associated with this unit …",
+    "text": "8.1 Preparation\n\n\n\n\n\n\nScript\n\n\n\nYou can find the full R script associated with this unit here.",
     "crumbs": [
       "Introduction to R",
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>Data frames</span>"

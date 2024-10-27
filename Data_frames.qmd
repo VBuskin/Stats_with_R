@@ -20,7 +20,8 @@ editor: visual
 ::: callout-tip
 ## Script
 
-You can find the full R script associated with this unit ...
+You can find the full R script associated with this unit
+[here](https://osf.io/xh962).
 :::
 
 ## Recommended reading
@@ -206,8 +207,8 @@ filter(data2, lemma == "start" | lemma == "help")
 
 ```
 
-A extensive guide to the main tidyverse functions is provided in Chapter
-3 of the free eBook [R For Data Science (2nd
+A extensive guide to the main `tidyverse` functions is provided in
+Chapter 3 of the free eBook [R For Data Science (2nd
 edition)](https://r4ds.hadley.nz).
 
 ## Exercises
@@ -216,7 +217,7 @@ edition)](https://r4ds.hadley.nz).
 ## Solutions
 
 You can find the solutions to the exercises
-[here](https://osf.io/967hj).
+[here](https://osf.io/vpjfu).
 :::
 
 ::: {#exr-df-1}
@@ -237,11 +238,16 @@ accordingly.
 -   *enjoy* 139
 
 -   the entire frequency column
-
 :::
 
 ::: {#exr-df-3}
 Extension of @exr-v-3. Verify that the following verbs are represented
 in the lemma column: *enjoy*, *hit*, *find*, *begin*. If they are in the
 data frame, print their frequency information.
+:::
+
+::: {#exr-df-4}
+Extension of @exr-v-4. Use `which()` to find the rows where the
+frequency is greater than 200, and then print the lemma and frequency of
+only those rows.
 :::
