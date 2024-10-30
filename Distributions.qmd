@@ -33,17 +33,11 @@ library("ggthemes")
 
 A great number of numerical variables in the world follow the well-known
 **normal** (or Gaussian) **distribution**, which includes test scores,
-weight and height, among many others.
-
-If a random variable $X$ is normally distributed, it is determined by
-the parameters $\mu$ (the mean) and $\sigma$ (the standard deviation).
-Formally, we can summarise this using the notation
-
-$$ X \sim N(\mu, \sigma^2).$$ The **probability density function (PDF)**
-of the normal distribution has a characteristic bell-shape. The density
-values on the $y$-axis indicate the likelihood of encountering a
-specific value of $X$ [cf. @winter_statistics_2020: 56;
-@heumann_introduction_2022: 173-177].
+weight and height, among many others. The plot below illustrates its
+characteristic bell-shape: Most observations are in the middle, with
+considerably fewer near the fringes. For example, most people are rather
+"average" in height; there are only few people that are extremely short
+or extremely tall.
 
 ```{r, echo = FALSE, output = TRUE, warning = FALSE, message = FALSE}
 
@@ -56,34 +50,138 @@ mean_val <- mean(data)
 sd_val <- sd(data)
 
 # Step 3: Create a data frame for plotting
-x_values <- seq(mean_val - 3*sd_val, mean_val + 3*sd_val, length.out = 1000)
+x_values <- seq(mean_val - 4*sd_val, mean_val + 4*sd_val, length.out = 1000)
 y_values <- dnorm(x_values, mean = mean_val, sd = sd_val)
 plot_data <- data.frame(x = x_values, y = y_values)
 
-# Step 4: Plot the normal distribution curve
-#ggplot(plot_data, aes(x = x, y = y)) +
- # geom_line() +
-  #labs(title = "Normal Distribution",
-   #    x = "X",
-    #   y = "Density")
-
-# Step 5: Add markers at mean, mean +/- 1 SD, mean +/- 2 SD, and mean +/- 3 SD
+#Step 4: Plot the normal distribution curve
 ggplot(plot_data, aes(x = x, y = y)) +
   geom_line() +
-  geom_vline(xintercept = c(mean_val - 3*sd_val, mean_val - 2*sd_val, mean_val - sd_val, mean_val, mean_val + sd_val, mean_val + 2*sd_val, mean_val + 3*sd_val), color = "darkgreen", linetype = "dashed") +
-  geom_text(aes(x = mean_val - 3*sd_val, label = "-3 SD"), y = 0.1, vjust = -0.5) +
-  geom_text(aes(x = mean_val - 2*sd_val, label = "-2 SD"), y = 0.1, vjust = -0.5) +
-  geom_text(aes(x = mean_val - sd_val, label = "-1 SD"), y = 0.1, vjust = -0.5) +
-  geom_text(aes(x = mean_val, label = "Mean"), y = 0.1, vjust = -0.5) +
-  geom_text(aes(x = mean_val + sd_val, label = "+1 SD"), y = 0.1, vjust = -0.5) +
-  geom_text(aes(x = mean_val + 2*sd_val, label = "+2 SD"), y = 0.1, vjust = -0.5) +
-  geom_text(aes(x = mean_val + 3*sd_val, label = "+3 SD"), y = 0.1, vjust = -0.5) +
+  geom_hline(yintercept = 0) +
   labs(title = "Normal Distribution",
        x = "X",
        y = "Density") +
   theme_minimal()
 
 ```
+
+The normal distribution is typically described in terms of two
+parameters: The population mean $\mu$ and the population standard
+deviation $\sigma$. If a random variable $X$ is normally distributed, we
+typically use the notation in @eq-normdistrib.
+
+$$ X \sim N(\mu, \sigma^2).
+$$ {#eq-normdistrib}
+
+The Gaussian bell curve has several interesting properties:
+
+-   68% all values fall within one standard deviation of the mean,
+
+-   95% within two, and
+
+-   99.7% within three.
+
+Below, you can see the annotated **probability density function (PDF)**
+of the normal distribution. The $y$-axis indicates the density of
+population values; note that since the Gaussian distribution is a
+continuous distribution, the probability of any given value is 0. We can
+only obtain probabilities for **intervals** of values, which are given
+by
+
+$$
+P(a \leq X \leq b) = \int_a^b f(x)dx.
+$$ {#eq-norm-prob}
+
+
+
+```{r, echo = FALSE, output = TRUE, warning = FALSE, message = FALSE}
+# Load required libraries
+library(ggplot2)
+
+# Step 1: Generate data from a normal distribution
+set.seed(123)
+data <- rnorm(1000, mean = 0, sd = 1)
+
+# Step 2: Calculate mean and standard deviation
+mean_val <- mean(data)
+sd_val <- sd(data)
+
+# Step 3: Create a data frame for plotting
+x_values <- seq(mean_val - 4*sd_val, mean_val + 4*sd_val, length.out = 1000)
+y_values <- dnorm(x_values, mean = mean_val, sd = sd_val)
+plot_data <- data.frame(x = x_values, y = y_values)
+
+# Create breaks and labels for x-axis
+x_breaks <- c(-3, -2, -1, 0, 1, 2, 3)
+x_labels <- c("μ-3σ", "μ-2σ", "μ-σ", "μ = 0", "μ+σ", "μ+2σ", "μ+3σ")
+
+# Step 4: Create the plot with multiple layers
+ggplot(plot_data, aes(x = x, y = y)) +
+  # Add shaded areas for standard deviations
+  stat_function(
+    fun = dnorm,
+    args = list(mean = mean_val, sd = sd_val),
+    xlim = c(mean_val - 3*sd_val, mean_val + 3*sd_val),
+    geom = "area",
+    fill = "#E3F2FD",
+    alpha = 0.3
+  ) +
+  stat_function(
+    fun = dnorm,
+    args = list(mean = mean_val, sd = sd_val),
+    xlim = c(mean_val - 2*sd_val, mean_val + 2*sd_val),
+    geom = "area",
+    fill = "#90CAF9",
+    alpha = 0.3
+  ) +
+  stat_function(
+    fun = dnorm,
+    args = list(mean = mean_val, sd = sd_val),
+    xlim = c(mean_val - sd_val, mean_val + sd_val),
+    geom = "area",
+    fill = "#2196F3",
+    alpha = 0.3
+  ) +
+  # Add the normal distribution curve
+  geom_line() +
+  # Add vertical line for mean
+  geom_vline(xintercept = 0, color = "red", linetype = "dashed") +
+  # Add legend annotations
+  annotate("text", x = 2, y = 0.35, label = "68.2% (μ ± 1σ)", hjust = 0) +
+  annotate("text", x = 2, y = 0.32, label = "95.4% (μ ± 2σ)", hjust = 0) +
+  annotate("text", x = 2, y = 0.29, label = "99.7% (μ ± 3σ)", hjust = 0) +
+  # Customize the theme and labels
+  labs(
+    title = "Normal Distribution with Mean μ = 0",
+    x = "X",
+    y = "Density"
+  ) +
+  theme_classic() +
+  theme(
+    plot.title = element_text(hjust = 0),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.background = element_blank(),
+    plot.background = element_blank(),
+    axis.text.x = element_text(size = 10),  # Show x-axis text
+    axis.ticks.length.x = unit(3, "mm")     # Longer tick marks
+  ) +
+  # Set appropriate axis limits
+  coord_cartesian(xlim = c(-4, 4), ylim = c(0, 0.4)) +
+  # Add custom breaks and labels
+  scale_x_continuous(breaks = x_breaks, labels = x_labels) +
+  scale_y_continuous(expand = c(0, 0), limits = c(0, 1))
+  
+
+```
+
+We can find the population mean of $X$ with a PDF $f(x)$ via
+
+$$
+E(X) = \mu = \int_x xf(x)dx,
+$$ {#eq-norm-mean}
+
+where $E(X)$ denotes the expected value of $X$, i.e., the mean. Essentially,  multiplying every value $x$ by its respective probability density $f(x)$ and integrating over all possible values of $x$ will return $E(X) = \mu$.
 
 ## Discrete distributions
 
