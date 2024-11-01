@@ -155,7 +155,7 @@ Once the figure has appeared in your "Plots" panel, you can click on
 "Export" in the menu bar below and proceed to choose the desired output
 format and file directory.
 
-### Essential R concepts
+### Essential R concepts {#sec-vectors}
 
 The example above demonstrates one of the most important data structures
 in R: **vectors**. They form the cornerstone of various more complex
