@@ -57,10 +57,10 @@ how social factors influence our linguistic behavior.
 ### Hypotheses
 
 Research questions must be complemented by a set of falsifiable
-hypotheses. These will be covered in-depth in @sec-hyp. In short,
+hypotheses. These will be covered in-depth in the chapter on [hypothesis testing](Hypothesis_testing.qmd). In short,
 
 -   **Hypothesis** $H_1$ predicts a specific relationship between a
-    dependent variable and an independent variable.
+    dependent variable and an independent variable. If $H_1$ holds, studies often speak of a correlation (or association) between variables.
 
 -   its **opposite**, **Hypothesis** $H_0$, describes the state of
     affairs where the predicted relationship between the variables does
@@ -74,9 +74,11 @@ York because I want to find out whether different social groups differ
 with respect to their pronunciation, in order to help my readers
 understand how social factors influence our linguistic behavior.
 
--   **Hypothesis** $H_1$: There is a difference in the use of postvocalic /r/ between upper-class and lower-class speakers.
+-   **Hypothesis** $H_1$: There is a difference in the use of
+    postvocalic /r/ between upper-class and lower-class speakers.
 
--   **Hypothesis** $H_0$:  There is **no** difference in the use of postvocalic /r/ between upper-class and lower-class speakers.
+-   **Hypothesis** $H_0$: There is **no** difference in the use of
+    postvocalic /r/ between upper-class and lower-class speakers.
 
 ### Exercises
 

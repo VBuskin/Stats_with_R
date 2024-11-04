@@ -27,6 +27,14 @@ library("ggthemes")
 
 ```
 
+## Suggested reading
+
+> @baguleySeriousStatsGuide2012: Chapter 2
+>
+> @agrestiFoundationsStatisticsData2022: Chapter 2
+>
+> @heumann_introduction_2022: Chapter 8
+
 ## Continuous distributions
 
 ### The normal distribution
@@ -91,8 +99,6 @@ by
 $$
 P(a \leq X \leq b) = \int_a^b f(x)dx.
 $$ {#eq-norm-prob}
-
-
 
 ```{r, echo = FALSE, output = TRUE, warning = FALSE, message = FALSE}
 # Load required libraries
@@ -181,7 +187,10 @@ $$
 E(X) = \mu = \int_x xf(x)dx,
 $$ {#eq-norm-mean}
 
-where $E(X)$ denotes the expected value of $X$, i.e., the mean. Essentially,  multiplying every value $x$ by its respective probability density $f(x)$ and integrating over all possible values of $x$ will return $E(X) = \mu$.
+where $E(X)$ denotes the expected value of $X$, i.e., the mean.
+Essentially, multiplying every value $x$ by its respective probability
+density $f(x)$ and integrating over all possible values of $x$ will
+return $E(X) = \mu$.
 
 ## Discrete distributions
 
@@ -231,15 +240,130 @@ ggplot(bernoulli_data, aes(x = factor(outcome), y = probability)) +
 
 ```
 
-::: callout-note
-### Extensions
+### Binomial Distribution
 
-A Bernoulli experiment presupposes a single trial (e.g., tossing a coin
-once). If we are interested in the distribution of a binary discrete
-variable over $n$ Bernoulli trials, we can describe it in terms of the
-**binomial distribution** [@heumann_introduction_2022: 163-166].
+The **binomial distribution** models the number of successes in $n$
+independent Bernoulli trials, each with probability $p$ of success. If a
+random variable $X$ follows a binomial distribution with parameters $n$
+and $p$, we write:
 
-Categorical variables with more than 2 outcomes and $n$ Bernoulli trials
-can be modelled using the **multinomial distribution**
-[@heumann_introduction_2022: 167-169].
-:::
+$$ X \sim Binomial(n,p) $$
+
+The **probability mass function (PMF)** for the binomial distribution
+is:
+
+$$ P(X = k) = \binom{n}{k} p^k (1-p)^{n-k} $$
+
+where:
+
+-   $n$ is the number of trials
+-   $k$ is the number of successes $(0 \leq k \leq n)$
+-   $p$ is the probability of success on each trial $(0 \leq p \leq 1)$
+-   $\binom{n}{k}$ is the binomial coefficient ("n choose k")
+
+### Multinomial Distribution
+
+The **multinomial distribution** is a generalisation of the binomial
+distribution to the case where each trial has $k$ possible outcomes
+(rather than just two). If a random variable
+$\mathbf{X} = (X_1,...,X_k)$ follows a multinomial distribution, we
+write:
+
+$$ \mathbf{X} \sim Multinomial(n,\mathbf{p}) $$
+
+The **probability mass function (PMF)** for the multinomial distribution
+is:
+
+$$ P(\mathbf{X} = \mathbf{x}) = \frac{n!}{x_1!x_2!...x_k!} p_1^{x_1}p_2^{x_2}...p_k^{x_k} $$
+
+where:
+
+-   $n$ is the number of trials
+
+-   $\mathbf{x} = (x_1,...,x_k)$ represents the number of occurrences of
+    each outcome
+
+-   $\mathbf{p} = (p_1,...,p_k)$ represents the probabilities of each
+    outcome
+
+-   $\sum_{i=1}^k x_i = n$ and $\sum_{i=1}^k p_i = 1$
+
+## Sampling Distributions
+
+Sampling distributions describe the distribution of statistics
+calculated from repeated random samples. Here are the most common ones:
+
+### Chi-squared Distribution
+
+The **chi-squared distribution** with $k$ degrees of freedom, denoted
+$\chi^2(k)$, is the distribution of the sum of squares of $k$
+independent standard normal random variables. Its **probability density
+function (PDF)** is:
+
+$$ f(x) = \frac{x^{k/2-1}e^{-x/2}}{2^{k/2}\Gamma(k/2)} $$
+
+where:
+
+-   $x > 0$
+
+-   $k$ is the degrees of freedom
+
+-   $\Gamma$ is the gamma function
+
+### Student's t-Distribution
+
+The **Student's t-distribution** with $\nu$ degrees of freedom has the
+following **PDF**:
+
+$$ f(x) = \frac{\Gamma(\frac{\nu+1}{2})}{\sqrt{\nu\pi}\Gamma(\frac{\nu}{2})}\left(1+\frac{x^2}{\nu}\right)^{-\frac{\nu+1}{2}} $$
+
+where:
+
+-   $-\infty < x < \infty$
+
+-   $\nu > 0$ is the degrees of freedom
+
+-   $\Gamma$ is the gamma function
+
+Key properties:
+
+-   As $\nu \to \infty$, the t-distribution approaches the standard
+    normal distribution
+
+-   The distribution is symmetric about 0
+
+-   The variance is $\frac{\nu}{\nu-2}$ for $\nu > 2$
+
+### F-Distribution
+
+The **F-distribution** with parameters $d_1$ and $d_2$ (degrees of
+freedom) has the following **PDF**:
+
+$$ f(x) = \frac{\sqrt{\frac{(d_1x)^{d_1}d_2^{d_2}}{(d_1x+d_2)^{d_1+d_2}}}}{x\beta(\frac{d_1}{2},\frac{d_2}{2})} $$
+
+where:
+
+-   $x > 0$
+
+-   $d_1, d_2 > 0$ are the degrees of freedom
+
+-   $\beta$ is the beta function
+
+The F-distribution is commonly used in:
+
+-   Analysis of Variance (ANOVA)
+
+-   Testing equality of variances
+
+-   Model comparison in regression analysis
+
+Each of these sampling distributions plays a crucial role in statistical
+inference:
+
+-   Chi-squared: Used for goodness-of-fit tests and tests of
+    independence
+
+-   t-distribution: Used for inference about means when population
+    variance is unknown
+
+-   F-distribution: Used for comparing variances and in ANOVA procedures

@@ -17,43 +17,40 @@ editor: visual
 bibliography: R.bib
 ---
 
-## Preparation
+## Suggested reading
 
-```{r, echo = FALSE, include = FALSE}
-library(readxl)
-library(tidyverse)
-```
+For linguists:
 
--   Load packages:
+> @gries_statistics_2021: Chapter 1.3.2
 
-```{r, echo = TRUE, eval = FALSE}
-library(readxl)
-library(tidyverse)
-```
+General:
 
--   Load the data sets:
-
-```{r, echo = TRUE, output = TRUE, warning = FALSE, message = FALSE}
-
-# Clause order data
-data <- read_xlsx("Paquot_Larsson_2020_data.xlsx")
-
-# Data on vowel frequencies
-data_vowels <- read.csv("Vowels_Apache.csv", sep = "\t")
-
-```
+> @baguleySeriousStatsGuide2012: Chapter 4
+>
+> @agrestiFoundationsStatisticsData2022: Chapter 5
 
 ## Hypothesis testing {#sec-hyp}
 
-The first step is to define the **null hypothesis** $H_0$ and the
-**alternative hypothesis** $H_1$ (or $H_a$).
+The null hypothesis significance testing (NHST) framework offers
+researchers a convenient way of testing theoretical assumptions about a
+population of interest (e.g., a speech community). This involves setting
+up a set of falsifiable statistical hypotheses that predict the presence
+or absence of certain patterns in the data. These are known as the
+**null hypothesis** $H_0$ and the **alternative hypothesis** $H_1$ (or
+$H_a$). They are set up **before** seeing the data and justified by
+previous research.
 
-Given two categorical variables $X$ and $Y$, we assume under $H_0$ that
-both variables are independent from each other. This hypothesis
-describes the "default state of the world" [@james_introduction_2021:
-555], i.e., what we would usually expect to see. By contrast, the
-alternative hypothesis $H_1$ states that $X$ and $Y$ are **not**
-independent, i.e., that $H_0$ does not hold.
+-   Given two categorical variables $X$ and $Y$, we assume under $H_0$
+    that both variables are independent from each other. This hypothesis
+    describes the "default state of the world"
+    [@james_introduction_2021: 555], i.e., what we would usually expect
+    to see. There is no association between the variables of interest
+    and, therefore, no effect.
+
+-   By contrast, the alternative hypothesis $H_1$ claims that $X$ and
+    $Y$ are **not** independent, i.e., that $H_0$ does not hold. $X$ and
+    $Y$ then appear to be correlated in some way, i.e., there is some
+    kind of effect.
 
 In the subsequent sections, we will consider two scenarios:
 
@@ -86,29 +83,38 @@ possible constellations are summarised in the table below [cf.
 @heumann_introduction_2022: 223]:
 
 |                           | $H_0$ is true                                       | $H_0$ is not true                                   |
-|------------------|---------------------------|---------------------------|
+|-------------------|---------------------------|---------------------------|
 | $H_0$ **is not rejected** | $\color{green}{\text{Correct decision}}$            | $\color{red}{\text{Type II } (\beta)\text{-error}}$ |
 | $H_0$ **is rejected**     | $\color{red}{\text{Type I } (\alpha)\text{-error}}$ | $\color{green}{\text{Correct decision}}$            |
 
 The probability of a Type I error, which refers to the rejection of
 $H_0$ although it is true, is called the **significance level**
 $\alpha$, which has a conventional value of $0.05$ (i.e., a 5% chance of
-committing a Type I error).
+committing a Type I error). Nevertheless, it is always recommended to
+state explicitly the $\alpha$-level used for rejecting/accepting $H_0$.
 
 ## Constructing the critical region
 
 An important question remains: How great should the difference be for us
 to reject $H_0$? The $p$-value measures **the probability of
-encountering a specific value of a test statistic** under the assumption
-that $H_0$ holds. For example, a $p$-value of $0.02$ means that we would
-see a particular $\chi^2$-score (or $T$, $F$ etc.) only 2% of the time
-if $X$ and $Y$ were unrelated (or if there was no difference between
-$\bar{x}$ and $\bar{y}$, respectively). Since our significance level
-$\alpha$ is set to $0.05$, we only reject the null hypothesis if this
-probability is lower than 5%.
+encountering a specific value of a test statistic** ($\chi^2$-score, $t$, $F$ etc.) on the condition that $H_0$ is true.
+
+::: callout-note
+## A more precise definition of $p$-values
+
+"The $P$-value is the probability, presuming that $H_0$ is true, that
+the test statistic equals the observed value or a value even more
+extreme in the direction predicted by $H_a$ [@agrestiFoundationsStatisticsData2022: 163]".
+:::
+
+For example, a $p$-value of $0.02$ means that we would see a particular
+test statistic only 2% of the time if $X$ and $Y$
+were unrelated (or if there was no difference between $\bar{x}$ and
+$\bar{y}$, respectively). Since our significance level $\alpha$ is set
+to $0.05$, we only reject the null hypothesis if this conditional probability is lower than 5%.
 
 We obtain $p$-values by consulting the probability density functions of
-the underlying distributions:
+the underlying sampling distributions:
 
 -   Probability density function for the $\chi^2$-distribution with
     $df = 1$
