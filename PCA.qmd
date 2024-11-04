@@ -126,24 +126,48 @@ even more so if the number of variables were to increase further.
 **Principal Components Analysis** offers a technique to break down a
 high-dimensional dataset into a much smaller set of "meta-variables",
 i.e., **principle components** (PCs) which capture the bulk of the
-variance in the data. This is also known as **dimension reduction**, which allows researchers to see overarching
-patterns in the data and re-use the output for further analysis (e.g.,
-clustering or predictive modelling).
+variance in the data. This is also known as **dimension reduction**,
+which allows researchers to see overarching patterns in the data and
+re-use the output for further analysis (e.g., clustering or predictive
+modelling).
 
 ## Basics of PCA
 
 PCA "repackages" large sets of variables by forming uncorrelated linear
-combinations of them, yielding $k$ principal components $Z_k$ (PCs hf.) of the
-dataset (for $k \in \{1, ..., K\}$). PCs are ordered such that the first PC explains the most variance in the data, with each subsequent PC explaining the maximum remaining variance while being uncorrelated with previous PCs. 
+combinations of them, yielding $k$ principal components $Z_1, ..., Z_k$
+(PCs hf.) of the dataset (for $1, ..., k$). PCs are ordered such that
+the first PC explains the most variance in the data, with each
+subsequent PC explaining the maximum remaining variance while being
+uncorrelated with previous PCs.
 
 Each PC comprises a set of **loadings** (or **weights**) $w_{nm}$, which
 are comparable to the coefficients of regression equations. For
 instance, the first PC has the general form shown in @eq-pca, where
 $x_m$ stand for continuous input variables in the $n \times m$ data
-matrix.
+matrix $\mathbf{X}$.
 
 $$
-Z_1 = w_{11}x_{1} + w_{21}x_{2} + \dots + w_{m1}x_{m}
+Z_{1} = w_{11}
+\begin{pmatrix}
+x_{11} \\
+x_{21} \\
+\vdots \\
+x_{n1}
+\end{pmatrix}
++ w_{21}
+\begin{pmatrix}
+x_{12} \\
+x_{22} \\
+\vdots \\
+x_{n2}
+\end{pmatrix}
++ \dots + w_{m1}
+\begin{pmatrix}
+x_{1m} \\
+x_{2m} \\
+\vdots \\
+x_{nm}
+\end{pmatrix}
 $$ {#eq-pca}
 
 If a feature positively loads on a principal component (i.e., $w > 0$),
@@ -152,7 +176,6 @@ principal component also increases. The magnitude of $w$ indicates the
 strength of this relationship. Conversely, negative loadings ($w < 0$)
 indicate that as the feature value increases, the PC score decreases as
 well.
-
 
 ::: {.callout-note collapse="true" title="How do we find PCs?"}
 PCs are identified using common techniques from matrix algebra, namely
