@@ -5230,7 +5230,7 @@ border: 0;
   <li><a href="#saving-your-output" id="toc-saving-your-output" class="nav-link" data-scroll-target="#saving-your-output"><span class="header-section-number">11.3.5</span> Saving your output</a></li>
   </ul></li>
   <li><a href="#characterising-the-output" id="toc-characterising-the-output" class="nav-link" data-scroll-target="#characterising-the-output"><span class="header-section-number">11.4</span> Characterising the output</a></li>
-  <li><a href="#i-want-a-proper-user-interface-using-the-quantedaapp" id="toc-i-want-a-proper-user-interface-using-the-quantedaapp" class="nav-link" data-scroll-target="#i-want-a-proper-user-interface-using-the-quantedaapp"><span class="header-section-number">11.5</span> “I want a proper user interface”: Using the <code>QuantedaApp</code></a></li>
+  <li><a href="#i-need-a-proper-user-interface-some-alternatives" id="toc-i-need-a-proper-user-interface-some-alternatives" class="nav-link" data-scroll-target="#i-need-a-proper-user-interface-some-alternatives"><span class="header-section-number">11.5</span> “I need a proper user interface”: Some alternatives</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/VBuskin/Stats_with_R/blob/main/Concordancing.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
     </div>
@@ -5887,17 +5887,31 @@ drink   eat sleep
 </div>
 </div>
 </section>
-<section id="i-want-a-proper-user-interface-using-the-quantedaapp" class="level2" data-number="11.5">
-<h2 data-number="11.5" class="anchored" data-anchor-id="i-want-a-proper-user-interface-using-the-quantedaapp"><span class="header-section-number">11.5</span> “I want a proper user interface”: Using the <code>QuantedaApp</code></h2>
-<p>This app provides a user-friendly GUI for <code>quanteda</code>. Installation and usage instructions are available in this <a href="https://github.com/VBuskin/quanteda_app">GitHub repository</a>.</p>
+<section id="i-need-a-proper-user-interface-some-alternatives" class="level2" data-number="11.5">
+<h2 data-number="11.5" class="anchored" data-anchor-id="i-need-a-proper-user-interface-some-alternatives"><span class="header-section-number">11.5</span> “I need a proper user interface”: Some alternatives</h2>
+<p>There is a wide variety of concordancing software available, both free and paid. Among the most popular options are AntConc <span class="citation" data-cites="anthony_antconc_2020">(<a href="references.html#ref-anthony_antconc_2020" role="doc-biblioref">Anthony 2020</a>)</span> and SketchEngine <span class="citation" data-cites="Kilgarriff2004">(<a href="references.html#ref-Kilgarriff2004" role="doc-biblioref">Kilgarriff et al. 2004</a>)</span>. However, as Schweinberger <span class="citation" data-cites="schweinberger2024kwics">(<a href="references.html#ref-schweinberger2024kwics" role="doc-biblioref">2024</a>)</span> notes, the exact processes these tools use to generate output are not always fully transparent, making them something of a “black box.” In contrast, programming languages like R or Python allow researchers to document each step of their analysis clearly, providing full transparency from start to finish.</p>
+<p>The following apps attempt to reconcile the need for an intuitive user interface with transparent data handling. The full source code is documented in the respective GitHub repositories.</p>
+<ul>
+<li><p><a href="https://github.com/VBuskin/quanteda_app"><code>QuantedaApp</code></a> is an interface for the R package <code>quanteda</code> <span class="citation" data-cites="quantedapkg">(<a href="references.html#ref-quantedapkg" role="doc-biblioref">Benoit et al. 2018</a>)</span>.</p></li>
+<li><p><a href="https://github.com/VBuskin/PyConc"><code>PyConc</code></a> is an interface for the Python package <code>spaCy</code> <span class="citation" data-cites="spacy2">(<a href="references.html#ref-spacy2" role="doc-biblioref">Honnibal and Montani 2017</a>)</span>.</p></li>
+</ul>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-anthony_antconc_2020" class="csl-entry" role="listitem">
+Anthony, Lawrence. 2020. <em><span>AntConc</span> (Version 3.5.9)</em>. Tokyo, Japan: Waseda University. <a href="https://www.laurenceanthony.net/software">https://www.laurenceanthony.net/software</a>.
+</div>
 <div id="ref-quantedapkg" class="csl-entry" role="listitem">
 Benoit, Kenneth, Kohei Watanabe, Haiyan Wang, Paul Nulty, Adam Obeng, Stefan Müller, and Akitaka Matsuo. 2018. <span>“Quanteda: An r Package for the Quantitative Analysis of Textual Data.”</span> <em>Journal of Open Source Software</em> 3 (30): 774. <a href="https://doi.org/10.21105/joss.00774">https://doi.org/10.21105/joss.00774</a>.
 </div>
 <div id="ref-griesAnalyzingDispersion2020" class="csl-entry" role="listitem">
 Gries, Stefan Thomas. 2020. <span>“Analyzing Dispersion.”</span> In <em>A <span>Practical</span> <span>Handbook</span> of <span>Corpus</span> <span>Linguistics</span></em>, edited by Magali Paquot and Stefan Thomas Gries, 99–118. Cham: Springer.
+</div>
+<div id="ref-spacy2" class="csl-entry" role="listitem">
+Honnibal, Matthew, and Ines Montani. 2017. <span>“<span class="nocase">spaCy 2</span>: Natural Language Understanding with <span>B</span>loom Embeddings, Convolutional Neural Networks and Incremental Parsing.”</span>
+</div>
+<div id="ref-Kilgarriff2004" class="csl-entry" role="listitem">
+Kilgarriff, Adam, Pavel Rychly, Pavel Smrz, and David Tugwell. 2004. <span>“ITRI-04-08 the Sketch Engine.”</span> <em>Information Technology</em> 105: 116.
 </div>
 <div id="ref-lange_corpus_2020" class="csl-entry" role="listitem">
 Lange, Claudia, and Sven Leuckert. 2020. <em>Corpus Linguistics for World Englishes: A Guide for Research</em>. New York: Taylor; Francis.

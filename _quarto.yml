@@ -74,6 +74,7 @@ format:
       - design.scss
     code-copy: true
   pdf:
+    engine: pdflatex
     documentclass: scrreprt
     keep-tex: true  # Optionally keep the intermediate .tex file
     geometry: "left=3cm,right=3cm,top=2cm,bottom=2cm,heightrounded"  # Set margins

@@ -4961,13 +4961,22 @@ vertical-align: -.125em;
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#continuous-distributions" id="toc-continuous-distributions" class="nav-link active" data-scroll-target="#continuous-distributions"><span class="header-section-number">17.1</span> Continuous distributions</a>
+  <li><a href="#suggested-reading" id="toc-suggested-reading" class="nav-link active" data-scroll-target="#suggested-reading"><span class="header-section-number">17.1</span> Suggested reading</a></li>
+  <li><a href="#continuous-distributions" id="toc-continuous-distributions" class="nav-link" data-scroll-target="#continuous-distributions"><span class="header-section-number">17.2</span> Continuous distributions</a>
   <ul class="collapse">
-  <li><a href="#the-normal-distribution" id="toc-the-normal-distribution" class="nav-link" data-scroll-target="#the-normal-distribution"><span class="header-section-number">17.1.1</span> The normal distribution</a></li>
+  <li><a href="#the-normal-distribution" id="toc-the-normal-distribution" class="nav-link" data-scroll-target="#the-normal-distribution"><span class="header-section-number">17.2.1</span> The normal distribution</a></li>
   </ul></li>
-  <li><a href="#discrete-distributions" id="toc-discrete-distributions" class="nav-link" data-scroll-target="#discrete-distributions"><span class="header-section-number">17.2</span> Discrete distributions</a>
+  <li><a href="#discrete-distributions" id="toc-discrete-distributions" class="nav-link" data-scroll-target="#discrete-distributions"><span class="header-section-number">17.3</span> Discrete distributions</a>
   <ul class="collapse">
-  <li><a href="#bernoulli-distribution" id="toc-bernoulli-distribution" class="nav-link" data-scroll-target="#bernoulli-distribution"><span class="header-section-number">17.2.1</span> Bernoulli distribution</a></li>
+  <li><a href="#bernoulli-distribution" id="toc-bernoulli-distribution" class="nav-link" data-scroll-target="#bernoulli-distribution"><span class="header-section-number">17.3.1</span> Bernoulli distribution</a></li>
+  <li><a href="#binomial-distribution" id="toc-binomial-distribution" class="nav-link" data-scroll-target="#binomial-distribution"><span class="header-section-number">17.3.2</span> Binomial Distribution</a></li>
+  <li><a href="#multinomial-distribution" id="toc-multinomial-distribution" class="nav-link" data-scroll-target="#multinomial-distribution"><span class="header-section-number">17.3.3</span> Multinomial Distribution</a></li>
+  </ul></li>
+  <li><a href="#sampling-distributions" id="toc-sampling-distributions" class="nav-link" data-scroll-target="#sampling-distributions"><span class="header-section-number">17.4</span> Sampling Distributions</a>
+  <ul class="collapse">
+  <li><a href="#chi-squared-distribution" id="toc-chi-squared-distribution" class="nav-link" data-scroll-target="#chi-squared-distribution"><span class="header-section-number">17.4.1</span> Chi-squared Distribution</a></li>
+  <li><a href="#students-t-distribution" id="toc-students-t-distribution" class="nav-link" data-scroll-target="#students-t-distribution"><span class="header-section-number">17.4.2</span> Student’s t-Distribution</a></li>
+  <li><a href="#f-distribution" id="toc-f-distribution" class="nav-link" data-scroll-target="#f-distribution"><span class="header-section-number">17.4.3</span> F-Distribution</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/VBuskin/Stats_with_R/blob/main/Distributions.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
@@ -5000,10 +5009,18 @@ vertical-align: -.125em;
 </header>
 
 
-<section id="continuous-distributions" class="level2" data-number="17.1">
-<h2 data-number="17.1" class="anchored" data-anchor-id="continuous-distributions"><span class="header-section-number">17.1</span> Continuous distributions</h2>
-<section id="the-normal-distribution" class="level3" data-number="17.1.1">
-<h3 data-number="17.1.1" class="anchored" data-anchor-id="the-normal-distribution"><span class="header-section-number">17.1.1</span> The normal distribution</h3>
+<section id="suggested-reading" class="level2" data-number="17.1">
+<h2 data-number="17.1" class="anchored" data-anchor-id="suggested-reading"><span class="header-section-number">17.1</span> Suggested reading</h2>
+<blockquote class="blockquote">
+<p><span class="citation" data-cites="baguleySeriousStatsGuide2012">Baguley (<a href="references.html#ref-baguleySeriousStatsGuide2012" role="doc-biblioref">2012</a>)</span>: Chapter 2</p>
+<p><span class="citation" data-cites="agrestiFoundationsStatisticsData2022">Agresti and Kateri (<a href="references.html#ref-agrestiFoundationsStatisticsData2022" role="doc-biblioref">2022</a>)</span>: Chapter 2</p>
+<p><span class="citation" data-cites="heumann_introduction_2022">Heumann, Schomaker, and Shalabh (<a href="references.html#ref-heumann_introduction_2022" role="doc-biblioref">2022</a>)</span>: Chapter 8</p>
+</blockquote>
+</section>
+<section id="continuous-distributions" class="level2" data-number="17.2">
+<h2 data-number="17.2" class="anchored" data-anchor-id="continuous-distributions"><span class="header-section-number">17.2</span> Continuous distributions</h2>
+<section id="the-normal-distribution" class="level3" data-number="17.2.1">
+<h3 data-number="17.2.1" class="anchored" data-anchor-id="the-normal-distribution"><span class="header-section-number">17.2.1</span> The normal distribution</h3>
 <p>A great number of numerical variables in the world follow the well-known <strong>normal</strong> (or Gaussian) <strong>distribution</strong>, which includes test scores, weight and height, among many others. The plot below illustrates its characteristic bell-shape: Most observations are in the middle, with considerably fewer near the fringes. For example, most people are rather “average” in height; there are only few people that are extremely short or extremely tall.</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -5043,10 +5060,10 @@ E(X) = \mu = \int_x xf(x)dx,
 <p>where <span class="math inline">\(E(X)\)</span> denotes the expected value of <span class="math inline">\(X\)</span>, i.e., the mean. Essentially, multiplying every value <span class="math inline">\(x\)</span> by its respective probability density <span class="math inline">\(f(x)\)</span> and integrating over all possible values of <span class="math inline">\(x\)</span> will return <span class="math inline">\(E(X) = \mu\)</span>.</p>
 </section>
 </section>
-<section id="discrete-distributions" class="level2" data-number="17.2">
-<h2 data-number="17.2" class="anchored" data-anchor-id="discrete-distributions"><span class="header-section-number">17.2</span> Discrete distributions</h2>
-<section id="bernoulli-distribution" class="level3" data-number="17.2.1">
-<h3 data-number="17.2.1" class="anchored" data-anchor-id="bernoulli-distribution"><span class="header-section-number">17.2.1</span> Bernoulli distribution</h3>
+<section id="discrete-distributions" class="level2" data-number="17.3">
+<h2 data-number="17.3" class="anchored" data-anchor-id="discrete-distributions"><span class="header-section-number">17.3</span> Discrete distributions</h2>
+<section id="bernoulli-distribution" class="level3" data-number="17.3.1">
+<h3 data-number="17.3.1" class="anchored" data-anchor-id="bernoulli-distribution"><span class="header-section-number">17.3.1</span> Bernoulli distribution</h3>
 <p>The <strong>Bernoulli distribution</strong> is a discrete probability distribution for random variables which have only two possible outcomes: “positive” (often coded as 1) and “negative” (often coded as 0). Examples of such variables include coin tosses (heads/tails), binary response questions (yes/no), and defect status (defective/non-defective).</p>
 <p>If a random variable <span class="math inline">\(X\)</span> follows a Bernoulli distribution, it is determined by the parameter <span class="math inline">\(p\)</span>, which is the probability of the positive case:</p>
 <p><span class="math display">\[ X \sim Bernoulli(p).\]</span> The <strong>probability mass function (PMF)</strong> of the Bernoulli distribution is given by: <span class="math display">\[
@@ -5066,23 +5083,98 @@ p &amp; \text{if } x = 1 \\
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Extensions
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>A Bernoulli experiment presupposes a single trial (e.g., tossing a coin once). If we are interested in the distribution of a binary discrete variable over <span class="math inline">\(n\)</span> Bernoulli trials, we can describe it in terms of the <strong>binomial distribution</strong> <span class="citation" data-cites="heumann_introduction_2022">(<a href="references.html#ref-heumann_introduction_2022" role="doc-biblioref">Heumann, Schomaker, and Shalabh 2022</a>: 163-166)</span>.</p>
-<p>Categorical variables with more than 2 outcomes and <span class="math inline">\(n\)</span> Bernoulli trials can be modelled using the <strong>multinomial distribution</strong> <span class="citation" data-cites="heumann_introduction_2022">(<a href="references.html#ref-heumann_introduction_2022" role="doc-biblioref">Heumann, Schomaker, and Shalabh 2022</a>: 167-169)</span>.</p>
-</div>
-</div>
+</section>
+<section id="binomial-distribution" class="level3" data-number="17.3.2">
+<h3 data-number="17.3.2" class="anchored" data-anchor-id="binomial-distribution"><span class="header-section-number">17.3.2</span> Binomial Distribution</h3>
+<p>The <strong>binomial distribution</strong> models the number of successes in <span class="math inline">\(n\)</span> independent Bernoulli trials, each with probability <span class="math inline">\(p\)</span> of success. If a random variable <span class="math inline">\(X\)</span> follows a binomial distribution with parameters <span class="math inline">\(n\)</span> and <span class="math inline">\(p\)</span>, we write:</p>
+<p><span class="math display">\[ X \sim Binomial(n,p) \]</span></p>
+<p>The <strong>probability mass function (PMF)</strong> for the binomial distribution is:</p>
+<p><span class="math display">\[ P(X = k) = \binom{n}{k} p^k (1-p)^{n-k} \]</span></p>
+<p>where:</p>
+<ul>
+<li><span class="math inline">\(n\)</span> is the number of trials</li>
+<li><span class="math inline">\(k\)</span> is the number of successes <span class="math inline">\((0 \leq k \leq n)\)</span></li>
+<li><span class="math inline">\(p\)</span> is the probability of success on each trial <span class="math inline">\((0 \leq p \leq 1)\)</span></li>
+<li><span class="math inline">\(\binom{n}{k}\)</span> is the binomial coefficient (“n choose k”)</li>
+</ul>
+</section>
+<section id="multinomial-distribution" class="level3" data-number="17.3.3">
+<h3 data-number="17.3.3" class="anchored" data-anchor-id="multinomial-distribution"><span class="header-section-number">17.3.3</span> Multinomial Distribution</h3>
+<p>The <strong>multinomial distribution</strong> is a generalisation of the binomial distribution to the case where each trial has <span class="math inline">\(k\)</span> possible outcomes (rather than just two). If a random variable <span class="math inline">\(\mathbf{X} = (X_1,...,X_k)\)</span> follows a multinomial distribution, we write:</p>
+<p><span class="math display">\[ \mathbf{X} \sim Multinomial(n,\mathbf{p}) \]</span></p>
+<p>The <strong>probability mass function (PMF)</strong> for the multinomial distribution is:</p>
+<p><span class="math display">\[ P(\mathbf{X} = \mathbf{x}) = \frac{n!}{x_1!x_2!...x_k!} p_1^{x_1}p_2^{x_2}...p_k^{x_k} \]</span></p>
+<p>where:</p>
+<ul>
+<li><p><span class="math inline">\(n\)</span> is the number of trials</p></li>
+<li><p><span class="math inline">\(\mathbf{x} = (x_1,...,x_k)\)</span> represents the number of occurrences of each outcome</p></li>
+<li><p><span class="math inline">\(\mathbf{p} = (p_1,...,p_k)\)</span> represents the probabilities of each outcome</p></li>
+<li><p><span class="math inline">\(\sum_{i=1}^k x_i = n\)</span> and <span class="math inline">\(\sum_{i=1}^k p_i = 1\)</span></p></li>
+</ul>
+</section>
+</section>
+<section id="sampling-distributions" class="level2" data-number="17.4">
+<h2 data-number="17.4" class="anchored" data-anchor-id="sampling-distributions"><span class="header-section-number">17.4</span> Sampling Distributions</h2>
+<p>Sampling distributions describe the distribution of statistics calculated from repeated random samples. Here are the most common ones:</p>
+<section id="chi-squared-distribution" class="level3" data-number="17.4.1">
+<h3 data-number="17.4.1" class="anchored" data-anchor-id="chi-squared-distribution"><span class="header-section-number">17.4.1</span> Chi-squared Distribution</h3>
+<p>The <strong>chi-squared distribution</strong> with <span class="math inline">\(k\)</span> degrees of freedom, denoted <span class="math inline">\(\chi^2(k)\)</span>, is the distribution of the sum of squares of <span class="math inline">\(k\)</span> independent standard normal random variables. Its <strong>probability density function (PDF)</strong> is:</p>
+<p><span class="math display">\[ f(x) = \frac{x^{k/2-1}e^{-x/2}}{2^{k/2}\Gamma(k/2)} \]</span></p>
+<p>where:</p>
+<ul>
+<li><p><span class="math inline">\(x &gt; 0\)</span></p></li>
+<li><p><span class="math inline">\(k\)</span> is the degrees of freedom</p></li>
+<li><p><span class="math inline">\(\Gamma\)</span> is the gamma function</p></li>
+</ul>
+</section>
+<section id="students-t-distribution" class="level3" data-number="17.4.2">
+<h3 data-number="17.4.2" class="anchored" data-anchor-id="students-t-distribution"><span class="header-section-number">17.4.2</span> Student’s t-Distribution</h3>
+<p>The <strong>Student’s t-distribution</strong> with <span class="math inline">\(\nu\)</span> degrees of freedom has the following <strong>PDF</strong>:</p>
+<p><span class="math display">\[ f(x) = \frac{\Gamma(\frac{\nu+1}{2})}{\sqrt{\nu\pi}\Gamma(\frac{\nu}{2})}\left(1+\frac{x^2}{\nu}\right)^{-\frac{\nu+1}{2}} \]</span></p>
+<p>where:</p>
+<ul>
+<li><p><span class="math inline">\(-\infty &lt; x &lt; \infty\)</span></p></li>
+<li><p><span class="math inline">\(\nu &gt; 0\)</span> is the degrees of freedom</p></li>
+<li><p><span class="math inline">\(\Gamma\)</span> is the gamma function</p></li>
+</ul>
+<p>Key properties:</p>
+<ul>
+<li><p>As <span class="math inline">\(\nu \to \infty\)</span>, the t-distribution approaches the standard normal distribution</p></li>
+<li><p>The distribution is symmetric about 0</p></li>
+<li><p>The variance is <span class="math inline">\(\frac{\nu}{\nu-2}\)</span> for <span class="math inline">\(\nu &gt; 2\)</span></p></li>
+</ul>
+</section>
+<section id="f-distribution" class="level3" data-number="17.4.3">
+<h3 data-number="17.4.3" class="anchored" data-anchor-id="f-distribution"><span class="header-section-number">17.4.3</span> F-Distribution</h3>
+<p>The <strong>F-distribution</strong> with parameters <span class="math inline">\(d_1\)</span> and <span class="math inline">\(d_2\)</span> (degrees of freedom) has the following <strong>PDF</strong>:</p>
+<p><span class="math display">\[ f(x) = \frac{\sqrt{\frac{(d_1x)^{d_1}d_2^{d_2}}{(d_1x+d_2)^{d_1+d_2}}}}{x\beta(\frac{d_1}{2},\frac{d_2}{2})} \]</span></p>
+<p>where:</p>
+<ul>
+<li><p><span class="math inline">\(x &gt; 0\)</span></p></li>
+<li><p><span class="math inline">\(d_1, d_2 &gt; 0\)</span> are the degrees of freedom</p></li>
+<li><p><span class="math inline">\(\beta\)</span> is the beta function</p></li>
+</ul>
+<p>The F-distribution is commonly used in:</p>
+<ul>
+<li><p>Analysis of Variance (ANOVA)</p></li>
+<li><p>Testing equality of variances</p></li>
+<li><p>Model comparison in regression analysis</p></li>
+</ul>
+<p>Each of these sampling distributions plays a crucial role in statistical inference:</p>
+<ul>
+<li><p>Chi-squared: Used for goodness-of-fit tests and tests of independence</p></li>
+<li><p>t-distribution: Used for inference about means when population variance is unknown</p></li>
+<li><p>F-distribution: Used for comparing variances and in ANOVA procedures</p></li>
+</ul>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-agrestiFoundationsStatisticsData2022" class="csl-entry" role="listitem">
+Agresti, Alan, and Maria Kateri. 2022. <em>Foundations of Statistics for Data Scientists: With r and Python</em>. Boca Raton: <span>CRC</span> Press.
+</div>
+<div id="ref-baguleySeriousStatsGuide2012" class="csl-entry" role="listitem">
+Baguley, Thomas. 2012. <em>Serious <span>Stats</span>: <span>A</span> <span>Guide</span> to <span>Advanced</span> <span>Statistics</span> for the <span>Behavioral</span> <span>Sciences</span></em>. Houndmills, Basingstoke: Palgrave Macmillan.
+</div>
 <div id="ref-heumann_introduction_2022" class="csl-entry" role="listitem">
 Heumann, Christian, Michael Schomaker, and Shalabh. 2022. <em>Introduction to Statistics and Data Analysis: With Exercises, Solutions and Applications in r</em>. 2nd ed. Cham: Springer. <a href="https://doi.org/10.1007/978-3-031-11833-3">https://doi.org/10.1007/978-3-031-11833-3</a>.
 </div>

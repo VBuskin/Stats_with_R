@@ -266,8 +266,13 @@ query_distrib <- table(query1$docname, query1$keyword)
 dotplot(query_distrib, auto.key = list(columns = 2, title = "Tokens", cex.title = 1))
 ```
 
-It seems that *eat* occurs at least once in most text categories (both spoken and written), but seems to be much more common in face-to-face conversations (S1A). This is not surprising: It is certainly more common to discuss food in a casual chat with friends than in an academic essay (unless, of course, its main subject matter is food). Dispersion measures can thus be viewed as indicators of **contextual preferences** associated with lexemes or more grammatical patterns.
-
+It seems that *eat* occurs at least once in most text categories (both
+spoken and written), but seems to be much more common in face-to-face
+conversations (S1A). This is not surprising: It is certainly more common
+to discuss food in a casual chat with friends than in an academic essay
+(unless, of course, its main subject matter is food). Dispersion
+measures can thus be viewed as indicators of **contextual preferences**
+associated with lexemes or more grammatical patterns.
 
 ::: {.callout-tip title="Advanced: More on dispersion" collapse="true"}
 The empirical study of dispersion has attracted a lot of attention in
@@ -357,12 +362,28 @@ barplot(as.numeric(kld_df), names.arg = names(kld_df), col = "steelblue",
 
 ```
 
-The plot indicates that *drink* is the most unevenly distributed verb out of the three considered (high KDL $\sim$ low dispersion), whereas *eat* appears to be slightly more evenly distributed across corpus files. The verb *sleep* assumes an intermediary position.
-
+The plot indicates that *drink* is the most unevenly distributed verb
+out of the three considered (high KDL $\sim$ low dispersion), whereas
+*eat* appears to be slightly more evenly distributed across corpus
+files. The verb *sleep* assumes an intermediary position.
 :::
 
-## "I want a proper user interface": Using the `QuantedaApp`
+## "I need a proper user interface": Some alternatives
 
-This app provides a user-friendly GUI for `quanteda`. Installation and
-usage instructions are available in this [GitHub
-repository](https://github.com/VBuskin/quanteda_app).
+There is a wide variety of concordancing software available, both free
+and paid. Among the most popular options are AntConc
+[@anthony_antconc_2020] and SketchEngine [@Kilgarriff2004]. However, as
+Schweinberger [-@schweinberger2024kwics] notes, the exact processes these tools use to
+generate output are not always fully transparent, making them something
+of a "black box." In contrast, programming languages like R or Python
+allow researchers to document each step of their analysis clearly,
+providing full transparency from start to finish.
+
+The following apps attempt to reconcile the need for an intuitive user
+interface with transparent data handling. The full source code is
+documented in the respective GitHub repositories.
+
+-   [`QuantedaApp`](https://github.com/VBuskin/quanteda_app) is an interface for the R package `quanteda`
+    [@quantedapkg].
+
+-   [`PyConc`](https://github.com/VBuskin/PyConc) is an interface for the Python package `spaCy` [@spacy2].
