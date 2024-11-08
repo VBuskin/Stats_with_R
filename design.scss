@@ -18,6 +18,17 @@ pre code {
   white-space: inherit;
 }
 
+/* Justify the main text */
+p {
+  text-align: justify;
+  hyphens: auto;
+}
+
+/* Grey out the sidebar */
+.quarto-sidebar {
+  background-color: #d3d3d3; /* Light grey */
+}
+
 /* Style for the navigation bar at the top of each chapter */
 
 .chapter-prefix {
@@ -45,6 +56,7 @@ pre code {
 .navbar a:hover {
   text-decoration: underline; /* Underline on hover */
 }
+
 
 /*-- scss: figures --*/
 

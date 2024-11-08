@@ -3,7 +3,7 @@ title: "Continuous data"
 author: Vladimir Buskin
 format:
   html:
-    self-contained: false
+    self-contained: true
     theme: default
     toc: true
     number-sections: true
@@ -75,15 +75,8 @@ In R, we can obtain the average value of a numeric vector with the
 the `cl.order` data:
 
 ```{r, echo = TRUE, output = TRUE}
-# Using mean()
 mean(cl.order$LEN_MC)
 ```
-
-::: {.callout-tip collapse="true" title="Compute the sample mean by hand"}
-```{r, echo = TRUE, output = TRUE}
-mean <- 1/length(cl.order$LEN_MC) * sum(cl.order$LEN_MC)
-```
-:::
 
 The output returned by this function provides a one-value summary of all
 observations contained in `LEN_MC`. How could we visualise it?
@@ -158,20 +151,9 @@ x_{((n+1)/2)} & \text{if } n \text{ is odd.} \\
 $$
 
 ```{r, echo = TRUE, output = TRUE}
-# Using median()
 median(cl.order$LEN_MC)
 ```
 
-::: {.callout-tip collapse="true" title="Compute the median by hand"}
-```{r, echo = TRUE, output = TRUE}
-sample_sorted <- sort(cl.order$LEN_MC) # sort values in ascending order
-
-n <- length(cl.order$LEN_MC) # sample size is 403 (odd number!)
-
-median <- sample_sorted[(n + 1) %/% 2] # compute median
-
-```
-:::
 
 The median of `LEN_MC` is represented by the red vertical line.
 
@@ -229,23 +211,8 @@ In other words, it stands for the average squared deviation of all
 observations from the sample mean.
 
 ```{r, echo = TRUE, output = TRUE}
-# Using var()
 var(cl.order$LEN_MC)
 ```
-
-::: {.callout-tip collapse="true" title="Compute the sample variance by hand"}
-```{r, echo = TRUE, output = TRUE}
-# Define sample
-sample_data <- cl.order$LEN_MC
-
-# Calculate the sample standard deviation
-var <- 1 / length(sample_data) * sum((sample_data - mean(sample_data))^2) # formula above
-
-# Note that R's var() function applies an additional bias correction measure:
-var_corrected <- 1 / (length(sample_data) - 1) * sum((sample_data - mean(sample_data))^2) # equivalent to var()
-
-```
-:::
 
 Correspondingly, the standard deviation of the mean is the square root
 of the variance [cf. @heumann_introduction_2022: 51-2].
@@ -253,19 +220,8 @@ of the variance [cf. @heumann_introduction_2022: 51-2].
 $$ s = \sqrt{\frac{1}{n}\sum_{i=1}^n{(x_i - \bar{x})^2}} $$
 
 ```{r, echo = TRUE, output = TRUE}
-# Using sd()
 sd(cl.order$LEN_MC)
-
-# or by hand:
-
-sample_data <- cl.order$LEN_MC
 ```
-
-::: {.callout-tip collapse="true" title="Compute the sample standard deviation by hand"}
-```{r, echo = TRUE, output = TRUE}
-sd <- sqrt(1 / (length(sample_data) - 1)* sum((sample_data - mean(sample_data))^2))
-```
-:::
 
 **Visualisation**:
 

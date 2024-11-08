@@ -212,7 +212,6 @@ Create a vector that lists the third person personal pronouns of English
 ::: {#exr-v-2}
 Now print ...
 
-```         
 -   ... the fourth element in `pp3`.
 
 -   ... elements 3 through 5.
@@ -220,7 +219,6 @@ Now print ...
 -   ... all elements.
 
 -   ... elements 1, 3 **and** 5.
-```
 :::
 
 ::: {#exr-v-3}

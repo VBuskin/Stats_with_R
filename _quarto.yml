@@ -10,6 +10,11 @@ book:
   repo-actions: [source]
   downloads: [pdf]
   repo-branch: main
+  sidebar:
+    border: false
+    alignment: left
+  search: 
+    type: textbox
   chapters:
     - part: "Fundamentals of Corpus-based Research"
       chapters:

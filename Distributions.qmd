@@ -81,24 +81,14 @@ typically use the notation in @eq-normdistrib.
 $$ X \sim N(\mu, \sigma^2).
 $$ {#eq-normdistrib}
 
-The Gaussian bell curve has several interesting properties:
-
--   68% all values fall within one standard deviation of the mean,
-
--   95% within two, and
-
--   99.7% within three.
-
-Below, you can see the annotated **probability density function (PDF)**
-of the normal distribution. The $y$-axis indicates the density of
-population values; note that since the Gaussian distribution is a
-continuous distribution, the probability of any given value is 0. We can
-only obtain probabilities for **intervals** of values, which are given
-by
+These two parameters affect the shape of the **probability density
+function (PDF)** $f(x)$, which is formally defined as
 
 $$
-P(a \leq X \leq b) = \int_a^b f(x)dx.
-$$ {#eq-norm-prob}
+f(x) = \frac{1}{\sqrt{2 \pi \sigma^2}} e^{-\frac{(x - \mu)^2}{2 \sigma^2}}.
+$$ {#eq-norm-pdf}
+
+In practice, this function returns a bell curve:
 
 ```{r, echo = FALSE, output = TRUE, warning = FALSE, message = FALSE}
 # Load required libraries
@@ -180,6 +170,28 @@ ggplot(plot_data, aes(x = x, y = y)) +
   
 
 ```
+
+::: callout-note
+## Quick facts about the Gaussian bell curve
+
+Quite interestingly,
+
+-   68% all values fall within one standard deviation of the mean,
+
+-   95% within two, and
+
+-   99.7% within three.
+:::
+
+In the plot, the $y$-axis indicates the density of population values;
+note that since the Gaussian distribution is a continuous distribution
+with technically infinite $x$-values, the probability of any given value
+must be 0. We can only obtain probabilities for **intervals** of values,
+which are given by
+
+$$
+P(a \leq X \leq b) = \int_a^b f(x)dx.
+$$ {#eq-norm-prob}
 
 We can find the population mean of $X$ with a PDF $f(x)$ via
 
@@ -287,83 +299,3 @@ where:
     outcome
 
 -   $\sum_{i=1}^k x_i = n$ and $\sum_{i=1}^k p_i = 1$
-
-## Sampling Distributions
-
-Sampling distributions describe the distribution of statistics
-calculated from repeated random samples. Here are the most common ones:
-
-### Chi-squared Distribution
-
-The **chi-squared distribution** with $k$ degrees of freedom, denoted
-$\chi^2(k)$, is the distribution of the sum of squares of $k$
-independent standard normal random variables. Its **probability density
-function (PDF)** is:
-
-$$ f(x) = \frac{x^{k/2-1}e^{-x/2}}{2^{k/2}\Gamma(k/2)} $$
-
-where:
-
--   $x > 0$
-
--   $k$ is the degrees of freedom
-
--   $\Gamma$ is the gamma function
-
-### Student's t-Distribution
-
-The **Student's t-distribution** with $\nu$ degrees of freedom has the
-following **PDF**:
-
-$$ f(x) = \frac{\Gamma(\frac{\nu+1}{2})}{\sqrt{\nu\pi}\Gamma(\frac{\nu}{2})}\left(1+\frac{x^2}{\nu}\right)^{-\frac{\nu+1}{2}} $$
-
-where:
-
--   $-\infty < x < \infty$
-
--   $\nu > 0$ is the degrees of freedom
-
--   $\Gamma$ is the gamma function
-
-Key properties:
-
--   As $\nu \to \infty$, the t-distribution approaches the standard
-    normal distribution
-
--   The distribution is symmetric about 0
-
--   The variance is $\frac{\nu}{\nu-2}$ for $\nu > 2$
-
-### F-Distribution
-
-The **F-distribution** with parameters $d_1$ and $d_2$ (degrees of
-freedom) has the following **PDF**:
-
-$$ f(x) = \frac{\sqrt{\frac{(d_1x)^{d_1}d_2^{d_2}}{(d_1x+d_2)^{d_1+d_2}}}}{x\beta(\frac{d_1}{2},\frac{d_2}{2})} $$
-
-where:
-
--   $x > 0$
-
--   $d_1, d_2 > 0$ are the degrees of freedom
-
--   $\beta$ is the beta function
-
-The F-distribution is commonly used in:
-
--   Analysis of Variance (ANOVA)
-
--   Testing equality of variances
-
--   Model comparison in regression analysis
-
-Each of these sampling distributions plays a crucial role in statistical
-inference:
-
--   Chi-squared: Used for goodness-of-fit tests and tests of
-    independence
-
--   t-distribution: Used for inference about means when population
-    variance is unknown
-
--   F-distribution: Used for comparing variances and in ANOVA procedures
