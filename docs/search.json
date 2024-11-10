@@ -834,5 +834,60 @@
       "Descriptive Statistics",
       "<span class='chapter-number'>16</span>  <span class='chapter-title'>Continuous data</span>"
     ]
+  },
+  {
+    "objectID": "Regular_expressions.html#regular-expressions",
+    "href": "Regular_expressions.html#regular-expressions",
+    "title": "12  Regular expressions",
+    "section": "12.2 Regular expressions",
+    "text": "12.2 Regular expressions\nRegular expressions (or ‘regex’) help us find more complex patterns in strings of text. Suppose we are interested in finding all inflectional forms of the lemma PROVIDE in a corpus, i.e., provide, provides, providing and provided. Insteading of searching for all forms individually, we can construct a regular expression of the form\n\\[\n\\text{provid(es | ing | ed)?}\n\\] which can be read as\n\n‘Match the sequence of letters &lt;provid&gt; as well as when it is optionally followed by the letters &lt;s&gt; or &lt;ing&gt; or &lt;ed&gt;’.\n\nNotice how optionality is signified by the ? operator and alternatives by |.\nTo activate regular expression in a kwic() query, the valuetype argument has to be set to \"regex\":\n\n# Load library and corpus\nlibrary(quanteda)\nICE_GB &lt;- readRDS(\"ICE_GB.RDS\")\n\n# Perform query\nkwic_provide &lt;- kwic(ICE_GB,\n                     \"provid(es|ing|ed)?\",\n                     valuetype = \"regex\",\n                     window = 20)\n\nThe number of hits has more than doubled. However, upon closer inspection, we’ll notice a few false positives, namely providential, provider and providers:\n\ntable(kwic_provide$keyword)\n\n\n      provid      provide     provided     Provided    Provident providential \n           1          165          118            5            1            1 \n    provider    providers     provides    providing    Providing \n           1            3           72           52            1 \n\n\nThere are two ways to handle the output:\n\nRefine the search expression further to only match those cases of interest.\nManually sort out irrelevant cases during qualitative annotation in a spreadsheet software.\n\nAs a rule of thumb, you should consider improving your search expression if you obtain hundreds or even thousands of false hits. Should there be only few false positives, it’s usually easier to simply mark them as “irrelevant” in your spreadsheet.",
+    "crumbs": [
+      "Corpus Linguistics with R",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Regular expressions</span>"
+    ]
+  },
+  {
+    "objectID": "Regular_expressions.html#a-regex-cheatsheet",
+    "href": "Regular_expressions.html#a-regex-cheatsheet",
+    "title": "12  Regular expressions",
+    "section": "12.3 A RegEx Cheatsheet",
+    "text": "12.3 A RegEx Cheatsheet\n\n12.3.1 Basic functions\n\n\n\nCommand\nDefinition\nExample\nFinds\n\n\n\n\n\n\npython\npython\n\n\n.\nAny character\n.ython\naython, bython…\n\n\n\n\n\n12.3.2 Character classes and alternatives\n\n\n\n\n\n\n\n\n\nCommand\nDefinition\nExample\nFinds\n\n\n\n\n[abc]\nClass of characters\n[jp]ython\njython, python\n\n\n[ ^pP]\nExcluded class of characters\n[^pP]ython\neverything but python, Python\n\n\n(...|...)\nAlternatives linked by logical operator or\nP(ython|eter)\nPython, Peter\n\n\n\n\n\n12.3.3 Quantifiers\n\n\n\n\n\n\n\n\n\nCommand\nDefinition\nExample\nFinds\n\n\n\n\n?\nOne or zero instances of the preceding symbol\nPy?thon\nPython, Pthon\n\n\n*\nNo matter how many times — also zero\nPy*thon\nPython, Pthon, Pyyyython…\n\n\n\n\nP[Yy]*thon\nPython, Pthon, PyYYython…\n\n\n+\nNo matter how many times but at least once\nPy+thon\nPython, Pyyython, Pyyyython\n\n\n{1,3}\n{min, max}\nPy{1,3}thon\nPython, Pyython, Pyyython\n\n\n\n\n\n12.3.4 Pre-defined character classes\n\n\n\n\n\n\nNote\n\n\n\nThe double backslashes (\\\\) shown here are specific to the quanteda R package. In most other programming languages including Python, you only need a single backslash (e.g., \\w, \\d, \\s). This double-escaping is an R-specific requirement due to how R handles string literals.\n\n\n\n\n\n\n\n\n\n\n\nCommand\nDefinition\nExample\nFinds\n\n\n\n\n\\\\w\nAll alphanumeric characters (A-Z, a-z, 0-9)\n\\\\w+ing\nwalking, running, 42ing\n\n\n\\\\W\nAll non-alphanumeric characters\nhello\\\\W+world\nhello world, hello!!!world\n\n\n\\\\d\nAll decimal numbers (0-9)\n\\\\d{3}-\\\\d{4}\n555-1234, 867-5309\n\n\n\\\\D\nEverything which is not a decimal number\n\\\\D+\nHello!, Python_code\n\n\n\\\\s\nEmpty space\nword\\\\s+word\nword word, word word\n\n\n\\\\b\nWord boundary\n\\\\bpython\\\\b\nMatches python as a whole word",
+    "crumbs": [
+      "Corpus Linguistics with R",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Regular expressions</span>"
+    ]
+  },
+  {
+    "objectID": "Regular_expressions.html#exercises",
+    "href": "Regular_expressions.html#exercises",
+    "title": "12  Regular expressions",
+    "section": "12.5 Exercises",
+    "text": "12.5 Exercises\n\nExercise 12.1 How could you refine the search expression for PROVIDE \"provid(es|ing|ed)?\" to get rid of the irrelevant cases?\n\n\nExercise 12.2 Find all nouns ending in -er. How accurate is your query?\n\n\nExercise 12.3 Find all four-digit numbers.\n\n\nExercise 12.4 Write an elegant regular expression which finds all inflectional forms of swim.\n\n\nExercise 12.5 Find all verbs that are followed by a prepositional phrase.\n\n\n\n\n\nLange, Claudia, and Sven Leuckert. 2020. Corpus Linguistics for World Englishes: A Guide for Research. New York: Taylor; Francis.",
+    "crumbs": [
+      "Corpus Linguistics with R",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Regular expressions</span>"
+    ]
+  },
+  {
+    "objectID": "Regular_expressions.html#suggested-reading",
+    "href": "Regular_expressions.html#suggested-reading",
+    "title": "12  Regular expressions",
+    "section": "12.1 Suggested reading",
+    "text": "12.1 Suggested reading\n\nLange and Leuckert (2020): Chapter 3.7\nDetailed cheatsheet (DataCamp)",
+    "crumbs": [
+      "Corpus Linguistics with R",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Regular expressions</span>"
+    ]
+  },
+  {
+    "objectID": "Regular_expressions.html#querying-parsed-corpora",
+    "href": "Regular_expressions.html#querying-parsed-corpora",
+    "title": "12  Regular expressions",
+    "section": "12.4 Querying parsed corpora",
+    "text": "12.4 Querying parsed corpora\nThe range of linguistic patterns to be matched can be extended further if the corpus contains additional metadata, such as the part of speech (POS) of a token. POS-tagged corpora open up the option of looking for more abstract patterns, such as all instances of the verb eat that are followed by a pronoun or noun:\n\n# Load library and corpus\nICE_GB_POS &lt;- readRDS(\"ICE_GB_POS.RDS\")\n\n# Perform query\nkwic_provide_POS2 &lt;- kwic(ICE_GB_POS,\n                     phrase(\"\\\\b(ate|eat(s|ing|en)?)_VERB\\\\b _(PRON|NOUN)\"),\n                     valuetype = \"regex\",\n                     window = 5)\n\nhead(kwic_provide_POS2)\n\n\n\n\n\n\ndocname\nfrom\nto\npre\nkeyword\npost\npattern\n\n\n\n\nS1A-009.txt\n1198\n1199\nI_PRON must_AUX &lt; , &gt;\neat_VERB them_PRON\n&lt; ICE-GB:S1A-009 #71 : 1\n\\b(ate|eat(s|ing|en)?)_VERB\\b _(PRON|NOUN)\n\n\nS1A-010.txt\n958\n959\nto &lt; , &gt; actually_ADV\neat_VERB it_PRON\nfor_ADP one_NOUN ' s_PART own_ADJ\n\\b(ate|eat(s|ing|en)?)_VERB\\b _(PRON|NOUN)\n\n\nS1A-011.txt\n3245\n3246\n: A &gt; I_PRON have_AUX\neaten_VERB my_PRON\nway_NOUN round_ADP the_DET Yorkshire_PROPN Dales_PROPN\n\\b(ate|eat(s|ing|en)?)_VERB\\b _(PRON|NOUN)\n\n\nS1A-011.txt\n4159\n4160\nI_PRON ended_VERB up_ADP uhm_NOUN just_ADV\neating_VERB sort_NOUN\nof_ADP_ADP lumps_NOUN of chicken_NOUN and_CCONJ\n\\b(ate|eat(s|ing|en)?)_VERB\\b _(PRON|NOUN)\n\n\nS1A-018.txt\n455\n456\norder_VERB on_ADPe_NUM first_ADJ and_CCONJ_CCONJ then_ADV_ADV\neat_VERB it_PRON\nand then sort_ADV of_ADV carry_VERB\n\\b(ate|eat(s|ing|en)?)_VERB\\b _(PRON|NOUN)\n\n\nS1A-019.txt\n1038\n1039\nA &gt; and_CCONJ everybody_PRON was_AUX\neating_VERB something_PRON\n&lt; ICE-GB:S1A-019 #76 : 1\n\\b(ate|eat(s|ing|en)?)_VERB\\b _(PRON|NOUN)\n\n\n\n\n\n\n\nOne R package that supplies functions for tokenisation, POS-tagging and even dependency parsing for dozens of languages is udpipe. They all rely on one common set of tags known as Universal Dependencies, which are listed here:\n\n\n\n\n\n\nUniversial dependencies – Tagset\n\n\n\nCf. https://universaldependencies.org/u/pos/.\n\n\n\n\n\n\n\nPOS Tag\nDescription\n\n\n\n\nADJ\nAdjective: describes a noun (e.g., big, old, green, first)\n\n\nADP\nAdposition: prepositions and postpositions (e.g., in, to, over)\n\n\nADV\nAdverb: modifies verbs, adjectives, or other adverbs (e.g., quickly, very)\n\n\nAUX\nAuxiliary: helps form verb tenses, moods, or voices (e.g., is, have, will)\n\n\nCCONJ\nCoordinating conjunction: links words, phrases, or clauses (e.g., and, or, but)\n\n\nDET\nDeterminer: introduces nouns (e.g., the, a, some, my)\n\n\nINTJ\nInterjection: expresses emotion or reaction (e.g., oh, wow, hello)\n\n\nNOUN\nNoun: person, place, thing, or concept (e.g., cat, city, idea)\n\n\nNUM\nNumeral: expresses a number or ranking (e.g., one, two, second)\n\n\nPART\nParticle: adds meaning without being an independent word class (e.g., not, to as in to run)\n\n\nPRON\nPronoun: replaces nouns (e.g., he, she, they, it)\n\n\nPROPN\nProper noun: names specific entities (e.g., London, Vladimir)\n\n\nPUNCT\nPunctuation: marks boundaries in text (. , ! ?)\n\n\nSCONJ\nSubordinating conjunction: links clauses, often indicating dependency (e.g., if, because, although)\n\n\nSYM\nSymbol: non-alphanumeric symbol (e.g., %, &, #)\n\n\nVERB\nVerb: action or state (e.g., run, be, have)\n\n\nX\nOther: used when a word doesn’t fit into other categories",
+    "crumbs": [
+      "Corpus Linguistics with R",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Regular expressions</span>"
+    ]
   }
 ]

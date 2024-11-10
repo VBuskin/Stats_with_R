@@ -15,6 +15,14 @@ format:
 editor: visual
 ---
 
+## Suggested reading
+
+> @lange_corpus_2020: Chapter 3.7
+>
+> [Detailed
+> cheatsheet](https://images.datacamp.com/image/upload/v1665049611/Marketing/Blog/Regular_Expressions_Cheat_Sheet.pdf)
+> (DataCamp)
+
 ## Regular expressions
 
 **Regular expressions** (or 'regex') help us find more complex patterns
@@ -25,13 +33,16 @@ forms individually, we can construct a regular expression of the form
 
 $$
 \text{provid(es | ing | ed)?}
-$$which can be read as 'Match the sequence of letters \<provide\> as
-well as when it is optionally followed by the letters \<s\> or \<ing\>
-or \<ed\>'. Notice how optionality is signified by the '?' operator and
-alternatives by '\|'.
+$$ which can be read as
 
-To activate regular expression in a KWIC query, simply set the
-`valuetype` argument to `"regex"`:
+> 'Match the sequence of letters \<provid\> as well as when it is
+> optionally followed by the letters \<s\> or \<ing\> or \<ed\>'.
+
+Notice how optionality is signified by the `?` operator and alternatives
+by `|`.
+
+To activate regular expression in a `kwic()` query, the `valuetype`
+argument has to be set to `"regex"`:
 
 ```{r, eval = TRUE}
 
@@ -41,7 +52,7 @@ ICE_GB <- readRDS("ICE_GB.RDS")
 
 # Perform query
 kwic_provide <- kwic(ICE_GB,
-                     phrase("provid(es|ing|ed)?"),
+                     "provid(es|ing|ed)?",
                      valuetype = "regex",
                      window = 20)
 ```
@@ -54,38 +65,17 @@ provider* and *providers*:
 table(kwic_provide$keyword)
 ```
 
-There are two ways to handle this:
+There are two ways to handle the output:
 
 1.  Refine the search expression further to only match those cases of
     interest.
-2.  Manually sort out irrelevant cases during annotation in your
-    spreadsheet software.
+2.  Manually sort out irrelevant cases during qualitative annotation in
+    a spreadsheet software.
 
 As a rule of thumb, you should consider improving your search expression
-if you receive hundreds or even thousands of false hits. If there are
-only a couple of false positives, it's usually easier to simply mark
-them as "irrelevant" in your spreadsheet.
-
-::: callout-caution
-## Task
-
-How could you refine the search expression for PROVIDE to get rid of the
-irrelevant cases? Consult the RegEX Cheatsheet below!
-
-```{r, output = FALSE}
-#| code-fold: true
-#| code-summary: "Solution:"
-
-# Add word boundary with \\b
-kwic_provide2 <- kwic(ICE_GB,
-                     phrase("\\bprovid(e|es|ing|ed)\\b"),
-                     valuetype = "regex",
-                     window = 20)
-
-table(kwic_provide2$keyword)
-
-```
-:::
+if you obtain hundreds or even thousands of false hits. Should there be
+only few false positives, it's usually easier to simply mark them as
+"irrelevant" in your spreadsheet.
 
 ## A RegEx Cheatsheet
 
@@ -104,17 +94,6 @@ table(kwic_provide2$keyword)
 | `[ ^pP]`    | Excluded class of characters                 | `[^pP]ython`    | everything but *python, Python* |
 | `(...|...)` | Alternatives linked by logical operator `or` | `P(ython|eter)` | *Python, Peter*                 |
 
-### Pre-defined character classes
-
-| **Command** | **Definition**                           | **Example**    | **Finds**                        |
-|-------------|------------------------------------------|----------------|----------------------------------|
-| `\\w`       | All alphanumeric characters              |                | A-Z, a-z, 0-9                    |
-| `\\W`       | All non-alphanumeric characters          |                | everything but A-Z, a-z, 0-9     |
-| `\\d`       | All decimal numbers                      |                | 0-9                              |
-| `\\D`       | Everything which is not a decimal number |                | everything but 0-9               |
-| `\\s`       | Empty space                              |                |                                  |
-| `\\b`       | Word boundary                            | `\\bpython\\b` | Matches *python* as a whole word |
-
 ### Quantifiers
 
 | **Command** | **Definition**                                | **Example**   | **Finds**                     |
@@ -125,11 +104,106 @@ table(kwic_provide2$keyword)
 | `+`         | No matter how many times but at least once    | `Py+thon`     | *Python, Pyyython, Pyyyython* |
 | `{1,3}`     | `{min, max}`                                  | `Py{1,3}thon` | *Python, Pyython, Pyyython*   |
 
+### Pre-defined character classes
+
+::: callout-note
+The double backslashes (`\\`) shown here are specific to the `quanteda`
+R package. In most other programming languages including Python, you
+only need a single backslash (e.g., `\w`, `\d`, `\s`). This
+double-escaping is an R-specific requirement due to how R handles string
+literals.
+:::
+
+| **Command** | **Definition**                              | **Example**      | **Finds**                        |
+|-------------|---------------------------------------------|------------------|----------------------------------|
+| `\\w`       | All alphanumeric characters (A-Z, a-z, 0-9) | `\\w+ing`        | *walking*, *running*, *42ing*    |
+| `\\W`       | All non-alphanumeric characters             | `hello\\W+world` | *hello world*, *hello!!!world*   |
+| `\\d`       | All decimal numbers (0-9)                   | `\\d{3}-\\d{4}`  | *555-1234*, *867-5309*           |
+| `\\D`       | Everything which is not a decimal number    | `\\D+`           | *Hello!*, *Python_code*          |
+| `\\s`       | Empty space                                 | `word\\s+word`   | *word word,* word word           |
+| `\\b`       | Word boundary                               | `\\bpython\\b`   | Matches *python* as a whole word |
+
+## Querying parsed corpora
+
+The range of linguistic patterns to be matched can be extended further
+if the corpus contains additional metadata, such as the part of speech
+(POS) of a token. POS-tagged corpora open up the option of looking for
+more abstract patterns, such as all instances of the verb *eat* that are
+followed by a pronoun or noun:
+
+```{r, output = FALSE}
+# Load library and corpus
+ICE_GB_POS <- readRDS("ICE_GB_POS.RDS")
+
+# Perform query
+kwic_provide_POS2 <- kwic(ICE_GB_POS,
+                     phrase("\\b(ate|eat(s|ing|en)?)_VERB\\b _(PRON|NOUN)"),
+                     valuetype = "regex",
+                     window = 5)
+
+head(kwic_provide_POS2)
+```
+
+```{r, echo = F}
+library(kableExtra)
+
+kwic_provide_POS2 %>% 
+  head() %>% 
+  kbl() %>% 
+  kable_classic(full_width = F, html_font = "Cambria")
+```
+
+One R package that supplies functions for tokenisation, POS-tagging and
+even dependency parsing for dozens of languages is `udpipe`. They all
+rely on one common set of tags known as Universal Dependencies, which
+are listed here:
+
+::: callout-tip
+## Universial dependencies -- Tagset
+
+Cf. <https://universaldependencies.org/u/pos/>.
+
+| POS Tag | Description                                                                                               |
+|---------|-----------------------------------------------------------------------------------------------------------|
+| ADJ     | Adjective: describes a noun (e.g., *big*, *old*, *green*, *first*)                                        |
+| ADP     | Adposition: prepositions and postpositions (e.g., *in*, *to*, *over*)                                     |
+| ADV     | Adverb: modifies verbs, adjectives, or other adverbs (e.g., *quickly*, *very*)                            |
+| AUX     | Auxiliary: helps form verb tenses, moods, or voices (e.g., *is*, *have*, *will*)                          |
+| CCONJ   | Coordinating conjunction: links words, phrases, or clauses (e.g., *and*, *or*, *but*)                     |
+| DET     | Determiner: introduces nouns (e.g., *the*, *a*, *some*, *my*)                                             |
+| INTJ    | Interjection: expresses emotion or reaction (e.g., *oh*, *wow*, *hello*)                                  |
+| NOUN    | Noun: person, place, thing, or concept (e.g., *cat*, *city*, *idea*)                                      |
+| NUM     | Numeral: expresses a number or ranking (e.g., *one*, *two*, *second*)                                     |
+| PART    | Particle: adds meaning without being an independent word class (e.g., *not*, *to* as in *to run*)         |
+| PRON    | Pronoun: replaces nouns (e.g., *he*, *she*, *they*, *it*)                                                 |
+| PROPN   | Proper noun: names specific entities (e.g., *London*, *Vladimir*)                                         |
+| PUNCT   | Punctuation: marks boundaries in text (*.* , *!* *?*)                                                     |
+| SCONJ   | Subordinating conjunction: links clauses, often indicating dependency (e.g., *if*, *because*, *although*) |
+| SYM     | Symbol: non-alphanumeric symbol (e.g., *%*, *&*, *\#*)                                                    |
+| VERB    | Verb: action or state (e.g., *run*, *be*, *have*)                                                         |
+| X       | Other: used when a word doesn't fit into other categories                                                 |
+:::
+
 ## Exercises
 
-1.  Find all labels of months!
-2.  Write an elegant regular expression which finds *sing*, *sang* and
-    *sung*.
-3.  Find all four-digit numbers in the corpus!
-4.  Write an elegant regular expression which finds all inflectional
-    forms of *swim*!
+::: {#exr-regex-1}
+How could you refine the search expression for PROVIDE
+`"provid(es|ing|ed)?"` to get rid of the irrelevant cases?
+:::
+
+::: {#exr-regex-2}
+Find all nouns ending in *-er*. How accurate is your query?
+:::
+
+::: {#exr-regex-3}
+Find all four-digit numbers.
+:::
+
+::: {#exr-regex-4}
+Write an elegant regular expression which finds all inflectional forms
+of *swim*.
+:::
+
+::: {#exr-regex-5}
+Find all verbs that are followed by a prepositional phrase.
+:::

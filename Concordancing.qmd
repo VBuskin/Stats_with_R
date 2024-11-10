@@ -72,10 +72,8 @@ read it into your working environment with
     reasons.
 
 ```{r, echo = TRUE, eval = T}
-
 # Load corpus from directory
 ICE_GB <- readRDS("ICE_GB.RDS")
-
 ```
 
 If you encounter any error messages at this stage, ensure you followed
@@ -373,17 +371,19 @@ files. The verb *sleep* assumes an intermediary position.
 There is a wide variety of concordancing software available, both free
 and paid. Among the most popular options are AntConc
 [@anthony_antconc_2020] and SketchEngine [@Kilgarriff2004]. However, as
-Schweinberger [-@schweinberger2024kwics] notes, the exact processes these tools use to
-generate output are not always fully transparent, making them something
-of a "black box." In contrast, programming languages like R or Python
-allow researchers to document each step of their analysis clearly,
-providing full transparency from start to finish.
+Schweinberger [-@schweinberger2024kwics] notes, the exact processes
+these tools use to generate output are not always fully transparent,
+making them something of a "black box." In contrast, programming
+languages like R or Python allow researchers to document each step of
+their analysis clearly, providing full transparency from start to
+finish.
 
 The following apps attempt to reconcile the need for an intuitive user
 interface with transparent data handling. The full source code is
 documented in the respective GitHub repositories.
 
--   [`QuantedaApp`](https://github.com/VBuskin/quanteda_app) is an interface for the R package `quanteda`
-    [@quantedapkg].
+-   [`QuantedaApp`](https://github.com/VBuskin/quanteda_app) is an
+    interface for the R package `quanteda` [@quantedapkg].
 
--   [`PyConc`](https://github.com/VBuskin/PyConc) is an interface for the Python package `spaCy` [@spacy2].
+-   [`PyConc`](https://github.com/VBuskin/PyConc) is an interface for
+    the Python package `spaCy` [@spacy2].
