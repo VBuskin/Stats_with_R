@@ -4647,11 +4647,8 @@ vertical-align: -.125em;
   "type": "textbox",
   "limit": 50,
   "keyboard-shortcut": [
-    "f",
-    "/",
-    "s"
+    null
   ],
-  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -4989,8 +4986,8 @@ vertical-align: -.125em;
   <ul class="collapse">
   <li><a href="#exporting-data" id="toc-exporting-data" class="nav-link" data-scroll-target="#exporting-data"><span class="header-section-number">10.2.1</span> Exporting data</a></li>
   <li><a href="#sec-import" id="toc-sec-import" class="nav-link" data-scroll-target="#sec-import"><span class="header-section-number">10.2.2</span> Importing data</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">10.2.3</span> Exercises</a></li>
   </ul></li>
+  <li><a href="#a-convenient-alternative-rds-files" id="toc-a-convenient-alternative-rds-files" class="nav-link" data-scroll-target="#a-convenient-alternative-rds-files"><span class="header-section-number">10.3</span> A convenient alternative: RDS files</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/VBuskin/Stats_with_R/blob/main/Importing_exporting.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
     </div>
@@ -5022,6 +5019,19 @@ vertical-align: -.125em;
 </header>
 
 
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Script
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You can find the full R script associated with this unit <a href="https://osf.io/puyrf">here</a>.</p>
+</div>
+</div>
 <section id="recommended-reading" class="level2" data-number="10.1">
 <h2 data-number="10.1" class="anchored" data-anchor-id="recommended-reading"><span class="header-section-number">10.1</span> Recommended reading</h2>
 <blockquote class="blockquote">
@@ -5040,13 +5050,12 @@ vertical-align: -.125em;
 <h3 data-number="10.2.1" class="anchored" data-anchor-id="exporting-data"><span class="header-section-number">10.2.1</span> Exporting data</h3>
 <p>Assume we’d like to save our data frame with word frequencies to a local folder on our system. Let’s briefly regenerate it:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>lemma <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"start"</span>, <span class="st">"enjoy"</span>, <span class="st">"begin"</span>, <span class="st">"help"</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>frequency <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">418</span>, <span class="dv">139</span>, <span class="dv">337</span>, <span class="dv">281</span>)</span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate data frame</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">lemma =</span> <span class="fu">c</span>(<span class="st">"start"</span>, <span class="st">"enjoy"</span>, <span class="st">"begin"</span>, <span class="st">"help"</span>), </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">frequency =</span> <span class="fu">c</span>(<span class="dv">418</span>, <span class="dv">139</span>, <span class="dv">337</span>, <span class="dv">281</span>))</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(lemma, frequency)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Print contents</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  lemma frequency
 1 start       418
@@ -5057,11 +5066,11 @@ vertical-align: -.125em;
 </div>
 <p>There are two common formats in which tabular data can be stored on your computer:</p>
 <ul>
-<li><p>in .<strong>csv</strong>-files (‘<strong>c</strong>omma-<strong>s</strong>eparated <strong>v</strong>alues’; native format of LibreOffice)</p></li>
+<li><p>in .<strong>csv</strong>-files (‘<strong>c</strong>omma-<strong>s</strong>eparated <strong>v</strong>alues’; native format of LibreOffice Calc)</p></li>
 <li><p>.<strong>xls</strong>/.<strong>xlsx-files</strong> (Microsoft Excel files)</p></li>
 </ul>
 <div class="callout callout-style-default callout-note callout-titled" title="Export to CSV">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -5070,7 +5079,7 @@ Export to CSV
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>To save our <code>data</code> data frame in .csv-format, we can use the <code>write_table()</code> function:</p>
 <div class="cell">
@@ -5086,7 +5095,7 @@ Export to CSV
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Export to Excel">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -5095,7 +5104,7 @@ Export to Excel
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>We use <code>write_xlsx()</code> provided by the package <code>writexl</code> package:</p>
 <div class="cell">
@@ -5110,7 +5119,7 @@ Export to Excel
 <h3 data-number="10.2.2" class="anchored" data-anchor-id="sec-import"><span class="header-section-number">10.2.2</span> Importing data</h3>
 <p>Let’s read the two files back into R.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Import from CSV">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -5119,7 +5128,7 @@ Import from CSV
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>To import the CSV file, we can use the <code>read.csv()</code> function:</p>
 <div class="cell">
@@ -5133,15 +5142,23 @@ Import from CSV
 4 4  help       281</code></pre>
 </div>
 </div>
-<p>To get rid of the column with the row names, we’ll use some subsetting:</p>
+<p>It appears that <code>read.csv()</code> has also written the row numbers to the file. This is not the desired outcome and can be prevented by adding an additional argument:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>imported_csv <span class="ot">&lt;-</span> imported_csv[,<span class="sc">-</span><span class="dv">1</span>] <span class="co"># delete first column</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>imported_csv <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"frequency_data.csv"</span>, <span class="at">row.names =</span> <span class="dv">1</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(imported_csv) <span class="co"># Problem solved!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  lemma frequency
+1 start       418
+2 enjoy       139
+3 begin       337
+4  help       281</code></pre>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Import from Excel">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -5150,12 +5167,12 @@ Import from Excel
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>For importing the Excel file, we’ll use the <code>read_xlsx()</code> function from the readxl package:</p>
+<p>For importing the Excel file, we’ll use the <code>read_xlsx()</code> function from the <code>readxl</code> package:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>imported_excel <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"frequency_data.xlsx"</span>)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(imported_excel)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>imported_excel <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"frequency_data.xlsx"</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(imported_excel)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 2
   lemma frequency
@@ -5169,10 +5186,36 @@ Import from Excel
 </div>
 </div>
 </div>
-<p>That’s it! Nevertheless, remember to always check your imported data to ensure it has been read correctly, especially when working with CSV files.</p>
+<p>That’s it! Nevertheless, remember to always check your imported data to ensure it has been read in correctly, especially when working with CSV files.</p>
 </section>
-<section id="exercises" class="level3" data-number="10.2.3">
-<h3 data-number="10.2.3" class="anchored" data-anchor-id="exercises"><span class="header-section-number">10.2.3</span> Exercises</h3>
+</section>
+<section id="a-convenient-alternative-rds-files" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="a-convenient-alternative-rds-files"><span class="header-section-number">10.3</span> A convenient alternative: RDS files</h2>
+<p>If the main goal is to save an intermediary result and make it available for later use, the most efficient solution would be to save the object to a local R data file ending in <code>.RDS</code>. Since it performs data compression as well, .RDS files can be considered analogous to .zip files, which are very commonly used for other data types.</p>
+<p>In practice, we use the <code>saveRDS()</code> function and supply it with …</p>
+<ul>
+<li><p>… an R object (e.g., a vector, data frame, matrix, graphs, statistical models – anything goes!) as well as</p></li>
+<li><p>… the desired name of the file.</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save data frame "data" to the file "frequency_data.RDS"</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(data, <span class="st">"frequency_data.RDS"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>To read a file back in, we need to indicate the file name (or the full file path if the file is located in a different folder).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in "frequency_data.RDS" and assign the contents to "data2"</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>data2 <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"frequency_data.RDS"</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify contents</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(data2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  lemma frequency
+1 start       418
+2 enjoy       139
+3 begin       337
+4  help       281</code></pre>
+</div>
+</div>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
@@ -5180,7 +5223,6 @@ Import from Excel
 Winter, Bodo. 2020. <em>Statistics for Linguists: An Introduction Using r</em>. New York; London: Routledge.
 </div>
 </div>
-</section>
 </section>
 
 </main> <!-- /main -->

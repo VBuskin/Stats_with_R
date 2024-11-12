@@ -15,6 +15,14 @@ format:
 editor: visual
 ---
 
+::: callout-tip
+## Script
+
+You can find the full R script associated with this unit
+[here](https://osf.io/puyrf).
+:::
+
+
 ## Recommended reading
 
 > @winter_statistics_2020: Chapter 1.11
@@ -38,12 +46,11 @@ Assume we'd like to save our data frame with word frequencies to a local
 folder on our system. Let's briefly regenerate it:
 
 ```{r}
-lemma <- c("start", "enjoy", "begin", "help")
+# Generate data frame
+data <- data.frame(lemma = c("start", "enjoy", "begin", "help"), 
+                   frequency = c(418, 139, 337, 281))
 
-frequency <- c(418, 139, 337, 281)
-
-data <- data.frame(lemma, frequency)
-
+# Print contents
 print(data)
 ```
 
@@ -51,7 +58,7 @@ There are two common formats in which tabular data can be stored on your
 computer:
 
 -   in .**csv**-files ('**c**omma-**s**eparated **v**alues'; native
-    format of LibreOffice)
+    format of LibreOffice Calc)
 
 -   .**xls**/.**xlsx-files** (Microsoft Excel files)
 
@@ -99,16 +106,17 @@ imported_csv <- read.csv("frequency_data.csv")
 print(imported_csv)
 ```
 
-To get rid of the column with the row names, we'll use some subsetting:
+It appears that `read.csv()` has also written the row numbers to the file. This is not the desired outcome and can be prevented by adding an additional argument:
 
 ```{r}
-imported_csv <- imported_csv[,-1] # delete first column
+imported_csv <- read.csv("frequency_data.csv", row.names = 1)
+print(imported_csv) # Problem solved!
 ```
 :::
 
 ::: {.callout-note collapse="true" title="Import from Excel"}
 For importing the Excel file, we'll use the `read_xlsx()` function from
-the readxl package:
+the `readxl` package:
 
 ```{r}
 imported_excel <- read_xlsx("frequency_data.xlsx")
@@ -117,7 +125,31 @@ print(imported_excel)
 :::
 
 That's it! Nevertheless, remember to always check your imported data to
-ensure it has been read correctly, especially when working with CSV
+ensure it has been read in correctly, especially when working with CSV
 files.
 
-### Exercises
+## A convenient alternative: RDS files
+
+If the main goal is to save an intermediary result and make it available for later use, the most efficient solution would be to save the object to a local R data file ending in `.RDS`. Since it performs data compression as well, .RDS files can be considered analogous to .zip files, which are very commonly used for other data types.
+
+In practice, we use the `saveRDS()` function and supply it with ...
+
+-   ... an R object (e.g., a vector, data frame, matrix, graphs, statistical models -- anything goes!) as well as 
+
+-   ... the desired name of the file.
+
+```{r}
+# Save data frame "data" to the file "frequency_data.RDS"
+saveRDS(data, "frequency_data.RDS")
+```
+
+To read a file back in, we need to indicate the file name (or the full file path if the file is located in a different folder).
+
+```{r}
+# Read in "frequency_data.RDS" and assign the contents to "data2"
+data2 <- readRDS("frequency_data.RDS")
+
+# Verify contents
+print(data2)
+```
+
