@@ -97,21 +97,23 @@ state explicitly the $\alpha$-level used for rejecting/accepting $H_0$.
 
 An important question remains: How great should the difference be for us
 to reject $H_0$? The $p$-value measures **the probability of
-encountering a specific value of a test statistic** ($\chi^2$-score, $t$, $F$ etc.) on the condition that $H_0$ is true.
+encountering a specific value of a test statistic** ($\chi^2$-score,
+$t$, $F$ etc.) on the condition that $H_0$ is true.
 
 ::: callout-note
 ## A more precise definition of $p$-values
 
 "The $P$-value is the probability, presuming that $H_0$ is true, that
 the test statistic equals the observed value or a value even more
-extreme in the direction predicted by $H_a$ [@agrestiFoundationsStatisticsData2022: 163]".
+extreme in the direction predicted by $H_a$
+[@agrestiFoundationsStatisticsData2022: 163]".
 :::
 
 For example, a $p$-value of $0.02$ means that we would see a particular
-test statistic only 2% of the time if $X$ and $Y$
-were unrelated (or if there was no difference between $\bar{x}$ and
-$\bar{y}$, respectively). Since our significance level $\alpha$ is set
-to $0.05$, we only reject the null hypothesis if this conditional probability is lower than 5%.
+test statistic only 2% of the time if $X$ and $Y$ were unrelated (or if
+there was no difference between $\bar{x}$ and $\bar{y}$, respectively).
+Since our significance level $\alpha$ is set to $0.05$, we only reject
+the null hypothesis if this conditional probability is lower than 5%.
 
 We obtain $p$-values by consulting the probability density functions of
 the underlying sampling distributions:
@@ -137,9 +139,7 @@ hist(x,
      cex.main = 0.9)
 
 # Overlay PDF
-curve(dchisq(x, df = 1), from = 0, to = 150, n = 5000, col = "orange", lwd = 2, add = TRUE)
-
-
+curve(dchisq(x, df = 1), from = 0, to = 150, n = 5000, col = "steelblue", lwd = 2, add = TRUE)
 
 ```
 
@@ -167,7 +167,7 @@ hist(x,
      cex.main = 0.9)
 
 # Overlay PDF
-curve(dt(x, df = df), from = -5, to = 5, n = 5000, col = "orange", lwd = 2, add = TRUE)
+curve(dt(x, df = df), from = -5, to = 5, n = 5000, col = "steelblue", lwd = 2, add = TRUE)
 
 ```
 
@@ -183,6 +183,6 @@ hist(x,
   main = ("Histogram for a chi-squared-distribution with 1 degree of freedom (df)"), cex.main = 0.9
 )
 
-curve(dchisq(x, df = 1), from = 0, to = 15, n = 5000, col = "orange", lwd = 2, add = T)
+curve(dchisq(x, df = 1), from = 0, to = 15, n = 5000, col = "steelblue", lwd = 2, add = T)
 
 ```

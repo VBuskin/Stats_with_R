@@ -4967,7 +4967,6 @@ vertical-align: -.125em;
   <ul class="collapse">
   <li><a href="#bernoulli-distribution" id="toc-bernoulli-distribution" class="nav-link" data-scroll-target="#bernoulli-distribution"><span class="header-section-number">17.3.1</span> Bernoulli distribution</a></li>
   <li><a href="#binomial-distribution" id="toc-binomial-distribution" class="nav-link" data-scroll-target="#binomial-distribution"><span class="header-section-number">17.3.2</span> Binomial Distribution</a></li>
-  <li><a href="#multinomial-distribution" id="toc-multinomial-distribution" class="nav-link" data-scroll-target="#multinomial-distribution"><span class="header-section-number">17.3.3</span> Multinomial Distribution</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/VBuskin/Stats_with_R/blob/main/Distributions.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
@@ -5094,30 +5093,18 @@ p &amp; \text{if } x = 1 \\
 </section>
 <section id="binomial-distribution" class="level3" data-number="17.3.2">
 <h3 data-number="17.3.2" class="anchored" data-anchor-id="binomial-distribution"><span class="header-section-number">17.3.2</span> Binomial Distribution</h3>
-<p>The <strong>binomial distribution</strong> models the number of successes in <span class="math inline">\(n\)</span> independent Bernoulli trials, each with probability <span class="math inline">\(p\)</span> of success. If a random variable <span class="math inline">\(X\)</span> follows a binomial distribution with parameters <span class="math inline">\(n\)</span> and <span class="math inline">\(p\)</span>, we write:</p>
-<p><span class="math display">\[ X \sim Binomial(n,p) \]</span></p>
+<p>The <strong>binomial distribution</strong> is a fairly straightforward extension of the Bernoulli distribution in that it models the number of successes in <span class="math inline">\(n\)</span> independent Bernoulli trials, each with probability <span class="math inline">\(p\)</span> of success. If a random variable <span class="math inline">\(X\)</span> follows a binomial distribution with parameters <span class="math inline">\(n\)</span> and <span class="math inline">\(p\)</span>, we write:</p>
+<p><span id="eq-binom"><span class="math display">\[ X \sim Binomial(n,p)
+\tag{17.5}\]</span></span></p>
 <p>The <strong>probability mass function (PMF)</strong> for the binomial distribution is:</p>
-<p><span class="math display">\[ P(X = k) = \binom{n}{k} p^k (1-p)^{n-k} \]</span></p>
+<p><span id="eq-binom-pmf"><span class="math display">\[ P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}
+\tag{17.6}\]</span></span></p>
 <p>where:</p>
 <ul>
 <li><span class="math inline">\(n\)</span> is the number of trials</li>
 <li><span class="math inline">\(k\)</span> is the number of successes <span class="math inline">\((0 \leq k \leq n)\)</span></li>
 <li><span class="math inline">\(p\)</span> is the probability of success on each trial <span class="math inline">\((0 \leq p \leq 1)\)</span></li>
 <li><span class="math inline">\(\binom{n}{k}\)</span> is the binomial coefficient (“n choose k”)</li>
-</ul>
-</section>
-<section id="multinomial-distribution" class="level3" data-number="17.3.3">
-<h3 data-number="17.3.3" class="anchored" data-anchor-id="multinomial-distribution"><span class="header-section-number">17.3.3</span> Multinomial Distribution</h3>
-<p>The <strong>multinomial distribution</strong> is a generalisation of the binomial distribution to the case where each trial has <span class="math inline">\(k\)</span> possible outcomes (rather than just two). If a random variable <span class="math inline">\(\mathbf{X} = (X_1,...,X_k)\)</span> follows a multinomial distribution, we write:</p>
-<p><span class="math display">\[ \mathbf{X} \sim Multinomial(n,\mathbf{p}) \]</span></p>
-<p>The <strong>probability mass function (PMF)</strong> for the multinomial distribution is:</p>
-<p><span class="math display">\[ P(\mathbf{X} = \mathbf{x}) = \frac{n!}{x_1!x_2!...x_k!} p_1^{x_1}p_2^{x_2}...p_k^{x_k} \]</span></p>
-<p>where:</p>
-<ul>
-<li><p><span class="math inline">\(n\)</span> is the number of trials</p></li>
-<li><p><span class="math inline">\(\mathbf{x} = (x_1,...,x_k)\)</span> represents the number of occurrences of each outcome</p></li>
-<li><p><span class="math inline">\(\mathbf{p} = (p_1,...,p_k)\)</span> represents the probabilities of each outcome</p></li>
-<li><p><span class="math inline">\(\sum_{i=1}^k x_i = n\)</span> and <span class="math inline">\(\sum_{i=1}^k p_i = 1\)</span></p></li>
 </ul>
 
 

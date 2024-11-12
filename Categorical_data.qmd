@@ -3,7 +3,7 @@ title: "Categorical data"
 author: Vladimir Buskin
 format:
   html:
-    self-contained: false
+    self-contained: true
     theme: default
     toc: true
     number-sections: true
@@ -17,7 +17,7 @@ bibliography: R.bib
 
 ## Preparation
 
-Please download the file "Paquot_Larsson_2020_data.xlsx"
+Please download the file `Paquot_Larsson_2020_data.xlsx`
 [@paquotDescriptiveStatisticsVisualization2020][^categorical_data-1] and
 store it in the same folder as your currently active R-script. Then run
 the code lines below:
@@ -134,10 +134,11 @@ can operate on the raw dataset.
     `tables()` or `xtabs()`
 
 ```{r}
+# Generate cross-table
 order_freq1 <- table(cl.order$ORDER)
 
+# Create barplot
 barplot(order_freq1)
-
 ```
 
 ### ggplot2
@@ -145,11 +146,12 @@ barplot(order_freq1)
 -   Barplot with `geom_bar()` using the raw input data
 
 ```{r, echo = TRUE, output = TRUE}
+# Load library  (if not already loaded)
 library(tidyverse)
 
+# Create barplot
 ggplot(cl.order, aes(x = ORDER)) +
   geom_bar()
-
 ```
 :::
 
@@ -161,8 +163,10 @@ ggplot(cl.order, aes(x = ORDER)) +
 ### Base R
 
 ```{r}
+# Generate cross-table
 order_counts2 <- xtabs(~ ORDER + SUBORDTYPE, cl.order)
 
+# Create barplot
 barplot(order_counts2, 
         beside = TRUE,  # Make bars side-by-side
         legend = TRUE)  # Add a legend
@@ -171,8 +175,10 @@ barplot(order_counts2,
 ### Base R (fully customised)
 
 ```{r}
+# Generate cross-table
 order_counts2 <- xtabs(~ ORDER + SUBORDTYPE, cl.order)
 
+# Create barplot
 barplot(order_counts2, 
         beside = TRUE,  # Make bars dodged (i.e., side by side)
         main = "Distribution of ORDER by SUBORDTYPE (Base R)", 
@@ -186,8 +192,10 @@ barplot(order_counts2,
 ### ggplot2
 
 ```{r, echo = TRUE, output = TRUE}
+# Load library (if not already loaded)
 library(tidyverse)
 
+# Create barplot
 ggplot(cl.order, aes(x = ORDER, fill = SUBORDTYPE)) +
   geom_bar(position = "dodge")
 ```
@@ -195,6 +203,7 @@ ggplot(cl.order, aes(x = ORDER, fill = SUBORDTYPE)) +
 ### ggplot2 (fully customised)
 
 ```{r, echo = TRUE, output = TRUE}
+# Load library (if not already loaded)
 library(tidyverse)
 
 ggplot(cl.order, aes(x = ORDER, fill = SUBORDTYPE)) +
@@ -215,6 +224,7 @@ ggplot(cl.order, aes(x = ORDER, fill = SUBORDTYPE)) +
 In very much the same way as with the raw counts:
 
 ```{r}
+# Create barplot
 barplot(pct1, 
         beside = TRUE,  # Make bars side-by-side
         legend = TRUE)  # Add a legend
@@ -227,8 +237,12 @@ prefers to works with data frames rather than cross-tables, so we'll
 have to coerce it into one first:
 
 ```{r}
+# Convert pct1 to a data frame
 pct1_df <- as.data.frame(pct1)
 
+colnames(pct1_df) <- c("ORDER", "SUBORDTYPE", "pct")
+
+# Print contents of the new data frame "pct1_df"
 print(pct1_df)
 ```
 
@@ -237,13 +251,54 @@ Now we can plot the percentages with `geom_col()`. This geom (=
 onto the y-axis:
 
 ```{r}
+# Load library  (if not already loaded)
 library(tidyverse)
 
-ggplot(pct1_df, aes(x = Var1, y = Freq, fill = Var2)) +
+# Create barplot with user-defined y-axis (requires geom_col())
+ggplot(pct1_df, aes(x = ORDER, y = pct, fill = SUBORDTYPE)) +
   geom_col(position = "dodge")
-
 ```
 :::
+
+## Other plots
+
+### Bubble plot
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+
+library(tidyverse)
+
+# Bubble plot
+ggplot(pct1_df, aes(x = ORDER, y = SUBORDTYPE, size = pct)) +
+  geom_point(color = "skyblue", alpha = 0.7) +
+  scale_size_continuous(range = c(5, 20)) +  # Adjust bubble size range
+  labs(title = "Bubble Plot of ORDER by SUBORDTYPE",
+       x = "ORDER",
+       y = "SUBORDTYPE",
+       size = "Percentage") +
+  theme_minimal()
+```
+
+### Alluvial plot
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+
+# Make sure to install this library prior to loading 
+library(ggalluvial)
+
+ggplot(pct1_df,
+       aes(axis1 = ORDER, axis2 = SUBORDTYPE, y = pct)) +
+  geom_alluvium(aes(fill = ORDER), width = 0.3, alpha = 0.7) +
+  geom_stratum(width = 0.4, fill = "gray", color = "black") +
+  geom_text(stat = "stratum", aes(label = after_stat(stratum))) +
+  labs(title = "Alluvial Plot of ORDER by SUBORDTYPE",
+       x = "Categories", y = "Percentage") +
+  theme_minimal()
+```
 
 ## Exporting tables to MS Word
 
@@ -253,6 +308,9 @@ tables in R. It provides the best output if used on a table created by
 [here](https://ardata-fr.github.io/flextable-book/crosstabs.html#using-tables).
 
 ```{r, output = FALSE}
+#| code-fold: true
+#| code-summary: "Show the code"
+
 # Load library after installation
 library(flextable)
 
@@ -274,6 +332,9 @@ remedy. In fact, it is even easier to use as it doesn't require you to
 compute any tables beforehand.
 
 ```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+
 # Required libraries
 library(crosstable)
 library(flextable)

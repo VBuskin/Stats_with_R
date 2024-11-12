@@ -254,17 +254,20 @@ ggplot(bernoulli_data, aes(x = factor(outcome), y = probability)) +
 
 ### Binomial Distribution
 
-The **binomial distribution** models the number of successes in $n$
+
+The **binomial distribution** is a fairly straightforward extension of the Bernoulli distribution in that it models the number of successes in $n$
 independent Bernoulli trials, each with probability $p$ of success. If a
 random variable $X$ follows a binomial distribution with parameters $n$
 and $p$, we write:
 
-$$ X \sim Binomial(n,p) $$
+$$ X \sim Binomial(n,p) 
+$$ {#eq-binom}
 
 The **probability mass function (PMF)** for the binomial distribution
 is:
 
-$$ P(X = k) = \binom{n}{k} p^k (1-p)^{n-k} $$
+$$ P(X = k) = \binom{n}{k} p^k (1-p)^{n-k} 
+$$ {#eq-binom-pmf}
 
 where:
 
@@ -273,29 +276,3 @@ where:
 -   $p$ is the probability of success on each trial $(0 \leq p \leq 1)$
 -   $\binom{n}{k}$ is the binomial coefficient ("n choose k")
 
-### Multinomial Distribution
-
-The **multinomial distribution** is a generalisation of the binomial
-distribution to the case where each trial has $k$ possible outcomes
-(rather than just two). If a random variable
-$\mathbf{X} = (X_1,...,X_k)$ follows a multinomial distribution, we
-write:
-
-$$ \mathbf{X} \sim Multinomial(n,\mathbf{p}) $$
-
-The **probability mass function (PMF)** for the multinomial distribution
-is:
-
-$$ P(\mathbf{X} = \mathbf{x}) = \frac{n!}{x_1!x_2!...x_k!} p_1^{x_1}p_2^{x_2}...p_k^{x_k} $$
-
-where:
-
--   $n$ is the number of trials
-
--   $\mathbf{x} = (x_1,...,x_k)$ represents the number of occurrences of
-    each outcome
-
--   $\mathbf{p} = (p_1,...,p_k)$ represents the probabilities of each
-    outcome
-
--   $\sum_{i=1}^k x_i = n$ and $\sum_{i=1}^k p_i = 1$
