@@ -54,10 +54,15 @@ book:
         - Mixed_effects_regression.qmd
         - Ordinal_regression.qmd
         - Decision_trees_and_random_forests.qmd
+        - Gradient_boosting.qmd
     - part: "Multivariate Data Analysis"
       chapters:
         - PCA.qmd
         - EFA.qmd
+        - Clustering.qmd
+    - part: "Appendix"
+      chapters:
+        - More_tests.qmd
     - part: References
       chapters:
         - references.qmd

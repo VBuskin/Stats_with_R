@@ -11,7 +11,6 @@ format:
     incremental: false
     slide-level: 3
     scrollable: true
-    
 editor: visual
 ---
 

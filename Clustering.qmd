@@ -1,0 +1,37 @@
+---
+title: "Clustering"
+author: Vladimir Buskin
+date: 11-12-2024
+format:
+  html:
+    self-contained: true
+    theme: default
+    toc: true
+    number-sections: true
+    slide-number: true
+    incremental: false
+    slide-level: 3
+    scrollable: true
+editor: visual
+bibliography: R.bib
+---
+
+## Recommended reading
+
+> @james_introduction_2021: Chapter 12
+>
+> @hastie2017: Chapters 14.3.6, 14.3.10 & 14.3.12
+
+## Preparation
+
+## Clustering algorithms
+
+::: callout-warning
+This page is still under construction. More content will be added soon!
+:::
+
+### $k$-means
+
+### Partitioning around medoids (PAM)
+
+### Hierarchical agglomerative clustering

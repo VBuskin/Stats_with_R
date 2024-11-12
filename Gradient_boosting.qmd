@@ -1,0 +1,35 @@
+---
+title: "Gradient boosting"
+author: 
+  - name: "Vladimir Buskin"
+date: 11-12-2024
+abstract: > 
+  Gradient boosting constitutes a powerful extension of tree-based methods and is generally appreciated for its high predictive performance. Nevertheless, this family of methods, which includes implementations such as AdaBoost, XGBoost, and CatBoost, among many others, is not yet established in corpus-linguistic statistics. A practical scenario is presented to introduce the core ideas of gradient boosting, demonstrate its application to linguistic data as well as point out its advantages and drawbacks.
+keywords: "Machine learning, gradient descent, loss function, regularization"
+format:
+  html:
+    self-contained: true
+    theme: default
+    toc: true
+    number-sections: true
+    slide-number: true
+    incremental: false
+    slide-level: 3
+    scrollable: true
+editor: visual
+bibliography: R.bib
+---
+
+## Recommended reading
+
+> @james_introduction_2021: Chapter 8.2
+>
+> @hastie2017: Chapter 10
+
+## Preparation
+
+## Boosting
+
+::: callout-warning
+This page is still under construction. More content will be added soon!
+:::

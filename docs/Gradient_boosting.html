@@ -7,8 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Vladimir Buskin">
+<meta name="dcterms.date" content="2024-11-12">
+<meta name="keywords" content="Machine learning, gradient descent, loss function, regularization">
 
-<title>Statistics and Data Analysis for Corpus Linguists: From Theory to Practice with R - 8&nbsp; Data frames</title>
+<title>Statistics and Data Analysis for Corpus Linguists: From Theory to Practice with R - 26&nbsp; Gradient boosting</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,40 +21,6 @@ ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
 width: 0.8em;
 margin: 0 0.8em 0.2em -1em;  vertical-align: middle;
-}
-
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-{ counter-reset: source-line 0; }
-pre.numberSource code > span
-{ position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-{ content: counter(source-line);
-position: relative; left: -1em; text-align: right; vertical-align: baseline;
-border: none; display: inline-block;
--webkit-touch-callout: none; -webkit-user-select: none;
--khtml-user-select: none; -moz-user-select: none;
--ms-user-select: none; user-select: none;
-padding: 0 4px; width: 4em;
-}
-pre.numberSource { margin-left: 3em; padding-left: 4px; }
-div.sourceCode
-{ }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 
 div.csl-bib-body { }
@@ -1637,8 +1605,8 @@ function fuseSearch(query, fuse, fuseOptions) {
 }
 </script>
 <meta name="quarto:offset" content="./">
-<link href="./Libraries.html" rel="next">
-<link href="./Vectors_Factors.html" rel="prev">
+<link href="./PCA.html" rel="next">
+<link href="./Decision_trees_and_random_forests.html" rel="prev">
 <script>const sectionChanged = new CustomEvent("quarto-sectionChanged", {
   detail: {},
   bubbles: true,
@@ -4663,17 +4631,6 @@ vertical-align: -.125em;
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  
-  <script>
-    (function () {
-      var script = document.createElement("script");
-      script.type = "text/javascript";
-      script.src  = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js";
-      document.getElementsByTagName("head")[0].appendChild(script);
-    })();
-  </script>
-
 
 </head>
 
@@ -4686,7 +4643,7 @@ vertical-align: -.125em;
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./First_steps.html">Introduction to R</a></li><li class="breadcrumb-item"><a href="./Data_frames.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Data frames</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Linear_regression.html">Statistical Modelling and Machine Learning</a></li><li class="breadcrumb-item"><a href="./Gradient_boosting.html"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Gradient boosting</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -4790,7 +4747,7 @@ vertical-align: -.125em;
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Data_frames.html" class="sidebar-item-text sidebar-link active">
+  <a href="./Data_frames.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Data frames</span></span></a>
   </div>
 </li>
@@ -4942,7 +4899,7 @@ vertical-align: -.125em;
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Gradient_boosting.html" class="sidebar-item-text sidebar-link">
+  <a href="./Gradient_boosting.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Gradient boosting</span></span></a>
   </div>
 </li>
@@ -4978,8 +4935,21 @@ vertical-align: -.125em;
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Appendix</span></span>
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+ <span class="menu-text">Appendix</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./More_tests.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">More on significance testing</span></span></a>
+  </div>
+</li>
+      </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
@@ -4993,7 +4963,7 @@ vertical-align: -.125em;
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">References</span></span></a>
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">References</span></span></a>
   </div>
 </li>
       </ul>
@@ -5008,24 +4978,18 @@ vertical-align: -.125em;
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#preparation" id="toc-preparation" class="nav-link active" data-scroll-target="#preparation"><span class="header-section-number">8.1</span> Preparation</a></li>
-  <li><a href="#recommended-reading" id="toc-recommended-reading" class="nav-link" data-scroll-target="#recommended-reading"><span class="header-section-number">8.2</span> Recommended reading</a></li>
-  <li><a href="#word-frequencies-ii" id="toc-word-frequencies-ii" class="nav-link" data-scroll-target="#word-frequencies-ii"><span class="header-section-number">8.3</span> Word frequencies II</a>
-  <ul class="collapse">
-  <li><a href="#sec-df" id="toc-sec-df" class="nav-link" data-scroll-target="#sec-df"><span class="header-section-number">8.3.1</span> Essential R concepts</a></li>
-  <li><a href="#filtering" id="toc-filtering" class="nav-link" data-scroll-target="#filtering"><span class="header-section-number">8.3.2</span> Filtering</a></li>
-  <li><a href="#i-dont-like-the-way-this-looks-is-there-another-way-to-filter-in-r" id="toc-i-dont-like-the-way-this-looks-is-there-another-way-to-filter-in-r" class="nav-link" data-scroll-target="#i-dont-like-the-way-this-looks-is-there-another-way-to-filter-in-r"><span class="header-section-number">8.3.3</span> I don’t like the way this looks – is there another way to filter in R?</a></li>
-  </ul></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">8.4</span> Exercises</a></li>
+  <li><a href="#recommended-reading" id="toc-recommended-reading" class="nav-link active" data-scroll-target="#recommended-reading"><span class="header-section-number">26.1</span> Recommended reading</a></li>
+  <li><a href="#preparation" id="toc-preparation" class="nav-link" data-scroll-target="#preparation"><span class="header-section-number">26.2</span> Preparation</a></li>
+  <li><a href="#boosting" id="toc-boosting" class="nav-link" data-scroll-target="#boosting"><span class="header-section-number">26.3</span> Boosting</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/VBuskin/Stats_with_R/blob/main/Data_frames.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/VBuskin/Stats_with_R/blob/main/Gradient_boosting.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./First_steps.html">Introduction to R</a></li><li class="breadcrumb-item"><a href="./Data_frames.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Data frames</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Linear_regression.html">Statistical Modelling and Machine Learning</a></li><li class="breadcrumb-item"><a href="./Gradient_boosting.html"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Gradient boosting</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Data frames</span></h1>
+<h1 class="title"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Gradient boosting</span></h1>
 </div>
 
 
@@ -5039,302 +5003,66 @@ vertical-align: -.125em;
           </div>
   </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">November 12, 2024</p>
+    </div>
+  </div>
   
     
   </div>
   
+<div>
+  <div class="abstract">
+    <div class="block-title">Abstract</div>
+    <p>Gradient boosting constitutes a powerful extension of tree-based methods and is generally appreciated for its high predictive performance. Nevertheless, this family of methods, which includes implementations such as AdaBoost, XGBoost, and CatBoost, among many others, is not yet established in corpus-linguistic statistics. A practical scenario is presented to introduce the core ideas of gradient boosting, demonstrate its application to linguistic data as well as point out its advantages and drawbacks.</p>
+  </div>
+</div>
 
+<div>
+  <div class="keywords">
+    <div class="block-title">Keywords</div>
+    <p>Machine learning, gradient descent, loss function, regularization</p>
+  </div>
+</div>
 
 </header>
 
 
-<section id="preparation" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="preparation"><span class="header-section-number">8.1</span> Preparation</h2>
-<div class="callout callout-style-default callout-tip callout-titled">
+<section id="recommended-reading" class="level2" data-number="26.1">
+<h2 data-number="26.1" class="anchored" data-anchor-id="recommended-reading"><span class="header-section-number">26.1</span> Recommended reading</h2>
+<blockquote class="blockquote">
+<p><span class="citation" data-cites="james_introduction_2021">James et al. (<a href="references.html#ref-james_introduction_2021" role="doc-biblioref">2021</a>)</span>: Chapter 8.2</p>
+<p><span class="citation" data-cites="hastie2017">Hastie, Tibshirani, and Friedman (<a href="references.html#ref-hastie2017" role="doc-biblioref">2017</a>)</span>: Chapter 10</p>
+</blockquote>
+</section>
+<section id="preparation" class="level2" data-number="26.2">
+<h2 data-number="26.2" class="anchored" data-anchor-id="preparation"><span class="header-section-number">26.2</span> Preparation</h2>
+</section>
+<section id="boosting" class="level2" data-number="26.3">
+<h2 data-number="26.3" class="anchored" data-anchor-id="boosting"><span class="header-section-number">26.3</span> Boosting</h2>
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Script
+Warning
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>You can find the full R script associated with this unit <a href="https://osf.io/xh962">here</a>.</p>
+<p>This page is still under construction. More content will be added soon!</p>
 </div>
-</div>
-</section>
-<section id="recommended-reading" class="level2" data-number="8.2">
-<h2 data-number="8.2" class="anchored" data-anchor-id="recommended-reading"><span class="header-section-number">8.2</span> Recommended reading</h2>
-<blockquote class="blockquote">
-<p><span class="citation" data-cites="winter_statistics_2020">Winter (<a href="references.html#ref-winter_statistics_2020" role="doc-biblioref">2020</a>)</span>: Chapter 1.10-1.16</p>
-</blockquote>
-<p>Suggested video tutorial:</p>
-<blockquote class="blockquote">
-<p><a href="https://www.youtube.com/watch?v=9f2g7RN5N0I">Using the Data Frame in R</a> (DataCamp, 5min)</p>
-<p><a href="https://www.youtube.com/watch?v=Nh6tSD4i4qs">Learn How to Subset, Extend &amp; Sort Data Frames in R</a> (DataCamp, 7min)</p>
-</blockquote>
-</section>
-<section id="word-frequencies-ii" class="level2" data-number="8.3">
-<h2 data-number="8.3" class="anchored" data-anchor-id="word-frequencies-ii"><span class="header-section-number">8.3</span> Word frequencies II</h2>
-<p>Recall our corpus-linguistic data from the previous unit:</p>
-<table class="table">
-<thead>
-<tr class="header">
-<th>Lemma</th>
-<th>Frequency</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>start</td>
-<td>418</td>
-</tr>
-<tr class="even">
-<td>enjoy</td>
-<td>139</td>
-</tr>
-<tr class="odd">
-<td>begin</td>
-<td>337</td>
-</tr>
-<tr class="even">
-<td>help</td>
-<td>281</td>
-</tr>
-</tbody>
-</table>
-<p>We thought of the columns as one-dimensional, indexed lists of elements:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>lemma <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"start"</span>, <span class="st">"enjoy"</span>, <span class="st">"begin"</span>, <span class="st">"help"</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>frequency <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">418</span>, <span class="dv">139</span>, <span class="dv">337</span>, <span class="dv">281</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Actually, R allows us to combine these two vectors into something that resembles a real spreadsheet. To this end, we apply the <code>data.frame()</code> function to two vectors of our choice.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(lemma, frequency)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  lemma frequency
-1 start       418
-2 enjoy       139
-3 begin       337
-4  help       281</code></pre>
-</div>
-</div>
-<section id="sec-df" class="level3" data-number="8.3.1">
-<h3 data-number="8.3.1" class="anchored" data-anchor-id="sec-df"><span class="header-section-number">8.3.1</span> Essential R concepts</h3>
-<p>The variable <code>data</code> is no longer a vector, but a <strong>data frame</strong> (often abbreviated as ‘df’). Once again, each element carries its own label and can, therefore, be accessed or manipulated.</p>
-<p>Since we now have two dimensions, the <strong>subsetting</strong> notation in square brackets <code>[ ]</code> has to reflect that. This is the general pattern:</p>
-<p><span id="eq-df"><span class="math display">\[ df[row, column]
-\tag{8.1}\]</span></span></p>
-<p>Say, we’re looking for the element at the intersection of the first row and first column. Applying the pattern above, we can access it like so:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>data[<span class="dv">1</span>,<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "start"</code></pre>
-</div>
-</div>
-<p>But what if we need the entire first row? We simply omit the column part. Note, however, that the comma <code>,</code> needs to remain:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>data[<span class="dv">1</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  lemma frequency
-1 start       418</code></pre>
-</div>
-</div>
-<p>Subsetting by columns is interesting. We can either use the square bracket notation <code>[ ]</code> or the <strong>column operator</strong> <code>$</code>:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>data[,<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "start" "enjoy" "begin" "help" </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>lemma</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "start" "enjoy" "begin" "help" </code></pre>
-</div>
-</div>
-</section>
-<section id="filtering" class="level3" data-number="8.3.2">
-<h3 data-number="8.3.2" class="anchored" data-anchor-id="filtering"><span class="header-section-number">8.3.2</span> Filtering</h3>
-<p>Not all the information contained in a data frame is always relevant for our research. In those cases, it’s important to subset the rows and columns according to certain criteria.</p>
-<p>Assume we only need those observations where the lemma frequencies are greater than 300. We can obtain those by specifying</p>
-<ol type="1">
-<li>the data frame,</li>
-<li>the column of interest and</li>
-<li>the condition to apply.</li>
-</ol>
-<p>You can read the code below as</p>
-<blockquote class="blockquote">
-<p>Take the data frame <code>data</code> and subset it according to the column <code>data$frequency</code>. Show me those rows where the values of <code>data$frequency</code> are greater than 300.</p>
-</blockquote>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>data[data<span class="sc">$</span>frequency <span class="sc">&gt;</span> <span class="dv">300</span>, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  lemma frequency
-1 start       418
-3 begin       337</code></pre>
-</div>
-</div>
-<p>What if we wanted to filter by <code>lemma</code> instead? Let’s say we’re looking for frequency data on the verbs <em>start</em> and <em>help</em>.</p>
-<p>This will give us the row associated with <em>start</em>:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>data[data<span class="sc">$</span>lemma <span class="sc">==</span> <span class="st">"start"</span>, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  lemma frequency
-1 start       418</code></pre>
-</div>
-</div>
-<p>Combining multiple statements requires a <strong>logical operator</strong>. Here we’re using <code>|</code> , which corresponds to a logical ‘or’ (disjunction).</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>data[data<span class="sc">$</span>lemma <span class="sc">==</span> <span class="st">"start"</span> <span class="sc">|</span> data<span class="sc">$</span>lemma <span class="sc">==</span> <span class="st">"help"</span>, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  lemma frequency
-1 start       418
-4  help       281</code></pre>
-</div>
-</div>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Why do we need to use “or” (|) and not “and” (&amp;)?
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>The idea of combining statements somewhat naturally suggests a conjunction, which could be achieved via <code>&amp;</code>. How come R doesn’t return anything if we do it that way?</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>data[data<span class="sc">$</span>lemma <span class="sc">==</span> <span class="st">"start"</span> <span class="sc">&amp;</span> data<span class="sc">$</span>lemma <span class="sc">==</span> <span class="st">"help"</span>, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] lemma     frequency
-&lt;0 rows&gt; (or 0-length row.names)</code></pre>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="i-dont-like-the-way-this-looks-is-there-another-way-to-filter-in-r" class="level3" data-number="8.3.3">
-<h3 data-number="8.3.3" class="anchored" data-anchor-id="i-dont-like-the-way-this-looks-is-there-another-way-to-filter-in-r"><span class="header-section-number">8.3.3</span> I don’t like the way this looks – is there another way to filter in R?</h3>
-<p>Yes, absolutely. The subsections below demonstrate a few popular alternatives. In the end, the exact way you filter doesn’t really matter, so long as you (as well as the people who have to work with your script) can understand what you’re trying to achieve. Always consider adding comments to your filtering operations!</p>
-<section id="subset" class="level4" data-number="8.3.3.1">
-<h4 data-number="8.3.3.1" class="anchored" data-anchor-id="subset"><span class="header-section-number">8.3.3.1</span> <code>subset()</code></h4>
-<p>Almost every subsetting operation we perform with square brackets can also be performed using the <code>subset()</code> function. Here are some expressions that are synonymous to the ones above:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(data, frequency <span class="sc">&gt;</span> <span class="dv">300</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  lemma frequency
-1 start       418
-3 begin       337</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(data, lemma <span class="sc">==</span> <span class="st">"start"</span> <span class="sc">|</span> lemma <span class="sc">==</span> <span class="st">"help"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  lemma frequency
-1 start       418
-4  help       281</code></pre>
-</div>
-</div>
-</section>
-<section id="tidyverse" class="level4" data-number="8.3.3.2">
-<h4 data-number="8.3.3.2" class="anchored" data-anchor-id="tidyverse"><span class="header-section-number">8.3.3.2</span> <code>tidyverse</code></h4>
-<p>The <code>tidyverse</code>-ecosystem is a collection of packages specifically designed for handling typical data science tasks as comfortably and elegantly as possible, supplying countless helper functions for data manipulation, transformation and visualisation. Installation instructions are provided in <a href="Libraries.html#sec-libraries" class="quarto-xref"><span>Section&nbsp;9.2.1</span></a>.</p>
-<p>It offers some appealing alternatives to the Base R subsetting functions. Let’s generate a tidyverse-style data frame, the <strong>tibble</strong>:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>data2 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">lemma =</span> <span class="fu">c</span>(<span class="st">"start"</span>, <span class="st">"enjoy"</span>, <span class="st">"begin"</span>, <span class="st">"help"</span>),</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">frequency =</span> <span class="fu">c</span>(<span class="dv">418</span>, <span class="dv">139</span>, <span class="dv">337</span>, <span class="dv">281</span>)</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(data2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 4 × 2
-  lemma frequency
-  &lt;chr&gt;     &lt;dbl&gt;
-1 start       418
-2 enjoy       139
-3 begin       337
-4 help        281</code></pre>
-</div>
-</div>
-<p>We can single out certain columns by using <code>select()</code>:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(data2, lemma)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 4 × 1
-  lemma
-  &lt;chr&gt;
-1 start
-2 enjoy
-3 begin
-4 help </code></pre>
-</div>
-</div>
-<p>It is very easy to filter the data frame according to certain criteria:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(data2, frequency <span class="sc">&gt;</span> <span class="dv">300</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 2 × 2
-  lemma frequency
-  &lt;chr&gt;     &lt;dbl&gt;
-1 start       418
-2 begin       337</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(data2, lemma <span class="sc">==</span> <span class="st">"start"</span> <span class="sc">|</span> lemma <span class="sc">==</span> <span class="st">"help"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 2 × 2
-  lemma frequency
-  &lt;chr&gt;     &lt;dbl&gt;
-1 start       418
-2 help        281</code></pre>
-</div>
-</div>
-<p>A extensive guide to the main <code>tidyverse</code> functions is provided in Chapter 3 of the free eBook <a href="https://r4ds.hadley.nz">R For Data Science (2nd edition)</a>.</p>
-</section>
-</section>
-</section>
-<section id="exercises" class="level2" data-number="8.4">
-<h2 data-number="8.4" class="anchored" data-anchor-id="exercises"><span class="header-section-number">8.4</span> Exercises</h2>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Solutions
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>You can find the solutions to the exercises <a href="https://osf.io/vpjfu">here</a>.</p>
-</div>
-</div>
-<div id="exr-df-1" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 8.1 </strong></span>Recreate the barplot from the previous unit by subsetting the <code>data</code> variable accordingly.</p>
-</div>
-<div id="exr-df-2" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 8.2 </strong></span>Print the following elements by subsetting the data frame <code>data</code> accordingly.</p>
-<ul>
-<li><p>337</p></li>
-<li><p><em>begin</em></p></li>
-<li><p><em>enjoy</em></p></li>
-<li><p><em>enjoy</em> 139</p></li>
-<li><p>the entire frequency column</p></li>
-</ul>
-</div>
-<div id="exr-df-3" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 8.3 </strong></span>Extension of <a href="Vectors_Factors.html#exr-v-3" class="quarto-xref">Exercise&nbsp;<span>7.3</span></a>. Verify that the following verbs are represented in the lemma column: <em>enjoy</em>, <em>hit</em>, <em>find</em>, <em>begin</em>. If they are in the data frame, print their frequency information.</p>
-</div>
-<div id="exr-df-4" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 8.4 </strong></span>Extension of <a href="Vectors_Factors.html#exr-v-4" class="quarto-xref">Exercise&nbsp;<span>7.4</span></a>. Use <code>which()</code> to find the rows where the frequency is greater than 200, and then print the lemma and frequency of only those rows.</p>
 </div>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
-<div id="ref-winter_statistics_2020" class="csl-entry" role="listitem">
-Winter, Bodo. 2020. <em>Statistics for Linguists: An Introduction Using r</em>. New York; London: Routledge.
+<div id="ref-hastie2017" class="csl-entry" role="listitem">
+Hastie, Trevor, Robert Tibshirani, and Jerome H. Friedman. 2017. <em>The Elements of Statistical Learning: Data Mining, Inference, and Prediction</em>. 2nd ed. New York, NY: Springer.
+</div>
+<div id="ref-james_introduction_2021" class="csl-entry" role="listitem">
+James, Gareth, Daniela Witten, Trevor Hastie, and Robert Tibshirani. 2021. <em>An Introduction to Statistical Learning: With Applications in r</em>. New York: Springer. <a href="https://doi.org/10.1007/978-1-0716-1418-1">https://doi.org/10.1007/978-1-0716-1418-1</a>.
 </div>
 </div>
 </section>
@@ -5739,13 +5467,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./Vectors_Factors.html" class="pagination-link  aria-label=" &lt;span="">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Vectors</span></span>
+      <a href="./Decision_trees_and_random_forests.html" class="pagination-link  aria-label=" &lt;span="" trees="" and="" random="" forests&lt;="" span&gt;"="">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Decision trees and random forests</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./Libraries.html" class="pagination-link" aria-label="<span class='chapter-number'>9</span>&nbsp; <span class='chapter-title'>Libraries</span>">
-        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Libraries</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./PCA.html" class="pagination-link" aria-label="<span class='chapter-number'>27</span>&nbsp; <span class='chapter-title'>Principal Components Analysis</span>">
+        <span class="nav-page-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Principal Components Analysis</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
