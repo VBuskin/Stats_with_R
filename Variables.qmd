@@ -170,15 +170,19 @@ list of possible dependent variables is provided in the section on
 Its outcomes are said to depend on one or more **independent
 variables**. These are also often referred to as **explanatory**
 variables as they are supposed to explain variation in the response
-variable. These can be age, sex or the variety of English at hand.
+variable. These can be `AGE`, `SEX` or the `VARIETY` of English at hand.
 
 ### Exercises
 
-1.  Classify the remaining variables in the `cl.order` dataset.
+::: {#exr-var-1}
+Classify the remaining variables in the `cl.order` dataset.
+:::
 
-2.  Consider the following statement:
+::: {#exr-var-2}
+Consider the following statement:
 
 > This paper examines the influence of clause length on the ordering of
 > main and subordinate clauses.
 
 What is the dependent variable? What is/are the independent variable(s)?
+:::

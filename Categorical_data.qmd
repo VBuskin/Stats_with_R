@@ -157,7 +157,9 @@ ggplot(cl.order, aes(x = ORDER)) +
 
 ### Two variables
 
--   Barplots with the `fill` argument
+Bivariate barplots can be obtained by either supplying a contingency
+table (Base R) or by mapping the second variable onto the `fill`
+argument using the raw data.
 
 ::: panel-tabset
 ### Base R

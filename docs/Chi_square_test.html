@@ -4940,6 +4940,12 @@ vertical-align: -.125em;
  <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Decision trees and random forests</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Gradient_boosting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Gradient boosting</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -4954,13 +4960,19 @@ vertical-align: -.125em;
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./PCA.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Principal Components Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Principal Components Analysis</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./EFA.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Exploratory Factor Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Exploratory Factor Analysis</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Clustering.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Clustering</span></span></a>
   </div>
 </li>
       </ul>
@@ -4968,7 +4980,7 @@ vertical-align: -.125em;
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
- <span class="menu-text">References</span></a>
+ <span class="menu-text">Appendix</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -4976,8 +4988,25 @@ vertical-align: -.125em;
       <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./More_tests.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">More on significance testing</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+ <span class="menu-text">References</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">References</span></span></a>
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">References</span></span></a>
   </div>
 </li>
       </ul>
@@ -4993,20 +5022,10 @@ vertical-align: -.125em;
    
   <ul>
   <li><a href="#preparation" id="toc-preparation" class="nav-link active" data-scroll-target="#preparation"><span class="header-section-number">19.1</span> Preparation</a></li>
-  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview"><span class="header-section-number">19.2</span> Overview</a></li>
-  <li><a href="#the-chi2-test" id="toc-the-chi2-test" class="nav-link" data-scroll-target="#the-chi2-test"><span class="header-section-number">19.3</span> The <span class="math inline">\(\chi^2\)</span>-test</a>
+  <li><a href="#the-chi2-test" id="toc-the-chi2-test" class="nav-link" data-scroll-target="#the-chi2-test"><span class="header-section-number">19.2</span> The <span class="math inline">\(\chi^2\)</span>-test</a>
   <ul>
-  <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions"><span class="header-section-number">19.3.1</span> Assumptions</a></li>
-  <li><a href="#implementation-in-r" id="toc-implementation-in-r" class="nav-link" data-scroll-target="#implementation-in-r"><span class="header-section-number">19.3.2</span> Implementation in R</a></li>
-  </ul></li>
-  <li><a href="#typical-workflow" id="toc-typical-workflow" class="nav-link" data-scroll-target="#typical-workflow"><span class="header-section-number">19.4</span> Typical workflow</a>
-  <ul>
-  <li><a href="#define-hypotheses" id="toc-define-hypotheses" class="nav-link" data-scroll-target="#define-hypotheses"><span class="header-section-number">19.4.1</span> Define hypotheses</a></li>
-  <li><a href="#cross-tabulate-the-categories-of-interest" id="toc-cross-tabulate-the-categories-of-interest" class="nav-link" data-scroll-target="#cross-tabulate-the-categories-of-interest"><span class="header-section-number">19.4.2</span> Cross-tabulate the categories of interest</a></li>
-  <li><a href="#run-the-test" id="toc-run-the-test" class="nav-link" data-scroll-target="#run-the-test"><span class="header-section-number">19.4.3</span> Run the test</a>
-  <ul class="collapse">
-  <li><a href="#reporting-the-results" id="toc-reporting-the-results" class="nav-link" data-scroll-target="#reporting-the-results"><span class="header-section-number">19.4.3.1</span> Reporting the results</a></li>
-  </ul></li>
+  <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions"><span class="header-section-number">19.2.1</span> Assumptions</a></li>
+  <li><a href="#implementation-in-r" id="toc-implementation-in-r" class="nav-link" data-scroll-target="#implementation-in-r"><span class="header-section-number">19.2.2</span> Implementation in R</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/VBuskin/Stats_with_R/blob/main/Chi_square_test.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
@@ -5034,6 +5053,12 @@ vertical-align: -.125em;
     
   </div>
   
+<div>
+  <div class="abstract">
+    <div class="block-title">Abstract</div>
+    <p>The chi-squared (<span class="math inline">\(\chi^2\)</span>) test helps determine if there is a statistically significant association between two categorical variables. It compares the observed frequencies of categories with those expected under the null hypothesis. The <span class="math inline">\(\chi^2\)</span> (chi-squared) score quantifies the difference between observed and expected frequencies for every cell in a contingency table. The greater the difference between observed and expected, the higher the <span class="math inline">\(\chi^2\)</span> score and the lower the <span class="math inline">\(p\)</span>-value, given the degrees of freedom. It is recommended to compute effect size measures and inspect the residuals to assess the nature of the association.</p>
+  </div>
+</div>
 
 
 </header>
@@ -5041,71 +5066,40 @@ vertical-align: -.125em;
 
 <section id="preparation" class="level2" data-number="19.1">
 <h2 data-number="19.1" class="anchored" data-anchor-id="preparation"><span class="header-section-number">19.1</span> Preparation</h2>
-<ul>
-<li>Load packages:</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"readxl"</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tidyverse"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ul>
-<li>Load the data sets:</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>cl.order <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"Paquot_Larsson_2020_data.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="overview" class="level2" data-number="19.2">
-<h2 data-number="19.2" class="anchored" data-anchor-id="overview"><span class="header-section-number">19.2</span> Overview</h2>
-<div class="callout callout-style-default callout-note callout-titled" title="This unit in a nutshell">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-This unit in a nutshell
+Script
 </div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>The chi-square test helps determine if there is a statistically significant association between two categorical variables. It compares observed frequencies (actual data) with expected frequencies (assuming the null hypothesis were true). The <span class="math inline">\(\chi^2\)</span> (chi-squared) score quantifies the difference between them for every cell in the table according to this simplified formula:</p>
-<p><span id="eq-chisq-simple"><span class="math display">\[
-\text{chi-squared =}\frac{(observed - expected)^2}{expected}
-\tag{19.1}\]</span></span></p>
-<p>The greater the difference between observed and expected, the higher the <span class="math inline">\(\chi^2\)</span> score, the more evidence we obtain against <span class="math inline">\(H_0\)</span>. We should always report the following three elements:</p>
-<ul>
-<li><span class="math inline">\(p\)</span>-value: Indicates significance level.</li>
-<li><span class="math inline">\(\chi^2\)</span> score: Shows the deviation between observed and expected frequencies.</li>
-<li>Degrees of freedom: Affects the shape of the chi-square distribution.</li>
-</ul>
-<p>If the <span class="math inline">\(p\)</span>-value is below 0.05, we reject <span class="math inline">\(H_0\)</span>, indicating a significant association between the variables.</p>
-<p>Example:</p>
+<p>You can find the full R script associated with this unit <a href="...">here</a>.</p>
+</div>
+</div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Hypotheses:</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># H0: ORDER and SUBORDTYPE are independent.</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># H1: ORDER and SUBORDTYPE are not independent.</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(cl.order<span class="sc">$</span>ORDER, cl.order<span class="sc">$</span>SUBORDTYPE)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Pearson's Chi-squared test with Yates' continuity correction
-
-data:  cl.order$ORDER and cl.order$SUBORDTYPE
-X-squared = 104.24, df = 1, p-value &lt; 2.2e-16</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We can reject H0 and accept H1.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-</div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#  Load libraries</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(confintr) <span class="co"># for effect size calculation</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>cl.order <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"Paquot_Larsson_2020_data.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="the-chi2-test" class="level2 page-columns page-full" data-number="19.3">
-<h2 data-number="19.3" class="anchored" data-anchor-id="the-chi2-test"><span class="header-section-number">19.3</span> The <span class="math inline">\(\chi^2\)</span>-test</h2>
-<p>Having clearly stated our hypotheses in the previous unit, the next step is to compute a test statistic that indicates how strongly our data conforms to <span class="math inline">\(H_0\)</span>. For instance, the Pearson <span class="math inline">\(\chi^2\)</span> statistic is commonly used for categorical data.</p>
-<p>It requires two types of values: the <strong>observed frequencies</strong> <span class="math inline">\(n_{ij}\)</span> (for <span class="math inline">\(1, ..., n\)</span>) in our data set and the <strong>expected frequencies</strong> <span class="math inline">\(m_{ij}\)</span> (for <span class="math inline">\(1, ..., m\)</span>), which we would expect to see if <span class="math inline">\(H_0\)</span> were true. The indices <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> uniquely identify the frequencies found in all column-row combinations of a cross-table.</p>
+<section id="the-chi2-test" class="level2 page-columns page-full" data-number="19.2">
+<h2 data-number="19.2" class="anchored" data-anchor-id="the-chi2-test"><span class="header-section-number">19.2</span> The <span class="math inline">\(\chi^2\)</span>-test</h2>
+<p>Recall our statistical hypotheses stated in the previous unit:</p>
+<ul>
+<li><p><span class="math inline">\(H_0:\)</span> The variables <code>ORDER</code> and <code>SUBORDTYPE</code> are independent.</p></li>
+<li><p><span class="math inline">\(H_1:\)</span> The variables <code>ORDER</code> and <code>SUBORDTYPE</code> are <strong>not</strong> independent.</p></li>
+</ul>
+<p>The next step is to compute a test statistic that indicates how strongly our data conforms to <span class="math inline">\(H_0\)</span>. For instance, the Pearson <span class="math inline">\(\chi^2\)</span> statistic is suitable for categorical data.</p>
+<p>It requires two types of values: the <strong>observed frequencies</strong> <span class="math inline">\(n_{ij}\)</span> in our data set and the <strong>expected frequencies</strong> <span class="math inline">\(m_{ij}\)</span>, which we would expect to see if <span class="math inline">\(H_0\)</span> were true, with <span class="math inline">\(n, m \in \mathbb{N}\)</span>. The indices <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> uniquely identify the frequencies found in all column-row combinations of a cross-table.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Mathematical details: The structure of a contingency table">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -5114,7 +5108,7 @@ Mathematical details: The structure of a contingency table
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <p>The table below represents a generic contingency table where <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are categorical variables. Each <span class="math inline">\(x_i\)</span> represents a category of <span class="math inline">\(X\)</span> and each <span class="math inline">\(y_j\)</span> represents a category of <span class="math inline">\(Y\)</span>. In the table, each cell indicates the count of observation <span class="math inline">\(n_{ij}\)</span> corresponding to the <span class="math inline">\(i\)</span>-th row and <span class="math inline">\(j\)</span>-th column.</p>
 <table class="table">
@@ -5182,6 +5176,10 @@ Mathematical details: The structure of a contingency table
 </div>
 <p>Drawing on the <code>cl.order</code> data, we can cross-tabulate the frequencies of <code>ORDER</code> by <code>SUBORDTYPE</code>. These correspond to our observed frequencies <span class="math inline">\(n_{ij}\)</span>.</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cross-tabulate the frequencies for the variables of interest</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>freqs <span class="ot">&lt;-</span> <span class="fu">table</span>(cl.order<span class="sc">$</span>ORDER, cl.order<span class="sc">$</span>SUBORDTYPE)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(freqs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       
         caus temp
@@ -5192,9 +5190,27 @@ Mathematical details: The structure of a contingency table
 <p>The expected frequencies <span class="math inline">\(m_{ij}\)</span> are calculated by</p>
 <p><span id="eq-exp-freq"><span class="math display">\[
 m_{ij} = \frac{i\textrm{th row sum} \times j \textrm{th column sum}}{\textrm{number of observations}}.
-\tag{19.2}\]</span></span></p>
+\tag{19.1}\]</span></span></p>
 <p>The expected frequencies for our combination of variables is shown below. In which cells can you see the greatest deviations between observed and expected frequencies?</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute expected frequencies</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Calculate row totals</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>row_totals <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(freqs)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Calculate column totals</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>col_totals <span class="ot">&lt;-</span> <span class="fu">colSums</span>(freqs)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="do">## Total number of observations</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>total_obs <span class="ot">&lt;-</span> <span class="fu">sum</span>(freqs)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="do">## Calculate expected frequencies</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>expected_table <span class="ot">&lt;-</span> <span class="fu">outer</span>(row_totals, col_totals) <span class="sc">/</span> total_obs</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>expected_table</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>           caus      temp
 mc-sc 135.79404 139.20596
@@ -5202,8 +5218,11 @@ sc-mc  63.20596  64.79404</code></pre>
 </div>
 </div>
 <p>The <span class="math inline">\(\chi^2\)</span>-test now offers a convenient way of quantifying the differences between the two tables above. Given <span class="math inline">\(n\)</span> observations and <span class="math inline">\(k\)</span> degrees of freedom (<span class="math inline">\(df\)</span>)<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, the <span class="math inline">\(\chi^2\)</span>-statistic measures how much the observed frequencies <strong>deviate</strong> from the expected frequencies <strong>for each cell</strong> in a contingency table <span class="citation" data-cites="heumann_introduction_2022">(cf. <a href="references.html#ref-heumann_introduction_2022" role="doc-biblioref">Heumann, Schomaker, and Shalabh 2022</a>: 249-251)</span>.</p>
-<div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;The degrees of freedom are calculated by <span class="math inline">\((\textrm{number of rows} -1) \times (\textrm{number of columns} - 1)\)</span>.</p></li></div><div class="callout callout-style-default callout-note callout-titled" title="Mathematical details: Formal definition of the chi-square test">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;The degrees of freedom are calculated by <span class="math inline">\((\textrm{number of rows} -1) \times (\textrm{number of columns} - 1)\)</span>.</p></li></div><p><span id="eq-chisq-simple"><span class="math display">\[
+\text{chi-squared =}\frac{(observed - expected)^2}{expected}
+\tag{19.2}\]</span></span></p>
+<div class="callout callout-style-default callout-note callout-titled" title="Mathematical details: Formal definition of the chi-square test">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -5212,17 +5231,18 @@ Mathematical details: Formal definition of the chi-square test
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <p>The joint deviations make up the final <span class="math inline">\(\chi^2\)</span>-score, which is defined as</p>
 <p><span id="eq-chisq"><span class="math display">\[
-\chi^2 = \sum_{i=1}^{I}\sum_{i=j}^{J}{\frac{(n_{ij} - m_{ij})^2}{m_{ij}}}.
+\chi^2 = \sum_{i=1}^{I}\sum_{i=j}^{J}{\frac{(n_{ij} - m_{ij})^2}{m_{ij}}}
 \tag{19.3}\]</span></span></p>
+<p>for <span class="math inline">\(i = 1, ..., I\)</span> and <span class="math inline">\(j = 1, ..., J\)</span>.</p>
 </div>
 </div>
 </div>
-<section id="assumptions" class="level3" data-number="19.3.1">
-<h3 data-number="19.3.1" class="anchored" data-anchor-id="assumptions"><span class="header-section-number">19.3.1</span> Assumptions</h3>
+<section id="assumptions" class="level3" data-number="19.2.1">
+<h3 data-number="19.2.1" class="anchored" data-anchor-id="assumptions"><span class="header-section-number">19.2.1</span> Assumptions</h3>
 <p>Note, however, that this test comes with certain <strong>statistical assumptions</strong>. Violations of these assumptions decrease the validity of the result and could, therefore, lead to wrong conclusions about relationships in the data. In this case, other tests should be consulted.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -5244,13 +5264,13 @@ Assumptions of the chi-squared test
 </div>
 </div>
 </section>
-<section id="implementation-in-r" class="level3" data-number="19.3.2">
-<h3 data-number="19.3.2" class="anchored" data-anchor-id="implementation-in-r"><span class="header-section-number">19.3.2</span> Implementation in R</h3>
+<section id="implementation-in-r" class="level3" data-number="19.2.2">
+<h3 data-number="19.2.2" class="anchored" data-anchor-id="implementation-in-r"><span class="header-section-number">19.2.2</span> Implementation in R</h3>
 <p>In R, conducting this test is a simple one-liner:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>freqs_test <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(freqs)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(freqs_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>freqs_test <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(freqs)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(freqs_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's Chi-squared test with Yates' continuity correction
@@ -5261,8 +5281,8 @@ X-squared = 104.24, df = 1, p-value &lt; 2.2e-16</code></pre>
 </div>
 <p>The test object <code>freqs_test</code> also stores the expected frequencies, which we can also access. They appear to be all right:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Expected frequencies</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>freqs_test<span class="sc">$</span>expected</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Expected frequencies</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>freqs_test<span class="sc">$</span>expected</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       
              caus      temp
@@ -5270,92 +5290,13 @@ X-squared = 104.24, df = 1, p-value &lt; 2.2e-16</code></pre>
   sc-mc  63.20596  64.79404</code></pre>
 </div>
 </div>
-</section>
-</section>
-<section id="typical-workflow" class="level2" data-number="19.4">
-<h2 data-number="19.4" class="anchored" data-anchor-id="typical-workflow"><span class="header-section-number">19.4</span> Typical workflow</h2>
-<section id="define-hypotheses" class="level3" data-number="19.4.1">
-<h3 data-number="19.4.1" class="anchored" data-anchor-id="define-hypotheses"><span class="header-section-number">19.4.1</span> Define hypotheses</h3>
-<ul>
-<li><p><span class="math inline">\(H_0:\)</span> The variables <code>ORDER</code> and <code>SUBORDTYPE</code> are independent.</p></li>
-<li><p><span class="math inline">\(H_1:\)</span> The variables <code>ORDER</code> and <code>SUBORDTYPE</code> are <strong>not</strong> independent.</p></li>
-</ul>
-</section>
-<section id="cross-tabulate-the-categories-of-interest" class="level3" data-number="19.4.2">
-<h3 data-number="19.4.2" class="anchored" data-anchor-id="cross-tabulate-the-categories-of-interest"><span class="header-section-number">19.4.2</span> Cross-tabulate the categories of interest</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cross-tabulate the frequencies for the variables of interest</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>freqs <span class="ot">&lt;-</span> <span class="fu">table</span>(cl.order<span class="sc">$</span>ORDER, cl.order<span class="sc">$</span>SUBORDTYPE)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>freqs <span class="do">## Assumption met: all observed freqs =&gt; 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>       
-        caus temp
-  mc-sc  184   91
-  sc-mc   15  113</code></pre>
-</div>
-</div>
-</section>
-<section id="run-the-test" class="level3" data-number="19.4.3">
-<h3 data-number="19.4.3" class="anchored" data-anchor-id="run-the-test"><span class="header-section-number">19.4.3</span> Run the test</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run a chis-quared test on the absolute frequencies and print the results</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(freqs, <span class="at">correct =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspect expected frequencies</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>test<span class="sc">$</span>expected <span class="co"># Assumption met: all expected frequences =&gt; 5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>       
-             caus      temp
-  mc-sc 135.79404 139.20596
-  sc-mc  63.20596  64.79404</code></pre>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled" title="Advanced: Effect size">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Advanced: Effect size
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>The sample-size independent effect size measure <strong>Cramer’s <em>V</em></strong> (<span class="math inline">\(\phi\)</span>) is defined as</p>
-<p><span id="eq-cramer-v"><span class="math display">\[V = \sqrt{\frac{\chi^2}{N \times df}}.
-\tag{19.4}\]</span></span></p>
-<p>The outcome varies between <span class="math inline">\(0\)</span> (= no correlation) and <span class="math inline">\(1\)</span> (= perfect correlation); cf.&nbsp;also Gries <span class="citation" data-cites="gries_statistics_2013">(<a href="references.html#ref-gries_statistics_2013" role="doc-biblioref">2013</a>: 186)</span>.</p>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute Cramer's V</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"confintr"</span>) <span class="co"># Load library</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cramersv</span>(test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.5139168</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<section id="reporting-the-results" class="level4" data-number="19.4.3.1">
-<h4 data-number="19.4.3.1" class="anchored" data-anchor-id="reporting-the-results"><span class="header-section-number">19.4.3.1</span> Reporting the results</h4>
-<p>According to a <span class="math inline">\(\chi^2\)</span>-test, there is a highly significant association between clause <code>ORDER</code>and <code>SUBORDTYPE</code> at <span class="math inline">\(p &lt; 0.001\)</span> (<span class="math inline">\(\chi^2 = 106.44, df = 1\)</span>), thus justifying the rejection of <span class="math inline">\(H_0\)</span>.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
-<div id="ref-gries_statistics_2013" class="csl-entry" role="listitem">
-Gries, Stefan Thomas. 2013. <em>Statistics for Linguistics with r: A Practical Introduction</em>. 2nd rev. ed. Berlin; Boston: De Gruyter Mouton.
-</div>
 <div id="ref-heumann_introduction_2022" class="csl-entry" role="listitem">
 Heumann, Christian, Michael Schomaker, and Shalabh. 2022. <em>Introduction to Statistics and Data Analysis: With Exercises, Solutions and Applications in r</em>. 2nd ed. Cham: Springer. <a href="https://doi.org/10.1007/978-3-031-11833-3">https://doi.org/10.1007/978-3-031-11833-3</a>.
 </div>
 </div>
-</section>
 </section>
 </section>
 
