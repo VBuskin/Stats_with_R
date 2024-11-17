@@ -22,22 +22,31 @@ metadata-files:
 google-scholar: false
 ---
 
+## Suggested reading
+
+For linguists:
+
+> @gries_statistics_2021: Chapter 4.1.2.1
+
+General:
+
+> @baguleySeriousStatsGuide2012: Chapter 4
+>
+> @agrestiFoundationsStatisticsData2022: Chapter 5
+
 ## Preparation
 
 ::: callout-tip
 ## Script
 
-You can find the full R script associated with this unit
-[here](...).
+You can find the full R script associated with this unit [here](...).
 :::
-
 
 ```{r, echo = FALSE, include = FALSE}
 library(readxl)
 library(tidyverse)
 library(confintr)
 ```
-
 
 ```{r, echo = TRUE, eval = TRUE}
 #  Load libraries
@@ -59,14 +68,15 @@ Recall our statistical hypotheses stated in the previous unit:
 -   $H_1:$ The variables `ORDER` and `SUBORDTYPE` are **not**
     independent.
 
-The next step is to compute a test statistic that indicates how strongly our data
-conforms to $H_0$. For instance, the Pearson $\chi^2$ statistic is
-suitable for categorical data.
+The next step is to compute a test statistic that indicates how strongly
+our data conforms to $H_0$, such as Pearson's $\chi^2$. In order to
+compute it, we need two types of values: the **observed frequencies**
+$n_{ij}$ in our data set and the **expected frequencies** $m_{ij}$,
+which we would expect to see if $H_0$ were true, with
+$n, m \in \mathbb{N}$. The indices $i$ and $j$ uniquely identify the
+frequencies found in all column-row combinations of a contingency table.
 
-It requires two types of values: the **observed frequencies** $n_{ij}$ in our data set and the **expected frequencies** $m_{ij}$, which we would expect to see if $H_0$ were true, with $n, m \in \mathbb{N}$. The indices $i$ and $j$ uniquely identify the frequencies found in
-all column-row combinations of a cross-table.
-
-::: {.callout-note collapse="false" title="Mathematical details: The structure of a contingency table"}
+::: {.callout-note collapse="true" title="The structure of a contingency table"}
 The table below represents a generic contingency table where $X$ and $Y$
 are categorical variables. Each $x_i$ represents a category of $X$ and
 each $y_j$ represents a category of $Y$. In the table, each cell
@@ -82,19 +92,34 @@ row and $j$-th column.
 |     | $x_I$ | $n_{I1}$ | $n_{I2}$ | ... | $n_{3J}$ |     |
 :::
 
-Drawing on the `cl.order` data, we can cross-tabulate the frequencies of
-`ORDER` by `SUBORDTYPE`. These correspond to our observed frequencies
-$n_{ij}$.
+In the `cl.order` data, the observed frequencies correspond to how often
+each `ORDER` value (i.e., `mc-sc` and `sc-mc`) is attested for a given
+`SUBORDTYPE` (i.e., `temp` and `caus`). This can be done in a very
+straightforward fashion using R's `table()` function on the variables of
+interest.
 
 ```{r}
-# Cross-tabulate the frequencies for the variables of interest
-freqs <- table(cl.order$ORDER, cl.order$SUBORDTYPE)
+observed_freqs <- table(cl.order$ORDER, cl.order$SUBORDTYPE)
 
-print(freqs)
-
+print(observed_freqs)
 ```
 
-The expected frequencies $m_{ij}$ are calculated by
+The expected frequencies require a few additional steps. Usually, these
+steps are performed automatically when conducting the chi-squared test
+in R, so you don't have to worry about calculating them by hand. We will
+do it anyway to drive home the rationale of the test.
+
+The expected frequencies $m_{ij}$ are given by the formula in
+@eq-exp-freq. In concrete terms, we go through each cell in the
+cross-table and multiply the corresponding row sums with the column
+sums, dividing the result by the total number of occurrences in the
+sample. For example, there are $184$ occurrences of mc-sc clause orders
+where the subordinate clause is causal. The row sum is $184 + 91 = 275$
+and the column sum is $184 + 15 = 199$. Next, we take their product
+$275 \times 199$ and divide it by the total number of observations,
+which is $184 + 91 + 15 + 113 = 403$. Thus we obtain an expected
+frequency of $\frac{275 \times 199}{403} = 135.79$ under the null
+hypothesis.
 
 $$
 m_{ij} = \frac{i\textrm{th row sum} \times j \textrm{th column sum}}{\textrm{number of observations}}.
@@ -108,62 +133,69 @@ observed and expected frequencies?
 #| code-fold: true
 #| code-summary: "Show the code"
 
-# Compute expected frequencies
-
 ## Calculate row totals
-row_totals <- rowSums(freqs)
+row_totals <- rowSums(observed_freqs)
 
 ## Calculate column totals
-col_totals <- colSums(freqs)
+col_totals <- colSums(observed_freqs)
 
 ## Total number of observations
-total_obs <- sum(freqs)
+total_obs <- sum(observed_freqs)
 
 ## Calculate expected frequencies
-expected_table <- outer(row_totals, col_totals) / total_obs
+expected_freqs <- outer(row_totals, col_totals) / total_obs
 
-expected_table
+print(expected_freqs)
 ```
 
 The $\chi^2$-test now offers a convenient way of quantifying the
-differences between the two tables above. Given $n$ observations and $k$
-degrees of freedom ($df$)[^chi_square_test-1], the $\chi^2$-statistic
-measures how much the observed frequencies **deviate** from the expected
-frequencies **for each cell** in a contingency table [cf.
-@heumann_introduction_2022: 249-251].
-
-[^chi_square_test-1]: The degrees of freedom are calculated by
-    $(\textrm{number of rows} -1) \times (\textrm{number of columns} - 1)$.
-    
-    
+differences between the two tables above. It measures how much the
+observed frequencies **deviate** from the expected frequencies **for
+each cell** in a contingency table [cf. @heumann_introduction_2022:
+249-251]. The gist of this procedure is summarised in @eq-chisq-simple.
 
 $$
-\text{chi-squared =}\frac{(observed - expected)^2}{expected}
+\text{Chi-squared } \chi^2 =\frac{(\text{observed} - \text{expected})^2}{\text{expected}}
 $$ {#eq-chisq-simple}
 
-
-::: {.callout-note collapse="false" title="Mathematical details: Formal definition of the chi-square test"}
-The joint deviations make up the final $\chi^2$-score, which is defined
-as
+::: {.callout-note collapse="true" title="Formal definition of the chi-squared test"}
+Given $n$ observations and $k$ degrees of freedom $df$, the joint
+deviations between $n_{ij}$ $m_{ij}$ contribute to the final
+$\chi^2$-score, which is defined as
 
 $$
 \chi^2 = \sum_{i=1}^{I}\sum_{i=j}^{J}{\frac{(n_{ij} - m_{ij})^2}{m_{ij}}}
 $$ {#eq-chisq}
 
-for $i = 1, ..., I$ and $j = 1, ..., J$.
-
+for $i = 1, ..., I$ and $j = 1, ..., J$ and
+$df = (\textrm{number of rows} -1) \times (\textrm{number of columns} - 1)$.
 :::
 
-### Assumptions
+The implementation in R is a simple one-liner. Keep in mind that we have
+to supply absolute frequencies to `chisq.test()` rather than
+percentages.
 
-Note, however, that this test comes with certain **statistical
-assumptions**. Violations of these assumptions decrease the validity of
-the result and could, therefore, lead to wrong conclusions about
-relationships in the data. In this case, other tests should be
-consulted.
+```{r}
+freqs_test <- chisq.test(observed_freqs)
+
+print(freqs_test)
+```
+
+Quite conveniently, the test object `freqs_test` stores the expected
+frequencies, which can be easily accessed via subsetting. Luckily, they
+are identical to what we calculated above!
+
+```{r}
+freqs_test$expected
+```
 
 ::: callout-important
 ### Assumptions of the chi-squared test
+
+This $\chi^2$-test comes with certain **statistical assumptions**.
+Violations of these assumptions decrease the validity of the result and
+could, therefore, lead to wrong conclusions about relationships in the
+data. In this case, other tests should be consulted.
 
 1.  All observations are independent of each other.
 2.  80% of the expected frequencies are $\geq$ 5.
@@ -178,21 +210,146 @@ participant), the default approach is to fit a multilevel model that can
 control for grouping factors (see mixed-effects regression in @sec-mer.)
 :::
 
-### Implementation in R
+### How do I make sense of the test results?
 
-In R, conducting this test is a simple one-liner:
+The test output has three 'ingredients':
+
+-   the **chi-squared score** (X-squared)
+-   the **degrees of freedom** (df)
+-   the **p-value**.
+
+It is absolutely essential to report all three of those as they
+determine each other. Here is an example:
+
+> According to a $\chi^2$-test, there is a highly significant
+> association between clause ORDER and SUBORDTYPE at $p < 0.001$
+> ($\chi^2 = 106.44, df = 1$), thus justifying the rejection of $H_0$.
+
+The test results provide evidence that the dependent variable `ORDER`
+and the explanatory variable `SUBORDTYPE` are not independent of each
+other. The probability of **randomly** observing usage patterns such as
+those found in the `cl.order` data is lower than 0.001 $\approx$ 0.1%,
+which is enough to reject the null hypothesis at $\alpha = 0.05$.
+
+We can infer that a speaker's choice of clause `ORDER` is very likely
+influenced by the semantic type of subordinate clause; in other words,
+these two variables are **correlated**. However, there are still several
+things the test does **not** tell us:
+
+-   Are there certain variable combinations where the $\chi^2$-scores
+    are particularly high?
+
+-   How strongly do `ORDER` and `SUBORDTYPE` influence each other?
+
+-   Does a causal subordinate clause make the `mc-sc` clause order more
+    likely?
+
+## Pearson residuals
+
+If we're interested in what cells show the greatest difference between
+observed and expected frequencies, an option would be to inspect the
+Pearson residuals (cf. @eq-pear-res).
+
+$$ \text{residuals} = \frac{\text{observed} - \text{expected}}{\sqrt{\text{expected}}} 
+$$ {#eq-pear-res}
+
+These can be accessed via the test results stored `freqs_test`.
 
 ```{r}
-freqs_test <- chisq.test(freqs)
-
-print(freqs_test)
+freqs_test$residuals
 ```
 
-The test object `freqs_test` also stores the expected frequencies, which
-we can also access. They appear to be all right:
+The function `assocplot()` can automatically compute the pearson
+residuals for any given contingency table and create a plot that
+highlights their contributions. If the bar is above the dashed line, it
+is black and indicates that a category is observed more frequently than
+expected (e.g., causal subordinate clauses in the `mc-sc` order).
+Conversely, bars are coloured grey if a category is considerably less
+frequent than expected, such as `caus` in `sc-mc`.
 
 ```{r}
-# Expected frequencies
-freqs_test$expected
+assocplot(t(observed_freqs), col = c("black", "lightgrey"))
 ```
 
+::: {.callout-tip collapse="true" title="Testing the residuals: Configural Frequency Analysis"}
+The chi-squared test only provides a $p$-value for the entire
+contingency table. But what if we wanted to test the residuals for their
+significance as well? Configural Frequency Analysis
+[@krauth_lienert_kfa] allows us to do exactly that: It performs a
+significance test for **all combinations of variable values** in a
+cross-table. Moreover, CFA is not limited to two variables only.
+Technically, users can test for associations between arbitrary numbers
+of variables, but should be aware of the increasing complexity of
+interpretation.
+
+```{r}
+library(cfa) # install library beforehand
+
+# Get the observed counts and convert them to a data frame
+config_df <- as.data.frame(observed_freqs)
+
+# Convert to matrix
+configs <- as.matrix(config_df[, 1:2])  # First two columns contain the configurations
+counts <- config_df$Freq                # The Freq column contains the counts
+
+# Perform CFA
+cfa_output <- cfa(configs, counts, bonferroni = TRUE)
+
+# Print output
+print(cfa_output)
+
+```
+:::
+
+## Effect size
+
+The $p$-value only indicates the **presence of correlation**, but not
+its strength – regardless of how low it may be. It does not convey how
+much two variables determine each other. To this end, it is recommended
+to report an **effect size measure** alongside the $p$-value. One such
+measure is Cramér's $V$, which takes values in the interval $[0, 1]$:
+
+$$
+V = \sqrt{\frac{\chi^2}{n \times (min(nrow, ncol) - 1)}}.
+$$ {#eq-effsize-v}
+
+The package `confintr` implements this in its `cramersv()` function:
+
+```{r}
+cramersv(freqs_test)
+```
+
+The association between two categorical variables is stronger, the closer $V$ approximates 1. Conversely, if $V = 0$, then the variables are completely independent. There are various guidelines in the literature that provide thresholds for "small", "moderate" and "large" effects, yet these are rarely justified on theoretical grounds and could be viewed as arbitrary.
+
+## Likelihood-based inference
+
+Since causal subordinate clauses typically follow the main clause in the
+sample, it may seem tempting to draw conclusions about the
+**probability** of a certain outcome of clause `ORDER`. Unfortunately,
+the $\chi^2$-test is **not designed** for this kind of statistical
+inference. An approach that would actually allow the estimation of
+probabilities is [Logistic regression](Logistic_regression.qmd).
+
+::: {.callout-note collapse="true" title="What would that look like?"}
+```{r}
+# Convert to factors and define reference levels
+cl.order$ORDER <- factor(cl.order$ORDER, levels = c("sc-mc", "mc-sc"))
+cl.order$SUBORDTYPE <- factor(cl.order$SUBORDTYPE, levels = c("temp", "caus")) 
+
+# Fit logistic regression model
+order.glm1 <- glm(ORDER ~ SUBORDTYPE, data = cl.order, family = "binomial")
+
+# Store model parameters
+intercept <- order.glm1$coefficients[1]
+slope <- order.glm1$coefficients[2]
+
+# Convert to probabilities
+unname(plogis(intercept + slope * 0)) # if temporal
+unname(plogis(intercept + slope * 1)) # if causal
+
+```
+
+If the subordinate clause is causal, there is a 92.5% chance that
+speakers will use the `mc-sc` ordering, but only a 44.6% chance of using
+`sc-mc`.
+:::
