@@ -158,7 +158,8 @@ matter, so long as you (as well as the people who have to work with your
 script) can understand what you're trying to achieve. Always consider
 adding comments to your filtering operations!
 
-#### `subset()`
+
+::: {.callout-note title="`subset()`" collapse="true"}
 
 Almost every subsetting operation we perform with square brackets can
 also be performed using the `subset()` function. Here are some
@@ -168,8 +169,9 @@ expressions that are synonymous to the ones above:
 subset(data, frequency > 300)
 subset(data, lemma == "start" | lemma == "help")
 ```
+:::
 
-#### `tidyverse`
+::: {.callout-note title="`tidyverse`" collapse="true"}
 
 The `tidyverse`-ecosystem is a collection of packages specifically
 designed for handling typical data science tasks as comfortably and
@@ -210,6 +212,8 @@ A extensive guide to the main `tidyverse` functions is provided in
 Chapter 3 of the free eBook [R For Data Science (2nd
 edition)](https://r4ds.hadley.nz).
 
+:::
+
 ## Exercises
 
 ::: callout-tip
@@ -220,7 +224,7 @@ You can find the solutions to the exercises
 :::
 
 ::: {#exr-df-1}
-Recreate the barplot from the previous unit by subsetting the `data`
+Recreate the barplot from the [previous unit](Vectors_Factors.qmd) by subsetting the `data`
 variable accordingly.
 :::
 
