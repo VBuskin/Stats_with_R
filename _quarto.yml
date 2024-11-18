@@ -63,6 +63,7 @@ book:
     - part: "Appendix"
       chapters:
         - More_tests.qmd
+        - Drawing_samples.qmd
     - part: References
       chapters:
         - references.qmd

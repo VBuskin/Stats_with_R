@@ -30,6 +30,25 @@ bibliography: R.bib
 
 ## Boosting
 
+The core idea of **boosting** is as simple as it is intuitive: By
+aggregating the insights of multiple weak models, a much more powerful
+complex model can be formed. The new model ensemble is argued to be
+superior in terms of predictive performance. Boosting is quite
+versatile, but we will restrict our scope to decision trees as
+introduced in the [previous
+unit](Decision_trees_and_random_forests.qmd).
+
+Core to building a boosting model is minimising a **loss function**
+$L(y, f(x))$ which represents the model's error. The choice of the loss
+metric crucially depends on whether the response $Y$ is continuous
+(regression) or discrete (classification). A simple loss function for
+regression would be the sum of squared-errors
+$L(y, f(x)) = (y -f(x))^2$. For classification, metrics that are known
+from logistic regression would be more appropriate, such as the model's
+deviance.
+
+## Gradient descent
+
 ::: callout-warning
 This page is still under construction. More content will be added soon!
 :::

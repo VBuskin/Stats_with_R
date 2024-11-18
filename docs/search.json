@@ -994,7 +994,7 @@
     "href": "Gradient_boosting.html#boosting",
     "title": "26  Gradient boosting",
     "section": "26.3 Boosting",
-    "text": "26.3 Boosting\n\n\n\n\n\n\nWarning\n\n\n\nThis page is still under construction. More content will be added soon!\n\n\n\n\n\n\nHastie, Trevor, Robert Tibshirani, and Jerome H. Friedman. 2017. The Elements of Statistical Learning: Data Mining, Inference, and Prediction. 2nd ed. New York, NY: Springer.\n\n\nJames, Gareth, Daniela Witten, Trevor Hastie, and Robert Tibshirani. 2021. An Introduction to Statistical Learning: With Applications in r. New York: Springer. https://doi.org/10.1007/978-1-0716-1418-1.",
+    "text": "26.3 Boosting\nThe core idea of boosting is as simple as it is intuitive: By aggregating the insights of multiple weak models, a much more powerful complex model can be formed. The new model ensemble is argued to be superior in terms of predictive performance. Boosting is quite versatile, but we will restrict our scope to decision trees as introduced in the previous unit.\nCore to building a boosting model is minimising a loss function \\(L(y, f(x))\\) which represents the model’s error. The choice of the loss metric crucially depends on whether the response \\(Y\\) is continuous (regression) or discrete (classification). A simple loss function for regression would be the sum of squared-errors \\(L(y, f(x)) = (y -f(x))^2\\). For classification, metrics that are known from logistic regression would be more appropriate, such as the model’s deviance.",
     "crumbs": [
       "Statistical Modelling and Machine Learning",
       "<span class='chapter-number'>26</span>  <span class='chapter-title'>Gradient boosting</span>"
@@ -1163,6 +1163,50 @@
     "crumbs": [
       "Inferential Statistics",
       "<span class='chapter-number'>19</span>  <span class='chapter-title'>Chi-squared test</span>"
+    ]
+  },
+  {
+    "objectID": "Gradient_boosting.html#gradient-descent",
+    "href": "Gradient_boosting.html#gradient-descent",
+    "title": "26  Gradient boosting",
+    "section": "26.4 Gradient descent",
+    "text": "26.4 Gradient descent\n\n\n\n\n\n\nWarning\n\n\n\nThis page is still under construction. More content will be added soon!\n\n\n\n\n\n\nHastie, Trevor, Robert Tibshirani, and Jerome H. Friedman. 2017. The Elements of Statistical Learning: Data Mining, Inference, and Prediction. 2nd ed. New York, NY: Springer.\n\n\nJames, Gareth, Daniela Witten, Trevor Hastie, and Robert Tibshirani. 2021. An Introduction to Statistical Learning: With Applications in r. New York: Springer. https://doi.org/10.1007/978-1-0716-1418-1.",
+    "crumbs": [
+      "Statistical Modelling and Machine Learning",
+      "<span class='chapter-number'>26</span>  <span class='chapter-title'>Gradient boosting</span>"
+    ]
+  },
+  {
+    "objectID": "Drawing_samples.html#sampling",
+    "href": "Drawing_samples.html#sampling",
+    "title": "31  Drawing samples",
+    "section": "31.1 Sampling",
+    "text": "31.1 Sampling",
+    "crumbs": [
+      "Appendix",
+      "<span class='chapter-number'>31</span>  <span class='chapter-title'>Drawing samples</span>"
+    ]
+  },
+  {
+    "objectID": "Drawing_samples.html#types-of-samples",
+    "href": "Drawing_samples.html#types-of-samples",
+    "title": "31  Drawing samples",
+    "section": "31.2 Types of samples",
+    "text": "31.2 Types of samples",
+    "crumbs": [
+      "Appendix",
+      "<span class='chapter-number'>31</span>  <span class='chapter-title'>Drawing samples</span>"
+    ]
+  },
+  {
+    "objectID": "Drawing_samples.html#implementation-in-r",
+    "href": "Drawing_samples.html#implementation-in-r",
+    "title": "31  Drawing samples",
+    "section": "31.3 Implementation in R",
+    "text": "31.3 Implementation in R\n\n\n\n\n\n\nWarning\n\n\n\nThis page is still under construction. More content will be added soon!",
+    "crumbs": [
+      "Appendix",
+      "<span class='chapter-number'>31</span>  <span class='chapter-title'>Drawing samples</span>"
     ]
   }
 ]

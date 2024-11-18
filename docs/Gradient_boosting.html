@@ -4631,6 +4631,17 @@ vertical-align: -.125em;
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
 
 </head>
 
@@ -4949,6 +4960,12 @@ vertical-align: -.125em;
  <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">More on significance testing</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Drawing_samples.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Drawing samples</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -4963,7 +4980,7 @@ vertical-align: -.125em;
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">References</span></span></a>
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">References</span></span></a>
   </div>
 </li>
       </ul>
@@ -4981,6 +4998,7 @@ vertical-align: -.125em;
   <li><a href="#recommended-reading" id="toc-recommended-reading" class="nav-link active" data-scroll-target="#recommended-reading"><span class="header-section-number">26.1</span> Recommended reading</a></li>
   <li><a href="#preparation" id="toc-preparation" class="nav-link" data-scroll-target="#preparation"><span class="header-section-number">26.2</span> Preparation</a></li>
   <li><a href="#boosting" id="toc-boosting" class="nav-link" data-scroll-target="#boosting"><span class="header-section-number">26.3</span> Boosting</a></li>
+  <li><a href="#gradient-descent" id="toc-gradient-descent" class="nav-link" data-scroll-target="#gradient-descent"><span class="header-section-number">26.4</span> Gradient descent</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/VBuskin/Stats_with_R/blob/main/Gradient_boosting.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
     </div>
@@ -5042,6 +5060,11 @@ vertical-align: -.125em;
 </section>
 <section id="boosting" class="level2" data-number="26.3">
 <h2 data-number="26.3" class="anchored" data-anchor-id="boosting"><span class="header-section-number">26.3</span> Boosting</h2>
+<p>The core idea of <strong>boosting</strong> is as simple as it is intuitive: By aggregating the insights of multiple weak models, a much more powerful complex model can be formed. The new model ensemble is argued to be superior in terms of predictive performance. Boosting is quite versatile, but we will restrict our scope to decision trees as introduced in the <a href="./Decision_trees_and_random_forests.html">previous unit</a>.</p>
+<p>Core to building a boosting model is minimising a <strong>loss function</strong> <span class="math inline">\(L(y, f(x))\)</span> which represents the model’s error. The choice of the loss metric crucially depends on whether the response <span class="math inline">\(Y\)</span> is continuous (regression) or discrete (classification). A simple loss function for regression would be the sum of squared-errors <span class="math inline">\(L(y, f(x)) = (y -f(x))^2\)</span>. For classification, metrics that are known from logistic regression would be more appropriate, such as the model’s deviance.</p>
+</section>
+<section id="gradient-descent" class="level2" data-number="26.4">
+<h2 data-number="26.4" class="anchored" data-anchor-id="gradient-descent"><span class="header-section-number">26.4</span> Gradient descent</h2>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
