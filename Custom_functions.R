@@ -48,7 +48,7 @@ stratified_sample_ICE <- function(data, size) {
   # Some post-hoc clean-up
   output_sample %>% 
     dplyr::select(-ID_unit, -Prob, -Stratum) %>% # remove unnecessary columns
-    relocate(Text_category) # move some columns around
+    relocate(Text_category) -> output_sample_cleaned # move some columns around
   
   # Return the desired sample
   return(output_sample)
