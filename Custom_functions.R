@@ -51,7 +51,7 @@ stratified_sample_ICE <- function(data, size) {
     relocate(Text_category) -> output_sample_cleaned # move some columns around
   
   # Return the desired sample
-  return(output_sample)
+  return(output_sample_cleaned)
   
 }
 
