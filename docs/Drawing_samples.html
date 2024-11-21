@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
 width: 0.8em;
 margin: 0 0.8em 0.2em -1em;  vertical-align: middle;
 }
+
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+}
+pre.numberSource { margin-left: 3em; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -4962,9 +4996,8 @@ vertical-align: -.125em;
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#sampling" id="toc-sampling" class="nav-link active" data-scroll-target="#sampling"><span class="header-section-number">31.1</span> Sampling</a></li>
-  <li><a href="#types-of-samples" id="toc-types-of-samples" class="nav-link" data-scroll-target="#types-of-samples"><span class="header-section-number">31.2</span> Types of samples</a></li>
-  <li><a href="#implementation-in-r" id="toc-implementation-in-r" class="nav-link" data-scroll-target="#implementation-in-r"><span class="header-section-number">31.3</span> Implementation in R</a></li>
+  <li><a href="#preparation" id="toc-preparation" class="nav-link active" data-scroll-target="#preparation"><span class="header-section-number">31.0.1</span> Preparation</a></li>
+  <li><a href="#stratified-sample" id="toc-stratified-sample" class="nav-link" data-scroll-target="#stratified-sample"><span class="header-section-number">31.0.2</span> Stratified sample</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/VBuskin/Stats_with_R/blob/main/Drawing_samples.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
     </div>
@@ -4996,14 +5029,6 @@ vertical-align: -.125em;
 </header>
 
 
-<section id="sampling" class="level2" data-number="31.1">
-<h2 data-number="31.1" class="anchored" data-anchor-id="sampling"><span class="header-section-number">31.1</span> Sampling</h2>
-</section>
-<section id="types-of-samples" class="level2" data-number="31.2">
-<h2 data-number="31.2" class="anchored" data-anchor-id="types-of-samples"><span class="header-section-number">31.2</span> Types of samples</h2>
-</section>
-<section id="implementation-in-r" class="level2" data-number="31.3">
-<h2 data-number="31.3" class="anchored" data-anchor-id="implementation-in-r"><span class="header-section-number">31.3</span> Implementation in R</h2>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -5015,6 +5040,71 @@ Warning
 </div>
 <div class="callout-body-container callout-body">
 <p>This page is still under construction. More content will be added soon!</p>
+</div>
+</div>
+<section id="preparation" class="level3" data-number="31.0.1">
+<h3 data-number="31.0.1" class="anchored" data-anchor-id="preparation"><span class="header-section-number">31.0.1</span> Preparation</h3>
+<p>Load libraries:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quanteda)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sampling)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Perform query:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load corpus</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>ICE_GB <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"ICE_GB.RDS"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform query</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>kwic_think <span class="ot">&lt;-</span> <span class="fu">kwic</span>(ICE_GB, <span class="st">"think"</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Count number of observations</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(kwic_think)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2648</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show first few</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(kwic_think)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Keyword-in-context with 6 matches.                                                       
+   [ICE_GB/S1A-001.txt, 55]          1: B &gt; I | think |
+  [ICE_GB/S1A-001.txt, 218]          1: B &gt; I | think |
+  [ICE_GB/S1A-001.txt, 534]          1: B &gt; I | think |
+  [ICE_GB/S1A-001.txt, 588] difference &lt;, &gt; I | think |
+  [ICE_GB/S1A-001.txt, 675]        &lt;, &gt; and I | think |
+ [ICE_GB/S1A-001.txt, 1049]     B &gt; Uhm and I | think |
+                           
+ the main things that I    
+ the m &lt;, &gt;                
+ that the &lt;,,              
+ the main difference that I
+ one of the things that    
+ f for for myself &lt;        </code></pre>
+</div>
+</div>
+</section>
+<section id="stratified-sample" class="level3" data-number="31.0.2">
+<h3 data-number="31.0.2" class="anchored" data-anchor-id="stratified-sample"><span class="header-section-number">31.0.2</span> Stratified sample</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"https://raw.githubusercontent.com/VBuskin/Stats_with_R/refs/heads/main/Custom_functions.R"</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">stratified_sample_ICE</span>(kwic_think, <span class="dv">500</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 501 × 8
+   Text_category File_number  from    to pre               keyword post  pattern
+   &lt;chr&gt;         &lt;chr&gt;       &lt;int&gt; &lt;int&gt; &lt;chr&gt;             &lt;chr&gt;   &lt;chr&gt; &lt;fct&gt;  
+ 1 ICE_GB/S1A    001.txt       588   588 difference &lt; , &gt;… think   the … think  
+ 2 ICE_GB/S1A    001.txt      1866  1866 : B &gt; And I       think   that… think  
+ 3 ICE_GB/S1A    001.txt      1974  1974 initial difficul… think   that… think  
+ 4 ICE_GB/S1A    002.txt       386   386 lazy really for … think   &lt; , … think  
+ 5 ICE_GB/S1A    002.txt       649   649 : C &gt; And I       think   when… think  
+ 6 ICE_GB/S1A    002.txt      1578  1578 think there ' s I think   ther… think  
+ 7 ICE_GB/S1A    002.txt      3621  3621 : B &gt; Therefore I think   that… think  
+ 8 ICE_GB/S1A    002.txt      3710  3710 : B &gt; But I       think   &lt; , … think  
+ 9 ICE_GB/S1A    003.txt       427   427 , &gt; why do you    think   phys… think  
+10 ICE_GB/S1A    003.txt      2613  2613 &gt; Well I Well I   think   it '… think  
+# ℹ 491 more rows</code></pre>
 </div>
 </div>
 

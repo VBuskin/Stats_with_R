@@ -1,0 +1,17 @@
+{
+  "hash": "321aec8f31dd577ddce9e920df6d1e36",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Drawing samples\"\nauthor: Vladimir Buskin\nformat:\n  html:\n    self-contained: true\n    theme: default\n    toc: true\n    number-sections: true\n    slide-number: true\n    incremental: false\n    slide-level: 3\n    scrollable: true\n    \neditor: visual\n---\n\n\n\n::: callout-warning\nThis page is still under construction. More content will be added soon!\n:::\n\n### Preparation\n\nLoad libraries:\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(tidyverse)\nlibrary(quanteda)\nlibrary(sampling)\nlibrary(data.table)\n```\n:::\n\n\nPerform query:\n\n\n::: {.cell}\n\n```{.r .cell-code}\n# Load corpus\nICE_GB <- readRDS(\"ICE_GB.RDS\")\n\n# Perform query\nkwic_think <- kwic(ICE_GB, \"think\")\n\n# Count number of observations\nnrow(kwic_think)\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] 2648\n```\n\n\n:::\n\n```{.r .cell-code}\n# Show first few\nhead(kwic_think)\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\nKeyword-in-context with 6 matches.                                                       \n   [ICE_GB/S1A-001.txt, 55]          1: B > I | think |\n  [ICE_GB/S1A-001.txt, 218]          1: B > I | think |\n  [ICE_GB/S1A-001.txt, 534]          1: B > I | think |\n  [ICE_GB/S1A-001.txt, 588] difference <, > I | think |\n  [ICE_GB/S1A-001.txt, 675]        <, > and I | think |\n [ICE_GB/S1A-001.txt, 1049]     B > Uhm and I | think |\n                           \n the main things that I    \n the m <, >                \n that the <,,              \n the main difference that I\n one of the things that    \n f for for myself <        \n```\n\n\n:::\n:::\n\n\n### Stratified sample\n\n\n::: {.cell}\n\n```{.r .cell-code}\nsource(\"https://raw.githubusercontent.com/VBuskin/Stats_with_R/refs/heads/main/Custom_functions.R\")\n\nstratified_sample_ICE(kwic_think, 500)\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n# A tibble: 501 × 8\n   Text_category File_number  from    to pre               keyword post  pattern\n   <chr>         <chr>       <int> <int> <chr>             <chr>   <chr> <fct>  \n 1 ICE_GB/S1A    001.txt       588   588 difference < , >… think   the … think  \n 2 ICE_GB/S1A    001.txt      1866  1866 : B > And I       think   that… think  \n 3 ICE_GB/S1A    001.txt      1974  1974 initial difficul… think   that… think  \n 4 ICE_GB/S1A    002.txt       386   386 lazy really for … think   < , … think  \n 5 ICE_GB/S1A    002.txt       649   649 : C > And I       think   when… think  \n 6 ICE_GB/S1A    002.txt      1578  1578 think there ' s I think   ther… think  \n 7 ICE_GB/S1A    002.txt      3621  3621 : B > Therefore I think   that… think  \n 8 ICE_GB/S1A    002.txt      3710  3710 : B > But I       think   < , … think  \n 9 ICE_GB/S1A    003.txt       427   427 , > why do you    think   phys… think  \n10 ICE_GB/S1A    003.txt      2613  2613 > Well I Well I   think   it '… think  \n# ℹ 491 more rows\n```\n\n\n:::\n:::\n",
+    "supporting": [
+      "Drawing_samples_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
