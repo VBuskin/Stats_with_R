@@ -40,17 +40,17 @@ the package you would like to install under `Packages`.
 This reader will use functions from a variety of R packages. Please
 install the following ones:
 
--   `quanteda` (for the analysis of text data)
+| Package | Purpose |  Session | 
+|---------|---------| ---------| 
+| `readxl` | Importing Microsoft Excel files | [Importing/exporting](Importing_exporting.qmd)
+| `writexl` | Exporting Microsoft Excel files | [Importing/exporting](Importing_exporting.qmd)
+| `quanteda` | Analysis of text data | [Concordancing](Concordancing.qmd)
+| `lattice` | Data visualisation | [Concordancing](Concordancing.qmd)
+| `tidyverse` | Framework for data manipulation and visualisation | [Categorical data](Categorical_data.qmd), [Continuous data](Summary_statistics.qmd)
+| `crosstable` | Creating contingency tables | [Categorical data](Categorical_data.qmd)
+| `flextable` | Exporting contingency tables | [Categorical data](Categorical_data.qmd)
+| `confintr` | Effect size measure for categorical data| [Chi-squared test](Chi_square_test.qmd)
 
--   `tidyverse` (a framework for data manipulation and visualisation)
-
--   `readxl` (for importing Microsoft Excel files)
-
--   `writexl` (for exporting Microsoft Excel files)
-
--   `crosstable` (for creating contingency tables)
-
--   `flextable` (for exporting contingency tables)
 
 ### Loading packages
 
@@ -59,14 +59,15 @@ libraries using the code below. You can ignore the warning messages.
 
 ```{r, echo = TRUE}
 
-library(quanteda)
-library(tidyverse)
 library(readxl)
 library(writexl)
+library(quanteda)
+library(lattice)
+library(tidyverse)
 library(crosstable)
 library(flextable)
+library(confintr)
 ```
-
 
 ::: {.callout-note collapse="false" title="Activating libraries"}
 Whenever you start a new R session (i.e., open RStudio), your libraries
@@ -87,9 +88,11 @@ from:
 readxl::read_xlsx(...)
 ```
 
-### Citing packages
+### Citing R and R packages
 
-Whenever we draw on ideas other than our own, we give credit to the respective source by citing it appropriately. The same applies to R, RStudio as well as all the packages we rely on throughout our analyses.
+Whenever we draw on ideas other than our own, we give credit to the
+respective source by citing it appropriately. The same applies to R,
+RStudio as well as all the packages we rely on throughout our analyses.
 
 For R, an up-to-date citation can be generated as follows:
 
@@ -97,25 +100,21 @@ For R, an up-to-date citation can be generated as follows:
 citation()
 ```
 
-To cite a specific package, simply supply the package name as an argument.
+To cite a specific package, simply supply the package name as an
+argument.
 
 ```{r}
 citation("quanteda")
 ```
 
-Since it would be quite tedious to do this for every single package we've currently loaded, there are a few more elegant solutions in place.
 
-```{r}
+```{r, include = FALSE, eval = FALSE}
 sessionInfo()
 ```
 
-An excellent package that specialises in reporting the output of statistical analyses, including the packages used, is `report`.
 
-
-```{r}
+```{r, include = FALSE, eval = FALSE}
 library(report)
 
 cite_packages()
 ```
-
-

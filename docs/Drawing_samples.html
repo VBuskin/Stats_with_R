@@ -4996,8 +4996,8 @@ vertical-align: -.125em;
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#preparation" id="toc-preparation" class="nav-link active" data-scroll-target="#preparation"><span class="header-section-number">31.0.1</span> Preparation</a></li>
-  <li><a href="#stratified-sample" id="toc-stratified-sample" class="nav-link" data-scroll-target="#stratified-sample"><span class="header-section-number">31.0.2</span> Stratified sample</a></li>
+  <li><a href="#preparation" id="toc-preparation" class="nav-link active" data-scroll-target="#preparation"><span class="header-section-number">31.1</span> Preparation</a></li>
+  <li><a href="#stratified-sample" id="toc-stratified-sample" class="nav-link" data-scroll-target="#stratified-sample"><span class="header-section-number">31.2</span> Stratified sample</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/VBuskin/Stats_with_R/blob/main/Drawing_samples.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
     </div>
@@ -5042,8 +5042,8 @@ Warning
 <p>This page is still under construction. More content will be added soon!</p>
 </div>
 </div>
-<section id="preparation" class="level3" data-number="31.0.1">
-<h3 data-number="31.0.1" class="anchored" data-anchor-id="preparation"><span class="header-section-number">31.0.1</span> Preparation</h3>
+<section id="preparation" class="level2" data-number="31.1">
+<h2 data-number="31.1" class="anchored" data-anchor-id="preparation"><span class="header-section-number">31.1</span> Preparation</h2>
 <p>Load libraries:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
@@ -5084,12 +5084,14 @@ Warning
 </div>
 </div>
 </section>
-<section id="stratified-sample" class="level3" data-number="31.0.2">
-<h3 data-number="31.0.2" class="anchored" data-anchor-id="stratified-sample"><span class="header-section-number">31.0.2</span> Stratified sample</h3>
+<section id="stratified-sample" class="level2" data-number="31.2">
+<h2 data-number="31.2" class="anchored" data-anchor-id="stratified-sample"><span class="header-section-number">31.2</span> Stratified sample</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"https://raw.githubusercontent.com/VBuskin/Stats_with_R/refs/heads/main/Custom_functions.R"</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">stratified_sample_ICE</span>(kwic_think, <span class="dv">500</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Source function from GitHub</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"https://raw.githubusercontent.com/VBuskin/Stats_with_R/refs/heads/main/Custom_functions.R"</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply function to the output of kwic() to perform weighted sampling</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">stratified_sample_ICE</span>(kwic_think, <span class="dv">500</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 501 × 8
    Text_category File_number  from    to pre               keyword post  pattern

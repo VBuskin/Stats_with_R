@@ -194,17 +194,24 @@ print(data2)
 
 ## Exercises
 
+::: callout-tip
+## Solutions
+
+You can find the solutions to the exercises
+[here](https://osf.io/gkvmr).
+:::
+
 ::: {#exr-impexp-1}
-Read in the file `SCOPE_reduced.RDS` into a variable named `SCOPE`. It
+Download the file `SCOPE_reduced.RDS` from [this repository](https://osf.io/3w29d) and read it into a variable named `SCOPE`. It
 contains data from the the South Carolina Psycholinguistic Metabase
 [@gaoSCOPESouthCarolina2022], specifically:
 
 -   Number of meanings (`Nsenses_WordNet`)
 
--    Emotional valence ratings, which describe the pleasantness of a
+-   Emotional valence ratings, which describe the pleasantness of a
     lexical stimulus on a scale from 1 to 9 (`Valence_Warr`)
 
--    Data for nearly 200,000 words
+-   Data for nearly 200,000 words
 :::
 
 ::: {#exr-impexp-2}

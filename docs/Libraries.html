@@ -5021,7 +5021,7 @@ vertical-align: -.125em;
   <ul class="collapse">
   <li><a href="#sec-libraries" id="toc-sec-libraries" class="nav-link" data-scroll-target="#sec-libraries"><span class="header-section-number">9.2.1</span> Installation</a></li>
   <li><a href="#loading-packages" id="toc-loading-packages" class="nav-link" data-scroll-target="#loading-packages"><span class="header-section-number">9.2.2</span> Loading packages</a></li>
-  <li><a href="#citing-packages" id="toc-citing-packages" class="nav-link" data-scroll-target="#citing-packages"><span class="header-section-number">9.2.3</span> Citing packages</a></li>
+  <li><a href="#citing-r-and-r-packages" id="toc-citing-r-and-r-packages" class="nav-link" data-scroll-target="#citing-r-and-r-packages"><span class="header-section-number">9.2.3</span> Citing R and R packages</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/VBuskin/Stats_with_R/blob/main/Libraries.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
@@ -5083,25 +5083,70 @@ How do I install a library?
 </div>
 </div>
 <p>This reader will use functions from a variety of R packages. Please install the following ones:</p>
-<ul>
-<li><p><code>quanteda</code> (for the analysis of text data)</p></li>
-<li><p><code>tidyverse</code> (a framework for data manipulation and visualisation)</p></li>
-<li><p><code>readxl</code> (for importing Microsoft Excel files)</p></li>
-<li><p><code>writexl</code> (for exporting Microsoft Excel files)</p></li>
-<li><p><code>crosstable</code> (for creating contingency tables)</p></li>
-<li><p><code>flextable</code> (for exporting contingency tables)</p></li>
-</ul>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Package</th>
+<th>Purpose</th>
+<th>Session</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>readxl</code></td>
+<td>Importing Microsoft Excel files</td>
+<td><a href="./Importing_exporting.html">Importing/exporting</a></td>
+</tr>
+<tr class="even">
+<td><code>writexl</code></td>
+<td>Exporting Microsoft Excel files</td>
+<td><a href="./Importing_exporting.html">Importing/exporting</a></td>
+</tr>
+<tr class="odd">
+<td><code>quanteda</code></td>
+<td>Analysis of text data</td>
+<td><a href="./Concordancing.html">Concordancing</a></td>
+</tr>
+<tr class="even">
+<td><code>lattice</code></td>
+<td>Data visualisation</td>
+<td><a href="./Concordancing.html">Concordancing</a></td>
+</tr>
+<tr class="odd">
+<td><code>tidyverse</code></td>
+<td>Framework for data manipulation and visualisation</td>
+<td><a href="./Categorical_data.html">Categorical data</a>, <a href="./Summary_statistics.html">Continuous data</a></td>
+</tr>
+<tr class="even">
+<td><code>crosstable</code></td>
+<td>Creating contingency tables</td>
+<td><a href="./Categorical_data.html">Categorical data</a></td>
+</tr>
+<tr class="odd">
+<td><code>flextable</code></td>
+<td>Exporting contingency tables</td>
+<td><a href="./Categorical_data.html">Categorical data</a></td>
+</tr>
+<tr class="even">
+<td><code>confintr</code></td>
+<td>Effect size measure for categorical data</td>
+<td><a href="./Chi_square_test.html">Chi-squared test</a></td>
+</tr>
+</tbody>
+</table>
 </section>
 <section id="loading-packages" class="level3" data-number="9.2.2">
 <h3 data-number="9.2.2" class="anchored" data-anchor-id="loading-packages"><span class="header-section-number">9.2.2</span> Loading packages</h3>
 <p>Once the installation has been completed, you can proceed to load the libraries using the code below. You can ignore the warning messages.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quanteda)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(writexl)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(crosstable)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(flextable)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(writexl)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quanteda)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lattice)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(crosstable)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(flextable)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(confintr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Activating libraries">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="true" aria-label="Toggle callout">
@@ -5124,8 +5169,8 @@ Activating libraries
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="citing-packages" class="level3" data-number="9.2.3">
-<h3 data-number="9.2.3" class="anchored" data-anchor-id="citing-packages"><span class="header-section-number">9.2.3</span> Citing packages</h3>
+<section id="citing-r-and-r-packages" class="level3" data-number="9.2.3">
+<h3 data-number="9.2.3" class="anchored" data-anchor-id="citing-r-and-r-packages"><span class="header-section-number">9.2.3</span> Citing R and R packages</h3>
 <p>Whenever we draw on ideas other than our own, we give credit to the respective source by citing it appropriately. The same applies to R, RStudio as well as all the packages we rely on throughout our analyses.</p>
 <p>For R, an up-to-date citation can be generated as follows:</p>
 <div class="cell">
@@ -5180,82 +5225,6 @@ A BibTeX entry for LaTeX users is
     pages = {774},
     year = {2018},
   }</code></pre>
-</div>
-</div>
-<p>Since it would be quite tedious to do this for every single package we’ve currently loaded, there are a few more elegant solutions in place.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>R version 4.2.3 (2023-03-15)
-Platform: x86_64-apple-darwin17.0 (64-bit)
-Running under: macOS Big Sur ... 10.16
-
-Matrix products: default
-BLAS:   /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRblas.0.dylib
-LAPACK: /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRlapack.dylib
-
-locale:
-[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
-
-attached base packages:
-[1] stats     graphics  grDevices utils     datasets  methods   base     
-
-other attached packages:
- [1] flextable_0.9.4  crosstable_0.7.0 writexl_1.4.2    readxl_1.4.3    
- [5] lubridate_1.9.2  forcats_1.0.0    stringr_1.5.0    dplyr_1.1.4     
- [9] purrr_1.0.1      readr_2.1.4      tidyr_1.3.0      tibble_3.2.1    
-[13] ggplot2_3.5.0    tidyverse_2.0.0  quanteda_3.3.1  
-
-loaded via a namespace (and not attached):
- [1] jsonlite_1.8.8          RcppParallel_5.1.7      shiny_1.7.4.1          
- [4] askpass_1.1             fontLiberation_0.1.0    cellranger_1.1.0       
- [7] yaml_2.3.7              gdtools_0.3.3           pillar_1.9.0           
-[10] backports_1.4.1         lattice_0.21-8          glue_1.6.2             
-[13] uuid_1.1-0              digest_0.6.33           promises_1.2.0.1       
-[16] checkmate_2.2.0         colorspace_2.1-0        htmltools_0.5.7        
-[19] httpuv_1.6.11           Matrix_1.6-5            gfonts_0.2.0           
-[22] fontBitstreamVera_0.1.1 pkgconfig_2.0.3         httpcode_0.3.0         
-[25] xtable_1.8-4            scales_1.3.0            later_1.3.1            
-[28] officer_0.6.2           fontquiver_0.2.1        tzdb_0.4.0             
-[31] openssl_2.1.0           timechange_0.2.0        generics_0.1.3         
-[34] ellipsis_0.3.2          withr_2.5.0             cli_3.6.2              
-[37] magrittr_2.0.3          crayon_1.5.2            mime_0.12              
-[40] evaluate_0.21           stopwords_2.3           fansi_1.0.4            
-[43] xml2_1.3.6              textshaping_0.3.6       tools_4.2.3            
-[46] data.table_1.14.8       hms_1.1.3               lifecycle_1.0.3        
-[49] munsell_0.5.0           zip_2.3.0               compiler_4.2.3         
-[52] systemfonts_1.0.4       rlang_1.1.2             grid_4.2.3             
-[55] rstudioapi_0.15.0       htmlwidgets_1.6.4       rmarkdown_2.23         
-[58] gtable_0.3.3            curl_5.2.1              R6_2.5.1               
-[61] knitr_1.43              fastmap_1.1.1           utf8_1.2.3             
-[64] fastmatch_1.1-4         ragg_1.2.5              stringi_1.8.3          
-[67] crul_1.4.0              Rcpp_1.0.11             vctrs_0.6.5            
-[70] tidyselect_1.2.0        xfun_0.39              </code></pre>
-</div>
-</div>
-<p>An excellent package that specialises in reporting the output of statistical analyses, including the packages used, is <code>report</code>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(report)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cite_packages</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  - Benoit K, Watanabe K, Wang H, Nulty P, Obeng A, Müller S, Matsuo A (2018). "quanteda: An R package for the quantitative analysis of textual data." _Journal of Open Source Software_, *3*(30), 774. doi:10.21105/joss.00774 &lt;https://doi.org/10.21105/joss.00774&gt;, &lt;https://quanteda.io&gt;.
-  - Chaltiel D (2023). _crosstable: Crosstables for Descriptive Analyses_. R package version 0.7.0, &lt;https://CRAN.R-project.org/package=crosstable&gt;.
-  - Gohel D, Skintzos P (2023). _flextable: Functions for Tabular Reporting_. R package version 0.9.4, &lt;https://CRAN.R-project.org/package=flextable&gt;.
-  - Grolemund G, Wickham H (2011). "Dates and Times Made Easy with lubridate." _Journal of Statistical Software_, *40*(3), 1-25. &lt;https://www.jstatsoft.org/v40/i03/&gt;.
-  - Makowski D, Lüdecke D, Patil I, Thériault R, Ben-Shachar M, Wiernik B (2023). "Automated Results Reporting as a Practical Tool to Improve Reproducibility and Methodological Best Practices Adoption." _CRAN_. &lt;https://easystats.github.io/report/&gt;.
-  - Müller K, Wickham H (2023). _tibble: Simple Data Frames_. R package version 3.2.1, &lt;https://CRAN.R-project.org/package=tibble&gt;.
-  - Ooms J (2023). _writexl: Export Data Frames to Excel 'xlsx' Format_. R package version 1.4.2, &lt;https://CRAN.R-project.org/package=writexl&gt;.
-  - R Core Team (2023). _R: A Language and Environment for Statistical Computing_. R Foundation for Statistical Computing, Vienna, Austria. &lt;https://www.R-project.org/&gt;.
-  - Wickham H (2016). _ggplot2: Elegant Graphics for Data Analysis_. Springer-Verlag New York. ISBN 978-3-319-24277-4, &lt;https://ggplot2.tidyverse.org&gt;.
-  - Wickham H (2022). _stringr: Simple, Consistent Wrappers for Common String Operations_. R package version 1.5.0, &lt;https://CRAN.R-project.org/package=stringr&gt;.
-  - Wickham H (2023). _forcats: Tools for Working with Categorical Variables (Factors)_. R package version 1.0.0, &lt;https://CRAN.R-project.org/package=forcats&gt;.
-  - Wickham H, Averick M, Bryan J, Chang W, McGowan LD, François R, Grolemund G, Hayes A, Henry L, Hester J, Kuhn M, Pedersen TL, Miller E, Bache SM, Müller K, Ooms J, Robinson D, Seidel DP, Spinu V, Takahashi K, Vaughan D, Wilke C, Woo K, Yutani H (2019). "Welcome to the tidyverse." _Journal of Open Source Software_, *4*(43), 1686. doi:10.21105/joss.01686 &lt;https://doi.org/10.21105/joss.01686&gt;.
-  - Wickham H, Bryan J (2023). _readxl: Read Excel Files_. R package version 1.4.3, &lt;https://CRAN.R-project.org/package=readxl&gt;.
-  - Wickham H, François R, Henry L, Müller K, Vaughan D (2023). _dplyr: A Grammar of Data Manipulation_. R package version 1.1.4, &lt;https://CRAN.R-project.org/package=dplyr&gt;.
-  - Wickham H, Henry L (2023). _purrr: Functional Programming Tools_. R package version 1.0.1, &lt;https://CRAN.R-project.org/package=purrr&gt;.
-  - Wickham H, Hester J, Bryan J (2023). _readr: Read Rectangular Text Data_. R package version 2.1.4, &lt;https://CRAN.R-project.org/package=readr&gt;.
-  - Wickham H, Vaughan D, Girlich M (2023). _tidyr: Tidy Messy Data_. R package version 1.3.0, &lt;https://CRAN.R-project.org/package=tidyr&gt;.</code></pre>
 </div>
 </div>
 
