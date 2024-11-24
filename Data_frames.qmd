@@ -67,8 +67,8 @@ print(data)
 ### Essential R concepts {#sec-df}
 
 The variable `data` is no longer a vector, but a **data frame** (often
-abbreviated as '**df**'). Once again, each element carries its own label and
-can, therefore, be accessed or manipulated.
+abbreviated as '**df**'). Once again, each element carries its own label
+and can, therefore, be accessed or manipulated.
 
 Since we now have two dimensions, the **subsetting** notation in square
 brackets `[ ]` has to reflect that. This is the general pattern:
@@ -158,9 +158,7 @@ matter, so long as you (as well as the people who have to work with your
 script) can understand what you're trying to achieve. Always consider
 adding comments to your filtering operations!
 
-
 ::: {.callout-note title="`subset()`" collapse="true"}
-
 Almost every subsetting operation we perform with square brackets can
 also be performed using the `subset()` function. Here are some
 expressions that are synonymous to the ones above:
@@ -172,7 +170,6 @@ subset(data, lemma == "start" | lemma == "help")
 :::
 
 ::: {.callout-note title="`tidyverse`" collapse="true"}
-
 The `tidyverse`-ecosystem is a collection of packages specifically
 designed for handling typical data science tasks as comfortably and
 elegantly as possible, supplying countless helper functions for data
@@ -211,7 +208,6 @@ filter(data2, lemma == "start" | lemma == "help")
 A extensive guide to the main `tidyverse` functions is provided in
 Chapter 3 of the free eBook [R For Data Science (2nd
 edition)](https://r4ds.hadley.nz).
-
 :::
 
 ## Exercises
@@ -224,8 +220,8 @@ You can find the solutions to the exercises
 :::
 
 ::: {#exr-df-1}
-Recreate the barplot from the [previous unit](Vectors_Factors.qmd) by subsetting the `data`
-variable accordingly.
+Recreate the barplot from the [previous unit](Vectors_Factors.qmd) by
+subsetting the `data` variable accordingly.
 :::
 
 ::: {#exr-df-2}
