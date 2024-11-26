@@ -192,6 +192,11 @@ data2 <- readRDS("frequency_data.RDS")
 print(data2)
 ```
 
+## Troubleshooting
+
+Importing data into R is often a challenging and error-prone task, made more difficult by the wide range of potential issues. **AI tools** can be immensely helpful for identifying and addressing problems specific to your use case. [This handout](Using_AI.qmd) provides some practical guidance, including tips for resolving file-loading errors.
+
+
 ## Exercises
 
 ::: callout-tip
@@ -202,9 +207,10 @@ You can find the solutions to the exercises
 :::
 
 ::: {#exr-impexp-1}
-Download the file `SCOPE_reduced.RDS` from [this repository](https://osf.io/3w29d) and read it into a variable named `SCOPE`. It
-contains data from the the South Carolina Psycholinguistic Metabase
-[@gaoSCOPESouthCarolina2022], specifically:
+Download the file `SCOPE_reduced.RDS` from [this
+repository](https://osf.io/3w29d) and read it into a variable named
+`SCOPE`. It contains data from the the South Carolina Psycholinguistic
+Metabase [@gaoSCOPESouthCarolina2022], specifically:
 
 -   Number of meanings (`Nsenses_WordNet`)
 
@@ -226,12 +232,9 @@ Using this database, retrieve
 What do you notice about the valence ratings? Do they align with your
 intuitions about these words' emotional content?
 
-:::callout-tip
-
+::: callout-tip
 This task is very similar to @exr-df-3!
-
 :::
-
 :::
 
 ::: {#exr-impexp-3}
@@ -244,9 +247,9 @@ read them back into R.
 :::
 
 ::: {#exr-impexp-4}
-
-Separators determine how tabular data is stored internally. Investigate what happens when you read in `frequency_data.csv` with different separator settings:
-
+Separators determine how tabular data is stored internally. Investigate
+what happens when you read in `frequency_data.csv` with different
+separator settings:
 
 ```{r, output = FALSE}
 # Comma separator (default)
@@ -262,5 +265,4 @@ imported_csv3 <- read.csv("frequency_data.csv", sep = ";")
 print(imported_csv3)
 
 ```
-
 :::

@@ -64,6 +64,7 @@ book:
       chapters:
         - More_tests.qmd
         - Drawing_samples.qmd
+        - Using_AI.qmd
     - part: References
       chapters:
         - references.qmd
