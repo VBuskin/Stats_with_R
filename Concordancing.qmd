@@ -37,6 +37,14 @@ On corpus-linguistic theory:
 
 ## Preparation
 
+::: callout-tip
+## Script
+
+You can find the full R script associated with this unit
+[here](https://osf.io/duras).
+:::
+
+
 ::: callout-warning
 ### Working directory
 
@@ -44,15 +52,16 @@ In order for R to be able to recognise the data, it is crucial to set up
 the working directory correctly.
 
 1.  Make sure your R-script **and** the corpus (e.g., 'ICE-GB') are
-    stored in the **same folder**.
+    stored in the **same folder** on your computer.
 
-2.  In RStudio, now navigate to `Session` \> `Set working directory` \>
-    `To Source File Location`. This ensures that the folder where you
-    have placed your R-script will function as your working directory
-    until you close RStudio again.
+2.  In RStudio, go to the `Files` pane (usually in the bottom-right
+    corner) and navigate to the location of your script. Alternatively, you can click on the three dots `...` and use the file browser instead.
 
-To see your working directory in your files pane, click on `Files` \>
-`'Blue wheel symbol'` \> `Go to working directory`.
+3.  Once you're in the correct folder, click on the blue ⚙️ icon.
+
+4.  Select `Set As Working Directory`. This action will update your
+    working directory to the folder where the file is located.
+
 :::
 
 In addition, make sure you have installed `quanteda`. Load it at the
@@ -83,7 +92,7 @@ steps 1 and 2 in the callout box above.
 
 A core task in corpus-linguistic research involves finding occurrences
 of a single word or multi-word sequence in the corpus. Lange & Leuckert
-[-@lange_corpus_2020: 55, emphasis in original] explain that specialised
+[-@lange_corpus_2020: 55] explain that specialised
 software typically "provide\[s\] the surrounding context as well as the
 name of the file in which the word could be identified." Inspecting the
 context is particularly important in comparative research, as it may be
@@ -201,7 +210,7 @@ the unit on [importing and exporting data](Importing_exporting.qmd).
 ```{r, output = F, eval = F}
 library(writexl) # required for writing files to MS Excel
 
-write_xlsx(query2, "myresults1.xlsx")
+write_xlsx(query1, "myresults1.xlsx")
 
 ```
 
@@ -209,7 +218,7 @@ write_xlsx(query2, "myresults1.xlsx")
 
 ```{r, output = F, eval = F}
 
-write.csv(query2, "myresults1.csv")
+write.csv(query1, "myresults1.csv")
 
 ```
 
@@ -258,10 +267,20 @@ spread relatively evenly across corpus files or does it only occur in
 specific ones?
 
 ```{r}
+# Frequency of keyword by docname
 query_distrib <- table(query1$docname, query1$keyword)
+
+# Show first few rows
+head(query_distrib)
 
 # Create a simple dot plot
 dotplot(query_distrib, auto.key = list(columns = 2, title = "Tokens", cex.title = 1))
+
+# Create a fancy plot (requires tidyverse)
+ggplot(query1, aes(x = keyword)) + 
+  geom_bar() +
+  facet_wrap(~docname)
+
 ```
 
 It seems that *eat* occurs at least once in most text categories (both

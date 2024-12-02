@@ -153,6 +153,9 @@ wrong** at each stage of the study!
 :::
 
 ::: {#exr-basics-2}
-Read another sociolinguistic study
-[e.g., @unuabonahCommentaryPragmaticMarkers2018]. As you read, identify similar key sections or "building blocks" used in this study (e.g., introduction, research question etc.). What purpose does each section serve in the study’s overall structure?
+Read another sociolinguistic study [e.g.,
+@unuabonahCommentaryPragmaticMarkers2018]. As you read, identify similar
+key sections or "building blocks" used in this study (e.g.,
+introduction, research question etc.). What purpose does each section
+serve in the study’s overall structure?
 :::
