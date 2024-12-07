@@ -52,12 +52,13 @@ previous research.
     $Y$ then appear to be correlated in some way, i.e., there is some
     kind of effect.
 
-In the subsequent sections, we will consider two scenarios:
+In the subsequent sections, we will consider two scenarios, one for
+categorical and one for continuous data:
 
-1.  We are interested in finding out whether English clause `ORDER`
-    ('sc-mc' or 'mc-sc') depends on the type of the subordinate clause
-    (`SUBORDTYPE`), which can be either temporal ('temp') or causal
-    ('caus').
+1.  **Categorical variables**: We are interested in finding out whether
+    English clause `ORDER` ('sc-mc' or 'mc-sc') depends on the type of
+    the subordinate clause (`SUBORDTYPE`), which can be either temporal
+    ('temp') or causal ('caus').
 
 Our hypotheses are:
 
@@ -66,9 +67,34 @@ Our hypotheses are:
 -   $H_1:$ The variables `ORDER` and `SUBORDTYPE` are **not**
     independent.
 
-2.  As part of a phonetic study, we compare the base frequencies of the
-    F1 formants for male and female speakers of Apache. We forward the
-    following hypotheses:
+::: {.callout-note title="What does independence really mean?" collapse="true"}
+The core idea is "that the probability distribution of the response
+variable is the same for each group"
+[@agrestiFoundationsStatisticsData2022: 177]. If clause `ORDER` is the
+response variable and `SUBORDTYPE` the explanatory variable,
+independence would mean that the outcomes of the response variable
+`ORDER = "mc-sc"` and `ORDER = "sc-mc"` are equally likely to occur in
+the groups `SUBORDTYPE = "temp"` **and** `SUBORDTYPE = "caus"`.
+
+The term **probability distribution** refers to a mathematical function
+that assigns probabilities to the outcomes of a variable. If we consider
+two variables at the same time, such as $X$ and $Y$, they are said to have **marginal probability functions** $f_1(x)$ and $f_2(y)$. If we condition the outcomes of all values on each other, the following equivalence will hold:
+
+$$
+f(x \mid y) = f_1(x) \text{ and } f(y \mid x) = f_2(y).
+$$ {#eq-indep}
+
+Thus, the null hypothesis assumes that the probabilities of each combination of values (such as `ORDER` and `SUBORDTYPE`), denoted by $\pi_{ij}$, have the relationship in @eq-indep. This can be stated succinctly as
+
+$$
+H_0 : \pi_{ij} = P(X = i)P(Y = j).
+$$ {#eq-nullhyp-math}
+
+:::
+
+2.  **Continuous variables**: As part of a phonetic study, we compare
+    the base frequencies of the F1 formants (in Hz) for male and female
+    speakers of Apache. We forward the following hypotheses:
 
 -   $H_0:$ mean `F1 frequency` of men $=$ mean `F1 frequency` of women.
 
@@ -77,9 +103,11 @@ Our hypotheses are:
 
 Based on our data, we can decide to either **accept** or **reject**
 $H_0$. Rejecting $H_0$ can be viewed as evidence in favour of $H_1$ and
-thus marks a potential 'discovery' in the data. However, there is always
-a chance that we accept or reject the wrong hypothesis; the four
-possible constellations are summarised in the table below [cf.
+thus marks a potential 'discovery' in the data.
+
+::: {.callout-caution title="Hypothesis testing -- what could go wrong?"}
+There is always a chance that we accept or reject the wrong hypothesis;
+the four possible constellations are summarised in the table below [cf.
 @heumann_introduction_2022: 223]:
 
 |                           | $H_0$ is true                                       | $H_0$ is not true                                   |
@@ -91,7 +119,8 @@ The probability of a Type I error, which refers to the rejection of
 $H_0$ although it is true, is called the **significance level**
 $\alpha$, which has a conventional value of $0.05$ (i.e., a 5% chance of
 committing a Type I error). Nevertheless, it is always recommended to
-state explicitly the $\alpha$-level used for rejecting/accepting $H_0$.
+explicitly state the $\alpha$-level used for rejecting/accepting $H_0$.
+:::
 
 ## Constructing the critical region
 
