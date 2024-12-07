@@ -156,14 +156,16 @@ respectively. Dichotomous variables of this kind are also often coded as
     logistic regression** or **softmax regression.**
 
 Another difference from linear regression is the **output** of the
-model. In linear regression, we obtain a predicted value for the
-continuous response variable we're interested in. For instance, if we're
-modelling reaction times, the model will return an estimated reaction
-time (given the predictors).
+model:
 
-In logistic regression, however, we either get a **class label** or a
-**probability**. When modelling pronominal reference, the model will
-thus either tell us
+-   In linear regression, we obtain a predicted value for the continuous
+    response variable we're interested in. For instance, if we're
+    modelling reaction times, the model will return an estimated mean
+    reaction time (given the predictors).
+
+-   In logistic regression, however, we either get a **class label** or
+    a **probability**. When modelling pronominal reference, the model
+    will thus either tell us
 
 1.  whether a speaker would use an overt or a null subject in a given
     observation (class prediction).
@@ -211,23 +213,22 @@ ggplot(df, aes(x = X, y = p)) +
 ### The simple logistic model
 
 Assuming a binary response variable $Y$ with the values 1 and 0 and a
-single predictor $X$, we can model the probability $P(Y = 1 \mid X)$ as
+single predictor $X$, the conditional probability
+$P(Y = 1 \mid X)$ is then equivalent to the inverse logit in @eq-log-exp.
 
 $$
 P(Y = 1 \mid  X) = \frac{e^{\beta_0 + \beta_1X}}{1 + e^{\beta_0 + \beta_1X}}.
-$$
+$$ {#eq-log-exp}
 
-The above expression is equivalent to
+With some manipulation it can be shaped into a form that is definitely more familiar:
 
 $$
 \log\left(\frac{P(Y = 1 \mid  X)}{1 - P(Y = 1 \mid  X)}\right) = \beta_0 + \beta_1X.
-$$
+$$ {#eq-log}
 
-The fraction $\frac{P(Y = 1 \mid X)}{1-P(Y = 1 \mid X)}$ represents the
+The logistic model has several characteristic components. The fraction $\frac{P(Y = 1 \mid X)}{1-P(Y = 1 \mid X)}$ represents the
 **odds**, which stand for to the probability of one outcome (e.g.,
-`Reference = null`) compared to the other (e.g., `Reference = overt`).
-
-Their logarithmic transformation are the **log odds** (or **logits**) of
+`Reference = null`) compared to the other (e.g., `Reference = overt`). Their logarithmic transformation are the **log odds** (or **logits**) of
 one outcome versus the other.
 
 ::: {.callout-tip title="Understanding log odds"}
@@ -240,43 +241,33 @@ When interpreting the output of a logistic model, note that
     $\frac{P(Y = 1 \mid X)}{1-P(Y = 1 \mid X)}$.
 :::
 
-In more concrete terms: If $X = \text{Register}$, then our model would
-have the form:
+In more concrete terms: If we are interested in the probability that the form of pronominal reference is `null` (our $Y$) while taking into account the extra-linguistic context (`Register`; our $X$), the model would then have the general form in @eq-log-simple. 
 
 $$
 \log\left(\frac{P(\text{Reference} = \text{null} \mid \text{Register})}{1- P(\text{Reference} = \text{null} \mid \text{Register})}\right) = \beta_0 + \beta_1\text{Register}
-$$
+$$ {#eq-log-simple}
 
-Given `Register`, the log odds of a null subject versus an overt one is
-essentially equivalent to the linear model equation. The model
-parameters $\beta_0$ and $\beta_1$ are typically estimated using
-**Maximum Likelihood Estimation**[^logistic_regression-3] (MLE).
+::: {.callout-tip collapse="true" title="Finding $\beta_0$ and $\beta_1$: Maximum Likelihood Estimation"}
 
-[^logistic_regression-3]: The goal of the fitting procedure is to
-    maximise the likelihood function of the parameter matrix
-    $\ell(\mathbf{\beta})$. Via partial differentiation, an intermediary
-    result can be attained which can only be solved using an iterative
-    algorithm (e.g. Newton-Ralphson). For further technical details, see
-    Wood [-@woodGeneralizedAdditiveModels2006: 63-66] or Agresti &
-    Kateri [-@agrestiFoundationsStatisticsData2022: 291-294].
+In contrast to continuous data, the estimation of parameters for discrete response variables is much less straightforward. Rather than finding a regression line that minimises the distance to all data points, logistic models typically attempt to find the parameter values that are **most likely**, given the data. Hence this procedure is also known as **Maximum Likelihood Estimation** (MLE). For further technical details, see Wood [-@woodGeneralizedAdditiveModels2006: 63-66] or Agresti & Kateri [-@agrestiFoundationsStatisticsData2022: 291-294].
+    
+:::
 
 ### Multiple logistic regression
 
 If more than one predictor is included, the above equations can be
-expanded so as to take into account $1, ..., p$ slopes and $1, ..., p$
-independent variables $X_p$.
+expanded so as to take into account $p$ slopes for $p$
+independent variables $X_1, X_2, ..., X_p$.
 
 $$ P(Y = 1 \mid X_1, ..., X_p) = \frac{e^{\beta_0 + \beta_1X_1 + ... + \beta_pX_p}}{1 + e^{\beta_0 + \beta_1X_1 + ... + \beta_pX_p}}.
-$$
+$$ {#eq-log-multiple}
 
-Thus, the log odds correspond to the sum of $\beta_pX_p$,
+Consequently, the log odds correspond to the sum of linear predictors $\beta_1X_1 + \beta_2X_2 + ...+ \beta_pX_p$ (cf. @eq-log-full).
 
 $$
-\begin{aligned}
-\log\left(\frac{P(Y = 1 \mid X_1, ..., X_p)}{1 - P(Y = 1 \mid X_1, ...,  X_p)}\right) & = \beta_0 + \beta_1X_1 + ... +  \beta_pX_p \\
-& = \beta_0 + \sum_{i=1}^{p} \beta_i X_i
-\end{aligned}
-$$ respectively.
+\log\left(\frac{P(Y = 1 \mid X_1, ..., X_p)}{1 - P(Y = 1 \mid X_1, ...,  X_p)}\right) = \beta_0 + \sum_{i=1}^{p} \beta_i X_i
+$$ {#eq-log-full}
+
 
 ### Odds ratios
 

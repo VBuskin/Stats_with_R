@@ -44,7 +44,6 @@ You can find the full R script associated with this unit
 [here](https://osf.io/duras).
 :::
 
-
 ::: callout-warning
 ### Working directory
 
@@ -55,13 +54,14 @@ the working directory correctly.
     stored in the **same folder** on your computer.
 
 2.  In RStudio, go to the `Files` pane (usually in the bottom-right
-    corner) and navigate to the location of your script. Alternatively, you can click on the three dots `...` and use the file browser instead.
+    corner) and navigate to the location of your script. Alternatively,
+    you can click on the three dots `...` and use the file browser
+    instead.
 
 3.  Once you're in the correct folder, click on the blue ⚙️ icon.
 
 4.  Select `Set As Working Directory`. This action will update your
     working directory to the folder where the file is located.
-
 :::
 
 In addition, make sure you have installed `quanteda`. Load it at the
@@ -92,11 +92,11 @@ steps 1 and 2 in the callout box above.
 
 A core task in corpus-linguistic research involves finding occurrences
 of a single word or multi-word sequence in the corpus. Lange & Leuckert
-[-@lange_corpus_2020: 55] explain that specialised
-software typically "provide\[s\] the surrounding context as well as the
-name of the file in which the word could be identified." Inspecting the
-context is particularly important in comparative research, as it may be
-indicative of distinct usage patterns.
+[-@lange_corpus_2020: 55] explain that specialised software typically
+"provide\[s\] the surrounding context as well as the name of the file in
+which the word could be identified." Inspecting the context is
+particularly important in comparative research, as it may be indicative
+of distinct usage patterns.
 
 ```{r, echo = F, output = F}
 # Load libraries

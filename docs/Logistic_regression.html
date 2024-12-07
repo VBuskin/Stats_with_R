@@ -4998,6 +4998,12 @@ vertical-align: -.125em;
  <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Drawing samples</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Using_AI.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Working with AI</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -5012,7 +5018,7 @@ vertical-align: -.125em;
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">References</span></span></a>
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">References</span></span></a>
   </div>
 </li>
       </ul>
@@ -5175,8 +5181,11 @@ vertical-align: -.125em;
 <section id="logistic-regression" class="level2 page-columns page-full" data-number="22.3">
 <h2 data-number="22.3" class="anchored" data-anchor-id="logistic-regression"><span class="header-section-number">22.3</span> Logistic regression</h2>
 <p>In contrast to linear regression, logistic regression models a <strong>qualitative response variable</strong> <span class="math inline">\(Y\)</span> with two outcomes<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. In the present study, <span class="math inline">\(Y\)</span> is pronominal <code>Reference</code> and has the outcomes <code>Reference = null</code> and <code>Reference = overt</code>, which represent null and overt subjects, respectively. Dichotomous variables of this kind are also often coded as <code>yes</code>/<code>no</code> or <code>1</code>/<code>0</code>.</p>
-<div class="no-row-height column-margin column-container"><li id="fn2"><p><sup>2</sup>&nbsp;Logistic regression can also be used for <span class="math inline">\(\geq 3\)</span> classes by breaking down the response variable into a series of dichotomous variables. This is also known as <strong>multinomial logistic regression</strong> or <strong>softmax regression.</strong></p></li></div><p>Another difference from linear regression is the <strong>output</strong> of the model. In linear regression, we obtain a predicted value for the continuous response variable we’re interested in. For instance, if we’re modelling reaction times, the model will return an estimated reaction time (given the predictors).</p>
-<p>In logistic regression, however, we either get a <strong>class label</strong> or a <strong>probability</strong>. When modelling pronominal reference, the model will thus either tell us</p>
+<div class="no-row-height column-margin column-container"><li id="fn2"><p><sup>2</sup>&nbsp;Logistic regression can also be used for <span class="math inline">\(\geq 3\)</span> classes by breaking down the response variable into a series of dichotomous variables. This is also known as <strong>multinomial logistic regression</strong> or <strong>softmax regression.</strong></p></li></div><p>Another difference from linear regression is the <strong>output</strong> of the model:</p>
+<ul>
+<li><p>In linear regression, we obtain a predicted value for the continuous response variable we’re interested in. For instance, if we’re modelling reaction times, the model will return an estimated mean reaction time (given the predictors).</p></li>
+<li><p>In logistic regression, however, we either get a <strong>class label</strong> or a <strong>probability</strong>. When modelling pronominal reference, the model will thus either tell us</p></li>
+</ul>
 <ol type="1">
 <li><p>whether a speaker would use an overt or a null subject in a given observation (class prediction).</p></li>
 <li><p>what the probability of using one variant vs.&nbsp;the other would be (probability prediction).</p></li>
@@ -5191,18 +5200,17 @@ vertical-align: -.125em;
 </div>
 </div>
 </div>
-<section id="the-simple-logistic-model" class="level3 page-columns page-full" data-number="22.3.1">
+<section id="the-simple-logistic-model" class="level3" data-number="22.3.1">
 <h3 data-number="22.3.1" class="anchored" data-anchor-id="the-simple-logistic-model"><span class="header-section-number">22.3.1</span> The simple logistic model</h3>
-<p>Assuming a binary response variable <span class="math inline">\(Y\)</span> with the values 1 and 0 and a single predictor <span class="math inline">\(X\)</span>, we can model the probability <span class="math inline">\(P(Y = 1 \mid X)\)</span> as</p>
-<p><span class="math display">\[
+<p>Assuming a binary response variable <span class="math inline">\(Y\)</span> with the values 1 and 0 and a single predictor <span class="math inline">\(X\)</span>, the conditional probability <span class="math inline">\(P(Y = 1 \mid X)\)</span> is then equivalent to the inverse logit in <a href="#eq-log-exp" class="quarto-xref">Equation&nbsp;<span>22.1</span></a>.</p>
+<p><span id="eq-log-exp"><span class="math display">\[
 P(Y = 1 \mid  X) = \frac{e^{\beta_0 + \beta_1X}}{1 + e^{\beta_0 + \beta_1X}}.
-\]</span></p>
-<p>The above expression is equivalent to</p>
-<p><span class="math display">\[
+\tag{22.1}\]</span></span></p>
+<p>With some manipulation it can be shaped into a form that is definitely more familiar:</p>
+<p><span id="eq-log"><span class="math display">\[
 \log\left(\frac{P(Y = 1 \mid  X)}{1 - P(Y = 1 \mid  X)}\right) = \beta_0 + \beta_1X.
-\]</span></p>
-<p>The fraction <span class="math inline">\(\frac{P(Y = 1 \mid X)}{1-P(Y = 1 \mid X)}\)</span> represents the <strong>odds</strong>, which stand for to the probability of one outcome (e.g., <code>Reference = null</code>) compared to the other (e.g., <code>Reference = overt</code>).</p>
-<p>Their logarithmic transformation are the <strong>log odds</strong> (or <strong>logits</strong>) of one outcome versus the other.</p>
+\tag{22.2}\]</span></span></p>
+<p>The logistic model has several characteristic components. The fraction <span class="math inline">\(\frac{P(Y = 1 \mid X)}{1-P(Y = 1 \mid X)}\)</span> represents the <strong>odds</strong>, which stand for to the probability of one outcome (e.g., <code>Reference = null</code>) compared to the other (e.g., <code>Reference = overt</code>). Their logarithmic transformation are the <strong>log odds</strong> (or <strong>logits</strong>) of one outcome versus the other.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Understanding log odds">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -5220,24 +5228,36 @@ Understanding log odds
 </ul>
 </div>
 </div>
-<p>In more concrete terms: If <span class="math inline">\(X = \text{Register}\)</span>, then our model would have the form:</p>
-<p><span class="math display">\[
+<p>In more concrete terms: If we are interested in the probability that the form of pronominal reference is <code>null</code> (our <span class="math inline">\(Y\)</span>) while taking into account the extra-linguistic context (<code>Register</code>; our <span class="math inline">\(X\)</span>), the model would then have the general form in <a href="#eq-log-simple" class="quarto-xref">Equation&nbsp;<span>22.3</span></a>.</p>
+<p><span id="eq-log-simple"><span class="math display">\[
 \log\left(\frac{P(\text{Reference} = \text{null} \mid \text{Register})}{1- P(\text{Reference} = \text{null} \mid \text{Register})}\right) = \beta_0 + \beta_1\text{Register}
-\]</span></p>
-<p>Given <code>Register</code>, the log odds of a null subject versus an overt one is essentially equivalent to the linear model equation. The model parameters <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> are typically estimated using <strong>Maximum Likelihood Estimation</strong><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> (MLE).</p>
-<div class="no-row-height column-margin column-container"><li id="fn3"><p><sup>3</sup>&nbsp;The goal of the fitting procedure is to maximise the likelihood function of the parameter matrix <span class="math inline">\(\ell(\mathbf{\beta})\)</span>. Via partial differentiation, an intermediary result can be attained which can only be solved using an iterative algorithm (e.g.&nbsp;Newton-Ralphson). For further technical details, see Wood <span class="citation" data-cites="woodGeneralizedAdditiveModels2006">(<a href="references.html#ref-woodGeneralizedAdditiveModels2006" role="doc-biblioref">2006</a>: 63-66)</span> or Agresti &amp; Kateri <span class="citation" data-cites="agrestiFoundationsStatisticsData2022">(<a href="references.html#ref-agrestiFoundationsStatisticsData2022" role="doc-biblioref">2022</a>: 291-294)</span>.</p></li></div></section>
+\tag{22.3}\]</span></span></p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Finding $\beta_0$ and $\beta_1$: Maximum Likelihood Estimation">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Finding <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>: Maximum Likelihood Estimation
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>In contrast to continuous data, the estimation of parameters for discrete response variables is much less straightforward. Rather than finding a regression line that minimises the distance to all data points, logistic models typically attempt to find the parameter values that are <strong>most likely</strong>, given the data. Hence this procedure is also known as <strong>Maximum Likelihood Estimation</strong> (MLE). For further technical details, see Wood <span class="citation" data-cites="woodGeneralizedAdditiveModels2006">(<a href="references.html#ref-woodGeneralizedAdditiveModels2006" role="doc-biblioref">2006</a>: 63-66)</span> or Agresti &amp; Kateri <span class="citation" data-cites="agrestiFoundationsStatisticsData2022">(<a href="references.html#ref-agrestiFoundationsStatisticsData2022" role="doc-biblioref">2022</a>: 291-294)</span>.</p>
+</div>
+</div>
+</div>
+</section>
 <section id="multiple-logistic-regression" class="level3" data-number="22.3.2">
 <h3 data-number="22.3.2" class="anchored" data-anchor-id="multiple-logistic-regression"><span class="header-section-number">22.3.2</span> Multiple logistic regression</h3>
-<p>If more than one predictor is included, the above equations can be expanded so as to take into account <span class="math inline">\(1, ..., p\)</span> slopes and <span class="math inline">\(1, ..., p\)</span> independent variables <span class="math inline">\(X_p\)</span>.</p>
-<p><span class="math display">\[ P(Y = 1 \mid X_1, ..., X_p) = \frac{e^{\beta_0 + \beta_1X_1 + ... + \beta_pX_p}}{1 + e^{\beta_0 + \beta_1X_1 + ... + \beta_pX_p}}.
-\]</span></p>
-<p>Thus, the log odds correspond to the sum of <span class="math inline">\(\beta_pX_p\)</span>,</p>
-<p><span class="math display">\[
-\begin{aligned}
-\log\left(\frac{P(Y = 1 \mid X_1, ..., X_p)}{1 - P(Y = 1 \mid X_1, ...,  X_p)}\right) &amp; = \beta_0 + \beta_1X_1 + ... +  \beta_pX_p \\
-&amp; = \beta_0 + \sum_{i=1}^{p} \beta_i X_i
-\end{aligned}
-\]</span> respectively.</p>
+<p>If more than one predictor is included, the above equations can be expanded so as to take into account <span class="math inline">\(p\)</span> slopes for <span class="math inline">\(p\)</span> independent variables <span class="math inline">\(X_1, X_2, ..., X_p\)</span>.</p>
+<p><span id="eq-log-multiple"><span class="math display">\[ P(Y = 1 \mid X_1, ..., X_p) = \frac{e^{\beta_0 + \beta_1X_1 + ... + \beta_pX_p}}{1 + e^{\beta_0 + \beta_1X_1 + ... + \beta_pX_p}}.
+\tag{22.4}\]</span></span></p>
+<p>Consequently, the log odds correspond to the sum of linear predictors <span class="math inline">\(\beta_1X_1 + \beta_2X_2 + ...+ \beta_pX_p\)</span> (cf. <a href="#eq-log-full" class="quarto-xref">Equation&nbsp;<span>22.5</span></a>).</p>
+<p><span id="eq-log-full"><span class="math display">\[
+\log\left(\frac{P(Y = 1 \mid X_1, ..., X_p)}{1 - P(Y = 1 \mid X_1, ...,  X_p)}\right) = \beta_0 + \sum_{i=1}^{p} \beta_i X_i
+\tag{22.5}\]</span></span></p>
 </section>
 <section id="odds-ratios" class="level3" data-number="22.3.3">
 <h3 data-number="22.3.3" class="anchored" data-anchor-id="odds-ratios"><span class="header-section-number">22.3.3</span> Odds ratios</h3>
@@ -5246,7 +5266,7 @@ Understanding log odds
 OR(X_1) = e^{\beta_1}.
 \]</span></p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Understanding odds ratios">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -5255,7 +5275,7 @@ Understanding odds ratios
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Essentially, the OR describes the ratio between two odds with respect to another independent variable. This is illustrated for <code>Reference</code> given <code>Register</code> below:</p>
 <p><span class="math display">\[
