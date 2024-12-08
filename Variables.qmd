@@ -1,10 +1,10 @@
 ---
-title: "Statistical variables"
+title: "Data types"
 author: Vladimir Buskin
 institute: Catholic University of Eichstätt-Ingolstadt
 format:
   html:
-    self-contained: false
+    self-contained: true
     theme: default
     toc: true
     number-sections: true

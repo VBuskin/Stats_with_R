@@ -67,15 +67,16 @@ table(kwic_provide$keyword)
 
 There are two ways to handle the output:
 
-1.  Refine the search expression further to only match those cases of
-    interest.
-2.  Manually sort out irrelevant cases during qualitative annotation in
-    a spreadsheet software.
+1.  **Refine the search expression** further to only match those cases
+    of interest.
+2.  Manually **sort out irrelevant cases** during qualitative annotation
+    in a spreadsheet software.
 
 As a rule of thumb, you should consider improving your search expression
 if you obtain hundreds or even thousands of false hits. Should there be
 only few false positives, it's usually easier to simply mark them as
-"irrelevant" in your spreadsheet.
+"irrelevant" in your spreadsheet. A full workflow is demonstrated in
+unit [13. Data annotation](Annotation.qmd).
 
 ## A RegEx Cheatsheet
 
@@ -89,15 +90,15 @@ only few false positives, it's usually easier to simply mark them as
 ### Character classes and alternatives
 
 | **Command** | **Definition**                               | **Example**     | **Finds**                       |
-|-------------|----------------------------------------------|-----------------|---------------------------------|
+|-----------------|---------------------|-----------------|-----------------|
 | `[abc]`     | Class of characters                          | `[jp]ython`     | *jython, python*                |
-| `[ ^pP]`    | Excluded class of characters                 | `[^pP]ython`    | everything but *python, Python* |
+| `[^pP]`     | Excluded class of characters                 | `[^pP]ython`    | everything but *python, Python* |
 | `(...|...)` | Alternatives linked by logical operator `or` | `P(ython|eter)` | *Python, Peter*                 |
 
 ### Quantifiers
 
 | **Command** | **Definition**                                | **Example**   | **Finds**                     |
-|-------------|-----------------------------------------------|---------------|-------------------------------|
+|-----------------|---------------------|-----------------|-----------------|
 | `?`         | One or zero instances of the preceding symbol | `Py?thon`     | *Python, Pthon*               |
 | `*`         | No matter how many times — also zero          | `Py*thon`     | *Python, Pthon, Pyyyython...* |
 |             |                                               | `P[Yy]*thon`  | *Python, Pthon, PyYYython...* |
@@ -115,12 +116,12 @@ literals.
 :::
 
 | **Command** | **Definition**                              | **Example**      | **Finds**                        |
-|-------------|---------------------------------------------|------------------|----------------------------------|
+|-----------------|--------------------|-----------------|-----------------|
 | `\\w`       | All alphanumeric characters (A-Z, a-z, 0-9) | `\\w+ing`        | *walking*, *running*, *42ing*    |
 | `\\W`       | All non-alphanumeric characters             | `hello\\W+world` | *hello world*, *hello!!!world*   |
 | `\\d`       | All decimal numbers (0-9)                   | `\\d{3}-\\d{4}`  | *555-1234*, *867-5309*           |
 | `\\D`       | Everything which is not a decimal number    | `\\D+`           | *Hello!*, *Python_code*          |
-| `\\s`       | Empty space                                 | `word\\s+word`   | *word word,* word word           |
+| `\\s`       | Empty space                                 | `word\\s+word`   | *word word*                      |
 | `\\b`       | Word boundary                               | `\\bpython\\b`   | Matches *python* as a whole word |
 
 ## Querying parsed corpora
@@ -164,7 +165,7 @@ are listed here:
 Cf. <https://universaldependencies.org/u/pos/>.
 
 | POS Tag | Description                                                                                               |
-|---------|-----------------------------------------------------------------------------------------------------------|
+|-------------------|-----------------------------------------------------|
 | ADJ     | Adjective: describes a noun (e.g., *big*, *old*, *green*, *first*)                                        |
 | ADP     | Adposition: prepositions and postpositions (e.g., *in*, *to*, *over*)                                     |
 | ADV     | Adverb: modifies verbs, adjectives, or other adverbs (e.g., *quickly*, *very*)                            |
@@ -184,6 +185,23 @@ Cf. <https://universaldependencies.org/u/pos/>.
 | X       | Other: used when a word doesn't fit into other categories                                                 |
 :::
 
+## Working with other platforms: CQP
+
+Some corpus platforms such as [BNCweb](https://cqpweb.lancs.ac.uk),
+[CQPweb](https://cqpweb.lancs.ac.uk) or our local [KU
+corpora](ku.de/corpora)[^regular_expressions-1] rely on a special syntax
+known as **CQP** (**C**orpus **Q**uery **P**rocessor). CQP syntax is
+very powerful in that enables users to query for strings with specific
+meta-attributes (text category, age, gender etc.). For more details, see
+the [CQP documentation](https://cwb.sourceforge.io/files/CQP_Tutorial/).
+
+[^regular_expressions-1]: Note that the corpus platform of the Catholic
+    University of Eichstätt-Ingolstadt, which was set up by Dr. Thomas Brunner, is only accessible to students or
+    staff via the local **eduroam** network or a
+    **VPN client** which holds their credentials.
+
+![CQP query of PROVIDE in the GloWbE corpus](CQP_example.png)
+
 ## Exercises
 
 ::: {#exr-regex-1}
@@ -192,16 +210,27 @@ How could you refine the search expression for PROVIDE
 :::
 
 ::: {#exr-regex-2}
+Write elegant regular expressions which find all inflectional forms of
+the following verbs:
+
+-   *accept*
+
+-   *attach*
+
+-   *swim*
+
+-   *know*
+
+-   *eat*
+:::
+
+
+::: {#exr-regex-3}
 Find all nouns ending in *-er*. How accurate is your query?
 :::
 
-::: {#exr-regex-3}
-Find all four-digit numbers.
-:::
-
 ::: {#exr-regex-4}
-Write an elegant regular expression which finds all inflectional forms
-of *swim*.
+Find all four-digit numbers.
 :::
 
 ::: {#exr-regex-5}
