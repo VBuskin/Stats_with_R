@@ -5073,7 +5073,7 @@ border: 0;
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Variables.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Statistical variables</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Data types</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -5257,18 +5257,19 @@ border: 0;
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#suggested-reading" id="toc-suggested-reading" class="nav-link active" data-scroll-target="#suggested-reading"><span class="header-section-number">12.1</span> Suggested reading</a></li>
-  <li><a href="#regular-expressions" id="toc-regular-expressions" class="nav-link" data-scroll-target="#regular-expressions"><span class="header-section-number">12.2</span> Regular expressions</a></li>
-  <li><a href="#a-regex-cheatsheet" id="toc-a-regex-cheatsheet" class="nav-link" data-scroll-target="#a-regex-cheatsheet"><span class="header-section-number">12.3</span> A RegEx Cheatsheet</a>
+  <li><a href="#preparation" id="toc-preparation" class="nav-link active" data-scroll-target="#preparation"><span class="header-section-number">12.1</span> Preparation</a></li>
+  <li><a href="#suggested-reading" id="toc-suggested-reading" class="nav-link" data-scroll-target="#suggested-reading"><span class="header-section-number">12.2</span> Suggested reading</a></li>
+  <li><a href="#regular-expressions" id="toc-regular-expressions" class="nav-link" data-scroll-target="#regular-expressions"><span class="header-section-number">12.3</span> Regular expressions</a></li>
+  <li><a href="#a-regex-cheatsheet" id="toc-a-regex-cheatsheet" class="nav-link" data-scroll-target="#a-regex-cheatsheet"><span class="header-section-number">12.4</span> A RegEx Cheatsheet</a>
   <ul class="collapse">
-  <li><a href="#basic-functions" id="toc-basic-functions" class="nav-link" data-scroll-target="#basic-functions"><span class="header-section-number">12.3.1</span> Basic functions</a></li>
-  <li><a href="#character-classes-and-alternatives" id="toc-character-classes-and-alternatives" class="nav-link" data-scroll-target="#character-classes-and-alternatives"><span class="header-section-number">12.3.2</span> Character classes and alternatives</a></li>
-  <li><a href="#quantifiers" id="toc-quantifiers" class="nav-link" data-scroll-target="#quantifiers"><span class="header-section-number">12.3.3</span> Quantifiers</a></li>
-  <li><a href="#pre-defined-character-classes" id="toc-pre-defined-character-classes" class="nav-link" data-scroll-target="#pre-defined-character-classes"><span class="header-section-number">12.3.4</span> Pre-defined character classes</a></li>
+  <li><a href="#basic-functions" id="toc-basic-functions" class="nav-link" data-scroll-target="#basic-functions"><span class="header-section-number">12.4.1</span> Basic functions</a></li>
+  <li><a href="#character-classes-and-alternatives" id="toc-character-classes-and-alternatives" class="nav-link" data-scroll-target="#character-classes-and-alternatives"><span class="header-section-number">12.4.2</span> Character classes and alternatives</a></li>
+  <li><a href="#quantifiers" id="toc-quantifiers" class="nav-link" data-scroll-target="#quantifiers"><span class="header-section-number">12.4.3</span> Quantifiers</a></li>
+  <li><a href="#pre-defined-character-classes" id="toc-pre-defined-character-classes" class="nav-link" data-scroll-target="#pre-defined-character-classes"><span class="header-section-number">12.4.4</span> Pre-defined character classes</a></li>
   </ul></li>
-  <li><a href="#querying-parsed-corpora" id="toc-querying-parsed-corpora" class="nav-link" data-scroll-target="#querying-parsed-corpora"><span class="header-section-number">12.4</span> Querying parsed corpora</a></li>
-  <li><a href="#working-with-other-platforms-cqp" id="toc-working-with-other-platforms-cqp" class="nav-link" data-scroll-target="#working-with-other-platforms-cqp"><span class="header-section-number">12.5</span> Working with other platforms: CQP</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">12.6</span> Exercises</a></li>
+  <li><a href="#querying-parsed-corpora" id="toc-querying-parsed-corpora" class="nav-link" data-scroll-target="#querying-parsed-corpora"><span class="header-section-number">12.5</span> Querying parsed corpora</a></li>
+  <li><a href="#working-with-other-platforms-cqp" id="toc-working-with-other-platforms-cqp" class="nav-link" data-scroll-target="#working-with-other-platforms-cqp"><span class="header-section-number">12.6</span> Working with other platforms: CQP</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">12.7</span> Exercises</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/VBuskin/Stats_with_R/blob/main/Regular_expressions.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
     </div>
@@ -5300,15 +5301,31 @@ border: 0;
 </header>
 
 
-<section id="suggested-reading" class="level2" data-number="12.1">
-<h2 data-number="12.1" class="anchored" data-anchor-id="suggested-reading"><span class="header-section-number">12.1</span> Suggested reading</h2>
+<section id="preparation" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="preparation"><span class="header-section-number">12.1</span> Preparation</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Script
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You can find the full R script associated with this unit <a href="https://osf.io/uhdns">here</a>.</p>
+</div>
+</div>
+</section>
+<section id="suggested-reading" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="suggested-reading"><span class="header-section-number">12.2</span> Suggested reading</h2>
 <blockquote class="blockquote">
 <p><span class="citation" data-cites="lange_corpus_2020">Lange and Leuckert (<a href="references.html#ref-lange_corpus_2020" role="doc-biblioref">2020</a>)</span>: Chapter 3.7</p>
 <p><a href="https://images.datacamp.com/image/upload/v1665049611/Marketing/Blog/Regular_Expressions_Cheat_Sheet.pdf">Detailed cheatsheet</a> (DataCamp)</p>
 </blockquote>
 </section>
-<section id="regular-expressions" class="level2" data-number="12.2">
-<h2 data-number="12.2" class="anchored" data-anchor-id="regular-expressions"><span class="header-section-number">12.2</span> Regular expressions</h2>
+<section id="regular-expressions" class="level2" data-number="12.3">
+<h2 data-number="12.3" class="anchored" data-anchor-id="regular-expressions"><span class="header-section-number">12.3</span> Regular expressions</h2>
 <p><strong>Regular expressions</strong> (or ‘regex’) help us find more complex patterns in strings of text. Suppose we are interested in finding all inflectional forms of the lemma PROVIDE in a corpus, i.e., <em>provide, provides, providing</em> and <em>provided</em>. Insteading of searching for all forms individually, we can construct a regular expression of the form</p>
 <p><span class="math display">\[
 \text{provid(es | ing | ed)?}
@@ -5347,10 +5364,10 @@ border: 0;
 </ol>
 <p>As a rule of thumb, you should consider improving your search expression if you obtain hundreds or even thousands of false hits. Should there be only few false positives, it’s usually easier to simply mark them as “irrelevant” in your spreadsheet. A full workflow is demonstrated in unit <a href="./Annotation.html">13. Data annotation</a>.</p>
 </section>
-<section id="a-regex-cheatsheet" class="level2" data-number="12.3">
-<h2 data-number="12.3" class="anchored" data-anchor-id="a-regex-cheatsheet"><span class="header-section-number">12.3</span> A RegEx Cheatsheet</h2>
-<section id="basic-functions" class="level3" data-number="12.3.1">
-<h3 data-number="12.3.1" class="anchored" data-anchor-id="basic-functions"><span class="header-section-number">12.3.1</span> Basic functions</h3>
+<section id="a-regex-cheatsheet" class="level2" data-number="12.4">
+<h2 data-number="12.4" class="anchored" data-anchor-id="a-regex-cheatsheet"><span class="header-section-number">12.4</span> A RegEx Cheatsheet</h2>
+<section id="basic-functions" class="level3" data-number="12.4.1">
+<h3 data-number="12.4.1" class="anchored" data-anchor-id="basic-functions"><span class="header-section-number">12.4.1</span> Basic functions</h3>
 <table class="table">
 <thead>
 <tr class="header">
@@ -5376,14 +5393,14 @@ border: 0;
 </tbody>
 </table>
 </section>
-<section id="character-classes-and-alternatives" class="level3" data-number="12.3.2">
-<h3 data-number="12.3.2" class="anchored" data-anchor-id="character-classes-and-alternatives"><span class="header-section-number">12.3.2</span> Character classes and alternatives</h3>
+<section id="character-classes-and-alternatives" class="level3" data-number="12.4.2">
+<h3 data-number="12.4.2" class="anchored" data-anchor-id="character-classes-and-alternatives"><span class="header-section-number">12.4.2</span> Character classes and alternatives</h3>
 <table class="table">
 <colgroup>
-<col style="width: 23%">
-<col style="width: 28%">
-<col style="width: 23%">
-<col style="width: 23%">
+<col style="width: 24%">
+<col style="width: 27%">
+<col style="width: 24%">
+<col style="width: 24%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -5415,14 +5432,14 @@ border: 0;
 </tbody>
 </table>
 </section>
-<section id="quantifiers" class="level3" data-number="12.3.3">
-<h3 data-number="12.3.3" class="anchored" data-anchor-id="quantifiers"><span class="header-section-number">12.3.3</span> Quantifiers</h3>
+<section id="quantifiers" class="level3" data-number="12.4.3">
+<h3 data-number="12.4.3" class="anchored" data-anchor-id="quantifiers"><span class="header-section-number">12.4.3</span> Quantifiers</h3>
 <table class="table">
 <colgroup>
-<col style="width: 23%">
-<col style="width: 28%">
-<col style="width: 23%">
-<col style="width: 23%">
+<col style="width: 24%">
+<col style="width: 27%">
+<col style="width: 24%">
+<col style="width: 24%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -5466,8 +5483,8 @@ border: 0;
 </tbody>
 </table>
 </section>
-<section id="pre-defined-character-classes" class="level3" data-number="12.3.4">
-<h3 data-number="12.3.4" class="anchored" data-anchor-id="pre-defined-character-classes"><span class="header-section-number">12.3.4</span> Pre-defined character classes</h3>
+<section id="pre-defined-character-classes" class="level3" data-number="12.4.4">
+<h3 data-number="12.4.4" class="anchored" data-anchor-id="pre-defined-character-classes"><span class="header-section-number">12.4.4</span> Pre-defined character classes</h3>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -5484,7 +5501,7 @@ Note
 <table class="table">
 <colgroup>
 <col style="width: 24%">
-<col style="width: 27%">
+<col style="width: 26%">
 <col style="width: 24%">
 <col style="width: 24%">
 </colgroup>
@@ -5537,8 +5554,8 @@ Note
 </table>
 </section>
 </section>
-<section id="querying-parsed-corpora" class="level2" data-number="12.4">
-<h2 data-number="12.4" class="anchored" data-anchor-id="querying-parsed-corpora"><span class="header-section-number">12.4</span> Querying parsed corpora</h2>
+<section id="querying-parsed-corpora" class="level2" data-number="12.5">
+<h2 data-number="12.5" class="anchored" data-anchor-id="querying-parsed-corpora"><span class="header-section-number">12.5</span> Querying parsed corpora</h2>
 <p>The range of linguistic patterns to be matched can be extended further if the corpus contains additional metadata, such as the part of speech (POS) of a token. POS-tagged corpora open up the option of looking for more abstract patterns, such as all instances of the verb <em>eat</em> that are followed by a pronoun or noun:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load library and corpus</span></span>
@@ -5641,8 +5658,8 @@ Universial dependencies – Tagset
 <p>Cf. <a href="https://universaldependencies.org/u/pos/" class="uri">https://universaldependencies.org/u/pos/</a>.</p>
 <table class="table">
 <colgroup>
-<col style="width: 27%">
-<col style="width: 72%">
+<col style="width: 29%">
+<col style="width: 70%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -5724,8 +5741,8 @@ Universial dependencies – Tagset
 </div>
 </div>
 </section>
-<section id="working-with-other-platforms-cqp" class="level2 page-columns page-full" data-number="12.5">
-<h2 data-number="12.5" class="anchored" data-anchor-id="working-with-other-platforms-cqp"><span class="header-section-number">12.5</span> Working with other platforms: CQP</h2>
+<section id="working-with-other-platforms-cqp" class="level2 page-columns page-full" data-number="12.6">
+<h2 data-number="12.6" class="anchored" data-anchor-id="working-with-other-platforms-cqp"><span class="header-section-number">12.6</span> Working with other platforms: CQP</h2>
 <p>Some corpus platforms such as <a href="https://cqpweb.lancs.ac.uk">BNCweb</a>, <a href="https://cqpweb.lancs.ac.uk">CQPweb</a> or our local <a href="ku.de/corpora">KU corpora</a><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> rely on a special syntax known as <strong>CQP</strong> (<strong>C</strong>orpus <strong>Q</strong>uery <strong>P</strong>rocessor). CQP syntax is very powerful in that enables users to query for strings with specific meta-attributes (text category, age, gender etc.). For more details, see the <a href="https://cwb.sourceforge.io/files/CQP_Tutorial/">CQP documentation</a>.</p>
 <div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;Note that the corpus platform of the Catholic University of Eichstätt-Ingolstadt, which was set up by Dr.&nbsp;Thomas Brunner, is only accessible to students or staff via the local <strong>eduroam</strong> network or a <strong>VPN client</strong> which holds their credentials.</p></li></div><div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -5734,8 +5751,21 @@ Universial dependencies – Tagset
 </figure>
 </div>
 </section>
-<section id="exercises" class="level2" data-number="12.6">
-<h2 data-number="12.6" class="anchored" data-anchor-id="exercises"><span class="header-section-number">12.6</span> Exercises</h2>
+<section id="exercises" class="level2" data-number="12.7">
+<h2 data-number="12.7" class="anchored" data-anchor-id="exercises"><span class="header-section-number">12.7</span> Exercises</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solutions
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You can find the solutions to the exercises <a href="https://osf.io/xaumr">here</a>.</p>
+</div>
+</div>
 <div id="exr-regex-1" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 12.1 </strong></span>How could you refine the search expression for PROVIDE <code>"provid(es|ing|ed)?"</code> to get rid of the irrelevant cases?</p>
 </div>

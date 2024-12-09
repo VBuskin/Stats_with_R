@@ -15,6 +15,16 @@ format:
 editor: visual
 ---
 
+## Preparation
+
+::: callout-tip
+## Script
+
+You can find the full R script associated with this unit
+[here](https://osf.io/uhdns).
+:::
+
+
 ## Suggested reading
 
 > @lange_corpus_2020: Chapter 3.7
@@ -22,6 +32,7 @@ editor: visual
 > [Detailed
 > cheatsheet](https://images.datacamp.com/image/upload/v1665049611/Marketing/Blog/Regular_Expressions_Cheat_Sheet.pdf)
 > (DataCamp)
+
 
 ## Regular expressions
 
@@ -90,7 +101,7 @@ unit [13. Data annotation](Annotation.qmd).
 ### Character classes and alternatives
 
 | **Command** | **Definition**                               | **Example**     | **Finds**                       |
-|-----------------|---------------------|-----------------|-----------------|
+|------------------|--------------------|------------------|------------------|
 | `[abc]`     | Class of characters                          | `[jp]ython`     | *jython, python*                |
 | `[^pP]`     | Excluded class of characters                 | `[^pP]ython`    | everything but *python, Python* |
 | `(...|...)` | Alternatives linked by logical operator `or` | `P(ython|eter)` | *Python, Peter*                 |
@@ -98,7 +109,7 @@ unit [13. Data annotation](Annotation.qmd).
 ### Quantifiers
 
 | **Command** | **Definition**                                | **Example**   | **Finds**                     |
-|-----------------|---------------------|-----------------|-----------------|
+|------------------|--------------------|------------------|------------------|
 | `?`         | One or zero instances of the preceding symbol | `Py?thon`     | *Python, Pthon*               |
 | `*`         | No matter how many times — also zero          | `Py*thon`     | *Python, Pthon, Pyyyython...* |
 |             |                                               | `P[Yy]*thon`  | *Python, Pthon, PyYYython...* |
@@ -116,7 +127,7 @@ literals.
 :::
 
 | **Command** | **Definition**                              | **Example**      | **Finds**                        |
-|-----------------|--------------------|-----------------|-----------------|
+|------------------|-------------------|------------------|------------------|
 | `\\w`       | All alphanumeric characters (A-Z, a-z, 0-9) | `\\w+ing`        | *walking*, *running*, *42ing*    |
 | `\\W`       | All non-alphanumeric characters             | `hello\\W+world` | *hello world*, *hello!!!world*   |
 | `\\d`       | All decimal numbers (0-9)                   | `\\d{3}-\\d{4}`  | *555-1234*, *867-5309*           |
@@ -165,7 +176,7 @@ are listed here:
 Cf. <https://universaldependencies.org/u/pos/>.
 
 | POS Tag | Description                                                                                               |
-|-------------------|-----------------------------------------------------|
+|---------------------|---------------------------------------------------|
 | ADJ     | Adjective: describes a noun (e.g., *big*, *old*, *green*, *first*)                                        |
 | ADP     | Adposition: prepositions and postpositions (e.g., *in*, *to*, *over*)                                     |
 | ADV     | Adverb: modifies verbs, adjectives, or other adverbs (e.g., *quickly*, *very*)                            |
@@ -196,13 +207,22 @@ meta-attributes (text category, age, gender etc.). For more details, see
 the [CQP documentation](https://cwb.sourceforge.io/files/CQP_Tutorial/).
 
 [^regular_expressions-1]: Note that the corpus platform of the Catholic
-    University of Eichstätt-Ingolstadt, which was set up by Dr. Thomas Brunner, is only accessible to students or
-    staff via the local **eduroam** network or a
-    **VPN client** which holds their credentials.
+    University of Eichstätt-Ingolstadt, which was set up by Dr. Thomas
+    Brunner, is only accessible to students or staff via the local
+    **eduroam** network or a **VPN client** which holds their
+    credentials.
 
 ![CQP query of PROVIDE in the GloWbE corpus](CQP_example.png)
 
 ## Exercises
+
+
+::: callout-tip
+## Solutions
+
+You can find the solutions to the exercises
+[here](https://osf.io/xaumr).
+:::
 
 ::: {#exr-regex-1}
 How could you refine the search expression for PROVIDE
@@ -224,9 +244,8 @@ the following verbs:
 -   *eat*
 :::
 
-
 ::: {#exr-regex-3}
-Find all nouns ending in *-er*. How accurate is your query?
+Find all nouns ending in *-er*.
 :::
 
 ::: {#exr-regex-4}
@@ -234,5 +253,5 @@ Find all four-digit numbers.
 :::
 
 ::: {#exr-regex-5}
-Find all verbs that are followed by a prepositional phrase.
+Find all verbs that are followed by a preposition.
 :::
