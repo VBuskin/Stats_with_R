@@ -862,7 +862,7 @@
     "href": "Regular_expressions.html#exercises",
     "title": "12  Regular expressions",
     "section": "12.6 Exercises",
-    "text": "12.6 Exercises\n\nExercise 12.1 How could you refine the search expression for PROVIDE \"provid(es|ing|ed)?\" to get rid of the irrelevant cases?\n\n\nExercise 12.2 Write elegant regular expressions which find all inflectional forms of the following verbs:\n\naccept\nattach\nswim\nknow\neat\n\n\n\nExercise 12.3 Find all nouns ending in -er. How accurate is your query?\n\n\nExercise 12.4 Find all four-digit numbers.\n\n\nExercise 12.5 Find all verbs that are followed by a prepositional phrase.\n\n\n\n\n\nLange, Claudia, and Sven Leuckert. 2020. Corpus Linguistics for World Englishes: A Guide for Research. New York: Taylor; Francis.",
+    "text": "12.6 Exercises\n\nExercise 12.1 How could you refine the search expression for PROVIDE \"provid(es|ing|ed)?\" to get rid of the irrelevant cases?\n\n\nExercise 12.2 Write elegant regular expressions which find all inflectional forms of the following verbs:\n\naccept\nattach\nswim\nknow\neat\n\n\n\nExercise 12.3 Find all nouns ending in -er.\n\n\nExercise 12.4 Find all four-digit numbers.\n\n\nExercise 12.5 Find all verbs that are followed by a preposition.\n\n\n\n\n\nLange, Claudia, and Sven Leuckert. 2020. Corpus Linguistics for World Englishes: A Guide for Research. New York: Taylor; Francis.",
     "crumbs": [
       "Corpus Linguistics with R",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Regular expressions</span>"
