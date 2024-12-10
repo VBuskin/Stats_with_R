@@ -59,42 +59,81 @@ cl.order <- read_xlsx("Paquot_Larsson_2020_data.xlsx")
 
 ```
 
-## The $\chi^2$-test
+## The Pearson $\chi^2$-test of independence
 
-Recall our statistical hypotheses stated in the previous unit:
+The first step of any significance test involves setting up the null and
+alternative hypothesis. In this unit, we will perform a sample analysis
+on the relationship between clause `ORDER` and the type of subordinate
+clause (`SUBORDTYPE`). Specifically, we will focus on the
+**independence** of these two discrete variables (i.e, the presence or
+absence of correlation).
 
 -   $H_0:$ The variables `ORDER` and `SUBORDTYPE` are independent.
 
 -   $H_1:$ The variables `ORDER` and `SUBORDTYPE` are **not**
     independent.
 
-The next step is to compute a test statistic that indicates how strongly
-our data conforms to $H_0$, such as Pearson's $\chi^2$. In order to
-compute it, we need two types of values: the **observed frequencies**
-$n_{ij}$ in our data set and the **expected frequencies** $m_{ij}$,
-which we would expect to see if $H_0$ were true, with
-$n, m \in \mathbb{N}$. The indices $i$ and $j$ uniquely identify the
-frequencies found in all column-row combinations of a contingency table.
+::: {.callout-note title="What does independence really mean?" collapse="true"}
+The core idea is "that the probability distribution of the response
+variable is the same for each group"
+[@agrestiFoundationsStatisticsData2022: 177]. If clause `ORDER` is the
+response variable and `SUBORDTYPE` the explanatory variable,
+independence would entail that the outcomes of the response variable
+`ORDER = "mc-sc"` and `ORDER = "sc-mc"` are equally likely to occur in
+the groups `SUBORDTYPE = "temp"` **and** `SUBORDTYPE = "caus"`.
+
+The term **probability distribution** refers to a mathematical function
+that assigns probabilities to the outcomes of a variable. If we consider
+two variables at the same time, such as $X$ and $Y$, they are said to
+have **marginal probability functions** $f_1(x)$ and $f_2(y)$. If we
+condition the outcomes of all values on each other, the following
+equivalence will hold:
+
+$$
+f(x \mid y) = f_1(x) \text{ and } f(y \mid x) = f_2(y).
+$$ {#eq-indep}
+
+Thus, the null hypothesis assumes that the probabilities of each
+combination of values (such as `ORDER` and `SUBORDTYPE`), denoted by
+$\pi_{ij}$, have the relationship in @eq-indep. This can be stated
+succinctly as
+
+$$
+H_0 : \pi_{ij} = P(X = i)P(Y = j).
+$$ {#eq-nullhyp-math}
+:::
+
+Next, we compute a test statistic that indicates how strongly our data
+conforms to $H_0$, such as Pearson's $\chi^2$. To this end, we will need
+two types of values:
+
+-   the **observed frequencies** $f_{ij}$ present in our data set
+
+-   the **expected frequencies** $e_{ij}$, which we would expect to see
+    if $H_0$ were true,
+
+where $f, e \in \mathbb{N}$. The indices $i$ and $j$ uniquely identify
+the cell counts in all column-row combinations of a contingency table.
 
 ::: {.callout-note collapse="true" title="The structure of a contingency table"}
 The table below represents a generic contingency table where $X$ and $Y$
-are categorical variables. Each $x_i$ represents a category of $X$ and
-each $y_j$ represents a category of $Y$. In the table, each cell
-indicates the count of observation $n_{ij}$ corresponding to the $i$-th
-row and $j$-th column.
+are categorical variables and have the values
+$X = \{x_1, x_2, \dots, x_i\}$ and $Y = \{y_1, y_2, \dots, y_j \}$. In
+the table, each cell indicates the count of observation $f_{ij}$
+corresponding to the $i$-th row and $j$-th column.
 
 |     |       |          | $Y$      |     |          |     |
 |-----|-------|----------|----------|-----|----------|-----|
-|     |       | $y_1$    | $y_2$    | ... | $y_J$    |     |
-|     | $x_1$ | $n_{11}$ | $n_{12}$ | ... | $n_{1J}$ |     |
-|     | $x_2$ | $n_{21}$ | $n_{22}$ | ... | $n_{2J}$ |     |
+|     |       | $y_1$    | $y_2$    | ... | $y_j$    |     |
+|     | $x_1$ | $f_{11}$ | $f_{12}$ | ... | $f_{1j}$ |     |
+|     | $x_2$ | $f_{21}$ | $f_{22}$ | ... | $f_{2j}$ |     |
 | $X$ | ...   | ...      | ...      | ... | ...      |     |
-|     | $x_I$ | $n_{I1}$ | $n_{I2}$ | ... | $n_{3J}$ |     |
+|     | $x_i$ | $f_{i1}$ | $f_{i2}$ | ... | $f_{3j}$ |     |
 :::
 
-In the `cl.order` data, the observed frequencies correspond to how often
-each `ORDER` value (i.e., `mc-sc` and `sc-mc`) is attested for a given
-`SUBORDTYPE` (i.e., `temp` and `caus`). This can be done in a very
+In the `cl.order` data, the **observed frequencies** correspond to how
+often each `ORDER` value (i.e., `mc-sc` and `sc-mc`) is attested for a
+given `SUBORDTYPE` (i.e., `temp` and `caus`). This can be done in a very
 straightforward fashion using R's `table()` function on the variables of
 interest.
 
@@ -104,25 +143,25 @@ observed_freqs <- table(cl.order$ORDER, cl.order$SUBORDTYPE)
 print(observed_freqs)
 ```
 
-The expected frequencies require a few additional steps. Usually, these
-steps are performed automatically when conducting the chi-squared test
-in R, so you don't have to worry about calculating them by hand. We will
-do it anyway to drive home the rationale of the test.
+The **expected frequencies** require a few additional steps. Usually,
+these steps are performed automatically when conducting the chi-squared
+test in R, so you don't have to worry about calculating them by hand. We
+will do it anyway to drive home the rationale of the test.
 
-The expected frequencies $m_{ij}$ are given by the formula in
+The expected frequencies $e_{ij}$ are given by the formula in
 @eq-exp-freq. In concrete terms, we go through each cell in the
 cross-table and multiply the corresponding row sums with the column
 sums, dividing the result by the total number of occurrences in the
-sample. For example, there are $184$ occurrences of mc-sc clause orders
-where the subordinate clause is causal. The row sum is $184 + 91 = 275$
-and the column sum is $184 + 15 = 199$. Next, we take their product
-$275 \times 199$ and divide it by the total number of observations,
-which is $184 + 91 + 15 + 113 = 403$. Thus we obtain an expected
-frequency of $\frac{275 \times 199}{403} = 135.79$ under the null
-hypothesis.
+sample. For example, there are $184$ occurrences of `mc-sc` clause
+orders where the subordinate clause is causal. The row sum is
+$184 + 91 = 275$ and the column sum is $184 + 15 = 199$. Next, we take
+their product $275 \times 199$ and divide it by the total number of
+observations, which is $184 + 91 + 15 + 113 = 403$. Thus we obtain an
+expected frequency of $\frac{275 \times 199}{403} = 135.79$ under the
+null hypothesis.
 
 $$
-m_{ij} = \frac{i\textrm{th row sum} \times j \textrm{th column sum}}{\textrm{number of observations}}.
+e_{ij} = \frac{i\textrm{th row sum} \times j \textrm{th column sum}}{\textrm{number of observations}}
 $$ {#eq-exp-freq}
 
 The expected frequencies for our combination of variables is shown
@@ -160,11 +199,11 @@ $$ {#eq-chisq-simple}
 
 ::: {.callout-note collapse="true" title="Formal definition of the chi-squared test"}
 Given $n$ observations and $k$ degrees of freedom $df$, the joint
-deviations between $n_{ij}$ $m_{ij}$ contribute to the final
+squared deviations between $f_{ij}$ and $e_{ij}$ contribute to the final
 $\chi^2$-score, which is defined as
 
 $$
-\chi^2 = \sum_{i=1}^{I}\sum_{i=j}^{J}{\frac{(n_{ij} - m_{ij})^2}{m_{ij}}}
+\chi^2 = \sum_{i=1}^{I}\sum_{i=j}^{J}{\frac{(f_{ij} - e_{ij})^2}{e_{ij}}}
 $$ {#eq-chisq}
 
 for $i = 1, ..., I$ and $j = 1, ..., J$ and
@@ -172,7 +211,7 @@ $df = (\textrm{number of rows} -1) \times (\textrm{number of columns} - 1)$.
 :::
 
 The implementation in R is a simple one-liner. Keep in mind that we have
-to supply absolute frequencies to `chisq.test()` rather than
+to supply **absolute frequencies** to `chisq.test()` rather than
 percentages.
 
 ```{r}
@@ -203,7 +242,7 @@ data. In this case, other tests should be consulted.
 
 If assumptions 2 and 3 are violated, it is recommended to use a more
 robust test such as the Fisher's Exact Test (see `?fisher.test()` for
-details) or the log-likelihood test ($G$-test).
+details) or the likelihood ratio test ($G$-test).
 
 In case of dependent observations (e.g., multiple measurements per
 participant), the default approach is to fit a multilevel model that can
@@ -305,9 +344,10 @@ print(cfa_output)
 
 The $p$-value only indicates the **presence of correlation**, but not
 its strength – regardless of how low it may be. It does not convey how
-much two variables determine each other. To this end, it is recommended
-to report an **effect size measure** alongside the $p$-value. One such
-measure is Cramér's $V$, which takes values in the interval $[0, 1]$:
+much two variables determine each other. For this reason, it is highly
+recommended to report an **effect size measure** alongside the
+$p$-value. One such measure is Cramér's $V$, which takes values in the
+interval $[0, 1]$:
 
 $$
 V = \sqrt{\frac{\chi^2}{n \times (min(nrow, ncol) - 1)}}.
@@ -319,7 +359,12 @@ The package `confintr` implements this in its `cramersv()` function:
 cramersv(freqs_test)
 ```
 
-The association between two categorical variables is stronger, the closer $V$ approximates 1. Conversely, if $V = 0$, then the variables are completely independent. There are various guidelines in the literature that provide thresholds for "small", "moderate" and "large" effects, yet these are rarely justified on theoretical grounds and could be viewed as arbitrary.
+The association between two categorical variables is stronger, the
+closer $V$ approximates 1. Conversely, if $V = 0$, then the variables
+are completely independent. There are various guidelines in the
+literature that provide thresholds for "small", "moderate" and "large"
+effects, yet these are rarely justified on theoretical grounds and could
+be viewed as arbitrary.
 
 ## Likelihood-based inference
 
@@ -328,7 +373,7 @@ sample, it may seem tempting to draw conclusions about the
 **probability** of a certain outcome of clause `ORDER`. Unfortunately,
 the $\chi^2$-test is **not designed** for this kind of statistical
 inference. An approach that would actually allow the estimation of
-probabilities is [Logistic regression](Logistic_regression.qmd).
+probabilities is [logistic regression](Logistic_regression.qmd).
 
 ::: {.callout-note collapse="true" title="What would that look like?"}
 ```{r}

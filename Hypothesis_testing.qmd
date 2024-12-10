@@ -33,32 +33,62 @@ General:
 
 The null hypothesis significance testing (NHST) framework offers
 researchers a convenient way of testing theoretical assumptions about a
-population of interest (e.g., a speech community). This involves setting
+population of interest. This chiefly involves setting up a set of falsifiable statistical hypotheses, gathering evidence from the observed data and computing the (in)famous '$p$-value' to determine "statistical significance" -- a notion that is frequently misinterpreted in scientific studies 
+
+This involves setting
 up a set of falsifiable statistical hypotheses that predict the presence
 or absence of certain patterns in the data. These are known as the
-**null hypothesis** $H_0$ and the **alternative hypothesis** $H_1$ (or
-$H_a$). They are set up **before** seeing the data and justified by
-previous research.
+**null hypothesis** and the **alternative hypothesis**. They are set up
+**before** seeing the data and justified by previous research.
+Association tests have the following components:
 
--   Given two categorical variables $X$ and $Y$, we assume under $H_0$
-    that both variables are independent from each other. This hypothesis
-    describes the "default state of the world"
-    [@james_introduction_2021: 555], i.e., what we would usually expect
-    to see. There is no association between the variables of interest
-    and, therefore, no effect.
+-   The **null hypothesis** $H_0$ could be viewed describing the
+    "default state of the world" [@james_introduction_2021: 555], which
+    suggests that there is no noteworthy effect to be observed. If we
+    are interested in some property $\theta$ of the population (also
+    known as a **population parameter**) (e.g., frequency differences
+    between observed or expected counts; differences in mean reaction
+    times between groups etc.), then it would have the value 0 under
+    $H_0$.
 
--   By contrast, the alternative hypothesis $H_1$ claims that $X$ and
-    $Y$ are **not** independent, i.e., that $H_0$ does not hold. $X$ and
-    $Y$ then appear to be correlated in some way, i.e., there is some
-    kind of effect.
+-   The **alternative hypothesis** $H_1$ (or $H_a$) plainly states that
+    the null hypothesis is false: There is an effect, i.e.,
+    $H_1: \theta \neq 0$. The parameter thus takes values in an
+    alternative range.
 
-In the subsequent sections, we will consider two scenarios, one for
-categorical and one for continuous data:
+-   In the NHST approach, researchers typically seek evidence against
+    $H_0$. To quantify the amount of evidence the observed data
+    provides, specific **test statistics** are computed depending on the
+    data type at hand; for instance, $\chi^2$ ('chi-squared') is typical
+    for discrete and $t$ for continuous data.
 
-1.  **Categorical variables**: We are interested in finding out whether
-    English clause `ORDER` ('sc-mc' or 'mc-sc') depends on the type of
-    the subordinate clause (`SUBORDTYPE`), which can be either temporal
-    ('temp') or causal ('caus').
+-   The final rejection of $H_0$ is determined by the **significance
+    probability** $p$, which denotes the probability that "the test
+    statistic equals the observed value or a value even more extreme in
+    the direction predicted by $H_a$"
+    [@agrestiFoundationsStatisticsData2022: 163]", assuming $H_0$ is
+    true.
+
+    -   If $p$ is lower than a pre-defined threshold (typically 0.05),
+        also known as the **significance level** $\alpha$, we reject
+        $H_0$. However, if $p \geq$ 0.05, this **neither justifies
+        rejecting nor accepting** the null hypothesis
+        [@baguleySeriousStatsGuide2012: 121].
+
+    -   For example, a $p$-value of $0.02$ means that we would see a
+        particular test statistic, which often reflect usage patterns in
+        linguistic data, only 2% of the time if $X$ and $Y$ were
+        unrelated (i.e., if $H_0$ were true). Since $0.02$ lies below
+        our significance level $\alpha$ = $0.05$, this would suggest a
+        statistically significant relationship between $X$ and $Y$, and
+        we could therefore reject $H_0$.
+
+### Some examples of hypotheses
+
+**Categorical variables**: We are interested in finding out whether
+English clause `ORDER` ('sc-mc' or 'mc-sc') depends on the type of the
+subordinate clause (`SUBORDTYPE`), which can be either temporal ('temp')
+or causal ('caus').
 
 Our hypotheses are:
 
@@ -67,45 +97,17 @@ Our hypotheses are:
 -   $H_1:$ The variables `ORDER` and `SUBORDTYPE` are **not**
     independent.
 
-::: {.callout-note title="What does independence really mean?" collapse="true"}
-The core idea is "that the probability distribution of the response
-variable is the same for each group"
-[@agrestiFoundationsStatisticsData2022: 177]. If clause `ORDER` is the
-response variable and `SUBORDTYPE` the explanatory variable,
-independence would mean that the outcomes of the response variable
-`ORDER = "mc-sc"` and `ORDER = "sc-mc"` are equally likely to occur in
-the groups `SUBORDTYPE = "temp"` **and** `SUBORDTYPE = "caus"`.
-
-The term **probability distribution** refers to a mathematical function
-that assigns probabilities to the outcomes of a variable. If we consider
-two variables at the same time, such as $X$ and $Y$, they are said to have **marginal probability functions** $f_1(x)$ and $f_2(y)$. If we condition the outcomes of all values on each other, the following equivalence will hold:
-
-$$
-f(x \mid y) = f_1(x) \text{ and } f(y \mid x) = f_2(y).
-$$ {#eq-indep}
-
-Thus, the null hypothesis assumes that the probabilities of each combination of values (such as `ORDER` and `SUBORDTYPE`), denoted by $\pi_{ij}$, have the relationship in @eq-indep. This can be stated succinctly as
-
-$$
-H_0 : \pi_{ij} = P(X = i)P(Y = j).
-$$ {#eq-nullhyp-math}
-
-:::
-
-2.  **Continuous variables**: As part of a phonetic study, we compare
-    the base frequencies of the F1 formants (in Hz) for male and female
-    speakers of Apache. We forward the following hypotheses:
+**Continuous variables**: As part of a phonetic study, we compare the
+base frequencies of the F1 formants of vowels (in Hz) for male and
+female speakers of Apache. We forward the following hypotheses:
 
 -   $H_0:$ mean `F1 frequency` of men $=$ mean `F1 frequency` of women.
 
 -   $H_1:$ mean `F1 frequency` of men $\ne$ mean `F1 frequency` of
     women.
 
-Based on our data, we can decide to either **accept** or **reject**
-$H_0$. Rejecting $H_0$ can be viewed as evidence in favour of $H_1$ and
-thus marks a potential 'discovery' in the data.
+### Hypothesis testing -- what could go wrong?
 
-::: {.callout-caution title="Hypothesis testing -- what could go wrong?"}
 There is always a chance that we accept or reject the wrong hypothesis;
 the four possible constellations are summarised in the table below [cf.
 @heumann_introduction_2022: 223]:
@@ -115,103 +117,65 @@ the four possible constellations are summarised in the table below [cf.
 | $H_0$ **is not rejected** | $\color{green}{\text{Correct decision}}$            | $\color{red}{\text{Type II } (\beta)\text{-error}}$ |
 | $H_0$ **is rejected**     | $\color{red}{\text{Type I } (\alpha)\text{-error}}$ | $\color{green}{\text{Correct decision}}$            |
 
-The probability of a Type I error, which refers to the rejection of
-$H_0$ although it is true, is called the **significance level**
-$\alpha$, which has a conventional value of $0.05$ (i.e., a 5% chance of
-committing a Type I error). Nevertheless, it is always recommended to
-explicitly state the $\alpha$-level used for rejecting/accepting $H_0$.
-:::
+### Advanced: Where does the $p$-value come from?
 
-## Constructing the critical region
+Let's say that the statistical analysis of clause `ORDER` and
+`SUBORDTYPE` has returned a test statistic of $\chi^2 = 6.5$ for 2 $df$. In order to compute the probability $P(\chi^2 \geq 5)$, we need to consult the **sampling distribution** of this test statistic. The sampling distribution is a probability distribution that assigns probabilities to the values of a test statistic. 
 
-An important question remains: How great should the difference be for us
-to reject $H_0$? The $p$-value measures **the probability of
-encountering a specific value of a test statistic** ($\chi^2$-score,
-$t$, $F$ etc.) on the condition that $H_0$ is true.
+The probability density function $f(x)$ of the $\chi^2$-distribution for 2 degrees of freedom (abbreviated $df$ and affect the function's shape) is visualised below. The $p$-value corresponds to the green area under curve ranging from $x = 6.5$ up to $\infty$.
 
-::: callout-note
-## A more precise definition of $p$-values
+```{r, echo = FALSE}
+# Load ggplot2
+library(ggplot2)
 
-"The $P$-value is the probability, presuming that $H_0$ is true, that
-the test statistic equals the observed value or a value even more
-extreme in the direction predicted by $H_a$
-[@agrestiFoundationsStatisticsData2022: 163]".
-:::
+# Define the degrees of freedom
+df <- 2
 
-For example, a $p$-value of $0.02$ means that we would see a particular
-test statistic only 2% of the time if $X$ and $Y$ were unrelated (or if
-there was no difference between $\bar{x}$ and $\bar{y}$, respectively).
-Since our significance level $\alpha$ is set to $0.05$, we only reject
-the null hypothesis if this conditional probability is lower than 5%.
+# Create a sequence of x values
+x <- seq(0, 30, length.out = 1000)
 
-We obtain $p$-values by consulting the probability density functions of
-the underlying sampling distributions:
+# Compute the chi-squared density
+y <- dchisq(x, df = df)
 
--   Probability density function for the $\chi^2$-distribution with
-    $df = 1$
+# Create a data frame
+chi_squared_data <- data.frame(x = x, y = y)
+
+# Define the range for highlighting
+highlight_data <- subset(chi_squared_data, x >= 6.5 & x <= 20)
+
+# Generate the plot
+ggplot(chi_squared_data, aes(x = x, y = y)) +
+  geom_line(color = "steelblue", size = 1) + # Line for the density curve
+  geom_area(data = highlight_data, aes(x = x, y = y), 
+            fill = "darkgreen", alpha = 0.5) + # Highlighted area
+  labs(
+    title = "Chi-Squared Distribution",
+    subtitle = "Probability density function with 2 degrees of freedom",
+    x = "Chi-squared value",
+    y = "Probability density"
+  ) +
+  theme_minimal() +
+  coord_cartesian(ylim = c(0, 0.05), xlim = c(0, 30)) +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    axis.title = element_text(size = 12)
+  )
+
+```
+
+
+The probability $P(\chi^2 \geq 6.5)$ can be obtained by integrating over all $\chi^2$-values in the range $0 \leq X < 6.5$ and subtracting them from 1, which represents the total area under the curve 
+
+$$
+P(X\geq 6.5) = 1 - \int_{0}^{6.5} f(x) dx
+$$
 
 ```{r}
-#| code-fold: true
+# For a chi-squared test statistic of 6.5 with 2 degree of freedom
+p_value <- 1 - pchisq(6.5, df = 2)
 
-# Generate random samples from a chi-squared distribution with 1 degree of freedom
-x <- rchisq(100000, df = 1)
-
-# Create histogram
-hist(x,
-     breaks = "Scott",
-     freq = FALSE,
-     xlim = c(0, 20),
-     ylim = c(0, 0.2),
-     ylab = "Probability density of observing a specific score",
-     xlab = "Chi-squared score",
-     main = "Histogram for a chi-squared distribution with 1 degree of freedom (df)",
-     cex.main = 0.9)
-
-# Overlay PDF
-curve(dchisq(x, df = 1), from = 0, to = 150, n = 5000, col = "steelblue", lwd = 2, add = TRUE)
-
+print(p_value) # significant!
 ```
 
--   Probability density function for the $t$-distribution with
-    $df = 112.19$
 
-```{r}
-#| code-fold: true
-# Given t-statistic and degrees of freedom
-t_statistic <- 2.4416
-df <- 112.19
 
-# Generate random samples from a t-distribution with the given degrees of freedom
-x <- rt(100000, df = df)
-
-# Create histogram
-hist(x,
-     breaks = "Scott",
-     freq = FALSE,
-     xlim = c(-5, 5),
-     ylim = c(0, 0.4),
-     ylab = "Probability density of observing a specific score",
-     xlab = "t-score",
-     main = "Histogram for a t-distribution with 112.19 degrees of freedom",
-     cex.main = 0.9)
-
-# Overlay PDF
-curve(dt(x, df = df), from = -5, to = 5, n = 5000, col = "steelblue", lwd = 2, add = TRUE)
-
-```
-
-```{r, echo = FALSE, output = TRUE, include = FALSE, eval = FALSE}
-
-x <- rchisq(100000, df = 1)
-hist(x,
-  breaks = "Scott",
-  freq = FALSE,
-  xlim = c(0, 20),
-  ylim = c(0, 0.2),
-  xlab = "",
-  main = ("Histogram for a chi-squared-distribution with 1 degree of freedom (df)"), cex.main = 0.9
-)
-
-curve(dchisq(x, df = 1), from = 0, to = 15, n = 5000, col = "steelblue", lwd = 2, add = T)
-
-```
