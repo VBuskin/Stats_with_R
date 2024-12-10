@@ -18,7 +18,7 @@ bibliography: R.bib
 
 ## Recommended reading
 
-> @heumann_introduction_2022: Chapter 1.2
+> @heumann_introduction_2022: Chapter 1
 >
 > @agrestiFoundationsStatisticsData2022: Chapter 1.2
 
@@ -39,9 +39,9 @@ it in your working directory.
     originally compiled by @gries_statistics_2013.
 
 ```{r, echo = TRUE, output = FALSE}
-# Libraries
-library("readxl")
-library("tidyverse")
+# Load libraries
+library(readxl)
+library(tidyverse)
 
 # Load data
 cl.order <- read_xlsx("Paquot_Larsson_2020_data.xlsx")
@@ -98,15 +98,86 @@ head(cl.order)
     variables)
 :::
 
+## The big picture: Populations and samples
+
+In order to investigate one or more (extra-)linguistic features, we
+first need to collect relevant **observations**, which typically
+correspond to linguistic utterances in a corpus-linguistic context.
+Since it is not feasible to examine the entirety of all linguistic
+utterances ever produced, i.e., the **population**, we rely on specific
+subsets of it: **samples**.
+
+To state this more formally, let $\omega$ ('lower-case Omega') denote a
+single observation of interest. The full set of theoretically possible
+observations is contained in $\Omega$ ('upper-case Omega'), with
+$\Omega = \{\omega_1, \omega_2, \dots, \omega_n \}$. Here $n$ represents
+the $n$-th observation and should be a natural number. A sample is then
+simply a selection of elements from $\Omega$.
+
 ## Variables
 
 The concept of the **variable** is very handy in that it allows us to
-quantify various aspects their observations. In general, we distinguish
-between **discrete** variables, which can only take a limited set of
-unique values, and **continuous** variables, which can take infinitely
-many values within a specified range.
+quantify different aspects our linguistic observations, such the age or
+gender of the speaker, the register of the speech situation, the variety
+of English, the length of an utterance, a syntactic construction or a
+grammatical category, among many other theoretically possible features.
+For each observation, we should be able to assign a specific **value**
+to our variables; for instance, a variable `Register` could assume a
+value such as `informal`, or `Utterance length` a hypothetical value of
+`5` (e.g., 5 words).
+
+In the statistical literature, variables are usually represented by
+upper-case letters, such as $X$. For each observation
+$\omega \in \Omega$, $X$ has a specific outcome $x$. The set $S$
+comprises all possible outcomes of $X$, e.g.,
+$S_{\text{Register}} = \{\text{informal}, \text{formal}, ...\}$ or
+$S_{\text{Utterance length}} = \{1, 2, 3, \dots \}$.
+
+::: callout-note
+## Number of (unique) values in R
+
+To count the number of items in a vector, which correspond to the total
+number $n$ of attested values of $X$, we can use `length()`:
+
+```{r}
+length(cl.order$SUBORDTYPE)
+```
+
+In fact, it is equivalent to the number of rows in the full data frame:
+
+```{r}
+nrow(cl.order)
+```
+
+The function `unique()` shows all unique items (= types) in a vector,
+which reflect the possible outcomes in $S$:
+
+```{r}
+unique(cl.order$SUBORDTYPE)
+```
+:::
+
+Information on variables and their values is conventionally arranged in
+a **data set**, which is essentially a matrix with columns (= variables)
+and rows (= observations). Assuming that $n$ denotes the row number and
+$p$ the column number, the general form of a dataset is summarised in
+@eq-dataset.
+
+$$
+\begin{pmatrix}
+    \omega & X_1 & X_2 & \cdots &  X_p \\
+    1 & x_{11} & x_{12} & \cdots & x_{1p} \\
+    2 & x_{21} & x_{22} & \cdots & x_{2p} \\
+    \vdots & \vdots & \vdots &  & \vdots \\
+    n & x_{n1} & x_{n2} & \cdots & x_{np}
+\end{pmatrix}
+$$ {#eq-dataset}
 
 ### Subtypes
+
+In general, we distinguish between **discrete** variables, which can
+only take a limited set of unique values, and **continuous** variables,
+which can take infinitely many values within a specified range.
 
 We can further subdivide discrete and continuous variables into into
 nominal, ordinal, interval-scaled and ratio-scaled ones:
@@ -159,8 +230,8 @@ individual values are not interpretable. Heumann
 
 In empirical studies, it is often of interest whether one variable leads
 to changes in the values of another variable. When exploring such
-**associations**, we need to take another heuristic step to clarify the
-direction of the influence.
+**associations** (or **correlations**), we need to take another
+heuristic step to clarify the direction of the influence.
 
 In a linguistic context, we denote the variable whose usage patterns
 we'd like to explain as the **dependent** or **response** variable. A
@@ -175,14 +246,28 @@ variable. These can be `AGE`, `SEX` or the `VARIETY` of English at hand.
 ### Exercises
 
 ::: {#exr-var-1}
-Classify the remaining variables in the `cl.order` dataset.
+Identify the variable types (nominal, ordinal etc.) for all columns in
+the `cl.order` dataset.
 :::
 
 ::: {#exr-var-2}
+Consider the general form of the data matrix from @eq-dataset.
+
+1.  What would the labels $\omega$, $X$, $x$ correspond to in the
+    `cl.order` dataset?
+
+2.  What would be $\Omega$ and $S$?
+:::
+
+::: {#exr-var-3}
 Consider the following statement:
 
 > This paper examines the influence of clause length on the ordering of
 > main and subordinate clauses.
 
-What is the dependent variable? What is/are the independent variable(s)?
+1.  What is the dependent variable?
+
+2.  What is/are the independent variable(s)?
+
+3.  What would it mean if they were reversed?
 :::

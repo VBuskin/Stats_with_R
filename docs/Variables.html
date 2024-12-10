@@ -4686,7 +4686,7 @@ vertical-align: -.125em;
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Variables.html">Descriptive Statistics</a></li><li class="breadcrumb-item"><a href="./Variables.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Statistical variables</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Variables.html">Descriptive Statistics</a></li><li class="breadcrumb-item"><a href="./Variables.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Data types</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -4849,7 +4849,7 @@ vertical-align: -.125em;
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Variables.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Statistical variables</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Data types</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -5035,11 +5035,12 @@ vertical-align: -.125em;
   <ul>
   <li><a href="#recommended-reading" id="toc-recommended-reading" class="nav-link active" data-scroll-target="#recommended-reading"><span class="header-section-number">14.1</span> Recommended reading</a></li>
   <li><a href="#preparation" id="toc-preparation" class="nav-link" data-scroll-target="#preparation"><span class="header-section-number">14.2</span> Preparation</a></li>
-  <li><a href="#variables" id="toc-variables" class="nav-link" data-scroll-target="#variables"><span class="header-section-number">14.3</span> Variables</a>
+  <li><a href="#the-big-picture-populations-and-samples" id="toc-the-big-picture-populations-and-samples" class="nav-link" data-scroll-target="#the-big-picture-populations-and-samples"><span class="header-section-number">14.3</span> The big picture: Populations and samples</a></li>
+  <li><a href="#variables" id="toc-variables" class="nav-link" data-scroll-target="#variables"><span class="header-section-number">14.4</span> Variables</a>
   <ul class="collapse">
-  <li><a href="#subtypes" id="toc-subtypes" class="nav-link" data-scroll-target="#subtypes"><span class="header-section-number">14.3.1</span> Subtypes</a></li>
-  <li><a href="#dependent-vs.-independent-variables" id="toc-dependent-vs.-independent-variables" class="nav-link" data-scroll-target="#dependent-vs.-independent-variables"><span class="header-section-number">14.3.2</span> Dependent vs.&nbsp;independent variables</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">14.3.3</span> Exercises</a></li>
+  <li><a href="#subtypes" id="toc-subtypes" class="nav-link" data-scroll-target="#subtypes"><span class="header-section-number">14.4.1</span> Subtypes</a></li>
+  <li><a href="#dependent-vs.-independent-variables" id="toc-dependent-vs.-independent-variables" class="nav-link" data-scroll-target="#dependent-vs.-independent-variables"><span class="header-section-number">14.4.2</span> Dependent vs.&nbsp;independent variables</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">14.4.3</span> Exercises</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/VBuskin/Stats_with_R/blob/main/Variables.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
@@ -5047,7 +5048,7 @@ vertical-align: -.125em;
 <!-- main -->
 <main class="content page-columns page-full" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Variables.html">Descriptive Statistics</a></li><li class="breadcrumb-item"><a href="./Variables.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Statistical variables</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Variables.html">Descriptive Statistics</a></li><li class="breadcrumb-item"><a href="./Variables.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Data types</span></a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Data types</span></h1>
 </div>
@@ -5082,7 +5083,7 @@ vertical-align: -.125em;
 <section id="recommended-reading" class="level2" data-number="14.1">
 <h2 data-number="14.1" class="anchored" data-anchor-id="recommended-reading"><span class="header-section-number">14.1</span> Recommended reading</h2>
 <blockquote class="blockquote">
-<p><span class="citation" data-cites="heumann_introduction_2022">Heumann, Schomaker, and Shalabh (<a href="references.html#ref-heumann_introduction_2022" role="doc-biblioref">2022</a>)</span>: Chapter 1.2</p>
+<p><span class="citation" data-cites="heumann_introduction_2022">Heumann, Schomaker, and Shalabh (<a href="references.html#ref-heumann_introduction_2022" role="doc-biblioref">2022</a>)</span>: Chapter 1</p>
 <p><span class="citation" data-cites="agrestiFoundationsStatisticsData2022">Agresti and Kateri (<a href="references.html#ref-agrestiFoundationsStatisticsData2022" role="doc-biblioref">2022</a>)</span>: Chapter 1.2</p>
 </blockquote>
 </section>
@@ -5090,9 +5091,9 @@ vertical-align: -.125em;
 <h2 data-number="14.2" class="anchored" data-anchor-id="preparation"><span class="header-section-number">14.2</span> Preparation</h2>
 <p>Please download the file <code>Paquot_Larsson_2020_data.xlsx</code> <span class="citation" data-cites="paquotDescriptiveStatisticsVisualization2020">(<a href="references.html#ref-paquotDescriptiveStatisticsVisualization2020" role="doc-biblioref">Paquot and Larsson 2020</a>)</span><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> and store it in your working directory.</p>
 <div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;The supplementary materials can be downloaded from the publisher’s <a href="https://link.springer.com/chapter/10.1007/978-3-030-46216-1_17">website</a> [Last accessed April 28, 2024]. Note that the dataset has been originally compiled by <span class="citation" data-cites="gries_statistics_2013">Gries (<a href="references.html#ref-gries_statistics_2013" role="doc-biblioref">2013</a>)</span>.</p></li></div><div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Libraries</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"readxl"</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tidyverse"</span>)</span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load libraries</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>cl.order <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"Paquot_Larsson_2020_data.xlsx"</span>)</span>
@@ -5176,14 +5177,64 @@ Further details on the variables
 </div>
 </div>
 </section>
-<section id="variables" class="level2" data-number="14.3">
-<h2 data-number="14.3" class="anchored" data-anchor-id="variables"><span class="header-section-number">14.3</span> Variables</h2>
-<p>The concept of the <strong>variable</strong> is very handy in that it allows us to quantify various aspects their observations. In general, we distinguish between <strong>discrete</strong> variables, which can only take a limited set of unique values, and <strong>continuous</strong> variables, which can take infinitely many values within a specified range.</p>
-<section id="subtypes" class="level3" data-number="14.3.1">
-<h3 data-number="14.3.1" class="anchored" data-anchor-id="subtypes"><span class="header-section-number">14.3.1</span> Subtypes</h3>
+<section id="the-big-picture-populations-and-samples" class="level2" data-number="14.3">
+<h2 data-number="14.3" class="anchored" data-anchor-id="the-big-picture-populations-and-samples"><span class="header-section-number">14.3</span> The big picture: Populations and samples</h2>
+<p>In order to investigate one or more (extra-)linguistic features, we first need to collect relevant <strong>observations</strong>, which typically correspond to linguistic utterances in a corpus-linguistic context. Since it is not feasible to examine the entirety of all linguistic utterances ever produced, i.e., the <strong>population</strong>, we rely on specific subsets of it: <strong>samples</strong>.</p>
+<p>To state this more formally, let <span class="math inline">\(\omega\)</span> (‘lower-case Omega’) denote a single observation of interest. The full set of theoretically possible observations is contained in <span class="math inline">\(\Omega\)</span> (‘upper-case Omega’), with <span class="math inline">\(\Omega = \{\omega_1, \omega_2, \dots, \omega_n \}\)</span>. Here <span class="math inline">\(n\)</span> represents the <span class="math inline">\(n\)</span>-th observation and should be a natural number. A sample is then simply a selection of elements from <span class="math inline">\(\Omega\)</span>.</p>
+</section>
+<section id="variables" class="level2" data-number="14.4">
+<h2 data-number="14.4" class="anchored" data-anchor-id="variables"><span class="header-section-number">14.4</span> Variables</h2>
+<p>The concept of the <strong>variable</strong> is very handy in that it allows us to quantify different aspects our linguistic observations, such the age or gender of the speaker, the register of the speech situation, the variety of English, the length of an utterance, a syntactic construction or a grammatical category, among many other theoretically possible features. For each observation, we should be able to assign a specific <strong>value</strong> to our variables; for instance, a variable <code>Register</code> could assume a value such as <code>informal</code>, or <code>Utterance length</code> a hypothetical value of <code>5</code> (e.g., 5 words).</p>
+<p>In the statistical literature, variables are usually represented by upper-case letters, such as <span class="math inline">\(X\)</span>. For each observation <span class="math inline">\(\omega \in \Omega\)</span>, <span class="math inline">\(X\)</span> has a specific outcome <span class="math inline">\(x\)</span>. The set <span class="math inline">\(S\)</span> comprises all possible outcomes of <span class="math inline">\(X\)</span>, e.g., <span class="math inline">\(S_{\text{Register}} = \{\text{informal}, \text{formal}, ...\}\)</span> or <span class="math inline">\(S_{\text{Utterance length}} = \{1, 2, 3, \dots \}\)</span>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Number of (unique) values in R
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>To count the number of items in a vector, which correspond to the total number <span class="math inline">\(n\)</span> of attested values of <span class="math inline">\(X\)</span>, we can use <code>length()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(cl.order<span class="sc">$</span>SUBORDTYPE)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 403</code></pre>
+</div>
+</div>
+<p>In fact, it is equivalent to the number of rows in the full data frame:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(cl.order)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 403</code></pre>
+</div>
+</div>
+<p>The function <code>unique()</code> shows all unique items (= types) in a vector, which reflect the possible outcomes in <span class="math inline">\(S\)</span>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(cl.order<span class="sc">$</span>SUBORDTYPE)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "temp" "caus"</code></pre>
+</div>
+</div>
+</div>
+</div>
+<p>Information on variables and their values is conventionally arranged in a <strong>data set</strong>, which is essentially a matrix with columns (= variables) and rows (= observations). Assuming that <span class="math inline">\(n\)</span> denotes the row number and <span class="math inline">\(p\)</span> the column number, the general form of a dataset is summarised in <a href="#eq-dataset" class="quarto-xref">Equation&nbsp;<span>14.1</span></a>.</p>
+<p><span id="eq-dataset"><span class="math display">\[
+\begin{pmatrix}
+    \omega &amp; X_1 &amp; X_2 &amp; \cdots &amp;  X_p \\
+    1 &amp; x_{11} &amp; x_{12} &amp; \cdots &amp; x_{1p} \\
+    2 &amp; x_{21} &amp; x_{22} &amp; \cdots &amp; x_{2p} \\
+    \vdots &amp; \vdots &amp; \vdots &amp;  &amp; \vdots \\
+    n &amp; x_{n1} &amp; x_{n2} &amp; \cdots &amp; x_{np}
+\end{pmatrix}
+\tag{14.1}\]</span></span></p>
+<section id="subtypes" class="level3" data-number="14.4.1">
+<h3 data-number="14.4.1" class="anchored" data-anchor-id="subtypes"><span class="header-section-number">14.4.1</span> Subtypes</h3>
+<p>In general, we distinguish between <strong>discrete</strong> variables, which can only take a limited set of unique values, and <strong>continuous</strong> variables, which can take infinitely many values within a specified range.</p>
 <p>We can further subdivide discrete and continuous variables into into nominal, ordinal, interval-scaled and ratio-scaled ones:</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Nominal/categorical">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -5192,15 +5243,15 @@ Nominal/categorical
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>These variables comprise a limited number of categories which <strong>cannot be ordered</strong> in a meaningful way. For instance, it does not matter which value of <code>SUBORDTYPE</code> or <code>MORETHAN2CL</code> comes first or last:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>    <span class="fu">unique</span>(cl.order<span class="sc">$</span>SUBORDTYPE)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>    <span class="fu">unique</span>(cl.order<span class="sc">$</span>SUBORDTYPE)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "temp" "caus"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>    <span class="fu">unique</span>(cl.order<span class="sc">$</span>MORETHAN2CL)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>    <span class="fu">unique</span>(cl.order<span class="sc">$</span>MORETHAN2CL)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "no"  "yes"</code></pre>
 </div>
@@ -5209,7 +5260,7 @@ Nominal/categorical
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Ordinal/categorical">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -5218,7 +5269,7 @@ Ordinal/categorical
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Ordinal variables are <strong>ordered</strong>. However, the intervals between their individual values are not interpretable. Heumann <span class="citation" data-cites="heumann_introduction_2022">(<a href="references.html#ref-heumann_introduction_2022" role="doc-biblioref">2022</a>: 6)</span> provides a pertinent example:</p>
 <blockquote class="blockquote">
@@ -5228,7 +5279,7 @@ Ordinal/categorical
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Interval-scaled/continuous">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -5237,7 +5288,7 @@ Interval-scaled/continuous
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
 <li>In the case of <strong>interval</strong>-scaled variables, the differences between the values can be interpreted, but their ratios must be treated with caution. A temperature of 4°C is 6 degrees warmer than -2°C; however, this does not imply that 4°C is three times warmer than -2°C. This is because the temperature scale has no true zero point; 0°C simply signifies another point on the scale and not the absence of temperature altogether.</li>
@@ -5246,7 +5297,7 @@ Interval-scaled/continuous
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Ratio-scaled/continuous">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -5255,7 +5306,7 @@ Ratio-scaled/continuous
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
 <li><strong>Ratio</strong>-scaled variables allow both a meaningful interpretation of the differences between their values and (!) of the ratios between them. Within the context of clause length, <code>LENGTH_DIFF</code> values such as 4 and 8 not only suggest that the latter is four units greater than the former but also that their ratio <span class="math inline">\(\frac{8}{4} = 2\)</span> is a valid way to describe the relationship between these values. Here a <code>LENGTH_DIFF</code> of 0 can be clearly viewed as the absence of a length difference.</li>
@@ -5264,23 +5315,34 @@ Ratio-scaled/continuous
 </div>
 </div>
 </section>
-<section id="dependent-vs.-independent-variables" class="level3" data-number="14.3.2">
-<h3 data-number="14.3.2" class="anchored" data-anchor-id="dependent-vs.-independent-variables"><span class="header-section-number">14.3.2</span> Dependent vs.&nbsp;independent variables</h3>
-<p>In empirical studies, it is often of interest whether one variable leads to changes in the values of another variable. When exploring such <strong>associations</strong>, we need to take another heuristic step to clarify the direction of the influence.</p>
+<section id="dependent-vs.-independent-variables" class="level3" data-number="14.4.2">
+<h3 data-number="14.4.2" class="anchored" data-anchor-id="dependent-vs.-independent-variables"><span class="header-section-number">14.4.2</span> Dependent vs.&nbsp;independent variables</h3>
+<p>In empirical studies, it is often of interest whether one variable leads to changes in the values of another variable. When exploring such <strong>associations</strong> (or <strong>correlations</strong>), we need to take another heuristic step to clarify the direction of the influence.</p>
 <p>In a linguistic context, we denote the variable whose usage patterns we’d like to explain as the <strong>dependent</strong> or <strong>response</strong> variable. A list of possible dependent variables is provided in the section on <a href="./Linguistic_variables.html">Linguistic variables</a>).</p>
 <p>Its outcomes are said to depend on one or more <strong>independent variables</strong>. These are also often referred to as <strong>explanatory</strong> variables as they are supposed to explain variation in the response variable. These can be <code>AGE</code>, <code>SEX</code> or the <code>VARIETY</code> of English at hand.</p>
 </section>
-<section id="exercises" class="level3" data-number="14.3.3">
-<h3 data-number="14.3.3" class="anchored" data-anchor-id="exercises"><span class="header-section-number">14.3.3</span> Exercises</h3>
+<section id="exercises" class="level3" data-number="14.4.3">
+<h3 data-number="14.4.3" class="anchored" data-anchor-id="exercises"><span class="header-section-number">14.4.3</span> Exercises</h3>
 <div id="exr-var-1" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 14.1 </strong></span>Classify the remaining variables in the <code>cl.order</code> dataset.</p>
+<p><span class="theorem-title"><strong>Exercise 14.1 </strong></span>Identify the variable types (nominal, ordinal etc.) for all columns in the <code>cl.order</code> dataset.</p>
 </div>
 <div id="exr-var-2" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 14.2 </strong></span>Consider the following statement:</p>
+<p><span class="theorem-title"><strong>Exercise 14.2 </strong></span>Consider the general form of the data matrix from <a href="#eq-dataset" class="quarto-xref">Equation&nbsp;<span>14.1</span></a>.</p>
+<ol type="1">
+<li><p>What would the labels <span class="math inline">\(\omega\)</span>, <span class="math inline">\(X\)</span>, <span class="math inline">\(x\)</span> correspond to in the <code>cl.order</code> dataset?</p></li>
+<li><p>What would be <span class="math inline">\(\Omega\)</span> and <span class="math inline">\(S\)</span>?</p></li>
+</ol>
+</div>
+<div id="exr-var-3" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 14.3 </strong></span>Consider the following statement:</p>
 <blockquote class="blockquote">
 <p>This paper examines the influence of clause length on the ordering of main and subordinate clauses.</p>
 </blockquote>
-<p>What is the dependent variable? What is/are the independent variable(s)?</p>
+<ol type="1">
+<li><p>What is the dependent variable?</p></li>
+<li><p>What is/are the independent variable(s)?</p></li>
+<li><p>What would it mean if they were reversed?</p></li>
+</ol>
 </div>
 
 
