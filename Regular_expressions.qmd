@@ -24,7 +24,6 @@ You can find the full R script associated with this unit
 [here](https://osf.io/uhdns).
 :::
 
-
 ## Suggested reading
 
 > @lange_corpus_2020: Chapter 3.7
@@ -32,7 +31,6 @@ You can find the full R script associated with this unit
 > [Detailed
 > cheatsheet](https://images.datacamp.com/image/upload/v1665049611/Marketing/Blog/Regular_Expressions_Cheat_Sheet.pdf)
 > (DataCamp)
-
 
 ## Regular expressions
 
@@ -43,11 +41,11 @@ provides, providing* and *provided*. Insteading of searching for all
 forms individually, we can construct a regular expression of the form
 
 $$
-\text{provid(es | ing | ed)?}
+\text{provid(e(s)? | ing | ed)}
 $$ which can be read as
 
 > 'Match the sequence of letters \<provid\> as well as when it is
-> optionally followed by the letters \<s\> or \<ing\> or \<ed\>'.
+> followed by the groups of letters \<es\> or \<ing\> or \<ed\>. Also make the \<s\> in \<es\> optional.'
 
 Notice how optionality is signified by the `?` operator and alternatives
 by `|`.
@@ -63,14 +61,14 @@ ICE_GB <- readRDS("ICE_GB.RDS")
 
 # Perform query
 kwic_provide <- kwic(ICE_GB,
-                     "provid(es|ing|ed)?",
+                     "provid(e(s)?|ing|ed)",
                      valuetype = "regex",
                      window = 20)
 ```
 
 The number of hits has more than doubled. However, upon closer
-inspection, we'll notice a few false positives, namely *providential,
-provider* and *providers*:
+inspection, we'll notice a few false positives, namely *providential*,
+*provider* and *providers*:
 
 ```{r}
 table(kwic_provide$keyword)
@@ -101,7 +99,7 @@ unit [13. Data annotation](Annotation.qmd).
 ### Character classes and alternatives
 
 | **Command** | **Definition**                               | **Example**     | **Finds**                       |
-|------------------|--------------------|------------------|------------------|
+|------------------|-------------------|------------------|------------------|
 | `[abc]`     | Class of characters                          | `[jp]ython`     | *jython, python*                |
 | `[^pP]`     | Excluded class of characters                 | `[^pP]ython`    | everything but *python, Python* |
 | `(...|...)` | Alternatives linked by logical operator `or` | `P(ython|eter)` | *Python, Peter*                 |
@@ -109,7 +107,7 @@ unit [13. Data annotation](Annotation.qmd).
 ### Quantifiers
 
 | **Command** | **Definition**                                | **Example**   | **Finds**                     |
-|------------------|--------------------|------------------|------------------|
+|------------------|-------------------|------------------|------------------|
 | `?`         | One or zero instances of the preceding symbol | `Py?thon`     | *Python, Pthon*               |
 | `*`         | No matter how many times — also zero          | `Py*thon`     | *Python, Pthon, Pyyyython...* |
 |             |                                               | `P[Yy]*thon`  | *Python, Pthon, PyYYython...* |
@@ -176,7 +174,7 @@ are listed here:
 Cf. <https://universaldependencies.org/u/pos/>.
 
 | POS Tag | Description                                                                                               |
-|---------------------|---------------------------------------------------|
+|----------------------|--------------------------------------------------|
 | ADJ     | Adjective: describes a noun (e.g., *big*, *old*, *green*, *first*)                                        |
 | ADP     | Adposition: prepositions and postpositions (e.g., *in*, *to*, *over*)                                     |
 | ADV     | Adverb: modifies verbs, adjectives, or other adverbs (e.g., *quickly*, *very*)                            |
@@ -216,7 +214,6 @@ the [CQP documentation](https://cwb.sourceforge.io/files/CQP_Tutorial/).
 
 ## Exercises
 
-
 ::: callout-tip
 ## Solutions
 
@@ -226,7 +223,7 @@ You can find the solutions to the exercises
 
 ::: {#exr-regex-1}
 How could you refine the search expression for PROVIDE
-`"provid(es|ing|ed)?"` to get rid of the irrelevant cases?
+`"provid(e(s)?|ing|ed)"` to get rid of the irrelevant cases?
 :::
 
 ::: {#exr-regex-2}
@@ -241,7 +238,7 @@ the following verbs:
 
 -   *know*
 
--   *eat*
+-   *forget*
 :::
 
 ::: {#exr-regex-3}
