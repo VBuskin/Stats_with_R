@@ -1,6 +1,11 @@
 ---
 title: "Chi-squared test"
-author: Vladimir Buskin
+author:
+  name: "Vladimir Buskin" 
+  orcid: "0009-0005-5824-1012"
+  affiliation: 
+    name: "Catholic University of Eichstätt-Ingolstadt"
+    department: "English Language and Linguistics"
 abstract: > 
   The chi-squared ($\chi^2$) test helps determine if there is a statistically significant association between two categorical variables. It compares the observed frequencies of categories with those expected under the null hypothesis. The $\chi^2$ (chi-squared) score quantifies the difference between observed and expected frequencies for every cell in a contingency table. The greater the difference between observed and expected, the higher the $\chi^2$ score and the lower the $p$-value, given the degrees of freedom. It is recommended to compute effect size measures and inspect the residuals to assess the nature of the association.
 format:

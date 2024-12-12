@@ -1,3 +1,4 @@
+
 ## Preface {.unnumbered}
 
 This collection of handouts provides a hands-on introduction to data

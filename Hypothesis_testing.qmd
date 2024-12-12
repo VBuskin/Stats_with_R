@@ -1,6 +1,11 @@
 ---
 title: "Hypothesis testing"
-author: Vladimir Buskin
+author:
+  name: "Vladimir Buskin" 
+  orcid: "0009-0005-5824-1012"
+  affiliation: 
+    name: "Catholic University of Eichstätt-Ingolstadt"
+    department: "English Language and Linguistics"
 format:
   html:
     self-contained: true
@@ -33,14 +38,17 @@ General:
 
 The null hypothesis significance testing (NHST) framework offers
 researchers a convenient way of testing theoretical assumptions about a
-population of interest. This chiefly involves setting up a set of falsifiable statistical hypotheses, gathering evidence from the observed data and computing the (in)famous '$p$-value' to determine "statistical significance" -- a notion that is frequently misinterpreted in scientific studies 
+population of interest. This chiefly involves setting up a set of
+falsifiable statistical hypotheses, gathering evidence from the observed
+data and computing the (in)famous '$p$-value' to determine "statistical
+significance" -- a notion that is frequently misinterpreted in
+scientific studies
 
-This involves setting
-up a set of falsifiable statistical hypotheses that predict the presence
-or absence of certain patterns in the data. These are known as the
-**null hypothesis** and the **alternative hypothesis**. They are set up
-**before** seeing the data and justified by previous research.
-Association tests have the following components:
+This involves setting up a set of falsifiable statistical hypotheses
+that predict the presence or absence of certain patterns in the data.
+These are known as the **null hypothesis** and the **alternative
+hypothesis**. They are set up **before** seeing the data and justified
+by previous research. Association tests have the following components:
 
 -   The **null hypothesis** $H_0$ could be viewed describing the
     "default state of the world" [@james_introduction_2021: 555], which
@@ -120,9 +128,16 @@ the four possible constellations are summarised in the table below [cf.
 ### Advanced: Where does the $p$-value come from?
 
 Let's say that the statistical analysis of clause `ORDER` and
-`SUBORDTYPE` has returned a test statistic of $\chi^2 = 6.5$ for 2 $df$. In order to compute the probability $P(\chi^2 \geq 5)$, we need to consult the **sampling distribution** of this test statistic. The sampling distribution is a probability distribution that assigns probabilities to the values of a test statistic. 
+`SUBORDTYPE` has returned a test statistic of $\chi^2 = 6.5$ for 2 $df$.
+In order to compute the probability $P(\chi^2 \geq 5)$, we need to
+consult the **sampling distribution** of this test statistic. The
+sampling distribution is a probability distribution that assigns
+probabilities to the values of a test statistic.
 
-The probability density function $f(x)$ of the $\chi^2$-distribution for 2 degrees of freedom (abbreviated $df$ and affect the function's shape) is visualised below. The $p$-value corresponds to the green area under curve ranging from $x = 6.5$ up to $\infty$.
+The probability density function $f(x)$ of the $\chi^2$-distribution for
+2 degrees of freedom (abbreviated $df$ and affect the function's shape)
+is visualised below. The $p$-value corresponds to the green area under
+curve ranging from $x = 6.5$ up to $\infty$.
 
 ```{r, echo = FALSE}
 # Load ggplot2
@@ -163,8 +178,9 @@ ggplot(chi_squared_data, aes(x = x, y = y)) +
 
 ```
 
-
-The probability $P(\chi^2 \geq 6.5)$ can be obtained by integrating over all $\chi^2$-values in the range $0 \leq X < 6.5$ and subtracting them from 1, which represents the total area under the curve 
+The probability $P(\chi^2 \geq 6.5)$ can be obtained by integrating over
+all $\chi^2$-values in the range $0 \leq X < 6.5$ and subtracting them
+from 1, which represents the total area under the curve
 
 $$
 P(X\geq 6.5) = 1 - \int_{0}^{6.5} f(x) dx
@@ -176,6 +192,3 @@ p_value <- 1 - pchisq(6.5, df = 2)
 
 print(p_value) # significant!
 ```
-
-
-
