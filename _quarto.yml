@@ -3,8 +3,22 @@ project:
   output-dir: docs
   
 book:
+  license: "GNU General Public License v3.0"
   title: "Statistics and Data Analysis for Corpus Linguists: From Theory to Practice with R"
-  author: "Vladimir Buskin, Thomas Brunner, Philippa Adolf"
+  author: 
+    - name: "Vladimir Buskin"
+      affiliations: 
+        - "Catholic University of Eichstätt-Ingolstadt"
+      orcid: "0009-0005-5824-1012"
+      url: "https://www.ku.de/en/slf/anglistik-amerikanistik/lehrstuehle-professuren/chair-of-english-language-and-linguistics/team/translate-to-englisch-vladimir-buskin"
+    - name: "Thomas Brunner"
+      url: "https://www.ku.de/en/slf/anglistik-amerikanistik/lehrstuehle-professuren/chair-of-english-language-and-linguistics/team/dr-thomas-brunner"
+      affiliations:
+        - "Catholic University of Eichstätt-Ingolstadt"
+    - name: "Philippa Adolf"
+      url: "https://de.linkedin.com/in/philippa-adolf-66a379268"
+      affiliations:
+        - "University of Vienna"
   reader-mode: true
   repo-url: https://github.com/VBuskin/Stats_with_R
   repo-actions: [source]
