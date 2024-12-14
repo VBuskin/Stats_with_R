@@ -1,7 +1,11 @@
 ---
 title: "More on significance testing"
-author: Vladimir Buskin
-date: 11-12-2024
+author:
+  name: "Vladimir Buskin" 
+  orcid: "0009-0005-5824-1012"
+  affiliation: 
+    name: "Catholic University of Eichstätt-Ingolstadt"
+    department: "English Language and Linguistics"
 format:
   html:
     self-contained: true
@@ -16,7 +20,11 @@ editor: visual
 bibliography: R.bib
 ---
 
-## Recommended reading
+## Other common association tests
+
+### Likelihood-ratio test
+
+### Fisher's exact test
 
 ::: callout-warning
 This page is still under construction. More content will be added soon!

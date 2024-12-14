@@ -1,6 +1,11 @@
 ---
 title: "Working with AI"
-author: Vladimir Buskin
+author:
+  name: "Vladimir Buskin" 
+  orcid: "0009-0005-5824-1012"
+  affiliation: 
+    name: "Catholic University of Eichstätt-Ingolstadt"
+    department: "English Language and Linguistics"
 format:
   html:
     self-contained: true

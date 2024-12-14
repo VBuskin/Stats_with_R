@@ -1,6 +1,11 @@
 ---
 title: "t-test"
-author: Vladimir Buskin
+author:
+  name: "Vladimir Buskin" 
+  orcid: "0009-0005-5824-1012"
+  affiliation: 
+    name: "Catholic University of Eichstätt-Ingolstadt"
+    department: "English Language and Linguistics"
 format:
   html:
     self-contained: true
@@ -17,19 +22,24 @@ editor: visual
 bibliography: R.bib
 ---
 
+## Preparation
+
 ```{r, echo = FALSE, include = FALSE}
-library("readxl")
-library("tidyverse")
+library(readxl)
+library(tidyverse)
+library(effsize)
 ```
 
--   Load packages:
+-   Load packages and data:
 
 ```{r, echo = TRUE, eval = FALSE}
 library("readxl")
 library("tidyverse")
+
+data_vowels <- read.csv("Vowels_Apache.csv", sep = "\t")
 ```
 
-```{r, echo = TRUE, output = TRUE, warning = FALSE, message = FALSE}
+```{r, echo = FALSE, output = TRUE, warning = FALSE, message = FALSE}
 
 data_vowels <- read.csv("Vowels_Apache.csv", sep = "\t")
 
@@ -41,15 +51,15 @@ Since the $\chi^2$ measure exclusively works with categorical variables,
 a separate test statistic is required if one of them is a continuous
 variable. The $t$ statistic is often used for research questions
 involving differences between sample means. The way $t$ is calculated
-depends on the sources of $X$ and $Y$: Are they from the same sample or
+depends on the sources of $X$ and $Y$: Do they originate from the same sample or
 from two (in-)dependent ones?
 
 First, we consider two **independent samples** from a population:
 
--   Sample $X$ with the observations $x_1, x_2, ..., {x_n}_1$, sample
+-   Sample $X$ with the observations $\{x_1, x_2, ..., {x_n}_1\}$, sample
     size $n_1$, sample mean $\bar{x}$ and sample variance $s^2_x$.
 
--   Sample $Y$ with the observations $y_1, y_2, ..., {y_n}_2$, sample
+-   Sample $Y$ with the observations $\{y_1, y_2, ..., {y_n}_2\}$, sample
     size $n_2$, sample mean $\bar{y}$ and sample variance $s^2_y$.
 
 ::: {.callout-note collapse="true" title="Definition of the $t$-test"}
@@ -57,7 +67,7 @@ The $t$-statistic after Welch is given by:
 
 $$
 t(x, y) = \frac{|\bar{x} - \bar{y}|}{\sqrt{\frac{s^2_x}{n_1} + \frac{s^2_y}{n_2}}} 
-$$
+$$ {#eq-welch}
 
 -   If there is more than one observation for a given subject (e.g,
     before and after an experiment), the samples are called
@@ -70,14 +80,14 @@ $$
 
 $$
 t(x, y) = t(d) = \frac{\bar{d}}{s_d} \sqrt{n}.
-$$
+$$ {#eq-paired}
 
 Note the difference $\bar{d} = \frac{1}{n}\sum_{i=1}^n{d_i}$ and the
 variance
 
 $$
 s^2_d = \frac{\sum_{i=1}^n({d_i} - \bar{d})^2}{n-1}.
-$$
+$$ {#eq-diff-var}
 
 Traditionally, the $t$-test is based on the assumptions of ...
 
@@ -87,48 +97,16 @@ Traditionally, the $t$-test is based on the assumptions of ...
     unequal variances.
 :::
 
-::: {.callout-tip collapse="true" title="Implementation in R: Manual vs. automatic"}
-By hand:
+The implementation in R is very straightforward:
 
 ```{r}
-# Subset the data by sex
-data_m <- data_vowels[data_vowels$SEX == "M", ]
-data_f <- data_vowels[data_vowels$SEX == "F", ]
-
-# Compute sample means
-mean_m <- mean(data_m$HZ_F1)
-mean_f <- mean(data_f$HZ_F1)
-
-# Compute sample variances
-var_m <- var(data_m$HZ_F1)
-var_f <- var(data_f$HZ_F1)
-
-# Determine sample sizes
-n_m <- length(data_m$HZ_F1)
-n_f <- length(data_f$HZ_F1)
-
-# Compute t-statistic
-t_statistic <- abs(mean_m - mean_f) / sqrt((var_m / n_m) + (var_f / n_f))
-
-# Compute degrees of freedom (simple version)
-df <- n_m + n_f - 2
-
-# Find the p-value using the cumulative distribution function (CDF) of the t-distribution
-p_value <- 2 * pt(-t_statistic, df)
-```
-
-Or, more concisely:
-
-```{r}
-
 t.test(data_vowels$HZ_F1 ~ data_vowels$SEX, paired = FALSE) # there is a significant difference!
 
 ```
-:::
 
 ::: callout-important
 If at least one assumption of the $t$-test has been violated, it is
-important to use a non-parametric test such as the
+advisable to use a non-parametric test such as the
 **Wilcoxon-Mann-Whitney (WMW) U-Test** instead. In essence, this test
 compares the probabilities of encountering a value $x$ from sample $X$
 that is greater than a value $y$ from sample $Y$. For details, see
@@ -154,7 +132,6 @@ frame.
 #| code-fold: true
 
 # Filter data so as to show only those observations that are relevant
-
 data_vowels %>% 
   # Filter columns
   select(HZ_F1, SEX) %>%
@@ -171,10 +148,7 @@ knitr::kable(data_vowels_stats)
 ```{r, echo = TRUE, ouput = TRUE}
 #| code-fold: true
 
-# Plot distribution
-
-## Plot means
-
+# Plot distributions
 data_vowels_stats %>% 
   ggplot(aes(x = SEX, y = mean)) +
     geom_col() +
@@ -184,7 +158,7 @@ data_vowels_stats %>%
     theme_classic()
 
 
-## Plot quartiles
+# Plot quartiles
 data_vowels %>% 
   ggplot(aes(x = SEX, y = HZ_F1)) +
     geom_boxplot() +
@@ -202,13 +176,11 @@ data_vowels %>%
 shapiro.test(data_vowels$HZ_F1) # H0: data points follow the normal distribution
 
 # Check histogram
-
 ggplot(data_vowels, aes(x = HZ_F1)) +
   geom_histogram(bins = 30) +
   theme_classic()
 
 # Variance homogeneity
-
 var.test(data_vowels$HZ_F1 ~ data_vowels$SEX) # H0: variances are not too different from each other
 
 ```
@@ -218,12 +190,11 @@ var.test(data_vowels$HZ_F1 ~ data_vowels$SEX) # H0: variances are not too differ
 ```{r, echo = TRUE, output = TRUE}
 
 # t-test for two independent samples 
-
 t.test(data_vowels$HZ_F1 ~ data_vowels$SEX, paired = FALSE) # there is a significant difference!
 
 ```
 
-### Optional: Effect size
+### Effect size
 
 **Cohen's** ***d*** is a possible effect size measure for continuous
 data and is obtained by dividing the difference of both sample means by
@@ -232,17 +203,6 @@ the pooled standard deviation:
 $$\frac{\bar{x} - \bar{y}}{\sqrt{\frac{{(n_1 - 1)s_x^2 + (n_2 - 1)s_y^2}}{{n_1 + n_2 - 2}}}}.$$
 
 ```{r}
-#| code-fold: true
-library("effsize")
-
-# By hand:
-## Compute pooled standard deviation sp
-sp <- sqrt(((n_m - 1) * var_m + (n_f - 1) * var_f) / (n_m + n_f - 2))
-
-## Compute Cohen's d
-d <- abs(mean_m - mean_f) / sp
-
-# Automatically:
 cohen.d(data_vowels$HZ_F1, data_vowels$SEX) # see also ?cohen.d for more details
 
 ```

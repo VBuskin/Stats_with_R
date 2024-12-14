@@ -1,8 +1,11 @@
 ---
 title: "Gradient boosting"
-author: 
-  - name: "Vladimir Buskin"
-date: 11-12-2024
+author:
+  name: "Vladimir Buskin" 
+  orcid: "0009-0005-5824-1012"
+  affiliation: 
+    name: "Catholic University of Eichstätt-Ingolstadt"
+    department: "English Language and Linguistics"
 abstract: > 
   Gradient boosting constitutes a powerful extension of tree-based methods and is generally appreciated for its high predictive performance. Nevertheless, this family of methods, which includes implementations such as AdaBoost, XGBoost, and CatBoost, among many others, is not yet established in corpus-linguistic statistics. A practical scenario is presented to introduce the core ideas of gradient boosting, demonstrate its application to linguistic data as well as point out its advantages and drawbacks.
 keywords: "Machine learning, gradient descent, loss function, regularization"
@@ -64,8 +67,8 @@ g_{mi} = \frac{\partial L(y, f(x_i))}{\partial f(x_i)}.
 $$ {#eq-boost-gradient}
 
 Essentially, it is a derivative of the function $L(y_i, f(x_i))$ with
-respect to the variable $f(x_i)$, which is why it can also be described
-as a **partial derivative**.
+respect to the variable $f(x_i)$, rendering it a **partial derivative**
+(as signified by $\partial$ symbol).
 
 ### Gradient boosting
 

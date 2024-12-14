@@ -1,6 +1,13 @@
 ---
 title: "Regular expressions"
-author: Vladimir Buskin, Thomas Brunner
+author: 
+    - name: "Vladimir Buskin"
+      affiliations: 
+        - "Catholic University of Eichstätt-Ingolstadt"
+      orcid: "0009-0005-5824-1012"
+    - name: "Thomas Brunner"
+      affiliations:
+        - "Catholic University of Eichstätt-Ingolstadt"
 format:
   html:
     self-contained: true
@@ -45,7 +52,8 @@ $$
 $$ which can be read as
 
 > 'Match the sequence of letters \<provid\> as well as when it is
-> followed by the groups of letters \<es\> or \<ing\> or \<ed\>. Also make the \<s\> in \<es\> optional.'
+> followed by the groups of letters \<es\> or \<ing\> or \<ed\>. Also
+> make the \<s\> in \<es\> optional.'
 
 Notice how optionality is signified by the `?` operator and alternatives
 by `|`.
@@ -99,7 +107,7 @@ unit [13. Data annotation](Annotation.qmd).
 ### Character classes and alternatives
 
 | **Command** | **Definition**                               | **Example**     | **Finds**                       |
-|------------------|-------------------|------------------|------------------|
+|-------------|----------------------------------------------|-----------------|---------------------------------|
 | `[abc]`     | Class of characters                          | `[jp]ython`     | *jython, python*                |
 | `[^pP]`     | Excluded class of characters                 | `[^pP]ython`    | everything but *python, Python* |
 | `(...|...)` | Alternatives linked by logical operator `or` | `P(ython|eter)` | *Python, Peter*                 |
@@ -107,7 +115,7 @@ unit [13. Data annotation](Annotation.qmd).
 ### Quantifiers
 
 | **Command** | **Definition**                                | **Example**   | **Finds**                     |
-|------------------|-------------------|------------------|------------------|
+|-------------|-----------------------------------------------|---------------|-------------------------------|
 | `?`         | One or zero instances of the preceding symbol | `Py?thon`     | *Python, Pthon*               |
 | `*`         | No matter how many times — also zero          | `Py*thon`     | *Python, Pthon, Pyyyython...* |
 |             |                                               | `P[Yy]*thon`  | *Python, Pthon, PyYYython...* |
@@ -125,7 +133,7 @@ literals.
 :::
 
 | **Command** | **Definition**                              | **Example**      | **Finds**                        |
-|------------------|-------------------|------------------|------------------|
+|-------------|---------------------------------------------|------------------|----------------------------------|
 | `\\w`       | All alphanumeric characters (A-Z, a-z, 0-9) | `\\w+ing`        | *walking*, *running*, *42ing*    |
 | `\\W`       | All non-alphanumeric characters             | `hello\\W+world` | *hello world*, *hello!!!world*   |
 | `\\d`       | All decimal numbers (0-9)                   | `\\d{3}-\\d{4}`  | *555-1234*, *867-5309*           |
@@ -174,7 +182,7 @@ are listed here:
 Cf. <https://universaldependencies.org/u/pos/>.
 
 | POS Tag | Description                                                                                               |
-|----------------------|--------------------------------------------------|
+|---------|-----------------------------------------------------------------------------------------------------------|
 | ADJ     | Adjective: describes a noun (e.g., *big*, *old*, *green*, *first*)                                        |
 | ADP     | Adposition: prepositions and postpositions (e.g., *in*, *to*, *over*)                                     |
 | ADV     | Adverb: modifies verbs, adjectives, or other adverbs (e.g., *quickly*, *very*)                            |

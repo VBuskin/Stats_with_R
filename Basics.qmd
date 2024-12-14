@@ -1,6 +1,13 @@
 ---
 title: "An example from sociolinguistics"
-author: Thomas Brunner, Vladimir Buskin
+author: 
+    - name: "Thomas Brunner"
+      affiliations:
+        - "Catholic University of Eichstätt-Ingolstadt"
+    - name: "Vladimir Buskin"
+      affiliations: 
+        - "Catholic University of Eichstätt-Ingolstadt"
+      orcid: "0009-0005-5824-1012"
 format:
   html:
     self-contained: true

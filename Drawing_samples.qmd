@@ -1,6 +1,11 @@
 ---
 title: "Drawing samples"
-author: Vladimir Buskin
+author:
+  name: "Vladimir Buskin" 
+  orcid: "0009-0005-5824-1012"
+  affiliation: 
+    name: "Catholic University of Eichstätt-Ingolstadt"
+    department: "English Language and Linguistics"
 format:
   html:
     self-contained: true
@@ -19,7 +24,7 @@ editor: visual
 This page is still under construction. More content will be added soon!
 :::
 
-##  Preparation
+## Preparation
 
 Load libraries:
 

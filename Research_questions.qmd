@@ -1,6 +1,13 @@
 ---
 title: "Research questions"
-author: Thomas Brunner, Vladimir Buskin
+author: 
+    - name: "Thomas Brunner"
+      affiliations:
+        - "Catholic University of Eichstätt-Ingolstadt"
+    - name: "Vladimir Buskin"
+      affiliations: 
+        - "Catholic University of Eichstätt-Ingolstadt"
+      orcid: "0009-0005-5824-1012"
 format:
   html:
     self-contained: true
@@ -57,10 +64,13 @@ how social factors influence our linguistic behavior.
 ### Hypotheses
 
 Research questions must be complemented by a set of falsifiable
-hypotheses. These will be covered in-depth in the chapter on [hypothesis testing](Hypothesis_testing.qmd). In short,
+hypotheses. These will be covered in-depth in the chapter on [hypothesis
+testing](Hypothesis_testing.qmd). In short,
 
 -   **Hypothesis** $H_1$ predicts a specific relationship between a
-    dependent variable and an independent variable. If $H_1$ holds, studies often speak of a correlation (or association) between variables.
+    dependent variable and an independent variable. If $H_1$ holds,
+    studies often speak of a correlation (or association) between
+    variables.
 
 -   its **opposite**, **Hypothesis** $H_0$, describes the state of
     affairs where the predicted relationship between the variables does

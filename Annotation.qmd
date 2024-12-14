@@ -1,17 +1,11 @@
 ---
 title: "Data annotation"
-date: "November, 2024"
 author:
   name: "Vladimir Buskin" 
   orcid: "0009-0005-5824-1012"
   affiliation: 
     name: "Catholic University of Eichstätt-Ingolstadt"
     department: "English Language and Linguistics"
-citation:
-  type: "webpage"
-  container-title: "Statistics and Data Analysis for Corpus Linguists"
-  url: "https://your-book-url.com" 
-  accessed: "2024-12-12"
 format:
   html:
     self-contained: true

@@ -1,6 +1,11 @@
 ---
 title: "Probability distributions"
-author: Vladimir Buskin
+author:
+  name: "Vladimir Buskin" 
+  orcid: "0009-0005-5824-1012"
+  affiliation: 
+    name: "Catholic University of Eichstätt-Ingolstadt"
+    department: "English Language and Linguistics"
 format:
   html:
     self-contained: true
@@ -254,11 +259,11 @@ ggplot(bernoulli_data, aes(x = factor(outcome), y = probability)) +
 
 ### Binomial Distribution
 
-
-The **binomial distribution** is a fairly straightforward extension of the Bernoulli distribution in that it models the number of successes in $n$
-independent Bernoulli trials, each with probability $p$ of success. If a
-random variable $X$ follows a binomial distribution with parameters $n$
-and $p$, we write:
+The **binomial distribution** is a fairly straightforward extension of
+the Bernoulli distribution in that it models the number of successes in
+$n$ independent Bernoulli trials, each with probability $p$ of success.
+If a random variable $X$ follows a binomial distribution with parameters
+$n$ and $p$, we write:
 
 $$ X \sim Binomial(n,p) 
 $$ {#eq-binom}
@@ -275,4 +280,3 @@ where:
 -   $k$ is the number of successes $(0 \leq k \leq n)$
 -   $p$ is the probability of success on each trial $(0 \leq p \leq 1)$
 -   $\binom{n}{k}$ is the binomial coefficient ("n choose k")
-

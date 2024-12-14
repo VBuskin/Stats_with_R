@@ -1,7 +1,11 @@
 ---
 title: "Data types"
-author: Vladimir Buskin
-institute: Catholic University of Eichstätt-Ingolstadt
+author:
+  name: "Vladimir Buskin" 
+  orcid: "0009-0005-5824-1012"
+  affiliation: 
+    name: "Catholic University of Eichstätt-Ingolstadt"
+    department: "English Language and Linguistics"
 format:
   html:
     self-contained: true
@@ -19,6 +23,8 @@ bibliography: R.bib
 ## Recommended reading
 
 > @heumann_introduction_2022: Chapter 1
+>
+> @baguleySeriousStatsGuide2012: Chapter 1
 >
 > @agrestiFoundationsStatisticsData2022: Chapter 1.2
 
@@ -130,8 +136,12 @@ In the statistical literature, variables are usually represented by
 upper-case letters, such as $X$. For each observation
 $\omega \in \Omega$, $X$ has a specific outcome $x$. The set $S$
 comprises all possible outcomes of $X$, e.g.,
-$S_{\text{Register}} = \{\text{informal}, \text{formal}, ...\}$ or
-$S_{\text{Utterance length}} = \{1, 2, 3, \dots \}$.
+
+-   $S_{\text{Register}} = \{\text{informal}, \text{formal}, ...\}$,
+
+-   $S_{\text{Utterance length}} = \{1, 2, 3, \dots \}$,
+
+-   ...
 
 ::: callout-note
 ## Number of (unique) values in R
@@ -253,7 +263,7 @@ the `cl.order` dataset.
 ::: {#exr-var-2}
 Consider the general form of the data matrix from @eq-dataset.
 
-1.  What would the labels $\omega$, $X$, $x$ correspond to in the
+1.  What would the labels $\omega$, $X$ and $x$ correspond to in the
     `cl.order` dataset?
 
 2.  What would be $\Omega$ and $S$?

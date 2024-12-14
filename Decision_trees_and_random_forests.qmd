@@ -1,6 +1,11 @@
 ---
 title: "Decision trees and random forests"
-author: Vladimir Buskin
+author:
+  name: "Vladimir Buskin" 
+  orcid: "0009-0005-5824-1012"
+  affiliation: 
+    name: "Catholic University of Eichstätt-Ingolstadt"
+    department: "English Language and Linguistics"
 format:
   html:
     self-contained: true
@@ -316,12 +321,10 @@ plot(tv.rf.permimp, horizontal = TRUE, type = "dot", sort = TRUE)
 
 ### Visualising random forest models
 
-Partial dependence plots provide averaged predictions ($\hat{y}$) for a
-given constellation of predictors.
-
-These averages are produced by the partial dependence function $f_k$. If
-a categorical response variable has $K$ possible values, it has the form
-$$
+Partial dependence plots provide averaged predictions $\hat{y}$ for a
+given constellation of predictors. These averages are produced by the
+partial dependence function $f_k$. If a categorical response variable
+has $K$ possible values, it has the form $$
 f_k(X) = \log [p_k (x)] - \frac{1}{N}\sum_{k=1}^{K} \log [p_k (x)],
 $$ with $p_k(x)$ corresponding to the fitted probability of the 𝑘th
 level of the response variable for $k \in \{1, 2, ..., K\}$

@@ -1,6 +1,11 @@
 ---
 title: "Import/export data"
-author: Vladimir Buskin
+author:
+  name: "Vladimir Buskin" 
+  orcid: "0009-0005-5824-1012"
+  affiliation: 
+    name: "Catholic University of Eichstätt-Ingolstadt"
+    department: "English Language and Linguistics"
 format:
   html:
     self-contained: true
@@ -194,8 +199,11 @@ print(data2)
 
 ## Troubleshooting
 
-Importing data into R is often a challenging and error-prone task, made more difficult by the wide range of potential issues. **AI tools** can be immensely helpful for identifying and addressing problems specific to your use case. [This handout](Using_AI.qmd) provides some practical guidance, including tips for resolving file-loading errors.
-
+Importing data into R is often a challenging and error-prone task, made
+more difficult by the wide range of potential issues. **AI tools** can
+be immensely helpful for identifying and addressing problems specific to
+your use case. [This handout](Using_AI.qmd) provides some practical
+guidance, including tips for resolving file-loading errors.
 
 ## Exercises
 

@@ -1,6 +1,11 @@
 ---
 title: "Libraries"
-author: Vladimir Buskin
+author:
+  name: "Vladimir Buskin" 
+  orcid: "0009-0005-5824-1012"
+  affiliation: 
+    name: "Catholic University of Eichstätt-Ingolstadt"
+    department: "English Language and Linguistics"
 format:
   html:
     self-contained: true
@@ -40,17 +45,16 @@ the package you would like to install under `Packages`.
 This reader will use functions from a variety of R packages. Please
 install the following ones:
 
-| Package | Purpose |  Session | 
-|---------|---------| ---------| 
-| `readxl` | Importing Microsoft Excel files | [Importing/exporting](Importing_exporting.qmd)
-| `writexl` | Exporting Microsoft Excel files | [Importing/exporting](Importing_exporting.qmd)
-| `quanteda` | Analysis of text data | [Concordancing](Concordancing.qmd)
-| `lattice` | Data visualisation | [Concordancing](Concordancing.qmd)
-| `tidyverse` | Framework for data manipulation and visualisation | [Categorical data](Categorical_data.qmd), [Continuous data](Summary_statistics.qmd)
-| `crosstable` | Creating contingency tables | [Categorical data](Categorical_data.qmd)
-| `flextable` | Exporting contingency tables | [Categorical data](Categorical_data.qmd)
-| `confintr` | Effect size measure for categorical data| [Chi-squared test](Chi_square_test.qmd)
-
+| Package      | Purpose                                           | Session                                                                             |
+|------------------------|------------------------|------------------------|
+| `readxl`     | Importing Microsoft Excel files                   | [Importing/exporting](Importing_exporting.qmd)                                      |
+| `writexl`    | Exporting Microsoft Excel files                   | [Importing/exporting](Importing_exporting.qmd)                                      |
+| `quanteda`   | Analysis of text data                             | [Concordancing](Concordancing.qmd)                                                  |
+| `lattice`    | Data visualisation                                | [Concordancing](Concordancing.qmd)                                                  |
+| `tidyverse`  | Framework for data manipulation and visualisation | [Categorical data](Categorical_data.qmd), [Continuous data](Summary_statistics.qmd) |
+| `crosstable` | Creating contingency tables                       | [Categorical data](Categorical_data.qmd)                                            |
+| `flextable`  | Exporting contingency tables                      | [Categorical data](Categorical_data.qmd)                                            |
+| `confintr`   | Effect size measure for categorical data          | [Chi-squared test](Chi_square_test.qmd)                                             |
 
 ### Loading packages
 
@@ -107,11 +111,9 @@ argument.
 citation("quanteda")
 ```
 
-
 ```{r, include = FALSE, eval = FALSE}
 sessionInfo()
 ```
-
 
 ```{r, include = FALSE, eval = FALSE}
 library(report)
