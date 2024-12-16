@@ -104,12 +104,11 @@ head(cl.order)
 
 ## The big picture: Populations and samples
 
-In order to investigate one or more (extra-)linguistic features, we
+In order to investigate one or more linguistic features, we
 first need to collect relevant **observations**, which typically
 correspond to linguistic utterances in a corpus-linguistic context.
-Since it is not feasible to examine the entirety of all linguistic
-utterances ever produced, i.e., the **population**, we rely on specific
-subsets of it: **samples**.
+Since it is not feasible to examine, for instance, the entirety of all linguistic
+utterances ever produced, i.e., the virtually infinite **population**, we rely on subsets of it: **samples**. Good research is characterised by good **sampling procedures** that limit the **bias** present in any sample, thus improving the generalisability of potential findings. 
 
 To state this more formally, let $\omega$ ('lower-case Omega') denote a
 single observation of interest. The full set of theoretically possible
@@ -132,8 +131,8 @@ value such as `informal`, or `Utterance length` a hypothetical value of
 
 In the statistical literature, variables are usually represented by
 upper-case letters, such as $X$. For each observation
-$\omega \in \Omega$, $X$ has a specific outcome $x$. The set $S$
-comprises all possible unique outcomes of $X$, e.g.,
+$\omega \in \Omega$, $X$ has a value $x$. The set $S$
+comprises all possible unique values of $X$, e.g.,
 
 -   $S_{\text{Register}} = \{\text{informal}, \text{formal}, ...\}$,
 
@@ -267,11 +266,28 @@ variable. These can be `AGE`, `SEX` or the `VARIETY` of English at hand.
 ### Exercises
 
 ::: {#exr-var-1}
+Consider the following statement:
+
+> This paper examines the influence of clause length on the ordering of
+> main and subordinate clauses.
+
+1.  What is the dependent variable?
+
+2.  What is the independent variable?
+
+3.  What would it mean if they were reversed?
+:::
+
+::: {#exr-var-2}
+Is frequency data a discrete or a continuous variable?
+:::
+
+::: {#exr-var-3}
 Identify the variable types (nominal, ordinal etc.) for all columns in
 the `cl.order` dataset.
 :::
 
-::: {#exr-var-2}
+::: {#exr-var-4}
 Consider the general form of the data matrix from @eq-dataset.
 
 1.  What would the labels $\omega$, $X$ and $x$ correspond to in the
@@ -280,15 +296,3 @@ Consider the general form of the data matrix from @eq-dataset.
 2.  What would be $\Omega$ and $S$?
 :::
 
-::: {#exr-var-3}
-Consider the following statement:
-
-> This paper examines the influence of clause length on the ordering of
-> main and subordinate clauses.
-
-1.  What is the dependent variable?
-
-2.  What is/are the independent variable(s)?
-
-3.  What would it mean if they were reversed?
-:::

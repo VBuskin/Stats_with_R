@@ -5418,13 +5418,13 @@ Further details on the variables
 </section>
 <section id="the-big-picture-populations-and-samples" class="level2" data-number="14.3">
 <h2 data-number="14.3" class="anchored" data-anchor-id="the-big-picture-populations-and-samples"><span class="header-section-number">14.3</span> The big picture: Populations and samples</h2>
-<p>In order to investigate one or more (extra-)linguistic features, we first need to collect relevant <strong>observations</strong>, which typically correspond to linguistic utterances in a corpus-linguistic context. Since it is not feasible to examine the entirety of all linguistic utterances ever produced, i.e., the <strong>population</strong>, we rely on specific subsets of it: <strong>samples</strong>.</p>
+<p>In order to investigate one or more linguistic features, we first need to collect relevant <strong>observations</strong>, which typically correspond to linguistic utterances in a corpus-linguistic context. Since it is not feasible to examine, for instance, the entirety of all linguistic utterances ever produced, i.e., the virtually infinite <strong>population</strong>, we rely on subsets of it: <strong>samples</strong>. Good research is characterised by good <strong>sampling procedures</strong> that limit the <strong>bias</strong> present in any sample, thus improving the generalisability of potential findings.</p>
 <p>To state this more formally, let <span class="math inline">\(\omega\)</span> (‘lower-case Omega’) denote a single observation of interest. The full set of theoretically possible observations is contained in <span class="math inline">\(\Omega\)</span> (‘upper-case Omega’), with <span class="math inline">\(\Omega = \{\omega_1, \omega_2, \dots, \omega_n \}\)</span>. Here <span class="math inline">\(n\)</span> represents the <span class="math inline">\(n\)</span>-th observation and should be a natural number. A sample is then simply a selection of elements from <span class="math inline">\(\Omega\)</span>.</p>
 </section>
 <section id="variables" class="level2" data-number="14.4">
 <h2 data-number="14.4" class="anchored" data-anchor-id="variables"><span class="header-section-number">14.4</span> Variables</h2>
 <p>The concept of the <strong>variable</strong> is very handy in that it allows us to quantify different aspects our linguistic observations, such the age or gender of the speaker, the register of the speech situation, the variety of English, the length of an utterance, a syntactic construction or a grammatical category, among many other theoretically possible features. For each observation, we should be able to assign a specific <strong>value</strong> to our variables; for instance, a variable <code>Register</code> could assume a value such as <code>informal</code>, or <code>Utterance length</code> a hypothetical value of <code>5</code> (e.g., 5 words).</p>
-<p>In the statistical literature, variables are usually represented by upper-case letters, such as <span class="math inline">\(X\)</span>. For each observation <span class="math inline">\(\omega \in \Omega\)</span>, <span class="math inline">\(X\)</span> has a specific outcome <span class="math inline">\(x\)</span>. The set <span class="math inline">\(S\)</span> comprises all possible unique outcomes of <span class="math inline">\(X\)</span>, e.g.,</p>
+<p>In the statistical literature, variables are usually represented by upper-case letters, such as <span class="math inline">\(X\)</span>. For each observation <span class="math inline">\(\omega \in \Omega\)</span>, <span class="math inline">\(X\)</span> has a value <span class="math inline">\(x\)</span>. The set <span class="math inline">\(S\)</span> comprises all possible unique values of <span class="math inline">\(X\)</span>, e.g.,</p>
 <ul>
 <li><p><span class="math inline">\(S_{\text{Register}} = \{\text{informal}, \text{formal}, ...\}\)</span>,</p></li>
 <li><p><span class="math inline">\(S_{\text{Utterance length}} = \{1, 2, 3, \dots \}\)</span>,</p></li>
@@ -5665,24 +5665,27 @@ Ratio-scaled/continuous
 <section id="exercises" class="level3" data-number="14.4.4">
 <h3 data-number="14.4.4" class="anchored" data-anchor-id="exercises"><span class="header-section-number">14.4.4</span> Exercises</h3>
 <div id="exr-var-1" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 14.1 </strong></span>Identify the variable types (nominal, ordinal etc.) for all columns in the <code>cl.order</code> dataset.</p>
-</div>
-<div id="exr-var-2" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 14.2 </strong></span>Consider the general form of the data matrix from <a href="#eq-dataset" class="quarto-xref">Equation&nbsp;<span>14.1</span></a>.</p>
-<ol type="1">
-<li><p>What would the labels <span class="math inline">\(\omega\)</span>, <span class="math inline">\(X\)</span> and <span class="math inline">\(x\)</span> correspond to in the <code>cl.order</code> dataset?</p></li>
-<li><p>What would be <span class="math inline">\(\Omega\)</span> and <span class="math inline">\(S\)</span>?</p></li>
-</ol>
-</div>
-<div id="exr-var-3" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 14.3 </strong></span>Consider the following statement:</p>
+<p><span class="theorem-title"><strong>Exercise 14.1 </strong></span>Consider the following statement:</p>
 <blockquote class="blockquote">
 <p>This paper examines the influence of clause length on the ordering of main and subordinate clauses.</p>
 </blockquote>
 <ol type="1">
 <li><p>What is the dependent variable?</p></li>
-<li><p>What is/are the independent variable(s)?</p></li>
+<li><p>What is the independent variable?</p></li>
 <li><p>What would it mean if they were reversed?</p></li>
+</ol>
+</div>
+<div id="exr-var-2" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 14.2 </strong></span>Is frequency data a discrete or a continuous variable?</p>
+</div>
+<div id="exr-var-3" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 14.3 </strong></span>Identify the variable types (nominal, ordinal etc.) for all columns in the <code>cl.order</code> dataset.</p>
+</div>
+<div id="exr-var-4" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 14.4 </strong></span>Consider the general form of the data matrix from <a href="#eq-dataset" class="quarto-xref">Equation&nbsp;<span>14.1</span></a>.</p>
+<ol type="1">
+<li><p>What would the labels <span class="math inline">\(\omega\)</span>, <span class="math inline">\(X\)</span> and <span class="math inline">\(x\)</span> correspond to in the <code>cl.order</code> dataset?</p></li>
+<li><p>What would be <span class="math inline">\(\Omega\)</span> and <span class="math inline">\(S\)</span>?</p></li>
 </ol>
 </div>
 
