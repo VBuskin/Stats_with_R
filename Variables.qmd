@@ -30,19 +30,21 @@ bibliography: R.bib
 
 ## Preparation
 
+::: callout-tip
+## Script
+
+You can find the full R script associated with this unit
+[here](https://osf.io/xn76k).
+:::
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+library(kableExtra)
 ```
 
-Please download the file `Paquot_Larsson_2020_data.xlsx`
-[@paquotDescriptiveStatisticsVisualization2020][^variables-1] and store
+Please download the file [`Paquot_Larsson_2020_data.xlsx`](https://osf.io/eu4gw)
+[@paquotDescriptiveStatisticsVisualization2020] and store
 it in your working directory.
-
-[^variables-1]: The supplementary materials can be downloaded from the
-    publisher's
-    [website](https://link.springer.com/chapter/10.1007/978-3-030-46216-1_17)
-    \[Last accessed April 28, 2024\]. Note that the dataset has been
-    originally compiled by @gries_statistics_2013.
 
 ```{r, echo = TRUE, output = FALSE}
 # Load libraries
@@ -85,23 +87,19 @@ head(cl.order)
 
 ::: {.callout-note collapse="true" title="Further details on the variables"}
 -   `ORDER`: Does the subordinate clause come before or after the main
-    clause? ('sc-mc' vs. 'mc-sc')
+    clause?
 
--   `SUBORDTYPE`: Is the subordinate clause temporal or causal? ('temp'
-    vs. 'caus')
+-   `SUBORDTYPE`: Is the subordinate clause temporal or causal?
 
 -   `MORETHAN2CL`: Are there most clauses in the sentence than just one
-    subordinate clause and one main clause? ('yes' vs. 'no')
+    subordinate clause and one main clause?
 
--   `LEN_MC`: How many words does the main clause contain? (ratio-scaled
-    continuous variable)
+-   `LEN_MC`: How many words does the main clause contain?
 
 -   `LEN_SC`: How many words does the subordinate clause contain?
-    (ratio-scaled continuous variable)
 
 -   `LENGTH_DIFF`: What is the length difference in words between the
-    main clause and subordinate clause? (ratio-scaled continuous
-    variables)
+    main clause and subordinate clause?
 :::
 
 ## The big picture: Populations and samples
@@ -135,7 +133,7 @@ value such as `informal`, or `Utterance length` a hypothetical value of
 In the statistical literature, variables are usually represented by
 upper-case letters, such as $X$. For each observation
 $\omega \in \Omega$, $X$ has a specific outcome $x$. The set $S$
-comprises all possible outcomes of $X$, e.g.,
+comprises all possible unique outcomes of $X$, e.g.,
 
 -   $S_{\text{Register}} = \{\text{informal}, \text{formal}, ...\}$,
 
@@ -143,8 +141,7 @@ comprises all possible outcomes of $X$, e.g.,
 
 -   ...
 
-::: callout-note
-## Number of (unique) values in R
+::: {.callout-note title="Number of (unique) values in R" collapse="true"}
 
 To count the number of items in a vector, which correspond to the total
 number $n$ of attested values of $X$, we can use `length()`:
@@ -167,11 +164,23 @@ unique(cl.order$SUBORDTYPE)
 ```
 :::
 
+### Datasets
+
 Information on variables and their values is conventionally arranged in
-a **data set**, which is essentially a matrix with columns (= variables)
-and rows (= observations). Assuming that $n$ denotes the row number and
-$p$ the column number, the general form of a dataset is summarised in
-@eq-dataset.
+a **dataset**, which is essentially a matrix with **rows** (= observations) and **columns** (= variables). Consider the `head()` of the clause data:
+
+```{r, echo = FALSE}
+head(cl.order) %>% 
+  kbl(row.names = TRUE) %>% 
+  kable_classic()
+```
+
+```{=html}
+<div style="margin-top: 10px;"></div>
+```
+
+Assuming that $n$ denotes the row number and
+$p$ the column number, the abstract form of a dataset is an $n \times p$ matrix of the form in @eq-dataset.
 
 $$
 \begin{pmatrix}
@@ -183,7 +192,9 @@ $$
 \end{pmatrix}
 $$ {#eq-dataset}
 
-### Subtypes
+
+
+### Data types
 
 In general, we distinguish between **discrete** variables, which can
 only take a limited set of unique values, and **continuous** variables,
