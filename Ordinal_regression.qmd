@@ -45,11 +45,11 @@ assesses **how high/low-routine contexts affect the acceptability of
 object omission** for transitive verbs from different frequency bins.
 
 We will replicate her findings using her survey data
-`Glass_2021_survey_processed.csv`[^ordinal_regression-1]:
+`Glass_2021_survey_processed.csv`[^1]:
 
-[^ordinal_regression-1]: The original dataset can be retrieved from
-    Lelia Glass's OSF repository: <https://osf.io/t6zw5> \[Last
-    accessed: 27th September, 2024\].
+[^1]: The original dataset can be retrieved from Lelia Glass's OSF
+    repository: <https://osf.io/t6zw5> \[Last accessed: 27th September,
+    2024\].
 
 ```{r}
 # Load libraries

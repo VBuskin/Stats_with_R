@@ -34,40 +34,58 @@ the code lines below:
 
 ```{r, echo = TRUE, output = TRUE}
 # Libraries
-library("readxl") # for loading Excel data
-library("tidyverse") # data manipulation and visualisation
+library(readxl)
+library(tidyverse)
+# For publication-ready tables
+library(crosstable)
+library(flextable)
 
 # Load data from working directory
 cl.order <- read_xlsx("Paquot_Larsson_2020_data.xlsx")
+
+# Check the structure of the data frame
+head(cl.order)
 
 ```
 
 ## Frequency tables
 
-### One variable
-
 Each categorical variable in the data frame is made up of two or more
 categories. A simple descriptive measure is the frequency of each
-category. The table below indicates how often each clause order occurs
-in the `ORDER` column.
+category, which are usually summarised in tables.
+
+### One variable
+
+Assume we are interested in how often each clause ordering type, namely `mc-sc` (main clause -- subordinate clause) and `sc-mc` (subordinate clause -- main clause). To this end, we need to inspect the `ORDER` column of the `cl.order` dataset. Since manual counting isn't really an option, we will make use of the convenient functions `table()` and `xtabs()`.
+
+::: {.callout-note collapse="true" title="The workhorse: `table()`"}
+
+This function requires a character vector. We use the notation `cl.order$ORDER` to subset the `cl.order` data frame according to the
+column `ORDER` (cf. [data frames](Data_frames.qmd)). We store the results in the variable `order_freq1` (you may choose a different name if you like) and display the output by applying to it the `print()` function.
 
 ```{r}
+# Count occurrences of ordering types ("mc-sc" and "sc-mc") in the data frame
 order_freq1 <- table(cl.order$ORDER) 
 
+# Print table
 print(order_freq1)
 ```
 
-The notation `cl.order$ORDER` subsets the `cl.order` according to the
-column `ORDER` (see [data frames](Data_frames.qmd)).
+:::
 
-Alternatively, you could use `xtabs()` to achieve the same result --
-perhaps with a slightly more intuitive syntax.
+::: {.callout-note collapse="true" title="More detailed: `xtabs()`"}
+
+Alternatively, you could use `xtabs()` to achieve the same result. The syntax is a little different, but it returns a slightly more more detailed table with explicit variable label(s).
 
 ```{r}
+# Count occurrences of ordering types ("mc-sc" and "sc-mc")
 order_freq2 <- xtabs(~ ORDER, cl.order)
 
+# Print table
 print(order_freq2)
 ```
+:::
+
 
 ### Two or more variables
 
@@ -77,37 +95,61 @@ For example, what is the distribution of clause order depending on the
 type of subordinate clause? The output is also referred to as a
 **contingency table**.
 
+::: {.callout-note collapse="true" title="The `table()` way"}
+
+
 ```{r}
+# Get frequencies of ordering tpyes ("mc-sc" vs. "sc-mc") depending on the type of subordinate clause ("caus" vs. "temp")
 order_counts1 <- table(cl.order$ORDER, cl.order$SUBORDTYPE)
 
+# Print contingency table
 print(order_counts1)
 ```
 
-Here is the `xtabs()` alternative:
+:::
+
+::: {.callout-note collapse="true" title="The `xtabs()` way"}
 
 ```{r}
+# Cross-tabulate ORDER and SUBORDTYPE
 order_counts2 <- xtabs(~ ORDER + SUBORDTYPE, cl.order)
 
+# Print cross-table
 print(order_counts2)
 ```
-
-::: {.callout-note collapse="true" title="How do I obtain percentage tables?"}
-There are two ways to convert the raw frequency counts to percentage
-tables:
-
-1.  Manually divide all cells by the total number of observations (which
-    correspond to the sum of all cells) and multiply the result by 100.
-
-```{r, output = FALSE}
-pct1 <- order_counts1/sum(order_counts1) * 100
-```
-
-2.  Use the `prop.table()` function and multiply the result by 100.
-
-```{r, output = FALSE}
-pct2 <- prop.table(order_counts1) * 100
-```
 :::
+
+### Percentage tables
+
+There are several ways to compute percentages for your cross-tables, but by far the simplest is via the `prop.table()` function. As it only provides proportions, you can multiply the output by 100 to obtain real percentages.
+
+::: {.callout-note collapse="true" title="Get percentages for a `table()` object"}
+
+```{r, output = TRUE}
+# Convert to % using the prop.table() function
+pct1 <- prop.table(order_counts1) * 100
+
+# Print percentages
+print(pct1)
+
+```
+
+:::
+
+::: {.callout-note collapse="true" title="Get percentages for an `xtabs()` object"}
+
+```{r, output = TRUE}
+# Convert to % using the prop.table() function
+pct2 <- prop.table(order_counts2) * 100
+
+# Print percentages
+print(pct2)
+```
+
+Notice how `pct2` still carries the variable labels `SUBORDTYPE` and `ORDER`, which is very convenient.
+
+:::
+
 
 ## Plotting categorical data
 
@@ -115,20 +157,30 @@ This section demonstrates both the in-built plotting functions of R
 ('Base R') as well as the more modern versions provided by the
 `tidyverse` package.
 
-### Moscaiplot
+::: {.callout-tip collapse="true"}
+
+### Mosaicplots (raw counts)
 
 A straightforward way to visualise a contingency table is the
 mosaicplot:
 
 ```{r}
+# Works with raw counts and percentages
+# Using the output of xtabs() as input
 mosaicplot(order_counts2, color = TRUE)
 ```
 
-### Barplots
+:::
+
+::: {.callout-tip collapse="true"}
+
+### Barplots (raw counts)
 
 The workhorse of categorical data analysis is the barplot. Base R
 functions usually require a `table` object as input, whereas `ggplot2`
 can operate on the raw dataset.
+
+
 
 ### One variable
 
@@ -151,8 +203,10 @@ barplot(order_freq1)
 -   Barplot with `geom_bar()` using the raw input data
 
 ```{r, echo = TRUE, output = TRUE}
-# Load library  (if not already loaded)
-library(tidyverse)
+# Requirement: library(tidyverse)
+
+# Raw input data
+head(cl.order)
 
 # Create barplot
 ggplot(cl.order, aes(x = ORDER)) +
@@ -170,10 +224,10 @@ argument using the raw data.
 ### Base R
 
 ```{r}
-# Generate cross-table
+# Generate cross-table with two variables
 order_counts2 <- xtabs(~ ORDER + SUBORDTYPE, cl.order)
 
-# Create barplot
+# Create simple barplot
 barplot(order_counts2, 
         beside = TRUE,  # Make bars side-by-side
         legend = TRUE)  # Add a legend
@@ -182,10 +236,10 @@ barplot(order_counts2,
 ### Base R (fully customised)
 
 ```{r}
-# Generate cross-table
+# Generate cross-table with two variables
 order_counts2 <- xtabs(~ ORDER + SUBORDTYPE, cl.order)
 
-# Create barplot
+# Customise barplot with axis labels, colours and legend
 barplot(order_counts2, 
         beside = TRUE,  # Make bars dodged (i.e., side by side)
         main = "Distribution of ORDER by SUBORDTYPE (Base R)", 
@@ -199,10 +253,9 @@ barplot(order_counts2,
 ### ggplot2
 
 ```{r, echo = TRUE, output = TRUE}
-# Load library (if not already loaded)
-library(tidyverse)
+# Requirement: library(tidyverse)
 
-# Create barplot
+# Create simple barplot with the ggplot() function
 ggplot(cl.order, aes(x = ORDER, fill = SUBORDTYPE)) +
   geom_bar(position = "dodge")
 ```
@@ -210,9 +263,9 @@ ggplot(cl.order, aes(x = ORDER, fill = SUBORDTYPE)) +
 ### ggplot2 (fully customised)
 
 ```{r, echo = TRUE, output = TRUE}
-# Load library (if not already loaded)
-library(tidyverse)
+# Requirement: library(tidyverse)
 
+# Fully customised ggplot2 object
 ggplot(cl.order, aes(x = ORDER, fill = SUBORDTYPE)) +
   geom_bar(position = "dodge") +
   labs(
@@ -225,32 +278,35 @@ ggplot(cl.order, aes(x = ORDER, fill = SUBORDTYPE)) +
 ```
 :::
 
-## Plotting percentages
+:::
 
-::: {.callout-note collapse="true" title="How do I plot percentages in Base R?"}
+::: {.callout-tip collapse="true"}
+### Barplots (percentages)
+
+::: panel-tabset
+
+#### Base R
 In very much the same way as with the raw counts:
 
 ```{r}
-# Create barplot
+
+# Create simple barplot with a percentage table as input
 barplot(pct1, 
         beside = TRUE,  # Make bars side-by-side
         legend = TRUE)  # Add a legend
 ```
-:::
 
-::: {.callout-note collapse="true" title="How do I plot percentages with `ggplot2`?"}
-Here, a few tweaks are necessary. In general, the `ggplot()` function
-prefers to works with data frames rather than cross-tables, so we'll
-have to coerce it into one first:
+#### ggplot2
+
+Here, a few tweaks are necessary. Because the `ggplot()` function
+prefers to works with data frames rather than cross-tables, we'll have to coerce it into one first:
 
 ```{r}
-# Convert pct1 to a data frame
-pct1_df <- as.data.frame(pct1)
+# Convert a percentage table to a data frame
+# My recommendation: Use the pct2 object, which was generated using xtabs() because it will keep the variable names
+pct2_df <- as.data.frame(pct2)
 
-colnames(pct1_df) <- c("ORDER", "SUBORDTYPE", "pct")
-
-# Print contents of the new data frame "pct1_df"
-print(pct1_df)
+print(pct2_df)
 ```
 
 Now we can plot the percentages with `geom_col()`. This geom (=
@@ -258,27 +314,27 @@ Now we can plot the percentages with `geom_col()`. This geom (=
 onto the y-axis:
 
 ```{r}
-# Load library  (if not already loaded)
-library(tidyverse)
+# Requirement: library(tidyverse)
 
-# Create barplot with user-defined y-axis (requires geom_col())
-ggplot(pct1_df, aes(x = ORDER, y = pct, fill = SUBORDTYPE)) +
-  geom_col(position = "dodge")
+# Create barplot with user-defined y-axis, which requires geom_col() rather than geom_bar()
+ggplot(pct2_df, aes(x = ORDER, y = Freq, fill = SUBORDTYPE)) +
+  geom_col(position = "dodge") +
+  labs(y = "Frequency (in %)")
 ```
 :::
 
-## Other plots
+:::
 
-### Bubble plot
+
+::: {.callout-tip collapse="true"}
+
+### Bubble plot (percentages)
 
 ```{r}
-#| code-fold: true
-#| code-summary: "Show the code"
-
-library(tidyverse)
+# Requirement: library(tidyverse)
 
 # Bubble plot
-ggplot(pct1_df, aes(x = ORDER, y = SUBORDTYPE, size = pct)) +
+ggplot(pct2_df, aes(x = ORDER, y = SUBORDTYPE, size = Freq)) +
   geom_point(color = "skyblue", alpha = 0.7) +
   scale_size_continuous(range = c(5, 20)) +  # Adjust bubble size range
   labs(title = "Bubble Plot of ORDER by SUBORDTYPE",
@@ -288,43 +344,79 @@ ggplot(pct1_df, aes(x = ORDER, y = SUBORDTYPE, size = pct)) +
   theme_minimal()
 ```
 
-### Alluvial plot
+:::
+
+::: {.callout-tip collapse="true"}
+### Alluvial plot (percentages)
 
 ```{r}
-#| code-fold: true
-#| code-summary: "Show the code"
-
-# Make sure to install this library prior to loading 
+# Make sure to install this library prior to running the code below 
 library(ggalluvial)
 
-ggplot(pct1_df,
-       aes(axis1 = ORDER, axis2 = SUBORDTYPE, y = pct)) +
-  geom_alluvium(aes(fill = ORDER), width = 0.3, alpha = 0.7) +
-  geom_stratum(width = 0.4, fill = "gray", color = "black") +
+ggplot(pct2_df,
+       aes(axis1 = ORDER, axis2 = SUBORDTYPE, y = Freq)) +
+  geom_alluvium(aes(fill = ORDER)) +
+  geom_stratum(fill = "gray") +
   geom_text(stat = "stratum", aes(label = after_stat(stratum))) +
   labs(title = "Alluvial Plot of ORDER by SUBORDTYPE",
        x = "Categories", y = "Percentage") +
   theme_minimal()
 ```
 
+:::
+
 ## Exporting tables to MS Word
 
-The `flextable` package greatly facilitates generating publication-ready
-tables in R. It provides the best output if used on a table created by
-`xtabs()`. The full guide to this package can be found
-[here](https://ardata-fr.github.io/flextable-book/crosstabs.html#using-tables).
+The `crosstable` and `flextable` packages make it very easy to export elegant tables to MS Word. 
+
+::: {.callout-note collapse="true" title="Clean and to the point: `crosstable()`"}
+
+This is perhaps the most elegant solution. Generate a `crosstable()` object by supplying at the very least ...
+
+-   the original dataset (`data = cl.order`),
+-   the dependent variable (`cols = ORDER`), and
+-   the independent variable (`by = SUBORDTYPE`).
+
+You can further specify ...
+
+-   whether to include column totals, row totals or both (here: `total = both`),
+-   the rounding scheme (here: `percent_digits = 2`), 
+-   ...
+
+```{r}
+
+# Required libraries:
+# library(crosstable)
+# library(flextable)
+
+# Create the cross table
+output1 <- crosstable(data = cl.order,
+                      cols = ORDER, 
+                      by = SUBORDTYPE, 
+                      total = "both",
+                      percent_digits = 2)
+
+# Generate file
+as_flextable(output1)
+
+```
+:::
+
+
+::: {.callout-note collapse="true" title="How much info do you need? Yes."}
+
+It also possible to use `as_flextable()` without pre-processing the data with `crosstable()`; supplying a table preferably created with `xtabs()` is sufficient. Without any doubt, the output is extremely informative, yet it is everything but reader-friendly.
+
+For this reason, I recommend relying on the less overwhelming  `crosstable()` option above if a plain and easy result is desired. However, readers who would like to leverage the full capabilities of the  `flextable()` package and familiarise themselves with the abundant options for customisation, can find the detailed documentation  [here](https://ardata-fr.github.io/flextable-book/crosstabs.html#using-tables).
 
 ```{r, output = FALSE}
-#| code-fold: true
-#| code-summary: "Show the code"
-
-# Load library after installation
-library(flextable)
+# Requires the following library:
+# library(flextable)
 
 # Create a table
 tab1 <- xtabs(~ ORDER + SUBORDTYPE, cl.order)
 
-# Convert a table to a flextable with as_flextable()
+# Directly convert a table to a flextable with as_flextable()
 output_1 <- as_flextable(tab1)
 
 # Print output
@@ -333,24 +425,4 @@ print(output_1)
 
 ![](crosstable_plot1.png)
 
-Unfortunately, the output cannot really be customised. However, if you'd
-like to add some further options, the `crosstable` package provides a
-remedy. In fact, it is even easier to use as it doesn't require you to
-compute any tables beforehand.
-
-```{r}
-#| code-fold: true
-#| code-summary: "Show the code"
-
-# Required libraries
-library(crosstable)
-library(flextable)
-
-# Create the cross table
-output2 <- crosstable(cl.order, ORDER, by = SUBORDTYPE, 
-                 total = "both",
-                 percent_digits = 2)
-
-as_flextable(output2)
-
-```
+:::

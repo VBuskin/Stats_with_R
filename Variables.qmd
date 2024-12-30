@@ -263,7 +263,7 @@ variables**. These are also often referred to as **explanatory**
 variables as they are supposed to explain variation in the response
 variable. These can be `AGE`, `SEX` or the `VARIETY` of English at hand.
 
-### Exercises
+## Exercises
 
 ::: {#exr-var-1}
 Consider the following statement:

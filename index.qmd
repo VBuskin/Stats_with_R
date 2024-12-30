@@ -1,4 +1,3 @@
-
 ## Preface {.unnumbered}
 
 This collection of handouts provides a hands-on introduction to data
@@ -24,10 +23,9 @@ The second section introduces R as an analytical tool, covering its core
 functionality. With these fundamentals in place, we proceed to query
 corpora directly within R. Chapters four and five focus on describing
 discrete and continuous outputs, as well as identifying meaningful
-associations and differences in the data (**BA**). Finally, to gain more
-nuanced insights into potential patterns, we apply common machine
-learning algorithms to fit, evaluate, and interpret statistical models
-(**MA**).
+associations and differences in the data. Finally, to gain more nuanced
+insights into potential patterns, we apply common machine learning
+algorithms to fit, evaluate, and interpret statistical models.
 
 Throughout this journey, readers will develop the skills to conduct
 robust corpus-linguistic analyses, from basic querying to advanced
