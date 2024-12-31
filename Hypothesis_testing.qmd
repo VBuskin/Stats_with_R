@@ -33,67 +33,58 @@ General:
 > @baguleySeriousStatsGuide2012: Chapter 4
 >
 > @agrestiFoundationsStatisticsData2022: Chapter 5
+>
+> @dienesUnderstandingPsychologyScience2008
 
-## Hypothesis testing {#sec-hyp}
+## On scientific inference {#sec-hyp}
 
-The null hypothesis significance testing (NHST) framework offers
-researchers a convenient way of testing theoretical assumptions about a
-population of interest. This chiefly involves setting up a set of
-falsifiable statistical hypotheses, gathering evidence from the observed
-data and computing the (in)famous '$p$-value' to determine "statistical
-significance" -- a notion that is frequently misinterpreted in
-scientific studies
+Science begins and ends with theory, and statistics acts as the
+"go-between". Regardless of the discipline, solid research is
+characterised by a robust theoretical foundation that gives rise to
+**substantive hypotheses**, i.e., theory-driven predictions about a
+population of interest. From this rather concrete hypothesis, it should
+be possible to derive a **statistical hypothesis** that re-states the
+prediction in more formal/mathematical terms. After checking it against
+real-world data, researchers can either **confirm** or **reject** their
+hypothesis, after which they may decide to amend (or even abandon) their
+theory – or keep it as is.
 
-This involves setting up a set of falsifiable statistical hypotheses
-that predict the presence or absence of certain patterns in the data.
-These are known as the **null hypothesis** and the **alternative
-hypothesis**. They are set up **before** seeing the data and justified
-by previous research. Association tests have the following components:
+## Null hypothesis significance testing (NHST)
 
--   The **null hypothesis** $H_0$ could be viewed describing the
-    "default state of the world" [@james_introduction_2021: 555], which
-    suggests that there is no noteworthy effect to be observed. If we
-    are interested in some property $\theta$ of the population (also
-    known as a **population parameter**) (e.g., frequency differences
-    between observed or expected counts; differences in mean reaction
-    times between groups etc.), then it would have the value 0 under
-    $H_0$.
+The **NHST** framework offers researchers a convenient way of testing
+their theoretical assumptions. This chiefly involves setting up a set of
+(ideally) falsifiable statistical hypotheses, gathering evidence from
+the observed data and computing the (in)famous '$p$-value' to determine
+"statistical significance" -- a notion that is frequently misinterpreted
+in scientific studies.
+
+::: callout-note
+## Is this the only way of testing hypotheses?
+
+The answer is a resounding **no**. Despite its immense popularity, NHST
+is problematic in many respects and hence subject to heavy criticism
+(cf. @dienesUnderstandingPsychologyScience2008: 76;
+@baguleySeriousStatsGuide2012: 143-144). There are other statistical
+schools that can remedy many of its shortcomings and come with distinct
+advantages, such as those relying on likelihood-based inference and
+Bayesian principles. Although these are also becoming increasingly
+common in linguistics, they are still restricted to very few
+sub-disciplines and journals (mostly in the area of psycholinguistics).
+:::
+
+### $H_0$ vs. $H_1$
+
+Statistical hypotheses always come in pairs: A **null hypothesis** is
+accompanied by an **alternative hypothesis**. They are set up before (!)
+seeing the data and justified by previous research.
+
+-   The **null hypothesis** $H_0$ describes the "default state of the world" [@james_introduction_2021: 555]. It claims there is no noteworthy effect to be observed in the data.
 
 -   The **alternative hypothesis** $H_1$ (or $H_a$) plainly states that
-    the null hypothesis is false: There is an effect, i.e.,
-    $H_1: \theta \neq 0$. The parameter thus takes values in an
-    alternative range.
-
--   In the NHST approach, researchers typically seek evidence against
-    $H_0$. To quantify the amount of evidence the observed data
-    provides, specific **test statistics** are computed depending on the
-    data type at hand; for instance, $\chi^2$ ('chi-squared') is typical
-    for discrete and $t$ for continuous data.
-
--   The final rejection of $H_0$ is determined by the **significance
-    probability** $p$, which denotes the probability that "the test
-    statistic equals the observed value or a value even more extreme in
-    the direction predicted by $H_a$"
-    [@agrestiFoundationsStatisticsData2022: 163]", assuming $H_0$ is
-    true.
-
-    -   If $p$ is lower than a pre-defined threshold (typically 0.05),
-        also known as the **significance level** $\alpha$, we reject
-        $H_0$. However, if $p \geq$ 0.05, this **neither justifies
-        rejecting nor accepting** the null hypothesis
-        [@baguleySeriousStatsGuide2012: 121].
-
-    -   For example, a $p$-value of $0.02$ means that we would see a
-        particular test statistic, which often reflect usage patterns in
-        linguistic data, only 2% of the time if $X$ and $Y$ were
-        unrelated (i.e., if $H_0$ were true). Since $0.02$ lies below
-        our significance level $\alpha$ = $0.05$, this would suggest a
-        statistically significant relationship between $X$ and $Y$, and
-        we could therefore reject $H_0$.
-
-### Some examples of hypotheses
-
-**Categorical variables**: We are interested in finding out whether
+    the $H_0$ is false, suggesting that there is an effect of some kind.
+    
+::: {.callout-tip collapse="true" title="Example: Hypotheses for categorical data"}
+We are interested in finding out whether
 English clause `ORDER` ('sc-mc' or 'mc-sc') depends on the type of the
 subordinate clause (`SUBORDTYPE`), which can be either temporal ('temp')
 or causal ('caus').
@@ -104,8 +95,10 @@ Our hypotheses are:
 
 -   $H_1:$ The variables `ORDER` and `SUBORDTYPE` are **not**
     independent.
+:::
 
-**Continuous variables**: As part of a phonetic study, we compare the
+::: {.callout-tip collapse="true" title="Example: Hypotheses for continuous data"}
+As part of a phonetic study, we compare the
 base frequencies of the F1 formants of vowels (in Hz) for male and
 female speakers of Apache. We forward the following hypotheses:
 
@@ -113,8 +106,53 @@ female speakers of Apache. We forward the following hypotheses:
 
 -   $H_1:$ mean `F1 frequency` of men $\ne$ mean `F1 frequency` of
     women.
+:::
 
-### Hypothesis testing -- what could go wrong?
+::: {.callout-note collapse="true" title="In formal terms"}
+
+To be precise, we use the hypotheses to make statements about a **population parameter** $\theta$, which can be a mean $\mu$ or a proportion $\pi$, among other things. Mathematically, the null and alternative hypotheses can be restated as in @eq-hypotheses. 
+
+$$
+\begin{align}
+H_0: \theta = 0  \\
+H_1: \theta \neq 0
+\end{align}
+$$ {#eq-hypotheses}
+
+
+:::
+
+In the NHST world, we're dealing with a "This town ain't big enough for the both of us" situation: While we have to state both $H_0$ and $H_1$, only one of them can remain at the end of the day. But how do we decide between these two?
+
+### Test statistics
+
+To facilitate the decision-making process, we proceed to gather statistical evidence from the observed data. Since NHST primarily revolves around $H_0$ (and not $H_1$!), we need to review the evidence the data provides against or in favour $H_0$. This is done via a **test statistic** $T$ that characterises the sample at hand. There are many possible test statistics out there:
+
+-   For instance, if the data are discrete, the $\chi^2$ measure is used to compute differences between observed and expected frequencies in the entire sample.
+-   In the case of continuos data, it is common to rely on $t$ for quantifying differences between sample means.
+-   Other possible test statistics include the correlation coefficient $r$, $z$-scores, the $F$-statistic, and many others.
+
+### Statistical significance
+
+The final rejection of $H_0$ is determined by the **significance
+    probability** $p$. Due to the frequency and ferocity with which statistical significance is misinterpreted in the research literature, we will begin by reviewing its technical definition:
+    
+> "The $p$-value is the probabilty, presuming that $H_0$ is true, that the test statistic equals the observed value or a value even more extreme in
+    the direction predicted by $H_a$"  [@agrestiFoundationsStatisticsData2022: 163].
+
+In compact notation, it is equivalent to the conditional probability 
+
+$$
+P(T \geq \text{some value} \mid H_0 \text{ is true}).
+$$
+If $p$ is lower than a pre-defined threshold (typically $0.05$), also known as the **significance level** $\alpha$, we can reject $H_0$. However, if $p \geq$ 0.05, this **neither justifies rejecting nor accepting** the null hypothesis     [@baguleySeriousStatsGuide2012: 121].
+
+For example, a $p$-value of $0.02$ means that we would see a test statistic $T$ only 2% of the time if $H_0$ were true. Since $0.02$ lies below our significance level $\alpha$ = $0.05$, this would suggest a statistically significant relationship in the data, and we could therefore reject $H_0$.
+
+
+### What could go wrong?
+
+#### Type I and Type II errors
 
 There is always a chance that we accept or reject the wrong hypothesis;
 the four possible constellations are summarised in the table below [cf.
@@ -125,7 +163,9 @@ the four possible constellations are summarised in the table below [cf.
 | $H_0$ **is not rejected** | $\color{green}{\text{Correct decision}}$            | $\color{red}{\text{Type II } (\beta)\text{-error}}$ |
 | $H_0$ **is rejected**     | $\color{red}{\text{Type I } (\alpha)\text{-error}}$ | $\color{green}{\text{Correct decision}}$            |
 
-### Advanced: Where does the $p$-value come from?
+#### Common pitfalls
+
+### The mathematics of the $p$-value
 
 Let's say that the statistical analysis of clause `ORDER` and
 `SUBORDTYPE` has returned a test statistic of $\chi^2 = 6.5$ for 2 $df$.
@@ -187,7 +227,7 @@ P(X\geq 6.5) = 1 - \int_{0}^{6.5} f(x) dx
 $$
 
 ```{r}
-# For a chi-squared test statistic of 6.5 with 2 degree of freedom
+# For a chi-squared test statistic of 6.5 with 2 degrees of freedom
 p_value <- 1 - pchisq(6.5, df = 2)
 
 print(p_value) # significant!

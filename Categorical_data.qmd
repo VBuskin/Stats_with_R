@@ -48,20 +48,29 @@ head(cl.order)
 
 ```
 
-## Frequency tables
+## Describing categorical data
 
-Each categorical variable in the data frame is made up of two or more
-categories. A simple descriptive measure is the frequency of each
-category, which are usually summarised in tables.
+A categorical variable is made up of two or more discrete values. An
+intuitive way to describe categorical data would be to count how often
+each category occurs in the sample. These counts are then typically
+summarised in **frequency tables** and accompanied by suitable
+**graphs** (e.g., barplots).
 
-### One variable
+### Frequency tables (one variable)
 
-Assume we are interested in how often each clause ordering type, namely `mc-sc` (main clause -- subordinate clause) and `sc-mc` (subordinate clause -- main clause). To this end, we need to inspect the `ORDER` column of the `cl.order` dataset. Since manual counting isn't really an option, we will make use of the convenient functions `table()` and `xtabs()`.
+Assume we are interested in how often each clause ordering type (
+`"mc-sc"` vs. `"sc-mc"`) is attested in our data. In R, we can obtain their
+frequencies by inspecting the `ORDER` column of the `cl.order` dataset.
+Since manual counting isn't really an option, we will make use of the
+convenient functions `table()` and `xtabs()`.
 
 ::: {.callout-note collapse="true" title="The workhorse: `table()`"}
-
-This function requires a character vector. We use the notation `cl.order$ORDER` to subset the `cl.order` data frame according to the
-column `ORDER` (cf. [data frames](Data_frames.qmd)). We store the results in the variable `order_freq1` (you may choose a different name if you like) and display the output by applying to it the `print()` function.
+This function requires a character vector. We use the notation
+`cl.order$ORDER` to subset the `cl.order` data frame according to the
+column `ORDER` (cf. [data frames](Data_frames.qmd)). We store the
+results in the variable `order_freq1` (you may choose a different name
+if you like) and display the output by applying to it the `print()`
+function.
 
 ```{r}
 # Count occurrences of ordering types ("mc-sc" and "sc-mc") in the data frame
@@ -70,12 +79,12 @@ order_freq1 <- table(cl.order$ORDER)
 # Print table
 print(order_freq1)
 ```
-
 :::
 
 ::: {.callout-note collapse="true" title="More detailed: `xtabs()`"}
-
-Alternatively, you could use `xtabs()` to achieve the same result. The syntax is a little different, but it returns a slightly more more detailed table with explicit variable label(s).
+Alternatively, you could use `xtabs()` to achieve the same result. The
+syntax is a little different, but it returns a slightly more more
+detailed table with explicit variable label(s).
 
 ```{r}
 # Count occurrences of ordering types ("mc-sc" and "sc-mc")
@@ -86,8 +95,7 @@ print(order_freq2)
 ```
 :::
 
-
-### Two or more variables
+### Frequency tables ($\geq$ 2 variables)
 
 If we are interested in the relationship between **multiple categorical
 variables**, we can cross-tabulate the frequencies of their categories.
@@ -96,8 +104,6 @@ type of subordinate clause? The output is also referred to as a
 **contingency table**.
 
 ::: {.callout-note collapse="true" title="The `table()` way"}
-
-
 ```{r}
 # Get frequencies of ordering tpyes ("mc-sc" vs. "sc-mc") depending on the type of subordinate clause ("caus" vs. "temp")
 order_counts1 <- table(cl.order$ORDER, cl.order$SUBORDTYPE)
@@ -105,11 +111,9 @@ order_counts1 <- table(cl.order$ORDER, cl.order$SUBORDTYPE)
 # Print contingency table
 print(order_counts1)
 ```
-
 :::
 
 ::: {.callout-note collapse="true" title="The `xtabs()` way"}
-
 ```{r}
 # Cross-tabulate ORDER and SUBORDTYPE
 order_counts2 <- xtabs(~ ORDER + SUBORDTYPE, cl.order)
@@ -121,10 +125,12 @@ print(order_counts2)
 
 ### Percentage tables
 
-There are several ways to compute percentages for your cross-tables, but by far the simplest is via the `prop.table()` function. As it only provides proportions, you can multiply the output by 100 to obtain real percentages.
+There are several ways to compute percentages for your cross-tables, but
+by far the simplest is via the `prop.table()` function. As it only
+provides proportions, you can multiply the output by 100 to obtain real
+percentages.
 
 ::: {.callout-note collapse="true" title="Get percentages for a `table()` object"}
-
 ```{r, output = TRUE}
 # Convert to % using the prop.table() function
 pct1 <- prop.table(order_counts1) * 100
@@ -133,11 +139,9 @@ pct1 <- prop.table(order_counts1) * 100
 print(pct1)
 
 ```
-
 :::
 
 ::: {.callout-note collapse="true" title="Get percentages for an `xtabs()` object"}
-
 ```{r, output = TRUE}
 # Convert to % using the prop.table() function
 pct2 <- prop.table(order_counts2) * 100
@@ -146,10 +150,9 @@ pct2 <- prop.table(order_counts2) * 100
 print(pct2)
 ```
 
-Notice how `pct2` still carries the variable labels `SUBORDTYPE` and `ORDER`, which is very convenient.
-
+Notice how `pct2` still carries the variable labels `SUBORDTYPE` and
+`ORDER`, which is very convenient.
 :::
-
 
 ## Plotting categorical data
 
@@ -158,7 +161,6 @@ This section demonstrates both the in-built plotting functions of R
 `tidyverse` package.
 
 ::: {.callout-tip collapse="true"}
-
 ### Mosaicplots (raw counts)
 
 A straightforward way to visualise a contingency table is the
@@ -169,18 +171,14 @@ mosaicplot:
 # Using the output of xtabs() as input
 mosaicplot(order_counts2, color = TRUE)
 ```
-
 :::
 
 ::: {.callout-tip collapse="true"}
-
 ### Barplots (raw counts)
 
 The workhorse of categorical data analysis is the barplot. Base R
 functions usually require a `table` object as input, whereas `ggplot2`
 can operate on the raw dataset.
-
-
 
 ### One variable
 
@@ -277,15 +275,14 @@ ggplot(cl.order, aes(x = ORDER, fill = SUBORDTYPE)) +
   theme_bw()
 ```
 :::
-
 :::
 
 ::: {.callout-tip collapse="true"}
 ### Barplots (percentages)
 
 ::: panel-tabset
-
 #### Base R
+
 In very much the same way as with the raw counts:
 
 ```{r}
@@ -299,7 +296,8 @@ barplot(pct1,
 #### ggplot2
 
 Here, a few tweaks are necessary. Because the `ggplot()` function
-prefers to works with data frames rather than cross-tables, we'll have to coerce it into one first:
+prefers to works with data frames rather than cross-tables, we'll have
+to coerce it into one first:
 
 ```{r}
 # Convert a percentage table to a data frame
@@ -322,12 +320,9 @@ ggplot(pct2_df, aes(x = ORDER, y = Freq, fill = SUBORDTYPE)) +
   labs(y = "Frequency (in %)")
 ```
 :::
-
 :::
 
-
 ::: {.callout-tip collapse="true"}
-
 ### Bubble plot (percentages)
 
 ```{r}
@@ -343,7 +338,6 @@ ggplot(pct2_df, aes(x = ORDER, y = SUBORDTYPE, size = Freq)) +
        size = "Percentage") +
   theme_minimal()
 ```
-
 :::
 
 ::: {.callout-tip collapse="true"}
@@ -362,16 +356,16 @@ ggplot(pct2_df,
        x = "Categories", y = "Percentage") +
   theme_minimal()
 ```
-
 :::
 
 ## Exporting tables to MS Word
 
-The `crosstable` and `flextable` packages make it very easy to export elegant tables to MS Word. 
+The `crosstable` and `flextable` packages make it very easy to export
+elegant tables to MS Word.
 
 ::: {.callout-note collapse="true" title="Clean and to the point: `crosstable()`"}
-
-This is perhaps the most elegant solution. Generate a `crosstable()` object by supplying at the very least ...
+This is perhaps the most elegant solution. Generate a `crosstable()`
+object by supplying at the very least ...
 
 -   the original dataset (`data = cl.order`),
 -   the dependent variable (`cols = ORDER`), and
@@ -379,8 +373,9 @@ This is perhaps the most elegant solution. Generate a `crosstable()` object by s
 
 You can further specify ...
 
--   whether to include column totals, row totals or both (here: `total = both`),
--   the rounding scheme (here: `percent_digits = 2`), 
+-   whether to include column totals, row totals or both (here:
+    `total = both`),
+-   the rounding scheme (here: `percent_digits = 2`),
 -   ...
 
 ```{r}
@@ -402,12 +397,18 @@ as_flextable(output1)
 ```
 :::
 
-
 ::: {.callout-note collapse="true" title="How much info do you need? Yes."}
+It also possible to use `as_flextable()` without pre-processing the data
+with `crosstable()`; supplying a table preferably created with `xtabs()`
+is sufficient. Without any doubt, the output is extremely informative,
+yet it is everything but reader-friendly.
 
-It also possible to use `as_flextable()` without pre-processing the data with `crosstable()`; supplying a table preferably created with `xtabs()` is sufficient. Without any doubt, the output is extremely informative, yet it is everything but reader-friendly.
-
-For this reason, I recommend relying on the less overwhelming  `crosstable()` option above if a plain and easy result is desired. However, readers who would like to leverage the full capabilities of the  `flextable()` package and familiarise themselves with the abundant options for customisation, can find the detailed documentation  [here](https://ardata-fr.github.io/flextable-book/crosstabs.html#using-tables).
+For this reason, I recommend relying on the less overwhelming
+`crosstable()` option above if a plain and easy result is desired.
+However, readers who would like to leverage the full capabilities of the
+`flextable()` package and familiarise themselves with the abundant
+options for customisation, can find the detailed documentation
+[here](https://ardata-fr.github.io/flextable-book/crosstabs.html#using-tables).
 
 ```{r, output = FALSE}
 # Requires the following library:
@@ -424,5 +425,4 @@ print(output_1)
 ```
 
 ![](crosstable_plot1.png)
-
 :::

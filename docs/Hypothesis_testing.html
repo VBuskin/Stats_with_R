@@ -5034,11 +5034,18 @@ vertical-align: -.125em;
    
   <ul>
   <li><a href="#suggested-reading" id="toc-suggested-reading" class="nav-link active" data-scroll-target="#suggested-reading"><span class="header-section-number">18.1</span> Suggested reading</a></li>
-  <li><a href="#sec-hyp" id="toc-sec-hyp" class="nav-link" data-scroll-target="#sec-hyp"><span class="header-section-number">18.2</span> Hypothesis testing</a>
+  <li><a href="#sec-hyp" id="toc-sec-hyp" class="nav-link" data-scroll-target="#sec-hyp"><span class="header-section-number">18.2</span> On scientific inference</a></li>
+  <li><a href="#null-hypothesis-significance-testing-nhst" id="toc-null-hypothesis-significance-testing-nhst" class="nav-link" data-scroll-target="#null-hypothesis-significance-testing-nhst"><span class="header-section-number">18.3</span> Null hypothesis significance testing (NHST)</a>
   <ul>
-  <li><a href="#some-examples-of-hypotheses" id="toc-some-examples-of-hypotheses" class="nav-link" data-scroll-target="#some-examples-of-hypotheses"><span class="header-section-number">18.2.1</span> Some examples of hypotheses</a></li>
-  <li><a href="#hypothesis-testing-what-could-go-wrong" id="toc-hypothesis-testing-what-could-go-wrong" class="nav-link" data-scroll-target="#hypothesis-testing-what-could-go-wrong"><span class="header-section-number">18.2.2</span> Hypothesis testing – what could go wrong?</a></li>
-  <li><a href="#advanced-where-does-the-p-value-come-from" id="toc-advanced-where-does-the-p-value-come-from" class="nav-link" data-scroll-target="#advanced-where-does-the-p-value-come-from"><span class="header-section-number">18.2.3</span> Advanced: Where does the <span class="math inline">\(p\)</span>-value come from?</a></li>
+  <li><a href="#h_0-vs.-h_1" id="toc-h_0-vs.-h_1" class="nav-link" data-scroll-target="#h_0-vs.-h_1"><span class="header-section-number">18.3.1</span> <span class="math inline">\(H_0\)</span> vs.&nbsp;<span class="math inline">\(H_1\)</span></a></li>
+  <li><a href="#test-statistics" id="toc-test-statistics" class="nav-link" data-scroll-target="#test-statistics"><span class="header-section-number">18.3.2</span> Test statistics</a></li>
+  <li><a href="#statistical-significance" id="toc-statistical-significance" class="nav-link" data-scroll-target="#statistical-significance"><span class="header-section-number">18.3.3</span> Statistical significance</a></li>
+  <li><a href="#what-could-go-wrong" id="toc-what-could-go-wrong" class="nav-link" data-scroll-target="#what-could-go-wrong"><span class="header-section-number">18.3.4</span> What could go wrong?</a>
+  <ul class="collapse">
+  <li><a href="#type-i-and-type-ii-errors" id="toc-type-i-and-type-ii-errors" class="nav-link" data-scroll-target="#type-i-and-type-ii-errors"><span class="header-section-number">18.3.4.1</span> Type I and Type II errors</a></li>
+  <li><a href="#common-pitfalls" id="toc-common-pitfalls" class="nav-link" data-scroll-target="#common-pitfalls"><span class="header-section-number">18.3.4.2</span> Common pitfalls</a></li>
+  </ul></li>
+  <li><a href="#the-mathematics-of-the-p-value" id="toc-the-mathematics-of-the-p-value" class="nav-link" data-scroll-target="#the-mathematics-of-the-p-value"><span class="header-section-number">18.3.5</span> The mathematics of the <span class="math inline">\(p\)</span>-value</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/VBuskin/Stats_with_R/blob/main/Hypothesis_testing.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
@@ -5088,38 +5095,126 @@ vertical-align: -.125em;
 <blockquote class="blockquote">
 <p><span class="citation" data-cites="baguleySeriousStatsGuide2012">Baguley (<a href="references.html#ref-baguleySeriousStatsGuide2012" role="doc-biblioref">2012</a>)</span>: Chapter 4</p>
 <p><span class="citation" data-cites="agrestiFoundationsStatisticsData2022">Agresti and Kateri (<a href="references.html#ref-agrestiFoundationsStatisticsData2022" role="doc-biblioref">2022</a>)</span>: Chapter 5</p>
+<p><span class="citation" data-cites="dienesUnderstandingPsychologyScience2008">Dienes (<a href="references.html#ref-dienesUnderstandingPsychologyScience2008" role="doc-biblioref">2008</a>)</span></p>
 </blockquote>
 </section>
 <section id="sec-hyp" class="level2" data-number="18.2">
-<h2 data-number="18.2" class="anchored" data-anchor-id="sec-hyp"><span class="header-section-number">18.2</span> Hypothesis testing</h2>
-<p>The null hypothesis significance testing (NHST) framework offers researchers a convenient way of testing theoretical assumptions about a population of interest. This chiefly involves setting up a set of falsifiable statistical hypotheses, gathering evidence from the observed data and computing the (in)famous ‘<span class="math inline">\(p\)</span>-value’ to determine “statistical significance” – a notion that is frequently misinterpreted in scientific studies</p>
-<p>This involves setting up a set of falsifiable statistical hypotheses that predict the presence or absence of certain patterns in the data. These are known as the <strong>null hypothesis</strong> and the <strong>alternative hypothesis</strong>. They are set up <strong>before</strong> seeing the data and justified by previous research. Association tests have the following components:</p>
+<h2 data-number="18.2" class="anchored" data-anchor-id="sec-hyp"><span class="header-section-number">18.2</span> On scientific inference</h2>
+<p>Science begins and ends with theory, and statistics acts as the “go-between”. Regardless of the discipline, solid research is characterised by a robust theoretical foundation that gives rise to <strong>substantive hypotheses</strong>, i.e., theory-driven predictions about a population of interest. From this rather concrete hypothesis, it should be possible to derive a <strong>statistical hypothesis</strong> that re-states the prediction in more formal/mathematical terms. After checking it against real-world data, researchers can either <strong>confirm</strong> or <strong>reject</strong> their hypothesis, after which they may decide to amend (or even abandon) their theory – or keep it as is.</p>
+</section>
+<section id="null-hypothesis-significance-testing-nhst" class="level2" data-number="18.3">
+<h2 data-number="18.3" class="anchored" data-anchor-id="null-hypothesis-significance-testing-nhst"><span class="header-section-number">18.3</span> Null hypothesis significance testing (NHST)</h2>
+<p>The <strong>NHST</strong> framework offers researchers a convenient way of testing their theoretical assumptions. This chiefly involves setting up a set of (ideally) falsifiable statistical hypotheses, gathering evidence from the observed data and computing the (in)famous ‘<span class="math inline">\(p\)</span>-value’ to determine “statistical significance” – a notion that is frequently misinterpreted in scientific studies.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Is this the only way of testing hypotheses?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The answer is a resounding <strong>no</strong>. Despite its immense popularity, NHST is problematic in many respects and hence subject to heavy criticism (cf. <span class="citation" data-cites="dienesUnderstandingPsychologyScience2008">Dienes (<a href="references.html#ref-dienesUnderstandingPsychologyScience2008" role="doc-biblioref">2008</a>)</span>: 76; <span class="citation" data-cites="baguleySeriousStatsGuide2012">Baguley (<a href="references.html#ref-baguleySeriousStatsGuide2012" role="doc-biblioref">2012</a>)</span>: 143-144). There are other statistical schools that can remedy many of its shortcomings and come with distinct advantages, such as those relying on likelihood-based inference and Bayesian principles. Although these are also becoming increasingly common in linguistics, they are still restricted to very few sub-disciplines and journals (mostly in the area of psycholinguistics).</p>
+</div>
+</div>
+<section id="h_0-vs.-h_1" class="level3" data-number="18.3.1">
+<h3 data-number="18.3.1" class="anchored" data-anchor-id="h_0-vs.-h_1"><span class="header-section-number">18.3.1</span> <span class="math inline">\(H_0\)</span> vs.&nbsp;<span class="math inline">\(H_1\)</span></h3>
+<p>Statistical hypotheses always come in pairs: A <strong>null hypothesis</strong> is accompanied by an <strong>alternative hypothesis</strong>. They are set up before (!) seeing the data and justified by previous research.</p>
 <ul>
-<li><p>The <strong>null hypothesis</strong> <span class="math inline">\(H_0\)</span> could be viewed describing the “default state of the world” <span class="citation" data-cites="james_introduction_2021">(<a href="references.html#ref-james_introduction_2021" role="doc-biblioref">James et al. 2021</a>: 555)</span>, which suggests that there is no noteworthy effect to be observed. If we are interested in some property <span class="math inline">\(\theta\)</span> of the population (also known as a <strong>population parameter</strong>) (e.g., frequency differences between observed or expected counts; differences in mean reaction times between groups etc.), then it would have the value 0 under <span class="math inline">\(H_0\)</span>.</p></li>
-<li><p>The <strong>alternative hypothesis</strong> <span class="math inline">\(H_1\)</span> (or <span class="math inline">\(H_a\)</span>) plainly states that the null hypothesis is false: There is an effect, i.e., <span class="math inline">\(H_1: \theta \neq 0\)</span>. The parameter thus takes values in an alternative range.</p></li>
-<li><p>In the NHST approach, researchers typically seek evidence against <span class="math inline">\(H_0\)</span>. To quantify the amount of evidence the observed data provides, specific <strong>test statistics</strong> are computed depending on the data type at hand; for instance, <span class="math inline">\(\chi^2\)</span> (‘chi-squared’) is typical for discrete and <span class="math inline">\(t\)</span> for continuous data.</p></li>
-<li><p>The final rejection of <span class="math inline">\(H_0\)</span> is determined by the <strong>significance probability</strong> <span class="math inline">\(p\)</span>, which denotes the probability that “the test statistic equals the observed value or a value even more extreme in the direction predicted by <span class="math inline">\(H_a\)</span>” <span class="citation" data-cites="agrestiFoundationsStatisticsData2022">(<a href="references.html#ref-agrestiFoundationsStatisticsData2022" role="doc-biblioref">Agresti and Kateri 2022</a>: 163)</span>“, assuming <span class="math inline">\(H_0\)</span> is true.</p>
-<ul>
-<li><p>If <span class="math inline">\(p\)</span> is lower than a pre-defined threshold (typically 0.05), also known as the <strong>significance level</strong> <span class="math inline">\(\alpha\)</span>, we reject <span class="math inline">\(H_0\)</span>. However, if <span class="math inline">\(p \geq\)</span> 0.05, this <strong>neither justifies rejecting nor accepting</strong> the null hypothesis <span class="citation" data-cites="baguleySeriousStatsGuide2012">(<a href="references.html#ref-baguleySeriousStatsGuide2012" role="doc-biblioref">Baguley 2012</a>: 121)</span>.</p></li>
-<li><p>For example, a <span class="math inline">\(p\)</span>-value of <span class="math inline">\(0.02\)</span> means that we would see a particular test statistic, which often reflect usage patterns in linguistic data, only 2% of the time if <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> were unrelated (i.e., if <span class="math inline">\(H_0\)</span> were true). Since <span class="math inline">\(0.02\)</span> lies below our significance level <span class="math inline">\(\alpha\)</span> = <span class="math inline">\(0.05\)</span>, this would suggest a statistically significant relationship between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, and we could therefore reject <span class="math inline">\(H_0\)</span>.</p></li>
-</ul></li>
+<li><p>The <strong>null hypothesis</strong> <span class="math inline">\(H_0\)</span> describes the “default state of the world” <span class="citation" data-cites="james_introduction_2021">(<a href="references.html#ref-james_introduction_2021" role="doc-biblioref">James et al. 2021</a>: 555)</span>. It claims there is no noteworthy effect to be observed in the data.</p></li>
+<li><p>The <strong>alternative hypothesis</strong> <span class="math inline">\(H_1\)</span> (or <span class="math inline">\(H_a\)</span>) plainly states that the <span class="math inline">\(H_0\)</span> is false, suggesting that there is an effect of some kind.</p></li>
 </ul>
-<section id="some-examples-of-hypotheses" class="level3" data-number="18.2.1">
-<h3 data-number="18.2.1" class="anchored" data-anchor-id="some-examples-of-hypotheses"><span class="header-section-number">18.2.1</span> Some examples of hypotheses</h3>
-<p><strong>Categorical variables</strong>: We are interested in finding out whether English clause <code>ORDER</code> (‘sc-mc’ or ‘mc-sc’) depends on the type of the subordinate clause (<code>SUBORDTYPE</code>), which can be either temporal (‘temp’) or causal (‘caus’).</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Example: Hypotheses for categorical data">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Example: Hypotheses for categorical data
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We are interested in finding out whether English clause <code>ORDER</code> (‘sc-mc’ or ‘mc-sc’) depends on the type of the subordinate clause (<code>SUBORDTYPE</code>), which can be either temporal (‘temp’) or causal (‘caus’).</p>
 <p>Our hypotheses are:</p>
 <ul>
 <li><p><span class="math inline">\(H_0:\)</span> The variables <code>ORDER</code> and <code>SUBORDTYPE</code> are independent.</p></li>
 <li><p><span class="math inline">\(H_1:\)</span> The variables <code>ORDER</code> and <code>SUBORDTYPE</code> are <strong>not</strong> independent.</p></li>
 </ul>
-<p><strong>Continuous variables</strong>: As part of a phonetic study, we compare the base frequencies of the F1 formants of vowels (in Hz) for male and female speakers of Apache. We forward the following hypotheses:</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Example: Hypotheses for continuous data">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Example: Hypotheses for continuous data
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>As part of a phonetic study, we compare the base frequencies of the F1 formants of vowels (in Hz) for male and female speakers of Apache. We forward the following hypotheses:</p>
 <ul>
 <li><p><span class="math inline">\(H_0:\)</span> mean <code>F1 frequency</code> of men <span class="math inline">\(=\)</span> mean <code>F1 frequency</code> of women.</p></li>
 <li><p><span class="math inline">\(H_1:\)</span> mean <code>F1 frequency</code> of men <span class="math inline">\(\ne\)</span> mean <code>F1 frequency</code> of women.</p></li>
 </ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="In formal terms">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+In formal terms
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>To be precise, we use the hypotheses to make statements about a <strong>population parameter</strong> <span class="math inline">\(\theta\)</span>, which can be a mean <span class="math inline">\(\mu\)</span> or a proportion <span class="math inline">\(\pi\)</span>, among other things. Mathematically, the null and alternative hypotheses can be restated as in <a href="#eq-hypotheses" class="quarto-xref">Equation&nbsp;<span>18.1</span></a>.</p>
+<p><span id="eq-hypotheses"><span class="math display">\[
+\begin{align}
+H_0: \theta = 0  \\
+H_1: \theta \neq 0
+\end{align}
+\tag{18.1}\]</span></span></p>
+</div>
+</div>
+</div>
+<p>In the NHST world, we’re dealing with a “This town ain’t big enough for the both of us” situation: While we have to state both <span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_1\)</span>, only one of them can remain at the end of the day. But how do we decide between these two?</p>
 </section>
-<section id="hypothesis-testing-what-could-go-wrong" class="level3" data-number="18.2.2">
-<h3 data-number="18.2.2" class="anchored" data-anchor-id="hypothesis-testing-what-could-go-wrong"><span class="header-section-number">18.2.2</span> Hypothesis testing – what could go wrong?</h3>
+<section id="test-statistics" class="level3" data-number="18.3.2">
+<h3 data-number="18.3.2" class="anchored" data-anchor-id="test-statistics"><span class="header-section-number">18.3.2</span> Test statistics</h3>
+<p>To facilitate the decision-making process, we proceed to gather statistical evidence from the observed data. Since NHST primarily revolves around <span class="math inline">\(H_0\)</span> (and not <span class="math inline">\(H_1\)</span>!), we need to review the evidence the data provides against or in favour <span class="math inline">\(H_0\)</span>. This is done via a <strong>test statistic</strong> <span class="math inline">\(T\)</span> that characterises the sample at hand. There are many possible test statistics out there:</p>
+<ul>
+<li>For instance, if the data are discrete, the <span class="math inline">\(\chi^2\)</span> measure is used to compute differences between observed and expected frequencies in the entire sample.</li>
+<li>In the case of continuos data, it is common to rely on <span class="math inline">\(t\)</span> for quantifying differences between sample means.</li>
+<li>Other possible test statistics include the correlation coefficient <span class="math inline">\(r\)</span>, <span class="math inline">\(z\)</span>-scores, the <span class="math inline">\(F\)</span>-statistic, and many others.</li>
+</ul>
+</section>
+<section id="statistical-significance" class="level3" data-number="18.3.3">
+<h3 data-number="18.3.3" class="anchored" data-anchor-id="statistical-significance"><span class="header-section-number">18.3.3</span> Statistical significance</h3>
+<p>The final rejection of <span class="math inline">\(H_0\)</span> is determined by the <strong>significance probability</strong> <span class="math inline">\(p\)</span>. Due to the frequency and ferocity with which statistical significance is misinterpreted in the research literature, we will begin by reviewing its technical definition:</p>
+<blockquote class="blockquote">
+<p>“The <span class="math inline">\(p\)</span>-value is the probabilty, presuming that <span class="math inline">\(H_0\)</span> is true, that the test statistic equals the observed value or a value even more extreme in the direction predicted by <span class="math inline">\(H_a\)</span>” <span class="citation" data-cites="agrestiFoundationsStatisticsData2022">(<a href="references.html#ref-agrestiFoundationsStatisticsData2022" role="doc-biblioref">Agresti and Kateri 2022</a>: 163)</span>.</p>
+</blockquote>
+<p>In compact notation, it is equivalent to the conditional probability</p>
+<p><span class="math display">\[
+P(T \geq \text{some value} \mid H_0 \text{ is true}).
+\]</span> If <span class="math inline">\(p\)</span> is lower than a pre-defined threshold (typically <span class="math inline">\(0.05\)</span>), also known as the <strong>significance level</strong> <span class="math inline">\(\alpha\)</span>, we can reject <span class="math inline">\(H_0\)</span>. However, if <span class="math inline">\(p \geq\)</span> 0.05, this <strong>neither justifies rejecting nor accepting</strong> the null hypothesis <span class="citation" data-cites="baguleySeriousStatsGuide2012">(<a href="references.html#ref-baguleySeriousStatsGuide2012" role="doc-biblioref">Baguley 2012</a>: 121)</span>.</p>
+<p>For example, a <span class="math inline">\(p\)</span>-value of <span class="math inline">\(0.02\)</span> means that we would see a test statistic <span class="math inline">\(T\)</span> only 2% of the time if <span class="math inline">\(H_0\)</span> were true. Since <span class="math inline">\(0.02\)</span> lies below our significance level <span class="math inline">\(\alpha\)</span> = <span class="math inline">\(0.05\)</span>, this would suggest a statistically significant relationship in the data, and we could therefore reject <span class="math inline">\(H_0\)</span>.</p>
+</section>
+<section id="what-could-go-wrong" class="level3" data-number="18.3.4">
+<h3 data-number="18.3.4" class="anchored" data-anchor-id="what-could-go-wrong"><span class="header-section-number">18.3.4</span> What could go wrong?</h3>
+<section id="type-i-and-type-ii-errors" class="level4" data-number="18.3.4.1">
+<h4 data-number="18.3.4.1" class="anchored" data-anchor-id="type-i-and-type-ii-errors"><span class="header-section-number">18.3.4.1</span> Type I and Type II errors</h4>
 <p>There is always a chance that we accept or reject the wrong hypothesis; the four possible constellations are summarised in the table below <span class="citation" data-cites="heumann_introduction_2022">(cf. <a href="references.html#ref-heumann_introduction_2022" role="doc-biblioref">Heumann, Schomaker, and Shalabh 2022</a>: 223)</span>:</p>
 <table class="table">
 <colgroup>
@@ -5148,8 +5243,12 @@ vertical-align: -.125em;
 </tbody>
 </table>
 </section>
-<section id="advanced-where-does-the-p-value-come-from" class="level3" data-number="18.2.3">
-<h3 data-number="18.2.3" class="anchored" data-anchor-id="advanced-where-does-the-p-value-come-from"><span class="header-section-number">18.2.3</span> Advanced: Where does the <span class="math inline">\(p\)</span>-value come from?</h3>
+<section id="common-pitfalls" class="level4" data-number="18.3.4.2">
+<h4 data-number="18.3.4.2" class="anchored" data-anchor-id="common-pitfalls"><span class="header-section-number">18.3.4.2</span> Common pitfalls</h4>
+</section>
+</section>
+<section id="the-mathematics-of-the-p-value" class="level3" data-number="18.3.5">
+<h3 data-number="18.3.5" class="anchored" data-anchor-id="the-mathematics-of-the-p-value"><span class="header-section-number">18.3.5</span> The mathematics of the <span class="math inline">\(p\)</span>-value</h3>
 <p>Let’s say that the statistical analysis of clause <code>ORDER</code> and <code>SUBORDTYPE</code> has returned a test statistic of <span class="math inline">\(\chi^2 = 6.5\)</span> for 2 <span class="math inline">\(df\)</span>. In order to compute the probability <span class="math inline">\(P(\chi^2 \geq 5)\)</span>, we need to consult the <strong>sampling distribution</strong> of this test statistic. The sampling distribution is a probability distribution that assigns probabilities to the values of a test statistic.</p>
 <p>The probability density function <span class="math inline">\(f(x)\)</span> of the <span class="math inline">\(\chi^2\)</span>-distribution for 2 degrees of freedom (abbreviated <span class="math inline">\(df\)</span> and affect the function’s shape) is visualised below. The <span class="math inline">\(p\)</span>-value corresponds to the green area under curve ranging from <span class="math inline">\(x = 6.5\)</span> up to <span class="math inline">\(\infty\)</span>.</p>
 <div class="cell">
@@ -5166,7 +5265,7 @@ vertical-align: -.125em;
 P(X\geq 6.5) = 1 - \int_{0}^{6.5} f(x) dx
 \]</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For a chi-squared test statistic of 6.5 with 2 degree of freedom</span></span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For a chi-squared test statistic of 6.5 with 2 degrees of freedom</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>p_value <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">pchisq</span>(<span class="fl">6.5</span>, <span class="at">df =</span> <span class="dv">2</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p_value) <span class="co"># significant!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -5182,6 +5281,9 @@ Agresti, Alan, and Maria Kateri. 2022. <em>Foundations of Statistics for Data Sc
 </div>
 <div id="ref-baguleySeriousStatsGuide2012" class="csl-entry" role="listitem">
 Baguley, Thomas. 2012. <em>Serious <span>Stats</span>: <span>A</span> <span>Guide</span> to <span>Advanced</span> <span>Statistics</span> for the <span>Behavioral</span> <span>Sciences</span></em>. Houndmills, Basingstoke: Palgrave Macmillan.
+</div>
+<div id="ref-dienesUnderstandingPsychologyScience2008" class="csl-entry" role="listitem">
+Dienes, Zoltán. 2008. <em>Understanding <span>Psychology</span> as a <span>Science</span>: <span>An</span> <span>Introduction</span> to <span>Scientific</span> and <span>Statistical</span> <span>Inference</span></em>. Houndmills: Palgrave Macmillan.
 </div>
 <div id="ref-gries_statistics_2021" class="csl-entry" role="listitem">
 Gries, Stefan Thomas. 2021. <em>Statistics for Linguistics with r: A Practical Introduction</em>. 3rd rev. ed. Berlin; Boston: De Gruyter Mouton.

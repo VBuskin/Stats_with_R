@@ -154,7 +154,6 @@ $$
 median(cl.order$LEN_MC)
 ```
 
-
 The median of `LEN_MC` is represented by the red vertical line.
 
 ::: panel-tabset
