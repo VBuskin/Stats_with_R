@@ -1,0 +1,21 @@
+{
+  "hash": "f766d32f239afde403919c1b74664886",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Probability distributions\"\nauthor: Vladimir Buskin\nformat:\n  html:\n    self-contained: true\n    theme: default\n    toc: true\n    number-sections: true\n    slide-number: true\n    incremental: false\n    slide-level: 3\n    scrollable: true\neditor: visual\nbibliography: R.bib\n---\n\n::: {.cell}\n\n:::\n\n\n\n## Continuous distributions\n\n### The normal distribution\n\nA great number of numerical variables in the world follow the well-known\n**normal** (or Gaussian) **distribution**, which includes test scores,\nweight and height, among many others. The plot below illustrates its\ncharacteristic bell-shape: Most observations are in the middle, with\nconsiderably fewer near the fringes. For example, most people are rather\n\"average\" in height; there are only few people that are extremely short\nor extremely tall.\n\n\n\n::: {.cell}\n::: {.cell-output-display}\n![](Distributions_files/figure-pdf/unnamed-chunk-2-1.pdf)\n:::\n:::\n\n\n\nThe normal distribution is typically described in terms of two\nparameters: The population mean $\\mu$ and the population standard\ndeviation $\\sigma$. If a random variable $X$ is normally distributed, we\ntypically use the notation in @eq-normdistrib.\n\n$$ X \\sim N(\\mu, \\sigma^2).\n$$ {#eq-normdistrib}\n\nThe Gaussian bell curve has several interesting properties:\n\n-   68% all values fall within one standard deviation of the mean,\n\n-   95% within two, and\n\n-   99.7% within three.\n\nBelow, you can see the annotated **probability density function (PDF)**\nof the normal distribution. The $y$-axis indicates the density of\npopulation values; note that since the Gaussian distribution is a\ncontinuous distribution, the probability of any given value is 0. We can\nonly obtain probabilities for **intervals** of values, which are given\nby\n\n$$\nP(a \\leq X \\leq b) = \\int_a^b f(x)dx.\n$$ {#eq-norm-prob}\n\n\n\n\n\n::: {.cell}\n::: {.cell-output-display}\n![](Distributions_files/figure-pdf/unnamed-chunk-3-1.pdf)\n:::\n:::\n\n\n\nWe can find the population mean of $X$ with a PDF $f(x)$ via\n\n$$\nE(X) = \\mu = \\int_x xf(x)dx,\n$$ {#eq-norm-mean}\n\nwhere $E(X)$ denotes the expected value of $X$, i.e., the mean. Essentially,  multiplying every value $x$ by its respective probability density $f(x)$ and integrating over all possible values of $x$ will return $E(X) = \\mu$.\n\n## Discrete distributions\n\n### Bernoulli distribution\n\nThe **Bernoulli distribution** is a discrete probability distribution\nfor random variables which have only two possible outcomes: \"positive\"\n(often coded as 1) and \"negative\" (often coded as 0). Examples of such\nvariables include coin tosses (heads/tails), binary response questions\n(yes/no), and defect status (defective/non-defective).\n\nIf a random variable $X$ follows a Bernoulli distribution, it is\ndetermined by the parameter $p$, which is the probability of the\npositive case:\n\n$$ X \\sim Bernoulli(p).$$ The **probability mass function (PMF)** of the\nBernoulli distribution is given by: $$\nP(X = x) = \n\\begin{cases} \np & \\text{if } x = 1 \\\\\n1 - p & \\text{if } x = 0 \n\\end{cases}\n$$\n\nwhere $0 \\leq p \\leq 1$. This function shows the probability of $X$\ntaking on the value of 1 or 0 [cf. @heumann_introduction_2022: 162-163].\n\n\n\n::: {.cell}\n::: {.cell-output-display}\n![](Distributions_files/figure-pdf/unnamed-chunk-4-1.pdf)\n:::\n:::\n\n\n\n::: callout-note\n### Extensions\n\nA Bernoulli experiment presupposes a single trial (e.g., tossing a coin\nonce). If we are interested in the distribution of a binary discrete\nvariable over $n$ Bernoulli trials, we can describe it in terms of the\n**binomial distribution** [@heumann_introduction_2022: 163-166].\n\nCategorical variables with more than 2 outcomes and $n$ Bernoulli trials\ncan be modelled using the **multinomial distribution**\n[@heumann_introduction_2022: 167-169].\n:::\n",
+    "supporting": [
+      "Distributions_files/figure-pdf"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {
+      "knitr": [
+        "{\"type\":\"list\",\"attributes\":{},\"value\":[]}"
+      ]
+    },
+    "preserve": null,
+    "postProcess": false
+  }
+}
