@@ -51,16 +51,18 @@ Since the $\chi^2$ measure exclusively works with categorical variables,
 a separate test statistic is required if one of them is a continuous
 variable. The $t$ statistic is often used for research questions
 involving differences between sample means. The way $t$ is calculated
-depends on the sources of $X$ and $Y$: Do they originate from the same sample or
-from two (in-)dependent ones?
+depends on the sources of $X$ and $Y$: Do they originate from the same
+sample or from two (in-)dependent ones?
 
 First, we consider two **independent samples** from a population:
 
--   Sample $X$ with the observations $\{x_1, x_2, ..., {x_n}_1\}$, sample
-    size $n_1$, sample mean $\bar{x}$ and sample variance $s^2_x$.
+-   Sample $X$ with the observations $\{x_1, x_2, ..., {x_n}_1\}$,
+    sample size $n_1$, sample mean $\bar{x}$ and sample variance
+    $s^2_x$.
 
--   Sample $Y$ with the observations $\{y_1, y_2, ..., {y_n}_2\}$, sample
-    size $n_2$, sample mean $\bar{y}$ and sample variance $s^2_y$.
+-   Sample $Y$ with the observations $\{y_1, y_2, ..., {y_n}_2\}$,
+    sample size $n_2$, sample mean $\bar{y}$ and sample variance
+    $s^2_y$.
 
 ::: {.callout-note collapse="true" title="Definition of the $t$-test"}
 The $t$-statistic after Welch is given by:

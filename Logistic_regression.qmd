@@ -42,8 +42,8 @@ Consider the data from Buskin's
 [-@buskinDefiniteNullInstantiationfc][^logistic_regression-1]
 corpus-study on subject pronoun realisation:
 
-[^logistic_regression-1]: The input data can be downloaded from this
-    OSF repository: <https://osf.io/qgnms>.
+[^logistic_regression-1]: The input data can be downloaded from this OSF
+    repository: <https://osf.io/qgnms>.
 
 ```{r, echo = TRUE, output = TRUE, eval = TRUE}
 # Load libraries
@@ -76,7 +76,7 @@ head(data_pro)
         comprises formal class lessons)
 
     -   `Variety` (British English 'GB', Singapore English 'SING' and
-        Hong Kong English 'HK') and
+        Hong Kong English 'HK'), and
 
     -   `Referentiality` ('referential' with an identifiable referent or
         'non-referential' with no/generic reference)
@@ -258,17 +258,6 @@ $$
 \log\left(\frac{P(\text{Reference} = \text{null} \mid \text{Register})}{1- P(\text{Reference} = \text{null} \mid \text{Register})}\right) = \beta_0 + \beta_1\text{Register}
 $$ {#eq-log-simple}
 
-::: {.callout-tip collapse="true" title="Finding $\\beta_0$ and $\\beta_1$: Maximum Likelihood Estimation"}
-In contrast to continuous data, the estimation of parameters for
-discrete response variables is much less straightforward. Rather than
-finding a regression line that minimises the distance to all data
-points, logistic models typically attempt to find the parameter values
-that are **most likely**, given the data. Hence this procedure is also
-known as **Maximum Likelihood Estimation** (MLE). For further technical
-details, see Wood [-@woodGeneralizedAdditiveModels2006: 63-66] or
-Agresti & Kateri [-@agrestiFoundationsStatisticsData2022: 291-294].
-:::
-
 ### Multiple logistic regression
 
 If more than one predictor is included, the above equations can be
@@ -309,12 +298,65 @@ object in S1A **and** the probability of a null vs. overt object in
 S1B'.
 :::
 
+## Finding $\beta_0$ and $\beta_1$: Maximum Likelihood Estimation
+
+In contrast to continuous data, the estimation of parameters for
+discrete response variables is less straightforward in that there is no
+unique solution. Rather than finding a regression line that minimises
+the distance to all data points, the default approach of logistic models
+is to find the parameter values that are **most likely**, given the
+data. Hence this procedure is also known as **Maximum Likelihood
+Estimation** (MLE).
+
+The model first makes an assumption about the probability distribution
+of the data. For categorical data, the binomial distribution is a common
+choice. @eq-d-binom indicates the corresponding probability mass
+function, which describes the probability $\pi$ of observing $y$
+successes in $k$ independent Bernoulli trials. In other words, if we
+tossed a coin $n = 10$ times and observed $y = 5$ heads (i.e., 5
+successes), what is the probability $\pi$ of a success?
+
+$$
+f(y; k; \pi) = \binom{k}{y} \pi^y (1 - \pi)^{n-y}
+$$ {#eq-d-binom}
+
+Now, let $\beta$ denote some parameter of interest (e.g., the slope
+coefficient of a logistic regression model). Given some observed data,
+likelihood of this parameter can be described in terms of the likelihood
+function $L(\beta)$ in @eq-lf1. It assumes $n$ binomial probability mass
+functions with trials $k = 1$ and computes their product. Since the
+binomial coefficient $\binom{n}{y}$ is a constant term, it is typically
+dropped. In essence, we're multiplying successes $\pi^{y_i}_i$ with
+failures $(1 - \pi_i)^{1-y_i}$ for each data point.
+
+$$
+L(\beta) = \prod_{i=1}^n \pi^{y_i}_i (1 - \pi_i)^{1-y_i}
+$$ {#eq-lf1}
+
+Conventionally, this expression is log-transformed in order to convert
+the product into a sum because, for one, sums are easier to handle
+computationally. The log-likelihood function $\ell(\beta)$ in @eq-loglf1
+forms the basis for a variety of goodness-of-fit measures used to
+evaluate logistic regression models.
+
+$$
+\ell(\beta) = \sum_{i=1}^n y_i \log(\pi_i) + (1 - y_i) \log(1 - \pi_i)
+$$ {#eq-loglf1}
+
+The goal is to find the value that maximises $\ell(\beta)$, i.e., the
+**maximum likelihood estimator** $\hat{\beta}$. Approximate solutions
+can be attained via iterative optimisation techniques (e.g.
+Newton-Ralphson). Sometimes the algorithm may fail to find an optimal
+solution, which R may report as a model convergence error. For further
+technical details, see Wood [-@woodGeneralizedAdditiveModels2006: 63-66]
+or Agresti & Kateri [-@agrestiFoundationsStatisticsData2022: 291-294].
+
 ## Workflow in R
 
-### Step 1: Research question and hypotheses
+### Research question and hypotheses
 
-How do the intra- and extra-linguistic variables suggested in the
-literature affect subject pronoun realisation (Definite Null
+**RQ**: How do the intra- and extra-linguistic variables suggested in
+the literature affect subject pronoun realisation (Definite Null
 Instantiation) in British English, Singapore English and Hong Kong
 English?
 
@@ -333,12 +375,17 @@ H_0: & \quad \beta_1 = \beta_2 = \cdots = \beta_p = 0 \\
 H_1: & \quad \text{At least one } \beta_i \neq 0 \text{ for } i \in \{1, 2, \ldots, p\}
 \end{aligned} $$
 
-### Step 2: Convert to factors and specify reference levels
+::: callout-caution
+Note that in practice, these hypotheses are rarely stated explicitly in
+corpus-linguistic publications.
+:::
+
+### Convert to factors and specify reference levels
 
 The next step involves specifying **reference levels** for all
 categorical variables. This step is very important because it will
-directly impact the parameter estimation and, consequently, influence
-our interpretation of the model output.
+directly impact the parameter estimation procedure and, consequently,
+influence our interpretation of the model output.
 
 -   The reference level of the response is usually chosen such that it
     corresponds to the **unmarked or most frequent case**. Since overt
@@ -406,7 +453,7 @@ data_pro$Referentiality <- relevel(data_pro$Referentiality, "referential")
 
 ```
 
-### Step 3: Fit the model
+### Model fitting
 
 There are two functions that can fit logistic models in R: `lrm()` and
 `glm()`.
@@ -438,7 +485,7 @@ Reference.glm <- glm(Reference ~ Register + Variety + Register:Variety + Person,
 summary(Reference.glm)
 ```
 
-```{r, echo = TRUE, output = TRUE}
+```{r, echo = TRUE, output = TRUE, eval = FALSE, include = FALSE}
 tab_model(Reference.glm, show.se = TRUE, show.aic = TRUE, show.dev = TRUE, show.fstat = TRUE, transform = NULL)
 ```
 
@@ -454,7 +501,7 @@ drop1(Reference.glm, test = "Chisq")
 ```
 :::
 
-### Step 4: Confidence intervals and odds ratios
+### Confidence intervals and odds ratios
 
 ```{r, echo = TRUE, output = TRUE, message = FALSE, warning = FALSE}
 
@@ -472,7 +519,7 @@ tidy_model <- tidy_model %>%
 
 ```
 
-### Step 5: Visualise the model
+### Visualisation
 
 -   Plot model coefficients:
 
@@ -532,7 +579,7 @@ plot(ggeffect(Reference.glm, terms = c("Person"))) + geom_line(col = "steelblue"
 
 ```
 
-### Step 6: Interpret the model
+### Interpret the model
 
 The logistic regression model is statistically significant at
 $p < 0.001$ ($\chi^2 = 120.43$, $df = 9$) and has acceptable fit
@@ -547,9 +594,22 @@ Singaporean variety.
 
 ...
 
-### Step 7: Further model diagnostics
+### Further model diagnostics
 
--   **Cross-validation**
+Post-hoc evaluation of the logistic regression model is just as important as it is for [linear regression](Linear_regression.qmd). However, several assumptions can be relaxed. Although independence of observations, a linear relationship between predictors and response as well as uncorrelated predictors remain essential, the stipulations on the distribution and variance of the residuals may be disregarded.
+
+**Multicollinearity** can be inspected via the `vif()` function from the `car` package.
+
+
+```{r, echo = TRUE, output = TRUE}
+#| code-fold: true
+#| code-summary: "Code"
+
+# Variable inflation factors further reveal severe multicollinearity
+vif(Reference.lrm)
+```
+
+**Cross-validating** the model is always recommended to assess the model's ability to generalise beyond the training data and thus prevent overfitting.
 
 ```{r, echo = TRUE, output = TRUE}
 #| code-fold: true
@@ -566,14 +626,4 @@ model.validated <- validate(Reference.val, B = 200)
 
 # Slope optimism should be as low possible!
 model.validated
-```
-
--   **Multicollinearity**
-
-```{r, echo = TRUE, output = TRUE}
-#| code-fold: true
-#| code-summary: "Code"
-
-# Variable inflation factors further reveal severe multicollinearity
-vif(Reference.lrm)
 ```

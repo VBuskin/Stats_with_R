@@ -5044,15 +5044,16 @@ vertical-align: -.125em;
   <li><a href="#multiple-logistic-regression" id="toc-multiple-logistic-regression" class="nav-link" data-scroll-target="#multiple-logistic-regression"><span class="header-section-number">22.3.2</span> Multiple logistic regression</a></li>
   <li><a href="#odds-ratios" id="toc-odds-ratios" class="nav-link" data-scroll-target="#odds-ratios"><span class="header-section-number">22.3.3</span> Odds ratios</a></li>
   </ul></li>
-  <li><a href="#workflow-in-r" id="toc-workflow-in-r" class="nav-link" data-scroll-target="#workflow-in-r"><span class="header-section-number">22.4</span> Workflow in R</a>
+  <li><a href="#finding-beta_0-and-beta_1-maximum-likelihood-estimation" id="toc-finding-beta_0-and-beta_1-maximum-likelihood-estimation" class="nav-link" data-scroll-target="#finding-beta_0-and-beta_1-maximum-likelihood-estimation"><span class="header-section-number">22.4</span> Finding <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>: Maximum Likelihood Estimation</a></li>
+  <li><a href="#workflow-in-r" id="toc-workflow-in-r" class="nav-link" data-scroll-target="#workflow-in-r"><span class="header-section-number">22.5</span> Workflow in R</a>
   <ul class="collapse">
-  <li><a href="#step-1-research-question-and-hypotheses" id="toc-step-1-research-question-and-hypotheses" class="nav-link" data-scroll-target="#step-1-research-question-and-hypotheses"><span class="header-section-number">22.4.1</span> Step 1: Research question and hypotheses</a></li>
-  <li><a href="#step-2-convert-to-factors-and-specify-reference-levels" id="toc-step-2-convert-to-factors-and-specify-reference-levels" class="nav-link" data-scroll-target="#step-2-convert-to-factors-and-specify-reference-levels"><span class="header-section-number">22.4.2</span> Step 2: Convert to factors and specify reference levels</a></li>
-  <li><a href="#step-3-fit-the-model" id="toc-step-3-fit-the-model" class="nav-link" data-scroll-target="#step-3-fit-the-model"><span class="header-section-number">22.4.3</span> Step 3: Fit the model</a></li>
-  <li><a href="#step-4-confidence-intervals-and-odds-ratios" id="toc-step-4-confidence-intervals-and-odds-ratios" class="nav-link" data-scroll-target="#step-4-confidence-intervals-and-odds-ratios"><span class="header-section-number">22.4.4</span> Step 4: Confidence intervals and odds ratios</a></li>
-  <li><a href="#step-5-visualise-the-model" id="toc-step-5-visualise-the-model" class="nav-link" data-scroll-target="#step-5-visualise-the-model"><span class="header-section-number">22.4.5</span> Step 5: Visualise the model</a></li>
-  <li><a href="#step-6-interpret-the-model" id="toc-step-6-interpret-the-model" class="nav-link" data-scroll-target="#step-6-interpret-the-model"><span class="header-section-number">22.4.6</span> Step 6: Interpret the model</a></li>
-  <li><a href="#step-7-further-model-diagnostics" id="toc-step-7-further-model-diagnostics" class="nav-link" data-scroll-target="#step-7-further-model-diagnostics"><span class="header-section-number">22.4.7</span> Step 7: Further model diagnostics</a></li>
+  <li><a href="#research-question-and-hypotheses" id="toc-research-question-and-hypotheses" class="nav-link" data-scroll-target="#research-question-and-hypotheses"><span class="header-section-number">22.5.1</span> Research question and hypotheses</a></li>
+  <li><a href="#convert-to-factors-and-specify-reference-levels" id="toc-convert-to-factors-and-specify-reference-levels" class="nav-link" data-scroll-target="#convert-to-factors-and-specify-reference-levels"><span class="header-section-number">22.5.2</span> Convert to factors and specify reference levels</a></li>
+  <li><a href="#model-fitting" id="toc-model-fitting" class="nav-link" data-scroll-target="#model-fitting"><span class="header-section-number">22.5.3</span> Model fitting</a></li>
+  <li><a href="#confidence-intervals-and-odds-ratios" id="toc-confidence-intervals-and-odds-ratios" class="nav-link" data-scroll-target="#confidence-intervals-and-odds-ratios"><span class="header-section-number">22.5.4</span> Confidence intervals and odds ratios</a></li>
+  <li><a href="#visualisation" id="toc-visualisation" class="nav-link" data-scroll-target="#visualisation"><span class="header-section-number">22.5.5</span> Visualisation</a></li>
+  <li><a href="#interpret-the-model" id="toc-interpret-the-model" class="nav-link" data-scroll-target="#interpret-the-model"><span class="header-section-number">22.5.6</span> Interpret the model</a></li>
+  <li><a href="#further-model-diagnostics" id="toc-further-model-diagnostics" class="nav-link" data-scroll-target="#further-model-diagnostics"><span class="header-section-number">22.5.7</span> Further model diagnostics</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/VBuskin/Stats_with_R/blob/main/Logistic_regression.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
@@ -5150,7 +5151,7 @@ vertical-align: -.125em;
 <ul>
 <li><p><code>Person</code> (‘1.p.’, ‘2.p’, ‘3.p’ as well as the dummy pronouns ‘it’ and ‘there’)</p></li>
 <li><p><code>Register</code> (the text category in the International Corpus of English; ‘S1A’ are informal conversations, whereas ‘S1B’ comprises formal class lessons)</p></li>
-<li><p><code>Variety</code> (British English ‘GB’, Singapore English ‘SING’ and Hong Kong English ‘HK’) and</p></li>
+<li><p><code>Variety</code> (British English ‘GB’, Singapore English ‘SING’ and Hong Kong English ‘HK’), and</p></li>
 <li><p><code>Referentiality</code> (‘referential’ with an identifiable referent or ‘non-referential’ with no/generic reference)</p></li>
 </ul></li>
 </ul>
@@ -5239,22 +5240,6 @@ Understanding log odds
 <p><span id="eq-log-simple"><span class="math display">\[
 \log\left(\frac{P(\text{Reference} = \text{null} \mid \text{Register})}{1- P(\text{Reference} = \text{null} \mid \text{Register})}\right) = \beta_0 + \beta_1\text{Register}
 \tag{22.3}\]</span></span></p>
-<div class="callout callout-style-default callout-tip callout-titled" title="Finding $\beta_0$ and $\beta_1$: Maximum Likelihood Estimation">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Finding <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>: Maximum Likelihood Estimation
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>In contrast to continuous data, the estimation of parameters for discrete response variables is much less straightforward. Rather than finding a regression line that minimises the distance to all data points, logistic models typically attempt to find the parameter values that are <strong>most likely</strong>, given the data. Hence this procedure is also known as <strong>Maximum Likelihood Estimation</strong> (MLE). For further technical details, see Wood <span class="citation" data-cites="woodGeneralizedAdditiveModels2006">(<a href="references.html#ref-woodGeneralizedAdditiveModels2006" role="doc-biblioref">2006</a>: 63-66)</span> or Agresti &amp; Kateri <span class="citation" data-cites="agrestiFoundationsStatisticsData2022">(<a href="references.html#ref-agrestiFoundationsStatisticsData2022" role="doc-biblioref">2022</a>: 291-294)</span>.</p>
-</div>
-</div>
-</div>
 </section>
 <section id="multiple-logistic-regression" class="level3" data-number="22.3.2">
 <h3 data-number="22.3.2" class="anchored" data-anchor-id="multiple-logistic-regression"><span class="header-section-number">22.3.2</span> Multiple logistic regression</h3>
@@ -5273,7 +5258,7 @@ Finding <span class="math inline">\(\beta_0\)</span> and <span class="math inlin
 OR(X_1) = e^{\beta_1}.
 \]</span></p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Understanding odds ratios">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -5282,7 +5267,7 @@ Understanding odds ratios
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Essentially, the OR describes the ratio between two odds with respect to another independent variable. This is illustrated for <code>Reference</code> given <code>Register</code> below:</p>
 <p><span class="math display">\[
@@ -5294,11 +5279,28 @@ Understanding odds ratios
 </div>
 </section>
 </section>
-<section id="workflow-in-r" class="level2" data-number="22.4">
-<h2 data-number="22.4" class="anchored" data-anchor-id="workflow-in-r"><span class="header-section-number">22.4</span> Workflow in R</h2>
-<section id="step-1-research-question-and-hypotheses" class="level3" data-number="22.4.1">
-<h3 data-number="22.4.1" class="anchored" data-anchor-id="step-1-research-question-and-hypotheses"><span class="header-section-number">22.4.1</span> Step 1: Research question and hypotheses</h3>
-<p>How do the intra- and extra-linguistic variables suggested in the literature affect subject pronoun realisation (Definite Null Instantiation) in British English, Singapore English and Hong Kong English?</p>
+<section id="finding-beta_0-and-beta_1-maximum-likelihood-estimation" class="level2" data-number="22.4">
+<h2 data-number="22.4" class="anchored" data-anchor-id="finding-beta_0-and-beta_1-maximum-likelihood-estimation"><span class="header-section-number">22.4</span> Finding <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>: Maximum Likelihood Estimation</h2>
+<p>In contrast to continuous data, the estimation of parameters for discrete response variables is less straightforward in that there is no unique solution. Rather than finding a regression line that minimises the distance to all data points, the default approach of logistic models is to find the parameter values that are <strong>most likely</strong>, given the data. Hence this procedure is also known as <strong>Maximum Likelihood Estimation</strong> (MLE).</p>
+<p>The model first makes an assumption about the probability distribution of the data. For categorical data, the binomial distribution is a common choice. <a href="#eq-d-binom" class="quarto-xref">Equation&nbsp;<span>22.6</span></a> indicates the corresponding probability mass function, which describes the probability <span class="math inline">\(\pi\)</span> of observing <span class="math inline">\(y\)</span> successes in <span class="math inline">\(k\)</span> independent Bernoulli trials. In other words, if we tossed a coin <span class="math inline">\(n = 10\)</span> times and observed <span class="math inline">\(y = 5\)</span> heads (i.e., 5 successes), what is the probability <span class="math inline">\(\pi\)</span> of a success?</p>
+<p><span id="eq-d-binom"><span class="math display">\[
+f(y; k; \pi) = \binom{k}{y} \pi^y (1 - \pi)^{n-y}
+\tag{22.6}\]</span></span></p>
+<p>Now, let <span class="math inline">\(\beta\)</span> denote some parameter of interest (e.g., the slope coefficient of a logistic regression model). Given some observed data, likelihood of this parameter can be described in terms of the likelihood function <span class="math inline">\(L(\beta)\)</span> in <a href="#eq-lf1" class="quarto-xref">Equation&nbsp;<span>22.7</span></a>. It assumes <span class="math inline">\(n\)</span> binomial probability mass functions with trials <span class="math inline">\(k = 1\)</span> and computes their product. Since the binomial coefficient <span class="math inline">\(\binom{n}{y}\)</span> is a constant term, it is typically dropped. In essence, we’re multiplying successes <span class="math inline">\(\pi^{y_i}_i\)</span> with failures <span class="math inline">\((1 - \pi_i)^{1-y_i}\)</span> for each data point.</p>
+<p><span id="eq-lf1"><span class="math display">\[
+L(\beta) = \prod_{i=1}^n \pi^{y_i}_i (1 - \pi_i)^{1-y_i}
+\tag{22.7}\]</span></span></p>
+<p>Conventionally, this expression is log-transformed in order to convert the product into a sum because, for one, sums are easier to handle computationally. The log-likelihood function <span class="math inline">\(\ell(\beta)\)</span> in <a href="#eq-loglf1" class="quarto-xref">Equation&nbsp;<span>22.8</span></a> forms the basis for a variety of goodness-of-fit measures used to evaluate logistic regression models.</p>
+<p><span id="eq-loglf1"><span class="math display">\[
+\ell(\beta) = \sum_{i=1}^n y_i \log(\pi_i) + (1 - y_i) \log(1 - \pi_i)
+\tag{22.8}\]</span></span></p>
+<p>The goal is to find the value that maximises <span class="math inline">\(\ell(\beta)\)</span>, i.e., the <strong>maximum likelihood estimator</strong> <span class="math inline">\(\hat{\beta}\)</span>. Approximate solutions can be attained via iterative optimisation techniques (e.g. Newton-Ralphson). Sometimes the algorithm may fail to find an optimal solution, which R may report as a model convergence error. For further technical details, see Wood <span class="citation" data-cites="woodGeneralizedAdditiveModels2006">(<a href="references.html#ref-woodGeneralizedAdditiveModels2006" role="doc-biblioref">2006</a>: 63-66)</span> or Agresti &amp; Kateri <span class="citation" data-cites="agrestiFoundationsStatisticsData2022">(<a href="references.html#ref-agrestiFoundationsStatisticsData2022" role="doc-biblioref">2022</a>: 291-294)</span>.</p>
+</section>
+<section id="workflow-in-r" class="level2" data-number="22.5">
+<h2 data-number="22.5" class="anchored" data-anchor-id="workflow-in-r"><span class="header-section-number">22.5</span> Workflow in R</h2>
+<section id="research-question-and-hypotheses" class="level3" data-number="22.5.1">
+<h3 data-number="22.5.1" class="anchored" data-anchor-id="research-question-and-hypotheses"><span class="header-section-number">22.5.1</span> Research question and hypotheses</h3>
+<p><strong>RQ</strong>: How do the intra- and extra-linguistic variables suggested in the literature affect subject pronoun realisation (Definite Null Instantiation) in British English, Singapore English and Hong Kong English?</p>
 <p>Given a significance level <span class="math inline">\(\alpha = 0.05\)</span>, the hypotheses are: <span class="math display">\[
 \begin{aligned}
 H_0: &amp; \quad \text{None of the predictor coefficients deviate from 0}.\\
@@ -5311,10 +5313,23 @@ H_1: &amp; \quad \text{At least one predictor coefficient deviates from 0}.
 H_0: &amp; \quad \beta_1 = \beta_2 = \cdots = \beta_p = 0 \\
 H_1: &amp; \quad \text{At least one } \beta_i \neq 0 \text{ for } i \in \{1, 2, \ldots, p\}
 \end{aligned} \]</span></p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Note that in practice, these hypotheses are rarely stated explicitly in corpus-linguistic publications.</p>
+</div>
+</div>
 </section>
-<section id="step-2-convert-to-factors-and-specify-reference-levels" class="level3" data-number="22.4.2">
-<h3 data-number="22.4.2" class="anchored" data-anchor-id="step-2-convert-to-factors-and-specify-reference-levels"><span class="header-section-number">22.4.2</span> Step 2: Convert to factors and specify reference levels</h3>
-<p>The next step involves specifying <strong>reference levels</strong> for all categorical variables. This step is very important because it will directly impact the parameter estimation and, consequently, influence our interpretation of the model output.</p>
+<section id="convert-to-factors-and-specify-reference-levels" class="level3" data-number="22.5.2">
+<h3 data-number="22.5.2" class="anchored" data-anchor-id="convert-to-factors-and-specify-reference-levels"><span class="header-section-number">22.5.2</span> Convert to factors and specify reference levels</h3>
+<p>The next step involves specifying <strong>reference levels</strong> for all categorical variables. This step is very important because it will directly impact the parameter estimation procedure and, consequently, influence our interpretation of the model output.</p>
 <ul>
 <li><p>The reference level of the response is usually chosen such that it corresponds to the <strong>unmarked or most frequent case</strong>. Since overt pronouns are much more common in the data, the reference level of the <code>Reference</code> variable will be set to <code>Reference = overt</code>. This way, the model coefficients will directly represent the probability of the <strong>null</strong> <strong>subject</strong> variant (i.e., the special case) given certain predictor configurations.</p></li>
 <li><p>The <strong>predictor levels</strong> need to be specified as well. Among other things, we are interested in how the Asian Englishes pattern relative to British English. Therefore, we will define British English as the baseline for comparison.</p></li>
@@ -5399,8 +5414,8 @@ H_1: &amp; \quad \text{At least one } \beta_i \neq 0 \text{ for } i \in \{1, 2, 
 </details>
 </div>
 </section>
-<section id="step-3-fit-the-model" class="level3" data-number="22.4.3">
-<h3 data-number="22.4.3" class="anchored" data-anchor-id="step-3-fit-the-model"><span class="header-section-number">22.4.3</span> Step 3: Fit the model</h3>
+<section id="model-fitting" class="level3" data-number="22.5.3">
+<h3 data-number="22.5.3" class="anchored" data-anchor-id="model-fitting"><span class="header-section-number">22.5.3</span> Model fitting</h3>
 <p>There are two functions that can fit logistic models in R: <code>lrm()</code> and <code>glm()</code>.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -5457,123 +5472,6 @@ Register=S1B * Variety=SING -0.4753 0.4688  -1.01 0.3107  </code></pre>
 <span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># View model statistics</span></span>
 <span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Reference.glm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tab_model</span>(Reference.glm, <span class="at">show.se =</span> <span class="cn">TRUE</span>, <span class="at">show.aic =</span> <span class="cn">TRUE</span>, <span class="at">show.dev =</span> <span class="cn">TRUE</span>, <span class="at">show.fstat =</span> <span class="cn">TRUE</span>, <span class="at">transform =</span> <span class="cn">NULL</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<table data-quarto-postprocess="true" class="table table-sm table-striped small">
-<colgroup>
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
-</colgroup>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">&nbsp;</td>
-<td colspan="4" data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">Reference</td>
-</tr>
-<tr class="even">
-<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">Predictors</td>
-<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">Log-Odds</td>
-<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">std. Error</td>
-<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">CI</td>
-<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">p</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">(Intercept)</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-3.41</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.27</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-3.99&nbsp;–&nbsp;-2.91</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;"><strong>&lt;0.001</strong></td>
-</tr>
-<tr class="even">
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">Register [S1B]</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.03</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.38</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-0.74&nbsp;–&nbsp;0.77</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.944</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">Variety [HK]</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.67</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.32</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.06&nbsp;–&nbsp;1.32</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;"><strong>0.034</strong></td>
-</tr>
-<tr class="even">
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">Variety [SING]</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">1.12</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.30</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.56&nbsp;–&nbsp;1.73</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;"><strong>&lt;0.001</strong></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">Person [1]</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-0.88</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.18</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-1.24&nbsp;–&nbsp;-0.53</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;"><strong>&lt;0.001</strong></td>
-</tr>
-<tr class="even">
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">Person [2]</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-1.64</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.27</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-2.21&nbsp;–&nbsp;-1.14</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;"><strong>&lt;0.001</strong></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">Person [it]</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.79</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.30</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.18&nbsp;–&nbsp;1.35</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;"><strong>0.008</strong></td>
-</tr>
-<tr class="even">
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">Person [there]</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-2.56</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">1.01</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-5.44&nbsp;–&nbsp;-1.05</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;"><strong>0.011</strong></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">Register [S1B] × Variety<br>
-[HK]</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.60</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.45</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-0.28&nbsp;–&nbsp;1.50</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.182</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">Register [S1B] × Variety<br>
-[SING]</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-0.48</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.47</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-1.40&nbsp;–&nbsp;0.45</td>
-<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.311</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">Observations</td>
-<td colspan="4" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">4838</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">R<sup>2</sup> Tjur</td>
-<td colspan="4" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">0.030</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">Deviance</td>
-<td colspan="4" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">1378.406</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">AIC</td>
-<td colspan="4" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">1398.406</td>
-</tr>
-</tbody>
-</table>
-
-
-</div>
-</div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -5586,7 +5484,7 @@ Stepwise variable selection
 <div class="callout-body-container callout-body">
 <p>With the function <code>drop1()</code>, it is possible to successively remove variables from the complex model to ascertain which ones improve the model significantly (i.e., decrease the deviance and AIC scores).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">drop1</span>(Reference.glm, <span class="at">test =</span> <span class="st">"Chisq"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">drop1</span>(Reference.glm, <span class="at">test =</span> <span class="st">"Chisq"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Single term deletions
 
@@ -5603,42 +5501,42 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 </section>
-<section id="step-4-confidence-intervals-and-odds-ratios" class="level3" data-number="22.4.4">
-<h3 data-number="22.4.4" class="anchored" data-anchor-id="step-4-confidence-intervals-and-odds-ratios"><span class="header-section-number">22.4.4</span> Step 4: Confidence intervals and odds ratios</h3>
+<section id="confidence-intervals-and-odds-ratios" class="level3" data-number="22.5.4">
+<h3 data-number="22.5.4" class="anchored" data-anchor-id="confidence-intervals-and-odds-ratios"><span class="header-section-number">22.5.4</span> Confidence intervals and odds ratios</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tidy the model output</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>tidy_model <span class="ot">&lt;-</span> <span class="fu">tidy</span>(Reference.glm, <span class="at">conf.int =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove intercept, compute odds ratios and their CIs</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>tidy_model <span class="ot">&lt;-</span> tidy_model <span class="sc">%&gt;%</span> </span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(term <span class="sc">!=</span> <span class="st">"(Intercept)"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">odds_ratio =</span> <span class="fu">exp</span>(estimate),</span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">odds.conf.low =</span> <span class="fu">exp</span>(conf.low),</span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">odds.conf.high =</span> <span class="fu">exp</span>(conf.high)</span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tidy the model output</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>tidy_model <span class="ot">&lt;-</span> <span class="fu">tidy</span>(Reference.glm, <span class="at">conf.int =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove intercept, compute odds ratios and their CIs</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>tidy_model <span class="ot">&lt;-</span> tidy_model <span class="sc">%&gt;%</span> </span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(term <span class="sc">!=</span> <span class="st">"(Intercept)"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">odds_ratio =</span> <span class="fu">exp</span>(estimate),</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">odds.conf.low =</span> <span class="fu">exp</span>(conf.low),</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">odds.conf.high =</span> <span class="fu">exp</span>(conf.high)</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="step-5-visualise-the-model" class="level3" data-number="22.4.5">
-<h3 data-number="22.4.5" class="anchored" data-anchor-id="step-5-visualise-the-model"><span class="header-section-number">22.4.5</span> Step 5: Visualise the model</h3>
+<section id="visualisation" class="level3" data-number="22.5.5">
+<h3 data-number="22.5.5" class="anchored" data-anchor-id="visualisation"><span class="header-section-number">22.5.5</span> Visualisation</h3>
 <ul>
 <li>Plot model coefficients:</li>
 </ul>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the coefficient plot</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(tidy_model, <span class="fu">aes</span>(<span class="at">x =</span> estimate, <span class="at">y =</span> term)) <span class="sc">+</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbarh</span>(<span class="fu">aes</span>(<span class="at">xmin =</span> conf.low, <span class="at">xmax =</span> conf.high), <span class="at">height =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Coefficient Estimate (log-odds)"</span>,</span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Predictor"</span>,</span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Coefficient Estimates with Confidence Intervals"</span>,</span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"*Note that the CIs of singificant predictors do not include 0."</span></span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the coefficient plot</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(tidy_model, <span class="fu">aes</span>(<span class="at">x =</span> estimate, <span class="at">y =</span> term)) <span class="sc">+</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbarh</span>(<span class="fu">aes</span>(<span class="at">xmin =</span> conf.low, <span class="at">xmax =</span> conf.high), <span class="at">height =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Coefficient Estimate (log-odds)"</span>,</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Predictor"</span>,</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Coefficient Estimates with Confidence Intervals"</span>,</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"*Note that the CIs of singificant predictors do not include 0."</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -5649,18 +5547,18 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot odds ratios</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(tidy_model, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">exp</span>(estimate), <span class="at">y =</span> term)) <span class="sc">+</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbarh</span>(<span class="fu">aes</span>(<span class="at">xmin =</span> odds.conf.low, <span class="at">xmax =</span> odds.conf.high), <span class="at">height =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">1</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Coefficient Estimate (odds ratios)"</span>,</span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Predictor"</span>,</span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Odds ratios with Confidence Intervals"</span>,</span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"*Note that the CIs of singificant predictors do not include 1."</span></span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot odds ratios</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(tidy_model, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">exp</span>(estimate), <span class="at">y =</span> term)) <span class="sc">+</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbarh</span>(<span class="fu">aes</span>(<span class="at">xmin =</span> odds.conf.low, <span class="at">xmax =</span> odds.conf.high), <span class="at">height =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">1</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Coefficient Estimate (odds ratios)"</span>,</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Predictor"</span>,</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Odds ratios with Confidence Intervals"</span>,</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"*Note that the CIs of singificant predictors do not include 1."</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -5676,8 +5574,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use ggeffect() from the ggeffects package</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">ggeffect</span>(Reference.glm, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"Register"</span>))) <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="at">col =</span> <span class="st">"steelblue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use ggeffect() from the ggeffects package</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">ggeffect</span>(Reference.glm, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"Register"</span>))) <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="at">col =</span> <span class="st">"steelblue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -5688,7 +5586,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">ggeffect</span>(Reference.glm, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"Variety"</span>))) <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="at">col =</span> <span class="st">"steelblue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">ggeffect</span>(Reference.glm, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"Variety"</span>))) <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="at">col =</span> <span class="st">"steelblue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -5699,7 +5597,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">ggeffect</span>(Reference.glm, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"Person"</span>))) <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="at">col =</span> <span class="st">"steelblue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">ggeffect</span>(Reference.glm, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"Person"</span>))) <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="at">col =</span> <span class="st">"steelblue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -5710,31 +5608,50 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 </section>
-<section id="step-6-interpret-the-model" class="level3" data-number="22.4.6">
-<h3 data-number="22.4.6" class="anchored" data-anchor-id="step-6-interpret-the-model"><span class="header-section-number">22.4.6</span> Step 6: Interpret the model</h3>
+<section id="interpret-the-model" class="level3" data-number="22.5.6">
+<h3 data-number="22.5.6" class="anchored" data-anchor-id="interpret-the-model"><span class="header-section-number">22.5.6</span> Interpret the model</h3>
 <p>The logistic regression model is statistically significant at <span class="math inline">\(p &lt; 0.001\)</span> (<span class="math inline">\(\chi^2 = 120.43\)</span>, <span class="math inline">\(df = 9\)</span>) and has acceptable fit (Nagelkerke’s-<span class="math inline">\(R^2\)</span> = <span class="math inline">\(0.09\)</span>, <span class="math inline">\(C = 0.73\)</span>).</p>
 <p>The model coefficients indicate that null subjects are significantly more likely in Singapore English compared to British English (Estimate = 1.12, 95% CI [0.56, 1.73], <span class="math inline">\(p &lt; 0.001\)</span>). This effect is moderate with an <span class="math inline">\(OR\)</span> of 3.06 (95% CI [1.75, 5.64]), suggesting that the probability of subject omission is elevated by a factor of approximately 3 in the Singaporean variety.</p>
 <p>…</p>
 </section>
-<section id="step-7-further-model-diagnostics" class="level3" data-number="22.4.7">
-<h3 data-number="22.4.7" class="anchored" data-anchor-id="step-7-further-model-diagnostics"><span class="header-section-number">22.4.7</span> Step 7: Further model diagnostics</h3>
-<ul>
-<li><strong>Cross-validation</strong></li>
-</ul>
+<section id="further-model-diagnostics" class="level3" data-number="22.5.7">
+<h3 data-number="22.5.7" class="anchored" data-anchor-id="further-model-diagnostics"><span class="header-section-number">22.5.7</span> Further model diagnostics</h3>
+<p>Post-hoc evaluation of the logistic regression model is just as important as it is for <a href="./Linear_regression.html">linear regression</a>. However, several assumptions can be relaxed. Although independence of observations, a linear relationship between predictors and response as well as uncorrelated predictors remain essential, the stipulations on the distribution and variance of the residuals may be disregarded.</p>
+<p><strong>Multicollinearity</strong> can be inspected via the <code>vif()</code> function from the <code>car</code> package.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set seed for reproducibility</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Refit the model with additional settings</span></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>Reference.val <span class="ot">&lt;-</span> <span class="fu">lrm</span>(Reference <span class="sc">~</span> Register <span class="sc">+</span> Variety <span class="sc">+</span> Register<span class="sc">:</span>Variety <span class="sc">+</span> Person, <span class="at">data =</span> data_pro, <span class="at">x =</span> T, <span class="at">y =</span> T)</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform 200-fold cross-validation</span></span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>model.validated <span class="ot">&lt;-</span> <span class="fu">validate</span>(Reference.val, <span class="at">B =</span> <span class="dv">200</span>)</span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Slope optimism should be as low possible!</span></span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>model.validated</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Variable inflation factors further reveal severe multicollinearity</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(Reference.lrm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>               Register=S1B                  Variety=HK 
+                   5.818111                    4.006084 
+               Variety=SING                    Person=1 
+                   3.421687                    1.140407 
+                   Person=2                   Person=it 
+                   1.089502                    1.102908 
+               Person=there   Register=S1B * Variety=HK 
+                   1.007148                    6.218803 
+Register=S1B * Variety=SING 
+                   3.685075 </code></pre>
+</div>
+</div>
+<p><strong>Cross-validating</strong> the model is always recommended to assess the model’s ability to generalise beyond the training data and thus prevent overfitting.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set seed for reproducibility</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Refit the model with additional settings</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>Reference.val <span class="ot">&lt;-</span> <span class="fu">lrm</span>(Reference <span class="sc">~</span> Register <span class="sc">+</span> Variety <span class="sc">+</span> Register<span class="sc">:</span>Variety <span class="sc">+</span> Person, <span class="at">data =</span> data_pro, <span class="at">x =</span> T, <span class="at">y =</span> T)</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform 200-fold cross-validation</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>model.validated <span class="ot">&lt;-</span> <span class="fu">validate</span>(Reference.val, <span class="at">B =</span> <span class="dv">200</span>)</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Slope optimism should be as low possible!</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>model.validated</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>          index.orig training    test optimism index.corrected   n
@@ -5749,28 +5666,6 @@ Q             0.0251   0.0268  0.0223   0.0045          0.0206 200
 B             0.0336   0.0336  0.0337  -0.0001          0.0337 200
 g             1.0081   1.2487  1.1361   0.1127          0.8954 200
 gp            0.0319   0.0326  0.0303   0.0022          0.0297 200</code></pre>
-</div>
-</div>
-<ul>
-<li><strong>Multicollinearity</strong></li>
-</ul>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Variable inflation factors further reveal severe multicollinearity</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(Reference.lrm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>               Register=S1B                  Variety=HK 
-                   5.818111                    4.006084 
-               Variety=SING                    Person=1 
-                   3.421687                    1.140407 
-                   Person=2                   Person=it 
-                   1.089502                    1.102908 
-               Person=there   Register=S1B * Variety=HK 
-                   1.007148                    6.218803 
-Register=S1B * Variety=SING 
-                   3.685075 </code></pre>
 </div>
 </div>
 
