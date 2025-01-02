@@ -1,0 +1,122 @@
+---
+title: "Libraries"
+author:
+  name: "Vladimir Buskin" 
+  orcid: "0009-0005-5824-1012"
+  affiliation: 
+    name: "Catholic University of Eichstätt-Ingolstadt"
+    department: "English Language and Linguistics"
+format:
+  html:
+    self-contained: true
+    theme: default
+    toc: true
+    number-sections: true
+    slide-number: true
+    incremental: false
+    slide-level: 3
+    scrollable: true
+    
+editor: visual
+---
+
+## Recommended reading
+
+> @winter_statistics_2020: Chapter 1.13
+
+## Working with packages in R
+
+Packages expand the basic functionality of R by providing numerous
+quality-of-life improvements that not only considerably simplify common
+data wrangling tasks but which also provide frameworks for
+state-of-the-art methods for statistical analysis and natural language
+processing (NLP), among many other things.
+
+### Installation {#sec-libraries}
+
+::: {.callout-note collapse="false" title="How do I install a library?"}
+Navigate to `Packages` \> `Install` and verify that the pop-up window
+says `Install from: Repository (CRAN)`. You can now type in the name of
+the package you would like to install under `Packages`.
+
+[Video tutorial on YouTube](https://www.youtube.com/watch?v=u1r5XTqrCTQ)
+:::
+
+This reader will use functions from a variety of R packages. Please
+install the following ones:
+
+| Package      | Purpose                                           | Session                                                                             |
+|------------------------|------------------------|------------------------|
+| `readxl`     | Importing Microsoft Excel files                   | [Importing/exporting](Importing_exporting.qmd)                                      |
+| `writexl`    | Exporting Microsoft Excel files                   | [Importing/exporting](Importing_exporting.qmd)                                      |
+| `quanteda`   | Analysis of text data                             | [Concordancing](Concordancing.qmd)                                                  |
+| `lattice`    | Data visualisation                                | [Concordancing](Concordancing.qmd)                                                  |
+| `tidyverse`  | Framework for data manipulation and visualisation | [Categorical data](Categorical_data.qmd), [Continuous data](Summary_statistics.qmd) |
+| `crosstable` | Creating contingency tables                       | [Categorical data](Categorical_data.qmd)                                            |
+| `flextable`  | Exporting contingency tables                      | [Categorical data](Categorical_data.qmd)                                            |
+| `confintr`   | Effect size measure for categorical data          | [Chi-squared test](Chi_square_test.qmd)                                             |
+
+### Loading packages
+
+Once the installation has been completed, you can proceed to load the
+libraries using the code below. You can ignore the warning messages.
+
+```{r, echo = TRUE}
+
+library(readxl)
+library(writexl)
+library(quanteda)
+library(lattice)
+library(tidyverse)
+library(crosstable)
+library(flextable)
+library(confintr)
+```
+
+::: {.callout-note collapse="false" title="Activating libraries"}
+Whenever you start a new R session (i.e., open RStudio), your libraries
+and their respective functions will be inactive. To re-activate a
+library, either use the `library()` function or simply select it in the
+`Packages` tab.
+:::
+
+It is good practice to only activate those packages that are necessary
+for your analysis. While it won't be a problem for the small set of
+packages as shown here, loading dozens of packages increases the risk of
+obtaining "homonymous" functions which have the same name but perform
+different operations. In this case, it might be helpful to
+"disambiguate" them by directly indicating which package a function is
+from:
+
+```{r, echo = TRUE, output = FALSE, eval = FALSE}
+readxl::read_xlsx(...)
+```
+
+### Citing R and R packages
+
+Whenever we draw on ideas other than our own, we give credit to the
+respective source by citing it appropriately. The same applies to R,
+RStudio as well as all the packages we rely on throughout our analyses.
+
+For R, an up-to-date citation can be generated as follows:
+
+```{r}
+citation()
+```
+
+To cite a specific package, simply supply the package name as an
+argument.
+
+```{r}
+citation("quanteda")
+```
+
+```{r, include = FALSE, eval = FALSE}
+sessionInfo()
+```
+
+```{r, include = FALSE, eval = FALSE}
+library(report)
+
+cite_packages()
+```

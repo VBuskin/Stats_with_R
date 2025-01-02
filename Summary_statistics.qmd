@@ -1,0 +1,363 @@
+---
+title: "Continuous data"
+author: Vladimir Buskin
+format:
+  html:
+    self-contained: true
+    theme: default
+    toc: true
+    number-sections: true
+    slide-number: true
+    incremental: false
+    slide-level: 3
+    scrollable: true
+editor: visual
+bibliography: R.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  warning = FALSE,
+  message = FALSE
+)
+```
+
+## Preparation
+
+We will use the dataset from the previous unit:
+
+```{r, echo = TRUE, output = FALSE}
+
+# Libraries
+library("readxl")
+library("tidyverse")
+
+# Load data from working directory
+cl.order <- read_xlsx("Paquot_Larsson_2020_data.xlsx")
+
+```
+
+## Measures of central tendency {.scrollable}
+
+### The mean {.smaller .scrollable}
+
+A useful summary statistic is the arithmetic mean $\bar{x}$ [cf.
+@heumann_introduction_2022: 38]. Consider a continuous variable $X$ with
+observations $x_1, x_2, ..., x_n$ from a sample of size $n$. The sample
+mean $\bar{x}$ then corresponds to
+
+$$
+\bar{x} = \frac{x_1 + x_2 + ... + x_n}{n} \\ = \frac{1}{n}\sum_{i=1}^n{x_i}.
+$$
+
+::: callout-note
+## Hold on, what does this large Σ symbol mean?
+
+The summation symbol $\sum$ is a concise way to express the sum of a
+sequence of numbers. It works like this:
+
+-   The expression below the $\sum$ (e.g., $i = 1$) indicates the
+    starting value of the index $i$.
+
+-   The number above the $\sum$ (e.g., $n$) is the ending value of the
+    index $i$.
+
+-   The expression to the right of the $\sum$ (e.g., $x_i$) is the term
+    to be summed.
+
+For instance, the expression $\sum_{i=1}^n{x_i}$ means "sum the values
+of $x_i$ starting from $i = 1$ up to $i = n$." In other words, it adds
+up the values $x_1 + x_2 + \dots + x_n$.
+:::
+
+In R, we can obtain the average value of a numeric vector with the
+`mean()` function. Let's do that for the length of main clauses found in
+the `cl.order` data:
+
+```{r, echo = TRUE, output = TRUE}
+mean(cl.order$LEN_MC)
+```
+
+The output returned by this function provides a one-value summary of all
+observations contained in `LEN_MC`. How could we visualise it?
+
+First, let's create a histogram of `LEN_MC`. Histograms summarise how
+often certain values occur in a continuous variable. The blue line
+indicates the sample mean. Alternatively, you can use a density plot to
+represent the probability of encountering a specific value in the data.
+
+::: panel-tabset
+### Histogram (ggplot2)
+
+```{r, echo = TRUE, warnings = FALSE, message = FALSE}
+
+# Plot distribution of LEN_MC
+cl.length.hist <- ggplot(cl.order, aes(x = LEN_MC)) +
+                  geom_histogram(binwidth = 2)
+
+cl.length.hist +
+  # Add mean
+  geom_vline(aes(xintercept = mean(LEN_MC)),
+             color = "steelblue",
+             linewidth = 1) +
+  theme_classic()
+  
+```
+
+### Density plot (ggplot2)
+
+```{r, echo = TRUE, warnings = FALSE, message = FALSE}
+
+# Plot distribution of LEN_MC
+cl.length.dens <- ggplot(cl.order, aes(x = LEN_MC)) +
+                  geom_density()
+
+cl.length.dens +
+  # Add mean
+  geom_vline(aes(xintercept = mean(LEN_MC)),
+             color = "steelblue",
+             linewidth = 1) +
+  theme_classic()
+  
+```
+
+### Histogram (Base R)
+
+```{r}
+hist(cl.order$LEN_MC)
+  abline(v=mean(cl.order$LEN_MC),lwd=3, col = "steelblue")
+```
+
+### Density plot (Base R)
+
+```{r}
+plot(density(cl.order$LEN_MC))
+  abline(v=mean(cl.order$LEN_MC),lwd=3, col = "steelblue")
+```
+:::
+
+### The median {.smaller}
+
+The `median()` function computes the "the halfway point of the data (50%
+of the data are above the median; 50% of the data are below"
+[@winter_statistics_2020: 58].
+
+$$
+\tilde{x}_{0.5} = 
+\begin{cases}
+x_{((n+1)/2)} & \text{if } n \text{ is odd.} \\
+\frac{1}{2}(x_{n/2}+x_{(n/2+1)}) & \text{if } n \text{ is even.}
+\end{cases} 
+$$
+
+```{r, echo = TRUE, output = TRUE}
+median(cl.order$LEN_MC)
+```
+
+The median of `LEN_MC` is represented by the red vertical line.
+
+::: panel-tabset
+### Histogram (ggplot2)
+
+```{r, echo = TRUE, output = TRUE}
+cl.length.hist +
+  # Add mean
+  geom_vline(aes(xintercept = mean(LEN_MC)), color = "steelblue", linewidth = 1) +
+  # Add median
+  geom_vline(aes(xintercept = median(LEN_MC)), color = "red", linewidth = 1) +
+  theme_classic()
+```
+
+### Density plot (ggplot2)
+
+```{r, echo = TRUE, output = TRUE}
+cl.length.dens +
+  # Add mean
+  geom_vline(aes(xintercept = mean(LEN_MC)), color = "steelblue", linewidth = 1) +
+  # Add median
+  geom_vline(aes(xintercept = median(LEN_MC)), color = "red", linewidth = 1) +
+  theme_classic()
+```
+
+### Histogram (Base R)
+
+```{r}
+hist(cl.order$LEN_MC)
+  abline(v=mean(cl.order$LEN_MC),lwd=3, col = "steelblue")
+  abline(v=median(cl.order$LEN_MC),lwd=3, col = "red")
+```
+
+### Density plot (Base R)
+
+```{r}
+plot(density(cl.order$LEN_MC))
+  abline(v=mean(cl.order$LEN_MC),lwd=3, col = "steelblue")
+  abline(v=mean(cl.order$LEN_MC),lwd=3, col = "red")
+```
+:::
+
+### Sample variance and standard deviation {.smaller}
+
+In order to assess how well the mean represents the data, it is
+instructive to compute the **variance** `var()` and the **standard
+deviation** `sd()` for a sample.
+
+The sample variance $s^2$ is defined as
+
+$$s^2 = \frac{1}{n}\sum_{i=1}^n{(x_i - \bar{x})^2}. $$
+
+In other words, it stands for the average squared deviation of all
+observations from the sample mean.
+
+```{r, echo = TRUE, output = TRUE}
+var(cl.order$LEN_MC)
+```
+
+Correspondingly, the standard deviation of the mean is the square root
+of the variance [cf. @heumann_introduction_2022: 51-2].
+
+$$ s = \sqrt{\frac{1}{n}\sum_{i=1}^n{(x_i - \bar{x})^2}} $$
+
+```{r, echo = TRUE, output = TRUE}
+sd(cl.order$LEN_MC)
+```
+
+**Visualisation**:
+
+::: panel-tabset
+#### Example 1
+
+```{r, echo = TRUE, output = TRUE}
+cl.length.hist +
+  # Add verticle line for the mean
+  geom_vline(aes(xintercept = mean(LEN_MC)), color = "steelblue", linewidth = 1) +
+  # Add -1sd
+  geom_vline(aes(xintercept = mean(LEN_MC) - sd(LEN_MC)), color = "orange", linewidth = 1) +
+  # Add +1sd
+  geom_vline(aes(xintercept = mean(LEN_MC) + sd(LEN_MC)), color = "orange", linewidth = 1) +
+  theme_classic()
+```
+
+#### Example 2
+
+```{r, echo = TRUE, output = TRUE}
+
+# Create data frame with mean and sd for each clause ORDER
+
+cl.order %>% 
+  # Select variables of interest
+  select(ORDER, LEN_MC) %>% 
+  # Group results of following operations by ORDER
+  group_by(ORDER) %>% 
+    # Create grouped summary of mean and sd for each ORDER
+    summarise(mean = mean(LEN_MC),
+                sd = sd(LEN_MC)) -> cl_mean_sd; cl_mean_sd
+
+# Plot results 
+
+ggplot(cl_mean_sd, aes(x = ORDER, y = mean)) +
+  # Barplot with a specific variable mapped onto y-axis
+  geom_col() +
+  # Add mean and standard deviation to the plot
+  geom_errorbar(aes(x = ORDER,
+                    ymin = mean-sd,
+                    ymax = mean+sd), width = .2) +
+  theme_classic() +
+  labs(y = "Mean length of main clauses", x = "Clause order")
+  
+```
+:::
+
+### Quantiles
+
+While `median()` divides the data into two equal sets (i.e., two 50%
+quantiles), the `quantile()` function makes it possible to partition the
+data further.
+
+```{r, echo = TRUE}
+quantile(cl.order$LEN_MC)
+```
+
+`quantile(x, 0)` and `quantile(x, 1)` thus show the minimum and maximum
+values, respectively.
+
+```{r, echo = TRUE}
+quantile(cl.order$LEN_MC, 0)
+quantile(cl.order$LEN_MC, 1)
+```
+
+### Quartiles and boxplots
+
+Consider the distribution of clause length by clause order:
+
+::: panel-tabset
+#### Boxplot (Base R)
+
+```{r}
+boxplot(LEN_MC ~ ORDER, cl.order)
+```
+
+#### Boxplot (ggplot2)
+
+```{r, echo = TRUE, output = TRUE}
+ggplot(cl.order, aes(x = ORDER, y = LEN_MC)) +
+  geom_boxplot() +
+  theme_classic()
+```
+:::
+
+Compare it to the corresponding rotated density plot:
+
+```{r, echo = TRUE, output = TRUE}
+
+ggplot(cl.order, aes(x = LEN_MC, fill = ORDER)) +
+  geom_density(alpha = 0.5) +
+  coord_flip() +
+  theme_classic()
+
+```
+
+## Visualising mixed data
+
+### A numerical and categorical variable
+
+-   Boxplot with `geom_boxplot()`
+
+```{r, echo = TRUE, output = TRUE}
+ggplot(cl.order, aes(x = ORDER, y = LEN_MC)) +
+  geom_boxplot()
+```
+
+-   Densitiy plot using the optional arguments `color` and/or `fill`
+
+```{r, echo = TRUE, output = TRUE}
+ggplot(cl.order, aes(x = LEN_MC, fill = ORDER)) +
+  geom_density(alpha = 0.5)
+```
+
+-   A barplot with `geom_col()`
+
+```{r, echo = TRUE, output = TRUE}
+ggplot(cl.order, aes(x = ORDER, y = LEN_MC)) +
+  geom_col(aes(x = ORDER, y = LEN_MC))
+```
+
+### Multivariate plots
+
+-   Advanced scatterplot with four variables: `LEN_MC` (x), `LEN_SC`
+    (y), `ORDER` (colour) and `SUBORDTYPE` (shape)
+
+```{r, echo = TRUE, output = TRUE}
+# 4 variables
+ggplot(cl.order, aes(x = LEN_MC, y = LEN_SC)) +
+  geom_point(aes(color = ORDER, shape = SUBORDTYPE))
+```
+
+-   Facets
+
+```{r, echo = TRUE, output = TRUE}
+# 5 variables
+ggplot(cl.order, aes(x = LEN_MC, y = LEN_SC)) +
+  geom_point(aes(color = ORDER, shape = SUBORDTYPE)) +
+  facet_wrap(~MORETHAN2CL)
+```

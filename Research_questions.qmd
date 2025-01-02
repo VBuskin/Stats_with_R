@@ -1,0 +1,128 @@
+---
+title: "Research questions"
+author: 
+    - name: "Thomas Brunner"
+      affiliations:
+        - "Catholic University of Eichstätt-Ingolstadt"
+    - name: "Vladimir Buskin"
+      affiliations: 
+        - "Catholic University of Eichstätt-Ingolstadt"
+      orcid: "0009-0005-5824-1012"
+format:
+  html:
+    self-contained: true
+    theme: default
+    toc: true
+    number-sections: true
+    slide-number: true
+    incremental: false
+    slide-level: 3
+    scrollable: true
+    
+editor: visual
+---
+
+## What makes a good research question?
+
+### The structure of research questions
+
+**Example**: I am studying the pronunciation of \[r\] in New York
+because I want to find out whether different social groups differ with
+respect to their pronunciation, in order to help my readers understand
+how social factors influence our linguistic behavior.
+
+1.  **Topic**: `I am studying...`
+
+2.  **Indirect question**:
+    `Because I want to find out what, why, how...`
+
+3.  **(General) linguistic significance**:
+    `... in order to help the readers understand how, why, or whether...`
+
+> Cf. @boothCraftResearch2008: 45–48
+
+### Hints for good research questions
+
+::: callout-tip
+1.  A research question must be **simple, specific, and doable**. It is
+    better to make a small contribution to a particular problem than to
+    aim at covering a whole subfield of sociolinguistics.
+
+2.  Keep a research question **stable** in your paper, even if you come
+    across interesting new ideas as you work on it.
+
+3.  The research question must be an **explicit part of your paper**.
+    Mention it in the introduction and keep referring back to it from
+    time to time.
+
+4.  Keep in mind that the research question will determine both
+    **methodology** and **data**.
+
+> Cf. @hazenIntroductionLanguage2015: 9–10
+:::
+
+### Hypotheses
+
+Research questions must be complemented by a set of falsifiable
+hypotheses. These will be covered in-depth in the chapter on [hypothesis
+testing](Hypothesis_testing.qmd). In short,
+
+-   **Hypothesis** $H_1$ predicts a specific relationship between a
+    dependent variable and an independent variable. If $H_1$ holds,
+    studies often speak of a correlation (or association) between
+    variables.
+
+-   its **opposite**, **Hypothesis** $H_0$, describes the state of
+    affairs where the predicted relationship between the variables does
+    not hold.
+
+The predictions made by the hypotheses are based on previous research.
+Here is an example:
+
+**Research question**: I am studying the pronunciation of \[r\] in New
+York because I want to find out whether different social groups differ
+with respect to their pronunciation, in order to help my readers
+understand how social factors influence our linguistic behavior.
+
+-   **Hypothesis** $H_1$: There is a difference in the use of
+    postvocalic /r/ between upper-class and lower-class speakers.
+
+-   **Hypothesis** $H_0$: There is **no** difference in the use of
+    postvocalic /r/ between upper-class and lower-class speakers.
+
+### Exercises
+
+::: {#exr-rqs-1}
+Assess the following research questions!
+
+(a) I will try to find the specific linguistic features which a
+    Shetlander uses when speaking Scottish standard English, i.e.,
+    Shetland accent in Scottish Standard English.
+
+(b) In this paper, I am going to analyze the use of American and Indian
+    dialect features among Indian immigrants to the US because I want to
+    find out whether they correlate with their willingness to integrate
+    into American society; this will show the degree to which linguistic
+    adaptation depends on cultural orientation.
+
+(c) In this paper, I am going to address the question of how gender
+    influences language.
+
+(d) The study aims to contribute to the investigation of the
+    controversial question of the effect of speaker’s age and sex on
+    quotative use in American English, focusing on the newer quotatives
+    *be like*, *go*, *be all*.
+
+(e) In this paper, adverts by Coca-Cola and Pepsi will be analyzed for
+    the use of verb forms.
+:::
+
+::: {#exr-rqs-2}
+Develop valid research questions on the basis of the following
+linguistic variables:
+
+1.  Speakers in bilingual conversations are especially likely to
+    code-switch when there is a significant change of topic.
+
+2.  Women use more tentative language in conversations than men.
+:::

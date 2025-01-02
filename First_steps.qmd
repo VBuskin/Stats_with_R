@@ -1,0 +1,92 @@
+---
+title: "First steps"
+author:
+  name: "Vladimir Buskin" 
+  orcid: "0009-0005-5824-1012"
+  affiliation: 
+    name: "Catholic University of Eichstätt-Ingolstadt"
+    department: "English Language and Linguistics"
+format:
+  html:
+    self-contained: true
+    theme: default
+    toc: true
+    number-sections: true
+    slide-number: true
+    incremental: false
+    slide-level: 3
+    scrollable: true
+    
+editor: visual
+---
+
+## Why learn R to begin with?
+
+When it comes to data analysis, learning R offers an overwhelming number
+of short- and long-term advantages over conventional spreadsheet
+software such as Microsoft Excel or LibreOffice Calc:
+
+-   First of all, it's completely **free**. There's no need to obtain
+    any expensive licenses, as it is the case for commercial software
+    such as SPSS or MS Excel.
+
+-   R makes it very easy to document and share every step of the
+    analysis, thereby facilitating **reproducible workflows**.
+
+-   Large (and by that I mean extremely large!) datasets pose no
+    problems whatsoever. Loading tabular data with hundreds of thousands
+    (or even millions) of rows only takes a few seconds, whereas most
+    other software would crash.
+
+-   There are numerous extensions that provide tailored **functions for
+    corpus linguistics** that aren't available in general-purpose
+    spreadsheet software. This allows us to work with corpora, use
+    complex search expression, perform part-of-speech annotation,
+    dependency parsing, and much more – all from within R.
+
+-   R's `ggplot2` offers an incredibly powerful framework for data
+    visualisation. Don't believe it? Check out the [ggplot2
+    gallery](https://r-graph-gallery.com/ggplot2-package.html).
+
+-   The CRAN repository features **more than 20,000 packages** that can
+    be installed to expand the functionality of R almost indefinitely.
+    Should none of them meet your needs, R gives you the tools to
+    comfortably **write and share your own functions and packages**.
+
+## Installing R
+
+The first step involves downloading the [R](https://ftp.fau.de/cran/)
+programming language itself. The link will take you to the homepage of
+the Comprehensive R Archive Network (CRAN) where you can download the
+binary distribution. Choose the one that corresponds to your operating
+system (Windows/MAC/Linux).
+
+::: {.callout-note collapse="true" title="Installation instructions for Windows users"}
+Click "Download R for Windows" $\rightarrow$ Select "base" $\rightarrow$
+Click on "Download R-4.4.1 for Windows" (or whatever most recent version
+is currently displayed).
+
+Open the set-up file you've just downloaded and simply follow the
+instructions on screen. It's fine to go with the default options.
+
+[Video tutorial on YouTube](https://www.youtube.com/watch?v=mfGFv-iB724)
+:::
+
+::: {.callout-note collapse="true" title="Installation instructions for MacOS users"}
+Click "Download R for macOS" $\rightarrow$ Select the latest release for
+your OS
+
+Open the downloaded .pkg file and follow the instructions in the
+installation window.
+
+[Video tutorial on YouTube](https://www.youtube.com/watch?v=Icawuhf0Yqo)
+:::
+
+## Installing RStudio
+
+You can now download and install
+[RStudio](https://posit.co/download/rstudio-desktop/). RStudio is a
+so-called "Integrated Development Environment" (IDE), which will provide
+us with a variety of helpful tools to write and edit code comfortably.
+If R was a musical instrument, then RStudio would be the recording
+studio, so-to-speak.

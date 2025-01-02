@@ -1,0 +1,413 @@
+---
+title: "Concordancing"
+author:
+  name: "Vladimir Buskin" 
+  orcid: "0009-0005-5824-1012"
+  affiliation: 
+    name: "Catholic University of Eichstätt-Ingolstadt"
+    department: "English Language and Linguistics"
+format:
+  html:
+    self-contained: true
+    theme: default
+    toc: true
+    number-sections: true
+    slide-number: true
+    incremental: false
+    slide-level: 3
+    scrollable: true
+    
+editor: visual
+---
+
+## Suggested reading
+
+In-depth introduction to concordancing with R:
+
+> @schweinberger2024kwics
+
+Naturale Language Processing (NLP) with `quanteda`:
+
+> @quantedapkg
+>
+> [Online reference](http://quanteda.io)
+
+On corpus-linguistic theory:
+
+> @wulffAnalyzingConcordances2020
+>
+> @lange_corpus_2020
+>
+> @mcenery_corpus-based_2006
+
+## Preparation
+
+::: callout-tip
+## Script
+
+You can find the full R script associated with this unit
+[here](https://osf.io/duras).
+:::
+
+::: callout-warning
+### Working directory
+
+In order for R to be able to recognise the data, it is crucial to set up
+the working directory correctly.
+
+1.  Make sure your R-script **and** the corpus (e.g., 'ICE-GB') are
+    stored in the **same folder** on your computer.
+
+2.  In RStudio, go to the `Files` pane (usually in the bottom-right
+    corner) and navigate to the location of your script. Alternatively,
+    you can click on the three dots `...` and use the file browser
+    instead.
+
+3.  Once you're in the correct folder, click on the blue ⚙️ icon.
+
+4.  Select `Set As Working Directory`. This action will update your
+    working directory to the folder where the file is located.
+:::
+
+In addition, make sure you have installed `quanteda`. Load it at the
+beginning of your script:
+
+```{r}
+library(quanteda) # Package for Natural Language Processing in R
+library(lattice) # for dotplots
+```
+
+To load a corpus object into R, place it in your working directory and
+read it into your working environment with
+`readRDS()`.[^concordancing-1]
+
+[^concordancing-1]: The `ICE-GB.RDS` file you've been provided with has
+    been pre-processed and saved in this specific format for practical
+    reasons.
+
+```{r, echo = TRUE, eval = T}
+# Load corpus from directory
+ICE_GB <- readRDS("ICE_GB.RDS")
+```
+
+If you encounter any error messages at this stage, ensure you followed
+steps 1 and 2 in the callout box above.
+
+## Concordancing
+
+A core task in corpus-linguistic research involves finding occurrences
+of a single word or multi-word sequence in the corpus. Lange & Leuckert
+[-@lange_corpus_2020: 55] explain that specialised software typically
+"provide\[s\] the surrounding context as well as the name of the file in
+which the word could be identified." Inspecting the context is
+particularly important in comparative research, as it may be indicative
+of distinct usage patterns.
+
+```{r, echo = F, output = F}
+# Load libraries
+library(tidyverse)
+library(kableExtra)
+```
+
+### Simple queries
+
+To obtain such a **keyword in context (KWIC)** in R**,** we use the
+`kwic()` function. We supply the corpus as well as the keyword we're
+interested in:
+
+```{r, echo = T, output = T}
+query1 <- kwic(ICE_GB, "eat")
+```
+
+The output in `query1` contains **concordance lines** that list all
+occurrences of the keyword, including the document, context to the left,
+the keyword itself, and the context to the right. The final column
+reiterates our search expression.
+
+```{r, echo = T, output = T}
+head(query1)
+```
+
+For a full screen display of the KWIC data frame, try `View()`:
+
+```{r, eval = FALSE}
+View(query1)
+```
+
+```{r, echo = F}
+query1 %>% 
+  head() %>% 
+  kbl() %>% 
+  kable_classic(full_width = F, html_font = "Cambria")
+```
+
+### Multi-word queries
+
+If the search expression exceeds a single word, we need to mark it as a
+multi-word sequence by means of the `phrase()` function. For instance,
+if we were interested in the pattern *eat a*, we'd have to adjust the
+code as follows:
+
+```{r, echo = T, output = T}
+query2 <- kwic(ICE_GB, phrase("eat a"))
+```
+
+```{r, eval = FALSE}
+View(query2)
+```
+
+```{r, echo = F}
+query2 %>% 
+  head() %>% 
+  kbl() %>% 
+  kable_classic(full_width = F, html_font = "Cambria")
+```
+
+### Multiple simultaneous queries
+
+A very powerful advantage of `quanteda` over traditional corpus software
+is that we can query a corpus for a multitude of keywords **at the same
+time**. Say, we need our output to contain hits for *eat*, *drink* as
+well as *sleep*. Instead of a single keyword, we supply a character
+[vector](Vectors_Factors.qmd) containing the strings of interest.
+
+```{r}
+query3 <- kwic(ICE_GB, c("eat", "drink", "sleep"))
+```
+
+```{r, eval = FALSE}
+View(query3)
+```
+
+```{r, echo = F}
+query3 %>% 
+  head() %>% 
+  kbl() %>% 
+  kable_classic(full_width = F, html_font = "Cambria")
+```
+
+### Window size
+
+Some studies require more detailed examination of the preceding or
+following context of the keyword. We can easily adjust the `window` size
+to suit our needs:
+
+```{r, eval = TRUE}
+query4 <- kwic(ICE_GB, "eat", window = 20) 
+
+```
+
+```{r, echo = FALSE, eval = TRUE}
+query4 %>% 
+  head() %>% 
+  kbl() %>% 
+  kable_classic(full_width = F, html_font = "Cambria")
+
+```
+
+### Saving your output
+
+You can store your results in a spreadsheet file just as described in
+the unit on [importing and exporting data](Importing_exporting.qmd).
+
+-   **Microsoft Excel (**.xlsx**)**
+
+```{r, output = F, eval = F}
+library(writexl) # required for writing files to MS Excel
+
+write_xlsx(query1, "myresults1.xlsx")
+
+```
+
+-   **LibreOffice** (.csv)
+
+```{r, output = F, eval = F}
+
+write.csv(query1, "myresults1.csv")
+
+```
+
+As soon as you have annotated your data, you can load .xlsx files back
+into R with `read_xlsx()` from the `readxl` package and .csv files using
+the Base R function `read.csv()`.
+
+## Characterising the output
+
+Recall our initial query of the *eat*, whose output we stored in
+`query1`:
+
+```{r, echo = F}
+query1 %>% 
+  head() %>% 
+  kbl() %>% 
+  kable_classic(full_width = F, html_font = "Cambria")
+```
+
+First, we may be interested in obtaining some general information on our
+results, such as ...
+
+-   ... how many **tokens** (= individual hits) does the query return?
+
+The `nrow()` function counts the number of rows in a data frame — these
+always correspond to the number of **observations** in our sample (here:
+53).
+
+```{r}
+nrow(query1)
+```
+
+-   ... how many **types** (= distinct hits) does the query return?
+
+Apparently, there are 52 counts of *eat* in lower case and 1 in upper
+case. Their sum corresponds to our 53 observations in total.
+
+```{r}
+table(query1$keyword)
+```
+
+-   ... how is the keyword distributed across corpus files?
+
+This question relates to the notion of **dispersion**: Is a keyword
+spread relatively evenly across corpus files or does it only occur in
+specific ones?
+
+```{r}
+# Frequency of keyword by docname
+query_distrib <- table(query1$docname, query1$keyword)
+
+# Show first few rows
+head(query_distrib)
+
+# Create a simple dot plot
+dotplot(query_distrib, auto.key = list(columns = 2, title = "Tokens", cex.title = 1))
+
+# Create a fancy plot (requires tidyverse)
+ggplot(query1, aes(x = keyword)) + 
+  geom_bar() +
+  facet_wrap(~docname)
+
+```
+
+It seems that *eat* occurs at least once in most text categories (both
+spoken and written), but seems to be much more common in face-to-face
+conversations (S1A). This is not surprising: It is certainly more common
+to discuss food in a casual chat with friends than in an academic essay
+(unless, of course, its main subject matter is food). Dispersion
+measures can thus be viewed as indicators of **contextual preferences**
+associated with lexemes or more grammatical patterns.
+
+::: {.callout-tip title="Advanced: More on dispersion" collapse="true"}
+The empirical study of dispersion has attracted a lot of attention in
+recent years [@sonningEvaluationKeynessMetrics2024;
+@griesNewApproachKey2021, @griesAnalyzingDispersion2020]. A reason for
+this is the necessity of finding a dispersion measure that is minimally
+correlated with token frequency. One such measure is the
+Kullback-Leibler divergence $KLD$, which comes from the field of
+information theory and is closely related to entropy.
+
+Mathematically, $KLD$ measures the difference between two [probability
+distributions](Distributions.qmd) $p$ and $q$.
+
+$$ KLD(p \parallel q) = \sum\limits_{x \in X} p(x) \log \frac{p(x)}{q(x)}
+$$ {#eq-kld}
+
+Let $f$ denote the overall frequency of a keyword in the corpus, $v$ its
+frequency in each corpus part, $s$ the sizes of each corpus part (as
+fractions) and $n$ the total number of corpus parts. We thus compare the
+posterior (= "actual") distribution of keywords $\frac{v_i}{f}$ for
+$i = 1, ..., n$ with their prior distribution, which assumes all words
+are spread evenly across corpus parts (hence the division by $s_i$).
+
+$$ KLD = \sum\limits_{i=1}^n \frac{v_i}{f} \times \log_2\left({\frac{v_i}{f} \times \frac{1}{s_i}}\right)
+$$ {#eq-kld-corpus}
+
+In R, let's calculate the dispersion of the verbs *eat*, *drink*, and
+*sleep* from `query3`.
+
+```{r}
+# Let's filter out the upper-case variants:
+query3_reduced <- query3[query3$keyword %in% c("eat", "drink", "sleep"),]
+table(query3_reduced$keyword)
+
+# Extract text categories
+query_registers <- separate_wider_delim(query3_reduced, cols = docname, delim = "-", names = c("Text_category", "File_number"))
+
+# Get separate data frames for each verb
+eat <- filter(query_registers, keyword == "eat")
+drink <- filter(query_registers, keyword == "drink")
+sleep <- filter(query_registers, keyword == "sleep")
+
+## Get frequency distribution across files
+v_eat <- table(eat$Text_category)
+v_drink <- table(drink$Text_category)
+v_sleep <- table(sleep$Text_category)
+
+## Get total frequencies
+f_eat <- nrow(eat)
+f_drink <- nrow(drink)
+f_sleep <- nrow(sleep)
+
+# The next step is a little trickier. First we need to find out how many distinct corpus parts there are in the ICE corpus.
+
+## Check ICE-corpus structure and convert to data frame
+ICE_GB_str <- as.data.frame(summary(ICE_GB))
+
+## Separate files from text categores
+ICE_GB_texts <- separate_wider_delim(ICE_GB_str, cols = Var1, delim = "-", names = c("Text_category", "File"))
+
+## Get number of distinct text categories
+n <- length(unique(ICE_GB_texts$Text_category))
+
+## Get proportions of distinct text categories (s)
+s <- table(ICE_GB_texts$Text_category)/sum(table(ICE_GB_texts$Text_category))
+
+## Unfortunately not all of these corpus parts are represented in our queries. We need to correct the proportions in s for the missing ones!
+
+## Store unique ICE text categories 
+ICE_unique_texts <- unique(ICE_GB_texts$Text_category)
+
+## Make sure only those text proportions are included where the keywords actually occur
+s_eat <- s[match(names(v_eat), ICE_unique_texts)]
+s_drink <- s[match(names(v_drink), ICE_unique_texts)]
+s_sleep <- s[match(names(v_sleep), ICE_unique_texts)]
+
+# Compute KLD for each verb
+kld_eat <- sum(v_eat/f_eat * log2(v_eat/f_eat * 1/s_eat)); kld_eat
+kld_drink <- sum(v_drink/f_drink * log2(v_drink/f_drink * 1/s_drink)); kld_drink
+kld_sleep <- sum(v_sleep/f_sleep * log2(v_sleep/f_sleep * 1/s_sleep)); kld_sleep
+
+# Plot
+kld_df <- data.frame(kld_eat, kld_drink, kld_sleep)
+
+barplot(as.numeric(kld_df), names.arg = names(kld_df), col = "steelblue",
+        xlab = "Variable", ylab = "KLD Value (= deviance from even distribution)", main = "Dispersion of 'eat', 'drink', and 'sleep'")
+
+```
+
+The plot indicates that *drink* is the most unevenly distributed verb
+out of the three considered (high KDL $\sim$ low dispersion), whereas
+*eat* appears to be slightly more evenly distributed across corpus
+files. The verb *sleep* assumes an intermediary position.
+:::
+
+## "I need a proper user interface": Some alternatives
+
+There is a wide variety of concordancing software available, both free
+and paid. Among the most popular options are AntConc
+[@anthony_antconc_2020] and SketchEngine [@Kilgarriff2004]. However, as
+Schweinberger [-@schweinberger2024kwics] notes, the exact processes
+these tools use to generate output are not always fully transparent,
+making them something of a "black box." In contrast, programming
+languages like R or Python allow researchers to document each step of
+their analysis clearly, providing full transparency from start to
+finish.
+
+The following apps attempt to reconcile the need for an intuitive user
+interface with transparent data handling. The full source code is
+documented in the respective GitHub repositories.
+
+-   [`QuantedaApp`](https://github.com/VBuskin/quanteda_app) is an
+    interface for the R package `quanteda` [@quantedapkg].
+
+-   [`PyConc`](https://github.com/VBuskin/PyConc) is an interface for
+    the Python package `spaCy` [@spacy2].

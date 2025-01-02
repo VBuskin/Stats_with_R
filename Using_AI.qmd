@@ -1,0 +1,204 @@
+---
+title: "Working with AI"
+author:
+  name: "Vladimir Buskin" 
+  orcid: "0009-0005-5824-1012"
+  affiliation: 
+    name: "Catholic University of Eichstätt-Ingolstadt"
+    department: "English Language and Linguistics"
+format:
+  html:
+    self-contained: true
+    theme: default
+    toc: true
+    number-sections: true
+    slide-number: true
+    incremental: false
+    slide-level: 3
+    scrollable: true
+  pdf: default
+editor: visual
+---
+
+## AI-assisted programming
+
+AI chatbots like [ChatGPT](https://openai.com/index/chatgpt/) or
+[Claude.ai](https://claude.ai/) are invaluable ressources for
+programming-related tasks. In the context of statistical computing, they
+can be particularly helpful -- whether it's for data filtering,
+visualisation or performing complex statistical analyses. This unit will
+explore some common analytical challenges and demonstrate how AI can be
+leveraged to address them.
+
+### Data filtering and subsetting
+
+Recall @exr-df-2 from the unit on [data frames](Data_frames.qmd). It
+involves subsetting the data frame `data` according to certain criteria.
+
+```{r}
+data <- data.frame(lemma = c("start", "enjoy", "begin", "help"), 
+                   frequency = c(418, 139, 337, 281))
+
+print(data)
+```
+
+::: {.callout-note title="Prompt" collapse="true"}
+> **I have this data frame**:
+>
+> data \<- data.frame(lemma = c("start", "enjoy", "begin", "help"),
+>
+> \+ frequency = c(418, 139, 337, 281))
+>
+> print(data)
+>
+> lemma frequency
+>
+> 1 start 418
+>
+> 2 enjoy 139
+>
+> 3 begin 337
+>
+> 4 help 281
+>
+> **Show me the code I need for solving these exercises:**
+>
+> Print the following elements by subsetting the data frame `data`
+> accordingly.
+>
+> -   337
+>
+> -   *begin*
+>
+> -   *enjoy*
+>
+> -   *enjoy* 139
+>
+> -   the entire frequency column
+:::
+
+::: {.callout-note title="Response (ChatGPT)" collapse="true"}
+Here is the R code to extract the specified elements from the data
+frame:
+
+```{r}
+# Data frame
+data <- data.frame(lemma = c("start", "enjoy", "begin", "help"), 
+                   frequency = c(418, 139, 337, 281))
+
+# 337 (element from the frequency column)
+data$frequency[3]
+
+# "begin" (element from the lemma column)
+data$lemma[3]
+
+# "enjoy" (element from the lemma column)
+data$lemma[2]
+
+# "enjoy" and 139 (row corresponding to "enjoy")
+data[2, ]
+
+# The entire frequency column
+data$frequency
+
+```
+
+Explanation:
+
+-   `data$frequency[3]`: Extracts the 3rd element of
+    the `frequency` column.
+
+-   `data$lemma[3]`: Extracts the 3rd element of the `lemma` column.
+
+-   `data$lemma[2]`: Extracts the 2nd element of the `lemma` column.
+
+-   `data[2, ]`: Extracts the entire 2nd row, which
+    contains `"enjoy"` and `139`.
+
+-   `data$frequency`: Extracts the entire `frequency` column.
+:::
+
+### Handling error messages
+
+#### Loading files
+
+::: {.callout-note title="Prompt" collapse="true"}
+> **I've downloaded a file `SCOPE_reduced.RDS`, but I can't read it into
+> RStudio. Whenever I run this code, I keep getting an error message.**
+>
+> `SCOPE <- readRDS("SCOPE_reduced.RDS")`
+>
+> Error in gzfile(file, "rb") : cannot open the connection In addition:
+> Warning message: In gzfile(file, "rb") : cannot open compressed file
+> 'SCOPE_reduced.RDS', probable reason 'No such file or directory'
+>
+> **Is there an easy solution to this problem? I remember I need to
+> click on something and set the working directory somehow.**
+:::
+
+::: {.callout-note title="Response (ChatGPT)" collapse="true"}
+Yes, you can resolve this issue easily in RStudio by setting your
+working directory to the folder where the `SCOPE_reduced.RDS` file is
+located. Follow these steps:
+
+#### Solution: Set the Working Directory in RStudio {.unnumbered}
+
+1.  **Navigate to the File Location**:
+
+-   In RStudio, go to the Files pane (usually in the bottom-right
+    corner).
+-   Use the navigation buttons to locate the folder containing your
+    `SCOPE_reduced.RDS` file.
+
+2.  **Set the Working Directory**:
+
+-   Once you're in the correct folder, click the `More` button (three
+    dots or a gear icon, depending on your version).
+-   Select `Set As Working Directory`. This action will update your
+    working directory to the folder where the file is located.
+
+3.  **Run the Code**: After setting the working directory, you can read
+    the file directly:
+
+```{r, eval = FALSE}
+SCOPE <- readRDS("SCOPE_reduced.RDS")
+```
+
+#### Verify the Working Directory {.unnumbered}
+
+You can confirm that the working directory is set correctly by running:
+
+```{r, eval = FALSE}
+getwd()
+```
+
+This will print the current working directory in the console. Make sure
+it matches the location of your file.
+
+#### Alternative: Use the RStudio Menu {.unnumbered}
+
+You can also set the working directory via the RStudio menu:
+
+-   Go to **Session** \> **Set Working Directory** \> **Choose
+    Directory**....
+
+-   Select the folder where your file is located and click **OK**.
+
+#### Quick Tip: Avoid Future Issues {.unnumbered}
+
+If you often work with files in the same directory, you can save time by
+setting the working directory automatically in your script:
+
+```{r, eval = FALSE}
+setwd("path_to_your_directory")
+```
+
+Replace `"path_to_your_directory"` with the folder's full path. After
+doing this, your `readRDS()` function should work without issues!
+:::
+
+### Specific questions
+
+::: callout-warning
+This page is still under construction. More content will be added soon!
+:::

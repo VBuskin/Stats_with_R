@@ -1,0 +1,195 @@
+/*-- scss:defaults --*/
+
+$primary: #3A6A92 !default;
+$font-size-root: 18px !default;
+
+p.caption {
+  color: #777;
+  margin-top: 10px;
+}
+p code {
+  white-space: inherit;
+}
+pre {
+  word-break: normal;
+  word-wrap: normal;
+}
+pre code {
+  white-space: inherit;
+}
+
+/* Justify the main text */
+p {
+  text-align: justify;
+  hyphens: auto;
+}
+
+/* Grey out the sidebar */
+.quarto-sidebar {
+  background-color: #d3d3d3; /* Light grey */
+}
+
+/* Style for the navigation bar at the top of each chapter */
+
+.chapter-prefix {
+  text-transform: none;
+}
+
+.navbar {
+  text-transform: none;   /* Remove uppercase transformation */
+  font-size: 1rem;        /* Adjust font size as needed */
+  color: #0066cc;            /* Change text color */
+  margin-bottom: 1rem;   /* Space below the navigation bar */
+}
+
+/* Style for separator between levels (e.g., " > " ) */
+.navbar-separator {
+  color: #666;            /* Color for the separator */
+}
+
+/* Optional: style for individual breadcrumb links */
+.navbar a {
+  color: #0066cc;         /* Link color */
+  text-decoration: none; /* Remove underline from links */
+}
+
+.navbar a:hover {
+  text-decoration: underline; /* Underline on hover */
+}
+
+
+/*-- scss: figures --*/
+
+/* Style for the figure container */
+.figure {
+  border-top: 1px solid rgba(0, 0, 0, 0.3);  /* Light grey and semi-transparent top line */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);  /* Light grey and semi-transparent bottom line */
+  padding: 1rem 0;  /* Space between lines and figure */
+  margin-bottom: 1.5rem;  /* Space below figure */
+}
+
+/* Style for figure captions */
+figcaption {
+  text-align: center;  /* Center align the caption */
+  font-style: italic;  /* Optional: make caption italic */
+  margin-top: 0.5rem;  /* Space between figure and caption */
+  font-size: 0.9rem;   /* Adjust caption font size */
+}
+
+/* Numbered caption format: Figure X: Caption */
+.quarto-figure-number::before {
+  content: "Figure " counter(figure) ": ";  /* Add Figure X before caption */
+  font-weight: bold;  /* Make the figure number bold */
+}
+
+
+/*-- scss:rules --*/
+
+.sidebar-title {
+  color: #3A6A92;
+  margin-bottom: 0.25rem;  /* Adjust this value for less spacing */
+}
+
+div.sidebar-item-container .active {
+  font-weight: bold;
+}
+
+.sidebar nav[role=doc-toc] ul>li>a.active, .sidebar nav[role=doc-toc] ul>li>ul>li>a.active{
+  font-weight: bold;
+}
+
+img.quarto-cover-image {
+  box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+}
+
+div.sidebar {
+  margin: 1em 0;
+  padding-left: 1em;
+}
+
+/* Adjust font size of the sidebar title */
+.sidebar-title {
+  font-size: 1rem;  /* Adjust this to your preferred size */
+}
+
+/* Adjust font size of the items in the sidebar */
+.sidebar-item-container {
+  font-size: 0.8rem;  /* Adjust this to your preferred size */
+}
+
+/* Optional: adjust font size for active items in the sidebar */
+.sidebar-item-container .active {
+  font-size: 0.85rem;  /* You can increase/decrease for active items */
+}
+
+.book .book-body .page-wrapper .page-inner section.normal div.sidebar > :first-child {
+  margin-top: 0;
+}
+
+.book .book-body .page-wrapper .page-inner section.normal div.sidebar > :last-child {
+  margin-bottom: 0;
+}
+
+/* Headings ------------------------------------------------------ */
+
+#title-block-header.quarto-title-block.default .quarto-title h1.title {
+  margin-bottom: 0.5rem;
+}
+
+h2 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+h3 { margin-top: 1.5em; font-size: 1.2rem; font-weight: 500; }
+h4 { margin-top: 1.5em; font-size: 1.1rem; }
+h5 { margin-top: 1.5em; font-size: 1rem; }
+
+.quarto-section-identifier {
+  color: #6C6C6C;
+  font-weight: normal;
+}
+
+/* Adjust header colors - Darker and more opaque version */
+h1, h2, h3, h4, h5, h6 {
+  color: #2A5982;  /* Darker version of your primary color */
+}
+
+/* Gradient of darker shades for different header levels */
+h1 { color: #2A5982; }  /* Darkest shade for h1 */
+h2 { color: #336699; }  /* Slightly lighter for h2 */
+h3 { color: #3C73B0; }  /* Even lighter for h3 */
+h4, h5, h6 { color: #4580C7; }  /* Lightest shade for h4-h6, but still darker than before */
+
+/* Adjust the color of the section identifiers if needed */
+.quarto-section-identifier {
+  color: #555555;  /* Darker grey for better contrast */
+}
+
+/* Main title color */
+#title-block-header.quarto-title-block.default .quarto-title h1.title {
+  color: #2A5982;  /* Matching the darkest header color */
+}
+
+/* Optional: If you want to ensure full opacity */
+h1, h2, h3, h4, h5, h6, .quarto-section-identifier, 
+#title-block-header.quarto-title-block.default .quarto-title h1.title {
+  opacity: 1;
+}
+
+/* Code ------------------------------------------------ */
+
+code {
+  color: #373a3c;
+}
+
+code a:any-link {
+  text-decoration: underline;
+  text-decoration-color: #ccc;
+}
+
+pre {
+  background-color: #ffffff;  /* Set background to white */
+  background-image: none;     /* Remove any gradient background */
+}

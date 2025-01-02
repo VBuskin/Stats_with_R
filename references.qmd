@@ -1,0 +1,23 @@
+---
+title: "References"
+author: Vladimir Buskin
+format:
+  html:
+    self-contained: false
+    code-fold: false
+    theme: default
+    toc: true
+    toc-depth: 4
+    number-sections: true
+    slide-number: true
+    incremental: false
+    slide-level: 3
+    scrollable: true
+editor: visual
+bibliography: R.bib
+---
+
+# References {.unnumbered}
+
+::: {#refs}
+:::

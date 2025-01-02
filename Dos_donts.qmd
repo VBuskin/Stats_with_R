@@ -1,0 +1,104 @@
+---
+title: "Some general guidelines"
+author: 
+    - name: "Thomas Brunner"
+      affiliations:
+        - "Catholic University of Eichstätt-Ingolstadt"
+    - name: "Vladimir Buskin"
+      affiliations: 
+        - "Catholic University of Eichstätt-Ingolstadt"
+      orcid: "0009-0005-5824-1012"
+format:
+  html:
+    self-contained: true
+    theme: default
+    toc: true
+    number-sections: true
+    slide-number: true
+    incremental: false
+    slide-level: 3
+    scrollable: true
+    
+editor: visual
+---
+
+## Do's
+
+-   (Re-)read a **published sociolinguistic study** (e.g.,
+    Barbieri, 2007) before you start writing.
+-   Try to write a **good first and a good last sentence**.
+-   Use **many examples** from your corpus in the **results section**.
+-   Provide a **plagiarism declaration**.
+-   Discuss **pros and cons of your corpus** (cf. Schneider, 1999).
+
+## Don'ts
+
+### Content
+
+1.  General content and style
+    -   An overly **general introduction**
+    -   No obvious **coherence** between **corpus and linguistic
+        phenomenon**
+    -   **Narrative** elements: *First, I thought that... But then, I
+        decided that...*
+    -   **Trivial** statements: *The gender is very important in the
+        field of linguistics.*
+    -   **"Steep"** introductions
+    -   **Opinions** presented as **facts**
+    -   **Biographies**, historical details with no relation to your
+        topics, overly long summaries of textbooks, etc.
+    -   **Sweeping conclusions**
+2.  Statistics
+    -   Use of **variables** in the **results section** that have not
+        been **prepared and introduced** in the **background section**.
+
+    -   **Figures or tables** that are **not discussed in the text**.
+
+    -   **Comparisons** of **non-normalized raw frequency data**: use
+        percentages!
+
+    -   **Graphs** based on **raw data**: **use percentages**!
+
+    -   Figures without **corresponding percentage tables**,
+        **percentage tables** without **corresponding figures**, or
+        **percentages** without **raw data**.
+
+### Language
+
+-   Avoid expressions like *a lot of*.
+-   Avoid contractions: *won't*, *doesn't*, *mustn't*, etc.
+
+### Structure
+
+-   Avoid placing **content or results** in the **introduction**, the
+    **methods section**, or the **background section**.
+-   Avoid **repetition** of arguments (e.g., in introduction and
+    background sections).
+
+### Form
+
+-   Avoid **sloppy formatting** of the **table of contents**.
+-   Avoid different **fonts** in the paper (e.g., footnotes, page
+    numbers, graphs, tables, etc.).
+-   Understand where to use **italics**.
+-   Avoid **spelling mistakes** in your **references**.
+-   Avoid using **accents** instead of **apostrophes**: English
+    apostrophe: *Don’t* vs. accent (e.g., in French): *é, è*. **Wrong**:
+    *Don´t*, *Don\`t*.
+-   Avoid **CAPITALS** if you actually want to use **small capitals**.
+-   Avoid using the **past tense** for **quotations**: *Chomsky (1957)
+    claims that...* rather than *Chomsky (1957) claimed that...*.
+
+### References
+
+-   Avoid **sources** from the **internet**/**unpublished
+    sources**/**sources which have not gone through a peer review
+    process**.
+-   Avoid **indirect references**: quoting Labov using someone else's
+    quotation of Labov.
+
+### General
+
+1.  No **collaboration**.
+2.  No **plagiarism**.
+3.  No **ghost writers**.

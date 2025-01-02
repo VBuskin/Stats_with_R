@@ -1,0 +1,127 @@
+project:
+  type: book
+  output-dir: docs
+  
+book:
+  license: "GNU General Public License v3.0"
+  title: "Statistics and Data Analysis for Corpus Linguists: From Theory to Practice with R"
+  author: 
+    - name: "Vladimir Buskin"
+      affiliations: 
+        - "Catholic University of Eichstätt-Ingolstadt"
+      orcid: "0009-0005-5824-1012"
+      url: "https://www.ku.de/en/slf/anglistik-amerikanistik/lehrstuehle-professuren/chair-of-english-language-and-linguistics/team/translate-to-englisch-vladimir-buskin"
+    - name: "Thomas Brunner"
+      url: "https://www.ku.de/en/slf/anglistik-amerikanistik/lehrstuehle-professuren/chair-of-english-language-and-linguistics/team/dr-thomas-brunner"
+      affiliations:
+        - "Catholic University of Eichstätt-Ingolstadt"
+    - name: "Philippa Adolf"
+      url: "https://de.linkedin.com/in/philippa-adolf-66a379268"
+      affiliations:
+        - "University of Vienna"
+  reader-mode: true
+  repo-url: https://github.com/VBuskin/Stats_with_R
+  repo-actions: [source]
+  downloads: [pdf]
+  repo-branch: main
+  sidebar:
+    border: false
+    alignment: left
+  search: 
+    type: textbox
+  chapters:
+    - part: "Fundamentals of Corpus-based Research"
+      chapters:
+        - index.qmd
+        - Basics.qmd
+        - Research_questions.qmd
+        - Linguistic_variables.qmd
+        - Dos_donts.qmd
+    - part: "Introduction to R"
+      chapters:
+        - First_steps.qmd
+        - Exploring_RStudio.qmd
+        - Vectors_Factors.qmd
+        - Data_frames.qmd
+        - Libraries.qmd
+        - Importing_exporting.qmd
+    - part: "Corpus Linguistics with R"
+      chapters:
+        - Concordancing.qmd
+        - Regular_expressions.qmd
+        - Annotation.qmd
+    - part: "Descriptive Statistics"
+      chapters:
+        - Variables.qmd
+        - Categorical_data.qmd
+        - Summary_statistics.qmd
+        - Distributions.qmd
+    - part: "Inferential Statistics"
+      chapters:
+        - Hypothesis_testing.qmd
+        - Chi_square_test.qmd
+        - t_test.qmd
+    - part: "Statistical Modelling and Machine Learning"
+      chapters:
+        - Linear_regression.qmd
+        - Logistic_regression.qmd
+        - Mixed_effects_regression.qmd
+        - Ordinal_regression.qmd
+        - Decision_trees_and_random_forests.qmd
+        - Gradient_boosting.qmd
+    - part: "Multivariate Data Analysis"
+      chapters:
+        - PCA.qmd
+        - EFA.qmd
+        - Clustering.qmd
+    - part: "Appendix"
+      chapters:
+        - More_tests.qmd
+        - Drawing_samples.qmd
+        - Using_AI.qmd
+    - part: References
+      chapters:
+        - references.qmd
+        
+        
+bibliography: R.bib
+
+code-block-font-size: 6pt
+
+format:
+  html:
+    grid:
+      sidebar-width: 300px
+      body-width: 850px
+      margin-width: 225px
+      gutter-width: 1.5rem
+    theme: 
+      - yeti
+      - design.scss
+    code-copy: true
+  pdf:
+    engine: pdflatex
+    documentclass: scrreprt
+    keep-tex: true  # Optionally keep the intermediate .tex file
+    geometry: "left=3cm,right=3cm,top=2cm,bottom=2cm,heightrounded"  # Set margins
+    fontsize: 11pt  # Set font size
+    fontfamily: libertine  # Set a custom font
+    header-includes:  # Add custom LaTeX preamble content
+      - \usepackage{fancyhdr}
+      - \pagestyle{fancy}
+      - \fancyhf{}
+      - \fancyhead[L]{\leftmark}
+      - \fancyhead[R]{\thepage}
+      - \fancyfoot[C]{Quantitative methods in corpus linguistics}
+  
+
+editor: visual
+
+execute:
+  freeze: auto
+  warning: false
+  message: false
+code-overflow: wrap
+
+reference-location: margin
+

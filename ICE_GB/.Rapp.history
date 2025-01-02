@@ -1,0 +1,62 @@
+library(tm)#
+library(stringi)#
+library(proxy)#
+MAIN_DIR <- "~/Documents/Diss_Ausgelagertes/Korpora/ICE GB text/ICE_GB_SEPARATED"#
+FILE_NAMES <- dir(MAIN_DIR)#
+ICE_PARTS <- character(length(FILE_NAMES))#
+setwd(MAIN_DIR)#
+#
+cat("Dateien werden eingelesen...")#
+PROGRESS_BAR_READ_FILES <- txtProgressBar(min = 0, max = length(FILE_NAMES), style = 3, label="Einlesen der Dateien...")#
+#Schleife zum Auslesen der Jahreszahlen aus den Dateien#
+#
+cat("Dateien werden eingelesen...")#
+PROGRESS_BAR_READ_FILES <- txtProgressBar(min = 0, max = length(FILE_NAMES), style = 3, label="Einlesen der Dateien...")#
+for(i in 1:length(FILE_NAMES)){#
+ICE_PARTS[i] <- paste(scan(file=FILE_NAMES[i], what="char", sep="\n", quiet=T), sep=" ", collapse=" ")#
+#
+#Fortschrittsbalken aktualisieren#
+setTxtProgressBar(PROGRESS_BAR_READ_FILES, i)#
+#
+}#
+docs <- Corpus(VectorSource(ICE_PARTS))#
+#
+docs[[1]]#
+#
+docs2 <- tm_map(docs, function(x) stri_replace_all_regex(x, "<.+?>", " "))#
+docs3 <- tm_map(docs2, function(x) stri_replace_all_fixed(x, "\t", " "))#
+#
+docs4 <- tm_map(docs3, PlainTextDocument)#
+docs5 <- tm_map(docs4, stripWhitespace)#
+docs6 <- tm_map(docs5, removeWords, stopwords("english"))#
+docs7 <- tm_map(docs6, removePunctuation)#
+docs8 <- tm_map(docs7, tolower)#
+#
+docs8[[1]]#
+docsTDM <- TermDocumentMatrix(docs8)#
+#
+docsdissim <- dissimilarity(docsTDM, method = "cosine")
+FILE_NAMES_2 <- gsub("W.+", "W", FILE_NAMES, perl=T)#
+FILE_NAMES_3 <- gsub("S.+", "S", FILE_NAMES_2, perl=T)#
+#MDS-VERSUCH#
+fit <- cmdscale(docsdissim,eig=TRUE, k=2)#
+#
+x <- fit$points[,1]#
+y <- fit$points[,2]#
+#
+plot(x, y, xlab="Coordinate 1", ylab="Coordinate 2", #
+  main="Metric MDS", type="n")#
+#NAMES <- rownames(TDM.scaled)#
+text(x, y, labels = FILE_NAMES_3)
+docsdissim
+docsTDM
+MDS-VERSUCH#
+fit <- cmdscale(docsdissim,eig=TRUE, k=2)#
+#
+x <- fit$points[,1]#
+y <- fit$points[,2]#
+#
+plot(x, y, xlab="Coordinate 1", ylab="Coordinate 2", #
+  main="Metric MDS", type="n")#
+#NAMES <- rownames(TDM.scaled)#
+text(x, y, labels = FILE_NAMES_3)

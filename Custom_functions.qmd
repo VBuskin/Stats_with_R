@@ -1,0 +1,43 @@
+---
+title: "Custom functions"
+author: Vladimir Buskin
+format:
+  html:
+    self-contained: true
+    theme: default
+    toc: true
+    number-sections: true
+    slide-number: true
+    incremental: false
+    slide-level: 3
+    scrollable: true
+    
+editor: visual
+---
+
+R allows you to write functions that are adjusted to your exact needs. While a full introduction is out of the scope of this reader, some possibly useful quality-of-life functions are listed here.
+
+```{r}
+lemma <- c("start", "enjoy", "begin", "help")
+frequency <- c(418, 139, 337, 281)
+
+data <- data.frame(lemma, frequency)
+```
+
+### `pct_table()`
+
+```{r}
+pct_table <- function(var1) {
+  
+  tbl <- table(var1)
+  p_tbl <- prop.table(tbl)
+  pct_tbl <- 100*p_tbl
+  
+  return(pct_tbl)
+  
+} 
+
+pct_table(data$lemma)
+
+```
+

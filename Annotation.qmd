@@ -1,0 +1,189 @@
+---
+title: "Data annotation"
+author:
+  name: "Vladimir Buskin" 
+  orcid: "0009-0005-5824-1012"
+  affiliation: 
+    name: "Catholic University of Eichstätt-Ingolstadt"
+    department: "English Language and Linguistics"
+format:
+  html:
+    self-contained: true
+    theme: default
+    toc: true
+    number-sections: true
+    slide-number: true
+    incremental: false
+    slide-level: 3
+    scrollable: true
+    
+editor: visual
+---
+
+## Recommended reading
+
+> @gries_statistics_2013: Chapter 1.3.3
+
+## Sample study
+
+### Theoretical background
+
+Let's assume we are interested in the object realisation patterns of the
+verb *eat* in the British ICE component. A quick review of the
+literature tells us that ...
+
+-   ... argument realisation may be related to the aspectual structure
+    of a verbal action [cf. @goldberg_patient_2001], but ...
+
+-   ... there is a stronger focus on situation aspect
+    (telicity/atelicity; i.e., logical endpoints of actions) than on
+    grammatical aspect (i.e., perfective/progressive).
+
+Since grammatical aspect is also concerned with the temporal construal
+of actions, it raises the question of whether or not it can also
+influence object realisation. To investigate the relationship between
+aspect and object realisation, we will perform an exemplary analysis on
+the verb lemma EAT.
+
+### Obtaining data
+
+We load all necessary libraries to query the ICE-GB corpus and run a
+KWIC-search using the regular expression `\\b(eat(s|ing|en)?|ate)\\b`,
+which finds all inflection forms of EAT. We then store the results in a
+spreadsheet file `kwic_eat.xlsx`.
+
+```{r, eval = TRUE, output = FALSE, warning = FALSE, message = FALSE}
+
+# Load library and corpus
+library(quanteda)
+library(writexl)
+
+ICE_GB <- readRDS("ICE_GB.RDS")
+
+# Perform query
+kwic_eat <- kwic(ICE_GB,
+          phrase("\\b(eat(s|ing|en)?|ate)\\b"),
+          valuetype = "regex",
+          window = 15)
+
+# Store results
+write_xlsx(kwic_eat, "kwic_eat.xlsx")
+
+```
+
+When you open `kwic_eat.xlsx` in a spreadsheet software, the file will
+contain 7 columns by default (docname, from, to, keyword, post,
+pattern). Each row corresponds to a match of your search expression in
+the corpus, which is equal to 113 here. This is your **raw output**.
+
+![](kwic_eat.png){fig-align="center"}
+
+## Data annotation
+
+Whenever you decide to work on your corpus results, it is good practice
+to duplicate your file and append the current date to the filename.
+Re-save it as, for instance, `kwic_eat_09_09_2024.xlsx` and open it
+again. This way you're performing basic **version control**, which will
+allow you to return to previous stages of your analysis with ease.
+
+In your spreadsheet software, you can now assign your variables of
+interest to the empty columns next to your output data. For our specific
+example, we will need one that captures object realisation and one the
+type of verb aspect. Let's simply call them `object_realisation` and
+`verb_aspect`.
+
+::: callout-warning
+### Naming variables
+
+Of course, you could also opt for a different column name, as long it
+has **no spaces** or **special characters** (e.g., !?%#). You could also
+name it `object_realisation` or, even more plainly, `object`, but
+**not** `direct object` or `object realisation` with spaces. Otherwise
+you are bound to encounter a surge of cryptic error messages in your R
+console.
+:::
+
+Now, you are ready to annotate your data! An easy coding scheme would
+involve classifying rows where *eat* occurs with an object as `yes`.
+Conversely, rows where the direct object is not realised syntactically
+are assigned the column value `no`. In the aspect column, verbal aspect
+will be coded as either `perfective`, `progressive` or `neutral`,
+following @gries2014: 118.
+
+![](kwic_eat_annotated2.png){fig-align="center"}
+
+### Dealing with problematic cases
+
+However, things are not always that clear-cut. What if you encounter a
+false positive, i.e., an erroneous hit in your dataset? Further down in
+the spreadsheet the keyword *ate* is actually part of the preceding
+word, *inappropriate*.
+
+```{r, echo = F, output = T}
+kwic_eat[113,] %>% 
+  kableExtra::kable()
+```
+
+::: callout-important
+### What do I do with false hits?
+
+Short answer: Do **not** delete irrelevant rows or columns. Essentially,
+from the moment you've obtained your corpus output, you should withstand
+the temptation to delete anything from it. Instead, adopt the practice
+of indicating missing values or irrelevant rows by an `NA` in a separate
+column. In later analyses, these can be easily filtered out!
+
+This also minimises the risk of accidentally getting rid of data that
+could have proven important at a later point in time.
+:::
+
+### Getting the data back into R
+
+Import the Excel file via
+
+```{r}
+# Load library
+library(readxl)
+
+# Read file contents into the variable "kwic_data"
+kwic_data <- read_xlsx("kwic_eat_09_09_2024.xlsx")
+
+# Print the first six lines of "kwic_data"
+print(head(kwic_data))
+
+```
+
+### Adding a case list
+
+@gries_statistics_2013 recommends setting up the first column of the
+data frame such that it "numbers all n cases from $1$ to $n$ so that
+every row can be uniquely identified and so that you always restore one
+particular ordering (e.g., the original one)" [@gries_statistics_2013:
+26]. This is very easy to do: We specify a numeric vector ranging from 1
+to the total number of rows in the data frame.
+
+```{r}
+# Create a new Case column (which, by default, is moved to the very end of the data frame)
+kwic_data$Case <- 1:nrow(kwic_data)
+
+# Move the Case column to the front of the data frame
+library(tidyverse)
+
+kwic_data <- relocate(kwic_data, Case)
+
+# Print reordered data frame
+print(head(kwic_data))
+```
+
+## Where do I go from here?
+
+As soon as you've fully annotated your dataset and reviewed it for
+potential coding errors, the next step involves analysing your data
+**statistically** to uncover potential patterns that are not visible to
+the naked eye. These patterns can include (subtle to major) differences
+in frequency of occurrence, relationships with other linguistically
+relevant features (e.g., register/genre) or probabilities (e.g., the
+probability that an object is omitted), among many others. The following
+units offer an introduction to statistics, where "statistics" is best
+understood as "a collection of methods which help us to describe,
+summarize, interpret, and analyse data" [@heumann_introduction_2022].

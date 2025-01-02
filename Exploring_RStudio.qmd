@@ -1,0 +1,133 @@
+---
+title: "Exploring RStudio"
+author:
+  name: "Vladimir Buskin" 
+  orcid: "0009-0005-5824-1012"
+  affiliation: 
+    name: "Catholic University of Eichstätt-Ingolstadt"
+    department: "English Language and Linguistics"
+format:
+  html:
+    self-contained: true
+    theme: default
+    toc: true
+    number-sections: true
+    slide-number: true
+    incremental: false
+    slide-level: 3
+    scrollable: true
+    
+editor: visual
+---
+
+## The RStudio interface
+
+Once you've opened RStudio, you will see several empty panes similar to
+this:
+
+![](RStudio.png){fig-align="center"}
+
+### Console
+
+Let's focus on the **console** window on the left. This is where we can
+directly communicate with R by entering "code". The way this code is
+written follows certain arbitrary conventions -- just like natural
+languages such as English or German. Here is an example in the R
+programming language:
+
+```{r, echo = TRUE}
+print("Hello world!")
+```
+
+Entering this command into your console and pressing ENTER will display
+the sentence "Hello world!" in a new line.
+
+As we can see, anything that R should understand as a simple sequence of
+letters or words must be enclosed by quotation marks `"..."`. Anything
+inside them will be interpreted as a so-called **string**. Their
+counterpart are **numbers** or **integers**, as illustrated here:
+
+```{r}
+2 + 2 - 1
+```
+
+Naturally, you can use R for more sophisticated computations:
+
+-   $2 + (3 \times 3)$
+
+    ```{r}
+    2 + (3 * 3)
+    ```
+
+-   $\sqrt{9}$
+
+    ```{r}
+    sqrt(9)
+    ```
+
+-   $\frac{16}{2^3}$
+
+    ```{r}
+    16 / 2 ^ 3
+    ```
+
+### Working environment
+
+While it is certainly useful to print text or numbers to your console,
+it may sometimes make more sense to (at least temporally) store them
+somewhere, so you can re-use them later. In fact, R gives us a way of
+storing data in virtual, container-like objects: **variables**. We can
+assign strings or numbers to a variable by using the assignment operator
+`<-`.
+
+When you run the commands below, you will (hopefully) notice two items
+popping up in your **Environment/Workspace** tab in the top right
+corner.
+
+```{r}
+greeting <- "Hello world!"
+
+quick_math <- 2 + 2 - 1
+```
+
+If we now want to display the content in the console, we can simply
+apply the `print()` function to the variable:
+
+```{r}
+print(greeting)
+
+print(quick_math)
+```
+
+We can also embed variables in other statements. For example, let's take
+the content of `quick_math` and multiply it with 2.
+
+```{r}
+hard_math <- quick_math * 2
+
+print(hard_math)
+```
+
+### R Scripts
+
+Working with the console has a very plain, yet important disadvantage:
+Once we close RStudio, the console is wiped clean, erasing everything
+we've typed into it during our precious R session.
+
+The remedy for this nuisance are **scripts**. Essentially, a script is
+the programmer's equivalent of a Word document: It allows you to save
+all the code you've written to a file, which you can seamlessly continue
+working on the next time you open it.
+
+::: callout-info
+To **create a new R script** you can either go to:
+
+-   "File" $\rightarrow$ "New" $\rightarrow$ "R Script" or ...
+
+-   click on the icon with the + sign and select "R Script" ...
+
+-   or simply press Ctrl+Shift+N (MacOS: Cmd+Shift+N)
+:::
+
+Don't forget to save your script with Ctrl+S (Cmd+S)! It is good
+practice to save your files regularly.

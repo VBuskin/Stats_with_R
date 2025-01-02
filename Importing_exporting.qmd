@@ -1,0 +1,276 @@
+---
+title: "Import/export data"
+author:
+  name: "Vladimir Buskin" 
+  orcid: "0009-0005-5824-1012"
+  affiliation: 
+    name: "Catholic University of Eichstätt-Ingolstadt"
+    department: "English Language and Linguistics"
+format:
+  html:
+    self-contained: true
+    theme: default
+    toc: true
+    number-sections: true
+    slide-number: true
+    incremental: false
+    slide-level: 3
+    scrollable: true
+    
+editor: visual
+---
+
+::: callout-tip
+## Script
+
+You can find the full R script associated with this unit
+[here](https://osf.io/puyrf).
+:::
+
+## Recommended reading
+
+> @winter_statistics_2020: Chapter 1.11
+
+## Preparation
+
+The first section of an R script should always specify the libraries
+that are needed for executing the code to follow. In this unit, we will
+need `readxl` and `writexl` to aid us with importing MS Excel files.
+
+```{r}
+library(readxl)
+library(writexl)
+```
+
+If you haven't installed them yet, the R console will throw an error
+message. For instructions on how to install an R package, consult the
+unit on [Libraries](Libraries.qmd).
+
+### Exporting data
+
+Assume we'd like to export our data frame with word frequencies to a
+local file on our system. Let's briefly regenerate the data frame:
+
+```{r}
+# Generate data frame
+data <- data.frame(lemma = c("start", "enjoy", "begin", "help"), 
+                   frequency = c(418, 139, 337, 281))
+
+# Print contents
+print(data)
+```
+
+There are two common formats in which tabular data can be stored:
+
+-   as .**csv**-files ('**c**omma-**s**eparated **v**alues'; native
+    format of LibreOffice Calc)
+
+-   as .**xls**/.**xlsx**-files (Microsoft Excel)
+
+::: {.callout-note collapse="true" title="Export to CSV"}
+To save our `data` data frame in .csv-format, we can use the
+`write_table()` function:
+
+```{r}
+write.csv(data, "frequency_data.csv")
+```
+
+The file is now stored at the location of your current R script. You can
+open this file ...
+
+-   in **LibreOffice**
+
+-   in **Microsoft Excel** via `File` \> `Import` \> `CSV file` \>
+    Select the file \> `Delimited` and then `Next` \> `Comma` and `Next`
+    \> `General` and `Finish`.
+
+Clearly, opening CSV files in MS Excel is quite cumbersome, which is why
+it's better to export it as an Excel file directly.
+:::
+
+::: {.callout-note collapse="true" title="Export to Excel"}
+We use the `write_xlsx()` function provided by the package `writexl`.
+
+```{r}
+write_xlsx(data, "frequency_data.xlsx")
+```
+
+The file is now stored at the location of your currently active R
+script. You should now be able to open it in MS Excel without any
+issues.
+:::
+
+### Importing data {#sec-import}
+
+Let's read the two files back into R.
+
+::: {.callout-note collapse="true" title="Import from CSV"}
+To import the CSV file, we can use the `read.csv()` function:
+
+```{r}
+imported_csv <- read.csv("frequency_data.csv")
+print(imported_csv)
+```
+
+It appears that `read.csv()` has also written the row numbers to the
+file. This is not the desired outcome and can be prevented by adding an
+additional argument:
+
+```{r}
+imported_csv <- read.csv("frequency_data.csv", row.names = 1)
+print(imported_csv) # Problem solved!
+```
+
+::: {.callout-warning collapse="true" title="A note on file encodings and separators"}
+When working with CSV files, you may encounter issues with character
+encodings and separators, especially when:
+
+-   working with files from different operating systems,
+-   dealing with text containing special characters (é, ü, ñ, etc.), or
+-   importing files created in different regions (e.g., European vs.
+    US).
+
+The most common encoding-related parameters for read.csv() are:
+
+```{r, output = F, eval = F}
+# For files with special characters (recommended default)
+data <- read.csv("myfile.csv", encoding = "UTF-8")
+
+# For files from Windows systems
+data <- read.csv("myfile.csv", encoding = "latin1")
+
+# For files using semicolons and commas as decimal points
+data <- read.csv("myfile.csv", sep = ";", dec = ",")
+```
+
+-   If you see garbled text like Ã© instead of é, try specifying
+    `encoding = "UTF-8"`.
+-   If your data appears in a single column, check if your file uses
+    semicolons (`;`) instead of commas (`,`) as separators.
+-   If numeric values are incorrect, verify whether the file uses commas
+    or periods as decimal separators.
+:::
+:::
+
+::: {.callout-note collapse="true" title="Import from Excel"}
+For importing the Excel file, we'll use the `read_xlsx()` function from
+the `readxl` package:
+
+```{r}
+imported_excel <- read_xlsx("frequency_data.xlsx")
+print(imported_excel)
+```
+:::
+
+That's it! Nevertheless, remember to always check your imported data to
+ensure it has been read in correctly, especially when working with CSV
+files.
+
+## A convenient alternative: RDS files
+
+If the main goal is to save an intermediary result and make it available
+for later use, the most efficient solution is to save the object to a
+local R data file ending in `.RDS`. Since it compressed data, .RDS files
+can be considered analogous to .zip files, which are very commonly used
+for other data types.
+
+In practice, we use the `saveRDS()` function and supply it with ...
+
+-   ... an R object (e.g., a vector, data frame, matrix, graphs,
+    statistical models -- anything goes!) as well as
+
+-   ... the desired name of the file.
+
+```{r}
+# Save data frame "data" to the file "frequency_data.RDS"
+saveRDS(data, "frequency_data.RDS")
+```
+
+To read a file back in, we need to indicate the file name (or the full
+file path if the file is located in a different folder).
+
+```{r}
+# Read in "frequency_data.RDS" and assign the contents to "data2"
+data2 <- readRDS("frequency_data.RDS")
+
+# Verify contents
+print(data2)
+```
+
+## Troubleshooting
+
+Importing data into R is often a challenging and error-prone task, made
+more difficult by the wide range of potential issues. **AI tools** can
+be immensely helpful for identifying and addressing problems specific to
+your use case. [This handout](Using_AI.qmd) provides some practical
+guidance, including tips for resolving file-loading errors.
+
+## Exercises
+
+::: callout-tip
+## Solutions
+
+You can find the solutions to the exercises
+[here](https://osf.io/gkvmr).
+:::
+
+::: {#exr-impexp-1}
+Download the file `SCOPE_reduced.RDS` from [this
+repository](https://osf.io/3w29d) and read it into a variable named
+`SCOPE`. It contains data from the the South Carolina Psycholinguistic
+Metabase [@gaoSCOPESouthCarolina2022], specifically:
+
+-   Number of meanings (`Nsenses_WordNet`)
+
+-   Emotional valence ratings, which describe the pleasantness of a
+    lexical stimulus on a scale from 1 to 9 (`Valence_Warr`)
+
+-   Data for nearly 200,000 words
+:::
+
+::: {#exr-impexp-2}
+Using this database, retrieve
+
+1.  the number of meanings for the verbs *start*, *enjoy*, *begin*,
+    *help*. Store them in a data frame with the name `senses_df`.
+2.  emotional valence ratings for the words *fun*, *love*, *vacation*,
+    *war*, *politics*, *failure*, *table*. Store them in a data frame,
+    and name it `valence_df`.
+
+What do you notice about the valence ratings? Do they align with your
+intuitions about these words' emotional content?
+
+::: callout-tip
+This task is very similar to @exr-df-3!
+:::
+:::
+
+::: {#exr-impexp-3}
+Export `senses_df` and `valence_df` both as .csv and .xlsx files, and
+read them back into R.
+
+```{r}
+
+```
+:::
+
+::: {#exr-impexp-4}
+Separators determine how tabular data is stored internally. Investigate
+what happens when you read in `frequency_data.csv` with different
+separator settings:
+
+```{r, output = FALSE}
+# Comma separator (default)
+imported_csv1 <- read.csv("frequency_data.csv", sep = ",")
+print(imported_csv1)
+
+# Tab separator
+imported_csv2 <- read.csv("frequency_data.csv", sep = "\t")
+print(imported_csv2)
+
+# Semi-colon separator
+imported_csv3 <- read.csv("frequency_data.csv", sep = ";")
+print(imported_csv3)
+
+```
+:::
