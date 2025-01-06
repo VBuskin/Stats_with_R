@@ -188,15 +188,15 @@ the four possible constellations are summarised in the table below [cf.
 
 Let's say that the statistical analysis of clause `ORDER` and
 `SUBORDTYPE` has returned a test statistic of $\chi^2 = 6.5$ for 2 $df$.
-In order to compute the corresponding $p$-value we need to
-consult the **sampling distribution** of this test statistic.
+In order to compute the corresponding $p$-value we need to consult the
+**sampling distribution** of this test statistic.
 
 A sampling distribution is a probability distribution that assigns
 probabilities to the values of a test statistic. Because most (if not
 all) of them are continuous, they have characteristic **probability
 density functions** (PDFs). Some of them are illustrated below:
 
-::: {.callout-note collapse="true" title="$\chi^2$ distribution"}
+::: {.callout-note collapse="true" title="$\\chi^2$ distribution"}
 ```{r}
 #| code-fold: true
 #| code-summary: "Show the code"
@@ -235,7 +235,6 @@ ggplot(chi_squared_data, aes(x = x, y = y)) +
 :::
 
 ::: {.callout-note collapse="true" title="$t$ distribution"}
-
 ```{r}
 #| code-fold: true
 #| code-summary: "Show the code"
@@ -270,9 +269,7 @@ ggplot(t_distribution_data, aes(x = x, y = y)) +
 ```
 :::
 
-
 ::: {.callout-note collapse="true" title="$F$ distribution"}
-
 ```{r}
 #| code-fold: true
 #| code-summary: "Show the code"
@@ -308,9 +305,12 @@ ggplot(f_distribution_data, aes(x = x, y = y)) +
 ```
 :::
 
-Because continuous functions have an infinite number of
-$x$-values, the probability of any single
-value must be 0.[^hypothesis_testing-1] Therefore, if we are interested in obtaining actual probabilities from the PDF, we can only do so for  intervals of values. The probability that a value $X$ falls into the interval $a < X < b$ is in fact equivalent to the area under the curve between $a$ and $b$ (cf. @eq-pdf).
+Because continuous functions have an infinite number of $x$-values, the
+probability of any single value must be 0.[^hypothesis_testing-1]
+Therefore, if we are interested in obtaining actual probabilities from
+the PDF, we can only do so for intervals of values. The probability that
+a value $X$ falls into the interval $a < X < b$ is in fact equivalent to
+the area under the curve between $a$ and $b$ (cf. @eq-pdf).
 
 [^hypothesis_testing-1]: The proof for the underlying theorem is given
     in Heumann et al. [-@heumann_introduction_2022: 544].
@@ -319,14 +319,16 @@ $$
 P(a < X < b) = \int_a^b f(x)dx.
 $$ {#eq-pdf}
 
-Recall the PDF $f(x)$ of the $\chi^2$-distribution with
-2 degrees of freedom. The $p$-value corresponds to the green area under the
-curve ranging from $x = 6.5$ up to $\infty$, which can be restated formally in @eq-pdf-chisq. This brings us back to the definition of the $p$-value: It is the probability that the $\chi^2$ score is equal to 6.5 or **higher**, i.e., $P(\chi^2 \geq 6.5)$.
+Recall the PDF $f(x)$ of the $\chi^2$-distribution with 2 degrees of
+freedom. The $p$-value corresponds to the green area under the curve
+ranging from $x = 6.5$ up to $\infty$, which can be restated formally in
+@eq-pdf-chisq. This brings us back to the definition of the $p$-value:
+It is the probability that the $\chi^2$ score is equal to 6.5 or
+**higher**, i.e., $P(\chi^2 \geq 6.5)$.
 
 $$
 P(6.5 < X < \infty) = \int_{6.5}^\infty f(x)dx.
 $$ {#eq-pdf-chisq}
-
 
 ```{r, echo = FALSE}
 # Load ggplot2
@@ -369,15 +371,19 @@ ggplot(chi_squared_data, aes(x = x, y = y)) +
 
 ## Practical considerations
 
-::: {.callout-important title="Common pitfalls"}
+::: {.callout-important title="Common pitfalls [cf. -@agrestiFoundationsStatisticsData2022: 189-190]"}
+-   Statistical significance is **NOT** an indication of a causal
+    relationship between the variables of interest (**correlation**
+    $\neq$ **causation**).
 
--   Statistical significance is **NOT** an indication of a causal relationship between the variables of interest (**correlation** $\neq$ **causation**).
+-   $p$-values do **NOT** signify the strength of an effect ($\neq$
+    effect size). It only helps identify whether there is an effect to
+    begin with.
 
--   $p$-values do **NOT** signify the strength of an effect ($\neq$ effect size). It only helps identify whether there is an effect to begin with.
+-   $p$-values are **NOT** the probability of the null hypothesis being
+    true.
 
--   $p$-values are **NOT** the probability of the null hypothesis being true.
-
--   Statistical significance is only a starting point for further scientific inquiry, and by no means the end of it.
+-   Statistical significance is only a starting point for further
+    scientific inquiry, and by no means the end of it.
 
 :::
-
