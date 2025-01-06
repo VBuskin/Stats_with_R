@@ -5033,19 +5033,20 @@ vertical-align: -.125em;
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#preparation" id="toc-preparation" class="nav-link active" data-scroll-target="#preparation"><span class="header-section-number">16.1</span> Preparation</a></li>
-  <li><a href="#measures-of-central-tendency" id="toc-measures-of-central-tendency" class="nav-link" data-scroll-target="#measures-of-central-tendency"><span class="header-section-number">16.2</span> Measures of central tendency</a>
+  <li><a href="#suggested-reading" id="toc-suggested-reading" class="nav-link active" data-scroll-target="#suggested-reading"><span class="header-section-number">16.1</span> Suggested reading</a></li>
+  <li><a href="#preparation" id="toc-preparation" class="nav-link" data-scroll-target="#preparation"><span class="header-section-number">16.2</span> Preparation</a></li>
+  <li><a href="#measures-of-central-tendency" id="toc-measures-of-central-tendency" class="nav-link" data-scroll-target="#measures-of-central-tendency"><span class="header-section-number">16.3</span> Measures of central tendency</a>
   <ul class="collapse">
-  <li><a href="#the-mean" id="toc-the-mean" class="nav-link" data-scroll-target="#the-mean"><span class="header-section-number">16.2.1</span> The mean</a></li>
-  <li><a href="#the-median" id="toc-the-median" class="nav-link" data-scroll-target="#the-median"><span class="header-section-number">16.2.2</span> The median</a></li>
-  <li><a href="#sample-variance-and-standard-deviation" id="toc-sample-variance-and-standard-deviation" class="nav-link" data-scroll-target="#sample-variance-and-standard-deviation"><span class="header-section-number">16.2.3</span> Sample variance and standard deviation</a></li>
-  <li><a href="#quantiles" id="toc-quantiles" class="nav-link" data-scroll-target="#quantiles"><span class="header-section-number">16.2.4</span> Quantiles</a></li>
-  <li><a href="#quartiles-and-boxplots" id="toc-quartiles-and-boxplots" class="nav-link" data-scroll-target="#quartiles-and-boxplots"><span class="header-section-number">16.2.5</span> Quartiles and boxplots</a></li>
+  <li><a href="#the-mean" id="toc-the-mean" class="nav-link" data-scroll-target="#the-mean"><span class="header-section-number">16.3.1</span> The mean</a></li>
+  <li><a href="#the-median" id="toc-the-median" class="nav-link" data-scroll-target="#the-median"><span class="header-section-number">16.3.2</span> The median</a></li>
+  <li><a href="#sample-variance-and-standard-deviation" id="toc-sample-variance-and-standard-deviation" class="nav-link" data-scroll-target="#sample-variance-and-standard-deviation"><span class="header-section-number">16.3.3</span> Sample variance and standard deviation</a></li>
+  <li><a href="#quantiles" id="toc-quantiles" class="nav-link" data-scroll-target="#quantiles"><span class="header-section-number">16.3.4</span> Quantiles</a></li>
+  <li><a href="#quartiles-and-boxplots" id="toc-quartiles-and-boxplots" class="nav-link" data-scroll-target="#quartiles-and-boxplots"><span class="header-section-number">16.3.5</span> Quartiles and boxplots</a></li>
   </ul></li>
-  <li><a href="#visualising-mixed-data" id="toc-visualising-mixed-data" class="nav-link" data-scroll-target="#visualising-mixed-data"><span class="header-section-number">16.3</span> Visualising mixed data</a>
+  <li><a href="#visualising-mixed-data" id="toc-visualising-mixed-data" class="nav-link" data-scroll-target="#visualising-mixed-data"><span class="header-section-number">16.4</span> Visualising mixed data</a>
   <ul class="collapse">
-  <li><a href="#a-numerical-and-categorical-variable" id="toc-a-numerical-and-categorical-variable" class="nav-link" data-scroll-target="#a-numerical-and-categorical-variable"><span class="header-section-number">16.3.1</span> A numerical and categorical variable</a></li>
-  <li><a href="#multivariate-plots" id="toc-multivariate-plots" class="nav-link" data-scroll-target="#multivariate-plots"><span class="header-section-number">16.3.2</span> Multivariate plots</a></li>
+  <li><a href="#a-numerical-and-categorical-variable" id="toc-a-numerical-and-categorical-variable" class="nav-link" data-scroll-target="#a-numerical-and-categorical-variable"><span class="header-section-number">16.4.1</span> A numerical and categorical variable</a></li>
+  <li><a href="#multivariate-plots" id="toc-multivariate-plots" class="nav-link" data-scroll-target="#multivariate-plots"><span class="header-section-number">16.4.2</span> Multivariate plots</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/VBuskin/Stats_with_R/blob/main/Summary_statistics.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
@@ -5078,8 +5079,14 @@ vertical-align: -.125em;
 </header>
 
 
-<section id="preparation" class="level2" data-number="16.1">
-<h2 data-number="16.1" class="anchored" data-anchor-id="preparation"><span class="header-section-number">16.1</span> Preparation</h2>
+<section id="suggested-reading" class="level2" data-number="16.1">
+<h2 data-number="16.1" class="anchored" data-anchor-id="suggested-reading"><span class="header-section-number">16.1</span> Suggested reading</h2>
+<blockquote class="blockquote">
+<p>Heumann et al. <span class="citation" data-cites="heumann_introduction_2022">(<a href="references.html#ref-heumann_introduction_2022" role="doc-biblioref">2022</a>: Chapter 3)</span></p>
+</blockquote>
+</section>
+<section id="preparation" class="level2" data-number="16.2">
+<h2 data-number="16.2" class="anchored" data-anchor-id="preparation"><span class="header-section-number">16.2</span> Preparation</h2>
 <p>We will use the dataset from the previous unit:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Libraries</span></span>
@@ -5090,14 +5097,14 @@ vertical-align: -.125em;
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>cl.order <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"Paquot_Larsson_2020_data.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="measures-of-central-tendency" class="level2 scrollable" data-number="16.2">
-<h2 class="scrollable anchored" data-number="16.2" data-anchor-id="measures-of-central-tendency"><span class="header-section-number">16.2</span> Measures of central tendency</h2>
-<section id="the-mean" class="level3 smaller scrollable" data-number="16.2.1">
-<h3 class="smaller scrollable anchored" data-number="16.2.1" data-anchor-id="the-mean"><span class="header-section-number">16.2.1</span> The mean</h3>
-<p>A useful summary statistic is the arithmetic mean <span class="math inline">\(\bar{x}\)</span> <span class="citation" data-cites="heumann_introduction_2022">(cf. <a href="references.html#ref-heumann_introduction_2022" role="doc-biblioref">Heumann, Schomaker, and Shalabh 2022</a>: 38)</span>. Consider a continuous variable <span class="math inline">\(X\)</span> with observations <span class="math inline">\(x_1, x_2, ..., x_n\)</span> from a sample of size <span class="math inline">\(n\)</span>. The sample mean <span class="math inline">\(\bar{x}\)</span> then corresponds to</p>
-<p><span class="math display">\[
+<section id="measures-of-central-tendency" class="level2 scrollable" data-number="16.3">
+<h2 class="scrollable anchored" data-number="16.3" data-anchor-id="measures-of-central-tendency"><span class="header-section-number">16.3</span> Measures of central tendency</h2>
+<section id="the-mean" class="level3 smaller scrollable" data-number="16.3.1">
+<h3 class="smaller scrollable anchored" data-number="16.3.1" data-anchor-id="the-mean"><span class="header-section-number">16.3.1</span> The mean</h3>
+<p>A useful summary statistic is the arithmetic mean <span class="math inline">\(\bar{x}\)</span>. Consider a continuous variable <span class="math inline">\(X\)</span> with observations <span class="math inline">\(\{x_1, x_2, ..., x_n\}\)</span> from a sample of size <span class="math inline">\(n\)</span>. The sample mean <span class="math inline">\(\bar{x}\)</span> then corresponds to</p>
+<p><span id="eq-mean"><span class="math display">\[
 \bar{x} = \frac{x_1 + x_2 + ... + x_n}{n} \\ = \frac{1}{n}\sum_{i=1}^n{x_i}.
-\]</span></p>
+\tag{16.1}\]</span></span></p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -5108,13 +5115,14 @@ Hold on, what does this large Σ symbol mean?
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The summation symbol <span class="math inline">\(\sum\)</span> is a concise way to express the sum of a sequence of numbers. It works like this:</p>
+<p>The summation symbol <span class="math inline">\(\sum\)</span> (Greek ‘upper-case sigma’) is a concise way to express the sum of a sequence of numbers.</p>
+<p>It works like this:</p>
 <ul>
 <li><p>The expression below the <span class="math inline">\(\sum\)</span> (e.g., <span class="math inline">\(i = 1\)</span>) indicates the starting value of the index <span class="math inline">\(i\)</span>.</p></li>
 <li><p>The number above the <span class="math inline">\(\sum\)</span> (e.g., <span class="math inline">\(n\)</span>) is the ending value of the index <span class="math inline">\(i\)</span>.</p></li>
 <li><p>The expression to the right of the <span class="math inline">\(\sum\)</span> (e.g., <span class="math inline">\(x_i\)</span>) is the term to be summed.</p></li>
 </ul>
-<p>For instance, the expression <span class="math inline">\(\sum_{i=1}^n{x_i}\)</span> means “sum the values of <span class="math inline">\(x_i\)</span> starting from <span class="math inline">\(i = 1\)</span> up to <span class="math inline">\(i = n\)</span>.” In other words, it adds up the values <span class="math inline">\(x_1 + x_2 + \dots + x_n\)</span>.</p>
+<p>For instance, the more general expression <span class="math inline">\(\sum_{i=1}^n{x_i}\)</span> means “sum the values of <span class="math inline">\(x_i\)</span> starting from <span class="math inline">\(i = 1\)</span> up to <span class="math inline">\(i = n\)</span>.” In other words, it adds up the values <span class="math inline">\(x_1 + x_2 + \dots + x_n\)</span>.</p>
 </div>
 </div>
 <p>In R, we can obtain the average value of a numeric vector with the <code>mean()</code> function. Let’s do that for the length of main clauses found in the <code>cl.order</code> data:</p>
@@ -5124,8 +5132,8 @@ Hold on, what does this large Σ symbol mean?
 <pre><code>[1] 9.265509</code></pre>
 </div>
 </div>
-<p>The output returned by this function provides a one-value summary of all observations contained in <code>LEN_MC</code>. How could we visualise it?</p>
-<p>First, let’s create a histogram of <code>LEN_MC</code>. Histograms summarise how often certain values occur in a continuous variable. The blue line indicates the sample mean. Alternatively, you can use a density plot to represent the probability of encountering a specific value in the data.</p>
+<p>The output returned by this function provides a one-value summary of all observations contained in <code>LEN_MC</code>. Because the the mean <span class="math inline">\(\bar{x}\)</span> takes into account all data points, it is prone to the influence of <strong>outliers</strong>, i.e., extreme values.</p>
+<p>The distribution of continuous variables is best visualised in terms of histograms or density plots, which are illustrated for <code>LEN_MC</code>. The blue line indicates the sample mean.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" aria-current="page">Histogram (ggplot2)</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Density plot (ggplot2)</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">Histogram (Base R)</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false">Density plot (Base R)</a></li></ul>
 <div class="tab-content">
@@ -5200,16 +5208,16 @@ Hold on, what does this large Σ symbol mean?
 </div>
 </div>
 </section>
-<section id="the-median" class="level3 smaller" data-number="16.2.2">
-<h3 class="smaller anchored" data-number="16.2.2" data-anchor-id="the-median"><span class="header-section-number">16.2.2</span> The median</h3>
-<p>The <code>median()</code> function computes the “the halfway point of the data (50% of the data are above the median; 50% of the data are below” <span class="citation" data-cites="winter_statistics_2020">(<a href="references.html#ref-winter_statistics_2020" role="doc-biblioref">Winter 2020</a>: 58)</span>.</p>
-<p><span class="math display">\[
+<section id="the-median" class="level3 smaller" data-number="16.3.2">
+<h3 class="smaller anchored" data-number="16.3.2" data-anchor-id="the-median"><span class="header-section-number">16.3.2</span> The median</h3>
+<p>The <code>median()</code> function computes the “the halfway point of the data (50% of the data are above the median; 50% of the data are below” <span class="citation" data-cites="winter_statistics_2020">(<a href="references.html#ref-winter_statistics_2020" role="doc-biblioref">Winter 2020</a>: 58)</span>. As such, it is the measure of choice for data with many outliers as well as for ordinal data (e.g.&nbsp;Likert-scale ratings).</p>
+<p><span id="eq-median"><span class="math display">\[
 \tilde{x}_{0.5} =
 \begin{cases}
 x_{((n+1)/2)} &amp; \text{if } n \text{ is odd.} \\
 \frac{1}{2}(x_{n/2}+x_{(n/2+1)}) &amp; \text{if } n \text{ is even.}
 \end{cases}
-\]</span></p>
+\tag{16.2}\]</span></span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(cl.order<span class="sc">$</span>LEN_MC)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -5285,11 +5293,13 @@ x_{((n+1)/2)} &amp; \text{if } n \text{ is odd.} \\
 </div>
 </div>
 </section>
-<section id="sample-variance-and-standard-deviation" class="level3 smaller" data-number="16.2.3">
-<h3 class="smaller anchored" data-number="16.2.3" data-anchor-id="sample-variance-and-standard-deviation"><span class="header-section-number">16.2.3</span> Sample variance and standard deviation</h3>
-<p>In order to assess how well the mean represents the data, it is instructive to compute the <strong>variance</strong> <code>var()</code> and the <strong>standard deviation</strong> <code>sd()</code> for a sample.</p>
+<section id="sample-variance-and-standard-deviation" class="level3 smaller" data-number="16.3.3">
+<h3 class="smaller anchored" data-number="16.3.3" data-anchor-id="sample-variance-and-standard-deviation"><span class="header-section-number">16.3.3</span> Sample variance and standard deviation</h3>
+<p>In order to assess how well the mean represents the data, it is instructive to compute the <strong>variance</strong> <code>var()</code> and the <strong>standard deviation</strong> <code>sd()</code> for a sample. The component <span class="math inline">\(\sum_{i=1}^n (x_i - \bar{x})^2\)</span> is also known as the <strong>squared error</strong>.</p>
 <p>The sample variance <span class="math inline">\(s^2\)</span> is defined as</p>
-<p><span class="math display">\[s^2 = \frac{1}{n}\sum_{i=1}^n{(x_i - \bar{x})^2}. \]</span></p>
+<p><span id="eq-variance"><span class="math display">\[
+s^2 = \frac{1}{n}\sum_{i=1}^n{(x_i - \bar{x})^2}.
+\tag{16.3}\]</span></span></p>
 <p>In other words, it stands for the average squared deviation of all observations from the sample mean.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(cl.order<span class="sc">$</span>LEN_MC)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -5297,8 +5307,10 @@ x_{((n+1)/2)} &amp; \text{if } n \text{ is odd.} \\
 <pre><code>[1] 25.12585</code></pre>
 </div>
 </div>
-<p>Correspondingly, the standard deviation of the mean is the square root of the variance <span class="citation" data-cites="heumann_introduction_2022">(cf. <a href="references.html#ref-heumann_introduction_2022" role="doc-biblioref">Heumann, Schomaker, and Shalabh 2022</a>: 51-2)</span>.</p>
-<p><span class="math display">\[ s = \sqrt{\frac{1}{n}\sum_{i=1}^n{(x_i - \bar{x})^2}} \]</span></p>
+<p>Correspondingly, the standard deviation of the mean is the square root of the variance:</p>
+<p><span id="eq-sd"><span class="math display">\[
+s = \sqrt{\frac{1}{n}\sum_{i=1}^n{(x_i - \bar{x})^2}}
+\tag{16.4}\]</span></span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(cl.order<span class="sc">$</span>LEN_MC)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -5370,8 +5382,8 @@ x_{((n+1)/2)} &amp; \text{if } n \text{ is odd.} \\
 </div>
 </div>
 </section>
-<section id="quantiles" class="level3" data-number="16.2.4">
-<h3 data-number="16.2.4" class="anchored" data-anchor-id="quantiles"><span class="header-section-number">16.2.4</span> Quantiles</h3>
+<section id="quantiles" class="level3" data-number="16.3.4">
+<h3 data-number="16.3.4" class="anchored" data-anchor-id="quantiles"><span class="header-section-number">16.3.4</span> Quantiles</h3>
 <p>While <code>median()</code> divides the data into two equal sets (i.e., two 50% quantiles), the <code>quantile()</code> function makes it possible to partition the data further.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(cl.order<span class="sc">$</span>LEN_MC)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -5394,8 +5406,8 @@ x_{((n+1)/2)} &amp; \text{if } n \text{ is odd.} \\
 </div>
 </div>
 </section>
-<section id="quartiles-and-boxplots" class="level3" data-number="16.2.5">
-<h3 data-number="16.2.5" class="anchored" data-anchor-id="quartiles-and-boxplots"><span class="header-section-number">16.2.5</span> Quartiles and boxplots</h3>
+<section id="quartiles-and-boxplots" class="level3" data-number="16.3.5">
+<h3 data-number="16.3.5" class="anchored" data-anchor-id="quartiles-and-boxplots"><span class="header-section-number">16.3.5</span> Quartiles and boxplots</h3>
 <p>Consider the distribution of clause length by clause order:</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true">Boxplot (Base R)</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false">Boxplot (ggplot2)</a></li></ul>
@@ -5444,10 +5456,10 @@ x_{((n+1)/2)} &amp; \text{if } n \text{ is odd.} \\
 </div>
 </section>
 </section>
-<section id="visualising-mixed-data" class="level2" data-number="16.3">
-<h2 data-number="16.3" class="anchored" data-anchor-id="visualising-mixed-data"><span class="header-section-number">16.3</span> Visualising mixed data</h2>
-<section id="a-numerical-and-categorical-variable" class="level3" data-number="16.3.1">
-<h3 data-number="16.3.1" class="anchored" data-anchor-id="a-numerical-and-categorical-variable"><span class="header-section-number">16.3.1</span> A numerical and categorical variable</h3>
+<section id="visualising-mixed-data" class="level2" data-number="16.4">
+<h2 data-number="16.4" class="anchored" data-anchor-id="visualising-mixed-data"><span class="header-section-number">16.4</span> Visualising mixed data</h2>
+<section id="a-numerical-and-categorical-variable" class="level3" data-number="16.4.1">
+<h3 data-number="16.4.1" class="anchored" data-anchor-id="a-numerical-and-categorical-variable"><span class="header-section-number">16.4.1</span> A numerical and categorical variable</h3>
 <ul>
 <li>Boxplot with <code>geom_boxplot()</code></li>
 </ul>
@@ -5491,8 +5503,8 @@ x_{((n+1)/2)} &amp; \text{if } n \text{ is odd.} \\
 </div>
 </div>
 </section>
-<section id="multivariate-plots" class="level3" data-number="16.3.2">
-<h3 data-number="16.3.2" class="anchored" data-anchor-id="multivariate-plots"><span class="header-section-number">16.3.2</span> Multivariate plots</h3>
+<section id="multivariate-plots" class="level3" data-number="16.4.2">
+<h3 data-number="16.4.2" class="anchored" data-anchor-id="multivariate-plots"><span class="header-section-number">16.4.2</span> Multivariate plots</h3>
 <ul>
 <li>Advanced scatterplot with four variables: <code>LEN_MC</code> (x), <code>LEN_SC</code> (y), <code>ORDER</code> (colour) and <code>SUBORDTYPE</code> (shape)</li>
 </ul>

@@ -22,6 +22,11 @@ knitr::opts_chunk$set(
 )
 ```
 
+
+## Suggested reading
+
+> Heumann et al. [-@heumann_introduction_2022: Chapter 3]
+
 ## Preparation
 
 We will use the dataset from the previous unit:
@@ -41,31 +46,31 @@ cl.order <- read_xlsx("Paquot_Larsson_2020_data.xlsx")
 
 ### The mean {.smaller .scrollable}
 
-A useful summary statistic is the arithmetic mean $\bar{x}$ [cf.
-@heumann_introduction_2022: 38]. Consider a continuous variable $X$ with
-observations $x_1, x_2, ..., x_n$ from a sample of size $n$. The sample
-mean $\bar{x}$ then corresponds to
+A useful summary statistic is the arithmetic mean $\bar{x}$. Consider a continuous variable $X$ with
+observations $\{x_1, x_2, ..., x_n\}$ from a sample of size $n$. The
+sample mean $\bar{x}$ then corresponds to
 
 $$
 \bar{x} = \frac{x_1 + x_2 + ... + x_n}{n} \\ = \frac{1}{n}\sum_{i=1}^n{x_i}.
-$$
+$$ {#eq-mean}
 
 ::: callout-note
 ## Hold on, what does this large Σ symbol mean?
 
-The summation symbol $\sum$ is a concise way to express the sum of a
-sequence of numbers. It works like this:
+The summation symbol $\sum$ (Greek 'upper-case sigma') is a concise way to express the sum of a
+sequence of numbers.
+
+It works like this:
 
 -   The expression below the $\sum$ (e.g., $i = 1$) indicates the
     starting value of the index $i$.
 
--   The number above the $\sum$ (e.g., $n$) is the ending value of the
-    index $i$.
+-   The number above the $\sum$ (e.g., $n$) is the ending value of the index $i$.
 
 -   The expression to the right of the $\sum$ (e.g., $x_i$) is the term
     to be summed.
 
-For instance, the expression $\sum_{i=1}^n{x_i}$ means "sum the values
+For instance, the more general expression $\sum_{i=1}^n{x_i}$ means "sum the values
 of $x_i$ starting from $i = 1$ up to $i = n$." In other words, it adds
 up the values $x_1 + x_2 + \dots + x_n$.
 :::
@@ -79,12 +84,9 @@ mean(cl.order$LEN_MC)
 ```
 
 The output returned by this function provides a one-value summary of all
-observations contained in `LEN_MC`. How could we visualise it?
+observations contained in `LEN_MC`. Because the the mean $\bar{x}$ takes into account all data points, it is prone to the influence of **outliers**, i.e., extreme values.
 
-First, let's create a histogram of `LEN_MC`. Histograms summarise how
-often certain values occur in a continuous variable. The blue line
-indicates the sample mean. Alternatively, you can use a density plot to
-represent the probability of encountering a specific value in the data.
+The distribution of continuous variables is best visualised in terms of histograms or density plots, which are illustrated for `LEN_MC`. The blue line indicates the sample mean.
 
 ::: panel-tabset
 ### Histogram (ggplot2)
@@ -140,7 +142,7 @@ plot(density(cl.order$LEN_MC))
 
 The `median()` function computes the "the halfway point of the data (50%
 of the data are above the median; 50% of the data are below"
-[@winter_statistics_2020: 58].
+[@winter_statistics_2020: 58]. As such, it is the measure of choice for data with many outliers as well as for ordinal data (e.g. Likert-scale ratings).
 
 $$
 \tilde{x}_{0.5} = 
@@ -148,7 +150,7 @@ $$
 x_{((n+1)/2)} & \text{if } n \text{ is odd.} \\
 \frac{1}{2}(x_{n/2}+x_{(n/2+1)}) & \text{if } n \text{ is even.}
 \end{cases} 
-$$
+$$ {#eq-median}
 
 ```{r, echo = TRUE, output = TRUE}
 median(cl.order$LEN_MC)
@@ -200,11 +202,13 @@ plot(density(cl.order$LEN_MC))
 
 In order to assess how well the mean represents the data, it is
 instructive to compute the **variance** `var()` and the **standard
-deviation** `sd()` for a sample.
+deviation** `sd()` for a sample. The component $\sum_{i=1}^n (x_i - \bar{x})^2$ is also known as the **squared error**.
 
 The sample variance $s^2$ is defined as
 
-$$s^2 = \frac{1}{n}\sum_{i=1}^n{(x_i - \bar{x})^2}. $$
+$$ 
+s^2 = \frac{1}{n}\sum_{i=1}^n{(x_i - \bar{x})^2}. 
+$$ {#eq-variance}
 
 In other words, it stands for the average squared deviation of all
 observations from the sample mean.
@@ -214,9 +218,11 @@ var(cl.order$LEN_MC)
 ```
 
 Correspondingly, the standard deviation of the mean is the square root
-of the variance [cf. @heumann_introduction_2022: 51-2].
+of the variance:
 
-$$ s = \sqrt{\frac{1}{n}\sum_{i=1}^n{(x_i - \bar{x})^2}} $$
+$$
+s = \sqrt{\frac{1}{n}\sum_{i=1}^n{(x_i - \bar{x})^2}} 
+$$ {#eq-sd}
 
 ```{r, echo = TRUE, output = TRUE}
 sd(cl.order$LEN_MC)
