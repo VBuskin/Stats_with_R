@@ -1,0 +1,237 @@
+---
+title: "Binomial test"
+author:
+  name: "Anne Stempel" 
+  affiliation: 
+    name: "Catholic University of Eichstätt-Ingolstadt"
+    department: "English Language and Linguistics"
+abstract: > 
+  A binomial distribution is a statistical distribution which can be found in an experiment with only two possible outcomes (`0` and `1`, also referred to as `failure` and `success`, respectively) and which are independent of each other in case of repetition.
+format:
+  html:
+    self-contained: true
+    theme: default
+    toc: true
+    number-sections: true
+    slide-number: true
+    incremental: false
+    slide-level: 3
+    scrollable: true
+editor: visual
+---
+
+## Recommended reading
+
+For linguists:
+
+> Gries [-@gries_statistics_2021: 39--45]
+
+General:
+
+> Baguley [-@baguleySeriousStatsGuide2012: Chapters 2.3.1, 4.5.1, 4.8.4]
+
+
+## Linguistic Example of a Binomial Distribution
+
+To illustrate this, consider a binomial distribution in linguistics,
+such as gender bias in pronoun use. The research question is as follows:
+
+> Do people tend to exhibit gender bias in pronoun use (e.g. *he* or
+> *she*) when referring to professionals in leadership roles?
+
+As a result, one can either expect to see pronouns used in a way that
+aligns with traditional gender stereotypes, or notice efforts to
+counteract such biases by adopting more inclusive and neutral language.
+Nevertheless, the pronouns that are being analysed can only be female or
+male and thus, they represent the required structure for a binomial
+distribution (*he* or *she*), which is binary data.
+
+A test that is built on the assumptions of the binomial distribution is
+called the **Binomial Test**. The Binomial Test calculates the likelihood of
+observing a particular pronoun (e.g., *he*) being used to refer to
+professionals in leadership roles, under the assumption of a given
+expected proportion, and assesses whether the observed frequency differs
+significantly from the expected one.
+
+::: callout-tip
+## Is this approach suitable for my research?
+
+If you are working with corpus-based frequency data that involves binary
+categories (yes or no, male or female, VO or OV, British or
+US-American,...) and if you have a specific probability of success which
+is specified in your hypotheses and does not change from one trial to
+the next, then this approach is working for you and will lead to
+successful results.
+:::
+
+## Understanding the Binomial Distribution (Cumulative Mass Function (CMF) Version)
+
+The binomial distribution is used to calculate the probability of
+observing up to and including $x$ successes in $n$ trials, given a fixed
+probability of success $P$. This calculation is conducted using the
+**Cumulative Mass Function** (CMF), which is a running total of
+probabilities. The CMF is a valuable tool for calculating probabilities
+for ranges, such as "what is the probability of 0 to 3 successes?" as
+opposed to the probability of a specific number of successes (see
+@eq-binom). [^binomial_test-1]
+
+[^binomial_test-1]: For more information on the binomial test using a
+    specific number of successes, please refer to The Probability Mass
+    Function PMF.
+
+$$ P(x;n,P) = \sum_{i=1}^{|x|}\bigg[\binom{n}{i} p^i (1-P)^{n-i}\bigg]
+$$ {#eq-binom}
+
+-   Key elements:
+    -   $x$: The maximum number of successes that is of interest (e.g.,
+        up to 3 successes).
+    -   $n$: The total number of trials (e.g., total observations or
+        experiments).
+    -   $P$: The probability of success in each trial (e.g., the chance
+        of using *he* when describing a professional).
+
+::: callout-tip
+## Linguistic example
+
+Imagine studying gender bias in pronoun use. If $P = 0.5$ (i.e., the
+probability of obtaining the masculine pronoun), and you observe up to 3
+uses of *he* out of 10 trials, the CMF calculates the probability of
+getting 0, 1, 2, or 3 successes (usage of *he*) combined.
+:::
+
+## Using the Binomial Test (CMF-Version) in Linguistic Research
+
+The CMF is especially useful when testing hypotheses about ranges of
+outcomes.
+
+Steps for a Binomial Test Using the CMF:
+
+1. Hypotheses
+
+-   Null hypothesis ($H_0$): The observed data matches the expected
+    cumulative probability. Therefore: The observed frequency of the
+    pronouns *he* and *she* referring to professionals in leadership
+    roles corresponds with the expected proportion of 50% each,
+    indicating that both pronouns are being used equally.
+
+-   Alternative hypothesis ($H_1$): The observed data deviates from
+    the expected cumulative probability. Therefore: The observed
+    frequency of the pronouns *he* and *she* referring to professionals
+    in leadership roles deviates from the expected proportion of 50%
+    each, indicating a gender bias.
+
+2. Performing the test in R by using the cumulative probabilities
+
+-   Example: To calculate the probability of observing up to 3 successes
+    in 10 trials with P=0.5 each, the following code should be used:
+
+```         
+pbinom(3,10,0.5)
+```
+
+3\. Interpreting the results:
+
+-   A p-value smaller than 0.05 indicates a significant deviation from
+    the expected probability
+
+-   The test helps to determine whether the observed data can be used to
+    reject the H0.
+
+-   Checking the confidence interval (CI) provides the range of likely
+    values for the true success probability
+
+::: callout-tip
+## The Probability Mass Function (PMF)
+
+This function is used to calculate the probability of observing exactly
+x successes in n trials, given a fixed probability of success P.
+
+$$ 
+\begin{align}
+f(x; n, P) & = \binom{n}{x} P^x (1-P)^{n-x} \\
+\end{align}
+$$
+
+To calculate the PMF binomial distributions in R, the following code
+should be used:
+
+```{r}         
+dbinom(x = 3, size = 10, prob = 0.5)
+```
+
+:::
+
+## One-Sided vs. Two-Sided Tests
+
+The choice between one-sided and two-sided tests depends on the research
+question.
+
+-   One-Sided Test: Used only for analysing deviations in one direction.
+
+    -   Example: Is a participant's performance better than chance?
+
+-   Two-Sided Test: Used for analysing deviations in both directions.
+
+    -   Example: Is the frequency of male pronouns different from the
+        frequency of female pronouns? (The result can either be that the
+        frequency of male pronouns is higher than the frequency of
+        female pronouns or that they are less frequent than female
+        pronouns.)
+
+Two-Sided Binomial Test
+
+```{r}         
+binom.test(x = 15, n = 20, p = 0.5, alternative = "two.sided")
+```
+
+One-Sided Binomial Test
+
+```{r}         
+binom.test(x = 15, n = 20, p = 0.5, alternative = "greater")
+```
+
+::: callout-tip
+## Please note
+
+The function `binom.test()` in R only uses the CMF function.
+:::
+
+## Comparing Two Groups: Proportion Tests
+
+For the comparison of proportions between two groups, the prop.test()
+function can be used.
+
+Example: An experiment is being conducted, in which participants have to
+determine whether a word they are being shown is an actual lemma of the
+English language or not.
+
+-   Group A achieved 24 correct answers out of 25 trials
+
+-   Group B obtained 19 correct answers out of 25 trials.
+
+-   To see, whether the proportions are significantly different, the
+    following code can be used.
+
+```{r}         
+prop.test(c(24,19), c(25,24))
+```
+
+## Testing Event Counts Over Time: The Poisson Test
+
+For analysing event counts over time, such as pauses in speech, the
+**Poisson distribution** with the `poisson.test()` function can be useful.
+
+**Example**: An experiment is conducted in which speakers are asked to
+talk for a predetermined time. and it is being researched how often
+pauses occur in speech.
+
+-   Participant A pauses 18 times in 5 minutes.
+
+-   The researcher expects 2 pauses per minute.
+
+-   To see whether the observed pause rate differs from the expected
+    pause rate, the following test is highly convenient.
+
+```{r}        
+poisson.test(18, T=5, r=2)
+```

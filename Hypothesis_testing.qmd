@@ -112,9 +112,10 @@ forward the following hypotheses:
 
 ::: {.callout-note collapse="true" title="In formal terms"}
 To be precise, we use the hypotheses to make statements about a
-**population parameter** $\theta$, which can be a mean $\mu$ or a
-proportion $\pi$, among other things. Mathematically, the null and
-alternative hypotheses can be restated as in @eq-hypotheses.
+**population parameter** $\theta$, which can be a mean $\mu$ for
+continuous data or a proportion $\pi$ for categorical data, among other
+things. Mathematically, the null and alternative hypotheses can be
+restated as in @eq-hypotheses.
 
 $$
 \begin{align}
@@ -398,24 +399,21 @@ grammatical category Person (`1.p`. vs. `2.p.` vs. `3.p.`) in three
 varieties of English (`Great Britain` vs. `Hong Kong` vs. `Singapore`).
 They report the following test results [-@schroter_pronoun_2016: 235]:
 
-> Chi-square test scores:
-$$
-\begin{align}
-\text{Singapore: \quad} & \chi^2 = 3.3245, df = 2, p = 0.1897 \\
-\text{Hong Kong: \quad} & \chi^2 = 40.799, df = 2, p < 0.1 \\
-\text{Great Britain: \quad} & \chi^2 = 3.6183, df = 2, p = 0.1638 \\
-\end{align}
-$$
+> Chi-square test scores: $$
+> \begin{align}
+> \text{Singapore: \quad} & \chi^2 = 3.3245, df = 2, p = 0.1897 \\
+> \text{Hong Kong: \quad} & \chi^2 = 40.799, df = 2, p < 0.01 \\
+> \text{Great Britain: \quad} & \chi^2 = 3.6183, df = 2, p = 0.1638 \\
+> \end{align}
+> $$
 
 -   What hypotheses are the authors testing?
--   Assuming a significance level $\alpha = 0.05$, what conclusions can be drawn from the test results?
+-   Assuming a significance level $\alpha = 0.05$, what statistical conclusions can
+    be drawn from the test results?
 -   What could be the theoretical implications of these results?
-
 :::
-
 
 ::: {#exr-hyp-2}
 Try to develop statistical hypotheses for a research project you are
 currently working on!
 :::
-
