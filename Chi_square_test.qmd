@@ -263,13 +263,17 @@ The test output has three 'ingredients':
 -   the **p-value**.
 
 It is absolutely essential to report all three of those as they
-determine each other. Here is an example:
+determine each other. Here a few possible wordings that could be used:
 
 > According to a $\chi^2$-test, there is a highly significant
 > association between clause ORDER and SUBORDTYPE at $p < 0.001$
 > ($\chi^2 = 106.44, df = 1$), thus justifying the rejection of $H_0$.
 
-The test results provide evidence that the dependent variable `ORDER`
+> A $\chi^2$-test revealed a highly significant association between clause ORDER and SUBORDTYPE ($\chi^2(1) = 106.44$, $p < 0.001$), supporting the rejection of $H_0$.
+
+> The $\chi^2$-test results ($\chi^2 = 106.44$, $df = 1$, $p < 0.001$) provide strong evidence against the null hypothesis, demonstrating a significant association between clause ORDER and SUBORDTYPE.
+
+The test results suggest that the dependent variable `ORDER`
 and the explanatory variable `SUBORDTYPE` are not independent of each
 other. The probability of **randomly** observing usage patterns such as
 those found in the `cl.order` data is lower than 0.001 $\approx$ 0.1%,

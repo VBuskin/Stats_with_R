@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Vladimir Buskin">
+<meta name="author" content="Anne Stempel">
 
-<title>Statistics and Data Analysis for Corpus Linguists: From Theory to Practice with R - 20&nbsp; Chi-squared test</title>
+<title>Statistics and Data Analysis for Corpus Linguists: From Theory to Practice with R - 19&nbsp; Binomial test</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -1637,8 +1637,8 @@ function fuseSearch(query, fuse, fuseOptions) {
 }
 </script>
 <meta name="quarto:offset" content="./">
-<link href="./t_test.html" rel="next">
-<link href="./Binomial_test.html" rel="prev">
+<link href="./Chi_square_test.html" rel="next">
+<link href="./Hypothesis_testing.html" rel="prev">
 <script>const sectionChanged = new CustomEvent("quarto-sectionChanged", {
   detail: {},
   bubbles: true,
@@ -4677,7 +4677,7 @@ vertical-align: -.125em;
 
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -4686,7 +4686,7 @@ vertical-align: -.125em;
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Hypothesis_testing.html">Inferential Statistics</a></li><li class="breadcrumb-item"><a href="./Chi_square_test.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Chi-squared test</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Hypothesis_testing.html">Inferential Statistics</a></li><li class="breadcrumb-item"><a href="./Binomial_test.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Binomial test</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -4889,13 +4889,13 @@ vertical-align: -.125em;
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Binomial_test.html" class="sidebar-item-text sidebar-link">
+  <a href="./Binomial_test.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Binomial test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Chi_square_test.html" class="sidebar-item-text sidebar-link active">
+  <a href="./Chi_square_test.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Chi-squared test</span></span></a>
   </div>
 </li>
@@ -5039,24 +5039,22 @@ vertical-align: -.125em;
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#suggested-reading" id="toc-suggested-reading" class="nav-link active" data-scroll-target="#suggested-reading"><span class="header-section-number">20.1</span> Suggested reading</a></li>
-  <li><a href="#preparation" id="toc-preparation" class="nav-link" data-scroll-target="#preparation"><span class="header-section-number">20.2</span> Preparation</a></li>
-  <li><a href="#the-pearson-chi2-test-of-independence" id="toc-the-pearson-chi2-test-of-independence" class="nav-link" data-scroll-target="#the-pearson-chi2-test-of-independence"><span class="header-section-number">20.3</span> The Pearson <span class="math inline">\(\chi^2\)</span>-test of independence</a>
-  <ul>
-  <li><a href="#how-do-i-make-sense-of-the-test-results" id="toc-how-do-i-make-sense-of-the-test-results" class="nav-link" data-scroll-target="#how-do-i-make-sense-of-the-test-results"><span class="header-section-number">20.3.1</span> How do I make sense of the test results?</a></li>
-  </ul></li>
-  <li><a href="#pearson-residuals" id="toc-pearson-residuals" class="nav-link" data-scroll-target="#pearson-residuals"><span class="header-section-number">20.4</span> Pearson residuals</a></li>
-  <li><a href="#effect-size" id="toc-effect-size" class="nav-link" data-scroll-target="#effect-size"><span class="header-section-number">20.5</span> Effect size</a></li>
-  <li><a href="#likelihood-based-inference" id="toc-likelihood-based-inference" class="nav-link" data-scroll-target="#likelihood-based-inference"><span class="header-section-number">20.6</span> Likelihood-based inference</a></li>
+  <li><a href="#recommended-reading" id="toc-recommended-reading" class="nav-link active" data-scroll-target="#recommended-reading"><span class="header-section-number">19.1</span> Recommended reading</a></li>
+  <li><a href="#linguistic-example-of-a-binomial-distribution" id="toc-linguistic-example-of-a-binomial-distribution" class="nav-link" data-scroll-target="#linguistic-example-of-a-binomial-distribution"><span class="header-section-number">19.2</span> Linguistic Example of a Binomial Distribution</a></li>
+  <li><a href="#understanding-the-binomial-distribution-cumulative-mass-function-cmf-version" id="toc-understanding-the-binomial-distribution-cumulative-mass-function-cmf-version" class="nav-link" data-scroll-target="#understanding-the-binomial-distribution-cumulative-mass-function-cmf-version"><span class="header-section-number">19.3</span> Understanding the Binomial Distribution (Cumulative Mass Function (CMF) Version)</a></li>
+  <li><a href="#using-the-binomial-test-cmf-version-in-linguistic-research" id="toc-using-the-binomial-test-cmf-version-in-linguistic-research" class="nav-link" data-scroll-target="#using-the-binomial-test-cmf-version-in-linguistic-research"><span class="header-section-number">19.4</span> Using the Binomial Test (CMF-Version) in Linguistic Research</a></li>
+  <li><a href="#one-sided-vs.-two-sided-tests" id="toc-one-sided-vs.-two-sided-tests" class="nav-link" data-scroll-target="#one-sided-vs.-two-sided-tests"><span class="header-section-number">19.5</span> One-Sided vs.&nbsp;Two-Sided Tests</a></li>
+  <li><a href="#comparing-two-groups-proportion-tests" id="toc-comparing-two-groups-proportion-tests" class="nav-link" data-scroll-target="#comparing-two-groups-proportion-tests"><span class="header-section-number">19.6</span> Comparing Two Groups: Proportion Tests</a></li>
+  <li><a href="#testing-event-counts-over-time-the-poisson-test" id="toc-testing-event-counts-over-time-the-poisson-test" class="nav-link" data-scroll-target="#testing-event-counts-over-time-the-poisson-test"><span class="header-section-number">19.7</span> Testing Event Counts Over Time: The Poisson Test</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/VBuskin/Stats_with_R/blob/main/Chi_square_test.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/VBuskin/Stats_with_R/blob/main/Binomial_test.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Hypothesis_testing.html">Inferential Statistics</a></li><li class="breadcrumb-item"><a href="./Chi_square_test.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Chi-squared test</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Hypothesis_testing.html">Inferential Statistics</a></li><li class="breadcrumb-item"><a href="./Binomial_test.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Binomial test</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Chi-squared test</span></h1>
+<h1 class="title"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Binomial test</span></h1>
 </div>
 
 
@@ -5065,7 +5063,7 @@ vertical-align: -.125em;
   <div class="quarto-title-meta-heading">Affiliation</div>
   
     <div class="quarto-title-meta-contents">
-    <p class="author">Vladimir Buskin <a href="https://orcid.org/0009-0005-5824-1012" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+    <p class="author">Anne Stempel </p>
   </div>
   <div class="quarto-title-meta-contents">
         <p class="affiliation">
@@ -5084,7 +5082,7 @@ vertical-align: -.125em;
 <div>
   <div class="abstract">
     <div class="block-title">Abstract</div>
-    <p>The chi-squared (<span class="math inline">\(\chi^2\)</span>) test helps determine if there is a statistically significant association between two categorical variables. It compares the observed frequencies of categories with those expected under the null hypothesis. The <span class="math inline">\(\chi^2\)</span> (chi-squared) score quantifies the difference between observed and expected frequencies for every cell in a contingency table. The greater the difference between observed and expected, the higher the <span class="math inline">\(\chi^2\)</span> score and the lower the <span class="math inline">\(p\)</span>-value, given the degrees of freedom. It is recommended to compute effect size measures and inspect the residuals to assess the nature of the association.</p>
+    <p>A binomial distribution is a statistical distribution which can be found in an experiment with only two possible outcomes (<code>0</code> and <code>1</code>, also referred to as <code>failure</code> and <code>success</code>, respectively) and which are independent of each other in case of repetition.</p>
   </div>
 </div>
 
@@ -5092,454 +5090,240 @@ vertical-align: -.125em;
 </header>
 
 
-<section id="suggested-reading" class="level2" data-number="20.1">
-<h2 data-number="20.1" class="anchored" data-anchor-id="suggested-reading"><span class="header-section-number">20.1</span> Suggested reading</h2>
+<section id="recommended-reading" class="level2" data-number="19.1">
+<h2 data-number="19.1" class="anchored" data-anchor-id="recommended-reading"><span class="header-section-number">19.1</span> Recommended reading</h2>
 <p>For linguists:</p>
 <blockquote class="blockquote">
-<p><span class="citation" data-cites="gries_statistics_2021">Gries (<a href="references.html#ref-gries_statistics_2021" role="doc-biblioref">2021</a>)</span>: Chapter 4.1.2.1</p>
+<p>Gries <span class="citation" data-cites="gries_statistics_2021">(<a href="references.html#ref-gries_statistics_2021" role="doc-biblioref">2021</a>: 39–45)</span></p>
 </blockquote>
 <p>General:</p>
 <blockquote class="blockquote">
-<p><span class="citation" data-cites="baguleySeriousStatsGuide2012">Baguley (<a href="references.html#ref-baguleySeriousStatsGuide2012" role="doc-biblioref">2012</a>)</span>: Chapter 4</p>
-<p><span class="citation" data-cites="agrestiFoundationsStatisticsData2022">Agresti and Kateri (<a href="references.html#ref-agrestiFoundationsStatisticsData2022" role="doc-biblioref">2022</a>)</span>: Chapter 5</p>
+<p>Baguley <span class="citation" data-cites="baguleySeriousStatsGuide2012">(<a href="references.html#ref-baguleySeriousStatsGuide2012" role="doc-biblioref">2012</a>: Chapters 2.3.1, 4.5.1, 4.8.4)</span></p>
 </blockquote>
 </section>
-<section id="preparation" class="level2" data-number="20.2">
-<h2 data-number="20.2" class="anchored" data-anchor-id="preparation"><span class="header-section-number">20.2</span> Preparation</h2>
+<section id="linguistic-example-of-a-binomial-distribution" class="level2" data-number="19.2">
+<h2 data-number="19.2" class="anchored" data-anchor-id="linguistic-example-of-a-binomial-distribution"><span class="header-section-number">19.2</span> Linguistic Example of a Binomial Distribution</h2>
+<p>To illustrate this, consider a binomial distribution in linguistics, such as gender bias in pronoun use. The research question is as follows:</p>
+<blockquote class="blockquote">
+<p>Do people tend to exhibit gender bias in pronoun use (e.g.&nbsp;<em>he</em> or <em>she</em>) when referring to professionals in leadership roles?</p>
+</blockquote>
+<p>As a result, one can either expect to see pronouns used in a way that aligns with traditional gender stereotypes, or notice efforts to counteract such biases by adopting more inclusive and neutral language. Nevertheless, the pronouns that are being analysed can only be female or male and thus, they represent the required structure for a binomial distribution (<em>he</em> or <em>she</em>), which is binary data.</p>
+<p>A test that is built on the assumptions of the binomial distribution is called the <strong>Binomial Test</strong>. The Binomial Test calculates the likelihood of observing a particular pronoun (e.g., <em>he</em>) being used to refer to professionals in leadership roles, under the assumption of a given expected proportion, and assesses whether the observed frequency differs significantly from the expected one.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Script
+Is this approach suitable for my research?
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>You can find the full R script associated with this unit <a href="...">here</a>.</p>
+<p>If you are working with corpus-based frequency data that involves binary categories (yes or no, male or female, VO or OV, British or US-American,…) and if you have a specific probability of success which is specified in your hypotheses and does not change from one trial to the next, then this approach is working for you and will lead to successful results.</p>
 </div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#  Load libraries</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(confintr) <span class="co"># for effect size calculation</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>cl.order <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"Paquot_Larsson_2020_data.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="the-pearson-chi2-test-of-independence" class="level2" data-number="20.3">
-<h2 data-number="20.3" class="anchored" data-anchor-id="the-pearson-chi2-test-of-independence"><span class="header-section-number">20.3</span> The Pearson <span class="math inline">\(\chi^2\)</span>-test of independence</h2>
-<p>The first step of any significance test involves setting up the null and alternative hypothesis. In this unit, we will perform a sample analysis on the relationship between clause <code>ORDER</code> and the type of subordinate clause (<code>SUBORDTYPE</code>). Specifically, we will focus on the <strong>independence</strong> of these two discrete variables (i.e, the presence or absence of correlation).</p>
+<section id="understanding-the-binomial-distribution-cumulative-mass-function-cmf-version" class="level2 page-columns page-full" data-number="19.3">
+<h2 data-number="19.3" class="anchored" data-anchor-id="understanding-the-binomial-distribution-cumulative-mass-function-cmf-version"><span class="header-section-number">19.3</span> Understanding the Binomial Distribution (Cumulative Mass Function (CMF) Version)</h2>
+<p>The binomial distribution is used to calculate the probability of observing up to and including <span class="math inline">\(x\)</span> successes in <span class="math inline">\(n\)</span> trials, given a fixed probability of success <span class="math inline">\(P\)</span>. This calculation is conducted using the <strong>Cumulative Mass Function</strong> (CMF), which is a running total of probabilities. The CMF is a valuable tool for calculating probabilities for ranges, such as “what is the probability of 0 to 3 successes?” as opposed to the probability of a specific number of successes (see <a href="#eq-binom" class="quarto-xref">Equation&nbsp;<span>19.1</span></a>). <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;For more information on the binomial test using a specific number of successes, please refer to The Probability Mass Function PMF.</p></li></div><p><span id="eq-binom"><span class="math display">\[ P(x;n,P) = \sum_{i=1}^{|x|}\bigg[\binom{n}{i} p^i (1-P)^{n-i}\bigg]
+\tag{19.1}\]</span></span></p>
 <ul>
-<li><p><span class="math inline">\(H_0:\)</span> The variables <code>ORDER</code> and <code>SUBORDTYPE</code> are independent.</p></li>
-<li><p><span class="math inline">\(H_1:\)</span> The variables <code>ORDER</code> and <code>SUBORDTYPE</code> are <strong>not</strong> independent.</p></li>
-</ul>
-<div class="callout callout-style-default callout-note callout-titled" title="What does independence really mean?">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-What does independence really mean?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>The core idea is “that the probability distribution of the response variable is the same for each group” <span class="citation" data-cites="agrestiFoundationsStatisticsData2022">(<a href="references.html#ref-agrestiFoundationsStatisticsData2022" role="doc-biblioref">Agresti and Kateri 2022</a>: 177)</span>. If clause <code>ORDER</code> is the response variable and <code>SUBORDTYPE</code> the explanatory variable, independence would entail that the outcomes of the response variable <code>ORDER = "mc-sc"</code> and <code>ORDER = "sc-mc"</code> are equally likely to occur in the groups <code>SUBORDTYPE = "temp"</code> <strong>and</strong> <code>SUBORDTYPE = "caus"</code>.</p>
-<p>The term <strong>probability distribution</strong> refers to a mathematical function that assigns probabilities to the outcomes of a variable. If we consider two variables at the same time, such as <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, they are said to have <strong>marginal probability functions</strong> <span class="math inline">\(f_1(x)\)</span> and <span class="math inline">\(f_2(y)\)</span>. If we condition the outcomes of all values on each other, the following equivalence will hold:</p>
-<p><span id="eq-indep"><span class="math display">\[
-f(x \mid y) = f_1(x) \text{ and } f(y \mid x) = f_2(y).
-\tag{20.1}\]</span></span></p>
-<p>Thus, the null hypothesis assumes that the probabilities of each combination of values (such as <code>ORDER</code> and <code>SUBORDTYPE</code>), denoted by <span class="math inline">\(\pi_{ij}\)</span>, have the relationship in <a href="#eq-indep" class="quarto-xref">Equation&nbsp;<span>20.1</span></a>. This can be stated succinctly as</p>
-<p><span id="eq-nullhyp-math"><span class="math display">\[
-H_0 : \pi_{ij} = P(X = i)P(Y = j).
-\tag{20.2}\]</span></span></p>
-</div>
-</div>
-</div>
-<p>Next, we compute a test statistic that indicates how strongly our data conforms to <span class="math inline">\(H_0\)</span>, such as Pearson’s <span class="math inline">\(\chi^2\)</span>. To this end, we will need two types of values:</p>
+<li>Key elements:
 <ul>
-<li><p>the <strong>observed frequencies</strong> <span class="math inline">\(f_{ij}\)</span> present in our data set</p></li>
-<li><p>the <strong>expected frequencies</strong> <span class="math inline">\(e_{ij}\)</span>, which we would expect to see if <span class="math inline">\(H_0\)</span> were true,</p></li>
+<li><span class="math inline">\(x\)</span>: The maximum number of successes that is of interest (e.g., up to 3 successes).</li>
+<li><span class="math inline">\(n\)</span>: The total number of trials (e.g., total observations or experiments).</li>
+<li><span class="math inline">\(P\)</span>: The probability of success in each trial (e.g., the chance of using <em>he</em> when describing a professional).</li>
+</ul></li>
 </ul>
-<p>where <span class="math inline">\(f, e \in \mathbb{N}\)</span>. The indices <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> uniquely identify the cell counts in all column-row combinations of a contingency table.</p>
-<div class="callout callout-style-default callout-note callout-titled" title="The structure of a contingency table">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-The structure of a contingency table
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>The table below represents a generic contingency table where <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are categorical variables and have the values <span class="math inline">\(X = \{x_1, x_2, \dots, x_i\}\)</span> and <span class="math inline">\(Y = \{y_1, y_2, \dots, y_j \}\)</span>. In the table, each cell indicates the count of observation <span class="math inline">\(f_{ij}\)</span> corresponding to the <span class="math inline">\(i\)</span>-th row and <span class="math inline">\(j\)</span>-th column.</p>
-<table class="table">
-<thead>
-<tr class="header">
-<th></th>
-<th></th>
-<th></th>
-<th><span class="math inline">\(Y\)</span></th>
-<th></th>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td></td>
-<td></td>
-<td><span class="math inline">\(y_1\)</span></td>
-<td><span class="math inline">\(y_2\)</span></td>
-<td>…</td>
-<td><span class="math inline">\(y_j\)</span></td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td><span class="math inline">\(x_1\)</span></td>
-<td><span class="math inline">\(f_{11}\)</span></td>
-<td><span class="math inline">\(f_{12}\)</span></td>
-<td>…</td>
-<td><span class="math inline">\(f_{1j}\)</span></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td><span class="math inline">\(x_2\)</span></td>
-<td><span class="math inline">\(f_{21}\)</span></td>
-<td><span class="math inline">\(f_{22}\)</span></td>
-<td>…</td>
-<td><span class="math inline">\(f_{2j}\)</span></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><span class="math inline">\(X\)</span></td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td><span class="math inline">\(x_i\)</span></td>
-<td><span class="math inline">\(f_{i1}\)</span></td>
-<td><span class="math inline">\(f_{i2}\)</span></td>
-<td>…</td>
-<td><span class="math inline">\(f_{3j}\)</span></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<p>In the <code>cl.order</code> data, the <strong>observed frequencies</strong> correspond to how often each <code>ORDER</code> value (i.e., <code>mc-sc</code> and <code>sc-mc</code>) is attested for a given <code>SUBORDTYPE</code> (i.e., <code>temp</code> and <code>caus</code>). This can be done in a very straightforward fashion using R’s <code>table()</code> function on the variables of interest.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>observed_freqs <span class="ot">&lt;-</span> <span class="fu">table</span>(cl.order<span class="sc">$</span>ORDER, cl.order<span class="sc">$</span>SUBORDTYPE)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(observed_freqs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>       
-        caus temp
-  mc-sc  184   91
-  sc-mc   15  113</code></pre>
-</div>
-</div>
-<p>The <strong>expected frequencies</strong> require a few additional steps. Usually, these steps are performed automatically when conducting the chi-squared test in R, so you don’t have to worry about calculating them by hand. We will do it anyway to drive home the rationale of the test.</p>
-<p>The expected frequencies <span class="math inline">\(e_{ij}\)</span> are given by the formula in <a href="#eq-exp-freq" class="quarto-xref">Equation&nbsp;<span>20.3</span></a>. In concrete terms, we go through each cell in the cross-table and multiply the corresponding row sums with the column sums, dividing the result by the total number of occurrences in the sample. For example, there are <span class="math inline">\(184\)</span> occurrences of <code>mc-sc</code> clause orders where the subordinate clause is causal. The row sum is <span class="math inline">\(184 + 91 = 275\)</span> and the column sum is <span class="math inline">\(184 + 15 = 199\)</span>. Next, we take their product <span class="math inline">\(275 \times 199\)</span> and divide it by the total number of observations, which is <span class="math inline">\(184 + 91 + 15 + 113 = 403\)</span>. Thus we obtain an expected frequency of <span class="math inline">\(\frac{275 \times 199}{403} = 135.79\)</span> under the null hypothesis.</p>
-<p><span id="eq-exp-freq"><span class="math display">\[
-e_{ij} = \frac{i\textrm{th row sum} \times j \textrm{th column sum}}{\textrm{number of observations}}
-\tag{20.3}\]</span></span></p>
-<p>The expected frequencies for our combination of variables is shown below. In which cells can you see the greatest deviations between observed and expected frequencies?</p>
-<div class="cell">
-<details class="code-fold">
-<summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Calculate row totals</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>row_totals <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(observed_freqs)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Calculate column totals</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>col_totals <span class="ot">&lt;-</span> <span class="fu">colSums</span>(observed_freqs)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Total number of observations</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>total_obs <span class="ot">&lt;-</span> <span class="fu">sum</span>(observed_freqs)</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="do">## Calculate expected frequencies</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>expected_freqs <span class="ot">&lt;-</span> <span class="fu">outer</span>(row_totals, col_totals) <span class="sc">/</span> total_obs</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(expected_freqs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>           caus      temp
-mc-sc 135.79404 139.20596
-sc-mc  63.20596  64.79404</code></pre>
-</div>
-</div>
-<p>The <span class="math inline">\(\chi^2\)</span>-test now offers a convenient way of quantifying the differences between the two tables above. It measures how much the observed frequencies <strong>deviate</strong> from the expected frequencies <strong>for each cell</strong> in a contingency table <span class="citation" data-cites="heumann_introduction_2022">(cf. <a href="references.html#ref-heumann_introduction_2022" role="doc-biblioref">Heumann, Schomaker, and Shalabh 2022</a>: 249-251)</span>. The gist of this procedure is summarised in <a href="#eq-chisq-simple" class="quarto-xref">Equation&nbsp;<span>20.4</span></a>.</p>
-<p><span id="eq-chisq-simple"><span class="math display">\[
-\text{Chi-squared } \chi^2 =\frac{(\text{observed} - \text{expected})^2}{\text{expected}}
-\tag{20.4}\]</span></span></p>
-<div class="callout callout-style-default callout-note callout-titled" title="Formal definition of the chi-squared test">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Formal definition of the chi-squared test
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Given <span class="math inline">\(n\)</span> observations and <span class="math inline">\(k\)</span> degrees of freedom <span class="math inline">\(df\)</span>, the joint squared deviations between <span class="math inline">\(f_{ij}\)</span> and <span class="math inline">\(e_{ij}\)</span> contribute to the final <span class="math inline">\(\chi^2\)</span>-score, which is defined as</p>
-<p><span id="eq-chisq"><span class="math display">\[
-\chi^2 = \sum_{i=1}^{I}\sum_{i=j}^{J}{\frac{(f_{ij} - e_{ij})^2}{e_{ij}}}
-\tag{20.5}\]</span></span></p>
-<p>for <span class="math inline">\(i = 1, ..., I\)</span> and <span class="math inline">\(j = 1, ..., J\)</span> and <span class="math inline">\(df = (\textrm{number of rows} -1) \times (\textrm{number of columns} - 1)\)</span>.</p>
-</div>
-</div>
-</div>
-<p>The implementation in R is a simple one-liner. Keep in mind that we have to supply <strong>absolute frequencies</strong> to <code>chisq.test()</code> rather than percentages.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>freqs_test <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(observed_freqs)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(freqs_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Pearson's Chi-squared test with Yates' continuity correction
-
-data:  observed_freqs
-X-squared = 104.24, df = 1, p-value &lt; 2.2e-16</code></pre>
-</div>
-</div>
-<p>Quite conveniently, the test object <code>freqs_test</code> stores the expected frequencies, which can be easily accessed via subsetting. Luckily, they are identical to what we calculated above!</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>freqs_test<span class="sc">$</span>expected</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>       
-             caus      temp
-  mc-sc 135.79404 139.20596
-  sc-mc  63.20596  64.79404</code></pre>
-</div>
-</div>
-<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Assumptions of the chi-squared test
+Linguistic example
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>This <span class="math inline">\(\chi^2\)</span>-test comes with certain <strong>statistical assumptions</strong>. Violations of these assumptions decrease the validity of the result and could, therefore, lead to wrong conclusions about relationships in the data. In this case, other tests should be consulted.</p>
+<p>Imagine studying gender bias in pronoun use. If <span class="math inline">\(P = 0.5\)</span> (i.e., the probability of obtaining the masculine pronoun), and you observe up to 3 uses of <em>he</em> out of 10 trials, the CMF calculates the probability of getting 0, 1, 2, or 3 successes (usage of <em>he</em>) combined.</p>
+</div>
+</div>
+</section>
+<section id="using-the-binomial-test-cmf-version-in-linguistic-research" class="level2" data-number="19.4">
+<h2 data-number="19.4" class="anchored" data-anchor-id="using-the-binomial-test-cmf-version-in-linguistic-research"><span class="header-section-number">19.4</span> Using the Binomial Test (CMF-Version) in Linguistic Research</h2>
+<p>The CMF is especially useful when testing hypotheses about ranges of outcomes.</p>
+<p>Steps for a Binomial Test Using the CMF:</p>
 <ol type="1">
-<li>All observations are independent of each other.</li>
-<li>80% of the expected frequencies are <span class="math inline">\(\geq\)</span> 5.</li>
-<li>All observed frequencies are <span class="math inline">\(\geq\)</span> 1.</li>
+<li>Hypotheses</li>
 </ol>
-<p>If assumptions 2 and 3 are violated, it is recommended to use a more robust test such as the Fisher’s Exact Test (see <code>?fisher.test()</code> for details) or the likelihood ratio test (<span class="math inline">\(G\)</span>-test).</p>
-<p>In case of dependent observations (e.g., multiple measurements per participant), the default approach is to fit a multilevel model that can control for grouping factors (see mixed-effects regression in <a href="Mixed_effects_regression.html#sec-mer" class="quarto-xref"><span>Section&nbsp;23.3</span></a>.)</p>
-</div>
-</div>
-<section id="how-do-i-make-sense-of-the-test-results" class="level3" data-number="20.3.1">
-<h3 data-number="20.3.1" class="anchored" data-anchor-id="how-do-i-make-sense-of-the-test-results"><span class="header-section-number">20.3.1</span> How do I make sense of the test results?</h3>
-<p>The test output has three ‘ingredients’:</p>
 <ul>
-<li>the <strong>chi-squared score</strong> (X-squared)</li>
-<li>the <strong>degrees of freedom</strong> (df)</li>
-<li>the <strong>p-value</strong>.</li>
+<li><p>Null hypothesis (<span class="math inline">\(H_0\)</span>): The observed data matches the expected cumulative probability. Therefore: The observed frequency of the pronouns <em>he</em> and <em>she</em> referring to professionals in leadership roles corresponds with the expected proportion of 50% each, indicating that both pronouns are being used equally.</p></li>
+<li><p>Alternative hypothesis (<span class="math inline">\(H_1\)</span>): The observed data deviates from the expected cumulative probability. Therefore: The observed frequency of the pronouns <em>he</em> and <em>she</em> referring to professionals in leadership roles deviates from the expected proportion of 50% each, indicating a gender bias.</p></li>
 </ul>
-<p>It is absolutely essential to report all three of those as they determine each other. Here a few possible wordings that could be used:</p>
-<blockquote class="blockquote">
-<p>According to a <span class="math inline">\(\chi^2\)</span>-test, there is a highly significant association between clause ORDER and SUBORDTYPE at <span class="math inline">\(p &lt; 0.001\)</span> (<span class="math inline">\(\chi^2 = 106.44, df = 1\)</span>), thus justifying the rejection of <span class="math inline">\(H_0\)</span>.</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>A <span class="math inline">\(\chi^2\)</span>-test revealed a highly significant association between clause ORDER and SUBORDTYPE (<span class="math inline">\(\chi^2(1) = 106.44\)</span>, <span class="math inline">\(p &lt; 0.001\)</span>), supporting the rejection of <span class="math inline">\(H_0\)</span>.</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>The <span class="math inline">\(\chi^2\)</span>-test results (<span class="math inline">\(\chi^2 = 106.44\)</span>, <span class="math inline">\(df = 1\)</span>, <span class="math inline">\(p &lt; 0.001\)</span>) provide strong evidence against the null hypothesis, demonstrating a significant association between clause ORDER and SUBORDTYPE.</p>
-</blockquote>
-<p>The test results suggest that the dependent variable <code>ORDER</code> and the explanatory variable <code>SUBORDTYPE</code> are not independent of each other. The probability of <strong>randomly</strong> observing usage patterns such as those found in the <code>cl.order</code> data is lower than 0.001 <span class="math inline">\(\approx\)</span> 0.1%, which is enough to reject the null hypothesis at <span class="math inline">\(\alpha = 0.05\)</span>.</p>
-<p>We can infer that a speaker’s choice of clause <code>ORDER</code> is very likely influenced by the semantic type of subordinate clause; in other words, these two variables are <strong>correlated</strong>. However, there are still several things the test does <strong>not</strong> tell us:</p>
+<ol start="2" type="1">
+<li>Performing the test in R by using the cumulative probabilities</li>
+</ol>
 <ul>
-<li><p>Are there certain variable combinations where the <span class="math inline">\(\chi^2\)</span>-scores are particularly high?</p></li>
-<li><p>How strongly do <code>ORDER</code> and <code>SUBORDTYPE</code> influence each other?</p></li>
-<li><p>Does a causal subordinate clause make the <code>mc-sc</code> clause order more likely?</p></li>
+<li>Example: To calculate the probability of observing up to 3 successes in 10 trials with P=0.5 each, the following code should be used:</li>
 </ul>
-</section>
-</section>
-<section id="pearson-residuals" class="level2" data-number="20.4">
-<h2 data-number="20.4" class="anchored" data-anchor-id="pearson-residuals"><span class="header-section-number">20.4</span> Pearson residuals</h2>
-<p>If we’re interested in what cells show the greatest difference between observed and expected frequencies, an option would be to inspect the Pearson residuals (cf. <a href="#eq-pear-res" class="quarto-xref">Equation&nbsp;<span>20.6</span></a>).</p>
-<p><span id="eq-pear-res"><span class="math display">\[ \text{residuals} = \frac{\text{observed} - \text{expected}}{\sqrt{\text{expected}}}
-\tag{20.6}\]</span></span></p>
-<p>These can be accessed via the test results stored <code>freqs_test</code>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>freqs_test<span class="sc">$</span>residuals</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>       
-             caus      temp
-  mc-sc  4.136760 -4.085750
-  sc-mc -6.063476  5.988708</code></pre>
-</div>
-</div>
-<p>The function <code>assocplot()</code> can automatically compute the pearson residuals for any given contingency table and create a plot that highlights their contributions. If the bar is above the dashed line, it is black and indicates that a category is observed more frequently than expected (e.g., causal subordinate clauses in the <code>mc-sc</code> order). Conversely, bars are coloured grey if a category is considerably less frequent than expected, such as <code>caus</code> in <code>sc-mc</code>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assocplot</span>(<span class="fu">t</span>(observed_freqs), <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"black"</span>, <span class="st">"lightgrey"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="data:image/png;base64,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CBAgQIAAAQIECBAgQEAAag8QIECAAAECBAgQIECAAAECBAgQIJCsgAA02dJaGAECBAgQIECAAAECBAgQIECAAAECAlB7gAABAgQIECBAgAABAgQIECBAgACBZAUEoMmW1sIIECBAgAABAgQIECBAgAABAgQIEBCA2gMECBAgQIAAAQIECBAgQIAAAQIECCQrIABNtrQWRoAAAQIECBAgQIAAAQIECBAgQICAANQeIECAAAECBAgQIECAAAECBAgQIEAgWQEBaLKltTACBAgQIECAAAECBAgQIECAAAECBASg9gABAgQIECBAgAABAgQIECBAgAABAskKCECTLa2FESBAgAABAgQIECBAgAABAgQIECAgALUHCBAgQIAAAQIECBAgQIAAAQIECBBIVkAAmmxpLYwAAQIECBAgQIAAAQIECBAgQIAAAQGoPUCAAAECBAgQIECAAAECBAgQIECAQLICAtBkS2thBAgQIECAAAECBAgQIECAAAECBAgIQO0BAgQIECBAgAABAgQIECBAgAABAgSSFRCAJltaCyNAgAABAgQIECBAgAABAgQIECBAQABqDxAgQIAAAQIECBAgQIAAAQIECBAgkKyAADTZ0loYAQIECBAgQIAAAQIECBAgQIAAAQICUHuAAAECBAgQIECAAAECBAgQIECAAIFkBQSgyZbWwggQIECAAAECBAgQIECAAAECBAgQEIDaAwQIECBAgAABAgQIECBAgAABAgQIJCsgAE22tBZGgAABAgQIECBAgAABAgQIECBAgIAA1B4gQIAAAQIECBAgQIAAAQIECBAgQCBZAQFosqW1MAIECBAgQIAAAQIECBAgQIAAAQIEBKD2AAECBAgQIECAAAECBAgQIECAAAECyQoIQJMtrYURIECAAAECBAgQIECAAAECBAgQICAAtQcIECBAgAABAgQIECBAgAABAgQIEEhWQACabGktjAABAgQIECBAgAABAgQIECBAgAABAag9QIAAAQIECBAgQIAAAQIECBAgQIBAsgIC0GRLa2EECBAgQIAAAQIECBAgQIAAAQIECAhA7QECBAgQIECAAAECBAgQIECAAAECBJIVEIAmW1oLI0CAAAECBAgQIECAAAECBAgQIEBAAGoPECBAgAABAgQIECBAgAABAgQIECCQrIAANNnSWhgBAgQIECBAgAABAgQIECBAgAABAgJQe4AAAQIECBAgQIAAAQIECBAgQIAAgWQFBKDJltbCCBAgQIAAAQIECBAgQIAAAQIECBAQgNoDBAgQIECAAAECBAgQIECAAAECBAgkKyAATba0FkaAAAECBAgQIECAAAECBAgQIECAgADUHiBAgAABAgQIECBAgAABAgQIECBAIFkBAWiypbUwAgQIECBAgAABAgQIECBAgAABAgQEoPYAAQIECBAgQIAAAQIECBAgQIAAAQLJCghAky2thREgQIAAAQIECBAgQIAAAQIECBAgIAC1BwgQIECAAAECBAgQIECAAAECBAgQSFZAAJpsaS2MAAECBAgQIECAAAECBAgQIECAAAEBqD1AgAABAgQIECBAgAABAgQIECBAgECyAgLQZEtrYQQIECBAgAABAgQIECBAgAABAgQICEDtAQIECBAgQIAAAQIECBAgQIAAAQIEkhUQgCZbWgsjQIAAAQIECBAgQIAAAQIECBAgQEAAag8QIECAAAECBAgQIECAAAECBAgQIJCsgAA02dJaGAECBAgQIECAAAECBAgQIECAAAECAlB7gAABAgQIECBAgAABAgQIECBAgACBZAUEoMmW1sIIECBAgAABAgQIECBAgAABAgQIEBCA2gMECBAgQIAAAQIECBAgQIAAAQIECCQrIABNtrQWRoAAAQIECBAgQIAAAQIECBAgQICAANQeIECAAAECBAgQIECAAAECBAgQIEAgWQEBaLKltTACBAgQIECAAAECBAgQIECAAAECBASg9gABAgQIECBAgAABAgQIECBAgAABAskKCECTLa2FESBAgAABAgQIECBAgAABAgQIECAgALUHCBAgQIAAAQIECBAgQIAAAQIECBBIVkAAmmxpLYwAAQIECBAgQIAAAQIECBAgQIAAAQGoPUCAAAECBAgQIECAAAECBAgQIECAQLICAtBkS2thBAgQIECAAAECBAgQIECAAAECBAgIQO0BAgQIECBAgAABAgQIECBAgAABAgSSFRCAJltaCyNAgAABAgQIECBAgAABAgQIECBAQABqDxAgQIAAAQIECBAgQIAAAQIECBAgkKyAADTZ0loYAQIECBAgQIAAAQIECBAgQIAAAQICUHuAAAECBAgQIECAAAECBAgQIECAAIFkBQSgyZbWwggQIECAAAECBAgQIECAAAECBAgQEIDaAwQIECBAgAABAgQIECBAgAABAgQIJCsgAE22tBZGgAABAgQIECBAgAABAgQIECBAgIAA1B4gQIAAAQIECBAgQIAAAQIECBAgQCBZAQFosqW1MAIECBAgQIAAAQIECBAgQIAAAQIEBKD2AAECBAgQIECAAAECBAgQIECAAAECyQoIQJMtrYURIECAAAECBAgQIECAAAECBAgQICAAtQcIECBAgAABAgQIECBAgAABAgQIEEhWQACabGktjAABAgQIECBAgAABAgQIECBAgAABAag9QIAAAQIECBAgQIAAAQIECBAgQIBAsgIC0GRLa2EECBAgQIAAAQIECBAgQIAAAQIECAhA7QECBAgQIECAAAECBAgQIECAAAECBJIVEIAmW1oLI0CAAAECBAgQIECAAAECBAgQIEBAAGoPECBAgAABAgQIECBAgAABAgQIECCQrIAANNnSWhgBAgQIECBAgAABAgQIECBAgAABAgJQe4AAAQIECBAgQIAAAQIECBAgQIAAgWQFBKDJltbCCBAgQIAAAQIECBAgQIAAAQIECBAQgNoDBAgQIECAAAECBAgQIECAAAECBAgkKyAATba0FkaAAAECBAgQIECAAAECBAgQIECAgADUHiBAgAABAgQIECBAgAABAgQIECBAIFkBAWiypbUwAgQIECBAgAABAgQIECBAgAABAgQEoPYAAQIECBAgQIAAAQIECBAgQIAAAQLJCghAky2thREgQIAAAQIECBAgQIAAAQIECBAgIAC1BwgQIECAAAECBAgQIECAAAECBAgQSFZAAJpsaS2MAAECBAgQIECAAAECBAgQIECAAAEBqD1AgAABAgQIECBAgAABAgQIECBAgECyAgLQZEtrYQQIECBAgAABAgQIECBAgAABAgQICEDtAQIECBAgQIAAAQIECBAgQIAAAQIEkhUQgCZbWgsjQIAAAQIECBAgQIAAAQIECBAgQEAAag8QIECAAAECBAgQIECAAAECBAgQIJCsgAA02dJaGAECBAgQIECAAAECBAgQIECAAAECAlB7gAABAgQIECBAgAABAgQIECBAgACBZAUEoMmW1sIIECBAgAABAgQIECBAgAABAgQIEBCA2gMECBAgQIAAAQIECBAgQIAAAQIECCQrIABNtrQWRoAAAQIECBAgQIAAAQIECBAgQICAANQeIECAAAECBAgQIECAAAECBAgQIEAgWQEBaLKltTACBAgQIECAAAECBAgQIECAAAECBASg9gABAgQIECBAgAABAgQIECBAgAABAskKCECTLa2FESBAgAABAgQIECBAgAABAgQIECAgALUHCBAgQIAAAQIECBAgQIAAAQIECBBIVkAAmmxpLYwAAQIECBAgQIAAAQIECBAgQIAAAQGoPUCAAAECBAgQIECAAAECBAgQIECAQLICAtBkS2thBAgQIECAAAECBAgQIECAAAECBAgIQO0BAgQIECBAgAABAgQIECBAgAABAgSSFRCAJltaCyNAgAABAgQIECBAgAABAgQIECBAQABqDxAgQIAAAQIECBAgQIAAAQIECBAgkKyAADTZ0loYAQIECBAgQIAAAQIECBAgQIAAAQICUHuAAAECBAgQIECAAAECBAgQIECAAIFkBQSgyZbWwggQIECAAAECBAgQIECAAAECBAgQEIDaAwQIECBAgAABAgQIECBAgAABAgQIJCsgAE22tBZGgAABAgQIECBAgAABAgQIECBAgIAA1B4gQIAAAQIECBAgQIAAAQIECBAgQCBZAQFosqW1MAIECBAgQIAAAQIECBAgQIAAAQIEBKD2AAECBAgQIECAAAECBAgQIECAAAECyQoIQJMtrYURIECAAAECBAgQIECAAAECBAgQICAAtQcIECBAgAABAgQIECBAgAABAgQIEEhWQACabGktjAABAgQIECBAgAABAgQIECBAgAABAag9QIAAAQIECBAgQIAAAQIECBAgQIBAsgIC0GRLa2EECBAgQIAAAQIECBAgQIAAAQIECAhA7QECBAgQIECAAAECBAgQIECAAAECBJIVEIAmW1oLI0CAAAECBAgQIECAAAECBAgQIEBAAGoPECBAgAABAgQIECBAgAABAgQIECCQrIAANNnSWhgBAgQIECBAgAABAgQIECBAgAABAgJQe4AAAQIECBAgQIAAAQIECBAgQIAAgWQFBKDJltbCCBAgQIAAAQIECBAgQIAAAQIECBAQgNoDBAgQIECAAAECBAgQIECAAAECBAgkKyAATba0FkaAAAECBAgQIECAAAECBAgQIECAgADUHiBAgAABAgQIECBAgAABAgQIECBAIFkBAWiypbUwAgQIECBAgAABAgQIECBAgAABAgQEoPYAAQIECBAgQIAAAQIECBAgQIAAAQLJCghAky2thREgQIAAAQIECBAgQIAAAQIECBAgIAC1BwgQIECAAAECBAgQIECAAAECBAgQSFZAAJpsaS2MAAECBAgQIECAAAECBAgQIECAAAEBqD1AgAABAgQIECBAgAABAgQIECBAgECyAgLQZEtrYQQIECBAgAABAgQIECBAgAABAgQICEDtAQIECBAgQIAAAQIECBAgQIAAAQIEkhUQgCZbWgsjQIAAAQIECBAgQIAAAQIECBAgQEAAag8QIECAAAECBAgQIECAAAECBAgQIJCsgAA02dJaGAECBAgQIECAAAECBAgQIECAAAECAlB7gAABAgQIECBAgAABAgQIECBAgACBZAUEoMmW1sIIECBAgAABAgQIECBAgAABAgQIEBCA2gMECBAgQIAAAQIECBAgQIAAAQIECCQrIABNtrQWRoAAAQIECBAgQIAAAQIECBAgQICAANQeIECAAAECBAgQIECAAAECBAgQIEAgWQEBaLKltTACBAgQIECAAAECBAgQIECAAAECBASg9gABAgQIECBAgAABAgQIECBAgAABAskKCECTLa2FESBAgAABAgQIECBAgAABAgQIECAgALUHCBAgQIAAAQIECBAgQIAAAQIECBBIVkAAmmxpLYwAAQIECBAgQIAAAQIECBAgQIAAAQGoPUCAAAECBAgQIECAAAECBAgQIECAQLICAtBkS2thBAgQIECAAAECBAgQIECAAAECBAgIQO0BAgQIECBAgAABAgQIECBAgAABAgSSFRCAJltaCyNAgAABAgQIECBAgAABAgQIECBAQABqDxAgQIAAAQIECBAgQIAAAQIECBAgkKyAADTZ0loYAQIECBAgQIAAAQIECBAgQIAAAQICUHuAAAECBAgQIECAAAECBAgQIECAAIFkBQSgyZbWwggQIECAAAECBAgQIECAAAECBAgQEIDaAwQIECBAgAABAgQIECBAgAABAgQIJCsgAE22tBZGgAABAgQIECBAgAABAgQIECBAgIAA1B4gQIAAAQIECBAgQIAAAQIECBAgQCBZAQFosqW1MAIECBAgQIAAAQIECBAgQIAAAQIEBKD2AAECBAgQIECAAAECBAgQIECAAAECyQoIQJMtrYURIECAAAECBAgQIECAAAECBAgQICAAtQcIECBAgAABAgQIECBAgAABAgQIEEhWQACabGktjAABAgQIECBAgAABAgQIECBAgAABAag9QIAAAQIECBAgQIAAAQIECBAgQIBAsgIC0GRLa2EECBAgQIAAAQIECBAgQIAAAQIECAhA7QECBAgQIECAAAECBAgQIECAAAECBJIVEIAmW1oLI0CAAAECBAgQIECAAAECBAgQIEBAAGoPECBAgAABAgQIECBAgAABAgQIECCQrIAANNnSWhgBAgQIECBAgAABAgQIECBAgAABAgJQe4AAAQIECBAgQIAAAQIECBAgQIAAgWQFBKDJltbCCBAgQIAAAQIECBAgQIAAAQIECBAQgNoDBAgQIECAAAECBAgQIECAAAECBAgkKyAATba0FkaAAAECBAgQIECAAAECBAgQIECAgADUHiBAgAABAgQIECBAgAABAgQIECBAIFkBAWiypbUwAgQIECBAgAABAgQIECBAgAABAgQEoPYAAQIECBAgQIAAAQIECBAgQIAAAQLJCghAky2thREgQIAAAQIECBAgQIAAAQIECBAgIAC1BwgQIECAAAECBAgQIECAAAECBAgQSFZAAJpsaS2MAAECBAgQIECAAAECBAgQIECAAAEBqD1AgAABAgQIECBAgAABAgQIECBAgECyAgLQZEtrYQQIECBAgAABAgQIECBAgAABAgQICEDtAQIECBAgQIAAAQIECBAgQIAAAQIEkhXoTnZlFkaAwKAC27Zti9tuuy0OHjw4aFsNCBAgQKCzBObNmxfXXXddZy3aagkQIECAAAECBJIU6Dp2/EhyZRZFgMCgAkuWLIm//du/HbSdBgQIECDQeQIf/vCH45VXXum8hVsxAQIECBAgQIBAcgLeAp9cSS2IQHGBo0ePFm+sJQECBAh0lMCRI0c6ar0WS4AAAQIECBAgkK6AADTd2loZAQIECBAgQIAAAQIECBAgQIAAgY4XEIB2/BYAQIAAAQIECBAgQIAAAQIECBAgQCBdAQFourW1MgIECBAgQIAAAQIECBAgQIAAAQIdLyAA7fgtAIAAAQIECBAgQIAAAQIECBAgQIBAugIC0HRra2UECBAgQIAAAQIECBAgQIAAAQIEOl5AANrxWwAAAQIECBAgQIAAAQIECBAgQIAAgXQFBKDp1tbKCBAgQIAAAQIECBAgQIAAAQIECHS8gAC047cAAAIECBAgQIAAAQIECBAgQIAAAQLpCghA062tlREgQIAAAQIECBAgQIAAAQIECBDoeAEBaMdvAQAECBAgQIAAAQIECBAgQIAAAQIE0hUQgKZbWysjQIAAAQIECBAgQIAAAQIECBAg0PECAtCO3wIACBAgQIAAAQIECBAgQIAAAQIECKQrIABNt7ZWRoAAAQIECBAgQIAAAQIECBAgQKDjBQSgHb8FABAgQIAAAQIECBAgQIAAAQIECBBIV0AAmm5trYwAAQIECBAgQIAAAQIECBAgQIBAxwsIQDt+CwAgQIAAAQIECBAgQIAAAQIECBAgkK6AADTd2loZAQIECBAgQIAAAQIECBAgQIAAgY4XEIB2/BYAQIAAAQIECBAgQIAAAQIECBAgQCBdAQFourW1MgIECBAgQIAAAQIECBAgQIAAAQIdLyAA7fgtAIAAAQIECBAgQIAAAQIECBAgQIBAugIC0HRra2UECBAgQIAAAQIECBAgQIAAAQIEOl5AANrxWwAAAQIECBAgQIAAAQIECBAgQIAAgXQFBKDp1tbKCBAgQIAAAQIECBAgQIAAAQIECHS8gAC047cAAAIECBAgQIAAAQIECBAgQIAAAQLpCghA062tlREgQIAAAQIECBAgQIAAAQIECBDoeAEBaMdvAQAECBAgQIAAAQIECBAgQIAAAQIE0hUQgKZbWysjQIAAAQIECBAgQIAAAQIECBAg0PECAtCO3wIACBAgQIAAAQIECBAgQIAAAQIECKQrIABNt7ZWRoAAAQIECBAgQIAAAQIECBAgQKDjBQSgHb8FABAgQIAAAQIECBAgQIAAAQIECBBIV0AAmm5trYwAAQIECBAgQIAAAQIECBAgQIBAxwsIQDt+CwAgQIAAAQIECBAgQIAAAQIECBAgkK6AADTd2loZAQIECBAgQIAAAQIECBAgQIAAgY4XEIB2/BYAQIAAAQIECBAgQIAAAQIECBAgQCBdAQFourW1MgIECBAgQIAAAQIECBAgQIAAAQIdLyAA7fgtAIAAAQIECBAgQIAAAQIECBAgQIBAugIC0HRra2UECBAgQIAAAQIECBAgQIAAAQIEOl5AANrxWwAAAQIECBAgQIAAAQIECBAgQIAAgXQFBKDp1tbKCBAgQIAAAQIECBAgQIAAAQIECHS8gAC047cAAAIECBAgQIAAAQIECBAgQIAAAQLpCghA062tlREgQIAAAQIECBAgQIAAAQIECBDoeAEBaMdvAQAECBAgQIAAAQIECBAgQIAAAQIE0hUQgKZbWysjQIAAAQIECBAgQIAAAQIECBAg0PECAtCO3wIACBAgQIAAAQIECBAgQIAAAQIECKQrIACtSG23bt0ar7/+et3Z3HHHHbFy5cro7e2te91JAgQIECBAgAABAgQIECBAgAABAgTqCwhA67sM29mNGzfG9OnTY+rUqfHAAw/UHffuu++O+fPnx/nnnx89PT112zhJgAABAgQIECBAgAABAgQIECBAgECtgAC01mTYzqxatSouv/zy2LRpUz7mtm3basY+fPhw7Ny5Mz+/d+/eWLRoUSxevLimnRMECBAgQIAAAQIECBAgQIAAAQIECNQKCEBrTYblzJ49e+L666+Pffv25eNlQeiVV15ZM/bIkSPjySefjFtuuSXOOuus/Ppdd90Vjz32WE1bJwgQIECAAAECBAgQIECAAAECBAgQ6C8gAO3vMWz3li1bFrt3787Hu/POO2Pt2rVx1VVX1Yzf1dUVM2bMiNtvvz02b94cEydOzNvcdNNNNW2dIECAAAECBAgQIECAAAECBAgQIECgv4AAtL/HsN1bv359Ptbs2bMLv6V98uTJkX0gUna88MILsWvXrvy2/xAgQIAAAQIECBAgQIAAAQIECBAgUF9AAFrfpeVnX3rppXyMem97bzT4nDlz+i6/+OKLfbfdIECAAAECBAgQIECAAAECBAgQIECgVkAAWmsyLGfefffdfJzsd3yeyjFmzJgYNWpU/pDs94g6CBAgQIAAAQIECBAgQIAAAQIECBAYWEAAOrBNS69MmjQp7/+ZZ545pXG2bNkShw4dyh9z8cUXn9JjNSZAgAABAgQIECBAgAABAgQIECDQaQIC0JIqPn369Hzk+++/P3bs2FF4FsuXL8/bZp8In/1OUAcBAgQIECBAgAABAgQIECBAgAABAgMLCEAHtmnplRtuuCHvP3sr/IIFC2Lr1q0Nxzt48GAsXbo0enp68nZXX311ZJ8Q7yBAgAABAgQIECBAgAABAgQIECBAYGCB7oEvudJKgRkzZsT8+fMjewXo888/H9OmTYuFCxfGzJkzI3t7/IUXXhjvvPNO7Ny5M3+F6L333pvfzuY0YcKEWLFiRSunp28CBAgQIECAAAECBAgQIECAAAECSQgIQEss43e+85145ZVX4rnnnoujR4/Gfffdl381mlL21vfsVaDnnntuo2auESBAgAABAgQIECBAgAABAgQIECBwXMBb4EvcBuPGjYunn346br311sg+3b3Rkb3dfdGiRbF9+/aYNWtWo6auESBAgAABAgQIECBAgAABAgQIECDw/wJeAVryVjjjjDPitttuiy996UuxevXqWLduXezatSveeuutGD9+fEyZMiX/uvTSS2Pq1Kklz9bwBAgQIECAAAECBAgQIECAAAECBNpLQABakXqNHj065s6dm39VZEqmQYAAAQIECBAgQIAAAQIECBAgQKDtBbwFvu1LaAEECBAgQIAAAQIECBAgQIAAAQIECAwk4BWgA8kM8/kDBw7EmWee2W/U3t7eeOyxx+LRRx+NN954Iz7+8Y/H5z//+fxT4Ps1dIcAAQIECBAgQIAAAQIECBAgQIAAgboCAtC6LMN3ctWqVfFP//RP8fbbb8cTTzzRN/CRI0fiD/7gD2LNmjV95x566KFYvnx5/OhHP4pLLrmk77wbBAgQIECAAAECBAgQIECAAAECBAjUFxCA1ncZlrP33Xdf/PEf/3E+1vnnn99vzL/+67/uF36euPjee+/FZz7zmdi4cWP+IUknzvuTAAECBAgQIECAAAECBAgQIECAAIFaAb8DtNZkWM5kb2m/8cYb+8bKPgTp8OHD+f09e/bEihUr8ttdXV3xta99LZ577rlYunRpdHd3x6uvvhp//ud/3vdYNwgQIECAAAECBAgQIECAAAECBAgQqC/gFaD1XVp+tqenJ3/bezbQ3//938df/uVf5uFmdj97W/z+/fuzmzFv3rz44he/mN/+nd/5nfz8V7/61Vi7dm1+zn8IECBAgAABAgQIECBAgAABAgQIEBhYwCtAB7Zp6ZUXXngh7/9jH/tY/NVf/VVkrwA9cTz88MMnbsbChQv7bmc3/vRP/zS//7Of/Sx27drV75o7BAgQIECAAAECBAgQIECAAAECBAj0FxCA9vcYtnsnAtA5c+b0GzP78KP//M//zM+NGDEiZs+e3e/6hRdeGKNGjcrPPfvss/2uuUOAAAECBAgQIECAAAECBAgQIECAQH8BAWh/j2G799///d/5WL/927/db8wNGzbE7t2783Of+MQn4txzz+13PQtIs6/sOPE7Q/s1cIcAAQIECBAgQIAAAQIECBAgQIAAgT4BAWgfxfDemDhxYj7g//zP//Qb+NFHH+27/+lPf7rv9okbO3bsiKNHj+Z3J02adOK0PwkQIECAAAECBAgQIECAAAECBAgQqCMgAK2DMhynpkyZkg/zH//xH33DHTx4ML7//e/33b/qqqv6bp+4cdddd+U3s0+H/9CHPnTitD8JECBAgAABAgQIECBAgAABAgQIEKgjIACtgzIcp6699tp8mB/96Ef5J8A/8cQTcd1118X27dvz8x/5yEfid3/3d/umsmfPnvzDkr71rW/l566++ur44Ac/2HfdDQIECBAgQIAAAQIECBAgQIAAAQIEagW6a085MxwCCxYsiGnTpsV//dd/xTe+8Y3868S4I0eOjDvvvPPE3fxDkebOnRuHDh3Kz2UfjvTlL3+577obBAgQIECAAAECBAgQIECAAAECBAjUF/AK0PouLT+bhZxr166Nyy67rN9Y2Vvbs0D05Le/n3feeX3h51lnnRX//u//HtOnT+/3OHcIECBAgAABAgQIECBAgAABAgQIEKgV8ArQWpNhO/Prv/7rsW7duvjJT34S69evjwkTJsTs2bMjCzxPPrK3w2e/MzR71egNN9yQ3z75utsECBAgQIAAAQIECBAgQIAAAQIECNQXEIDWdxm2s93d3TFjxoz8a6BBx4wZE9mnvzsIECBAgAABAgQIECBAgAABAgQIEDg1AW+BPzUvrQkQIECAAAECBAgQIECAAAECBAgQaCMBrwCtYLG+/vWvx6ZNm/KZZb8P9P1via/glE2JAAECBAgQIECAAAECBAgQIECAQCUFvAK0gmXJfh/ov/zLv+Rfe/fureAMTYkAAQIECBAgQIAAAQIECBAgQIBAewgIQNujTmZJgAABAgQIECBAgAABAgQIECBAgMAQBASgQ0DzEAIECBAgQIAAAQIECBAgQIAAAQIE2kNAANoedTJLAgQIECBAgAABAgQIECBAgAABAgSGICAAHQKahxAgQIAAAQIECBAgQIAAAQIECBAg0B4CAtD2qJNZEiBAgAABAgQIECBAgAABAgQIECAwBAEB6BDQPIQAAQIECBAgQIAAAQIECBAgQIAAgfYQ6G6PaXbWLEeMGBHd3f9Xmq6uruQW/9hjj8WTTz5ZaF0f+chH4o/+6I8atj127Fjcc8898bOf/axhuxMXP/CBD8SNN94Y48aNO3Gq7p9PPPFErFmzpu6195/M6vSZz3wmPv7xj7//Ur/72Ry/9a1vxaFDh/qdH+hOmesfaE7OEyBAgEBnCLz99ttx6623Nlxsis9/KT//X3TRRbF58+aGNX3ttdci+yp6fPSjH43f+I3faNj8vffei02bNsXRo0cbtjtxcfz48XHxxRefuFv3z+znv2eeeSayvosc2c/Wn/jEJ+LMM89s2Nz61d/+f63h35GTL7bL3/9Ro0bFpZde2rF//4e6/tGjR+ffN0eOHHly2fPb7fT8P2bMmPj85z+fzP//1xTDieICx394cBAYVoGbb7752PEdWvhrz549Dee3ZcuWwn2dGPfb3/52wz6zi1OnTj2lfufMmTNon7fccssp9ZnNt5Xrv/322095PicM/Vl8D7NiZQ/YAynvgXZ8/mv0hJ3y8//xfwT2vH8KP4Om/PfW2jwv2QP2wOnuAc//5fz/f6OfYVxrLOAVoMf/1lfh2Lp1a2SvTPzQhz5UM5077rgjfuu3fis+/elPR/avF+1+zJ07N84555xCy8heATnYKzWnTZsW//iP/xi7du0q1Gdm+Id/+IeDts36fPzxx+P4X6FB22av2p03b96g7bJ/ecrqfPDgwUHbZg1avf7slbDZKyEOHDhQM5/XX389Xn311Zrz9U5k/wKYzbXIK0CeffbZOHLkSL1uas4VeQVI9qCf/OQnhV8BUvRfQK1f/e1/f/9rvinVOZHq97/sFVAf/vCHY9KkSXVW/atT7fr896sV1N5K+fn/y1/+cr7g66+/Puq9oie7mL1b5ac//WktzABnsp9ds+frRkdvb29s37698CtAzz777Pxn30Z9ZtdefPHF2Ldv32DN8uvZK0CPh9uR/RzQ6LB+9bf//f1v9D3i5Gspf/97+eWXI3snyLXXXhsf+9jHTl52ftvzf3n//19TDCcKC3Rl+Wjh1ho2XWDjxo3xZ3/2Z/nbglasWBF/8Rd/UTPGb/7mb0YWxowdOzb+4R/+Ia677rqaNk4QIECAAAECBAgQaCSQ/SPs/v37Y926dYO+FbRRP64RIECAQNoCX/ziF2Pt2rXxgx/8IObPn5/2Yq2uYwR8CFKJpV61alVcfvnlefiZTWPbtm01szl8+HDs3LkzP793795YtGhRLF68uKadEwQIECBAgAABAgQIECBAgAABAgQI1AoIQGtNhuXM8d/rGNnbj068bScLQq+88sqasbO3J2UfGHT8d0fGWWedlV+/6667IvsgIQcBAgQIECBAgAABAgQIECBAgAABAo0FBKCNfVp2ddmyZbF79+68/zvvvDN/eflVV11VM172u8VmzJgRxz+sJv/UzokTJ+Ztbrrpppq2ThAgQIAAAQIECBAgQIAAAQIECBAg0F9AANrfY9jurV+/Ph9r9uzZhd/SPnny5Mg+ECk7XnjhhcIf+pM/wH8IECBAgAABAgQIECBAgAABAgQIdKCAALSkor/00kv5yPXe9t5oSnPmzOm7nH3ypYMAAQIECBAgQIAAAQIECBAgQIAAgYEFBKAD27T0yrvvvpv3n/2Oz1M5xowZE6NGjcofkv0eUQcBAgQIECBAgAABAgQIECBAgAABAgMLCEAHtmnplUmTJuX9P/PMM6c0zpYtW+LQoUP5Yy6++OJTeqzGBAgQIECAAAECBAgQIECAAAECBDpNQABaUsWnT5+ej3z//ffHjh07Cs9i+fLledvsE+Gz3wnqIECAAAECBAgQIECAAAECBAgQIEBgYAEB6MA2Lb1yww035P1nb4VfsGBBbN26teF4Bw8ejKVLl0ZPT0/e7uqrr47sE+IdBAgQIECAAAECBAgQIECAAAECBAgMLNA98CVXWikwY8aMmD9/fmSvAH3++edj2rRpsXDhwpg5c2Zkb4+/8MIL45133omdO3fmrxC9995789vZnCZMmBArVqxo5fT0TYAAAQIECBAgQIAAAQIECBAgQCAJAQFoiWX8zne+E6+88ko899xzcfTo0bjvvvvyr0ZTyt76nr0K9Nxzz23UzDUCBAgQIECAAAECBAgQIECAAAECBI4LeAt8idtg3Lhx8fTTT8ett94a2ae7Nzqyt7svWrQotm/fHrNmzWrU1DUCBAgQIECAAAECBAgQIECAAAECBP5fwCtAS94KZ5xxRtx2223xpS99KVavXh3r1q2LXbt2xVtvvRXjx4+PKVOm5F+XXnppTJ06teTZGp4AAQIECBAgQIAAAQIECBAgQIBAewkIQCtSr9GjR8fcuXPzr4pMyTQIECBAgAABAgQIECBAgAABAgQItL2At8C3fQktgAABAgQIECBAgAABAgQIECBAgACBgQQEoAPJOE+AAAECBAgQIECAAAECBAgQIECAQNsLeAt8ySU8cOBA/PCHP4yXX345XnvttcjuFz3uueeeok21I0CAAAECBAgQIECAAAECBAgQINCRAgLQEsv+yCOPxI033hivvvrqkGYhAB0SmwcRIECAAAECBAgQIECAAAECBAh0kIAAtKRiZ6HnggULore3t6QZGJYAAQIECBAgQIAAAQIECBAgQIBA+gIC0JJq/JWvfKUv/Jw4cWIsWbIkLrroohg7dmx0dXWVNCvDEiBAgAABAgQIECBAgAABAgQIEEhLQABaUj03b96cj3zeeefFhg0b4oILLihpJoYlQIAAAQIECBAgQIAAAQIECBAgkK6AT4EvqbZvvPFGPvIVV1wh/CypBoYlQIAAAQIECBAgQIAAAQIECBBIX0AAWlKNp0+fno+cvf3dQYAAAQIECBAgQIAAAQIECBAgQIBAawQEoK1xHbTXT37yk3mbZ599dtC2GhAgQIAAAQIECBAgQIAAAQIECBAgMDQBAejQ3E77Uddcc02cffbZsXr16lizZs1p96cDAgQIECBAgAABAgQIECBAgAABAgRqBQSgtSbDcmbKlCnxyCOP5J/6noWhy5Yti3379g3L2AYhQIAAAQIECBAgQIAAAQIECBAg0CkCPgW+xEpfdtll8c1vfjM++9nPxs033xyLFy+OCRMm5F8jRgyeTT/11FMlzt7QBAgQIECAAAECBAgQIECAAAECBKovIAAtsUbr1q3Lg88TUzh27Fi8+eab+deJc/4kQIAAAQIECBAgQIAAAQIECBAgQGDoAgLQodud1iM3bNgQn/rUp+Lw4cOn1Y8HEyBAgAABAgQIECBAgAABAgQIECAwsIAAdGCbll55+OGH+8LP2bNnxxe+8IWYOnVqjB8/vqXj6pwAAQIECBAgQIAAAQIECBAgQIBAJwkIQEuq9uOPP56PfMkll8SDDz4Yo0aNKmkmhiVAgAABAgQIECBAgAABAgQIECCQrsDgn7ST7tpLXdmOHTvy8WfNmiX8LLUSBidAgAABAgQIECBAgAABAgQIEEhZQABaUnWzT4DPjl/+8pclzcCwBAgQIECAAAECBAgQIECAAAECBNIXEICWVOOZM2fmIz/66KORffq7gwABAgQIECBAgAABAgQIECBAgACB5gsIQJtvWqjHa665Ji644ILYtWtXLFmyJI4ePVrocRoRIECAAAECBAgQIECAAAECBAgQIFBcQABa3KqpLSdMmBCrV6/OP/V96dKlMW/evFi/fn309vY2dRydESBAgAABAgQIECBAgAABAgQIEOhkAZ8CX1L1v/vd78aaNWti8uTJ8Ytf/CIeeuih/Cubzplnnhljx46Nrq6uhrP7+c9/3vC6iwQIECBAgAABAgQIECBAgAABAgQ6XUAAWtIO+PGPfxw9PT11Rz9w4EBkXw4CBAgQIECAAAECBAgQIECAAAECBE5PQAB6en5DfvQ555wTEydOHPLjPZAAAQIECBAgQIAAAQIECBAgQIAAgcEFBKCDG7Wkxd/93d9F9uUgQIAAAQIECBAgQIAAAQIECBAgQKB1Aj4EqXW2eiZAgAABAgQIECBAgAABAgQIECBAoGQBAWjJBTA8AQIECBAgQIAAAQIECBAgQIAAAQKtExCAts5WzwQIECBAgAABAgQIECBAgAABAgQIlCwgAC25AIYnQIAAAQIECBAgQIAAAQIECBAgQKB1AgLQ1tnqmQABAgQIECBAgAABAgQIECBAgACBkgUEoCUXwPAECBAgQIAAAQIECBAgQIAAAQIECLROQADaOls9EyBAgAABAgQIECBAgAABAgQIECBQsoAAtOQCGJ4AAQIECBAgQIAAAQIECBAgQIAAgdYJCEBbZ6tnAgQIECBAgAABAgQIECBAgAABAgRKFhCAllwAwxMgQIAAAQIECBAgQIAAAQIECBAg0DoBAWjrbPVMgAABAgQIECBAgAABAgQIECBAgEDJAgLQkgtgeAIECBAgQIAAAQIECBAgQIAAAQIEWicgAG2drZ4JECBAgAABAgQIECBAgAABAgQIEChZQABacgEMT4AAAQIECBAgQIAAAQIECBAgQIBA6wQEoK2z1TMBAgQIECBAgAABAgQIECBAgAABAiULCEBLLoDhCRAgQIAAAQIECBAgQIAAAQIECBBonYAAtHW2eiZAgAABAgQIECBAgAABAgQIECBAoGQBAWjJBTA8AQIECBAgQIAAAQIECBAgQIAAAQKtExCAts5WzwQIECBAgAABAgQIECBAgAABAgQIlCwgAC25AIYnQIAAAQIECBAgQIAAAQIECBAgQKB1AgLQ1tnqmQABAgQIECBAgAABAgQIECBAgACBkgUEoCUXwPAECBAgQIAAAQIECBAgQIAAAQIECLROQADaOls9EyBAgAABAgQIECBAgAABAgQIECBQsoAAtOQCGJ4AAQIECBAgQIAAAQIECBAgQIAAgdYJCEBbZ6tnAgQIECBAgAABAgQIECBAgAABAgRKFhCAllwAwxMgQIAAAQIECBAgQIAAAQIECBAg0DoBAWjrbPVMgAABAgQIECBAgAABAgQIECBAgEDJAgLQkgtgeAIECBAgQIAAAQIECBAgQIAAAQIEWicgAG2drZ4JECBAgAABAgQIECBAgAABAgQIEChZQABacgEMT4AAAQIECBAgQIAAAQIECBAgQIBA6wQEoK2z1TMBAgQIECBAgAABAgQIECBAgAABAiULCEBLLoDhCRAgQIAAAQIECBAgQIAAAQIECBBonYAAtHW2eiZAgAABAgQIECBAgAABAgQIECBAoGQBAWjJBTA8AQIECBAgQIAAAQIECBAgQIAAAQKtExCAts5WzwQIECBAgAABAgQIECBAgAABAgQIlCwgAC25AIYnQIAAAQIECBAgQIAAAQIECBAgQKB1AgLQ1tnqmQABAgQIECBAgAABAgQIECBAgACBkgUEoCUXwPAECBAgQIAAAQIECBAgQIAAAQIECLROQADaOls9EyBAgAABAgQIECBAgAABAgQIECBQsoAAtOQCGJ4AAQIECBAgQIAAAQIECBAgQIAAgdYJCEBbZ6tnAgQIECBAgAABAgQIECBAgAABAgRKFhCAllwAwxMgQIAAAQIECBAgQIAAAQIECBAg0DoBAWjrbPVMgAABAgQIECBAgAABAgQIECBAgEDJAt0lj294AgQIECBAgAABAgSGUeAHP/hBdHf734BhJDcUAQIE2krgzTffbKv5miyBIgJ+8imipA0BAgQIECBAgACBNhcYNWpU7N+/P5YvX97mKzF9AgQIEBgOAf9YNhzKxhguAQHocEkbhwABAgQIECBAgECJAt/85jfjySefLHEGhiZAgACBdhH44Ac/GFdccUW7TNc8CQwq0HXs+DFoKw0IECBAgAABAgQIECBAgAABAgQIECDQhgI+BKkNi2bKBAgQIECAAAECBAgQIECAAAECBAgUExCAFnPSigABAgQIECBAgAABAgQIECBAgACBNhQQgLZh0UyZAAECBAgQIECAAAECBAgQIECAAIFiAgLQYk5aESBAgAABAgQIECBAgAABAgQIECDQhgIC0DYsmikTIECAAAECBAgQIECAAAECBAgQIFBMQABazEkrAgQIECBAgAABAgQIECBAgAABAgTaUEAA2oZFM2UCBAgQIECAAAECBAgQIECAAAECBIoJCECLOWlFgAABAgQIECBAgAABAgQIECBAgEAbCghA27BopkyAAAECBAgQIECAAAECBAgQIECAQDEBAWgxJ60IECBAgAABAgQIECBAgAABAgQIEGhDAQFoGxbNlAkQIECAAAECBAgQIECAAAECBAgQKCYgAC3mpBUBAgQIECBAgAABAgQIECBAgAABAm0oIABtw6KZMgECBAgQIECAAAECBAgQIECAAAECxQQEoMWctCJAgAABAgQIECBAgAABAgQIECBAoA0FBKBtWDRTJkCAAAECBAgQIECAAAECBAgQIECgmIAAtJiTVgQIECBAgAABAgQIECBAgAABAgQItKGAALQNi2bKBAgQIECAAAECBAgQIECAAAECBAgUExCAFnPSigABAgQIECBAgAABAgQIECBAgACBNhQQgLZh0UyZAAECBAgQIECAAAECBAgQIECAAIFiAgLQYk5aESBAgAABAgQIECBAgAABAgQIECDQhgIC0DYsmikTIECAAAECBAgQIECAAAECBAgQIFBMQABazEkrAgQIECBAgAABAgQIECBAgAABAgTaUEAA2oZFM2UCBAgQIECAAAECBAgQIECAAAECBIoJCECLOWlFgAABAgQIECBAgAABAgQIECBAgEAbCghA27BopkyAAAECBAgQIECAAAECBAgQIECAQDEBAWgxJ60IECBAgAABAgQIECBAgAABAgQIEGhDAQFoGxbNlAkQIECAAAECBAgQIECAAAECBAgQKCYgAC3mpBUBAgQIECBAgAABAgQIECBAgAABAm0oIABtw6KZMgECBAgQIECAAAECBAgQIECAAAECxQQEoMWctCJAgAABAgQIECBAgAABAgQIECBAoA0FBKBtWDRTJkCAAAECBAgQIECAAAECBAgQIECgmIAAtJiTVgQIECBAgAABAgQIECBAgAABAgQItKGAALQNi2bKBAgQIECAAAECBAgQIECAAAECBAgUExCAFnPSigABAgQIECBAgAABAgQIECBAgACBNhQQgLZh0UyZAAECBAgQIECAAAECBAgQIECAAIFiAgLQYk5aESBAgAABAgQIECBAgAABAgQIECDQhgIC0DYsmikTIECAAAECBAgQIECAAAECBAgQIFBMQABazEkrAgQIECBAgAABAgQIECBAgAABAgTaUEAA2oZFM2UCBAgQIECAAAECBAgQIECAAAECBIoJCECLOWlFgAABAgQIECBAgAABAgQIECBAgEAbCghA27BopkyAAAECBAgQIECAAAECBAgQIECAQDEBAWgxJ60IECBAgAABAgQIECBAgAABAgQIEGhDAQFoGxbNlAkQIECAAAECBAgQIECAAAECBAgQKCYgAC3mpBUBAgQIECBAgAABAgQIECBAgAABAm0oIABtw6KZMgECBAgQIECAAAECBAgQIECAAAECxQQEoMWctCJAgAABAgQIECBAgAABAgQIECBAoA0FBKBtWDRTJkCAAAECBAgQIECAAAECBAgQIECgmIAAtJiTVgQIECBAgAABAgQIECBAgAABAgQItKGAALQNi2bKBAgQIECAAAECBAgQIECAAAECBAgUExCAFnPSigABAgQIECBAgAABAgQIECBAgACBNhQQgLZh0UyZAAECBAgQIECAAAECBAgQIECAAIFiAgLQYk5aESBAgAABAgQIECBAgAABAgQIECDQhgIC0DYsmikTIECAAAECBAgQIECAAAECBAgQIFBMQABazEkrAgQIECBAgAABAgQIECBAgAABAgTaUEAA2oZFM2UCBAgQIECAAAECBAgQIECAAAECBIoJCECLOWlFgAABAgQIECBAgAABAgQIECBAgEAbCghA27BopkyAAAECBAgQIECAAAECBAgQIECAQDEBAWgxJ60IECBAgAABAgQIECBAgAABAgQIEGhDAQFoGxbNlAkQIECAAAECBAgQIECAAAECBAgQKCYgAC3mpBUBAgQIECBAgAABAgQIECBAgAABAm0oIABtw6KZMgECBAgQIECAAAECBAgQIECAAAECxQS6izXTigABAgQIECBAgAABAu0p8O1vfzuefvrp9py8WRMgUJrA2WefHUuWLIlf+7VfK20OBiZAoDkCXceOH83pSi8ECBAgQIAAAQIECBConkB3d3ccOXKkehMzIwIEKi/wz//8z7Fw4cLKz9MECRBoLOAt8I19XCVAgAABAgQIECBAoI0Fstd7CD/buICmTqBkgcOHD5c8A8MTINAMAQFoMxT1QYAAAQIECBAgQIAAAQIECBAgQIBAJQUEoJUsi0kRIECAAAECBAgQIECAAAECBAgQINAMAQFoMxT1QYAAAQIECBAgQIAAAQIECBAgQIBAJQUEoJUsi0kRIECAAAECBAgQIECAAAECBAgQINAMAQFoMxT1QYAAAQIECBAgQIAAAQIECBAgQIBAJQUEoJUsi0kRIECAAAECBAgQIECAAAECBAgQINAMAQFoMxT1QYAAAQIECBAgQIAAAQIECBAgQIBAJQUEoJUsi0kRIECAAAECBAgQIECAAAECBAgQINAMAQFoMxT1QYAAAQIECBAgQIAAAQIECBAgQIBAJQUEoJUsi0kRIECAAAECBAgQIECAAAECBAgQINAMAQFoMxT1QYAAAQIECBAgQIAAAQIECBAgQIBAJQUEoJUsi0kRIECAAAECBAgQIECAAAECBAgQINAMAQFoMxT1QYAAAQIECBAgQIAAAQIECBAgQIBAJQUEoJUsi0kRIECAAAECBAgQIECAAAECBAgQINAMAQFoMxT1QYAAAQIECBAgQIAAAQIECBAgQIBAJQUEoJUsi0kRIECAAAECBAgQIECAAAECBAgQINAMAQFoMxT1QYAAAQIECBAgQIAAAQIECBAgQIBAJQUEoJUsi0kRIECAAAECBAgQIECAAAECBAgQINAMAQFoMxT1QYAAAQIECBAgQIAAAQIECBAgQIBAJQUEoJUsi0kRIEDrupgeAABAAElEQVSAAAECBAgQIECAAAECBAgQINAMAQFoMxT1QYAAAQIECBAgQIAAAQIECBAgQIBAJQUEoJUsi0kRIECAAAECBAgQIECAAAECBAgQINAMAQFoMxT1QYAAAQIECBAgQIAAAQIECBAgQIBAJQUEoJUsi0kRIECAAAECBAgQIECAAAECBAgQINAMAQFoMxT1QYAAAQIECBAgQIAAAQIECBAgQIBAJQUEoJUsi0kRIECAAAECBAgQIECAAAECBAgQINAMAQFoMxT1QYAAAQIECBAgQIAAAQIECBAgQIBAJQUEoJUsi0kRIECAAAECBAgQIECAAAECBAgQINAMAQFoMxT1QYAAAQIECBAgQIAAAQIECBAgQIBAJQUEoJUsi0kRIECAAAECBAgQIECAAAECBAgQINAMAQFoMxT1QYAAAQIECBAgQIAAAQIECBAgQIBAJQUEoJUsi0kRIECAAAECBAgQIECAAAECBAgQINAMAQFoMxT1QYAAAQIECBAgQIAAAQIECBAgQIBAJQUEoJUsi0kRIECAAAECBAgQIECAAAECBAgQINAMAQFoMxT1QYAAAQIECBAgQIAAAQIECBAgQIBAJQUEoJUsi0kRIECAAAECBAgQIECAAAECBAgQINAMAQFoMxT1QYAAAQIECBAgQIAAAQIECBAgQIBAJQUEoJUsi0kRIECAAAECBAgQIECAAAECBAgQINAMAQFoMxT1QYAAAQIECBAgQIAAAQIECBAgQIBAJQUEoJUsi0kRIECAAAECBAgQIECAAAECBAgQINAMAQFoMxT1QYAAAQIECBAgQIAAAQIECBAgQIBAJQUEoJUsi0kRIECAAAECBAgQIECAAAECBAgQINAMAQFoMxT1QYAAAQIECBAgQIAAAQIECBAgQIBAJQUEoJUsi0kRIECAAAECBAgQIECAAAECBAgQINAMAQFoMxT1QYAAAQIECBAgQIAAAQIECBAgQIBAJQUEoJUsi0kRIECAAAECBAgQIECAAAECBAgQINAMAQFoMxT1QYAAAQIECBAgQIAAAQIECBAgQIBAJQUEoJUsi0kRIECAAAECBAgQIECAAAECBAgQINAMAQFoMxT1QYAAAQIECBAgQIAAAQIECBAgQIBAJQUEoJUsi0kRIECAAAECBAgQIECAAAECBAgQINAMAQFoMxT1QYAAAQIECBAgQIAAAQIECBAgQIBAJQUEoJUsi0kRIECAAAECBAgQIECAAAECBAgQINAMAQFoMxT1QYAAAQIECBAgQIAAAQIECBAgQIBAJQUEoJUsi0kRIECAAAECBAgQIECAAAECBAgQINAMAQFoMxT1QYAAAQIECBAgQIAAAQIECBAgQIBAJQUEoJUsi0kRIECAAAECBAgQIECAAAECBAgQINAMAQFoMxT1QYAAAQIECBAgQIAAAQIECBAgQIBAJQUEoJUsi0kRIECAAAECBAgQIECAAAECBAgQINAMAQFoMxT1QYAAAQIECBAgQIAAAQIECBAgQIBAJQUEoJUsi0kRIECAAAECBAgQIECAAAECBAgQINAMAQFoMxT1QYAAAQIECBAgQIAAAQIECBAgQIBAJQUEoJUsi0kRIECAAAECBAgQIECAAAECBAgQINAMAQFoMxT1QYAAAQIECBAgQIAAAQIECBAgQIBAJQUEoJUsi0kRIECAAAECBAgQIECAAAECBAgQINAMAQFoMxT1QYAAAQIECBAgQIAAAQIECBAgQIBAJQUEoJUsi0kRIECAAAECBAgQIECAAAECBAgQINAMAQFoMxT1QYAAAQIECBAgQIAAAQIECBAgQIBAJQUEoJUsi0kRIECAAAECBAgQIECAAAECBAgQINAMAQFoMxT1QYAAAQIECBAgQIAAAQIECBAgQIBAJQUEoJUsi0kRIECAAAECBAgQIECAAAECBAgQINAMAQFoMxT1QYAAAQIECBAgQIAAAQIECBAgQIBAJQUEoJUsi0kRIECAAAECBAgQIECAAAECBAgQINAMAQFoMxT1QYAAAQIECBAgQIAAAQIECBAgQIBAJQUEoJUsi0kRIECAAAECBAgQIECAAAECBAgQINAMAQFoMxT1QYAAAQIECBAgQIAAAQIECBAgQIBAJQUEoJUsi0kRIECAAAECBAgQIECAAAECBAgQINAMAQFoMxT1QYAAAQIECBAgQIAAAQIECBAgQIBAJQUEoJUsi0kRIECAAAECBAgQIECAAAECBAgQINAMAQFoMxT1QYAAAQIECBAgQIAAAQIECBAgQIBAJQUEoJUsi0kRIECAAAECBAgQIECAAAECBAgQINAMAQFoMxT1QYAAAQIECBAgQIAAAQIECBAgQIBAJQUEoJUsi0kRIECAAAECBAgQIECAAAECBAgQINAMAQFoMxT1QYAAAQIECBAgQIAAAQIECBAgQIBAJQUEoJUsi0kRIECAAAECBAgQIECAAAECBAgQINAMAQFoMxSb0MfWrVvj9ddfr9vTHXfcEStXroze3t66150kQIAAAQIECBAgQIAAAQIECBAgQKC+gAC0vsuwnd24cWNMnz49pk6dGg888EDdce++++6YP39+nH/++dHT01O3jZMECBAgQIAAAQIECBAgQIAAAQIECNQKCEBrTYbtzKpVq+Lyyy+PTZs25WNu27atZuzDhw/Hzp078/N79+6NRYsWxeLFi2vaOUGAAAECBAgQIECAAAECBAgQIECAQK2AALTWZFjO7NmzJ66//vrYt29fPl4WhF555ZU1Y48cOTKefPLJuOWWW+Kss87Kr991113x2GOP1bR1ggABAgQIECBAgAABAgQIECBAgACB/gIC0P4ew3Zv2bJlsXv37ny8O++8M9auXRtXXXVVzfhdXV0xY8aMuP3222Pz5s0xceLEvM1NN91U09YJAgQIECBAgAABAgQIECBAgAABAgT6CwhA+3sM273169fnY82ePbvwW9onT54c2QciZccLL7wQu3btym/7DwECBAgQIECAAAECBAgQIECAAAEC9QUEoPVdWn72pZdeyseo97b3RoPPmTOn7/KLL77Yd9sNAgQIECBAgAABAgQIECBAgAABAgRqBQSgtSbDcubdd9/Nx8l+x+epHGPGjIlRo0blD8l+j6iDAAECBAgQIECAAAECBAgQIECAAIGBBQSgA9u09MqkSZPy/p955plTGmfLli1x6NCh/DEXX3zxKT1WYwIECBAgQIAAAQIECBAgQIAAAQKdJiAALani06dPz0e+//77Y8eOHYVnsXz58rxt9onw2e8EdRAgQIAAAQIECBAgQIAAAQIECBAgMLCAAHRgm5ZeueGGG/L+s7fCL1iwILZu3dpwvIMHD8bSpUujp6cnb3f11VdH9gnxDgIECBAgQIAAAQIECBAgQIAAAQIEBhboHviSK60UmDFjRsyfPz+yV4A+//zzMW3atFi4cGHMnDkzsrfHX3jhhfHOO+/Ezp0781eI3nvvvfntbE4TJkyIFStWtHJ6+iZAgAABAgQIECBAgAABAgQIECCQhEDXseNHEitpw0Vkr/78vd/7vXjuuecKzz576/vKlStj1qxZhR+jIQECBAgQIECAAIFOFcj+d2fECG9869T6WzeB0xX43ve+F5/73OdOtxuPJ0CgZAE/CZRYgHHjxsXTTz8dt956a2Sf7t7oyN7uvmjRoti+fbvwsxGUawQIECBAgAABAgQIECBAgAABAgROEvAK0JMwyry5f//+WL16daxbty527doVb731VowfPz6mTJmSf1166aUxderUMqdobAIECBAgQIAAAQJtJ+AVoG1XMhMmUCkBrwCtVDlMhsCQBfwO0CHTNfeBo0ePjrlz5+Zfze1ZbwQIECBAgAABAgQIECBAgAABAgQ6V8Bb4Du39lZOgAABAgQIECBAgAABAgQIECBAIHkBAWjyJbZAAgQIECBAgAABAgQIECBAgAABAp0r4C3wJdf+wIED8cMf/jBefvnleO211yK7X/S45557ijbVjgABAgQIECBAgAABAgQIECBAgEBHCghASyz7I488EjfeeGO8+uqrQ5qFAHRIbB5EgAABAgQIECBAgAABAgQIECDQQQIC0JKKnYWeCxYsiN7e3pJmYFgCBAgQIECAAAECBAgQIECAAAEC6QsIQEuq8Ve+8pW+8HPixImxZMmSuOiii2Ls2LHR1dVV0qwMS4AAAQIECBAgQIAA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CBAgQIAAAQIECBAgQKC6AgLQ6tbGzAgQIECAAAECBAgQIECAAAECBAgQOE0BAehpAno4AQIECBAgQIAAAQIECBAgQIAAAQLVFRCAVrc2ZkaAAAECBAgQIECAAAECBAgQIECAwGkKCEBPE9DDCRAgQIAAAQIECBAgQIAAAQIECBCoroAAtLq1MTMCBAgQIECAAAECBAgQIECAAAECBE5ToPs0H+/hLRAYMWJEdHf/X2m6urpaMIIuCRAgQIAAAQIECBAgQIAAAQIECHSGgAC0gnVetWpVBWdlSgQIECBAgAABAgQIECBAgAABAgTaT8Bb4CtSs61bt8brr79edzZ33HFHrFy5Mnp7e+ted5IAAQIECBAgQIAAAQIECBAgQIAAgfoCAtD6LsN2duPGjTF9+vSYOnVqPPDAA3XHvfvuu2P+/Plx/vnnR09PT902ThIgQIAAAQIECBAgQIAAAQIECBAgUCsgAK01GbYz2VvdL7/88ti0aVM+5rZt22rGPnz4cOzcuTM/v3fv3li0aFEsXry4pp0TBAgQIECAAAECBAgQIEDgf9u7E2i7pvsP4DsSUxpVEVREKCklxhIN1ZojKoaqFrVaFAtlKVpDsVCatmikwtJlVZVVQ7WqlKoKGgklhibUVGONMVQQ8/j+d5/+7+29efcljryXvrP356z18s4959xz9+/zs9x7v+8MBAgQIECgs4AAtLPJfFkya9as8K1vfSu8+eabxevFIHSbbbbp9Np9+/YNN910UzjuuOPCgAEDivXjx48PEydO7LStBQQIECBAgAABAgQIECBAgAABAgQItAoIQFs95tujn/3sZ2HmzJnF640bNy5MmjQpbLvttp1eP94FfuTIkeEHP/hBuOuuu8KQIUOKbQ455JBO21pAgAABAgQIECBAgAABAgQIECBAgECrgAC01WO+PZoyZUrxWqNGjfrQp7SvtNJKId4QKU733XdfmDFjRjHvHwIECBAgQIAAAQIECBAgQIAAAQIE2gsIQNu79PjShx9+uHiNdqe9z+nFR48e3Vh9//33N+bNECBAgAABAgQIECBAgAABAgQIECDQWUAA2tlkvix59dVXi9eJ1/gsM/Xv3z8suOCCxVPidURNBAgQIECAAAECBAgQIECAAAECBAh0LSAA7dqmR9cMHTq02P+dd95Z6nXuueee8O677xbPWXPNNUs918YECBAgQIAAAQIECBAgQIAAAQIEchMQgP6POr7eeusVr3zZZZeFhx566EOP4vTTTy+2jXeEj9cENREgQIAAAQIECBAgQIAAAQIECBAg0LWAALRrmx5ds/feexf7j6fC77zzzuGBBx6Y4+u98847YezYseH8888vttthhx1CvEO8iQABAgQIECBAgAABAgQIECBAgACBrgX6db3Kmp4UGDlyZNhpp51CPAL07rvvDsOHDw+77rpr2HTTTUM8PX655ZYLr7zySnjqqaeKI0TPPvvsYj6OafDgwWHChAk9OTz7JkCAAAECBAgQIECAAAECBAgQIJCEgAD0f9jG8847Lzz66KNh+vTp4YMPPggXXXRR8TOnIcVT3+NRoAMHDpzTZtYRIECAAAECBAgQIECAAAECBAgQIFATcAr8//A/g8UWWyxMnTo1HH/88SHe3X1OUzzdfc899wwPPvhg2HLLLee0qXUECBAgQIAAAQIECBAgQIAAAQIECPy/gCNA/8f/KSy00ELhhBNOCEcddVS47rrrwuTJk8OMGTPCCy+8EJZccskwbNiw4mf99dcPq6222v94tF6eAAECBAgQIECAAAECBAgQIECAQLUEBKC9pF+LLLJIGDNmTPHTS4ZkGAQIECBAgAABAgQIECBAgAABAgQqL+AU+Mq3UAEECBAgQIAAAQIECBAgQIAAAQIECHQl4AjQrmTm8/K33347LLzwwi2v+sYbb4SJEyeGa665Jjz55JNhnXXWCd/+9reLu8C3bOgBAQIECBAgQIAAAQIECBAgQIAAAQJtBQSgbVnm38IrrrginHvuueHll18ON954Y+OF33///bDddtuFG264obHsT3/6Uzj99NPDzTffHNZaa63GcjMECBAgQIAAAQIECBAgQIAAAQIECLQXEIC2d5kvSy+66KKw++67F6+19NJLt7zm0Ucf3RJ+1le+9tprYccddwy33357cZOk+nK/CRAgQIAAAQIECBAgQIAAAQIECBDoLOAaoJ1N5suSeEr7gQce2HiteBOk9957r3g8a9asMGHChGK+T58+4Sc/+UmYPn16GDt2bOjXr1947LHHwkEHHdR4rhkCBAgQIECAAAECBAgQIECAAAECBNoLOAK0vUuPLz3//POL097jC5188snh4IMPLsLN+DieFv/WW2/F2bD99tuHI488sphfe+21i+UnnXRSmDRpUrHMPwQIECBAgAABAgQIECBAgAABAgQIdC3gCNCubXp0zX333Vfsf/XVVw9HHHFEiEeA1qerr766Pht23XXXxnyc2XfffYvHzz77bJgxY0bLOg8IECBAgAABAgQIECBAgAABAgQIEGgVEIC2esy3R/UAdPTo0S2vGW9+dO211xbLFlhggTBq1KiW9cstt1xYcMEFi2XTpk1rWecBAQIECBAgQIAAAQIECBAgQIAAAQKtAgLQVo/59uiJJ54oXmuNNdZoec3bbrstzJw5s1g2YsSIMHDgwJb1MSCNP3GqXzO0ZQMPCBAgQIAAAQIECBAgQIAAAQIECBBoCAhAGxTzd2bIkCHFCz7//PMtL3zNNdc0Hm+99daN+frMQw89FD744IPi4dChQ+uL/SZAgAABAgQIECBAgAABAgQIECBAoI2AALQNyvxYNGzYsOJlrrzyysbLvfPOO+E3v/lN4/G2227bmK/PjB8/vpiNd4dfYYUV6ov9JkCAAAECBAgQIECAAAECBAgQIECgjYAAtA3K/Fi0yy67FC9z8803F3eAv/HGG8Mee+wRHnzwwWL5qquuGjbYYIPGUGbNmlXcLOmcc84plu2www5hiSWWaKw3Q4AAAQIECBAgQIAAAQIECBAgQIBAZ4F+nRdZMj8Edt555zB8+PBw7733hjPOOKP4qb9u3759w7hx4+oPi5sijRkzJrz77rvFsnhzpGOPPbax3gwBAgQIECBAgAABAgQIECBAgAABAu0FHAHa3qXHl8aQc9KkSWHDDTdsea14ansMRJtPf19qqaUa4eeAAQPC5ZdfHtZbb72W53lAgAABAgQIECBAgAABAgQIECBAgEBnAUeAdjaZb0sGDRoUJk+eHO64444wZcqUMHjw4DBq1KgQA8/mKZ4OH68ZGo8a3XvvvYv55vXmCRAgQIAAAQIECBAgQIAAAQIECBBoLyAAbe8y35b269cvjBw5svjp6kX79+8f4t3fTQQIECBAgAABAgQIECBAgAABAgQIlBNwCnw5L1sTIECAAAECBAgQIECAAAECBAgQIFAhAQFohZplqAQIECBAgAABAgQIECBAgAABAgQIlBMQgJbzsjUBAgQIECBAgAABAgQIECBAgAABAhUSEIBWqFmGSoAAAQIECBAgQIAAAQIECBAgQIBAOQEBaDkvWxMgQIAAAQIECBAgQIAAAQIECBAgUCEBAWiFmmWoBAgQIECAAAECBAgQIECAAAECBAiUExCAlvOyNQECBAgQIECAAAECBAgQIECAAAECFRIQgFaoWYZKgAABAgQIECBAgAABAgQIECBAgEA5AQFoOS9bEyBAgAABAgQIECBAgAABAgQIECBQIQEBaIWaZagECBAgQIAAAQIECBAgQIAAAQIECJQTEICW87I1AQIECBAgQIAAAQIECBAgQIAAAQIVEhCAVqhZhkqAAAECBAgQIECAAAECBAgQIECAQDkBAWg5L1sTIECAAAECBAgQIECAAAECBAgQIFAhAQFohZplqAQIECBAgAABAgQIECBAgAABAgQIlBMQgJbzsjUBAgQIECBAgAABAgQIECBAgAABAhUSEIBWqFmGSoAAAQIECBAgQIAAAQIECBAgQIBAOQEBaDkvWxMgQIAAAQIECBAgQIAAAQIECBAgUCEBAWiFmmWoBAgQIECAAAECBAgQIECAAAECBAiUExCAlvOyNQECBAgQIECAAAECBAgQIECAAAECFRIQgFaoWYZKgAABAgQIECBAgAABAgQIECBAgEA5AQFoOS9bEyBAgAABAgQIECBAgAABAgQIECBQIQEBaIWaZagECBAgQIAAAQIECBAgQIAAAQIECJQTEICW87I1AQIECBAgQIAAAQIECBAgQIAAAQIVEhCAVqhZhkqAAAECBAgQIECAAAECBAgQIECAQDkBAWg5L1sTIECAAAECBAgQIECAAAECBAgQIFAhAQFohZplqAQIECBAgAABAgQIECBAgAABAgQIlBMQgJbzsjUBAgQIECBAgAABAgQIECBAgAABAhUSEIBWqFmGSoAAAQIECBAgQIAAAQIECBAgQIBAOQEBaDkvWxMgQIAAAQIECBAgQIAAAQIECBAgUCEBAWiFmmWoBAgQIECAAAECBAgQIECAAAECBAiUExCAlvOyNQECBAgQIECAAAECBAgQIECAAAECFRIQgFaoWYZKgAABAgQIECBAgAABAgQIECBAgEA5AQFoOS9bEyBAgAABAgQIECBAgAABAgQIECBQIQEBaIWaZagECBAgQIAAAQIECBAgQIAAAQIECJQTEICW87I1AQIECBAgQIAAAQIECBAgQIAAAQIVEhCAVqhZhkqAAAECBAgQIECAAAECBAgQIECAQDkBAWg5L1sTIECAAAECBAgQIECAAAECBAgQIFAhAQFohZplqAQIECBAgAABAgQIECBAgAABAgQIlBMQgJbzsjUBAgQIECBAgAABAgQIECBAgAABAhUSEIBWqFmGSoAAAQIECBAgQIAAAQIECBAgQIBAOQEBaDkvWxMgQIAAAQIECBAgQIAAAQIECBAgUCEBAWiFmmWoBAgQIECAAAECBAgQIECAAAECBAiUExCAlvOyNQECBAgQIECAAAECBAgQIECAAAECFRIQgFaoWYZKgAABAgQIECBAgAABAgQIECBAgEA5AQFoOS9bEyBAgAABAgQIECBAgAABAgQIECBQIQEBaIWaZagECBAgQIAAAQIECBAgQIAAAQIECJQTEICW87I1AQIECBAgQIAAAQIECBAgQIAAAQIVEhCAVqhZhkqAAAECBAgQIECAAAECBAgQIECAQDkBAWg5L1sTIECAAAECBAgQIECAAAECBAgQIFAhAQFohZplqAQIECBAgAABAgQIECBAgAABAgQIlBMQgJbzsjUBAgQIECBAgAABAgQIECBAgAABAhUSEIBWqFmGSoAAAQIECBAgQIAAAQIECBAgQIBAOQEBaDkvWxMgQIAAAQIECBAgQIAAAQIECBAgUCEBAWiFmmWoBAgQIECAAAECBAgQIECAAAECBAiUExCAlvOyNQECBAgQIECAAAECBAgQIECAAAECFRIQgFaoWYZKgAABAgQIECBAgAABAgQIECBAgEA5AQFoOS9bEyBAgAABAgQIECBAgAABAgQIECBQIQEBaIWaZagECBAgQIAAAQIECBAgQIAAAQIECJQTEICW87I1AQIECBAgQIAAAQIECBAgQIAAAQIVEhCAVqhZhkqAAAECBAgQIECAAAECBAgQIECAQDkBAWg5L1sTIECAAAECBAgQIECAAAECBAgQIFAhAQFohZplqAQIECBAgAABAgQIECBAgAABAgQIlBMQgJbzsjUBAgQIECBAgAABAgQIECBAgAABAhUSEIBWqFmGSoAAAQIECBAgQIAAAQIECBAgQIBAOQEBaDkvWxMgQIAAAQIECBAgQIAAAQIECBAgUCEBAWiFmmWoBAgQIECAAAECBAgQIECAAAECBAiUExCAlvOyNQECBAgQIECAAAECBAgQIECAAAECFRIQgFaoWYZKgAABAgQIECBAgAABAgQIECBAgEA5AQFoOS9bEyBAgAABAgQIECBAgAABAgQIECBQIQEBaIWaZagECBAgQIAAAQIECBAgQIAAAQIECJQTEICW87I1AQIECBAgQIAAAQIECBAgQIAAAQIVEhCAVqhZhkqAAAECBAgQIECAAAECBAgQIECAQDkBAWg5L1sTIECAAAECBAgQIECAAAECBAgQIFAhAQFohZplqAQIECBAgAABAgQIECBAgAABAgQIlBMQgJbzsjUBAgQIECBAgAABAgQIECBAgAABAhUSEIBWqFmGSoAAAQIECBAgQIAAAQIECBAgQIBAOQEBaDkvWxMgQIAAAQIECBAgQIAAAQIECBAgUCEBAWiFmmWoBAgQIECAAAECBAgQIECAAAECBAiUExCAlvOyNQECBAgQIECAAAECBAgQIECAAAECFRIQgFaoWYZKgAABAgQIECBAgAABAgQIECBAgEA5AQFoOS9bEyBAgAABAgQIECBAgAABAgQIECBQIQEBaIWaZagECBAgQIAAAQIECBAgQIAAAQIECJQTEICW87I1AQIECBAgQIAAAQIECBAgQIAAAQIVEhCAVqhZhkqAAAECBAgQIECAAAECBAgQIECAQDkBAWg5L1sTIECAAAECBAgQIECAAAECBAgQIFAhgX4VGquhEiBAoFsFpk2bFg4++OBu3aedESCQjsBLL72UTjEqIUCAAAECBAgQIJCxgAA04+YrnUCuAoMGDSpKnzlzZpg6dWquDOomQOBDCtT/n/EhN7cZAQIECBAgQIAAAQK9TKBPR23qZWMyHAIECPS4QAw+X3755R5/HS9AgEC1Bfr27RtGjhwZBgwYUO1CjJ4AAQIECBAgQIBAxgIC0Iybr3QCBAgQIECAAAECBAgQIECAAAECqQu4CVLqHVYfAQIECBAgQIAAAQIECBAgQIAAgYwFBKAZN1/pBAgQIECAAAECBAgQIECAAAECBFIXEICm3mH1ESBAgAABAgQIECBAgAABAgQIEMhYQACacfOVToAAAQIECBAgQIAAAQIECBAgQCB1AQFo6h1WHwECBAgQIECAAAECBAgQIECAAIGMBQSgGTdf6QQIECBAgAABAgQIECBAgAABAgRSFxCApt5h9REgQIAAAQIECBAgQIAAAQIECBDIWEAAmnHzlU6AAAECBAgQIECAAAECBAgQIEAgdQEBaOodVh8BAgQIECBAgAABAgQIECBAgACBjAUEoBk3X+kECBAgQIAAAQIECBAgQIAAAQIEUhcQgKbeYfURIECAAAECBAgQIECAAAECBAgQyFhAAJpx85VOgAABAgQIECBAgAABAgQIECBAIHUBAWjqHVYfAQIECBAgQIAAAQIECBAgQIAAgYwFBKAZN1/pBAgQIECAAAECBAgQIECAAAECBFIXEICm3mH1ESBAgAABAgQIECBAgAABAgQIEMhYQACacfOVToAAAQIECBAgQIAAAQIECBAgQCB1AQFo6h1WHwECBAgQIECAAAECBAgQIECAAIGMBQSgGTdf6QQIECBAgAABAgQIECBAgAABAgRSFxCApt5h9REgQIAAAQIECBAgQIAAAQIECBDIWEAAmnHzlU6AAAECBAgQIECAAAECBAgQIEAgdQEBaOodVh8BAgQIECBAgAABAgQIECBAgACBjAUEoBk3X+kECBAgQIAAAQIECBAgQIAAAQIEUhcQgKbeYfURIECAAAECBAgQIECAAAECBAgQyFhAAJpx85VOgAABAgQIECBAgAABAgQIECBAIHUBAWjqHVYfAQIECBAgQIAAAQIECBAgQIAAgYwFBKAZN1/pBAgQIECAAAECBAgQIECAAAECBFIXEICm3mH1ESBAgAABAgQIECBAgAABAgQIEMhYQACacfOVToAAAQIECBAgQIAAAQIECBAgQCB1AQFo6h1WHwECBAgQIECAAAECBAgQIECAAIGMBQSgGTdf6QQIECBAgAABAgQIECBAgAABAgRSFxCApt5h9REgQIAAAQIECBAgQIAAAQIECBDIWEAAmnHzlU6AAAECBAgQIECAAAECBAgQIEAgdQEBaOodVh8BAgQIECBAgAABAgQIECBAgACBjAUEoBk3X+kECBAgQIAAAQIECBAgQIAAAQIEUhcQgKbeYfURIECAAAECBAgQIECAAAECBAgQyFhAAJpx85VOgAABAgQIECBAgAABAgQIECBAIHUBAWjqHVYfAQIECBAgQIAAAQIECBAgQIAAgYwFBKAZN1/pBAgQIECAAAECBAgQIECAAAECBFIXEICm3mH1ESBAgAABAgQIECBAgAABAgQIEMhYQACacfOVToAAAQIECBAgQIAAAQIECBAgQCB1AQFo6h1WHwECBAgQIECAAAECBAgQIECAAIGMBQSgGTdf6QQIECBAgAABAgQIECBAgAABAgRSFxCApt5h9REgQIAAAQIECBAgQIAAAQIECBDIWEAAmnHzlU6AAAECBAgQIECAAAECBAgQIEAgdQEBaOodVh8BAgQIECBAgAABAgQIECBAgACBjAUEoBk3X+kECBAgQIAAAQIECBAgQIAAAQIEUhcQgKbeYfURIECAAAECBAgQIECAAAECBAgQyFhAAJpx85VOgAABAgQIECBAgAABAgQIECBAIHUBAWjqHVYfAQIECBAgQIAAAQIECBAgQIAAgYwFBKAZN1/pBAgQIECAAAECBAgQIECAAAECBFIXEICm3mH1ESBAgAABAgQIECBAgAABAgQIEMhYQACacfOVToAAAQIECBAgQIAAAQIECBAgQCB1AQFo6h1WHwECBAgQIECAAAECBAgQIECAAIGMBQSgGTdf6QQIECBAgAABAgQIECBAgAABAgRSFxCApt5h9REgQIAAAQIECBAgQIAAAQIECBDIWEAAmnHzlU6AAAECBAgQIECAAAECBAgQIEAgdQEBaOodVh8BAgQIECBAgAABAgQIECBAgACBjAUEoBk3X+kECBAgQIAAAQIECBAgQIAAAQIEUhcQgKbeYfURIECAAAECBAgQIECAAAECBAgQyFhAAJpx85VOgAABAgQIECBAgAABAgQIECBAIHUBAWjqHVYfAQIECBAgQIAAAQIECBAgQIAAgYwFBKAZN1/pBAgQIECAAAECBAgQIECAAAECBFIXEICm3mH1ESBAgAABAgQIECBAgAABAgQIEMhYQACacfOVToAAAQIECBAgQIAAAQIECBAgQCB1AQFo6h1WHwECBAgQIECAAAECBAgQIECAAIGMBQSgGTdf6QQIECBAgAABAgQIECBAgAABAgRSFxCApt5h9REgQIAAAQIECBAgQIAAAQIECBDIWEAAmnHzlU6AAAECBAgQIECAAAECBAgQIEAgdQEBaOodVh8BAgQIECBAgAABAgQIECBAgACBjAUEoBk3X+kECBAgQIAAAQIECBAgQIAAAQIEUhcQgKbeYfURIECAAAECBAgQIECAAAECBAgQyFhAAJpx85VOgAABAgQIECBAgAABAgQIECBAIHUBAWjqHVYfAQIECBAgQIAAAQIECBAgQIAAgYwFBKAZN1/pBAgQIECAAAECBAgQIECAAAECBFIXEICm3mH1ESBAgAABAgQIECBAgAABAgQIEMhYQACacfOVToAAAQIECBAgQIAAAQIECBAgQCB1AQFo6h1WHwECBAgQIECAAAECBAgQIECAAIGMBQSgGTdf6QQIECBAgAABAgQIECBAgAABAgRSFxCApt5h9REgQIAAAQIECBAgQIAAAQIECBDIWEAAmnHzlU6AAAECBAgQIECAAAECBAgQIEAgdQEBaOodVh8BAgQIECBAgAABAgQIECBAgACBjAUEoBk3X+kECBAgQIAAAQIECBAgQIAAAQIEUhcQgKbeYfURIECAAAECBAgQIECAAAECBAgQyFhAAJpx85VOgAABAgQIECBAgAABAgQIECBAIHUBAWjqHVYfAQIECBAgQIAAAQIECBAgQIAAgYwFBKAZN1/pBAgQIECAAAECBAgQIECAAAECBFIXEICm3mH1ESBAgAABAgQIECBAgAABAgQIEMhYQACacfOVToAAAQIECBAgQIAAAQIECBAgQCB1AQFo6h1WHwECBAgQIECAAAECBAgQIECAAIGMBQSgGTdf6QQIECBAgAABAgQIECBAgAABAgRSFxCApt5h9REgQIAAAQIECBAgQIAAAQIECBDIWEAAmnHzlU6AAAECBAgQIECAAAECBAgQIEAgdQEBaOodVh8BAgQIECBAgAABAgQIECBAgACBjAUEoBk3X+kECBAgQIAAAQIECBAgQIAAAQIEUhcQgKbeYfURIECAAAECBAgQIECAAAECBAgQyFhAAJpx85VOgAABAgQIECBAgAABAgQIECBAIHUBAWjqHVYfAQIECBAgQIAAAQIECBAgQIAAgYwFBKAZN1/pBAgQIECAAAECBAgQIECAAAECBFIXEICm3mH1ESBAgAABAgQIECBAgAABAgQIEMhYQACacfOVToAAAQIECBAgQIAAgd4g8K9//as3DMMYCBAgQCBRAQFooo1VFgECBAgQIECAAAECBHq7wOuvvx6OOuqosNFGG/X2oRofAQIECFRYoF+Fx27oBAgQIECAAAECBAgQIFBhgS9+8Yvh73//e1hyySUrXIWhEyBAgEBvF3AEaG/vkPERIECAAAECBAgQIEAgUYGZM2cWlfXp0yfRCpVFgAABAr1BQADaG7pgDAQIECBAgAABAgQIECBAgAABAgQI9IiAALRHWO2UAAECBAgQIECAAAECBAgQIECAAIHeIOAaoL2hC8ZAgAABAp0Epk6dGs4555xw5513hieeeCIstthiYdiwYeELX/hCOOSQQ8LHP/7xTs+pL3j//ffDBRdcEKZPnx4eeOCB4ueNN94onr/KKquEddZZJ+y///5h4YUXrj+l5Xfc/1tvvRWWXnrpcOKJJ7asa35w1113hZ///OfFojFjxoT4M/sU72p75plnhjvuuCM8/PDDoaOjI6y++urFz+c///nwta99bfaneEyAAAECBJIXOOyww0J8b37xxReLWl977bXivTk+iO/Vcf3sU3xfv/TSS4v39/geHN/H43t6/Nlnn33CJz/5ydmf0nj8/e9/P7z00kthww03DHvssUd4+umnw2WXXRYmTZoUbrnllvDpT386bLbZZuFLX/pS2GCDDRrPi+/dv//978Nf//rX4jPJ8ssvH9Zee+1w3HHHhU996lON7eozN998c/j1r39dPIzbxDGdd9554cYbbwx/+9vfippXXnnlsP3224f99tuv+HxTf67fBAgQINCDArUvYiYCBAgQINBrBGbNmtWx0047ddTe+rr8GThwYMfll1/edsz33Xdfx4gRI7p8bn2/q666akctZG27jwEDBhTPrwWubdfXF8Yx1Pd3wgkn1Bc3fp9xxhkdffv2bWxT37b5dy007XjuuecazzFDgAABAgRyEPjEJz7R5fvjpptu2kJQ+8Nmx9ixYzsWXHDBLp+z1FJLdfnZIO5syJAhxXP33HPPjnvuuadj2WWXbbuvfv36ddTCyuL1a4Flx+KLL952u/79+3dcffXVLeOMD2p/vG1sX7u5U8cuu+zSeNz8/h/n45i7+izSaccWECBAgMA8CTgCtPbOYyJAgACB3iHwzjvvhHg32HiER5ziUZ9f+cpXwmc/+9nwwQcfhNoXjXDttdeGeMOE3XbbrThqo/kojXiU5cYbbxzefvvt4vm1L1Bhyy23DMsss0xx1EctHA0XX3xxsf6f//xn+MY3vhHuv//+sMAC3X9FmCuvvDJ85zvfKcZd+/JUvNZqq61WPJ44cWK44YYbQjza5aqrrgpbb711mDZtWjFm/xAgQIAAgRwE9tprr/Dmm2+GCy+8MLz66qthkUUWCbVwsig9HgHaPG233XbFZ4C4bNFFFy0+A8SjPuPZGrfddluo/UEyvPDCC2HHHXcMp512Wjj00EObn94yf++994ZNNtmkOPK0FoKG0aNHh9ofVkN8b7777rvDe++9F2qhZRg/fnzYd999w+uvvx622mqrsO6664annnqq2C6+Vjx69cADDyw+R3R1Rkn8nBFfL34OiEd7xjM/4j5+97vfFZ9h4n622GKLMGXKlOIo1paBekCAAAEC3SswT/GpJxMgQIAAgW4UOP744xtHSay11lodDz74YKe9jxs3rrFNLRhtWV8LRRvrzjrrrJZ19QePP/54y1EftaCyvqrxuzuOAB01alQxlnjkyKOPPtrYd30mHulaC2Yb441HiZgIECBAgEBuAiuuuGLxXjho0KC2pdf+cNl4r6ydet72s0E8YrN22Zpiu4997GMdtdPbO+2rfgRo7dt0sd0xxxzTsk3tj7Ad9ffu+jbxKNXrr7++ZbtnnnmmY7nllmuM6YorrmhZ33wEaNxP7TT5jnh2SvMUj2j93ve+19jHRhtt1LzaPAECBAj0gED3H/LSvfmsvREgQIBAJgLxKI5TTz21qDYekXnJJZcU1+Oavfx4TbB45EacaqFhcX3POF/7QlJcFyzOjxw5MhxwwAFxttM0dOjQ4sjM+or60ab1x93xOx6tGq/zFad4xEi7a4TFo1vjtcHiUSOf+cxnGke9dsfr2wcBAgQIEEhBIB5lecQRRxSlxCM/f/vb37b9bBDPHqlfdzMesXnkkUfOsfxtt902nHTSSS3b1E6vD4cffnjLstofZsPmm2/esiweNRrfv+vTI488Up9t+zte/zOeAdI8xc85p5xySqj9sbdYHD8zXHfddc2bmCdAgACBbhYQgHYzqN0RIECAwEcTiB/84xedOO26665FKNjVnuIXlHja2YQJE4pT4eJ2taM2w1/+8pfwi1/8ovhS0dVz4/LmU+viF6XunuIXm/qNGG699dbi9Lx2rxFD2lhzPA0/ngpoIkCAAAECBP4rEC8n8+STTxYL4unkze/f/93qP3O1ozfD8OHDiwfxcjfxsjpdTTEg7dOnT6fVzUFlXB9PW283NY8j3uywqymGpzGcbTfF/deOQm2s+uMf/9iYN0OAAAEC3S/gGqDdb2qPBAgQIPARBOLdUevTpptuWp9t+zseuRF/mqd4V/h499b409UUr+t1++23hz//+c+NTeKynpjidT3jnWPjka3xml/xWqZxzHF5vLt8nOKXn3ZfwHpiPPZJgAABAgSqJlC7FE5jyPG9dG5TvC54vOZm7RTz8Nhjj4XaDQ/bPmW99dZru3zJJZdsLB88eHDjj6yNhf8/UzvNvrFoTkFrvNP7nKZ43fL61Pw5qL7MbwIECBDoPgEBaPdZ2hMBAgQIzIPAs88+23h2PE19Xqc777yzuLHQQw89FOIXqPgTA8nZv6jULi8zry/V9vnHHntsuOWWW4rT9GPIGk/pjz8x8Iw3ddpmm22KmzV09SWs7U4tJECAAAECGQnE9/D6VLtmZjj66KPrD9v+rl1fu7E8PrddABovPVO7g3tju+aZ5j9KxgC0q+nD3jxxhRVW6GoXxfJ4Ov1CCy1UfDaZMWPGHLe1kgABAgTmTUAAOm9+nk2AAAEC3SQQ74Ran2o3F6jPlv59wQUXhJNPPjncc889bZ8br/G10korhXgX+J6c4inwkydPDgcddFDjzvPx9WLgGsPZ+PPDH/6wOF0vjjnezdZEgAABAgQI/Fcg/uGyPjV/Tqgvm9Pvrq7N2Xz05pye37dv3zmt/lDr5vYH3Ri4xrNC4p3hX3zxxQ+1TxsRIECAwEcTEIB+NDfPIkCAAIFuFmg+7eyVV175SHsfO3ZsiEde1qf45WXYsGHFTQZqd44N8SdeiysGk9ttt12xWfPRHvXn1X/P7ejQuZ0+H79k/epXvwrjx48P8Tpm8RqlEydODM8//3z9JYpT9Wp3fw0XXnhh+PKXv9xYboYAAQIECOQu0BxWnnDCCaH5s8LcbLo6Zf7DHr05t/1/mPX1a5vPadt///vfxeraHefntJl1BAgQIDCPAgLQeQT0dAIECBDoHoEYVNaneCTEnKYYTMbre/Xr99+3seuvv74RfsblP/7xj8O+++4bFl988U67aj5FLt6xvavp3Xff7WpVsfzDBrXxS028eUP8iWOPd6+/6qqrihs2Pf300+HNN98MJ554ogB0jtpWEiBAgEBuAvFmQ/W7o8fre8bLx1RpeuKJJ+Y43HhUa7xWeJzqN0+c4xOsJECAAIGPLOAu8B+ZzhMJECBAoDsFmgPQ5mt+tXuNqVOnhkUWWSSsuOKK4ac//WmxSTzCsj7Fo0TitcLahZ9xm+YvJO2O4oynyccpBpNzmuINFurT7EeLxhA3Hu3Z/Fpx23jEabzu5/HHHx/uuuuuUD/dP843Xwe1vl+/CRAgQIBArgLNd1uPfzyc2zRt2rQQPyM899xzxR8c57Z9T69vvolTu9dqvlzPiBEj2m1iGQECBAh0k4AAtJsg7YYAAQIE5k1g/fXXb9wR/eyzz+50s6Lmvce7uMcjQB9//PGw8sorF6viF576tMUWW9RnO/2ON0G69NJLG8vjfmaf4h3l4xRPS+vqmlwxOI1Hcbab4unsyy+/fBg1alQ466yz2m1SLIun8tW/8MQAdW5Hvna5IysIECBAgEBFBerX2mz3fjxy5MhGVfH99NVXX208nn0m/tEyHiEanxOPprz//vtn32S+P46fZ+b0x9RTTz21MSaXwWlQmCFAgECPCAhAe4TVTgkQIECgrMBqq60W9thjj+JpMQhs/lLQvK9HH300nHbaacWieG2wrbfeupivH0kZH9x9993Fstn/iV+udtttt+IGRPV19VPP6o/j7/oNiWIo+d3vfrd5VWN+n332CdOnT288bp6J1xeNd5mN0y9/+ctOR4HWt33ppZeKO8XHx4suumjbu9XWt/WbAAECBAikKFC/zmcMN2d/T/7c5z4XvvrVrxZlP/PMM+Gwww4r/gDazuGII44ojvyM67bccsuw+uqrt9tsvi6LZ3bE65O3m6644ooQ/6Abp3gWzOjRo9ttZhkBAgQIdJOAALSbIO2GAAECBOZd4Ec/+lEYMGBAsaN4M6M999wzxNPZ4rU44/U2L7nkkrDJJpuE1157rdgmHg3Sv3//Yn6zzTZrDODII48MEyZMCPVT1OORnH/4wx/CjjvuGC677LLGdnGmfvOB5oX77bdf4+H5558fDjjggOIGRnF/8aZGMeCMywcPHtzYrnkmHkG61157FYvi/uPYLr744sbRpHH88fT4+AUtnqYXp/333z8stthixbx/CBAgQIBALgLLLLNMUWo8s2LMSOgnuAAAEIhJREFUmDHFjQPPPffcRvnjxo1rvNefc845xeeASZMmhXg97/iHzX/84x/h61//ejjzzDOL58TPBfHzRG+ZYgD6zW9+s/jjbBxvvLN9vFTPTjvt1Bhi/DxT/8NpY6EZAgQIEOhegdrRLSYCBAgQINBrBGrBYEctWOyovds1fmrX5GzM15cfeuihLWOufanoqN3hvdN2cV+16242lg8fPrxjypQpHbUvXMWy2pGjHfG5zVPtxkgdtZCz8Zz6azb/rl2XrOORRx5pbFP7MtO8i4633367o3YH2sb6+nNr1y7ttOzwww/vNIaWnXlAgAABAgQSFagFl53eF5daaqmWams3OuwYOnRoy3bxvb1208OWZfHzQu2oypbn1h8MGTKk2HbQoEH1RZ1+145Abeyvdip9p/X1BXfccUdju9ofMOuLi9+1kLaxrnaWSkftDI/G43bjrYW9Lc/3gAABAgR6RsARoLVvpCYCBAgQ6D0C8ajIeDTH7rvv3jgatPlu7PGUtmuvvbZxGnx95AsssEBxTc6jjjqquEFSfXk8Za72FlpcDyzeGT4eUbrxxhuHrbbaqtgk3oU9HknSPMUbFcVT0+Jp+LUvSs2rQjy6c4cddgg33XRTWGGFFVrWNT9YaKGFGuNsPlK0fnpfXL/uuuuGeL3QU045JcTxmwgQIECAQG4CBx54YDjmmGNC/UjQWH+8O3rzNbg333zzEG8YFM/QWGKJJQqi+N5ev5FhvI5oPMry3nvv7VWnksczRmp/dA1rrbVWcZ3z+nhjAfESPpMnT26cMVIU5R8CBAgQ6DGBPjFX7bG92zEBAgQIEJgHgfgWFa/5GQPRGDzG64Quu+yyc91jPMU8nmJWO0IzDBw4MKy55pqdgsy57qRpg3izpXi9zxh4xi8xZcPK+IXnySefLK4FGk95j9f6WmONNUIMQU0ECBAgQIDAfwTiNcDjtUBrR3uG+rVB29nEP27GQPT1118PK620UvHTWy4jE6/9Ha8THqd4Wn4MeOMUA91bbrmlONU9fp6pHZFaLPcPAQIECMwfAQHo/HH2KgQIECBAgAABAgQIECCQuEBXAWjiZSuPAAECvV7A+Xa9vkUGSIAAAQIECBAgQIAAAQIECBAgQIDARxUQgH5UOc8jQIAAAQIECBAgQIAAAQIECBAgQKDXCwhAe32LDJAAAQIECBAgQIAAAQIECBAgQIAAgY8qIAD9qHKeR4AAAQIECBAgQIAAAQIECBAgQIBArxdwE6Re3yIDJECAAAECBAgQIECAAIEqCDzyyCPh1ltvLYY6YsSIsMoqq1Rh2MZIgACB5AUEoMm3WIEECBAgQIAAAQIECBAgQIAAAQIE8hVwCny+vVc5AQIECBAgQIAAAQIECBAgQIAAgeQFBKDJt1iBBAgQIECAAAECBAgQIECAAAECBPIVEIDm23uVEyBAgAABAgQIECBAgAABAgQIEEheQACafIsVSIAAAQIECBAgQIAAAQIECBAgQCBfAQFovr1XOQECBAgQIECAAAECBAgQIECAAIHkBQSgybdYgQQIECBAgAABAgQIECBAgAABAgTyFRCA5tt7lRMgQIAAAQIECBAgQIAAAQIECBBIXkAAmnyLFUiAAAECBAgQIECAAAECBAgQIEAgXwEBaL69VzkBAgQIECBAgAABAgQIECBAgACB5AUEoMm3WIEECBAgQIAAAQIECBAgQIAAAQIE8hUQgObbe5UTIECAAAECBAgQIECAAAECBAgQSF5AAJp8ixVIgAABAgQIECBAgAABAgQIECBAIF8BAWi+vVc5AQIECBAgQIAAAQIECBAgQIAAgeQFBKDJt1iBBAgQIECAAAECBAgQIECAAAECBPIVEIDm23uVEyBAgAABAgQIECBAgAABAgQIEEheQACafIsVSIAAAQIECBAgQIAAAQIECBAgQCBfAQFovr1XOQECBAgQIECAAAECBAgQIECAAIHkBQSgybdYgQQIECBAgAABAgQIECBAgAABAgTyFRCA5tt7lRMgQIAAAQIECBAgQIAAAQIECBBIXkAAmnyLFUiAAAECBAgQIECAAAECBAgQIEAgXwEBaL69VzkBAgQIECBAgAABAgQIECBAgACB5AUEoMm3WIEECBAgQIAAAQIECBAgQIAAAQIE8hUQgObbe5UTIECAAAECBAgQIECAAAECBAgQSF5AAJp8ixVIgAABAgQIECBAgAABAgQIECBAIF8BAWi+vVc5AQIECBAgQIAAAQIECBAgQIAAgeQFBKDJt1iBBAgQIECAAAECBAgQIECAAAECBPIVEIDm23uVEyBAgAABAgQIECBAgAABAgQIEEheQACafIsVSIAAAQIECBAgQIAAAQIECBAgQCBfAQFovr1XOQECBAgQIECAAAECBAgQIECAAIHkBQSgybdYgQQIECBAgAABAgQIECBAgAABAgTyFRCA5tt7lRMgQIAAAQIECBAgQIAAAQIECBBIXkAAmnyLFUiAAAECBAgQIECAAAECBAgQIEAgXwEBaL69VzkBAgQIECBAgAABAgQIECBAgACB5AUEoMm3WIEECBAgQIAAAQIECBAgQIAAAQIE8hUQgObbe5UTIECAAAECBAgQIECAAAECBAgQSF5AAJp8ixVIgAABAgQIECBAgAABAgQIECBAIF8BAWi+vVc5AQIECBAgQIAAAQIECBAgQIAAgeQFBKDJt1iBBAgQIECAAAECBAgQIECAAAECBPIVEIDm23uVEyBAgAABAgQIECBAgAABAgQIEEheQACafIsVSIAAAQIECBAgQIAAAQIECBAgQCBfAQFovr1XOQECBAgQIECAAAECBAgQIECAAIHkBQSgybdYgQQIECBAgAABAgQIECBAgAABAgTyFRCA5tt7lRMgQIAAAQIECBAgQIAAAQIECBBIXkAAmnyLFUiAAAECBAgQIECAAAECBAgQIEAgXwEBaL69VzkBAgQIECBAgAABAgQIECBAgACB5AUEoMm3WIEECBAgQIAAAQIECBAgQIAAAQIE8hUQgObbe5UTIECAAAECBAgQIECAAAECBAgQSF5AAJp8ixVIgAABAgQIECBAgAABAgQIECBAIF8BAWi+vVc5AQIECBAgQIAAAQIECBAgQIAAgeQFBKDJt1iBBAgQIECAAAECBAgQIECAAAECBPIVEIDm23uVEyBAgAABAgQIECBAgAABAgQIEEheQACafIsVSIAAAQIECBAgQIAAAQIECBAgQCBfAQFovr1XOQECBAgQIECAAAECBAgQIECAAIHkBQSgybdYgQQIECBAgAABAgQIECBAgAABAgTyFRCA5tt7lRMgQIAAAQIECBAgQIAAAQIECBBIXkAAmnyLFUiAAAECBAgQIECAAAECBAgQIEAgXwEBaL69VzkBAgQIECBAgAABAgQIECBAgACB5AUEoMm3WIEECBAgQIAAAQIECBAgQIAAAQIE8hUQgObbe5UTIECAAAECBAgQIECAAAECBAgQSF5AAJp8ixVIgAABAgQIECBAgAABAgQIECBAIF8BAWi+vVc5AQIECBAgQIAAAQIECBAgQIAAgeQFBKDJt1iBBAgQIECAAAECBAgQIECAAAECBPIVEIDm23uVEyBAgAABAgQIECBAgAABAgQIEEheQACafIsVSIAAAQIECBAgQIAAAQIECBAgQCBfAQFovr1XOQECBAgQIECAAAECBAgQIECAAIHkBQSgybdYgQQIECBAgAABAgQIECBAgAABAgTyFRCA5tt7lRMgQIAAAQIECBAgQIAAAQIECBBIXkAAmnyLFUiAAAECBAgQIECAAAECBAgQIEAgXwEBaL69VzkBAgQIECBAgAABAgQIECBAgACB5AUEoMm3WIEECBAgQIAAAQIECBAgQIAAAQIE8hUQgObbe5UTIECAAAECBAgQIECAAAECBAgQSF5AAJp8ixVIgAABAgQIECBAgAABAgQIECBAIF8BAWi+vVc5AQIECBAgQIAAAQIECBAgQIAAgeQFBKDJt1iBBAgQIECAAAECBAgQIECAAAECBPIVEIDm23uVEyBAgAABAgQIECBAgAABAgQIEEheQACafIsVSIAAAQIECBAgQIAAAQIECBAgQCBfAQFovr1XOQECBAgQIECAAAECBAgQIECAAIHkBQSgybdYgQQIECBAgAABAgQIECBAgAABAgTyFRCA5tt7lRMgQIAAAQIECBAgQIAAAQIECBBIXkAAmnyLFUiAAAECBAgQIECAAAECBAgQIEAgXwEBaL69VzkBAgQIECBAgAABAgQIECBAgACB5AUEoMm3WIEECBAgQIAAAQIECBAgQIAAAQIE8hUQgObbe5UTIECAAAECBAgQIECAAAECBAgQSF5AAJp8ixVIgAABAgQIECBAgAABAgQIECBAIF8BAWi+vVc5AQIECBAgQIAAAQIECBAgQIAAgeQFBKDJt1iBBAgQIECAAAECBAgQIECAAAECBPIVEIDm23uVEyBAgAABAgQIECBAgAABAgQIEEheQACafIsVSIAAAQIECBAgQIAAAQIECBAgQCBfAQFovr1XOQECBAgQIECAAAECBAgQIECAAIHkBQSgybdYgQQIECBAgAABAgQIECBAgAABAgTyFRCA5tt7lRMgQIAAAQIECBAgQIAAAQIECBBIXkAAmnyLFUiAAAECBAgQIECAAAECBAgQIEAgXwEBaL69VzkBAgQIECBAgAABAgQIECBAgACB5AUEoMm3WIEECBAgQIAAAQIECBAgQIAAAQIE8hUQgObbe5UTIECAAAECBAgQIECAAAECBAgQSF5AAJp8ixVIgAABAgQIECBAgAABAgQIECBAIF8BAWi+vVc5AQIECBAgQIAAAQIECBAgQIAAgeQFBKDJt1iBBAgQIECAAAECBAgQIECAAAECBPIVEIDm23uVEyBAgAABAgQIECBAgAABAgQIEEheQACafIsVSIAAAQIECBAgQIAAAQIECBAgQCBfAQFovr1XOQECBAgQIECAAAECBAgQIECAAIHkBQSgybdYgQQIECBAgAABAgQIECBAgAABAgTyFRCA5tt7lRMgQIAAAQIECBAgQIAAAQIECBBIXkAAmnyLFUiAAAECBAgQIECAAAECBAgQIEAgXwEBaL69VzkBAgQIECBAgAABAgQIECBAgACB5AUEoMm3WIEECBAgQIAAAQIECBAgQIAAAQIE8hUQgObbe5UTIECAAAECBAgQIECAAAECBAgQSF5AAJp8ixVIgAABAgQIECBAgAABAgQIECBAIF8BAWi+vVc5AQIECBAgQIAAAQIECBAgQIAAgeQFBKDJt1iBBAgQIECAAAECBAgQIECAAAECBPIVEIDm23uVEyBAgAABAgQIECBAgAABAgQIEEheQACafIsVSIAAAQIECBAgQIAAAQIECBAgQCBfAQFovr1XOQECBAgQIECAAAECBAgQIECAAIHkBQSgybdYgQQIECBAgAABAgQIECBAgAABAgTyFRCA5tt7lRMgQIAAAQIECBAgQIAAAQIECBBIXkAAmnyLFUiAAAECBAgQIECAAAECBAgQIEAgXwEBaL69VzkBAgQIECBAgAABAgQIECBAgACB5AUEoMm3WIEECBAgQIAAAQIECBAgQIAAAQIE8hX4P6R5bY8WYMHgAAAAAElFTkSuQmCC" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled" title="Testing the residuals: Configural Frequency Analysis">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<pre><code>pbinom(3,10,0.5)</code></pre>
+<p>3. Interpreting the results:</p>
+<ul>
+<li><p>A p-value smaller than 0.05 indicates a significant deviation from the expected probability</p></li>
+<li><p>The test helps to determine whether the observed data can be used to reject the H0.</p></li>
+<li><p>Checking the confidence interval (CI) provides the range of likely values for the true success probability</p></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Testing the residuals: Configural Frequency Analysis
+The Probability Mass Function (PMF)
 </div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>The chi-squared test only provides a <span class="math inline">\(p\)</span>-value for the entire contingency table. But what if we wanted to test the residuals for their significance as well? Configural Frequency Analysis <span class="citation" data-cites="krauth_lienert_kfa">(<a href="references.html#ref-krauth_lienert_kfa" role="doc-biblioref">Krauth and Lienert 1973</a>)</span> allows us to do exactly that: It performs a significance test for <strong>all combinations of variable values</strong> in a cross-table. Moreover, CFA is not limited to two variables only. Technically, users can test for associations between arbitrary numbers of variables, but should be aware of the increasing complexity of interpretation.</p>
+<p>This function is used to calculate the probability of observing exactly x successes in n trials, given a fixed probability of success P.</p>
+<p><span class="math display">\[
+\begin{align}
+f(x; n, P) &amp; = \binom{n}{x} P^x (1-P)^{n-x} \\
+\end{align}
+\]</span></p>
+<p>To calculate the PMF binomial distributions in R, the following code should be used:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cfa) <span class="co"># install library beforehand</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the observed counts and convert them to a data frame</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>config_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(observed_freqs)</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to matrix</span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>configs <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(config_df[, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])  <span class="co"># First two columns contain the configurations</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>counts <span class="ot">&lt;-</span> config_df<span class="sc">$</span>Freq                <span class="co"># The Freq column contains the counts</span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform CFA</span></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>cfa_output <span class="ot">&lt;-</span> <span class="fu">cfa</span>(configs, counts, <span class="at">bonferroni =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Print output</span></span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(cfa_output)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbinom</span>(<span class="at">x =</span> <span class="dv">3</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1171875</code></pre>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="one-sided-vs.-two-sided-tests" class="level2" data-number="19.5">
+<h2 data-number="19.5" class="anchored" data-anchor-id="one-sided-vs.-two-sided-tests"><span class="header-section-number">19.5</span> One-Sided vs.&nbsp;Two-Sided Tests</h2>
+<p>The choice between one-sided and two-sided tests depends on the research question.</p>
+<ul>
+<li><p>One-Sided Test: Used only for analysing deviations in one direction.</p>
+<ul>
+<li>Example: Is a participant’s performance better than chance?</li>
+</ul></li>
+<li><p>Two-Sided Test: Used for analysing deviations in both directions.</p>
+<ul>
+<li>Example: Is the frequency of male pronouns different from the frequency of female pronouns? (The result can either be that the frequency of male pronouns is higher than the frequency of female pronouns or that they are less frequent than female pronouns.)</li>
+</ul></li>
+</ul>
+<p>Two-Sided Binomial Test</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">binom.test</span>(<span class="at">x =</span> <span class="dv">15</span>, <span class="at">n =</span> <span class="dv">20</span>, <span class="at">p =</span> <span class="fl">0.5</span>, <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-*** Analysis of configuration frequencies (CFA) ***
+    Exact binomial test
 
-       label   n  expected         Q    chisq      p.chisq sig.chisq         z
-1 sc-mc caus  15  63.20596 0.1418682 36.76575 1.332103e-09      TRUE -6.671872
-2 sc-mc temp 113  64.79404 0.1425343 35.86463 2.115143e-09      TRUE  6.469444
-3 mc-sc caus 184 135.79404 0.1804075 17.11278 3.522441e-05      TRUE  5.027611
-4 mc-sc temp  91 139.20596 0.1827409 16.69335 4.393467e-05      TRUE -5.102385
-           p.z sig.z
-1 1.000000e+00  TRUE
-2 4.918210e-11  TRUE
-3 2.483137e-07  TRUE
-4 9.999998e-01  TRUE
-
-
-Summary statistics:
-
-Total Chi squared         =  106.4365 
-Total degrees of freedom  =  1 
-p                         =  0 
-Sum of counts             =  403 
-
-Levels:
-
-Var1 Var2 
-   2    2 </code></pre>
+data:  15 and 20
+number of successes = 15, number of trials = 20, p-value = 0.04139
+alternative hypothesis: true probability of success is not equal to 0.5
+95 percent confidence interval:
+ 0.5089541 0.9134285
+sample estimates:
+probability of success 
+                  0.75 </code></pre>
 </div>
 </div>
-</div>
-</div>
-</div>
-</section>
-<section id="effect-size" class="level2" data-number="20.5">
-<h2 data-number="20.5" class="anchored" data-anchor-id="effect-size"><span class="header-section-number">20.5</span> Effect size</h2>
-<p>The <span class="math inline">\(p\)</span>-value only indicates the <strong>presence of correlation</strong>, but not its strength – regardless of how low it may be. It does not convey how much two variables determine each other. For this reason, it is highly recommended to report an <strong>effect size measure</strong> alongside the <span class="math inline">\(p\)</span>-value. One such measure is Cramér’s <span class="math inline">\(V\)</span>, which takes values in the interval <span class="math inline">\([0, 1]\)</span>:</p>
-<p><span id="eq-effsize-v"><span class="math display">\[
-V = \sqrt{\frac{\chi^2}{n \times (min(nrow, ncol) - 1)}}.
-\tag{20.7}\]</span></span></p>
-<p>The package <code>confintr</code> implements this in its <code>cramersv()</code> function:</p>
+<p>One-Sided Binomial Test</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cramersv</span>(freqs_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">binom.test</span>(<span class="at">x =</span> <span class="dv">15</span>, <span class="at">n =</span> <span class="dv">20</span>, <span class="at">p =</span> <span class="fl">0.5</span>, <span class="at">alternative =</span> <span class="st">"greater"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.5085863</code></pre>
+<pre><code>
+    Exact binomial test
+
+data:  15 and 20
+number of successes = 15, number of trials = 20, p-value = 0.02069
+alternative hypothesis: true probability of success is greater than 0.5
+95 percent confidence interval:
+ 0.5444176 1.0000000
+sample estimates:
+probability of success 
+                  0.75 </code></pre>
 </div>
 </div>
-<p>The association between two categorical variables is stronger, the closer <span class="math inline">\(V\)</span> approximates 1. Conversely, if <span class="math inline">\(V = 0\)</span>, then the variables are completely independent. There are various guidelines in the literature that provide thresholds for “small”, “moderate” and “large” effects, yet these are rarely justified on theoretical grounds and could be viewed as arbitrary.</p>
-</section>
-<section id="likelihood-based-inference" class="level2" data-number="20.6">
-<h2 data-number="20.6" class="anchored" data-anchor-id="likelihood-based-inference"><span class="header-section-number">20.6</span> Likelihood-based inference</h2>
-<p>Since causal subordinate clauses typically follow the main clause in the sample, it may seem tempting to draw conclusions about the <strong>probability</strong> of a certain outcome of clause <code>ORDER</code>. Unfortunately, the <span class="math inline">\(\chi^2\)</span>-test is <strong>not designed</strong> for this kind of statistical inference. An approach that would actually allow the estimation of probabilities is <a href="./Logistic_regression.html">logistic regression</a>.</p>
-<div class="callout callout-style-default callout-note callout-titled" title="What would that look like?">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-What would that look like?
+Please note
 </div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
+<p>The function binom.test() in R only uses the CMF function.</p>
+</div>
+</div>
+</section>
+<section id="comparing-two-groups-proportion-tests" class="level2" data-number="19.6">
+<h2 data-number="19.6" class="anchored" data-anchor-id="comparing-two-groups-proportion-tests"><span class="header-section-number">19.6</span> Comparing Two Groups: Proportion Tests</h2>
+<p>For the comparison of proportions between two groups, the prop.test() function can be used.</p>
+<p>Example: An experiment is being conducted, in which participants have to determine whether a word they are being shown is an actual lemma of the English language or not.</p>
+<ul>
+<li><p>Group A achieved 24 correct answers out of 25 trials</p></li>
+<li><p>Group B obtained 19 correct answers out of 25 trials.</p></li>
+<li><p>To see, whether the proportions are significantly different, the following code can be used.</p></li>
+</ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to factors and define reference levels</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>cl.order<span class="sc">$</span>ORDER <span class="ot">&lt;-</span> <span class="fu">factor</span>(cl.order<span class="sc">$</span>ORDER, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"sc-mc"</span>, <span class="st">"mc-sc"</span>))</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>cl.order<span class="sc">$</span>SUBORDTYPE <span class="ot">&lt;-</span> <span class="fu">factor</span>(cl.order<span class="sc">$</span>SUBORDTYPE, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"temp"</span>, <span class="st">"caus"</span>)) </span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit logistic regression model</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>order.glm1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(ORDER <span class="sc">~</span> SUBORDTYPE, <span class="at">data =</span> cl.order, <span class="at">family =</span> <span class="st">"binomial"</span>)</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Store model parameters</span></span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>intercept <span class="ot">&lt;-</span> order.glm1<span class="sc">$</span>coefficients[<span class="dv">1</span>]</span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>slope <span class="ot">&lt;-</span> order.glm1<span class="sc">$</span>coefficients[<span class="dv">2</span>]</span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to probabilities</span></span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="fu">unname</span>(<span class="fu">plogis</span>(intercept <span class="sc">+</span> slope <span class="sc">*</span> <span class="dv">0</span>)) <span class="co"># if temporal</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.test</span>(<span class="fu">c</span>(<span class="dv">24</span>,<span class="dv">19</span>), <span class="fu">c</span>(<span class="dv">25</span>,<span class="dv">24</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.4460784</code></pre>
+<pre><code>
+    2-sample test for equality of proportions with continuity correction
+
+data:  c(24, 19) out of c(25, 24)
+X-squared = 1.8525, df = 1, p-value = 0.1735
+alternative hypothesis: two.sided
+95 percent confidence interval:
+ -0.05222032  0.38888699
+sample estimates:
+   prop 1    prop 2 
+0.9600000 0.7916667 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unname</span>(<span class="fu">plogis</span>(intercept <span class="sc">+</span> slope <span class="sc">*</span> <span class="dv">1</span>)) <span class="co"># if causal</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="testing-event-counts-over-time-the-poisson-test" class="level2" data-number="19.7">
+<h2 data-number="19.7" class="anchored" data-anchor-id="testing-event-counts-over-time-the-poisson-test"><span class="header-section-number">19.7</span> Testing Event Counts Over Time: The Poisson Test</h2>
+<p>For analysing event counts over time, such as pauses in speech, the Poisson distribution with the poisson.test() function can be useful.</p>
+<p>Example: An experiment is being conducted in which speakers are asked to talk for a predetermined time and it is being researched how often pauses occur in speech.</p>
+<ul>
+<li><p>Participant A pauses 18 times in 5 minutes.</p></li>
+<li><p>The researcher expects 2 pauses per minute.</p></li>
+<li><p>To see whether the observed pause rate differs from the expected pause rate, the following test is highly convenient.</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">poisson.test</span>(<span class="dv">18</span>, <span class="at">T=</span><span class="dv">5</span>, <span class="at">r=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.9246231</code></pre>
-</div>
-</div>
-<p>If the subordinate clause is causal, there is a 92.5% chance that speakers will use the <code>mc-sc</code> ordering, but only a 44.6% chance of using <code>sc-mc</code>.</p>
-</div>
+<pre><code>
+    Exact Poisson test
+
+data:  18 time base: 5
+number of events = 18, time base = 5, p-value = 0.01705
+alternative hypothesis: true event rate is not equal to 2
+95 percent confidence interval:
+ 2.133588 5.689552
+sample estimates:
+event rate 
+       3.6 </code></pre>
 </div>
 </div>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
-<div id="ref-agrestiFoundationsStatisticsData2022" class="csl-entry" role="listitem">
-Agresti, Alan, and Maria Kateri. 2022. <em>Foundations of Statistics for Data Scientists: With r and Python</em>. Boca Raton: <span>CRC</span> Press.
-</div>
 <div id="ref-baguleySeriousStatsGuide2012" class="csl-entry" role="listitem">
 Baguley, Thomas. 2012. <em>Serious <span>Stats</span>: <span>A</span> <span>Guide</span> to <span>Advanced</span> <span>Statistics</span> for the <span>Behavioral</span> <span>Sciences</span></em>. Houndmills, Basingstoke: Palgrave Macmillan.
 </div>
 <div id="ref-gries_statistics_2021" class="csl-entry" role="listitem">
 Gries, Stefan Thomas. 2021. <em>Statistics for Linguistics with r: A Practical Introduction</em>. 3rd rev. ed. Berlin; Boston: De Gruyter Mouton.
 </div>
-<div id="ref-heumann_introduction_2022" class="csl-entry" role="listitem">
-Heumann, Christian, Michael Schomaker, and Shalabh. 2022. <em>Introduction to Statistics and Data Analysis: With Exercises, Solutions and Applications in r</em>. 2nd ed. Cham: Springer. <a href="https://doi.org/10.1007/978-3-031-11833-3">https://doi.org/10.1007/978-3-031-11833-3</a>.
-</div>
-<div id="ref-krauth_lienert_kfa" class="csl-entry" role="listitem">
-Krauth, J., and G. A. Lienert. 1973. <em>Die Konfigurationsfrequenzanalyse (KFA) Und Ihre Anwendung in Psychologie Und Medizin</em>. Reprint 1995. Weinheim: Beltz Psychologie Verlagsunion.
-</div>
 </div>
 </section>
+
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -5941,13 +5725,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./Binomial_test.html" class="pagination-link  aria-label=" &lt;span="" test&lt;="" span&gt;"="">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Binomial test</span></span>
+      <a href="./Hypothesis_testing.html" class="pagination-link  aria-label=" &lt;span="" testing&lt;="" span&gt;"="">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Hypothesis testing</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./t_test.html" class="pagination-link" aria-label="<span class='chapter-number'>21</span>&nbsp; <span class='chapter-title'>t-test</span>">
-        <span class="nav-page-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">t-test</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./Chi_square_test.html" class="pagination-link" aria-label="<span class='chapter-number'>20</span>&nbsp; <span class='chapter-title'>Chi-squared test</span>">
+        <span class="nav-page-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Chi-squared test</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

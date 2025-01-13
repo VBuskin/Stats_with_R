@@ -135,13 +135,15 @@ To facilitate the decision-making process, we proceed to gather
 statistical evidence from the observed data. Since NHST primarily
 revolves around $H_0$ (and not $H_1$!), we need to review the evidence
 the data provides against or in favour $H_0$. This is done via a **test
-statistic** $T$ that characterises the sample at hand. There are many
-possible test statistics out there:
+statistic** $T$ that characterises the sample at hand. Essentially, you
+can think of $T$ as one-value summary of your data.
 
--   For instance, if the data are discrete, the $\chi^2$ measure is used
-    to compute differences between observed and expected frequencies in
-    the entire sample.
--   In the case of continuos data, it is common to rely on $t$ for
+There are many possible test statistics out there:
+
+-   For instance, if the data are **discrete**, the $\chi^2$ measure is
+    used to compute differences between observed and expected
+    frequencies in the entire sample.
+-   In the case of **continuos** data, it is common to rely on $t$ for
     quantifying differences between sample means.
 -   Other possible test statistics include the correlation coefficient
     $r$, $z$-scores, the $F$-statistic, and many others.
@@ -371,7 +373,7 @@ ggplot(chi_squared_data, aes(x = x, y = y)) +
 
 ## Practical considerations
 
-::: {.callout-important title="Common pitfalls [cf. -@agrestiFoundationsStatisticsData2022: 189-190]"}
+::: {.callout-important title="Common pitfalls [cf. @agrestiFoundationsStatisticsData2022: 189-190]"}
 -   Statistical significance is **NOT** an indication of a causal
     relationship between the variables of interest (**correlation**
     $\neq$ **causation**).
@@ -385,5 +387,35 @@ ggplot(chi_squared_data, aes(x = x, y = y)) +
 
 -   Statistical significance is only a starting point for further
     scientific inquiry, and by no means the end of it.
+:::
+
+## Exercises
+
+::: {#exr-hyp-1}
+Schröter & Kortmann [-@schroter_pronoun_2016] investigate the
+relationship between subject realisation (`overt` vs. `null`) and the
+grammatical category Person (`1.p`. vs. `2.p.` vs. `3.p.`) in three
+varieties of English (`Great Britain` vs. `Hong Kong` vs. `Singapore`).
+They report the following test results [-@schroter_pronoun_2016: 235]:
+
+> Chi-square test scores:
+$$
+\begin{align}
+\text{Singapore: \quad} & \chi^2 = 3.3245, df = 2, p = 0.1897 \\
+\text{Hong Kong: \quad} & \chi^2 = 40.799, df = 2, p < 0.1 \\
+\text{Great Britain: \quad} & \chi^2 = 3.6183, df = 2, p = 0.1638 \\
+\end{align}
+$$
+
+-   What hypotheses are the authors testing?
+-   Assuming a significance level $\alpha = 0.05$, what conclusions can be drawn from the test results?
+-   What could be the theoretical implications of these results?
 
 :::
+
+
+::: {#exr-hyp-2}
+Try to develop statistical hypotheses for a research project you are
+currently working on!
+:::
+

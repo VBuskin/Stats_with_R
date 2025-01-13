@@ -59,6 +59,7 @@ book:
     - part: "Inferential Statistics"
       chapters:
         - Hypothesis_testing.qmd
+        - Binomial_test.qmd
         - Chi_square_test.qmd
         - t_test.qmd
     - part: "Statistical Modelling and Machine Learning"
