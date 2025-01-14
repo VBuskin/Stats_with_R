@@ -164,7 +164,7 @@ we will begin by reviewing its technical definition:
 In compact notation, it is equivalent to the conditional probability
 
 $$
-P(T \geq \text{some value} \mid H_0 \text{ is true}).
+P(T \geq \text{observed value} \mid H_0 \text{ is true}).
 $$ If $p$ is lower than a pre-defined threshold (typically $0.05$), also
 known as the **significance level** $\alpha$, we can reject $H_0$.
 However, if $p \geq$ 0.05, this **neither justifies rejecting nor
