@@ -981,23 +981,23 @@
   {
     "objectID": "Gradient_boosting.html#preparation",
     "href": "Gradient_boosting.html#preparation",
-    "title": "26  Gradient boosting",
-    "section": "26.2 Preparation",
-    "text": "26.2 Preparation",
+    "title": "27  Gradient boosting",
+    "section": "27.2 Preparation",
+    "text": "27.2 Preparation",
     "crumbs": [
       "Statistical Modelling and Machine Learning",
-      "<span class='chapter-number'>26</span>  <span class='chapter-title'>Gradient boosting</span>"
+      "<span class='chapter-number'>27</span>  <span class='chapter-title'>Gradient boosting</span>"
     ]
   },
   {
     "objectID": "Gradient_boosting.html#boosting",
     "href": "Gradient_boosting.html#boosting",
-    "title": "26  Gradient boosting",
-    "section": "26.3 Boosting",
-    "text": "26.3 Boosting\nThe core idea of boosting is as simple as it is intuitive: By aggregating the insights of multiple weak models, a much more powerful complex model can be formed. The new model ensemble is argued to be superior in terms of predictive performance. Boosting is quite versatile, but we will restrict our scope to decision trees as introduced in the previous unit.\n\n26.3.1 Loss functions and gradient descent\nA possible way of quantifying a model’s errors is by means of a loss function. Given \\(N\\) observations, let \\(y_i\\) represent the labels of the response variable and \\(f(x_i)\\) the predicted value for a data point \\(x_i\\). Then the corresponding multivariable loss function would be \\(L(y_i, f(x_i))\\), with the loss itself having the form in Equation 26.1. There are various metrics that can be used as concrete measures of loss. Squared errors are common for continuous target variables, whereas deviance, which is based on log-likelihood, would be more appropriate for categorical ones.\n\\[\nL(f) = \\sum_{i=1}^N L(y_i, f(x_i))\n\\tag{26.1}\\]\nIn order to find the best possible model, it is crucial to find the values that minimise \\(L(f)\\). Afterwards, it is possible to compute the rate of change in the predicted value, i.e., the gradient \\(g_{m}\\) for a given increment \\(h_m\\). The gradient is computed by\n\\[\ng_{mi} = \\frac{\\partial L(y, f(x_i))}{\\partial f(x_i)}.\n\\tag{26.2}\\]\nEssentially, it is a derivative of the function \\(L(y_i, f(x_i))\\) with respect to the variable \\(f(x_i)\\), rendering it a partial derivative (as signified by \\(\\partial\\) symbol).\n\n\n26.3.2 Gradient boosting\n\n\n\n\n\n\nWarning\n\n\n\nThis page is still under construction. More content will be added soon!\n\n\n\n\n\n\nHastie, Trevor, Robert Tibshirani, and Jerome H. Friedman. 2017. The Elements of Statistical Learning: Data Mining, Inference, and Prediction. 2nd ed. New York, NY: Springer.\n\n\nJames, Gareth, Daniela Witten, Trevor Hastie, and Robert Tibshirani. 2021. An Introduction to Statistical Learning: With Applications in r. New York: Springer. https://doi.org/10.1007/978-1-0716-1418-1.",
+    "title": "27  Gradient boosting",
+    "section": "27.3 Boosting",
+    "text": "27.3 Boosting\nThe core idea of boosting is as simple as it is intuitive: By aggregating the insights of multiple weak models, a much more powerful complex model can be formed. The new model ensemble is generally superior in terms of predictive performance. While there are various computational implementations of boosting, we will restrict our scope to decision trees as introduced in the previous unit.\n\n27.3.1 Trees revisited\nA single tree \\(T\\) splits up the feature space into prediction regions \\(R_j\\) for \\(j = 1, \\dots, J\\). Each observation \\(x\\) from the training data is assigned to a prediction region \\(R_j\\) and receives a constant value \\(\\gamma_j\\). The final prediction \\(\\hat{y}\\) is a function of the constants returned from all regions:\n\\[\n\\hat{y} = f(x) = \\sum_{j= 1}^{J}\\gamma_jI(x \\in R_j)\n\\tag{27.1}\\]\nThus, the tree \\(T\\) is determined by the input \\(x\\) and the parameter space \\(\\Theta = \\{R_j, \\gamma_j\\}_{1}^{J}\\) which contains said regions and constant terms. A tree ensemble can the be described as the sum of \\(M\\) trees \\(T(x; \\Theta)\\), as summarised in Equation 27.2.\n\\[\nf_M(x) = \\sum_{m=1}^{M}T(x;\\Theta_m)\n\\tag{27.2}\\]\nIn contrast to random forests, where the goal is to attain maximum variance among trees, boosted trees actually learn from each other. Each subsequent tree should improve on the errors made by the current one. It does so by finding the parameter values that minimise the loss function \\(L(f)\\).1\n1 There is no analytical solution to this which can be computed via a single formula. Instead, it poses an optimisation problem that requires specialised numerical techniques. In the end, these can only provide approximate solutions.\n\n27.3.2 Loss functions and gradient descent\nGiven \\(N\\) observations, let \\(y_i\\) represent the labels of the response variable and \\(f(x_i)\\) the prediction function for a data point \\(x_i\\). There are numerous metrics that can be used to quantify the “loss” \\(L(y_i, f(x_i))\\), such as squared errors for regression or deviance for classification. The full loss function \\(L(f)\\) is given by Equation 27.3.\n\\[\nL(f) = \\sum_{i=1}^N L(y_i, f(x_i))\n\\tag{27.3}\\]\nThe multi-dimensional space can be conceptualised as a mountain range where we are looking for paths that lead us back to level ground. The loss function quantifies the amount of energy we have to expend during this endeavor. For this reason, it would be a good idea to keep track of all the paths we could take. As fearless as we are, we want to opt for the steepest paths that lead us back down as quickly as possible.\nMathematically, this can be done via the gradient \\(\\mathbf{g}_m\\), which is a vector of partial derivatives. It captures how a function with multiple variables changes in different directions. Essentially, it is akin to a map that indicates all paths and how steep they are. One possible path, a gradient component \\(g_{mi}\\), would have the general form in Equation 27.4.\n\\[\ng_{mi} = \\frac{\\partial L(y, f(x_i))}{\\partial f(x_i)}\n\\tag{27.4}\\]\nThe steepest path, and thus the most rapid decrease in the loss function, is the negative gradient \\(-\\mathbf{g}_m\\), determining the predictions of the next boosted tree. It is, therefore, no surprise that this procedure is also known as gradient descent.",
     "crumbs": [
       "Statistical Modelling and Machine Learning",
-      "<span class='chapter-number'>26</span>  <span class='chapter-title'>Gradient boosting</span>"
+      "<span class='chapter-number'>27</span>  <span class='chapter-title'>Gradient boosting</span>"
     ]
   },
   {
@@ -1036,12 +1036,12 @@
   {
     "objectID": "Gradient_boosting.html#recommended-reading",
     "href": "Gradient_boosting.html#recommended-reading",
-    "title": "26  Gradient boosting",
-    "section": "26.1 Recommended reading",
-    "text": "26.1 Recommended reading\n\nJames et al. (2021): Chapter 8.2\nHastie, Tibshirani, and Friedman (2017): Chapter 10",
+    "title": "27  Gradient boosting",
+    "section": "27.1 Recommended reading",
+    "text": "27.1 Recommended reading\n\nJames et al. (2021): Chapter 8.2\nHastie, Tibshirani, and Friedman (2017): Chapters 9 & 10",
     "crumbs": [
       "Statistical Modelling and Machine Learning",
-      "<span class='chapter-number'>26</span>  <span class='chapter-title'>Gradient boosting</span>"
+      "<span class='chapter-number'>27</span>  <span class='chapter-title'>Gradient boosting</span>"
     ]
   },
   {
@@ -1691,6 +1691,17 @@
     "crumbs": [
       "Inferential Statistics",
       "<span class='chapter-number'>18</span>  <span class='chapter-title'>Hypothesis testing</span>"
+    ]
+  },
+  {
+    "objectID": "Gradient_boosting.html#implementation-in-r",
+    "href": "Gradient_boosting.html#implementation-in-r",
+    "title": "27  Gradient boosting",
+    "section": "27.4 Implementation in R",
+    "text": "27.4 Implementation in R\n\n# Load libraries\nlibrary(gbm)\nlibrary(xgboost)\n\n# Load data\n\n\n\n\n\n\n\nWarning\n\n\n\nThis page is still under construction. More content will be added soon!\n\n\n\n\n\n\nHastie, Trevor, Robert Tibshirani, and Jerome H. Friedman. 2017. The Elements of Statistical Learning: Data Mining, Inference, and Prediction. 2nd ed. New York, NY: Springer.\n\n\nJames, Gareth, Daniela Witten, Trevor Hastie, and Robert Tibshirani. 2021. An Introduction to Statistical Learning: With Applications in r. New York: Springer. https://doi.org/10.1007/978-1-0716-1418-1.",
+    "crumbs": [
+      "Statistical Modelling and Machine Learning",
+      "<span class='chapter-number'>27</span>  <span class='chapter-title'>Gradient boosting</span>"
     ]
   }
 ]

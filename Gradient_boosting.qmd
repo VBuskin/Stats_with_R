@@ -27,7 +27,7 @@ bibliography: R.bib
 
 > @james_introduction_2021: Chapter 8.2
 >
-> @hastie2017: Chapter 10
+> @hastie2017: Chapters 9 & 10
 
 ## Preparation
 
@@ -35,42 +35,90 @@ bibliography: R.bib
 
 The core idea of **boosting** is as simple as it is intuitive: By
 aggregating the insights of multiple weak models, a much more powerful
-complex model can be formed. The new model ensemble is argued to be
-superior in terms of predictive performance. Boosting is quite
-versatile, but we will restrict our scope to decision trees as
-introduced in the [previous
+complex model can be formed. The new model ensemble is generally
+superior in terms of predictive performance. While there are various
+computational implementations of boosting, we will restrict our scope to
+decision trees as introduced in the [previous
 unit](Decision_trees_and_random_forests.qmd).
+
+### Trees revisited
+
+A single tree $T$ splits up the feature space into prediction regions
+$R_j$ for $j = 1, \dots, J$. Each observation $x$ from the training data
+is assigned to a prediction region $R_j$ and receives a constant value
+$\gamma_j$. The final prediction $\hat{y}$ is a function of the
+constants returned from all regions:
+
+$$
+\hat{y} = f(x) = \sum_{j= 1}^{J}\gamma_jI(x \in R_j)
+$$ {#eq-tree}
+
+Thus, the tree $T$ is determined by the input $x$ and the parameter
+space $\Theta = \{R_j, \gamma_j\}_{1}^{J}$ which contains said regions
+and constant terms. A tree ensemble can the be described as the sum of
+$M$ trees $T(x; \Theta)$, as summarised in @eq-ensemble.
+
+$$
+f_M(x) = \sum_{m=1}^{M}T(x;\Theta_m)
+$$ {#eq-ensemble}
+
+In contrast to random forests, where the goal is to attain maximum
+variance among trees, boosted trees actually learn from each other. Each
+subsequent tree should improve on the errors made by the current one. It
+does so by finding the parameter values that minimise the **loss
+function** $L(f)$.[^gradient_boosting-1]
+
+[^gradient_boosting-1]: There is no analytical solution to this which
+    can be computed via a single formula. Instead, it poses an
+    optimisation problem that requires specialised numerical techniques.
+    In the end, these can only provide approximate solutions.
 
 ### Loss functions and gradient descent
 
-A possible way of quantifying a model's errors is by means of a **loss
-function**. Given $N$ observations, let $y_i$ represent the labels of
-the response variable and $f(x_i)$ the predicted value for a data point
-$x_i$. Then the corresponding multivariable loss function would be
-$L(y_i, f(x_i))$, with the loss itself having the form in
-@eq-boost-loss. There are various metrics that can be used as concrete
-measures of loss. Squared errors are common for continuous target
-variables, whereas deviance, which is based on log-likelihood, would be
-more appropriate for categorical ones.
+Given $N$ observations, let $y_i$ represent the labels of the response
+variable and $f(x_i)$ the prediction function for a data point $x_i$.
+There are numerous metrics that can be used to quantify the "loss"
+$L(y_i, f(x_i))$, such as squared errors for regression or deviance for
+classification. The full loss function $L(f)$ is given by
+@eq-boost-loss.
 
 $$
 L(f) = \sum_{i=1}^N L(y_i, f(x_i))
 $$ {#eq-boost-loss}
 
-In order to find the best possible model, it is crucial to find the
-values that minimise $L(f)$. Afterwards, it is possible to compute the
-rate of change in the predicted value, i.e., the **gradient** $g_{m}$
-for a given increment $h_m$. The gradient is computed by
+The multi-dimensional space can be conceptualised as a mountain range
+where we are looking for paths that lead us back to level ground. The
+loss function quantifies the amount of energy we have to expend during
+this endeavor. For this reason, it would be a good idea to keep track of
+all the paths we could take. As fearless as we are, we want to opt for
+the steepest paths that lead us back down as quickly as possible.
+
+Mathematically, this can be done via the **gradient** $\mathbf{g}_m$,
+which is a vector of partial derivatives. It captures how a function
+with multiple variables changes in different directions. Essentially, it
+is akin to a map that indicates all paths and how steep they are. One
+possible path, a gradient component $g_{mi}$, would have the general
+form in @eq-boost-gradient.
 
 $$
-g_{mi} = \frac{\partial L(y, f(x_i))}{\partial f(x_i)}.
+g_{mi} = \frac{\partial L(y, f(x_i))}{\partial f(x_i)}
 $$ {#eq-boost-gradient}
 
-Essentially, it is a derivative of the function $L(y_i, f(x_i))$ with
-respect to the variable $f(x_i)$, rendering it a **partial derivative**
-(as signified by $\partial$ symbol).
+The steepest path, and thus the most rapid decrease in the loss
+function, is the **negative gradient** $-\mathbf{g}_m$, determining the
+predictions of the next boosted tree. It is, therefore, no surprise that
+this procedure is also known as **gradient descent**.
 
-### Gradient boosting
+## Implementation in R
+
+```{r}
+# Load libraries
+library(gbm)
+library(xgboost)
+
+# Load data
+```
+
 
 ::: callout-warning
 This page is still under construction. More content will be added soon!
