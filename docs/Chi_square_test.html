@@ -5043,7 +5043,10 @@ vertical-align: -.125em;
   <li><a href="#preparation" id="toc-preparation" class="nav-link" data-scroll-target="#preparation"><span class="header-section-number">20.2</span> Preparation</a></li>
   <li><a href="#the-pearson-chi2-test-of-independence" id="toc-the-pearson-chi2-test-of-independence" class="nav-link" data-scroll-target="#the-pearson-chi2-test-of-independence"><span class="header-section-number">20.3</span> The Pearson <span class="math inline">\(\chi^2\)</span>-test of independence</a>
   <ul>
-  <li><a href="#how-do-i-make-sense-of-the-test-results" id="toc-how-do-i-make-sense-of-the-test-results" class="nav-link" data-scroll-target="#how-do-i-make-sense-of-the-test-results"><span class="header-section-number">20.3.1</span> How do I make sense of the test results?</a></li>
+  <li><a href="#observerd-frequencies" id="toc-observerd-frequencies" class="nav-link" data-scroll-target="#observerd-frequencies"><span class="header-section-number">20.3.1</span> Observerd frequencies</a></li>
+  <li><a href="#expected-frequencies" id="toc-expected-frequencies" class="nav-link" data-scroll-target="#expected-frequencies"><span class="header-section-number">20.3.2</span> Expected frequencies</a></li>
+  <li><a href="#conducting-the-test" id="toc-conducting-the-test" class="nav-link" data-scroll-target="#conducting-the-test"><span class="header-section-number">20.3.3</span> Conducting the test</a></li>
+  <li><a href="#how-do-i-make-sense-of-the-test-results" id="toc-how-do-i-make-sense-of-the-test-results" class="nav-link" data-scroll-target="#how-do-i-make-sense-of-the-test-results"><span class="header-section-number">20.3.4</span> How do I make sense of the test results?</a></li>
   </ul></li>
   <li><a href="#pearson-residuals" id="toc-pearson-residuals" class="nav-link" data-scroll-target="#pearson-residuals"><span class="header-section-number">20.4</span> Pearson residuals</a></li>
   <li><a href="#effect-size" id="toc-effect-size" class="nav-link" data-scroll-target="#effect-size"><span class="header-section-number">20.5</span> Effect size</a></li>
@@ -5166,26 +5169,16 @@ H_0 : \pi_{ij} = P(X = i)P(Y = j).
 <li><p>the <strong>expected frequencies</strong> <span class="math inline">\(e_{ij}\)</span>, which we would expect to see if <span class="math inline">\(H_0\)</span> were true,</p></li>
 </ul>
 <p>where <span class="math inline">\(f, e \in \mathbb{N}\)</span>. The indices <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> uniquely identify the cell counts in all column-row combinations of a contingency table.</p>
-<div class="callout callout-style-default callout-note callout-titled" title="The structure of a contingency table">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-The structure of a contingency table
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>The table below represents a generic contingency table where <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are categorical variables and have the values <span class="math inline">\(X = \{x_1, x_2, \dots, x_i\}\)</span> and <span class="math inline">\(Y = \{y_1, y_2, \dots, y_j \}\)</span>. In the table, each cell indicates the count of observation <span class="math inline">\(f_{ij}\)</span> corresponding to the <span class="math inline">\(i\)</span>-th row and <span class="math inline">\(j\)</span>-th column.</p>
+<section id="observerd-frequencies" class="level3" data-number="20.3.1">
+<h3 data-number="20.3.1" class="anchored" data-anchor-id="observerd-frequencies"><span class="header-section-number">20.3.1</span> Observerd frequencies</h3>
+<p>The table below represents a generic contingency table where <span class="math inline">\(Y\)</span> and <span class="math inline">\(X\)</span> are categorical variables and have the values <span class="math inline">\(Y = \{y_1, y_2, \dots, y_i \}\)</span> and <span class="math inline">\(X = \{x_1, x_2, \dots, x_j\}\)</span>. In the table, each cell indicates the count of observation <span class="math inline">\(f_{ij}\)</span> corresponding to the <span class="math inline">\(i\)</span>-th row and <span class="math inline">\(j\)</span>-th column.</p>
 <table class="table">
 <thead>
 <tr class="header">
 <th></th>
 <th></th>
 <th></th>
-<th><span class="math inline">\(Y\)</span></th>
+<th><span class="math inline">\(X\)</span></th>
 <th></th>
 <th></th>
 <th></th>
@@ -5195,15 +5188,15 @@ The structure of a contingency table
 <tr class="odd">
 <td></td>
 <td></td>
-<td><span class="math inline">\(y_1\)</span></td>
-<td><span class="math inline">\(y_2\)</span></td>
+<td><span class="math inline">\(x_1\)</span></td>
+<td><span class="math inline">\(x_2\)</span></td>
 <td>…</td>
-<td><span class="math inline">\(y_j\)</span></td>
+<td><span class="math inline">\(x_j\)</span></td>
 <td></td>
 </tr>
 <tr class="even">
 <td></td>
-<td><span class="math inline">\(x_1\)</span></td>
+<td><span class="math inline">\(y_1\)</span></td>
 <td><span class="math inline">\(f_{11}\)</span></td>
 <td><span class="math inline">\(f_{12}\)</span></td>
 <td>…</td>
@@ -5212,7 +5205,7 @@ The structure of a contingency table
 </tr>
 <tr class="odd">
 <td></td>
-<td><span class="math inline">\(x_2\)</span></td>
+<td><span class="math inline">\(y_2\)</span></td>
 <td><span class="math inline">\(f_{21}\)</span></td>
 <td><span class="math inline">\(f_{22}\)</span></td>
 <td>…</td>
@@ -5220,7 +5213,7 @@ The structure of a contingency table
 <td></td>
 </tr>
 <tr class="even">
-<td><span class="math inline">\(X\)</span></td>
+<td><span class="math inline">\(Y\)</span></td>
 <td>…</td>
 <td>…</td>
 <td>…</td>
@@ -5230,18 +5223,16 @@ The structure of a contingency table
 </tr>
 <tr class="odd">
 <td></td>
-<td><span class="math inline">\(x_i\)</span></td>
+<td><span class="math inline">\(y_i\)</span></td>
 <td><span class="math inline">\(f_{i1}\)</span></td>
 <td><span class="math inline">\(f_{i2}\)</span></td>
 <td>…</td>
-<td><span class="math inline">\(f_{3j}\)</span></td>
+<td><span class="math inline">\(f_{ij}\)</span></td>
 <td></td>
 </tr>
 </tbody>
 </table>
-</div>
-</div>
-</div>
+<div style="margin-top: 20px;"></div>
 <p>In the <code>cl.order</code> data, the <strong>observed frequencies</strong> correspond to how often each <code>ORDER</code> value (i.e., <code>mc-sc</code> and <code>sc-mc</code>) is attested for a given <code>SUBORDTYPE</code> (i.e., <code>temp</code> and <code>caus</code>). This can be done in a very straightforward fashion using R’s <code>table()</code> function on the variables of interest.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>observed_freqs <span class="ot">&lt;-</span> <span class="fu">table</span>(cl.order<span class="sc">$</span>ORDER, cl.order<span class="sc">$</span>SUBORDTYPE)</span>
@@ -5254,7 +5245,71 @@ The structure of a contingency table
   sc-mc   15  113</code></pre>
 </div>
 </div>
+</section>
+<section id="expected-frequencies" class="level3" data-number="20.3.2">
+<h3 data-number="20.3.2" class="anchored" data-anchor-id="expected-frequencies"><span class="header-section-number">20.3.2</span> Expected frequencies</h3>
 <p>The <strong>expected frequencies</strong> require a few additional steps. Usually, these steps are performed automatically when conducting the chi-squared test in R, so you don’t have to worry about calculating them by hand. We will do it anyway to drive home the rationale of the test.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th></th>
+<th></th>
+<th></th>
+<th><span class="math inline">\(X\)</span></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td></td>
+<td><span class="math inline">\(x_1\)</span></td>
+<td><span class="math inline">\(x_2\)</span></td>
+<td>…</td>
+<td><span class="math inline">\(x_j\)</span></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td><span class="math inline">\(y_1\)</span></td>
+<td><span class="math inline">\(e_{11}\)</span></td>
+<td><span class="math inline">\(e_{12}\)</span></td>
+<td>…</td>
+<td><span class="math inline">\(e_{1j}\)</span></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><span class="math inline">\(y_2\)</span></td>
+<td><span class="math inline">\(e_{21}\)</span></td>
+<td><span class="math inline">\(e_{22}\)</span></td>
+<td>…</td>
+<td><span class="math inline">\(e_{2j}\)</span></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(Y\)</span></td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><span class="math inline">\(y_i\)</span></td>
+<td><span class="math inline">\(e_{i1}\)</span></td>
+<td><span class="math inline">\(e_{i2}\)</span></td>
+<td>…</td>
+<td><span class="math inline">\(e_{ij}\)</span></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div style="margin-top: 20px;"></div>
 <p>The expected frequencies <span class="math inline">\(e_{ij}\)</span> are given by the formula in <a href="#eq-exp-freq" class="quarto-xref">Equation&nbsp;<span>20.3</span></a>. In concrete terms, we go through each cell in the cross-table and multiply the corresponding row sums with the column sums, dividing the result by the total number of occurrences in the sample. For example, there are <span class="math inline">\(184\)</span> occurrences of <code>mc-sc</code> clause orders where the subordinate clause is causal. The row sum is <span class="math inline">\(184 + 91 = 275\)</span> and the column sum is <span class="math inline">\(184 + 15 = 199\)</span>. Next, we take their product <span class="math inline">\(275 \times 199\)</span> and divide it by the total number of observations, which is <span class="math inline">\(184 + 91 + 15 + 113 = 403\)</span>. Thus we obtain an expected frequency of <span class="math inline">\(\frac{275 \times 199}{403} = 135.79\)</span> under the null hypothesis.</p>
 <p><span id="eq-exp-freq"><span class="math display">\[
 e_{ij} = \frac{i\textrm{th row sum} \times j \textrm{th column sum}}{\textrm{number of observations}}
@@ -5283,12 +5338,15 @@ mc-sc 135.79404 139.20596
 sc-mc  63.20596  64.79404</code></pre>
 </div>
 </div>
+</section>
+<section id="conducting-the-test" class="level3" data-number="20.3.3">
+<h3 data-number="20.3.3" class="anchored" data-anchor-id="conducting-the-test"><span class="header-section-number">20.3.3</span> Conducting the test</h3>
 <p>The <span class="math inline">\(\chi^2\)</span>-test now offers a convenient way of quantifying the differences between the two tables above. It measures how much the observed frequencies <strong>deviate</strong> from the expected frequencies <strong>for each cell</strong> in a contingency table <span class="citation" data-cites="heumann_introduction_2022">(cf. <a href="references.html#ref-heumann_introduction_2022" role="doc-biblioref">Heumann, Schomaker, and Shalabh 2022</a>: 249-251)</span>. The gist of this procedure is summarised in <a href="#eq-chisq-simple" class="quarto-xref">Equation&nbsp;<span>20.4</span></a>.</p>
 <p><span id="eq-chisq-simple"><span class="math display">\[
 \text{Chi-squared } \chi^2 =\frac{(\text{observed} - \text{expected})^2}{\text{expected}}
 \tag{20.4}\]</span></span></p>
 <div class="callout callout-style-default callout-note callout-titled" title="Formal definition of the chi-squared test">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -5297,13 +5355,83 @@ Formal definition of the chi-squared test
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Given <span class="math inline">\(n\)</span> observations and <span class="math inline">\(k\)</span> degrees of freedom <span class="math inline">\(df\)</span>, the joint squared deviations between <span class="math inline">\(f_{ij}\)</span> and <span class="math inline">\(e_{ij}\)</span> contribute to the final <span class="math inline">\(\chi^2\)</span>-score, which is defined as</p>
 <p><span id="eq-chisq"><span class="math display">\[
-\chi^2 = \sum_{i=1}^{I}\sum_{i=j}^{J}{\frac{(f_{ij} - e_{ij})^2}{e_{ij}}}
+\chi^2 = \sum_{i=1}^{I}\sum_{j=1}^{J}{\frac{(f_{ij} - e_{ij})^2}{e_{ij}}}
 \tag{20.5}\]</span></span></p>
 <p>for <span class="math inline">\(i = 1, ..., I\)</span> and <span class="math inline">\(j = 1, ..., J\)</span> and <span class="math inline">\(df = (\textrm{number of rows} -1) \times (\textrm{number of columns} - 1)\)</span>.</p>
+<p>Applying the formula, the updated contingency would have the following form:</p>
+<table class="table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th></th>
+<th></th>
+<th><span class="math inline">\(X\)</span></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td></td>
+<td><span class="math inline">\(x_1\)</span></td>
+<td><span class="math inline">\(x_2\)</span></td>
+<td>…</td>
+<td><span class="math inline">\(x_j\)</span></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td><span class="math inline">\(y_1\)</span></td>
+<td><span class="math inline">\(\frac{(f_{11} - e_{11})^2}{e_{11}}\)</span></td>
+<td><span class="math inline">\(\frac{(f_{12} - e_{12})^2}{e_{12}}\)</span></td>
+<td>…</td>
+<td><span class="math inline">\(\frac{(f_{1j} - e_{1j})^2}{e_{1j}}\)</span></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><span class="math inline">\(y_2\)</span></td>
+<td><span class="math inline">\(\frac{(f_{21} - e_{21})^2}{e_{21}}\)</span></td>
+<td><span class="math inline">\(\frac{(f_{22} - e_{22})^2}{e_{22}}\)</span></td>
+<td>…</td>
+<td><span class="math inline">\(\frac{(f_{2j} - e_{2j})^2}{e_{2j}}\)</span></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(Y\)</span></td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><span class="math inline">\(y_i\)</span></td>
+<td><span class="math inline">\(\frac{(f_{i1} - e_{i1})^2}{e_{i1}}\)</span></td>
+<td><span class="math inline">\(\frac{(f_{i2} - e_{i1})^2}{e_{i2}}\)</span></td>
+<td>…</td>
+<td><span class="math inline">\(\frac{(f_{ij} - e_{ij})^2}{e_{ij}}\)</span></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
@@ -5350,8 +5478,9 @@ Assumptions of the chi-squared test
 <p>In case of dependent observations (e.g., multiple measurements per participant), the default approach is to fit a multilevel model that can control for grouping factors (see mixed-effects regression in <a href="Mixed_effects_regression.html#sec-mer" class="quarto-xref"><span>Section&nbsp;23.3</span></a>.)</p>
 </div>
 </div>
-<section id="how-do-i-make-sense-of-the-test-results" class="level3" data-number="20.3.1">
-<h3 data-number="20.3.1" class="anchored" data-anchor-id="how-do-i-make-sense-of-the-test-results"><span class="header-section-number">20.3.1</span> How do I make sense of the test results?</h3>
+</section>
+<section id="how-do-i-make-sense-of-the-test-results" class="level3" data-number="20.3.4">
+<h3 data-number="20.3.4" class="anchored" data-anchor-id="how-do-i-make-sense-of-the-test-results"><span class="header-section-number">20.3.4</span> How do I make sense of the test results?</h3>
 <p>The test output has three ‘ingredients’:</p>
 <ul>
 <li>the <strong>chi-squared score</strong> (X-squared)</li>
@@ -5404,7 +5533,7 @@ Assumptions of the chi-squared test
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Testing the residuals: Configural Frequency Analysis">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -5413,7 +5542,7 @@ Testing the residuals: Configural Frequency Analysis
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>The chi-squared test only provides a <span class="math inline">\(p\)</span>-value for the entire contingency table. But what if we wanted to test the residuals for their significance as well? Configural Frequency Analysis <span class="citation" data-cites="krauth_lienert_kfa">(<a href="references.html#ref-krauth_lienert_kfa" role="doc-biblioref">Krauth and Lienert 1973</a>)</span> allows us to do exactly that: It performs a significance test for <strong>all combinations of variable values</strong> in a cross-table. Moreover, CFA is not limited to two variables only. Technically, users can test for associations between arbitrary numbers of variables, but should be aware of the increasing complexity of interpretation.</p>
 <div class="cell">
@@ -5423,10 +5552,10 @@ Testing the residuals: Configural Frequency Analysis
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>config_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(observed_freqs)</span>
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to matrix</span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>configs <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(config_df[, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])  <span class="co"># First two columns contain the configurations</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>counts <span class="ot">&lt;-</span> config_df<span class="sc">$</span>Freq                <span class="co"># The Freq column contains the counts</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>configs <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(config_df[, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])  <span class="co"># first two columns contain the configurations (= combinations of variable values)</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>counts <span class="ot">&lt;-</span> config_df<span class="sc">$</span>Freq <span class="co"># Freq column contains the corresponding counts</span></span>
 <span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform CFA</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform CFA on configuarations and counts; apply Bonferroni correction for multiple testing</span></span>
 <span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>cfa_output <span class="ot">&lt;-</span> <span class="fu">cfa</span>(configs, counts, <span class="at">bonferroni =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Print output</span></span>
@@ -5483,7 +5612,7 @@ V = \sqrt{\frac{\chi^2}{n \times (min(nrow, ncol) - 1)}}.
 <h2 data-number="20.6" class="anchored" data-anchor-id="likelihood-based-inference"><span class="header-section-number">20.6</span> Likelihood-based inference</h2>
 <p>Since causal subordinate clauses typically follow the main clause in the sample, it may seem tempting to draw conclusions about the <strong>probability</strong> of a certain outcome of clause <code>ORDER</code>. Unfortunately, the <span class="math inline">\(\chi^2\)</span>-test is <strong>not designed</strong> for this kind of statistical inference. An approach that would actually allow the estimation of probabilities is <a href="./Logistic_regression.html">logistic regression</a>.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="What would that look like?">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -5492,7 +5621,7 @@ What would that look like?
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to factors and define reference levels</span></span>
