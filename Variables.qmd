@@ -42,9 +42,10 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 library(kableExtra)
 ```
 
-Please download the file [`Paquot_Larsson_2020_data.xlsx`](https://osf.io/eu4gw)
-[@paquotDescriptiveStatisticsVisualization2020] and store
-it in your working directory.
+Please download the file
+[`Paquot_Larsson_2020_data.xlsx`](https://osf.io/eu4gw)
+[@paquotDescriptiveStatisticsVisualization2020] and store it in your
+working directory.
 
 ```{r, echo = TRUE, output = FALSE}
 # Load libraries
@@ -104,11 +105,14 @@ head(cl.order)
 
 ## The big picture: Populations and samples
 
-In order to investigate one or more linguistic features, we
-first need to collect relevant **observations**, which typically
-correspond to linguistic utterances in a corpus-linguistic context.
-Since it is not feasible to examine, for instance, the entirety of all linguistic
-utterances ever produced, i.e., the virtually infinite **population**, we rely on subsets of it: **samples**. Good research is characterised by good **sampling procedures** that limit the **bias** present in any sample, thus improving the generalisability of potential findings. 
+In order to investigate one or more linguistic features, we first need
+to collect relevant **observations**, which typically correspond to
+linguistic utterances in a corpus-linguistic context. Since it is not
+feasible to examine, for instance, the entirety of all linguistic
+utterances ever produced, i.e., the virtually infinite **population**,
+we rely on subsets of it: **samples**. Good research is characterised by
+good **sampling procedures** that limit the **bias** present in any
+sample, thus improving the generalisability of potential findings.
 
 To state this more formally, let $\omega$ ('lower-case Omega') denote a
 single observation of interest. The full set of theoretically possible
@@ -131,8 +135,8 @@ value such as `informal`, or `Utterance length` a hypothetical value of
 
 In the statistical literature, variables are usually represented by
 upper-case letters, such as $X$. For each observation
-$\omega \in \Omega$, $X$ has a value $x$. The set $S$
-comprises all possible unique values of $X$, e.g.,
+$\omega \in \Omega$, $X$ has a value $x$. The set $S$ comprises all
+possible unique values of $X$, e.g.,
 
 -   $S_{\text{Register}} = \{\text{informal}, \text{formal}, ...\}$,
 
@@ -141,7 +145,6 @@ comprises all possible unique values of $X$, e.g.,
 -   ...
 
 ::: {.callout-note title="Number of (unique) values in R" collapse="true"}
-
 To count the number of items in a vector, which correspond to the total
 number $n$ of attested values of $X$, we can use `length()`:
 
@@ -166,7 +169,9 @@ unique(cl.order$SUBORDTYPE)
 ### Datasets
 
 Information on variables and their values is conventionally arranged in
-a **dataset**, which is essentially a matrix with **rows** (= observations) and **columns** (= variables). Consider the `head()` of the clause data:
+a **dataset**, which is essentially a matrix with **rows** (=
+observations) and **columns** (= variables). Consider the `head()` of
+the clause data:
 
 ```{r, echo = FALSE}
 head(cl.order) %>% 
@@ -177,9 +182,9 @@ head(cl.order) %>%
 ```{=html}
 <div style="margin-top: 10px;"></div>
 ```
-
-Assuming that $n$ denotes the row number and
-$p$ the column number, the abstract form of a dataset is an $n \times p$ matrix of the form in @eq-dataset.
+Assuming that $n$ denotes the row number and $p$ the column number, the
+abstract form of a dataset is an $n \times p$ matrix of the form in
+@eq-dataset.
 
 $$
 \begin{pmatrix}
@@ -190,8 +195,6 @@ $$
     n & x_{n1} & x_{n2} & \cdots & x_{np}
 \end{pmatrix}
 $$ {#eq-dataset}
-
-
 
 ### Data types
 
@@ -295,4 +298,3 @@ Consider the general form of the data matrix from @eq-dataset.
 
 2.  What would be $\Omega$ and $S$?
 :::
-

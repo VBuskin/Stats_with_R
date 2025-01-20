@@ -38,84 +38,46 @@ General:
 
 ## On scientific inference {#sec-hyp}
 
-Science begins and ends with theory, and statistics acts as the
-"go-between". Regardless of the discipline, solid research is
-characterised by a robust theoretical foundation that gives rise to
-**substantive hypotheses**, i.e., theory-driven predictions about a
-population of interest. From this rather concrete hypothesis, it should
-be possible to derive a **statistical hypothesis** that re-states the
-prediction in more formal/mathematical terms. After checking it against
-real-world data, researchers can either **confirm** or **reject** their
-hypothesis, after which they may decide to amend (or even abandon) their
-theory – or keep it as is.
+Science begins and ends with theory, and statistics acts as the "go-between". Regardless of the discipline, solid research is characterised by a robust theoretical foundation that gives rise to **substantive hypotheses**, i.e., theory-driven predictions about a population of interest. From this rather concrete hypothesis, it should be possible to derive a **statistical hypothesis** that re-states the prediction in more formal/mathematical terms. After checking it against real-world data, researchers can either **confirm** or **reject** their hypothesis, after which they may decide to amend (or even abandon) their theory – or keep it as is.
 
 ## Null hypothesis significance testing (NHST)
 
-The **NHST** framework offers researchers a convenient way of testing
-their theoretical assumptions. This chiefly involves setting up a set of
-(ideally) falsifiable statistical hypotheses, gathering evidence from
-the observed data and computing the (in)famous '$p$-value' to determine
-"statistical significance" -- a notion that is frequently misinterpreted
-in scientific studies.
+The **NHST** framework offers researchers a convenient way of testing their theoretical assumptions. This chiefly involves setting up a set of (ideally) falsifiable statistical hypotheses, gathering evidence from the observed data and computing the (in)famous '$p$-value' to determine "statistical significance" -- a notion that is frequently misinterpreted in scientific studies.
 
 ::: callout-note
 ## Is this the only way of testing hypotheses?
 
-The answer is a resounding **no**. Despite its immense popularity, NHST
-is problematic in many respects and hence subject to heavy criticism
-(cf. @dienesUnderstandingPsychologyScience2008: 76;
-@baguleySeriousStatsGuide2012: 143-144). There are other statistical
-schools that can remedy many of its shortcomings and come with distinct
-advantages, such as those relying on likelihood-based inference and
-Bayesian principles. Although these are also becoming increasingly
-common in linguistics, they are still restricted to very few
-sub-disciplines and journals (mostly in the area of psycholinguistics).
+The answer is a resounding **no**. Despite its immense popularity, NHST is problematic in many respects and hence subject to heavy criticism (cf. @dienesUnderstandingPsychologyScience2008: 76; @baguleySeriousStatsGuide2012: 143-144). There are other statistical schools that can remedy many of its shortcomings and come with distinct advantages, such as those relying on likelihood-based inference and Bayesian principles. Although these are also becoming increasingly common in linguistics, they are still restricted to very few sub-disciplines and journals (mostly in the area of psycholinguistics).
 :::
 
 ### $H_0$ vs. $H_1$
 
-Statistical hypotheses always come in pairs: A **null hypothesis** is
-accompanied by an **alternative hypothesis**. They are set up before (!)
-seeing the data and justified by previous research.
+Statistical hypotheses always come in pairs: A **null hypothesis** is accompanied by an **alternative hypothesis**. They are set up before (!) seeing the data and justified by previous research.
 
--   The **null hypothesis** $H_0$ describes the "default state of the
-    world" [@james_introduction_2021: 555]. It claims there is no
-    noteworthy effect to be observed in the data.
+-   The **null hypothesis** $H_0$ describes the "default state of the world" [@james_introduction_2021: 555]. It claims there is no noteworthy effect to be observed in the data.
 
--   The **alternative hypothesis** $H_1$ (or $H_a$) plainly states that
-    the $H_0$ is false, suggesting that there is an effect of some kind.
+-   The **alternative hypothesis** $H_1$ (or $H_a$) plainly states that the $H_0$ is false, suggesting that there is an effect of some kind.
 
 ::: {.callout-tip collapse="true" title="Example: Hypotheses for categorical data"}
-We are interested in finding out whether English clause `ORDER` ('sc-mc'
-or 'mc-sc') depends on the type of the subordinate clause
-(`SUBORDTYPE`), which can be either temporal ('temp') or causal
-('caus').
+We are interested in finding out whether English clause `ORDER` ('sc-mc' or 'mc-sc') depends on the type of the subordinate clause (`SUBORDTYPE`), which can be either temporal ('temp') or causal ('caus').
 
 Our hypotheses are:
 
 -   $H_0:$ The variables `ORDER` and `SUBORDTYPE` are independent.
 
--   $H_1:$ The variables `ORDER` and `SUBORDTYPE` are **not**
-    independent.
+-   $H_1:$ The variables `ORDER` and `SUBORDTYPE` are **not** independent.
 :::
 
 ::: {.callout-tip collapse="true" title="Example: Hypotheses for continuous data"}
-As part of a phonetic study, we compare the base frequencies of the F1
-formants of vowels (in Hz) for male and female speakers of Apache. We
-forward the following hypotheses:
+As part of a phonetic study, we compare the base frequencies of the F1 formants of vowels (in Hz) for male and female speakers of Apache. We forward the following hypotheses:
 
 -   $H_0:$ mean `F1 frequency` of men $=$ mean `F1 frequency` of women.
 
--   $H_1:$ mean `F1 frequency` of men $\ne$ mean `F1 frequency` of
-    women.
+-   $H_1:$ mean `F1 frequency` of men $\ne$ mean `F1 frequency` of women.
 :::
 
 ::: {.callout-note collapse="true" title="In formal terms"}
-To be precise, we use the hypotheses to make statements about a
-**population parameter** $\theta$, which can be a mean $\mu$ for
-continuous data or a proportion $\pi$ for categorical data, among other
-things. Mathematically, the null and alternative hypotheses can be
-restated as in @eq-hypotheses.
+To be precise, we use the hypotheses to make statements about a **population parameter** $\theta$, which can be a mean $\mu$ for continuous data or a proportion $\pi$ for categorical data, among other things. Mathematically, the null and alternative hypotheses can be restated as in @eq-hypotheses.
 
 $$
 \begin{align}
@@ -125,79 +87,46 @@ H_1: \theta \neq 0
 $$ {#eq-hypotheses}
 :::
 
-In the NHST world, we're dealing with a "This town ain't big enough for
-the both of us" situation: While we have to state both $H_0$ and $H_1$,
-only one of them can remain at the end of the day. But how do we decide
-between these two?
+In the NHST world, we're dealing with a "This town ain't big enough for the both of us" situation: While we have to state both $H_0$ and $H_1$, only one of them can remain at the end of the day. But how do we decide between these two?
 
 ### Test statistics
 
-To facilitate the decision-making process, we proceed to gather
-statistical evidence from the observed data. Since NHST primarily
-revolves around $H_0$ (and not $H_1$!), we need to review the evidence
-the data provides against or in favour $H_0$. This is done via a **test
-statistic** $T$ that characterises the sample at hand. Essentially, you
-can think of $T$ as one-value summary of your data.
+To facilitate the decision-making process, we proceed to gather statistical evidence from the observed data. Since NHST primarily revolves around $H_0$ (and not $H_1$!), we need to review the evidence the data provides against or in favour $H_0$. This is done via a **test statistic** $T$ that characterises the sample at hand. Essentially, you can think of $T$ as one-value summary of your data.
 
 There are many possible test statistics out there:
 
--   For instance, if the data are **discrete**, the $\chi^2$ measure is
-    used to compute differences between observed and expected
-    frequencies in the entire sample.
--   In the case of **continuos** data, it is common to rely on $t$ for
-    quantifying differences between sample means.
--   Other possible test statistics include the correlation coefficient
-    $r$, $z$-scores, the $F$-statistic, and many others.
+-   For instance, if the data are **discrete**, the $\chi^2$ measure is used to compute differences between observed and expected frequencies in the entire sample.
+-   In the case of **continuos** data, it is common to rely on $t$ for quantifying differences between sample means.
+-   Other possible test statistics include the correlation coefficient $r$, $z$-scores, the $F$-statistic, and many others.
 
 ### Statistical significance
 
-The final rejection of $H_0$ is determined by the **significance
-probability** $p$. Due to the frequency and ferocity with which
-statistical significance is misinterpreted in the research literature,
-we will begin by reviewing its technical definition:
+The final rejection of $H_0$ is determined by the **significance probability** $p$. Due to the frequency and ferocity with which statistical significance is misinterpreted in the research literature, we will begin by reviewing its technical definition:
 
-> "The $p$-value is the probabilty, presuming that $H_0$ is true, that
-> the test statistic equals the observed value or a value even more
-> extreme in the direction predicted by $H_a$"
-> [@agrestiFoundationsStatisticsData2022: 163].
+> "The $p$-value is the probabilty, presuming that $H_0$ is true, that the test statistic equals the observed value or a value even more extreme in the direction predicted by $H_a$" [@agrestiFoundationsStatisticsData2022: 163].
 
 In compact notation, it is equivalent to the conditional probability
 
 $$
 P(T \geq \text{observed value} \mid H_0 \text{ is true}).
-$$ If $p$ is lower than a pre-defined threshold (typically $0.05$), also
-known as the **significance level** $\alpha$, we can reject $H_0$.
-However, if $p \geq$ 0.05, this **neither justifies rejecting nor
-accepting** the null hypothesis [@baguleySeriousStatsGuide2012: 121].
+$$ If $p$ is lower than a pre-defined threshold (typically $0.05$), also known as the **significance level** $\alpha$, we can reject $H_0$. However, if $p \geq$ 0.05, this **neither justifies rejecting nor accepting** the null hypothesis [@baguleySeriousStatsGuide2012: 121].
 
-For example, a $p$-value of $0.02$ means that we would see a test
-statistic $T$ only 2% of the time if $H_0$ were true. Since $0.02$ lies
-below our significance level $\alpha$ = $0.05$, this would suggest a
-statistically significant relationship in the data, and we could
-therefore reject $H_0$.
+For example, a $p$-value of $0.02$ means that we would see a test statistic $T$ only 2% of the time if $H_0$ were true. Since $0.02$ lies below our significance level $\alpha$ = $0.05$, this would suggest a statistically significant relationship in the data, and we could therefore reject $H_0$.
 
 ### What could go wrong? Type I and Type II errors
 
-There is always a chance that we accept or reject the wrong hypothesis;
-the four possible constellations are summarised in the table below [cf.
-@heumann_introduction_2022: 223]:
+There is always a chance that we accept or reject the wrong hypothesis; the four possible constellations are summarised in the table below [cf. @heumann_introduction_2022: 223]:
 
-|                           | $H_0$ is true                                       | $H_0$ is not true                                   |
+|   | $H_0$ is true | $H_0$ is not true |
 |-------------------|---------------------------|---------------------------|
-| $H_0$ **is not rejected** | $\color{green}{\text{Correct decision}}$            | $\color{red}{\text{Type II } (\beta)\text{-error}}$ |
-| $H_0$ **is rejected**     | $\color{red}{\text{Type I } (\alpha)\text{-error}}$ | $\color{green}{\text{Correct decision}}$            |
+| $H_0$ **is not rejected** | $\color{green}{\text{Correct decision}}$ | $\color{red}{\text{Type II } (\beta)\text{-error}}$ |
+| $H_0$ **is rejected** | $\color{red}{\text{Type I } (\alpha)\text{-error}}$ | $\color{green}{\text{Correct decision}}$ |
 
 ### The mathematics of the $p$-value
 
-Let's say that the statistical analysis of clause `ORDER` and
-`SUBORDTYPE` has returned a test statistic of $\chi^2 = 6.5$ for 2 $df$.
-In order to compute the corresponding $p$-value we need to consult the
-**sampling distribution** of this test statistic.
+Let's say that the statistical analysis of clause `ORDER` and `SUBORDTYPE` has returned a test statistic of $\chi^2 = 6.5$ for 2 $df$. In order to compute the corresponding $p$-value we need to consult the **sampling distribution** of this test statistic.
 
-A sampling distribution is a probability distribution that assigns
-probabilities to the values of a test statistic. Because most (if not
-all) of them are continuous, they have characteristic **probability
-density functions** (PDFs). Some of them are illustrated below:
+A sampling distribution is a probability distribution that assigns probabilities to the values of a test statistic. Because most (if not all) of them are continuous, they have characteristic **probability density functions** (PDFs). Some of them are illustrated below:
 
 ::: {.callout-note collapse="true" title="$\\chi^2$ distribution"}
 ```{r}
@@ -308,26 +237,15 @@ ggplot(f_distribution_data, aes(x = x, y = y)) +
 ```
 :::
 
-Because continuous functions have an infinite number of $x$-values, the
-probability of any single value must be 0.[^hypothesis_testing-1]
-Therefore, if we are interested in obtaining actual probabilities from
-the PDF, we can only do so for intervals of values. The probability that
-a value $X$ falls into the interval $a < X < b$ is in fact equivalent to
-the area under the curve between $a$ and $b$ (cf. @eq-pdf).
+Because continuous functions have an infinite number of $x$-values, the probability of any single value must be 0.[^hypothesis_testing-1] Therefore, if we are interested in obtaining actual probabilities from the PDF, we can only do so for intervals of values. The probability that a value $X$ falls into the interval $a < X < b$ is in fact equivalent to the area under the curve between $a$ and $b$ (cf. @eq-pdf).
 
-[^hypothesis_testing-1]: The proof for the underlying theorem is given
-    in Heumann et al. [-@heumann_introduction_2022: 544].
+[^hypothesis_testing-1]: The proof for the underlying theorem is given in Heumann et al. [-@heumann_introduction_2022: 544].
 
 $$
 P(a < X < b) = \int_a^b f(x)dx.
 $$ {#eq-pdf}
 
-Recall the PDF $f(x)$ of the $\chi^2$-distribution with 2 degrees of
-freedom. The $p$-value corresponds to the green area under the curve
-ranging from $x = 6.5$ up to $\infty$, which can be restated formally in
-@eq-pdf-chisq. This brings us back to the definition of the $p$-value:
-It is the probability that the $\chi^2$ score is equal to 6.5 or
-**higher**, i.e., $P(\chi^2 \geq 6.5)$.
+Recall the PDF $f(x)$ of the $\chi^2$-distribution with 2 degrees of freedom. The $p$-value corresponds to the green area under the curve ranging from $x = 6.5$ up to $\infty$, which can be restated formally in @eq-pdf-chisq. This brings us back to the definition of the $p$-value: It is the probability that the $\chi^2$ score is equal to 6.5 or **higher**, i.e., $P(\chi^2 \geq 6.5)$.
 
 $$
 P(6.5 < X < \infty) = \int_{6.5}^\infty f(x)dx.
@@ -375,29 +293,19 @@ ggplot(chi_squared_data, aes(x = x, y = y)) +
 ## Practical considerations
 
 ::: {.callout-important title="Common pitfalls [cf. @agrestiFoundationsStatisticsData2022: 189-190]"}
--   Statistical significance is **NOT** an indication of a causal
-    relationship between the variables of interest (**correlation**
-    $\neq$ **causation**).
+-   Statistical significance is **NOT** an indication of a causal relationship between the variables of interest (**correlation** $\neq$ **causation**).
 
--   $p$-values do **NOT** signify the strength of an effect ($\neq$
-    effect size). It only helps identify whether there is an effect to
-    begin with.
+-   $p$-values do **NOT** signify the strength of an effect ($\neq$ effect size). It only helps identify whether there is an effect to begin with.
 
--   $p$-values are **NOT** the probability of the null hypothesis being
-    true.
+-   $p$-values are **NOT** the probability of the null hypothesis being true.
 
--   Statistical significance is only a starting point for further
-    scientific inquiry, and by no means the end of it.
+-   Statistical significance is only a starting point for further scientific inquiry, and by no means the end of it.
 :::
 
 ## Exercises
 
 ::: {#exr-hyp-1}
-Schröter & Kortmann [-@schroter_pronoun_2016] investigate the
-relationship between subject realisation (`overt` vs. `null`) and the
-grammatical category Person (`1.p`. vs. `2.p.` vs. `3.p.`) in three
-varieties of English (`Great Britain` vs. `Hong Kong` vs. `Singapore`).
-They report the following test results [-@schroter_pronoun_2016: 235]:
+Schröter & Kortmann [-@schroter_pronoun_2016] investigate the relationship between subject realisation (`overt` vs. `null`) and the grammatical category Person (`1.p`. vs. `2.p.` vs. `3.p.`) in three varieties of English (`Great Britain` vs. `Hong Kong` vs. `Singapore`). They report the following test results [-@schroter_pronoun_2016: 235]:
 
 > Chi-square test scores: $$
 > \begin{align}
@@ -408,12 +316,10 @@ They report the following test results [-@schroter_pronoun_2016: 235]:
 > $$
 
 -   What hypotheses are the authors testing?
--   Assuming a significance level $\alpha = 0.05$, what statistical conclusions can
-    be drawn from the test results?
+-   Assuming a significance level $\alpha = 0.05$, what statistical conclusions can be drawn from the test results?
 -   What could be the theoretical implications of these results?
 :::
 
 ::: {#exr-hyp-2}
-Try to develop statistical hypotheses for a research project you are
-currently working on!
+Try to develop statistical hypotheses for a research project you are currently working on!
 :::
