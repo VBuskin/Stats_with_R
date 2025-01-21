@@ -84,9 +84,8 @@ The core idea is "that the probability distribution of the response
 variable is the same for each group"
 [@agrestiFoundationsStatisticsData2022: 177]. If clause `ORDER` is the
 response variable and `SUBORDTYPE` the explanatory variable,
-independence would entail that the outcomes of the response variable
-`ORDER = "mc-sc"` and `ORDER = "sc-mc"` are equally likely to occur in
-the groups `SUBORDTYPE = "temp"` **and** `SUBORDTYPE = "caus"`.
+independence would entail that the probabilities of the outcomes of the response variable
+`ORDER = "mc-sc"` and `ORDER = "sc-mc"` are not influenced by whether they occur in the groups `SUBORDTYPE = "temp"` or `SUBORDTYPE = "caus"`.
 
 The term **probability distribution** refers to a mathematical function
 that assigns probabilities to the outcomes of a variable. If we consider
@@ -247,7 +246,7 @@ form:
 
 The implementation in R is a simple one-liner. Keep in mind that we have
 to supply **absolute frequencies** to `chisq.test()` rather than
-percentages.n
+percentages.
 
 ```{r}
 freqs_test <- chisq.test(observed_freqs)
@@ -361,9 +360,6 @@ things the test does **not** tell us:
 
 -   How strongly do `ORDER` and `SUBORDTYPE` influence each other?
 
--   Does a causal subordinate clause make the `mc-sc` clause order more
-    likely?
-
 ## Pearson residuals
 
 If we're interested in what cells show the greatest difference between
@@ -447,38 +443,6 @@ literature that provide thresholds for "small", "moderate" and "large"
 effects, yet these are rarely justified on theoretical grounds and could
 be viewed as arbitrary.
 
-## Likelihood-based inference
-
-Since causal subordinate clauses typically follow the main clause in the
-sample, it may seem tempting to draw conclusions about the
-**probability** of a certain outcome of clause `ORDER`. Unfortunately,
-the $\chi^2$-test is **not designed** for this kind of statistical
-inference. An approach that would actually allow the estimation of
-probabilities is [logistic regression](Logistic_regression.qmd).
-
-::: {.callout-note collapse="true" title="What would that look like?"}
-```{r}
-# Convert to factors and define reference levels
-cl.order$ORDER <- factor(cl.order$ORDER, levels = c("sc-mc", "mc-sc"))
-cl.order$SUBORDTYPE <- factor(cl.order$SUBORDTYPE, levels = c("temp", "caus")) 
-
-# Fit logistic regression model
-order.glm1 <- glm(ORDER ~ SUBORDTYPE, data = cl.order, family = "binomial")
-
-# Store model parameters
-intercept <- order.glm1$coefficients[1]
-slope <- order.glm1$coefficients[2]
-
-# Convert to probabilities
-unname(plogis(intercept + slope * 0)) # if temporal
-unname(plogis(intercept + slope * 1)) # if causal
-
-```
-
-If the subordinate clause is causal, there is a 92.5% chance that
-speakers will use the `mc-sc` ordering, but only a 44.6% chance of using
-`sc-mc`.
-:::
 
 ## Exercises
 

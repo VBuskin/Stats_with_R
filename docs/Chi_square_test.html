@@ -5051,8 +5051,7 @@ vertical-align: -.125em;
   </ul></li>
   <li><a href="#pearson-residuals" id="toc-pearson-residuals" class="nav-link" data-scroll-target="#pearson-residuals"><span class="header-section-number">20.4</span> Pearson residuals</a></li>
   <li><a href="#effect-size" id="toc-effect-size" class="nav-link" data-scroll-target="#effect-size"><span class="header-section-number">20.5</span> Effect size</a></li>
-  <li><a href="#likelihood-based-inference" id="toc-likelihood-based-inference" class="nav-link" data-scroll-target="#likelihood-based-inference"><span class="header-section-number">20.6</span> Likelihood-based inference</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">20.7</span> Exercises</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">20.6</span> Exercises</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/VBuskin/Stats_with_R/blob/main/Chi_square_test.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
     </div>
@@ -5153,7 +5152,7 @@ What does independence really mean?
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>The core idea is “that the probability distribution of the response variable is the same for each group” <span class="citation" data-cites="agrestiFoundationsStatisticsData2022">(<a href="references.html#ref-agrestiFoundationsStatisticsData2022" role="doc-biblioref">Agresti and Kateri 2022</a>: 177)</span>. If clause <code>ORDER</code> is the response variable and <code>SUBORDTYPE</code> the explanatory variable, independence would entail that the outcomes of the response variable <code>ORDER = "mc-sc"</code> and <code>ORDER = "sc-mc"</code> are equally likely to occur in the groups <code>SUBORDTYPE = "temp"</code> <strong>and</strong> <code>SUBORDTYPE = "caus"</code>.</p>
+<p>The core idea is “that the probability distribution of the response variable is the same for each group” <span class="citation" data-cites="agrestiFoundationsStatisticsData2022">(<a href="references.html#ref-agrestiFoundationsStatisticsData2022" role="doc-biblioref">Agresti and Kateri 2022</a>: 177)</span>. If clause <code>ORDER</code> is the response variable and <code>SUBORDTYPE</code> the explanatory variable, independence would entail that the probabilities of the outcomes of the response variable <code>ORDER = "mc-sc"</code> and <code>ORDER = "sc-mc"</code> are not influenced by whether they occur in the groups <code>SUBORDTYPE = "temp"</code> or <code>SUBORDTYPE = "caus"</code>.</p>
 <p>The term <strong>probability distribution</strong> refers to a mathematical function that assigns probabilities to the outcomes of a variable. If we consider two variables at the same time, such as <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, they are said to have <strong>marginal probability functions</strong> <span class="math inline">\(f_1(x)\)</span> and <span class="math inline">\(f_2(y)\)</span>. If we condition the outcomes of all values on each other, the following equivalence will hold:</p>
 <p><span id="eq-indep"><span class="math display">\[
 f(x \mid y) = f_1(x) \text{ and } f(y \mid x) = f_2(y).
@@ -5437,7 +5436,7 @@ Formal definition of the <span class="math inline">\(\chi^2\)</span>-test
 </div>
 </div>
 </div>
-<p>The implementation in R is a simple one-liner. Keep in mind that we have to supply <strong>absolute frequencies</strong> to <code>chisq.test()</code> rather than percentages.n</p>
+<p>The implementation in R is a simple one-liner. Keep in mind that we have to supply <strong>absolute frequencies</strong> to <code>chisq.test()</code> rather than percentages.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>freqs_test <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(observed_freqs)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -5574,7 +5573,6 @@ G = 116.97, X-squared df = 1, p-value &lt; 2.2e-16</code></pre>
 <ul>
 <li><p>Are there certain variable combinations where the <span class="math inline">\(\chi^2\)</span>-scores are particularly high?</p></li>
 <li><p>How strongly do <code>ORDER</code> and <code>SUBORDTYPE</code> influence each other?</p></li>
-<li><p>Does a causal subordinate clause make the <code>mc-sc</code> clause order more likely?</p></li>
 </ul>
 </section>
 </section>
@@ -5680,50 +5678,8 @@ V = \sqrt{\frac{\chi^2}{n \times (min(nrow, ncol) - 1)}}.
 </div>
 <p>The association between two categorical variables is stronger, the closer <span class="math inline">\(V\)</span> approximates 1. Conversely, if <span class="math inline">\(V = 0\)</span>, then the variables are completely independent. There are various guidelines in the literature that provide thresholds for “small”, “moderate” and “large” effects, yet these are rarely justified on theoretical grounds and could be viewed as arbitrary.</p>
 </section>
-<section id="likelihood-based-inference" class="level2" data-number="20.6">
-<h2 data-number="20.6" class="anchored" data-anchor-id="likelihood-based-inference"><span class="header-section-number">20.6</span> Likelihood-based inference</h2>
-<p>Since causal subordinate clauses typically follow the main clause in the sample, it may seem tempting to draw conclusions about the <strong>probability</strong> of a certain outcome of clause <code>ORDER</code>. Unfortunately, the <span class="math inline">\(\chi^2\)</span>-test is <strong>not designed</strong> for this kind of statistical inference. An approach that would actually allow the estimation of probabilities is <a href="./Logistic_regression.html">logistic regression</a>.</p>
-<div class="callout callout-style-default callout-note callout-titled" title="What would that look like?">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-What would that look like?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to factors and define reference levels</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>cl.order<span class="sc">$</span>ORDER <span class="ot">&lt;-</span> <span class="fu">factor</span>(cl.order<span class="sc">$</span>ORDER, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"sc-mc"</span>, <span class="st">"mc-sc"</span>))</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>cl.order<span class="sc">$</span>SUBORDTYPE <span class="ot">&lt;-</span> <span class="fu">factor</span>(cl.order<span class="sc">$</span>SUBORDTYPE, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"temp"</span>, <span class="st">"caus"</span>)) </span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit logistic regression model</span></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>order.glm1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(ORDER <span class="sc">~</span> SUBORDTYPE, <span class="at">data =</span> cl.order, <span class="at">family =</span> <span class="st">"binomial"</span>)</span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Store model parameters</span></span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>intercept <span class="ot">&lt;-</span> order.glm1<span class="sc">$</span>coefficients[<span class="dv">1</span>]</span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>slope <span class="ot">&lt;-</span> order.glm1<span class="sc">$</span>coefficients[<span class="dv">2</span>]</span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to probabilities</span></span>
-<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a><span class="fu">unname</span>(<span class="fu">plogis</span>(intercept <span class="sc">+</span> slope <span class="sc">*</span> <span class="dv">0</span>)) <span class="co"># if temporal</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.4460784</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unname</span>(<span class="fu">plogis</span>(intercept <span class="sc">+</span> slope <span class="sc">*</span> <span class="dv">1</span>)) <span class="co"># if causal</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.9246231</code></pre>
-</div>
-</div>
-<p>If the subordinate clause is causal, there is a 92.5% chance that speakers will use the <code>mc-sc</code> ordering, but only a 44.6% chance of using <code>sc-mc</code>.</p>
-</div>
-</div>
-</div>
-</section>
-<section id="exercises" class="level2" data-number="20.7">
-<h2 data-number="20.7" class="anchored" data-anchor-id="exercises"><span class="header-section-number">20.7</span> Exercises</h2>
+<section id="exercises" class="level2" data-number="20.6">
+<h2 data-number="20.6" class="anchored" data-anchor-id="exercises"><span class="header-section-number">20.6</span> Exercises</h2>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
