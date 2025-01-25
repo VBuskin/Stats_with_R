@@ -77,7 +77,7 @@ book:
         - Clustering.qmd
     - part: "Appendix"
       chapters:
-        - More_tests.qmd
+        - Register.qmd
         - Drawing_samples.qmd
         - Using_AI.qmd
     - part: References

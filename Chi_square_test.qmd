@@ -84,8 +84,10 @@ The core idea is "that the probability distribution of the response
 variable is the same for each group"
 [@agrestiFoundationsStatisticsData2022: 177]. If clause `ORDER` is the
 response variable and `SUBORDTYPE` the explanatory variable,
-independence would entail that the probabilities of the outcomes of the response variable
-`ORDER = "mc-sc"` and `ORDER = "sc-mc"` are not influenced by whether they occur in the groups `SUBORDTYPE = "temp"` or `SUBORDTYPE = "caus"`.
+independence would entail that the probabilities of the outcomes of the
+response variable `ORDER = "mc-sc"` and `ORDER = "sc-mc"` are not
+influenced by whether they occur in the groups `SUBORDTYPE = "temp"` or
+`SUBORDTYPE = "caus"`.
 
 The term **probability distribution** refers to a mathematical function
 that assigns probabilities to the outcomes of a variable. If we consider
@@ -220,7 +222,7 @@ $$
 \text{Chi-squared } \chi^2 =\frac{(\text{observed} - \text{expected})^2}{\text{expected}}
 $$ {#eq-chisq-simple}
 
-::: {.callout-note collapse="true" title="Formal definition of the $\chi^2$-test"}
+::: {.callout-note collapse="true" title="Formal definition of the $\\chi^2$-test"}
 Given $n$ observations and $k$ degrees of freedom $df$, the joint
 squared deviations between $f_{ij}$ and $e_{ij}$ contribute to the final
 $\chi^2$-score, which is defined as
@@ -236,7 +238,7 @@ Applying the formula, the updated contingency would have the following
 form:
 
 |     |       |                                      | $X$                                  |     |                                      |     |
-|-----------|-----------|-----------|-----------|-----------|-----------|-----------|
+|----------|----------|----------|----------|----------|----------|----------|
 |     |       | $x_1$                                | $x_2$                                | ... | $x_j$                                |     |
 |     | $y_1$ | $\frac{(f_{11} - e_{11})^2}{e_{11}}$ | $\frac{(f_{12} - e_{12})^2}{e_{12}}$ | ... | $\frac{(f_{1j} - e_{1j})^2}{e_{1j}}$ |     |
 |     | $y_2$ | $\frac{(f_{21} - e_{21})^2}{e_{21}}$ | $\frac{(f_{22} - e_{22})^2}{e_{22}}$ | ... | $\frac{(f_{2j} - e_{2j})^2}{e_{2j}}$ |     |
@@ -270,11 +272,9 @@ could, therefore, lead to wrong conclusions about relationships in the
 data. In this case, other tests should be consulted.
 
 ::: callout-important
-
 1.  All observations are independent of each other.
 2.  80% of the expected frequencies are $\geq$ 5.
 3.  All observed frequencies are $\geq$ 1.
-
 :::
 
 In case of dependent observations (e.g., multiple measurements per
@@ -282,25 +282,28 @@ participant), the default approach is to fit a multilevel model that can
 control for grouping factors (see mixed-effects regression in @sec-mer.)
 
 If assumptions 2 and 3 are violated, it is recommended to use a more
-robust test such as the **Fisher's Exact Test** or the **log-likelihood ratio test** ($G$-test).
-
+robust test such as the **Fisher's Exact Test** or the **log-likelihood
+ratio test** ($G$-test).
 
 ::: {.callout-tip collapse="true" title="Fisher's Exact Test"}
+While the $\chi^2$-test can only approximate the $p$-value, Fisher's
+Exact Test can provide an exact solution. Note that for anything more
+complex than a $2 \times 2$ table, it becomes considerably more
+computationally expensive; if it takes too long, set
+`simulate.p.value = TRUE`.
 
-While the $\chi^2$-test can only approximate the $p$-value, Fisher's Exact Test can provide an exact solution. Note that for anything more complex than a $2 \times 2$ table, it becomes considerably more computationally expensive; if it takes too long, set `simulate.p.value = TRUE`.
-
-Drawing on the hypergeometric distribution (see `?dhyper()`), it computes the probability of all frequency tables that are equal or more extreme than the one observed.
+Drawing on the hypergeometric distribution (see `?dhyper()`), it
+computes the probability of all frequency tables that are equal or more
+extreme than the one observed.
 
 ```{r}
 fisher.test(observed_freqs)
 ```
-
-
 :::
 
 ::: {.callout-tip collapse="true" title="$G$-test"}
-
-The $G^2$-statistic is analogous to $\chi^2$, but it tends to be more robust for lower observed counts. It is defined as 
+The $G^2$-statistic is analogous to $\chi^2$, but it tends to be more
+robust for lower observed counts. It is defined as
 
 $$
 G^2 = 2\sum_{i=1}^{I}\sum_{j=1}^{J} f_{ij} \ln\left({\frac{f_{ij}}{e_{ij}}}\right)
@@ -315,11 +318,7 @@ library(DescTools)
 # Perform G-test (preferably for tables with more than 2 rows/columns)
 GTest(observed_freqs)
 ```
-
-
 :::
-
-
 
 ### How do I make sense of the test results?
 
@@ -442,7 +441,6 @@ are completely independent. There are various guidelines in the
 literature that provide thresholds for "small", "moderate" and "large"
 effects, yet these are rarely justified on theoretical grounds and could
 be viewed as arbitrary.
-
 
 ## Exercises
 
