@@ -1824,5 +1824,16 @@
       "Appendix",
       "<span class='chapter-number'>31</span>  <span class='chapter-title'>ICE: Extract register data</span>"
     ]
+  },
+  {
+    "objectID": "Register.html",
+    "href": "Register.html",
+    "title": "31  ICE: Extract register data",
+    "section": "",
+    "text": "31.1 Preparation\nThis supplementary unit illustrates how to extract register information from kwic() queries performed on data from the International Corpus of English (cf. Concordancing). We begin by loading the relevant libraries:\nlibrary(tidyverse)\nlibrary(readxl)\nNext we load some sample data to work with, which you can download here. If you have data of your own, you may skip this step.\n# Load data\ndata_eat &lt;- read_xlsx(\"eat_obj_aspect.xlsx\")\nThe dataset follows the default kwic() structure with the document name and the immediate context before and after the keyword. The columns object_realisation (dependent variable) and verb_aspect (indepdent variable) are the result of manual annotation in Microsoft Excel.\n# First few lines\nhead(data_eat)\n\n# A tibble: 6 × 9\n  docname  from    to pre   keyword post  pattern object_realisation verb_aspect\n  &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;              &lt;chr&gt;      \n1 ICE_GB…   458   458 had … eaten   anyw… \"\\\\b(e… no                 perfective \n2 ICE_GB…   478   478 : 1 … eating  will… \"\\\\b(e… no                 progressive\n3 ICE_GB…   785   785 &gt; Ye… eat     befo… \"\\\\b(e… no                 neutral    \n4 ICE_GB…  1198  1198 the … eat     them… \"\\\\b(e… yes                neutral    \n5 ICE_GB…  4529  4529 &gt; Ye… ate     in t… \"\\\\b(e… no                 neutral    \n6 ICE_GB…   958   958 know… eat     it f… \"\\\\b(e… yes                neutral",
+    "crumbs": [
+      "Appendix",
+      "<span class='chapter-number'>31</span>  <span class='chapter-title'>ICE: Extract register data</span>"
+    ]
   }
 ]
