@@ -1455,8 +1455,8 @@
     "objectID": "Dos_donts.html#dos",
     "href": "Dos_donts.html#dos",
     "title": "4  Some general guidelines",
-    "section": "4.1 Do’s",
-    "text": "4.1 Do’s\n\n(Re-)read a published sociolinguistic study (e.g., Barbieri, 2007) before you start writing.\nTry to write a good first and a good last sentence.\nUse many examples from your corpus in the results section.\nProvide a plagiarism declaration.\nDiscuss pros and cons of your corpus (cf. Schneider, 1999).",
+    "section": "",
+    "text": "Tip\n\n\n\n\n(Re-)read a published sociolinguistic study (e.g., Barbieri (2007)) before you start writing.\nTry to write a good first and a good last sentence.\nPapers should be written in clear and concise English.\nUse many examples from your corpus in the results section.\nProvide a plagiarism declaration signed by you (e.g “Ich habe die vorliegende Arbeit selbständig verfasst und keine anderen als die angegebenen Quellen und Hilfsmittel benutzt.”)\nDiscuss pros and cons of your corpus (cf. Lange and Leuckert 2020: Chapter 4)",
     "crumbs": [
       "Fundamentals of Corpus-based Research",
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Some general guidelines</span>"
@@ -1467,7 +1467,7 @@
     "href": "Dos_donts.html#donts",
     "title": "4  Some general guidelines",
     "section": "4.2 Don’ts",
-    "text": "4.2 Don’ts\n\n4.2.1 Content\n\nGeneral content and style\n\nAn overly general introduction\nNo obvious coherence between corpus and linguistic phenomenon\nNarrative elements: First, I thought that… But then, I decided that…\nTrivial statements: The gender is very important in the field of linguistics.\n“Steep” introductions\nOpinions presented as facts\nBiographies, historical details with no relation to your topics, overly long summaries of textbooks, etc.\nSweeping conclusions\n\nStatistics\n\nUse of variables in the results section that have not been prepared and introduced in the background section.\nFigures or tables that are not discussed in the text.\nComparisons of non-normalized raw frequency data: use percentages!\nGraphs based on raw data: use percentages!\nFigures without corresponding percentage tables, percentage tables without corresponding figures, or percentages without raw data.\n\n\n\n\n4.2.2 Language\n\nAvoid expressions like a lot of.\nAvoid contractions: won’t, doesn’t, mustn’t, etc.\n\n\n\n4.2.3 Structure\n\nAvoid placing content or results in the introduction, the methods section, or the background section.\nAvoid repetition of arguments (e.g., in introduction and background sections).\n\n\n\n4.2.4 Form\n\nAvoid sloppy formatting of the table of contents.\nAvoid different fonts in the paper (e.g., footnotes, page numbers, graphs, tables, etc.).\nUnderstand where to use italics.\nAvoid spelling mistakes in your references.\nAvoid using accents instead of apostrophes: English apostrophe: Don’t vs. accent (e.g., in French): é, è. Wrong: Don´t, Don`t.\nAvoid CAPITALS if you actually want to use small capitals.\nAvoid using the past tense for quotations: Chomsky (1957) claims that… rather than Chomsky (1957) claimed that….\n\n\n\n4.2.5 References\n\nAvoid sources from the internet/unpublished sources/sources which have not gone through a peer review process.\nAvoid indirect references: quoting Labov using someone else’s quotation of Labov.\n\n\n\n4.2.6 General\n\nNo collaboration.\nNo plagiarism.\nNo ghost writers.",
+    "text": "4.2 Don’ts\n\n\n\n\n\n\nImportant\n\n\n\nGeneral content and style\n\nAn overly general introduction\nNo obvious coherence between corpus and linguistic phenomenon\nNarrative elements: First, I thought that… But then, I decided that…\nTrivial statements: The gender is very important in the field of linguistics.\n“Steep” introductions\nOpinions presented as facts\nBiographies, historical details with no relation to your topics, overly long summaries of textbooks, etc.\nSweeping conclusions\n\nStatistics\n\nUse of variables in the results section that have not been prepared and introduced in the background section.\nFigures or tables that are not discussed in the text.\nComparisons of non-normalized raw frequency data: use percentages!\nGraphs based on raw data: use percentages!\nFigures without corresponding percentage tables, percentage tables without corresponding figures, or percentages without raw data.\n\n\n4.2.1 Language\n\nAvoid expressions like a lot of.\nAvoid contractions: won’t, doesn’t, mustn’t, etc.\n\n\n\n4.2.2 Structure\n\nAvoid placing content or results in the introduction, the methods section, or the background section.\nAvoid repetition of arguments (e.g., in introduction and background sections).\n\n\n\n4.2.3 Form\n\nAvoid sloppy formatting of the table of contents.\nAvoid different fonts in the paper (e.g., footnotes, page numbers, graphs, tables, etc.).\nDon’t forget to use italics when referring to linguistic entities (e.g., the verb eat).\nAvoid spelling mistakes in your references.\nAvoid using accents instead of apostrophes: English apostrophe: Don’t vs. accent (e.g., in French): é, è. Wrong: Don´t, Don`t.\nAvoid CAPITALS if you actually want to use small capitals.\nAvoid using the past tense for quotations: Chomsky (1957) claims that… rather than Chomsky (1957) claimed that….\n\n\n\n4.2.4 References\n\nAvoid sources from the internet/unpublished sources/sources which have not gone through a peer review process.\nAvoid indirect references: quoting Labov using someone else’s quotation of Labov.\n\n\n\n4.2.5 General\n\nNo collaboration.\nNo plagiarism.\nNo ghost writers.\n\n\n\n\n\n\n\n\nBarbieri, Federica. 2007. “Older Men and Younger Women: A Corpus-Based Study of Quotative Use in American English.” English World-Wide 28 (1): 23–45. https://doi.org/10.1075/eww.28.1.03bar.\n\n\nLange, Claudia, and Sven Leuckert. 2020. Corpus Linguistics for World Englishes: A Guide for Research. New York: Taylor; Francis.",
     "crumbs": [
       "Fundamentals of Corpus-based Research",
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Some general guidelines</span>"
@@ -1834,6 +1834,17 @@
     "crumbs": [
       "Appendix",
       "<span class='chapter-number'>31</span>  <span class='chapter-title'>ICE: Extract register data</span>"
+    ]
+  },
+  {
+    "objectID": "Dos_donts.html",
+    "href": "Dos_donts.html",
+    "title": "4  Some general guidelines",
+    "section": "",
+    "text": "4.1 Do’s",
+    "crumbs": [
+      "Fundamentals of Corpus-based Research",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Some general guidelines</span>"
     ]
   }
 ]
