@@ -25,18 +25,62 @@ editor: visual
 ## Do's
 
 ::: callout-tip
--   (Re-)read a published sociolinguistic study (e.g., @barbieriOlderMenYounger2007) before you start writing.
+-   Re-read a published sociolinguistic study before you start writing.
 
 -   Try to write a good first and a good last sentence.
 
 -   Papers should be written in clear and concise English.
 
--   Use **many examples** from your corpus in the results section.
+-   Show and discuss many examples from your corpus in the results
+    section.
 
--   Provide a **plagiarism declaration** signed by you (e.g "Ich habe die vorliegende Arbeit selbständig verfasst und keine anderen als die angegebenen Quellen und Hilfsmittel benutzt.")
+-   Discuss pros and cons of your corpus [cf. @lange_corpus_2020:
+    Chapter 4]
 
--   Discuss **pros and cons of your corpus** [cf. @lange_corpus_2020: Chapter 4]
+-   **Artificial Intelligence:** If you used AI for any part of your
+    paper - whether it is for proof-reading, generating content or even
+    code for programming - indicate so in a footnote and/or by providing
+    the full prompt and response in an appendix. For citing AI, you may
+    follow the [practical suggestions by the
+    APA](https://apastyle.apa.org/blog/how-to-cite-chatgpt).
+
+-   **Term** **papers**: Provide a plagiarism declaration signed by you
+    (e.g., „Ich habe die vorliegende Arbeit selbständig verfasst und
+    keine anderen als die angegebenen Quellen und Hilfsmittel
+    benutzt."). Additionally, consider including „Ich versichere, dass
+    ich in dieser Arbeit die Nutzung von KI-Werkzeugen vollständig
+    gekennzeichnet habe.“
+
+-   Closely follow the **stylesheet** of the department or journal where you
+    are planning to submit your work. A great number of linguistic publications tend to follow the Unified Stylesheet for Linguistics.
+
+-   If required, ensure your submission includes all relevant
+    **supplementary materials** (e.g., datasets, code, additional figures or
+    tables etc.).
 :::
+
+Adhere to the conventional structure of empirical corpus-linguistic
+studies [cf. @griesWritingCorpuslinguisticPaper2020]:
+
+| **Part**         | **Content**                                                                                                                                                      |
+|----------------------------------------|--------------------------------|
+| **Introduction** | What is the question?                                                                                                                                            |
+|                  | Motivation of the question: Why is this problem important?                                                                                                       |
+|                  | Overview of previous relevant work                                                                                                                               |
+|                  | Formulation of hypotheses                                                                                                                                        |
+| **Methods**      | Choice of method (e.g. diachronic vs. synchronic corpus data; tagged vs. untagged corpora; etc.)                                                                 |
+|                  | Source of data (which corpus/corpora?)                                                                                                                           |
+|                  | Operationalization of variables                                                                                                                                  |
+|                  | Retrieval algorithm or syntax                                                                                                                                    |
+|                  | Software that was used                                                                                                                                           |
+|                  | Data filtering/annotation (e.g., how were false hits identified? What did you do to guarantee objective coding procedures? How did you annotate your data? etc.) |
+|                  | Choice of statistical test(s) and how they are implemented                                                                                                       |
+| **Results**      | Summary statistics                                                                                                                                               |
+|                  | Graphic representation                                                                                                                                           |
+|                  | Significance test: Test statistic, degrees of freedom (where available), and $p$                                                                                 |
+|                  | Effect size: The difference in means, the correlation, etc.                                                                                                      |
+| **Discussion**   | Implications of the results for your hypotheses                                                                                                                  |
+|                  | Implications of the results for the research area                                                                                                                |
 
 ## Don'ts
 
@@ -47,21 +91,25 @@ editor: visual
 
 -   No obvious coherence between corpus and linguistic phenomenon
 
--   Narrative elements: *First, I thought that... But then, I decided that...*
+-   Narrative elements: *First, I thought that... But then, I decided
+    that...*
 
--   Trivial statements: *The gender is very important in the field of linguistics.*
+-   Trivial statements: *The gender is very important in the field of
+    linguistics.*
 
 -   "Steep" introductions
 
 -   Opinions presented as facts
 
--   Biographies, historical details with no relation to your topics, overly long summaries of textbooks, etc.
+-   Biographies, historical details with no relation to your topics,
+    overly long summaries of textbooks, etc.
 
 -   Sweeping conclusions
 
 **Statistics**
 
--   Use of variables in the results section that have not been prepared and introduced in the background section.
+-   Use of variables in the results section that have not been prepared
+    and introduced in the background section.
 
 -   Figures or tables that are not discussed in the text.
 
@@ -69,7 +117,8 @@ editor: visual
 
 -   Graphs based on raw data: use percentages!
 
--   Figures without corresponding percentage tables, percentage tables without corresponding figures, or percentages without raw data.
+-   Figures without corresponding percentage tables, percentage tables
+    without corresponding figures, or percentages without raw data.
 
 ### Language
 
@@ -81,31 +130,40 @@ editor: visual
 
 ### Structure
 
--   Avoid placing content or results in the introduction, the methods section, or the background section.
+-   Avoid placing content or results in the introduction, the methods
+    section, or the background section.
 
--   Avoid repetition of arguments (e.g., in introduction and background sections).
+-   Avoid repetition of arguments (e.g., in introduction and background
+    sections).
 
 ### Form
 
 -   Avoid sloppy formatting of the table of contents.
 
--   Avoid different fonts in the paper (e.g., footnotes, page numbers, graphs, tables, etc.).
+-   Avoid different fonts in the paper (e.g., footnotes, page numbers,
+    graphs, tables, etc.).
 
--   Don't forget to use italics when referring to linguistic entities (e.g., the verb *eat*).
+-   Don't forget to use italics when referring to linguistic entities
+    (e.g., the verb *eat*).
 
 -   Avoid spelling mistakes in your references.
 
--   Avoid using accents instead of apostrophes: English apostrophe: *Don’t* vs. accent (e.g., in French): *é, è*. Wrong: *Don´t*, *Don\`t*.
+-   Avoid using accents instead of apostrophes: English apostrophe:
+    *Don’t* vs. accent (e.g., in French): *é, è*. Wrong: *Don´t*,
+    *Don\`t*.
 
 -   Avoid CAPITALS if you actually want to use small capitals.
 
--   Avoid using the past tense for quotations: *Chomsky (1957) claims that...* rather than *Chomsky (1957) claimed that...*.
+-   Avoid using the past tense for quotations: *Chomsky (1957) claims
+    that...* rather than *Chomsky (1957) claimed that...*.
 
 ### References
 
--   Avoid sources from the internet/unpublished sources/sources which have not gone through a peer review process.
+-   Avoid sources from the internet/unpublished sources/sources which
+    have not gone through a peer review process.
 
--   Avoid indirect references: quoting Labov using someone else's quotation of Labov.
+-   Avoid indirect references such as quoting Labov using someone else's
+    quotation of Labov.
 
 ### General
 
