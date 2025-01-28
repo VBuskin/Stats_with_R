@@ -5113,7 +5113,7 @@ vertical-align: -.125em;
 </section>
 <section id="the-poisson-family" class="level2" data-number="26.3">
 <h2 data-number="26.3" class="anchored" data-anchor-id="the-poisson-family"><span class="header-section-number">26.3</span> The Poisson family</h2>
-<p>Frequency data is ubiquitous in corpus linguistics. Given its numeric nature, it seems tempting to model it using <a href="./Linear_regression.html">linear regression</a>, but doing so is bound to cause problems. Partially owing to the fact that count data is always positive, the residuals more often than do not follow a Gaussian distribution and additionally display non-constant variance. The figures below illustrate these for a linear model fitted to simulated count data.</p>
+<p>Frequency data is ubiquitous in corpus linguistics. Given its numeric nature, it seems tempting to model such data using <a href="./Linear_regression.html">linear regression</a>, but doing so is bound to cause problems. Partially owing to the fact that count data is always positive, the residuals more often than not deviate from normality and additionally display non-constant variance. The figures below illustrate these issues for a linear model fitted to simulated count data.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -5123,11 +5123,11 @@ vertical-align: -.125em;
 </div>
 </div>
 </div>
-<p>A probability distribution that is much better equipped this special case of discrete, yet numeric data is the <strong>Poisson distribution</strong>. Assuming a Poisson-distributed variable <span class="math inline">\(X\)</span>, its exact shape is determined by a single parameter, <span class="math inline">\(\lambda\)</span> (lambda), which is both its mean <strong>and</strong> and variance. In other words,</p>
+<p>A probability distribution that is much better equipped for this special case of discrete, yet numeric data is the <strong>Poisson distribution</strong>. Assuming a Poisson-distributed variable <span class="math inline">\(X\)</span>, its exact shape is determined by a single parameter, <span class="math inline">\(\lambda\)</span> (lambda), which is both its mean <strong>and</strong> and variance. In other words,</p>
 <p><span id="eq-pois"><span class="math display">\[
 X \sim Pois(\lambda).
 \tag{26.1}\]</span></span></p>
-<p>Its probability mass functions has a notable left skew, which becomes less conspicuous for increasingly higher parameter values.</p>
+<p>Its probability mass function has a notable negative skew, which becomes less conspicuous for increasingly higher parameter values.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -5140,11 +5140,11 @@ X \sim Pois(\lambda).
 </section>
 <section id="poisson-regression" class="level2" data-number="26.4">
 <h2 data-number="26.4" class="anchored" data-anchor-id="poisson-regression"><span class="header-section-number">26.4</span> Poisson regression</h2>
-<p>Recall the linear regression <a href="Linear_regression.html#eq-multreg" class="quarto-xref">Equation&nbsp;<span>22.10</span></a> where the dependent variable <span class="math inline">\(Y\)</span> was modelled as a function of the linear sum of predictor terms <span class="math inline">\(\beta_pX_p\)</span> for <span class="math inline">\(p\)</span> independent variable.</p>
+<p>Recall the linear regression <a href="Linear_regression.html#eq-multreg" class="quarto-xref">Equation&nbsp;<span>22.10</span></a>, where the dependent variable <span class="math inline">\(Y\)</span> was modelled as a function of the linear sum of predictor terms <span class="math inline">\(\beta_pX_p\)</span> for <span class="math inline">\(p\)</span> independent variable.</p>
 <p>The <strong>Poisson model</strong> is very similar to the linear regression model, with the main differences being the logarithmic transformation of the response and the exclusion of the error term:</p>
 <p><span id="eq-pois-full"><span class="math display">\[ \ln(Y) = \beta_0 + \beta_1X_1 + \beta_2X_2 + ... + \beta_pX_p.
 \tag{26.2}\]</span></span></p>
-<p>To remove the logarithm and obtain the model output on the more intuitive probability scale, we simply exponentiate both sides:</p>
+<p>To remove the logarithm and obtain the model output on a more intuitive scale, we simply exponentiate both sides:</p>
 <p><span id="eq-pois-exp"><span class="math display">\[ Y = e^{\beta_0 + \beta_1X_1 + \beta_2X_2 + ... + \beta_pX_p}.
 \tag{26.3}\]</span></span></p>
 <section id="application-in-r" class="level3" data-number="26.4.1">
