@@ -5057,7 +5057,8 @@ vertical-align: -.125em;
   </ul></li>
   <li><a href="#pearson-residuals" id="toc-pearson-residuals" class="nav-link" data-scroll-target="#pearson-residuals"><span class="header-section-number">20.4</span> Pearson residuals</a></li>
   <li><a href="#effect-size" id="toc-effect-size" class="nav-link" data-scroll-target="#effect-size"><span class="header-section-number">20.5</span> Effect size</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">20.6</span> Exercises</a></li>
+  <li><a href="#only-one-variable-the-pearson-chi2-goodness-of-fit-test" id="toc-only-one-variable-the-pearson-chi2-goodness-of-fit-test" class="nav-link" data-scroll-target="#only-one-variable-the-pearson-chi2-goodness-of-fit-test"><span class="header-section-number">20.6</span> Only one variable? The Pearson <span class="math inline">\(\chi^2\)</span> goodness-of-fit test</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">20.7</span> Exercises</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/VBuskin/Stats_with_R/blob/main/Chi_square_test.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
     </div>
@@ -5372,13 +5373,13 @@ Formal definition of the <span class="math inline">\(\chi^2\)</span>-test
 <p>Applying the formula, the updated contingency would have the following form:</p>
 <table class="table">
 <colgroup>
-<col style="width: 13%">
-<col style="width: 13%">
-<col style="width: 15%">
-<col style="width: 15%">
-<col style="width: 13%">
-<col style="width: 15%">
-<col style="width: 13%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -5684,8 +5685,63 @@ V = \sqrt{\frac{\chi^2}{n \times (min(nrow, ncol) - 1)}}.
 </div>
 <p>The association between two categorical variables is stronger, the closer <span class="math inline">\(V\)</span> approximates 1. Conversely, if <span class="math inline">\(V = 0\)</span>, then the variables are completely independent. There are various guidelines in the literature that provide thresholds for “small”, “moderate” and “large” effects, yet these are rarely justified on theoretical grounds and could be viewed as arbitrary.</p>
 </section>
-<section id="exercises" class="level2" data-number="20.6">
-<h2 data-number="20.6" class="anchored" data-anchor-id="exercises"><span class="header-section-number">20.6</span> Exercises</h2>
+<section id="only-one-variable-the-pearson-chi2-goodness-of-fit-test" class="level2" data-number="20.6">
+<h2 data-number="20.6" class="anchored" data-anchor-id="only-one-variable-the-pearson-chi2-goodness-of-fit-test"><span class="header-section-number">20.6</span> Only one variable? The Pearson <span class="math inline">\(\chi^2\)</span> goodness-of-fit test</h2>
+<p>The <span class="math inline">\(\chi^2\)</span>-statistic can also be utilised in simpler scenarios that involve only one single categorical variable. Consider the small <a href="https://osf.io/y5scq"><code>eat_obj_aspect.xlsx</code></a> dataset, where the <code>object_realisation</code> column indicates whether the object was realised or dropped in a given observation.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>eat <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"eat_obj_aspect.xlsx"</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Show object realisation pattern</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>eat_observed <span class="ot">&lt;-</span> <span class="fu">table</span>(eat<span class="sc">$</span>object_realisation)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(eat_observed)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ no yes 
+ 57  45 </code></pre>
+</div>
+</div>
+<p>We can use the <span class="math inline">\(\chi^2\)</span> <strong>goddness-of-fit test</strong> “to compare an observed frequency distribution against its expected probability of occurrence” <span class="citation" data-cites="baguleySeriousStatsGuide2012">(<a href="references.html#ref-baguleySeriousStatsGuide2012" role="doc-biblioref">Baguley 2012</a>: 132)</span>. In other words, we can check if the observed object data matches the frequencies we’d expect to see if both outcomes of <code>object realisation</code> were equally likely and hence randomly distributed.</p>
+<p>Our hypotheses are thus</p>
+<ul>
+<li><p><span class="math inline">\(H_0:\)</span> Observed frequencies of <code>object realisation</code> <span class="math inline">\(=\)</span> expected frequencies of <code>object realisation</code></p></li>
+<li><p><span class="math inline">\(H_1:\)</span> Observed frequencies of <code>object realisation</code> <span class="math inline">\(\neq\)</span> expected frequencies of <code>object realisation</code></p></li>
+</ul>
+<p>The expected frequencies are given by</p>
+<p><span id="eq-exp-gof"><span class="math display">\[
+e_i = \frac{\text{number of observations}}{\text{number of cells}},
+\tag{20.9}\]</span></span></p>
+<p>and the test statistic simplifies to</p>
+<p><span id="eq-chisq-gof"><span class="math display">\[
+\chi^2 = \sum_{i=1}^{I}{\frac{(f_{i} - e_{i})^2}{e_{i}}}.
+\tag{20.10}\]</span></span></p>
+<p>In R:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform the chi-squared goodness-of-fit test</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>eat_gof <span class="ot">&lt;-</span>  <span class="fu">chisq.test</span>(eat_observed)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(eat_gof)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Chi-squared test for given probabilities
+
+data:  eat_observed
+X-squared = 1.4118, df = 1, p-value = 0.2348</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check expected frequencies (should be greater or equal to 5)</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(eat_gof<span class="sc">$</span>expected)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> no yes 
+ 51  51 </code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>A chi-squared goodness-of-fit test indicates that the distribution of object realisation for <em>eat</em> does not significantly differ from an equal distribution (<span class="math inline">\(\chi^2\)</span> = 1.41, df = 1, <span class="math inline">\(p\)</span> = 0.23). In the sample at hand, the verb does not seem to prefer one variant or the other.</p>
+</blockquote>
+</section>
+<section id="exercises" class="level2" data-number="20.7">
+<h2 data-number="20.7" class="anchored" data-anchor-id="exercises"><span class="header-section-number">20.7</span> Exercises</h2>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">

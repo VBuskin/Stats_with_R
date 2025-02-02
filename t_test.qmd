@@ -113,6 +113,10 @@ advisable to use a non-parametric test such as the
 compares the probabilities of encountering a value $x$ from sample $X$
 that is greater than a value $y$ from sample $Y$. For details, see
 `?wilcox.test()`.
+
+```{r}
+wilcox.test(data_vowels$HZ_F1 ~ data_vowels$SEX)
+```
 :::
 
 ## Workflow in R
@@ -174,8 +178,7 @@ data_vowels %>%
 ```{r, echo = TRUE, output = TRUE}
 
 # Normality
-
-shapiro.test(data_vowels$HZ_F1) # H0: data points follow the normal distribution
+shapiro.test(data_vowels$HZ_F1) # H0: data points follow the normal distribution; however, this test is pretty unreliable!
 
 # Check histogram
 ggplot(data_vowels, aes(x = HZ_F1)) +
@@ -192,7 +195,7 @@ var.test(data_vowels$HZ_F1 ~ data_vowels$SEX) # H0: variances are not too differ
 ```{r, echo = TRUE, output = TRUE}
 
 # t-test for two independent samples 
-t.test(data_vowels$HZ_F1 ~ data_vowels$SEX, paired = FALSE) # there is a significant difference!
+t.test(data_vowels$HZ_F1 ~ data_vowels$SEX, paired = FALSE) # there is a significant difference between sample means!
 
 ```
 
@@ -215,3 +218,5 @@ According to a two-sample $t$-test, there is a significant difference
 between the mean `F1 frequencies` of male and female speakers of Apache
 ($t = 2.44$, $df = 112.19$, $p < 0.05$). Therefore, $H_0$ will be
 rejected.
+
+
