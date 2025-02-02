@@ -1,0 +1,194 @@
+---
+title: "Poisson regression"
+author:
+  name: "Vladimir Buskin" 
+  orcid: "0009-0005-5824-1012"
+  affiliation: 
+    name: "Catholic University of Eichstätt-Ingolstadt"
+    department: "English Language and Linguistics"
+format:
+  html:
+    self-contained: true
+    logo: logo.png
+    footer: "Regression"
+    theme: default
+    toc: true
+    number-sections: true
+    slide-number: true
+    incremental: false
+    slide-level: 4
+    scrollable: true
+editor: visual
+bibliography: R.bib
+---
+
+## Recommended reading
+
+> @winter_statistics_2020: Chapter 13
+>
+> @baguleySeriousStatsGuide2012: Chapter 17.5
+
+## Preparation
+
+```{r}
+# Load libraries
+library(tidyverse)
+library(ggeffects)
+library(readxl)
+library(car)
+
+# Load datasets
+verbs <- read_xlsx("winter_2020_visual.xlsx")
+```
+
+## The Poisson family
+
+Frequency data is ubiquitous in corpus linguistics. Given its numeric
+nature, it seems tempting to model such data using [linear
+regression](Linear_regression.qmd), but doing so is bound to cause
+problems. Partially owing to the fact that count data is always
+positive, the residuals more often than not deviate from normality and
+additionally display non-constant variance. The figures below illustrate
+these issues for a linear model fitted to simulated count data.
+
+```{r, echo = F}
+set.seed(123)
+
+# Simulate predictor variable (continuous)
+n <- 500
+x <- runif(n, 0, 10)  # Random values between 0 and 10
+
+# Generate Poisson-distributed count data
+lambda <- exp(0.5 + 0.3 * x)  # Log-link relationship
+y <- rpois(n, lambda)  # Poisson-distributed response variable
+
+# Fit a linear regression model
+lm_fit <- lm(y ~ x)
+
+# Plot residuals to examine non-normality and heteroscedasticity
+par(mfrow = c(1, 2))  # Arrange plots side by side
+
+
+crPlot(lm_fit, var = "x") 
+
+plot(lm_fit, which = 1)
+
+```
+
+A probability distribution that is much better equipped for this special
+case of discrete, yet numeric data is the **Poisson distribution**.
+Assuming a Poisson-distributed variable $X$, its exact shape is
+determined by a single parameter, $\lambda$ (lambda), which is both its
+mean **and** and variance. In other words,
+
+$$
+X \sim Pois(\lambda).
+$$ {#eq-pois}
+
+Its probability mass function has a notable negative skew, which becomes
+less conspicuous for increasingly higher parameter values.
+
+```{r, echo = F}
+
+x1 <- dpois(0:20, 3.5)
+x2 <- dpois(0:20, 10)
+
+par(mfrow = c(1, 2))
+
+barplot(x1, names.arg = 0:20, xlab = "Count", ylab = "Probability", main = "Poisson pmf with lambda = 3.5")
+
+barplot(x2, names.arg = 0:20, xlab = "Count", ylab = "Probability", main = "Poisson pmf with lambda = 10")
+
+```
+
+## Poisson regression
+
+Recall the linear regression @eq-multreg, where the dependent variable
+$Y$ was modelled as a function of the linear sum of predictor terms
+$\beta_pX_p$ for $p$ independent variable.
+
+The **Poisson model** is very similar to the linear regression model,
+with the main differences being the logarithmic transformation of the
+response and the exclusion of the error term:
+
+$$ \ln(Y) = \beta_0 + \beta_1X_1 + \beta_2X_2 + ... + \beta_pX_p.
+$$ {#eq-pois-full}
+
+To remove the logarithm and obtain the model output on a more intuitive
+scale, we simply exponentiate both sides:
+
+$$ Y = e^{\beta_0 + \beta_1X_1 + \beta_2X_2 + ... + \beta_pX_p}.
+$$ {#eq-pois-exp}
+
+### Application in R
+
+The data provided by Winter [-@winter_statistics_2020] contains
+frequency data for hundreds of verbs (`Freq` column) as well as a
+variety of psycholinguistic ratings (`Sight`, `Touch`, `Sound` etc.),
+which were originally compiled by Lynott & Connell
+[-@LynottConnell2009].
+
+```{r}
+head(verbs)
+```
+
+We will examine of the effects of different sensory ratings on the
+frequency of a verb. When fitting the generalized linear model, it is
+important to indicate the argument `family = "poisson"` to apply the
+correct (logarithmic) link function.
+
+```{r}
+# Fit Poisson regression model
+freq.m1 <- glm(Freq ~ Sight + Touch + Sound + Taste + Smell, data = verbs, family = "poisson")
+
+# Summarise model statistics
+summary(freq.m1)
+```
+
+The model has identified numerous significant effects, i.e.,
+$\beta$-values that are significantly different from 0. The low standard
+errors hint at very robust estimates, resulting in 95% confidence
+intervals that are barely visible in the effect plots.
+
+```{r}
+# Get predicted values for each predictor
+pred_sight <- ggpredict(freq.m1, terms = "Sight")
+pred_touch <- ggpredict(freq.m1, terms = "Touch")
+pred_sound <- ggpredict(freq.m1, terms = "Sound")
+pred_taste <- ggpredict(freq.m1, terms = "Taste")
+pred_smell <- ggpredict(freq.m1, terms = "Smell")
+
+# For plotting individual predictions, simply use:
+# plot(pred_sight) 
+
+# Combine all predictions into one data frame
+pred_all <- rbind(
+  data.frame(pred_sight, predictor = "Sight"),
+  data.frame(pred_touch, predictor = "Touch"),
+  data.frame(pred_sound, predictor = "Sound"),
+  data.frame(pred_taste, predictor = "Taste"),
+  data.frame(pred_smell, predictor = "Smell")
+)
+
+# Create faceted plot
+ggplot(pred_all, aes(x = x, y = predicted)) +
+  geom_line() +
+  geom_ribbon(aes(ymin = conf.low, ymax = conf.high), alpha = 0.5) +
+  facet_wrap(~predictor, scales = "free_x") +
+  labs(x = "Rating", y = "Predicted verb frequency") +
+  theme_bw()
+```
+
+### Interpretation
+
+As we can see, verbs with higher `Sight` ratings (i.e., highly visual
+verbs) are associated with the greatest increase in frequency of
+occurrence. Given a one-unit increase in $X$, we can obtain the
+percentage increase (or decrease, respectively) using the formula
+$100(e^b - 1)$. The predictor `Sight` has an estimate of approximately
+$0.87$ ($p< 0.001$, 95% CI \[0.87, 0.88\]), so the proportional increase
+is $100(e^{0.87} - 1) = 138.69\%$.
+
+By contrast, `Smell` is a associated with a lower frequency:
+$100(e^{0.10} -1) = -9.51\%$ is the drop in frequency for each one-unit
+increase in smell ratings. In essence: Smelly verbs are unpopular!

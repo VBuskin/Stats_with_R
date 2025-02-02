@@ -1,0 +1,213 @@
+---
+title: "ICE: Extract register data"
+author:
+  name: "Vladimir Buskin" 
+  orcid: "0009-0005-5824-1012"
+  affiliation: 
+    name: "Catholic University of Eichstätt-Ingolstadt"
+    department: "English Language and Linguistics"
+format:
+  html:
+    self-contained: true
+    theme: default
+    toc: true
+    number-sections: true
+    slide-number: true
+    incremental: false
+    slide-level: 3
+    scrollable: true
+editor: visual
+bibliography: R.bib
+---
+
+::: callout-tip
+## Script
+
+You can find the full R script associated with this unit [here](https://osf.io/ny2g3).
+:::
+
+## Preparation
+
+This supplementary unit illustrates how to extract register information from `kwic()` queries performed on data from the International Corpus of English (cf. [Concordancing](Concordancing.qmd)). We begin by loading the relevant libraries:
+
+```{r, output = F}
+library(tidyverse)
+library(readxl)
+```
+
+Next we load some sample data to work with, which you can download [here](https://osf.io/y5scq). If you have data of your own, you may skip this step.
+
+```{r, include = F, eval = F}
+# Load corpus of your choice
+ICE_GB <- readRDS("ICE_GB.RDS")
+
+# Perform query for the lemma "tell"
+data <- kwic(ICE_GB,
+          phrase("\\b(tell(s|ing)?|told)\\b"),
+          valuetype = "regex",
+          window = 15)
+
+str(kwic_tell)
+```
+
+```{r}
+# Load data
+data_eat <- read_xlsx("eat_obj_aspect.xlsx")
+```
+
+The dataset follows the default `kwic()` structure with the document name and the immediate context before and after the keyword. The columns `object_realisation` (dependent variable) and `verb_aspect` (indepdent variable) are the result of manual annotation in Microsoft Excel.
+
+```{r}
+# First few lines
+head(data_eat)
+```
+
+## Fine-grained: Text categories
+
+After querying the ICE corpora, information on the texts (and, therefore, the register) is stored in the `docname` column.
+
+```{r}
+head(data_eat[,"docname"])
+```
+
+We want to split up this column into two separate ones. One should contain the text category labels (S1A, S1B, S2A etc.) and one the file numbers (001, 002, 003 etc.). The tidyverse function `seperate_wider_delim()` offers a method to handle that. Let's call the new columns `text_category` and `file_number`, respectively.
+
+If you apply the function to your own data, simply exchange the `data =` argument with your search results, and leave the rest as is.
+
+```{r}
+data_eat_reg <- separate_wider_delim(
+                                # Original data frame
+                                data = data_eat,
+                                # Which column to split
+                                cols = docname,
+                                # Where to split it (at the hyphen)
+                                delim = "-", # where to split exactly
+                                # Names of the new columns
+                                names = c("text_category", "file_number")
+                                ) 
+```
+
+The data frame now have the desired format, as the first two columns indicate:
+
+```{r}
+head(data_eat_reg)
+```
+
+## More general: Spoken vs. written
+
+If there is no need for the fine-grained register distinctions illustrated above, we might as well group them into macro-categories instead, such as **spoken** data and **written** data.
+
+::: {.callout-note collapse="true" title="Summary of text categories in the ICE corpora"}
+| Category | Subcategory | Type | Code Range |
+|------------------|------------------|------------------|------------------|
+| **SPOKEN (S)** | **DIALOGUE (S1)** | **PRIVATE (S1A)** |  |
+|  |  | Direct Conversations | S1A-001 to S1A-090 |
+|  |  | Telephone Calls | S1A-091 to S1A-100 |
+|  | **PUBLIC (S1B)** |  |  |
+|  |  | Class Lessons | S1B-001 to S1B-020 |
+|  |  | Broadcast Discussions | S1B-021 to S1B-040 |
+|  |  | Broadcast Interviews | S1B-041 to S1B-050 |
+|  |  | Parliamentary Debates | S1B-051 to S1B-060 |
+|  |  | Legal Cross-examinations | S1B-061 to S1B-070 |
+|  |  | Business Transactions | S1B-071 to S1B-080 |
+| **MONOLOGUE (S2)** | **UNSCRIPTED (S2A)** |  |  |
+|  |  | Spontaneous Commentaries | S2A-001 to S2A-020 |
+|  |  | Unscripted Speeches | S2A-021 to S2A-050 |
+|  |  | Demonstrations | S2A-051 to S2A-060 |
+|  |  | Legal Presentations | S2A-061 to S2A-070 |
+|  | **SCRIPTED (S2B)** |  |  |
+|  |  | Broadcast News | S2B-001 to S2B-020 |
+|  |  | Broadcast Talks | S2B-021 to S2B-040 |
+|  |  | Non-broadcast Talks | S2B-041 to S2B-050 |
+| **WRITTEN (W)** | **NON-PRINTED (W1)** |  |  |
+|  | **NON-PROFESSIONAL WRITING (W1A)** |  |  |
+|  |  | Student Essays | W1A-001 to W1A-010 |
+|  |  | Examination Scripts | W1A-011 to W1A-020 |
+|  | **CORRESPONDENCE (W1B)** |  |  |
+|  |  | Social Letters | W1B-001 to W1B-015 |
+|  |  | Business Letters | W1B-016 to W1B-030 |
+| **PRINTED (W2)** | **ACADEMIC WRITING (W2A)** |  |  |
+|  |  | Humanities | W2A-001 to W2A-010 |
+|  |  | Social Sciences | W2A-011 to W2A-020 |
+|  |  | Natural Sciences | W2A-021 to W2A-030 |
+|  |  | Technology | W2A-031 to W2A-040 |
+|  | **NON-ACADEMIC WRITING (W2B)** |  |  |
+|  |  | Humanities | W2B-001 to W2B-010 |
+|  |  | Social Sciences | W2B-011 to W2B-020 |
+|  |  | Natural Sciences | W2B-021 to W2B-030 |
+|  |  | Technology | W2B-031 to W2B-040 |
+|  | **REPORTAGE (W2C)** | Press News Reports | W2C-001 to W2C-020 |
+|  | **INSTRUCTIONAL WRITING (W2D)** |  |  |
+|  |  | Administrative Writing | W2D-001 to W2D-010 |
+|  |  | Skills & Hobbies | W2D-011 to W2D-020 |
+|  | **PERSUASIVE WRITING (W2E)** | Press Editorials | W2E-001 to W2E-010 |
+|  | **CREATIVE WRITING (W2F)** | Novels & Stories | W2F-001 to W2F-020 |
+:::
+
+What all spoken files have in common is that they begin with the upper-case letter `"S"`, and written files with `"W"`.
+
+```{r}
+# Classify text files as either "spoken" or "written"
+data_eat_reg %>% # <1>
+  mutate(medium = case_when( # <2>
+    grepl("ICE_GB/S", text_category) ~ "spoken", # <3>
+    grepl("ICE_GB/W", text_category) ~ "written" # <4>
+  )) -> data_sw # <5>
+
+```
+
+1.  Take the data frame `data_eat_reg` and pass it on to the next function via the pipe operator `%>%`. Make sure `library(tidyverse)` is loaded.
+
+2.  Create a new column with `mutate` and call it `medium`. The column values are assigned conditionally with `case_when()`:
+
+3.  If `text_category` contains the string `"ICE_GB/S"`, classify `medium` as `"spoken"`.
+
+4.  If `text_category` contains the string `"ICE_GB/W"`, classify `medium` as `"written"`.
+
+5.  Store the new data frame in the variable `data_sw`.
+
+## What next? A few sample analyses
+
+It is now possible to investigate associations between register (i.e., `text_category` or `medium`) and other variables more comfortably.
+
+-   `object_realisation` and `text_category`
+
+    ```{r}
+    # Contingency table
+    obj_reg_freq <- xtabs(~ object_realisation + text_category, data_eat_reg)
+
+    # Percentage table
+    object_reg_prop <- prop.table(obj_reg_freq, margin = 2) * 100
+
+    print(object_reg_prop)
+
+    # Simple barplot
+    barplot(object_reg_prop, 
+            beside = TRUE, 
+            legend = TRUE,
+            cex.names = 0.8)
+
+    # Statistical analysis
+    fisher.test(obj_reg_freq)
+    ```
+
+-   `object_realisation` and `medium`
+
+    ```{r}
+    # Contingency table
+    obj_sw_freq <- xtabs(~ object_realisation + medium, data_sw)
+
+    # Percentage table
+    obj_sw_prop <- prop.table(obj_sw_freq, margin = 2) * 100
+
+    print(obj_sw_prop)
+
+    # Simple barplot
+    barplot(obj_sw_prop, 
+            beside = TRUE, 
+            legend = TRUE,
+            cex.names = 0.8)
+
+    # Statistical analysis
+    chisq.test(obj_sw_freq)
+    ```

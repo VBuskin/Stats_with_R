@@ -80,8 +80,8 @@
     "objectID": "Categorical_data.html#preparation",
     "href": "Categorical_data.html#preparation",
     "title": "15  Categorical data",
-    "section": "15.1 Preparation",
-    "text": "15.1 Preparation\n\n\n\n\n\n\nScript\n\n\n\nYou can find the full R script associated with this unit here.\n\n\nPlease download the file Paquot_Larsson_2020_data.xlsx (Paquot and Larsson 2020)1 and store it in the same folder as your currently active R-script. Then run the code lines below:\n1 The original supplementary materials can be downloaded from the publisher’s website [Last accessed April 28, 2024].\n# Libraries\nlibrary(readxl)\nlibrary(tidyverse)\n# For publication-ready tables\nlibrary(crosstable)\nlibrary(flextable)\n\n# Load data from working directory\ncl.order &lt;- read_xlsx(\"Paquot_Larsson_2020_data.xlsx\")\n\n# Check the structure of the data frame\nhead(cl.order)\n\n# A tibble: 6 × 8\n   CASE ORDER SUBORDTYPE LEN_MC LEN_SC LENGTH_DIFF CONJ     MORETHAN2CL\n  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;      \n1  4777 sc-mc temp            4     10          -6 als/when no         \n2  1698 mc-sc temp            7      6           1 als/when no         \n3   953 sc-mc temp           12      7           5 als/when yes        \n4  1681 mc-sc temp            6     15          -9 als/when no         \n5  4055 sc-mc temp            9      5           4 als/when yes        \n6   967 sc-mc temp            9      5           4 als/when yes",
+    "section": "",
+    "text": "Script\n\n\n\nYou can find the full R script associated with this unit here.\n\n\n\n1 The original supplementary materials can be downloaded from the publisher’s website [Last accessed April 28, 2024].",
     "crumbs": [
       "Descriptive Statistics",
       "<span class='chapter-number'>15</span>  <span class='chapter-title'>Categorical data</span>"
@@ -410,8 +410,8 @@
     "objectID": "Linear_regression.html#recommended-reading",
     "href": "Linear_regression.html#recommended-reading",
     "title": "22  Linear regression",
-    "section": "22.1 Recommended reading",
-    "text": "22.1 Recommended reading\nFor linguists:\n\nLevshina (2015: Chapter 7)\nWinter (2020: Chapter 4)\n\nGeneral:\n\nHeumann et al. (2022: Chapter 11)\nJames et al. (2021: Chapter 3)",
+    "section": "",
+    "text": "Levshina (2015: Chapter 7)\nWinter (2020: Chapter 4)\n\n\n\nHeumann et al. (2022: Chapter 11)\nJames et al. (2021: Chapter 3)",
     "crumbs": [
       "Statistical Modelling and Machine Learning",
       "<span class='chapter-number'>22</span>  <span class='chapter-title'>Linear regression</span>"
@@ -884,7 +884,7 @@
     "href": "Regular_expressions.html#querying-parsed-corpora",
     "title": "12  Regular expressions",
     "section": "12.5 Querying parsed corpora",
-    "text": "12.5 Querying parsed corpora\nThe range of linguistic patterns to be matched can be extended further if the corpus contains additional metadata, such as the part of speech (POS) of a token. POS-tagged corpora open up the option of looking for more abstract patterns, such as all instances of the verb eat that are followed by a pronoun or noun:\n\n# Load library and corpus\nICE_GB_POS &lt;- readRDS(\"ICE_GB_POS.RDS\")\n\n# Perform query\nkwic_provide_POS2 &lt;- kwic(ICE_GB_POS,\n                     phrase(\"\\\\b(ate|eat(s|ing|en)?)_VERB\\\\b _(PRON|NOUN)\"),\n                     valuetype = \"regex\",\n                     window = 5)\n\nhead(kwic_provide_POS2)\n\n\n\n\n\n\ndocname\nfrom\nto\npre\nkeyword\npost\npattern\n\n\n\n\nS1A-009.txt\n1198\n1199\nI_PRON must_AUX &lt; , &gt;\neat_VERB them_PRON\n&lt; ICE-GB:S1A-009 #71 : 1\n\\b(ate|eat(s|ing|en)?)_VERB\\b _(PRON|NOUN)\n\n\nS1A-010.txt\n958\n959\nto &lt; , &gt; actually_ADV\neat_VERB it_PRON\nfor_ADP one_NOUN ' s_PART own_ADJ\n\\b(ate|eat(s|ing|en)?)_VERB\\b _(PRON|NOUN)\n\n\nS1A-011.txt\n3245\n3246\n: A &gt; I_PRON have_AUX\neaten_VERB my_PRON\nway_NOUN round_ADP the_DET Yorkshire_PROPN Dales_PROPN\n\\b(ate|eat(s|ing|en)?)_VERB\\b _(PRON|NOUN)\n\n\nS1A-011.txt\n4159\n4160\nI_PRON ended_VERB up_ADP uhm_NOUN just_ADV\neating_VERB sort_NOUN\nof_ADP_ADP lumps_NOUN of chicken_NOUN and_CCONJ\n\\b(ate|eat(s|ing|en)?)_VERB\\b _(PRON|NOUN)\n\n\nS1A-018.txt\n455\n456\norder_VERB on_ADPe_NUM first_ADJ and_CCONJ_CCONJ then_ADV_ADV\neat_VERB it_PRON\nand then sort_ADV of_ADV carry_VERB\n\\b(ate|eat(s|ing|en)?)_VERB\\b _(PRON|NOUN)\n\n\nS1A-019.txt\n1038\n1039\nA &gt; and_CCONJ everybody_PRON was_AUX\neating_VERB something_PRON\n&lt; ICE-GB:S1A-019 #76 : 1\n\\b(ate|eat(s|ing|en)?)_VERB\\b _(PRON|NOUN)\n\n\n\n\n\n\n\nOne R package that supplies functions for tokenisation, POS-tagging and even dependency parsing for dozens of languages is udpipe. They all rely on one common set of tags known as Universal Dependencies, which are listed here:\n\n\n\n\n\n\nUniversial dependencies – Tagset\n\n\n\nCf. https://universaldependencies.org/u/pos/.\n\n\n\n\n\n\n\nPOS Tag\nDescription\n\n\n\n\nADJ\nAdjective: describes a noun (e.g., big, old, green, first)\n\n\nADP\nAdposition: prepositions and postpositions (e.g., in, to, over)\n\n\nADV\nAdverb: modifies verbs, adjectives, or other adverbs (e.g., quickly, very)\n\n\nAUX\nAuxiliary: helps form verb tenses, moods, or voices (e.g., is, have, will)\n\n\nCCONJ\nCoordinating conjunction: links words, phrases, or clauses (e.g., and, or, but)\n\n\nDET\nDeterminer: introduces nouns (e.g., the, a, some, my)\n\n\nINTJ\nInterjection: expresses emotion or reaction (e.g., oh, wow, hello)\n\n\nNOUN\nNoun: person, place, thing, or concept (e.g., cat, city, idea)\n\n\nNUM\nNumeral: expresses a number or ranking (e.g., one, two, second)\n\n\nPART\nParticle: adds meaning without being an independent word class (e.g., not, to as in to run)\n\n\nPRON\nPronoun: replaces nouns (e.g., he, she, they, it)\n\n\nPROPN\nProper noun: names specific entities (e.g., London, Vladimir)\n\n\nPUNCT\nPunctuation: marks boundaries in text (. , ! ?)\n\n\nSCONJ\nSubordinating conjunction: links clauses, often indicating dependency (e.g., if, because, although)\n\n\nSYM\nSymbol: non-alphanumeric symbol (e.g., %, &, #)\n\n\nVERB\nVerb: action or state (e.g., run, be, have)\n\n\nX\nOther: used when a word doesn’t fit into other categories",
+    "text": "12.5 Querying parsed corpora\nThe range of linguistic patterns to be matched can be extended further if the corpus contains additional metadata, such as the part of speech (POS) of a token. POS-tagged corpora open up the option of looking for more abstract patterns, such as all instances of the verb eat that are followed by a pronoun or noun:\n\n# Load library and corpus\nICE_GB_POS &lt;- readRDS(\"ICE_GB_POS.RDS\")\n\n# Perform query\nkwic_provide_POS2 &lt;- kwic(ICE_GB_POS,\n                     phrase(\"\\\\b(ate|eat(s|ing|en)?)_VERB\\\\b _(PRON|NOUN)\"),\n                     valuetype = \"regex\",\n                     window = 5)\n\nhead(kwic_provide_POS2)\n\n\n\n\n\n\ndocname\nfrom\nto\npre\nkeyword\npost\npattern\n\n\n\n\nS1A-009.txt\n1198\n1199\nI_PRON must_AUX &lt; , &gt;\neat_VERB them_PRON\n&lt; ICE-GB:S1A-009 #71 : 1\n\\b(ate|eat(s|ing|en)?)_VERB\\b _(PRON|NOUN)\n\n\nS1A-010.txt\n958\n959\nto &lt; , &gt; actually_ADV\neat_VERB it_PRON\nfor_ADP one_NOUN ' s_PART own_ADJ\n\\b(ate|eat(s|ing|en)?)_VERB\\b _(PRON|NOUN)\n\n\nS1A-011.txt\n3245\n3246\n: A &gt; I_PRON have_AUX\neaten_VERB my_PRON\nway_NOUN round_ADP the_DET Yorkshire_PROPN Dales_PROPN\n\\b(ate|eat(s|ing|en)?)_VERB\\b _(PRON|NOUN)\n\n\nS1A-011.txt\n4159\n4160\nI_PRON ended_VERB up_ADP uhm_NOUN just_ADV\neating_VERB sort_NOUN\nof_ADP_ADP lumps_NOUN of chicken_NOUN and_CCONJ\n\\b(ate|eat(s|ing|en)?)_VERB\\b _(PRON|NOUN)\n\n\nS1A-018.txt\n455\n456\norder_VERB on_ADPe_NUM first_ADJ and_CCONJ_CCONJ then_ADV_ADV\neat_VERB it_PRON\nand then sort_ADV of_ADV carry_VERB\n\\b(ate|eat(s|ing|en)?)_VERB\\b _(PRON|NOUN)\n\n\nS1A-019.txt\n1038\n1039\nA &gt; and_CCONJ everybody_PRON was_AUX\neating_VERB something_PRON\n&lt; ICE-GB:S1A-019 #76 : 1\n\\b(ate|eat(s|ing|en)?)_VERB\\b _(PRON|NOUN)\n\n\n\n\n\n\n\nOne R package that supplies functions for tokenisation, POS-tagging and even dependency parsing for dozens of languages is udpipe. They all rely on one common set of tags known as Universal Dependencies, which are listed here:\n\n\n\n\n\n\nUniversial dependencies – Tagset\n\n\n\n\n\nCf. https://universaldependencies.org/u/pos/.\n\n\n\n\n\n\n\nPOS Tag\nDescription\n\n\n\n\nADJ\nAdjective: describes a noun (e.g., big, old, green, first)\n\n\nADP\nAdposition: prepositions and postpositions (e.g., in, to, over)\n\n\nADV\nAdverb: modifies verbs, adjectives, or other adverbs (e.g., quickly, very)\n\n\nAUX\nAuxiliary: helps form verb tenses, moods, or voices (e.g., is, have, will)\n\n\nCCONJ\nCoordinating conjunction: links words, phrases, or clauses (e.g., and, or, but)\n\n\nDET\nDeterminer: introduces nouns (e.g., the, a, some, my)\n\n\nINTJ\nInterjection: expresses emotion or reaction (e.g., oh, wow, hello)\n\n\nNOUN\nNoun: person, place, thing, or concept (e.g., cat, city, idea)\n\n\nNUM\nNumeral: expresses a number or ranking (e.g., one, two, second)\n\n\nPART\nParticle: adds meaning without being an independent word class (e.g., not, to as in to run)\n\n\nPRON\nPronoun: replaces nouns (e.g., he, she, they, it)\n\n\nPROPN\nProper noun: names specific entities (e.g., London, Vladimir)\n\n\nPUNCT\nPunctuation: marks boundaries in text (. , ! ?)\n\n\nSCONJ\nSubordinating conjunction: links clauses, often indicating dependency (e.g., if, because, although)\n\n\nSYM\nSymbol: non-alphanumeric symbol (e.g., %, &, #)\n\n\nVERB\nVerb: action or state (e.g., run, be, have)\n\n\nX\nOther: used when a word doesn’t fit into other categories",
     "crumbs": [
       "Corpus Linguistics with R",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Regular expressions</span>"
@@ -1256,23 +1256,23 @@
   {
     "objectID": "Drawing_samples.html#preparation",
     "href": "Drawing_samples.html#preparation",
-    "title": "31  Drawing samples",
-    "section": "31.1 Preparation",
-    "text": "31.1 Preparation\nLoad libraries:\n\nlibrary(tidyverse)\nlibrary(quanteda)\nlibrary(sampling)\nlibrary(data.table)\n\nPerform query:\n\n# Load corpus\nICE_GB &lt;- readRDS(\"ICE_GB.RDS\")\n\n# Perform query\nkwic_think &lt;- kwic(ICE_GB, \"think\")\n\n# Count number of observations\nnrow(kwic_think)\n\n[1] 2648\n\n# Show first few\nhead(kwic_think)\n\nKeyword-in-context with 6 matches.                                                       \n   [ICE_GB/S1A-001.txt, 55]          1: B &gt; I | think |\n  [ICE_GB/S1A-001.txt, 218]          1: B &gt; I | think |\n  [ICE_GB/S1A-001.txt, 534]          1: B &gt; I | think |\n  [ICE_GB/S1A-001.txt, 588] difference &lt;, &gt; I | think |\n  [ICE_GB/S1A-001.txt, 675]        &lt;, &gt; and I | think |\n [ICE_GB/S1A-001.txt, 1049]     B &gt; Uhm and I | think |\n                           \n the main things that I    \n the m &lt;, &gt;                \n that the &lt;,,              \n the main difference that I\n one of the things that    \n f for for myself &lt;",
+    "title": "33  Drawing samples",
+    "section": "33.1 Preparation",
+    "text": "33.1 Preparation\nLoad libraries:\n\nlibrary(tidyverse)\nlibrary(quanteda)\nlibrary(sampling)\nlibrary(data.table)\n\nPerform query:\n\n# Load corpus\nICE_GB &lt;- readRDS(\"ICE_GB.RDS\")\n\n# Perform query\nkwic_think &lt;- kwic(ICE_GB, \"think\")\n\n# Count number of observations\nnrow(kwic_think)\n\n[1] 2648\n\n# Show first few\nhead(kwic_think)\n\nKeyword-in-context with 6 matches.                                                       \n   [ICE_GB/S1A-001.txt, 55]          1: B &gt; I | think |\n  [ICE_GB/S1A-001.txt, 218]          1: B &gt; I | think |\n  [ICE_GB/S1A-001.txt, 534]          1: B &gt; I | think |\n  [ICE_GB/S1A-001.txt, 588] difference &lt;, &gt; I | think |\n  [ICE_GB/S1A-001.txt, 675]        &lt;, &gt; and I | think |\n [ICE_GB/S1A-001.txt, 1049]     B &gt; Uhm and I | think |\n                           \n the main things that I    \n the m &lt;, &gt;                \n that the &lt;,,              \n the main difference that I\n one of the things that    \n f for for myself &lt;",
     "crumbs": [
       "Appendix",
-      "<span class='chapter-number'>31</span>  <span class='chapter-title'>Drawing samples</span>"
+      "<span class='chapter-number'>33</span>  <span class='chapter-title'>Drawing samples</span>"
     ]
   },
   {
     "objectID": "Drawing_samples.html#stratified-sample",
     "href": "Drawing_samples.html#stratified-sample",
-    "title": "31  Drawing samples",
-    "section": "31.2 Stratified sample",
-    "text": "31.2 Stratified sample\n\n# Source function from GitHub\nsource(\"https://raw.githubusercontent.com/VBuskin/Stats_with_R/refs/heads/main/Custom_functions.R\")\n\n# Apply function to the output of kwic() to perform weighted sampling\nstratified_sample_ICE(kwic_think, 500)\n\n# A tibble: 501 × 8\n   Text_category File_number  from    to pre               keyword post  pattern\n   &lt;chr&gt;         &lt;chr&gt;       &lt;int&gt; &lt;int&gt; &lt;chr&gt;             &lt;chr&gt;   &lt;chr&gt; &lt;fct&gt;  \n 1 ICE_GB/S1A    001.txt       588   588 difference &lt; , &gt;… think   the … think  \n 2 ICE_GB/S1A    001.txt      1866  1866 : B &gt; And I       think   that… think  \n 3 ICE_GB/S1A    001.txt      1974  1974 initial difficul… think   that… think  \n 4 ICE_GB/S1A    002.txt       386   386 lazy really for … think   &lt; , … think  \n 5 ICE_GB/S1A    002.txt       649   649 : C &gt; And I       think   when… think  \n 6 ICE_GB/S1A    002.txt      1578  1578 think there ' s I think   ther… think  \n 7 ICE_GB/S1A    002.txt      3621  3621 : B &gt; Therefore I think   that… think  \n 8 ICE_GB/S1A    002.txt      3710  3710 : B &gt; But I       think   &lt; , … think  \n 9 ICE_GB/S1A    003.txt       427   427 , &gt; why do you    think   phys… think  \n10 ICE_GB/S1A    003.txt      2613  2613 &gt; Well I Well I   think   it '… think  \n# ℹ 491 more rows",
+    "title": "33  Drawing samples",
+    "section": "33.2 Stratified sample",
+    "text": "33.2 Stratified sample\n\n# Source function from GitHub\nsource(\"https://raw.githubusercontent.com/VBuskin/Stats_with_R/refs/heads/main/Custom_functions.R\")\n\n# Apply function to the output of kwic() to perform weighted sampling\nstratified_sample_ICE(kwic_think, 500)\n\n# A tibble: 501 × 8\n   Text_category File_number  from    to pre               keyword post  pattern\n   &lt;chr&gt;         &lt;chr&gt;       &lt;int&gt; &lt;int&gt; &lt;chr&gt;             &lt;chr&gt;   &lt;chr&gt; &lt;fct&gt;  \n 1 ICE_GB/S1A    001.txt       588   588 difference &lt; , &gt;… think   the … think  \n 2 ICE_GB/S1A    001.txt      1866  1866 : B &gt; And I       think   that… think  \n 3 ICE_GB/S1A    001.txt      1974  1974 initial difficul… think   that… think  \n 4 ICE_GB/S1A    002.txt       386   386 lazy really for … think   &lt; , … think  \n 5 ICE_GB/S1A    002.txt       649   649 : C &gt; And I       think   when… think  \n 6 ICE_GB/S1A    002.txt      1578  1578 think there ' s I think   ther… think  \n 7 ICE_GB/S1A    002.txt      3621  3621 : B &gt; Therefore I think   that… think  \n 8 ICE_GB/S1A    002.txt      3710  3710 : B &gt; But I       think   &lt; , … think  \n 9 ICE_GB/S1A    003.txt       427   427 , &gt; why do you    think   phys… think  \n10 ICE_GB/S1A    003.txt      2613  2613 &gt; Well I Well I   think   it '… think  \n# ℹ 491 more rows",
     "crumbs": [
       "Appendix",
-      "<span class='chapter-number'>31</span>  <span class='chapter-title'>Drawing samples</span>"
+      "<span class='chapter-number'>33</span>  <span class='chapter-title'>Drawing samples</span>"
     ]
   },
   {
@@ -1335,7 +1335,7 @@
     "href": "Regular_expressions.html#working-with-other-platforms-cqp",
     "title": "12  Regular expressions",
     "section": "12.6 Working with other platforms: CQP",
-    "text": "12.6 Working with other platforms: CQP\nSome corpus platforms such as BNCweb, CQPweb or our local KU corpora1 rely on a special syntax known as CQP (Corpus Query Processor). CQP syntax is very powerful in that enables users to query for strings with specific meta-attributes (text category, age, gender etc.). For more details, see the CQP documentation.\n1 Note that the corpus platform of the Catholic University of Eichstätt-Ingolstadt, which was set up by Dr. Thomas Brunner, is only accessible to students or staff via the local eduroam network or a VPN client which holds their credentials.\n\n\nCQP query of PROVIDE in the GloWbE corpus",
+    "text": "12.6 Working with other platforms: CQP\nSome corpus platforms such as BNCweb, CQPweb or our local KU corpora1 rely on a special syntax known as CQP (Corpus Query Processor). CQP syntax is very powerful in that enables users to query for strings with specific meta-attributes (text category, age, gender etc.). After signing up on one of these platforms, For more details, see the CQP documentation.\n1 Note that the corpus platform of the Catholic University of Eichstätt-Ingolstadt, which was set up by Dr. Thomas Brunner, is only accessible to students or staff via the local eduroam network or a VPN client which holds their credentials.\n\n\nCQP query of PROVIDE in the GloWbE corpus",
     "crumbs": [
       "Corpus Linguistics with R",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Regular expressions</span>"
@@ -1889,6 +1889,39 @@
     "crumbs": [
       "Statistical Modelling and Machine Learning",
       "<span class='chapter-number'>26</span>  <span class='chapter-title'>Poisson regression</span>"
+    ]
+  },
+  {
+    "objectID": "Categorical_data.html",
+    "href": "Categorical_data.html",
+    "title": "15  Categorical data",
+    "section": "",
+    "text": "15.1 Preparation\nPlease download the file Paquot_Larsson_2020_data.xlsx (Paquot and Larsson 2020)1 and store it in the same folder as your currently active R-script. Then run the code lines below:\n# Libraries\nlibrary(readxl)\nlibrary(tidyverse)\n# For publication-ready tables\nlibrary(crosstable)\nlibrary(flextable)\n\n# Load data from working directory\ncl.order &lt;- read_xlsx(\"Paquot_Larsson_2020_data.xlsx\")\n\n# Check the structure of the data frame\nhead(cl.order)\n\n# A tibble: 6 × 8\n   CASE ORDER SUBORDTYPE LEN_MC LEN_SC LENGTH_DIFF CONJ     MORETHAN2CL\n  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;      \n1  4777 sc-mc temp            4     10          -6 als/when no         \n2  1698 mc-sc temp            7      6           1 als/when no         \n3   953 sc-mc temp           12      7           5 als/when yes        \n4  1681 mc-sc temp            6     15          -9 als/when no         \n5  4055 sc-mc temp            9      5           4 als/when yes        \n6   967 sc-mc temp            9      5           4 als/when yes",
+    "crumbs": [
+      "Descriptive Statistics",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Categorical data</span>"
+    ]
+  },
+  {
+    "objectID": "Linear_regression.html",
+    "href": "Linear_regression.html",
+    "title": "22  Linear regression",
+    "section": "",
+    "text": "22.1 Recommended reading\nFor linguists:\nGeneral:",
+    "crumbs": [
+      "Statistical Modelling and Machine Learning",
+      "<span class='chapter-number'>22</span>  <span class='chapter-title'>Linear regression</span>"
+    ]
+  },
+  {
+    "objectID": "Regular_expressions.html#working-with-other-corpora",
+    "href": "Regular_expressions.html#working-with-other-corpora",
+    "title": "12  Regular expressions",
+    "section": "12.6 Working with other corpora",
+    "text": "12.6 Working with other corpora\nSome corpus platforms such as BNCweb, CQPweb or our local KU corpora1 support a specialised query syntax known as CQP (Corpus Query Processor), which enables users to query for strings with specific meta-attributes (text category, age, gender etc.).\n1 Note that the corpus platform of the Catholic University of Eichstätt-Ingolstadt, which was set up by Dr. Thomas Brunner, is only accessible to students or staff via the local eduroam network or a VPN client which holds their credentials.\n12.6.1 Basic use\nOnce signed in on any of these platforms, the user interface will generally follow this layout:\n\n\n\nCQP query of PROVIDE in the GloWbE corpus\n\n\n\nTo select a different corpus, navigate to CQPweb main menu under About CQPweb in the left menu bar.\nTo restrict search results to specific parts of the corpus, select Restricted query and choose the relevant text categories, varieties, etc.\n\nYou can now enter a search expression into the white box using the following pattern:\n\n[attribute = \"property\"]\n\nFor example, to retrieve all inflectional forms of the verb provide, enter:\n\n[lemma = \"provide\"]\n\nTo search for a word with a specific part-of-speech (POS) tag – such as like used as a preposition – use:\n\n[word = \"like\" & pos = \"ii\"]\n\nFor a full list of POS-tags, refer to:\n\nCLAWS5 (for BNC)\nCLAWS7 (for COCA and GloWbE)\n\n\n\n12.6.2 Exporting and importing your results\nTo export your KWIC-hits, select Download in the top-right corner and specify your output options (e.g., the size of the search window or the speaker metadata). While you can immediately read the downloaded concordance.txt file into R, it’s advisable to first perform some manual clean-up in spreadsheet software (e.g., MS Excel). This ensures all columns and rows are complete and properly formatted.\nTo do this in Excel:\n\nNavigate to File &gt; Import &gt; Text file.\nSelect your file and choose Delimited.\nClick Next, select Tab as the delimiter, then click Next &gt; Finish.\n\nMake sure to save your file, ideally with the extension .xlsx.\nFrom here, please refer to the unit Import/export data for further steps.",
+    "crumbs": [
+      "Corpus Linguistics with R",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Regular expressions</span>"
     ]
   }
 ]
