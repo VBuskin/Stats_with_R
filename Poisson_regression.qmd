@@ -43,13 +43,7 @@ verbs <- read_xlsx("winter_2020_visual.xlsx")
 
 ## The Poisson family
 
-Frequency data is ubiquitous in corpus linguistics. Given its numeric
-nature, it seems tempting to model such data using [linear
-regression](Linear_regression.qmd), but doing so is bound to cause
-problems. Partially owing to the fact that count data is always
-positive, the residuals more often than not deviate from normality and
-additionally display non-constant variance. The figures below illustrate
-these issues for a linear model fitted to simulated count data.
+Frequency data is ubiquitous in corpus linguistics. Given its numeric nature, it seems tempting to model such data using [linear regression](Linear_regression.qmd), but doing so is bound to cause problems. Partially owing to the fact that count data is always positive, the residuals more often than not deviate from normality and additionally display non-constant variance. The figures below illustrate these issues for a linear model fitted to simulated count data.
 
 ```{r, echo = F}
 set.seed(123)
@@ -75,18 +69,13 @@ plot(lm_fit, which = 1)
 
 ```
 
-A probability distribution that is much better equipped for this special
-case of discrete, yet numeric data is the **Poisson distribution**.
-Assuming a Poisson-distributed variable $X$, its exact shape is
-determined by a single parameter, $\lambda$ (lambda), which is both its
-mean **and** and variance. In other words,
+A probability distribution that is much better equipped for this special case of discrete, yet numeric data is the **Poisson distribution**. Assuming a Poisson-distributed variable $X$, its exact shape is determined by a single parameter, $\lambda$ (lambda), which is both its mean **and** its variance. In other words,
 
 $$
 X \sim Pois(\lambda).
 $$ {#eq-pois}
 
-Its probability mass function has a notable negative skew, which becomes
-less conspicuous for increasingly higher parameter values.
+Its probability mass function has a notable negative skew, which becomes less conspicuous for increasingly higher parameter values.
 
 ```{r, echo = F}
 
@@ -103,39 +92,27 @@ barplot(x2, names.arg = 0:20, xlab = "Count", ylab = "Probability", main = "Pois
 
 ## Poisson regression
 
-Recall the linear regression @eq-multreg, where the dependent variable
-$Y$ was modelled as a function of the linear sum of predictor terms
-$\beta_pX_p$ for $p$ independent variable.
+Recall the linear regression @eq-multreg, where the dependent variable $Y$ was modelled as a function of the linear sum of predictor terms $\beta_pX_p$ for $p$ independent variables.
 
-The **Poisson model** is very similar to the linear regression model,
-with the main differences being the logarithmic transformation of the
-response and the exclusion of the error term:
+The **Poisson model** is very similar to the linear regression model, with the main differences being the logarithmic transformation of the response and the exclusion of the error term:
 
 $$ \ln(Y) = \beta_0 + \beta_1X_1 + \beta_2X_2 + ... + \beta_pX_p.
 $$ {#eq-pois-full}
 
-To remove the logarithm and obtain the model output on a more intuitive
-scale, we simply exponentiate both sides:
+To remove the logarithm and obtain the model output on a more intuitive scale, we simply exponentiate both sides:
 
 $$ Y = e^{\beta_0 + \beta_1X_1 + \beta_2X_2 + ... + \beta_pX_p}.
 $$ {#eq-pois-exp}
 
 ### Application in R
 
-The data provided by Winter [-@winter_statistics_2020] contains
-frequency data for hundreds of verbs (`Freq` column) as well as a
-variety of psycholinguistic ratings (`Sight`, `Touch`, `Sound` etc.),
-which were originally compiled by Lynott & Connell
-[-@LynottConnell2009].
+The data provided by Winter [-@winter_statistics_2020] contains frequency data for hundreds of verbs (`Freq` column) as well as a variety of psycholinguistic ratings (`Sight`, `Touch`, `Sound` etc.), which were originally compiled by Lynott & Connell [-@LynottConnell2009].
 
 ```{r}
 head(verbs)
 ```
 
-We will examine of the effects of different sensory ratings on the
-frequency of a verb. When fitting the generalized linear model, it is
-important to indicate the argument `family = "poisson"` to apply the
-correct (logarithmic) link function.
+We will examine of the effects of different sensory ratings on the frequency of a verb. When fitting the generalized linear model, it's important to indicate the argument `family = "poisson"` to apply the correct (logarithmic) link function.
 
 ```{r}
 # Fit Poisson regression model
@@ -145,10 +122,7 @@ freq.m1 <- glm(Freq ~ Sight + Touch + Sound + Taste + Smell, data = verbs, famil
 summary(freq.m1)
 ```
 
-The model has identified numerous significant effects, i.e.,
-$\beta$-values that are significantly different from 0. The low standard
-errors hint at very robust estimates, resulting in 95% confidence
-intervals that are barely visible in the effect plots.
+The model has identified numerous significant effects, i.e., $\beta$-values that are significantly different from 0. The low standard errors hint at very robust estimates, resulting in 95% confidence intervals that are barely visible in the effect plots.
 
 ```{r}
 # Get predicted values for each predictor
@@ -181,14 +155,6 @@ ggplot(pred_all, aes(x = x, y = predicted)) +
 
 ### Interpretation
 
-As we can see, verbs with higher `Sight` ratings (i.e., highly visual
-verbs) are associated with the greatest increase in frequency of
-occurrence. Given a one-unit increase in $X$, we can obtain the
-percentage increase (or decrease, respectively) using the formula
-$100(e^b - 1)$. The predictor `Sight` has an estimate of approximately
-$0.87$ ($p< 0.001$, 95% CI \[0.87, 0.88\]), so the proportional increase
-is $100(e^{0.87} - 1) = 138.69\%$.
+As we can see, verbs with higher `Sight` ratings (i.e., highly visual verbs) are associated with the greatest increase in frequency of occurrence. Given a one-unit increase in $X$, we can obtain the percentage increase (or decrease, respectively) using the formula $100(e^b - 1)$. The predictor `Sight` has an estimate of approximately $0.87$ ($p< 0.001$, 95% CI \[0.87, 0.88\]), so the proportional increase is $100(e^{0.87} - 1) = 138.69\%$.
 
-By contrast, `Smell` is a associated with a lower frequency:
-$100(e^{0.10} -1) = -9.51\%$ is the drop in frequency for each one-unit
-increase in smell ratings. In essence: Smelly verbs are unpopular!
+By contrast, `Smell` is a associated with a lower frequency: $100(e^{0.10} -1) = -9.51\%$ is the drop in frequency for each one-unit increase in smell ratings. In essence: Smelly verbs are unpopular!
