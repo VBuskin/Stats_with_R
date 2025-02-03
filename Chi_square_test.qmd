@@ -444,8 +444,14 @@ be viewed as arbitrary.
 
 ## Only one variable? The Pearson $\chi^2$ goodness-of-fit test
 
-The $\chi^2$-statistic can also be utilised in simpler scenarios that involve only one single categorical variable. Consider the small [`eat_obj_aspect.xlsx`](https://osf.io/y5scq) dataset, where the `object_realisation` column indicates whether the object was realised or dropped in a given observation.
+The $\chi^2$-statistic can also be utilised in simpler scenarios that
+involve only one single categorical variable.[^chi_square_test-1]
+Consider the small [`eat_obj_aspect.xlsx`](https://osf.io/y5scq)
+dataset, where the `object_realisation` column indicates whether the
+object was realised or dropped in a given observation.
 
+[^chi_square_test-1]: For this reason, the distinction between dependent
+    and independent variable is irrelevant here.
 
 ```{r}
 # Load data
@@ -457,29 +463,34 @@ eat_observed <- table(eat$object_realisation)
 print(eat_observed)
 ```
 
-We can use the $\chi^2$ **goddness-of-fit test** "to compare an observed frequency distribution against its expected probability of occurrence" [@baguleySeriousStatsGuide2012: 132]. In other words, we can check if the observed object data matches the frequencies we'd expect to see if both outcomes of `object realisation` were equally likely and hence randomly distributed.
+We can use the $\chi^2$ **goddness-of-fit test** "to compare an observed
+frequency distribution against its expected probability of occurrence"
+[@baguleySeriousStatsGuide2012: 132]. In other words, we can check if
+the observed object data matches the frequencies we'd expect to see if
+both outcomes of `object realisation` were equally likely and hence
+randomly distributed.
 
-Our hypotheses are thus 
+Our hypotheses are thus
 
--   $H_0:$ Observed frequencies of `object realisation` $=$ expected frequencies of `object realisation`
+-   $H_0:$ Observed frequencies of `object realisation` $=$ expected
+    frequencies of `object realisation`
 
--   $H_1:$ Observed frequencies of `object realisation` $\neq$ expected frequencies of `object realisation`
+-   $H_1:$ Observed frequencies of `object realisation` $\neq$ expected
+    frequencies of `object realisation`
 
-The expected frequencies are given by 
+The expected frequencies are given by
 
 $$
 e_i = \frac{\text{number of observations}}{\text{number of cells}},
 $$ {#eq-exp-gof}
 
-
-and the test statistic simplifies to 
+and the test statistic simplifies to
 
 $$
 \chi^2 = \sum_{i=1}^{I}{\frac{(f_{i} - e_{i})^2}{e_{i}}}.
 $$ {#eq-chisq-gof}
 
-
-In R:
+**In R**:
 
 ```{r}
 # Perform the chi-squared goodness-of-fit test
@@ -491,8 +502,11 @@ print(eat_gof)
 print(eat_gof$expected)
 ```
 
-> A chi-squared goodness-of-fit test indicates that the distribution of object realisation for *eat* does not significantly differ from an equal distribution ($\chi^2$ = 1.41, df = 1, $p$ = 0.23). In the sample at hand, the verb does not seem to prefer one variant or the other.
-
+> A chi-squared goodness-of-fit test indicates that the distribution of
+> object realisation for *eat* does not significantly differ from an
+> equal distribution ($\chi^2$ = 1.41, $df$ = 1, $p$ = 0.23). In the
+> sample at hand, the verb *eat* does not seem to prefer one variant or
+> the other.
 
 ## Exercises
 

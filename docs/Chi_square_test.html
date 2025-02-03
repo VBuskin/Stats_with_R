@@ -4677,7 +4677,7 @@ vertical-align: -.125em;
 
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -5063,7 +5063,7 @@ vertical-align: -.125em;
 <div class="toc-actions"><ul><li><a href="https://github.com/VBuskin/Stats_with_R/blob/main/Chi_square_test.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Hypothesis_testing.html">Inferential Statistics</a></li><li class="breadcrumb-item"><a href="./Chi_square_test.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Chi-squared test</span></a></li></ol></nav>
 <div class="quarto-title">
@@ -5685,10 +5685,10 @@ V = \sqrt{\frac{\chi^2}{n \times (min(nrow, ncol) - 1)}}.
 </div>
 <p>The association between two categorical variables is stronger, the closer <span class="math inline">\(V\)</span> approximates 1. Conversely, if <span class="math inline">\(V = 0\)</span>, then the variables are completely independent. There are various guidelines in the literature that provide thresholds for “small”, “moderate” and “large” effects, yet these are rarely justified on theoretical grounds and could be viewed as arbitrary.</p>
 </section>
-<section id="only-one-variable-the-pearson-chi2-goodness-of-fit-test" class="level2" data-number="20.6">
+<section id="only-one-variable-the-pearson-chi2-goodness-of-fit-test" class="level2 page-columns page-full" data-number="20.6">
 <h2 data-number="20.6" class="anchored" data-anchor-id="only-one-variable-the-pearson-chi2-goodness-of-fit-test"><span class="header-section-number">20.6</span> Only one variable? The Pearson <span class="math inline">\(\chi^2\)</span> goodness-of-fit test</h2>
-<p>The <span class="math inline">\(\chi^2\)</span>-statistic can also be utilised in simpler scenarios that involve only one single categorical variable. Consider the small <a href="https://osf.io/y5scq"><code>eat_obj_aspect.xlsx</code></a> dataset, where the <code>object_realisation</code> column indicates whether the object was realised or dropped in a given observation.</p>
-<div class="cell">
+<p>The <span class="math inline">\(\chi^2\)</span>-statistic can also be utilised in simpler scenarios that involve only one single categorical variable.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Consider the small <a href="https://osf.io/y5scq"><code>eat_obj_aspect.xlsx</code></a> dataset, where the <code>object_realisation</code> column indicates whether the object was realised or dropped in a given observation.</p>
+<div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;For this reason, the distinction between dependent and independent variable is irrelevant here.</p></li></div><div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>eat <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"eat_obj_aspect.xlsx"</span>)</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -5716,7 +5716,7 @@ e_i = \frac{\text{number of observations}}{\text{number of cells}},
 <p><span id="eq-chisq-gof"><span class="math display">\[
 \chi^2 = \sum_{i=1}^{I}{\frac{(f_{i} - e_{i})^2}{e_{i}}}.
 \tag{20.10}\]</span></span></p>
-<p>In R:</p>
+<p><strong>In R</strong>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform the chi-squared goodness-of-fit test</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>eat_gof <span class="ot">&lt;-</span>  <span class="fu">chisq.test</span>(eat_observed)</span>
@@ -5737,7 +5737,7 @@ X-squared = 1.4118, df = 1, p-value = 0.2348</code></pre>
 </div>
 </div>
 <blockquote class="blockquote">
-<p>A chi-squared goodness-of-fit test indicates that the distribution of object realisation for <em>eat</em> does not significantly differ from an equal distribution (<span class="math inline">\(\chi^2\)</span> = 1.41, df = 1, <span class="math inline">\(p\)</span> = 0.23). In the sample at hand, the verb does not seem to prefer one variant or the other.</p>
+<p>A chi-squared goodness-of-fit test indicates that the distribution of object realisation for <em>eat</em> does not significantly differ from an equal distribution (<span class="math inline">\(\chi^2\)</span> = 1.41, <span class="math inline">\(df\)</span> = 1, <span class="math inline">\(p\)</span> = 0.23). In the sample at hand, the verb <em>eat</em> does not seem to prefer one variant or the other.</p>
 </blockquote>
 </section>
 <section id="exercises" class="level2" data-number="20.7">
@@ -5786,6 +5786,7 @@ Krauth, J., and G. A. Lienert. 1973. <em>Die Konfigurationsfrequenzanalyse (KFA)
 </div>
 </div>
 </section>
+
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
